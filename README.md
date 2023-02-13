@@ -2,6 +2,26 @@
 
 This website is built using [Docusaurus 2](https://docusaurus.io/), a modern static website generator.
 
+
+### Requirements
+
+The site is built through `node` and `npm` (included in Node.js), and the minimum version required for it to work is:
+
+```
+"node": ">=16.14"
+```
+
+You can check your version by going to your terminal and performing:
+
+```
+node -v
+```
+
+Depending on your OS and your OS apps/package managers, you could find different methods of having the proper `node` version installed. Please visit the [Node.js website](https://nodejs.org) to see the [best way for you](https://nodejs.org/en/download/) to have it available in your system.
+
+We recommend the use of a tool like [NVM](https://github.com/nvm-sh/nvm) which could ease the installation, and will also allow you to have different `node` versions coexisting in your system in case you need it. Using a LTS Node.js version is recommended.
+
+
 ### Installation
 
 ```
