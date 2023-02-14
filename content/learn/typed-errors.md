@@ -4,13 +4,13 @@
 
 Working with typed errors offers a couple of advantages over using exceptions:
 
-- Type Safety: Typed errors allow the compiler to catch type mismatches early, making it easier to catch bugs before they make it to production. With exceptions, type information is lost, making it more difficult to catch errors at compile-time.
+- **Type Safety:** Typed errors allow the compiler to find type mismatches early, making it easier to catch bugs before they make it to production. However, with exceptions, the type information is lost, making it more difficult to detect errors at compile-time.
 
-- Predictability: When using typed errors, the possible error conditions are explicitly listed in the type signature of a function. This makes it easier to understand the possible error conditions and to write tests to cover all error scenarios.
+- **Predictability:** When using typed errors, the possible error conditions are explicitly listed in the type signature of a function. This makes it easier to understand the possible error conditions and to write tests to cover all error scenarios.
 
-- Composability: Typed errors can be easily combined and propagated through a series of function calls, making it easier to write modular, composable code. With exceptions, it can be difficult to ensure that errors are properly propagated through a complex codebase.
+- **Composability:** Typed errors can be easily combined and propagated through a series of function calls, making it easier to write modular, composable code. With exceptions, it can be difficult to ensure that errors are properly propagated through a complex codebase.
 
-- Performance: Exception handling can have a significant impact on performance, especially in languages that don't have a dedicated stack for exceptions. Typed errors can be handled more efficiently, as the compiler has more information about the possible error conditions.
+- **Performance:** Exception handling can have a significant impact on performance, especially in languages that don't have a dedicated stack for exceptions. Typed errors can be handled more efficiently, as the compiler has more information about the possible error conditions.
 
 In summary, typed errors provide a more structured, predictable, and efficient way of handling errors, and can make it easier to write high-quality, maintainable code.
 
@@ -160,7 +160,7 @@ fun main() {
 <!--- KNIT example-typed-errors-03.kt -->
 <!--- TEST assert -->
 
-`ensureNotNull` takes a _predicate_ and a _lazy_ `E` value, when the value is not null the _computation_ will result in a _logical failure_ of `E`.
+`ensureNotNull` takes a _nullable value_ and a _lazy_ `E` value, when the value is not null the _computation_ will result in a _logical failure_ of `E`.
 Otherwise, the value will be _smart-casted_ to non-null and you will be able to operate on it without checking nullability.
 In the function below we show how we can use `ensureNotNull` to check if a given `Int` is non-null and increment it with `1`, and if not we return a _logical failure_ of `MyError`.
 
