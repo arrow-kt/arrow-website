@@ -20,7 +20,7 @@ apply(plugin = libs.plugins.kotlinx.knit.get().pluginId)
 configure<KnitPluginExtension> {
   siteRoot = "https://arrow-kt.io/"
 
-  this.files = fileTree(project.rootDir) {
+  files = fileTree(project.rootDir) {
     include("**/*.md")
     exclude("**/node_modules/**/*.md")
   }
