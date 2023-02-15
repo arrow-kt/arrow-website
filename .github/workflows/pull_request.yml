@@ -21,11 +21,11 @@ jobs:
       - name: Set up Node
         uses: actions/setup-node@v3
         with:
-          node-version: 16.x
-          cache: yarn
+          node-version: 16
+          cache: 'npm'
 
       - name: Install Node dependencies
-        run: yarn install --immutable
+        run: npm ci --prefer-offline --no-audit
 
       - name: build
         uses: gradle/gradle-build-action@v2
@@ -33,4 +33,5 @@ jobs:
           arguments: build
 
       - name: Test Website build
-        run: yarn build
+        run: npm run test --if-present
+        run: npm run build
