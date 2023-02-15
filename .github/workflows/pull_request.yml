@@ -33,5 +33,5 @@ jobs:
           arguments: build
 
       - name: Test Website build
-        run: npm run test --if-present
-        run: npm run build
+        - run: npm run test --if-present
+        - run: npm run build
