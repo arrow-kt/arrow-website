@@ -160,7 +160,7 @@ fun main() {
 <!--- KNIT example-typed-errors-03.kt -->
 <!--- TEST assert -->
 
-`ensureNotNull` takes a _nullable value_ and a _lazy_ `E` value, when the value is not null the _computation_ will result in a _logical failure_ of `E`.
+`ensureNotNull` takes a _nullable value_ and a _lazy_ `E` value, when the value is null the _computation_ will result in a _logical failure_ of `E`.
 Otherwise, the value will be _smart-casted_ to non-null and you will be able to operate on it without checking nullability.
 In the function below we show how we can use `ensureNotNull` to check if a given `Int` is non-null and increment it with `1`, and if not we return a _logical failure_ of `MyError`.
 
