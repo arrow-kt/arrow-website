@@ -1,4 +1,6 @@
+/* eslint-disable @typescript-eslint/no-var-requires */
 import React from 'react';
+
 import Link from '@docusaurus/Link';
 
 import styles from './HomepageFeatures.module.css';
@@ -46,7 +48,7 @@ const FeatureList: FeatureItem[] = [
   },
 ];
 
-function Feature({title, Svg, description, link}: FeatureItem) {
+function Feature({ title, Svg, description, link }: FeatureItem) {
   return (
     <div className="col col--4">
       <div className="text--center">
