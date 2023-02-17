@@ -1,0 +1,69 @@
+{
+  "parser": "@typescript-eslint/parser",
+  "extends": [
+    "eslint:recommended",
+    "plugin:@typescript-eslint/recommended",
+    "prettier",
+    "plugin:import/recommended",
+    "plugin:import/typescript"
+  ],
+  "parserOptions": {
+    "ecmaVersion": 2018,
+    "sourceType": "module",
+    "ecmaFeatures": {
+      "jsx": true
+    }
+  },
+  "plugins": ["@typescript-eslint", "prettier", "import"],
+  "rules": {
+    "prettier/prettier": "error",
+    "import/no-unresolved": [
+      "error",
+      {"ignore": ["^@theme", "^@docusaurus", "^@site"]}
+    ],
+    "import/order": [
+      "error",
+      {
+        "groups": [
+          "builtin",
+          "external",
+          "internal",
+          "parent",
+          "sibling",
+          "index",
+          "object",
+          "type"
+        ],
+        "pathGroups": [
+          {
+            "pattern": "{@docusaurus/**,@theme/**}",
+            "group": "external",
+            "position": "after"
+          },
+          {
+            "pattern": "@site/**",
+            "group": "internal",
+            "position": "after"
+          }
+        ],
+        "distinctGroup": true,
+        "pathGroupsExcludedImportTypes": [
+          "@docusaurus/**",
+          "@theme/**",
+          "@site/**"
+        ],
+        "newlines-between": "always"
+      }
+    ]
+  },
+  "settings": {
+    "import/parsers": {
+      "@typescript-eslint/parser": [".ts", ".tsx"]
+    },
+    "import/resolver": {
+      "typescript": {
+        "alwaysTryTypes": true
+      }
+    }
+  }
+}
