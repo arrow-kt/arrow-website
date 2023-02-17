@@ -279,7 +279,7 @@ fun main() {
 <!--- TEST assert -->
 
 The type system now tracks that a new error of `OtherError` might have occurred, but that we recovered from any possible errors of `MyError`. This is useful across application layers, or in the service layer, where we might want to `recover` from a `DatabaseError` with a `NetworkError` when we want to load data from the network when a database operation failed.
-Similarly to `either { }`, and `Raise` the `recover` function works DSL based, and we can thus mix both types seamlessly with each-other.
+Similarly to `either { }` and `Raise`, the `recover` function works DSL based, and we can thus mix both types seamlessly with each-other.
 
 <!--- INCLUDE
 import arrow.core.Either
