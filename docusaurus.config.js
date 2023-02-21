@@ -1,14 +1,16 @@
 // @ts-check
+/* eslint-disable @typescript-eslint/no-var-requires */
+/* eslint-disable no-undef */
 
-const lightCodeTheme = require('prism-react-renderer/themes/github');
+const lightCodeTheme = require('prism-react-renderer/themes/vsDark');
 const darkCodeTheme = require('prism-react-renderer/themes/dracula');
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
   title: 'Arrow website',
   tagline: "Functional companion to Kotlin's Standard Library",
-  favicon: 'img/favicon.ico',
-  url: 'https://your-docusaurus-test-site.com',
+  favicon: 'img/arrow-brand-icon.svg',
+  url: 'https://arrow-kt.io',
   baseUrl: '/',
   trailingSlash: true,
   // GitHub pages deployment config.
@@ -33,8 +35,8 @@ const config = {
           path: 'content/learn',
           routeBasePath: 'learn',
           sidebarPath: require.resolve('./sidebars.js'),
-          editUrl:
-            'https://github.com/arrow-kt/arrow-website/tree/main/packages/create-docusaurus/templates/shared/',
+          editUrl: 'https://github.com/arrow-kt/arrow-website/edit/main/',
+          breadcrumbs: false,
         },
         pages: {
           path: 'src/pages',
@@ -43,8 +45,7 @@ const config = {
           path: 'content/blog',
           routeBasePath: 'community/blog',
           showReadingTime: true,
-          editUrl:
-            'https://github.com/arrow-kt/arrow-website/tree/main/packages/create-docusaurus/templates/shared/',
+          editUrl: 'https://github.com/arrow-kt/arrow-website/edit/main/',
         },
         theme: {
           customCss: require.resolve('./src/css/custom.css'),
@@ -56,38 +57,112 @@ const config = {
   themeConfig:
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
-      // Replace with your project's social card
       image: 'img/docusaurus-social-card.jpg',
+      colorMode: {
+        defaultMode: 'light',
+        disableSwitch: true,
+        respectPrefersColorScheme: false,
+      },
       navbar: {
-        title: 'Arrow website',
         logo: {
           alt: 'Arrow Logo',
-          src: 'img/logo.svg',
+          src: 'img/arrow-brand.svg',
         },
         items: [
           {
-            type: 'doc',
-            docId: 'overview',
-            position: 'left',
-            label: 'Learn',
-          },
-          {to: '/community/blog', label: 'Blog', position: 'left'},
-          {
-            href: 'https://github.com/arrow-kt/arrow-website',
-            label: 'GitHub',
+            to: '/',
             position: 'right',
+            label: 'Home',
+            activeBaseRegex: '^/+$',
+          },
+          {
+            to: 'about/what-is-arrow',
+            position: 'right',
+            label: 'About',
+          },
+          {
+            type: 'dropdown',
+            position: 'right',
+            label: 'Learn',
+            items: [
+              {
+                label: 'Overview',
+                to: 'learn/overview',
+              },
+              {
+                label: 'Quickstart',
+                to: 'learn/quickstart',
+              },
+              {
+                label: 'Docs',
+                to: 'learn/category/docs',
+                activeBaseRegex: '^(/learn/category/docs)|^(/learn/docs)',
+              },
+            ],
+          },
+          {
+            to: 'projects',
+            position: 'right',
+            label: 'Projects',
+          },
+          {
+            to: 'training',
+            position: 'right',
+            label: 'Training',
+          },
+          {
+            type: 'dropdown',
+            position: 'right',
+            label: 'Community',
+            items: [
+              { to: 'community/support', label: 'Support' },
+              { to: 'community/blog', label: 'Blog' },
+              { to: 'community/events', label: 'Events' },
+            ],
           },
         ],
       },
       footer: {
-        style: 'dark',
         links: [
           {
-            title: 'Docs',
+            title: 'Menu',
             items: [
               {
+                label: 'About',
+                to: 'about/what-is-arrow',
+              },
+              {
                 label: 'Learn',
-                to: '/learn/overview',
+                to: 'learn/quickstart',
+              },
+              {
+                label: 'Projects',
+                to: 'projects',
+              },
+              {
+                label: 'Training',
+                to: 'training',
+              },
+              {
+                label: 'Community',
+                to: 'community/support',
+              },
+            ],
+          },
+          {
+            title: 'Learn',
+            items: [
+              {
+                label: 'Quickstart',
+                to: 'learn/quickstart',
+              },
+              {
+                label: 'Overview',
+                to: 'learn/overview',
+              },
+              {
+                label: 'Docs',
+                to: 'learn/category/docs',
               },
             ],
           },
@@ -95,40 +170,75 @@ const config = {
             title: 'Community',
             items: [
               {
-                label: 'Stack Overflow',
-                href: 'https://stackoverflow.com/questions/tagged/arrow-kt',
+                label: 'Support',
+                to: 'community/support',
               },
               {
-                label: 'Discord',
-                href: 'https://discordapp.com/invite/docusaurus',
+                label: 'Events',
+                to: 'community/events',
               },
               {
-                label: 'Twitter',
-                href: 'https://twitter.com/arrow-kt',
+                label: 'Blog',
+                to: 'community/blog',
               },
             ],
           },
           {
-            title: 'More',
+            title: 'Links',
             items: [
               {
-                label: 'Blog',
-                to: '/community/blog',
+                label: 'Twitter',
+                href: 'https://twitter.com/arrow-kt',
               },
               {
                 label: 'GitHub',
-                href: 'https://github.com/arrow-kt/',
+                href: 'https://github.com/arrow-kt',
+              },
+              {
+                label: 'YouTube',
+                href: 'https://www.youtube.com/@xebiafunctional',
+              },
+              {
+                label: 'Stack Overflow',
+                href: 'https://stackoverflow.com/questions/tagged/arrow-kt',
               },
             ],
           },
         ],
-        copyright: `Copyright © ${new Date().getFullYear()} Arrow. Built with Docusaurus.`,
+        logo: {
+          alt: 'Arrow Logo',
+          src: 'img/arrow-brand.svg',
+          href: 'https://arrow-kt.io',
+          width: 128,
+          height: 42,
+        },
+        copyright: `Arrow is designed and developed by ARROW with support from Xebia Functional`,
       },
       prism: {
         theme: lightCodeTheme,
         darkTheme: darkCodeTheme,
+        additionalLanguages: ['kotlin'],
+        defaultLanguage: 'kotlin',
       },
     }),
+
+  plugins: [
+    () => ({
+      name: 'yaml-loader-plugin',
+      configureWebpack() {
+        return {
+          module: {
+            rules: [
+              {
+                test: /\.ya?ml$/,
+                use: 'yaml-loader',
+              },
+            ],
+          },
+        };
+      },
+    }),
+  ],
 };
 
 module.exports = config;
