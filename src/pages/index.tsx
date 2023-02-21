@@ -6,6 +6,7 @@ import Layout from '@theme/Layout';
 
 import { HomepageFeatures } from '@site/src/components/HomepageFeatures';
 
+import data from './index.yml';
 import styles from './index.module.css';
 
 function HomepageHeader() {
@@ -22,6 +23,9 @@ function HomepageHeader() {
             Get started
           </Link>
         </div>
+        {data.cards.map((card: { title: string; description: string }) => (
+          <div key={card.title}>{card.title}</div>
+        ))}
       </div>
     </header>
   );
