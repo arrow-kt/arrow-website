@@ -1,14 +1,33 @@
+/* Fonts */
+@font-face {
+  font-family: 'Inter';
+  font-weight: 100 900;
+  font-display: swap;
+  font-style: normal;
+  font-named-instance: 'Regular';
+  src: url('/static/fonts/Inter-Roman-Var.woff2') format('woff2');
+}
+
 /* You can override the default Infima variables here. */
 :root {
-  --ifm-color-primary: #004e93;
-  --ifm-color-primary-dark: #004684;
-  --ifm-color-primary-darker: #00427d;
-  --ifm-color-primary-darkest: #003767;
-  --ifm-color-primary-light: #005daf;
-  --ifm-color-primary-lighter: #005aa9;
-  --ifm-color-primary-lightest: #00549f;
+  --ifm-color-primary: #497bf7;
+  --ifm-color-primary-dark: #2455cf;
+  --ifm-color-primary-darker: #2455cf;
+  --ifm-color-primary-darkest: #2455cf;
+  --ifm-color-primary-light: #497bf7;
+  --ifm-color-primary-lighter: #497bf7;
+  --ifm-color-primary-lightest: #497bf7;
   --ifm-code-font-size: 95%;
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.1);
+
+  --ifm-font-family-base: 'Inter', open sans, sans-serif, system-ui,
+    -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial,
+    'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
+
+  --ifm-heading-color: #222e51;
+  --ifm-font-color-base: #57607B;
+
+  --ifm-global-radius: 0;
 }
 
 /* For readability concerns, you should choose a lighter palette in dark mode. */
@@ -21,4 +40,9 @@
   --ifm-color-primary-lighter: #5ab2ff;
   --ifm-color-primary-lightest: #87c7ff;
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
+}
+
+/* Pagination bottom buttons not needed */
+.pagination-nav {
+  display: none;
 }
