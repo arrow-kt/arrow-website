@@ -1,3 +1,10 @@
+---
+id: nullable-and-option
+title: Why nullable types & Option?
+description: This document discusses the difference between nullable types and Option, and when to use each.
+slug: /nullable-and-option
+---
+
 # Why nullable types & Option?
 
 <!--- TEST_NAME OptionAndNullableKnitTest -->
@@ -26,7 +33,10 @@ fun main() {
 <!--- TEST assert -->
 
 When run this code with an `emptyList`, or a non-empty list it seems to work as expect.
-However, if we run this function with a list that contains `null` as the **first** value we get an unexpected result.
+
+:::danger Unexpected result
+If we run this function with a list that contains `null` as the **first** value we get an unexpected result.
+:::
 
 <!--- INCLUDE
 import io.kotest.matchers.shouldBe
@@ -101,7 +111,9 @@ Sometimes you might still want to use `Option` instead of nullable types, even w
 Some libraries such as [RxJava](https://github.com/ReactiveX/RxJava/wiki/What's-different-in-2.0#nulls) and [Project Reactor](https://projectreactor.io/docs/core/release/reference/#null-safety) don't support nullable types in all their APIs.
 If you still need to work with `null` in combination with generic APIs that don't allow nullable types, you can use `Option` to work around this problem.
 
-Arrow also provides special DSL syntax for _nullable_ types, so let's review both below and compare both below.
+:::tip Arrow DSL
+Arrow also provides special DSL syntax for _nullable_ & `Option` types
+:::
 
 ## Working with Option
 
@@ -153,7 +165,10 @@ fun main() {
 <!--- KNIT example-option-07.kt -->
 <!--- TEST assert -->
 
-**Beware** that if `A?` is null than you should be explicitly using the `Some` or `.some()` constructor. Otherwise, you will get a `None` instead of a `Some` due to the _nested nullable_ problem.
+:::danger Take care
+If `A?` is null than you should be explicitly using the `Some` or `.some()` constructor.
+Otherwise, you will get a `None` instead of a `Some` due to the _nested nullable_ problem.
+:::
 
 <!--- INCLUDE
 import arrow.core.Option
@@ -273,7 +288,10 @@ fun sendEmail(params: QueryParameters): SendResult? =
 <!--- KNIT example-option-12.kt -->
 
 There is already quite some nesting going on, and quite a lot of `?` but we can use `bind()`, and `ensureNotNull`, to get rid of the nesting.
-To showcase you can seamlessly mix `Option` into the nullable DSL, we turned the return type of `findUserById` into `Option`.
+
+:::tip Seamlessly mix
+The `nullable` DSL can seamlessly be mixed with `Option` by calling `bind` on `Option` values.
+:::
 
 <!--- INCLUDE
 import arrow.core.Option
@@ -303,7 +321,10 @@ fun sendEmail(params: QueryParameters): SendResult? = nullable {
 <!--- KNIT example-option-13.kt -->
 
 Similarly, this same pattern is applicable to `Option` as well as other data types such as `Either` which is covered in other sections.
-To showcase you can seamlessly mix _nullable types_ into the `Option` DSL, we turned the return type of `findUserById` back into a nullable type.
+
+:::tip Seamlessly mix
+The `Option` DSL can seamlessly be mixed with _nullable types_ by using `ensureNotNull`.
+:::
 
 <!--- INCLUDE
 import arrow.core.Option
