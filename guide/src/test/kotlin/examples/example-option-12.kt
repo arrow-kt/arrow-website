@@ -1,21 +1,20 @@
 // This file was automatically generated from nullable-and-option.md by Knit tool. Do not edit.
 package arrow.website.examples.exampleOption12
 
-import arrow.core.None
-import arrow.core.Some
-import arrow.core.none
-import arrow.core.some
-import io.kotest.assertions.fail
-import io.kotest.matchers.shouldBe
+typealias Email = String
+typealias QueryParameters = Map<String, String>
+typealias SendResult = Unit
 
-fun main() {
-  when(val value = 20.some()) {
-    is Some -> value.value shouldBe 20
-    None -> fail("$value should not be None")
+@JvmInline value class UserId(val value: Int)
+data class User(val id: UserId, val email: Email?)
+
+fun QueryParameters.userId(): UserId? = get("userId")?.toIntOrNull()?.let { UserId(it) }
+fun findUserById(id: UserId): User? = TODO()
+fun sendEmail(email: Email): SendResult? = TODO()
+
+fun sendEmail(params: QueryParameters): SendResult? =
+  params.userId()?.let { userId ->
+    findUserById(userId)?.email?.let { email ->
+      sendEmail(email)
+    }
   }
-  
-  when(val value = none<Int>()) {
-    is Some -> fail("$value should not be Some")
-    None -> value shouldBe None
-  }
-}

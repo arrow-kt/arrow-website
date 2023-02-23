@@ -1,18 +1,26 @@
 // This file was automatically generated from nullable-and-option.md by Knit tool. Do not edit.
 package arrow.website.examples.exampleOption14
 
-import arrow.core.None
 import arrow.core.Option
-import arrow.core.Some
+import arrow.core.raise.option
+import arrow.core.toOption
 
-val number: Option<Int> = Some(3)
-val noNumber: Option<Int> = None
-val mappedResult1 = number.map { it * 1.5 }
-val mappedResult2 = noNumber.map { it * 1.5 }
+typealias Email = String
+typealias QueryParameters = Map<String, String>
+typealias SendResult = Unit
 
-fun main() {
-  println("number = $number")
-  println("noNumber = $noNumber")
-  println("mappedResult1 = $mappedResult1")
-  println("mappedResult2 = $mappedResult2")
+@JvmInline value class UserId(val value: Int)
+data class User(val id: UserId, val email: Email?)
+
+fun QueryParameters.userId(): Option<UserId> =
+  get("userId")?.toIntOrNull()?.let(::UserId).toOption()
+
+fun findUserById(id: UserId): Option<User> = TODO()
+fun sendEmail(email: Email): Option<SendResult> = TODO()
+
+fun sendEmail(params: QueryParameters): Option<SendResult> = option {
+  val userId = params.userId().bind()
+  val user = findUserById(userId).bind()
+  val email = ensureNotNull(user.email)
+  sendEmail(email).bind()
 }

@@ -1,6 +1,6 @@
-<!--- TEST_NAME OptionKnitTest -->
+# Why nullable types & Option?
 
-# Nullable vs Option
+<!--- TEST_NAME OptionAndNullableKnitTest -->
 
 If you have worked with Java at all in the past, it is very likely that you have come across a `NullPointerException` at some time (other languages will throw similarly named errors in such a case).
 Usually this happens because some method returns `null` when you weren't expecting it and, thus, isn't dealing with that possibility in your client code.
@@ -98,112 +98,62 @@ fun main() {
 <!-- TEST assert -->
 
 Sometimes you might still want to use `Option` instead of nullable types, even when you're not the author of these generic functions.
-Some libraries such as [RxJava]() and [Project Reactor](https://projectreactor.io/docs/core/release/reference/#null-safety) don't support nullable types in all their APIs.
+Some libraries such as [RxJava](https://github.com/ReactiveX/RxJava/wiki/What's-different-in-2.0#nulls) and [Project Reactor](https://projectreactor.io/docs/core/release/reference/#null-safety) don't support nullable types in all their APIs.
 If you still need to work with `null` in combination with generic APIs that don't allow nullable types, you can use `Option` to work around this problem.
 
 Arrow also provides special DSL syntax for _nullable_ types, so let's review both below and compare both below.
 
-## Option
+## Working with Option
 
-`Option<A>` is a container for an optional value of type `A`.
-If the value of type `A` is present, the `Option<A>` is an instance of `Some<A>`, containing the present value of type `A`. If the value is absent, the `Option<A>` is the object `None`.
+Arrow offers a special DSL syntax for all of its types, and it also offers it for _nullable types_ so let's review both below.
+Before we get started we need to know how to construct an `Option` from a (nullable) value, and vice versa.
 
-<!--- INCLUDE
-import arrow.core.Option
-import arrow.core.Some
-import arrow.core.None
--->
-```kotlin
-val some: Option<String> = Some("I am wrapped in something")
-val none: Option<String> = None
-
-fun main() {
-  println("value = $some")
-  println("empty = $none")
-}
-```
-<!--- KNIT example-option-06.kt -->
-
-```text
-value = Option.Some(I am wrapped in something)
-empty = Option.None
-```
-<!--- TEST -->
-
-Let's write a function that may or may not give us a string, thus returning `Option<String>`:
-
-<!--- INCLUDE
-import arrow.core.None
-import arrow.core.Option
-import arrow.core.Some
--->
-```kotlin
-fun findValue(value: Boolean): Option<String> =
-  if (value) Some("Found value") else None
-```
-<!--- KNIT example-option-07.kt -->
-
-Using `getOrElse`, we can provide a default value `"No value"` when the optional argument `None` does not exist.
-This is similar to the `?:` operator in Kotlin, but instead of providing a default value for `null`, we provide a default value for `None`.
-
-<!--- INCLUDE
-import arrow.core.None
-import arrow.core.Option
-import arrow.core.Some
-import arrow.core.getOrElse
-import io.kotest.matchers.shouldBe
-
-fun findValue(value: Boolean): Option<String> = if (value) Some("Found value") else None
--->
-```kotlin
-fun main() {
-  findValue(true).getOrElse { "No value" } shouldBe "Found value"
-  findValue(false).getOrElse { "No value" } shouldBe "No value"
-}
-```
-<!--- KNIT example-option-08.kt -->
-<!--- TEST assert -->
-
-We can check whether option has value or not using `isSome` and `isNone`, which also support smart casts.
-
-<!--- INCLUDE
-import arrow.core.None
-import arrow.core.Option
-import arrow.core.Some
-import io.kotest.matchers.shouldBe
-
-fun findValue(value: Boolean): Option<String> = if (value) Some("Found value") else None
--->
-```kotlin
-fun main() {
-  findValue(true).isSome() shouldBe true
-  findValue(false).isNone() shouldBe true
-}
-```
-<!--- KNIT example-option-09.kt -->
-<!--- TEST assert -->
-
-The same function exists to check if `Some` contains a value that passes a certain predicate.
+`Option<A>` is a container for an optional value of type `A`. If the value of type `A` is present, the `Option<A>` is an instance of `Some<A>`, containing the present value of type `A`. If the value is absent, the `Option<A>` is the object `None`.
+And we have 4 constructors available to create an `Option<A>`, their regular `class` constructors and 2 extension functions that return `Option<A>`.
 
 <!--- INCLUDE
 import arrow.core.Option
 import arrow.core.Some
+import arrow.core.some
 import arrow.core.None
 import arrow.core.none
 import io.kotest.matchers.shouldBe
 -->
 ```kotlin
+val some: Some<String> = Some("I am wrapped in something")
+val none: None = None
+
+val optionA: Option<String> = "I am wrapped in something".some()
+val optionB: Option<String> = none<String>()
+
 fun main() {
-  Some(2).isSome { it % 2 == 0 } shouldBe true
-  Some(1).isSome { it % 2 == 0 } shouldBe false
-  none<Int>().isSome { it % 2 == 0 } shouldBe false
+  some shouldBe optionA
+  none shouldBe optionB
 }
 ```
-<!--- KNIT example-option-10.kt -->
+<!--- KNIT example-option-06.kt -->
 <!--- TEST assert -->
 
-Creating a `Option<T>` of a `T?` can be useful for when we need to lift nullable values into Option.
-Beware that if `T?` is null than you should be explicitly using the `Some` or `.some()` constructor.
+Creating a `Option<A>` from a nullable type `A?` can be useful for when we need to lift nullable values into Option. This can be done with the `Option.fromNullable` function, or the `A?.toOption()` extension function.
+
+<!--- INCLUDE
+import arrow.core.Option
+import arrow.core.toOption
+import io.kotest.matchers.shouldBe
+-->
+```kotlin
+fun main() {
+  val some: Option<String> = Option.fromNullable("Nullable string")
+  val none: Option<String> = Option.fromNullable(null)
+  
+  "Nullable string".toOption() shouldBe some
+  null.toOption<String>() shouldBe none
+}
+```
+<!--- KNIT example-option-07.kt -->
+<!--- TEST assert -->
+
+**Beware** that if `A?` is null than you should be explicitly using the `Some` or `.some()` constructor. Otherwise, you will get a `None` instead of a `Some` due to the _nested nullable_ problem.
 
 <!--- INCLUDE
 import arrow.core.Option
@@ -214,12 +164,52 @@ import io.kotest.matchers.shouldBe
 -->
 ```kotlin
 fun main() {
-  Option.fromNullable("Nullable string") shouldBe Some("Nullable string")
-  Option.fromNullable(null) shouldBe None
-  null.some() shouldBe Some(null)
+  val some: Option<String?> = Some(null)
+  val none: Option<String?> = Option.fromNullable(null)
+  
+  some shouldBe null.some()
+  none shouldBe None
 }
 ```
-<!--- KNIT example-option-11.kt -->
+<!--- KNIT example-option-08.kt -->
+<!--- TEST assert -->
+
+## Extracting values from Option
+
+So now that we know how to construct `Option` values, how can we extract the value from it?
+The easiest way to extract the `String` value from the `Option` would be to turn it into a _nullable type_ using `getOrNull` and work with it like we would normally do with nullable types.
+
+<!--- INCLUDE
+import arrow.core.None
+import arrow.core.Some
+import io.kotest.matchers.shouldBe
+-->
+```kotlin
+fun main() {
+  Some("Found value").getOrNull() shouldBe "Found value"
+  None.getOrNull() shouldBe null
+}
+```
+<!--- KNIT example-option-09.kt -->
+<!--- TEST assert -->
+
+Another way would be to provide a default value using `getOrElse`. This is similar to the `?:` operator in Kotlin, but instead of providing a default value for `null`, we provide a default value for `None`.
+In the example below we provide a default value of `"No value"` for when the `Option` is `None`.
+
+<!--- INCLUDE
+import arrow.core.None
+import arrow.core.Option
+import arrow.core.Some
+import arrow.core.getOrElse
+import io.kotest.matchers.shouldBe
+-->
+```kotlin
+fun main() {
+  Some( "Found value").getOrElse { "No value" } shouldBe "Found value"
+  None.getOrElse { "No value" } shouldBe "No value"
+}
+```
+<!--- KNIT example-option-10.kt -->
 <!--- TEST assert -->
 
 Since `Option` is modeled as a `sealed class` we can use exhaustive `when` statements to _pattern match_ on the possible cases.
@@ -245,235 +235,173 @@ fun main() {
   }
 }
 ```
-<!--- KNIT example-option-12.kt -->
+<!--- KNIT example-option-11.kt -->
 <!--- TEST assert -->
 
-// Below is WIP
+## Option & nullable DSL
 
+Now that we know how to construct `Option` values, and turn `Option` back into regular (nullable) values.
+Let's see how we can use the `Option` and nullable DSL to work with `Option` & nullable values in an imperative way.
+
+When working with nullable types, we often need to check if the value is `null` or not, and then do something with it. We typically do that by using `?.let { }` but this quickly results in a lot of nested `?.let { }` blocks.
+Arrow offers `bind()`, and `ensureNotNull`, to get rid of this issue, so let's look at an example. As well as some other interesting functions that Arrow provides in its DSL.
+
+Imagine we have a `User` domain class that has _nullable_ email address, and we want to find a user by their id, and then email them.
+
+<!--- INCLUDE
+typealias Email = String
+typealias QueryParameters = Map<String, String>
+typealias SendResult = Unit
+-->
 ```kotlin
-import arrow.core.None
-import arrow.core.Option
-import arrow.core.Some
+@JvmInline value class UserId(val value: Int)
+data class User(val id: UserId, val email: Email?)
 
-//sampleStart
-val noValue: Option<Double> = None
-val value = when (noValue) {
-  is Some -> noValue.value
-  is None -> 0.0
-}
-
-//sampleEnd
-fun main() {
-  println("value = $value")
-}
+fun QueryParameters.userId(): UserId? = get("userId")?.toIntOrNull()?.let { UserId(it) }
+fun findUserById(id: UserId): User? = TODO()
+fun sendEmail(email: Email): SendResult? = TODO()
 ```
 
+```kotlin
+fun sendEmail(params: QueryParameters): SendResult? =
+  params.userId()?.let { userId ->
+    findUserById(userId)?.email?.let { email ->
+      sendEmail(email)
+    }
+  }
+```
+<!--- KNIT example-option-12.kt -->
+
+There is already quite some nesting going on, and quite a lot of `?` but we can use `bind()`, and `ensureNotNull`, to get rid of the nesting.
+To showcase you can seamlessly mix `Option` into the nullable DSL, we turned the return type of `findUserById` into `Option`.
+
+<!--- INCLUDE
+import arrow.core.Option
+import arrow.core.raise.nullable
+
+typealias Email = String
+typealias QueryParameters = Map<String, String>
+typealias SendResult = Unit
+-->
+```kotlin
+@JvmInline value class UserId(val value: Int)
+data class User(val id: UserId, val email: Email?)
+
+fun QueryParameters.userId(): UserId? = get("userId")?.toIntOrNull()?.let { UserId(it) }
+fun findUserById(id: UserId): Option<User> = TODO()
+fun sendEmail(email: Email): SendResult? = TODO()
+```
+
+```kotlin
+fun sendEmail(params: QueryParameters): SendResult? = nullable {
+  val userId = ensureNotNull(params.userId())
+  val user = findUserById(userId).bind()
+  val email = user.email.bind()
+  sendEmail(email)
+}
+```
 <!--- KNIT example-option-13.kt -->
 
-An alternative for pattern matching is folding. This is possible because an option could be looked at as a collection or
-foldable structure with either one or zero elements.
+Similarly, this same pattern is applicable to `Option` as well as other data types such as `Either` which is covered in other sections.
+To showcase you can seamlessly mix _nullable types_ into the `Option` DSL, we turned the return type of `findUserById` back into a nullable type.
 
-One of these operations is `map`. This operation allows us to map the inner value to a different type while preserving
-the option:
-
-```kotlin
-import arrow.core.None
+<!--- INCLUDE
 import arrow.core.Option
-import arrow.core.Some
+import arrow.core.raise.option
+import arrow.core.toOption
 
-//sampleStart
-val number: Option<Int> = Some(3)
-val noNumber: Option<Int> = None
-val mappedResult1 = number.map { it * 1.5 }
-val mappedResult2 = noNumber.map { it * 1.5 }
+typealias Email = String
+typealias QueryParameters = Map<String, String>
+typealias SendResult = Unit
+-->
+```kotlin
+@JvmInline value class UserId(val value: Int)
+data class User(val id: UserId, val email: Email?)
 
-//sampleEnd
-fun main() {
-  println("number = $number")
-  println("noNumber = $noNumber")
-  println("mappedResult1 = $mappedResult1")
-  println("mappedResult2 = $mappedResult2")
-}
+fun QueryParameters.userId(): Option<UserId> =
+  get("userId")?.toIntOrNull()?.let(::UserId).toOption()
+
+fun findUserById(id: UserId): Option<User> = TODO()
+fun sendEmail(email: Email): Option<SendResult> = TODO()
 ```
 
+```kotlin
+fun sendEmail(params: QueryParameters): Option<SendResult> = option {
+  val userId = params.userId().bind()
+  val user = findUserById(userId).bind()
+  val email = ensureNotNull(user.email)
+  sendEmail(email).bind()
+}
+```
 <!--- KNIT example-option-14.kt -->
-Another operation is `fold`. This operation will extract the value from the option, or provide a default if the value
-is `None`
 
-```kotlin
-import arrow.core.Option
+## Inspecting `Option` values
+
+Beside extracting the value from an `Option`, or sequencing nullable or `Option` based logic, we often just need to _inspect_ the values inside it.
+With _nullable types_ we can simply use `!= null` to inspect the value, but with `Option` we can check whether option has value or not using `isSome` and `isNone`.
+
+<!--- INCLUDE
 import arrow.core.Some
-
-val fold =
-//sampleStart
-  Some(3).fold({ 1 }, { it * 3 })
-
-//sampleEnd
+import arrow.core.none
+import io.kotest.matchers.shouldBe
+-->
+```kotlin
 fun main() {
-  println(fold)
+  Some(1).isSome() shouldBe true
+  none<Int>().isNone() shouldBe true
 }
 ```
-
 <!--- KNIT example-option-15.kt -->
+<!--- TEST assert -->
 
-```kotlin
+The same function exists to check if `Some` contains a value that passes a certain predicate. For _nullable types_ we would use `?.let { } ?: false`.
+
+<!--- INCLUDE
 import arrow.core.Option
+import arrow.core.Some
+import arrow.core.None
 import arrow.core.none
-
-val fold =
-//sampleStart
-  none<Int>().fold({ 1 }, { it * 3 })
-
-//sampleEnd
+import io.kotest.matchers.shouldBe
+-->
+```kotlin
 fun main() {
-  println(fold)
+  Some(2).isSome { it % 2 == 0 } shouldBe true
+  Some(1).isSome { it % 2 == 0 } shouldBe false
+  none<Int>().isSome { it % 2 == 0 } shouldBe false
 }
 ```
-
 <!--- KNIT example-option-16.kt -->
+<!--- TEST assert -->
 
-Arrow also adds syntax to all datatypes so you can easily lift them into the context of `Option` where needed.
+And finally sometimes we just need to execute a side effect, if the value is present. For _nullable types_ we would use `?.also { }` or `?.also { if(it != null) { } }`.
 
-```kotlin
-import arrow.core.some
+<!--- INCLUDE
+import arrow.core.Option
+import arrow.core.Some
+import arrow.core.None
 import arrow.core.none
-
-//sampleStart
-val some = 1.some()
-val none = none<String>()
-
-//sampleEnd
+import io.kotest.matchers.shouldBe
+-->
+```kotlin
 fun main() {
-  println("some = $some")
-  println("none = $none")
+  Some(1).onSome { println("I am here: $it") }
+  none<Int>().onNone { println("I am here") }
+  
+  none<Int>().onSome { println("I am not here: $it") }
+  Some(1).onNone { println("I am not here") }
 }
 ```
-
 <!--- KNIT example-option-17.kt -->
-
-```kotlin
-import arrow.core.toOption
-
-//sampleStart
-val nullString: String? = null
-val valueFromNull = nullString.toOption()
-
-val helloString: String? = "Hello"
-val valueFromStr = helloString.toOption()
-
-//sampleEnd
-fun main() {
-  println("valueFromNull = $valueFromNull")
-  println("valueFromStr = $valueFromStr")
-}
+```text
+I am here: 1
+I am here
 ```
+<!--- TEST -->
 
-<!--- KNIT example-option-18.kt -->
+## Conclusion
 
-You can easily convert between `A?` and `Option<A>` by using the `toOption()` extension or `Option.fromNullable`
-constructor.
+Typically, when working in Kotlin you should prefer working with _nullable types_ over `Option` as it is more idiomatic.
+However, when writing generic code we sometimes need `Option` to avoid the _nested nullability_ issue. Or when working with libraries that don't support _null values_ such as Project Reactor or RxJava.
 
-```kotlin
-import arrow.core.firstOrNone
-import arrow.core.toOption
-import arrow.core.Option
-
-//sampleStart
-val foxMap = mapOf(1 to "The", 2 to "Quick", 3 to "Brown", 4 to "Fox")
-
-val empty = foxMap.entries.firstOrNull { it.key == 5 }?.value.let { it?.toCharArray() }.toOption()
-val filled = Option.fromNullable(foxMap.entries.firstOrNull { it.key == 5 }?.value.let { it?.toCharArray() })
-
-//sampleEnd
-fun main() {
-  println("empty = $empty")
-  println("filled = $filled")
-}
-```
-
-<!--- KNIT example-option-19.kt -->
-
-### Transforming the inner contents
-
-```kotlin
-import arrow.core.Some
-
-fun main() {
-  val value =
-    //sampleStart
-    Some(1).map { it + 1 }
-  //sampleEnd
-  println(value)
-}
-```
-
-<!--- KNIT example-option-20.kt -->
-
-### Computing over independent values
-
-```kotlin
-import arrow.core.Some
-
-val value =
-//sampleStart
-  Some(1).zip(Some("Hello"), Some(20.0), ::Triple)
-
-//sampleEnd
-fun main() {
-  println(value)
-}
-```
-
-<!--- KNIT example-option-21.kt -->
-
-### Computing over dependent values ignoring absence
-
-```kotlin
-import arrow.core.computations.option
-import arrow.core.Some
-import arrow.core.Option
-
-suspend fun value(): Option<Int> =
-//sampleStart
-  option {
-    val a = Some(1).bind()
-    val b = Some(1 + a).bind()
-    val c = Some(1 + b).bind()
-    a + b + c
-  }
-
-//sampleEnd
-suspend fun main() {
-  println(value())
-}
-```
-
-<!--- KNIT example-option-22.kt -->
-
-```kotlin
-import arrow.core.computations.option
-import arrow.core.Some
-import arrow.core.none
-import arrow.core.Option
-
-suspend fun value(): Option<Int> =
-//sampleStart
-  option {
-    val x = none<Int>().bind()
-    val y = Some(1 + x).bind()
-    val z = Some(1 + y).bind()
-    x + y + z
-  }
-
-//sampleEnd
-suspend fun main() {
-  println(value())
-}
-```
-
-<!--- KNIT example-option-23.kt -->
-
-## Credits
-
-Contents partially adapted from [Scala Exercises Option Tutorial](https://www.scala-exercises.org/std_lib/options)
-Originally based on the Scala Koans.
+Arrow offers a neat DSL to work with `Option` and _nullable types_ in an imperative way, which makes it easy to work with them both in a functional way.
+They seamlessly integrate with each other, so you can use whatever you need and prefer when you need it.

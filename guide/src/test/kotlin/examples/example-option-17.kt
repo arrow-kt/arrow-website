@@ -1,13 +1,16 @@
 // This file was automatically generated from nullable-and-option.md by Knit tool. Do not edit.
 package arrow.website.examples.exampleOption17
 
-import arrow.core.some
+import arrow.core.Option
+import arrow.core.Some
+import arrow.core.None
 import arrow.core.none
-
-val some = 1.some()
-val none = none<String>()
+import io.kotest.matchers.shouldBe
 
 fun main() {
-  println("some = $some")
-  println("none = $none")
+  Some(1).onSome { println("I am here: $it") }
+  none<Int>().onNone { println("I am here") }
+  
+  none<Int>().onSome { println("I am not here: $it") }
+  Some(1).onNone { println("I am not here") }
 }

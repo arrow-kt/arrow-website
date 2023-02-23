@@ -3,12 +3,18 @@ package arrow.website.examples.exampleOption06
 
 import arrow.core.Option
 import arrow.core.Some
+import arrow.core.some
 import arrow.core.None
+import arrow.core.none
+import io.kotest.matchers.shouldBe
 
-val some: Option<String> = Some("I am wrapped in something")
-val none: Option<String> = None
+val some: Some<String> = Some("I am wrapped in something")
+val none: None = None
+
+val optionA: Option<String> = "I am wrapped in something".some()
+val optionB: Option<String> = none<String>()
 
 fun main() {
-  println("value = $some")
-  println("empty = $none")
+  some shouldBe optionA
+  none shouldBe optionB
 }

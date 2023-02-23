@@ -2,11 +2,13 @@
 package arrow.website.examples.exampleOption16
 
 import arrow.core.Option
+import arrow.core.Some
+import arrow.core.None
 import arrow.core.none
-
-val fold =
-  none<Int>().fold({ 1 }, { it * 3 })
+import io.kotest.matchers.shouldBe
 
 fun main() {
-  println(fold)
+  Some(2).isSome { it % 2 == 0 } shouldBe true
+  Some(1).isSome { it % 2 == 0 } shouldBe false
+  none<Int>().isSome { it % 2 == 0 } shouldBe false
 }

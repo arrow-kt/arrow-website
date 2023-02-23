@@ -5,7 +5,7 @@ import io.kotest.core.spec.style.StringSpec
 import arrow.website.captureOutput
 import kotlinx.knit.test.verifyOutputLines
 
-class OptionKnitTest : StringSpec({
+class OptionAndNullableKnitTest : StringSpec({
   "ExampleOption01" {
     arrow.website.examples.exampleOption01.main()
   }
@@ -16,11 +16,11 @@ class OptionKnitTest : StringSpec({
   }
 
   "ExampleOption06" {
-    captureOutput("ExampleOption06") { arrow.website.examples.exampleOption06.main() }
-      .verifyOutputLines(
-        "value = Option.Some(I am wrapped in something)",
-        "empty = Option.None"
-      )
+    arrow.website.examples.exampleOption06.main()
+  }
+
+  "ExampleOption07" {
+    arrow.website.examples.exampleOption07.main()
   }
 
   "ExampleOption08" {
@@ -39,8 +39,20 @@ class OptionKnitTest : StringSpec({
     arrow.website.examples.exampleOption11.main()
   }
 
-  "ExampleOption12" {
-    arrow.website.examples.exampleOption12.main()
+  "ExampleOption15" {
+    arrow.website.examples.exampleOption15.main()
+  }
+
+  "ExampleOption16" {
+    arrow.website.examples.exampleOption16.main()
+  }
+
+  "ExampleOption17" {
+    captureOutput("ExampleOption17") { arrow.website.examples.exampleOption17.main() }
+      .verifyOutputLines(
+        "I am here: 1",
+        "I am here"
+      )
   }
 
 }) {
