@@ -1,4 +1,4 @@
-# Summary of operators
+# Summary
 
 <details>
 <summary><span style={{ fontSize: '115%' }}>Typed Errors</span> (<a href="../typed-errors">guide</a>)</summary>
