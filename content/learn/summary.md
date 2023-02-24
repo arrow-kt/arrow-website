@@ -73,7 +73,7 @@ These functions use `NonEmptyList<E>` as the surrounding error type.
 #### Independently in parallel
 
 - `parMap` to operate over a collection of items.
-- `parZip` to operate over independent actions, with potentially different return types.
+- `parZip` to combine the result of independent actions, with potentially different return types.
 
 #### Race (only the fastest is returned)
 
