@@ -94,7 +94,7 @@ const config = {
                 to: 'learn/quickstart',
               },
               {
-                label: 'Typed Errors',
+                label: 'Typed errors',
                 to: 'learn/category/typed-errors',
                 activeBaseRegex: '^(/learn/category/typed-errors)|^(/learn/typed-errors)',
               },
@@ -176,7 +176,7 @@ const config = {
                 to: 'learn/overview',
               },
               {
-                label: 'Typed Errors',
+                label: 'Typed errors',
                  to: 'learn/category/typed-errors',
                  activeBaseRegex: '^(/learn/category/typed-errors)|^(/learn/typed-errors)',
                },
