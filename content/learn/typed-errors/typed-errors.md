@@ -1,3 +1,7 @@
+---
+sidebar_position: 1
+---
+
 # Working with typed errors
 
 <!--- TEST_NAME TypedErrorsTest -->
