@@ -171,9 +171,20 @@ const config = {
                 to: 'learn/overview',
               },
               {
-                label: 'Docs',
-                to: 'learn/category/docs',
-              },
+                label: 'Typed Errors',
+                 to: 'learn/category/typed-errors',
+                 activeBaseRegex: '^(/learn/category/typed-errors)|^(/learn/typed-errors)',
+               },
+               {
+                 label: 'Coroutines',
+                 to: 'learn/category/coroutines',
+                 activeBaseRegex: '^(/learn/category/coroutines)|^(/learn/coroutines)',
+               },
+               {
+                 label: 'Resilience',
+                 to: 'learn/category/resilience',
+                 activeBaseRegex: '^(/learn/category/resilience)|^(/learn/resilience)',
+               },
             ],
           },
           {
