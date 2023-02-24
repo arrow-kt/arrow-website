@@ -1,6 +1,6 @@
 {
   "label": "Resilience",
-  "position": 2,
+  "position": 5,
   "link": {
     "type": "generated-index",
     "description": "Recovering and withstanding failure"
