@@ -2,49 +2,266 @@
 sidebar_position: 2
 ---
 
-[![Maven Central](https://img.shields.io/maven-central/v/io.arrow-kt/arrow-core?color=4caf50&label=latest%20release)](https://maven-badges.herokuapp.com/maven-central/io.arrow-kt/arrow-core)
-[![Latest snapshot](https://img.shields.io/badge/dynamic/xml?color=orange&label=latest%20snapshot&prefix=v&query=%2F%2Fmetadata%2Fversioning%2Flatest&url=https%3A%2F%2Foss.sonatype.org%2Fservice%2Flocal%2Frepositories%2Fsnapshots%2Fcontent%2Fio%2Farrow-kt%2Farrow-core%2Fmaven-metadata.xml)](https://oss.sonatype.org/service/local/repositories/snapshots/content/io/arrow-kt/)
-[![Kotlin version](https://img.shields.io/badge/Kotlin-1.8-blue)](https://kotlinlang.org/docs/reference/whatsnew14.html)
-[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://www.apache.org/licenses/LICENSE-2.0)
-[![StackOverflow](https://img.shields.io/badge/arrow--kt-grey.svg?logo=stackoverflow)](https://stackoverflow.com/questions/tagged/arrow-kt)
-[![Twitter](https://img.shields.io/twitter/follow/arrow_kt?color=blue&style=flat)](https://twitter.com/arrow_kt)
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
 
-## Getting Started
+# Quickstart
 
-Get started by **creating a new site**.
+Arrow is composed of different libraries, you can just choose and pick the ones
+you need in your project.
 
-Or **try Docusaurus immediately** with **[docusaurus.new](https://docusaurus.new)**.
+### Enable the Maven Central repository
 
-### What you'll need
+Arrow is published in [Maven Central](https://search.maven.org/), so you need to
+enable it as source of dependencies in your build.
 
-- [Node.js](https://nodejs.org/en/download/) version 16.14 or above:
-  - When installing Node.js, you are recommended to check all checkboxes related to dependencies.
+<Tabs groupId="build">
+  <TabItem value="gradleKotlin" label="Gradle (Kotlin)">
 
-## Generate a new site
+  ```kotlin
+  repositories {
+    mavenCentral()
+  }
+  ```
 
-Generate a new Docusaurus site using the **classic template**.
+  </TabItem>
+  <TabItem value="gradleGroovy" label="Gradle (Groovy)">
 
-The classic template will automatically be added to your project after you run the command:
+  ```groovy
+  repositories {
+    mavenCentral()
+  }
+  ```
 
-```bash
-npm init docusaurus@latest my-website classic
+  </TabItem>
+  <TabItem value="maven" label="Maven">
+
+:::info
+  
+Maven includes the Maven Central repository by default.
+
+:::
+
+  </TabItem>
+</Tabs>
+
+### Include the dependencies
+
+You're now ready to include Arrow in your project. You have three possibilities,
+which correspond to three different ways of handling versioning in your build.
+
+#### One by one
+
+Simply include the desired library in your `dependencies` block, or as a
+`<dependency>` if you're using Maven.
+
+<Tabs groupId="build">
+<TabItem value="gradleKotlin" label="Gradle (Kotlin)">
+
+```kotlin
+dependencies {
+  implementation("io.arrow-kt:arrow-core:1.2.0")
+  implementation("io.arrow-kt:arrow-fx-coroutines:1.2.0")
+}
 ```
 
-You can type this command into Command Prompt, Powershell, Terminal, or any other integrated terminal of your code editor.
+</TabItem>
+<TabItem value="gradleGroovy" label="Gradle (Groovy)">
 
-The command also installs all necessary dependencies you need to run Docusaurus.
-
-## Start your site
-
-Run the development server:
-
-```bash
-cd my-website
-npm run start
+```groovy
+dependencies {
+  implementation 'io.arrow-kt:arrow-core:1.2.0'
+  implementation 'io.arrow-kt:arrow-fx-coroutines:1.2.0'
+}
 ```
 
-The `cd` command changes the directory you're working with. In order to work with your newly created Docusaurus site, you'll need to navigate the terminal there.
+</TabItem>
+<TabItem value="maven" label="Maven">
 
-The `npm run start` command builds your website locally and serves it through a development server, ready for you to view at http://localhost:3000/.
 
-Open `content/learn/overview.md` (this page) and edit some lines: the site **reloads automatically** and displays your changes.
+```xml
+<dependency>
+  <groupId>io.arrow-kt</groupId>
+  <artifactId>arrow-core</artifactId>
+  <version>1.2.0</version>
+</dependency>
+<dependency>
+  <groupId>io.arrow-kt</groupId>
+  <artifactId>arrow-fx-coroutines</artifactId>
+  <version>1.2.0</version>
+</dependency>
+```
+
+</TabItem>
+</Tabs>
+
+#### Using version catalogs
+
+[Version catalogs](https://docs.gradle.org/current/userguide/platforms.html)
+provide centralized management of versions. This is especially interesting when
+your Gradle build has several subprojects.
+
+<Tabs groupId="build">
+
+<TabItem value="gradleToml" label="libs.version.toml (Common)">
+
+```yaml
+[versions]
+arrow = "1.2.0"
+# other versions
+
+[libraries]
+arrow-core = { module = "io.arrow-kt:arrow-core", version.ref = "arrow" }
+arrow-fx-coroutines = { module = "io.arrow-kt:arrow-fx-coroutines", version.ref = "arrow" }
+# other dependencies
+```
+
+</TabItem>
+
+<TabItem value="gradleKotlin" label="Gradle (Kotlin)">
+
+```kotlin
+dependencies {
+  implementation(libs.arrow.core)
+  implementation(libs.arrow.fx.coroutines)
+}
+```
+
+</TabItem>
+
+<TabItem value="gradleGroovy" label="Gradle (Groovy)">
+
+```groovy
+dependencies {
+  implementation(libs.arrow.core)
+  implementation(libs.arrow.fx.coroutines)
+}
+```
+
+</TabItem>
+
+<TabItem value="maven" label="Maven">
+
+:::info
+
+Version catalogs are only available in Gradle.
+
+:::
+
+</TabItem>
+</Tabs>
+
+#### Using a Bill-of-Materials (BOM)
+
+Another way to keep a single version for all Arrow dependencies in your build is
+to include `arrow-stack`, which declares versions for the rest of the components.
+
+<Tabs groupId="build">
+<TabItem value="gradleKotlin" label="Gradle (Kotlin)">
+
+```kotlin
+dependencies {
+  implementation(platform("io.arrow-kt:arrow-stack:1.2.0"))
+  // no versions on libraries
+  implementation("io.arrow-kt:arrow-core")
+  implementation("io.arrow-kt:arrow-fx-coroutines")
+}
+```
+
+</TabItem>
+<TabItem value="gradleGroovy" label="Gradle (Groovy)">
+
+```groovy
+dependencies {
+  implementation platform('io.arrow-kt:arrow-stack:1.2.0')
+  // no versions on libraries
+  implementation 'io.arrow-kt:arrow-core'
+  implementation 'io.arrow-kt:arrow-fx-coroutines'
+}
+```
+
+</TabItem>
+<TabItem value="maven" label="Maven">
+
+
+```xml
+<dependency>
+    <groupId>io.arrow-kt</groupId>
+    <artifactId>arrow-stack</artifactId>
+    <version>1.2.0</version>
+    <type>pom</type>
+    <scope>import</scope>
+</dependency>
+<!-- no versions on libraries -->
+<dependency>
+  <groupId>io.arrow-kt</groupId>
+  <artifactId>arrow-core</artifactId>
+</dependency>
+<dependency>
+  <groupId>io.arrow-kt</groupId>
+  <artifactId>arrow-fx-coroutines</artifactId>
+</dependency>
+```
+
+</TabItem>
+</Tabs>
+
+### Additional setup for plug-ins
+
+If you're using the Optics component of Arrow, we provide a Kotlin compiler 
+plug-in which can derive most of the boilerplate required to use it. This
+plug-in is built with [KSP](https://kotlinlang.org/docs/ksp-overview.html),
+which requires an additional configuration step.
+
+
+<Tabs groupId="build">
+<TabItem value="gradleKotlin" label="Gradle (Kotlin)">
+
+```kotlin
+plugins {
+  id("com.google.devtools.ksp") version "1.8.10-1.0.9"
+}
+
+dependencies {
+  implementation("io.arrow-kt:arrow-optics:1.2.0")
+  ksp("io.arrow-kt:arrow-optics-ksp-plugin:1.2.0")
+}
+```
+
+</TabItem>
+<TabItem value="gradleGroovy" label="Gradle (Groovy)">
+
+```groovy
+plugins {
+  id 'com.google.devtools.ksp' version '1.8.10-1.0.9'
+}
+
+dependencies {
+  implementation 'io.arrow-kt:arrow-optics:1.2.0'
+  ksp 'io.arrow-kt:arrow-optics-ksp-plugin:1.2.0'
+}
+```
+
+</TabItem>
+
+<TabItem value="maven" label="Maven">
+
+:::caution
+
+There's no official support for KSP in Maven. 
+[This project](https://github.com/Dyescape/kotlin-maven-symbol-processing)
+provides unofficial support for that scenario.
+
+:::
+
+</TabItem>
+
+</Tabs>
+
+### Alphas (development builds)
+
+For those wanting to live on the edge, we provide alphas of our [development
+branch](https://github.com/arrow-kt/arrow). Those are tagged with the upcoming
+version, followed by `-alpha.` and the sequence number of the compilation. 
+Check [Maven Central](https://central.sonatype.com/artifact/io.arrow-kt/arrow-core/1.1.5/versions)
+for the most recent list of available versions.

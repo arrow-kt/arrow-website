@@ -3,7 +3,7 @@ coroutines = "1.6.4"
 kotest = "5.5.5"
 kotlin = "1.7.22"
 knit = "0.4.0"
-arrow = "1.1.6-alpha.28"
+arrow = "1.1.6-alpha.36"
 
 [libraries]
 coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "coroutines" }
