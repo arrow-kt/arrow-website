@@ -8,8 +8,8 @@ sidebar_position: 3
 
 # Either & Ior
 
-Both [`Either<E, A>`](https://arrow-kt.io/docs/apidocs/arrow-core/arrow.core/-either/index.html)
-and [`Ior<E, A>`](https://arrow-kt.io/docs/apidocs/arrow-core/arrow.core/-ior/index.html)
+Both [`Either<E, A>`](https://arrow-kt.github.io/arrow/arrow-core/arrow.core/-either/index.html)
+and [`Ior<E, A>`](https://arrow-kt.github.io/arrow/arrow-core/arrow.core/-ior/index.html)
 hold values which may be of type `E` or `A`.
 By convention the type `E` represents _errors_ and the type `A` represents
 _success_. For example, `Either<DbError, User>` could be a good result type for
