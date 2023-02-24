@@ -1,7 +1,7 @@
 # Summary of operators
 
 <details>
-<summary><span style={{ fontSize: '115%' }}>Typed errors</span> (<a href="../typed-errors">guide</a>)</summary>
+<summary><span style={{ fontSize: '115%' }}>Typed Errors</span> (<a href="../typed-errors">guide</a>)</summary>
 
 <details>
 <summary>Run a computation with potential errors</summary>
@@ -65,7 +65,7 @@ These functions use `NonEmptyList<E>` as the surrounding error type.
 </details>
 
 <details>
-<summary><span style={{ fontSize: '115%' }}><code>suspend</code>ed actions</span> (guide)</summary>
+<summary><span style={{ fontSize: '115%' }}>Coroutines / <code>suspend</code>ed actions</span> (guide)</summary>
 
 <details>
 <summary>Run several of them</summary>
