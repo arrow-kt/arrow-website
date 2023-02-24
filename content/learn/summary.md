@@ -1,7 +1,7 @@
 # Summary
 
 <details>
-<summary><span style={{ fontSize: '115%' }}>Typed Errors</span> (<a href="../typed-errors">guide</a>)</summary>
+<summary><span style={{ fontSize: '115%' }}>Typed errors</span> (<a href="../typed-errors">guide</a>)</summary>
 
 <details>
 <summary>Run a computation with potential errors</summary>
