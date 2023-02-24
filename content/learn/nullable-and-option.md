@@ -13,8 +13,7 @@ If you have worked with Java at all in the past, it is very likely that you have
 Usually this happens because some method returns `null` when you weren't expecting it and, thus, isn't dealing with that possibility in your client code.
 A value of `null` is often abused to represent an absent optional value. Kotlin already solves the problem by getting rid of `null` values altogether, and providing its own special syntax [Null-safety machinery based on `?`](https://kotlinlang.org/docs/reference/null-safety.html).
 
-Since Kotlin already has nullable types, why do we need Arrow's `Option` type?  There is only **a few** cases where you should use `Option` instead of nullable types.
-There is only one good reason to use `Option` instead of nullable types, and that is the _nested nullability_ problem. Let's see an example:
+Since Kotlin already has nullable types, why do we need Arrow's `Option` type? There are only **a few** cases where you should use `Option` instead of nullable types, and one is the _nested nullability_ problem. Let's see an example:
 
 We write a small `firstOrElse` function, and it should return the first element of a list, or the default value if the list is **empty**.
 
@@ -58,7 +57,7 @@ Instead however it returns `-1`, which is the default value we specified in case
 Exception in thread "main" java.lang.AssertionError: Expected null but actual was -1
 ```
 
-This is known as the _nested nullability_ problem, and it is a problem that can be solved by using `Option` instead of nullable types.
+This is known as the _nested nullability_ problem, and it is an issue that can be solved by using `Option` instead of nullable types.
 So let's analyse what is going wrong here, and how we can fix it. When we look at the implementation of our `firstOrElse` function,
 we see that we're using `firstOrNull` to get the first element of the list, and if that is `null` we return the default value.
 
@@ -166,7 +165,7 @@ fun main() {
 <!--- TEST assert -->
 
 :::danger Take care
-If `A?` is null than you should be explicitly using the `Some` or `.some()` constructor.
+If `A?` is null then you should be explicitly using the `Some` or `.some()` constructor.
 Otherwise, you will get a `None` instead of a `Some` due to the _nested nullable_ problem.
 :::
 
