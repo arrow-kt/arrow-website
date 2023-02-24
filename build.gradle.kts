@@ -22,6 +22,7 @@ configure<KnitPluginExtension> {
 
   files = fileTree(project.rootDir) {
     include("**/*.md")
+    exclude("**/quickstart.md")
     exclude("**/node_modules/**/*.md")
   }
 }
