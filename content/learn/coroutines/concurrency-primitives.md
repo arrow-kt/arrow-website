@@ -1,6 +1,11 @@
+---
+sidebar_position: 4
+---
+
 # Concurrency primitives
 
-Horrible page name... I know. But I couldn't think of anything better.
+These types are not usually found in application code, but provide important
+foundation blocks for larger patterns.
 
 ## CountDownLatch
 
