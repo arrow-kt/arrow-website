@@ -190,7 +190,7 @@ context(Database, Logger)
 fun User.saveInDb() { ... }
 ```
 
-and inject the values by simply nesting the calls to `db` and `stdoutLogger`.
+and inject the values by simply nesting the calls to `db` and `stdoutLogger`. Note that sometimes you need a more powerful `with` function than the one provided by the standard library, like [this one](https://gist.github.com/carbaj03/4ebd0f8da17c351d4235e1bedd9a36b5), which admits subtyping within contexts.
 
 ## Contexts, effects, algebras
 

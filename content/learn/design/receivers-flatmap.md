@@ -200,7 +200,15 @@ is nothing else than your regular list `map`, but where `f` may incorporate some
 
 The signature of `traverse` shows another important part of the monadic style of effects, namely _higher-kinded types_. Since monads are types which take other types as parameters -- like `Option` or `Result` --, to provide utility functions that work over different monads one must have a way to refer to those types. In Scala this is made explicit by the number of underscores after the type name, like `F[_]` above; in Haskell this is not made explicit in the signature, but is still checked by the compiler. Even after decades from their inception, higher-kinded types are still considered an advanced feature, and haven't made their way into mainstream programming languages.
 
-The reason why Kotlin doesn't require higher-kinded types to provide similar abstraction is that the same functions which work over "regular" functions, like `map`, keep working when used in the coroutine world. Kotlin language designers have found, in my opinion, a great point in the design space, in which they can offer the same abilities but without the cost of such a complex feature.
+The reason why Kotlin doesn't require higher-kinded types to provide similar abstraction is that the same functions which work over "regular" functions, like `map`, keep working when used in the coroutine world. Continuing with the example above, we can obtain the names of every friend of a user combining `map` and `getUserName`, even though the later is a suspended function.
+
+```kotlin
+context(UserRepository)
+suspend fun getUserFriends(id: UserId): List<String> =
+  getUserFriendIds(id).map { getUserName(it) }
+```
+
+Kotlin language designers have found, in my opinion, a great point in the design space, in which they can offer the same abilities but without the cost of such a complex feature.
 
 ### Composition of effects
 
