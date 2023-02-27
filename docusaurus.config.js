@@ -108,6 +108,11 @@ const config = {
                 to: 'learn/category/resilience',
                 activeBaseRegex: '^(/learn/category/resilience)|^(/learn/resilience)',
               },
+              {
+                label: 'Design',
+                to: 'learn/category/design',
+                activeBaseRegex: '^(/learn/category/design)|^(/learn/design)',
+              },
             ],
           },
           {
@@ -185,6 +190,11 @@ const config = {
                  to: 'learn/category/resilience',
                  activeBaseRegex: '^(/learn/category/resilience)|^(/learn/resilience)',
                },
+               {
+                label: 'Design',
+                to: 'learn/category/design',
+                activeBaseRegex: '^(/learn/category/design)|^(/learn/design)',
+              },
             ],
           },
           {
