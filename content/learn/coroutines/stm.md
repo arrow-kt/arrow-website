@@ -59,7 +59,7 @@ fun STM.withdraw(acc: TVar<Int>, amount: Int): Unit {
   else throw IllegalStateException("Not enough money in the account!")
 }
 
-suspend fun main() {
+suspend fun example() {
   val acc1 = TVar.new(500)
   val acc2 = TVar.new(300)
   println("Balance account 1: ${acc1.unsafeRead()}")
@@ -101,14 +101,14 @@ variable has changed.
 Here in this example we've changed `withdraw` to use `retry` and thus wait until
 enough money is in the account, which after a few seconds just happens to be the case.
 
-```kotlin
+<!--- INCLUDE
 import arrow.fx.stm.atomically
 import arrow.fx.stm.TVar
 import arrow.fx.stm.STM
-import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.async
 import kotlinx.coroutines.delay
-
+-->
+```kotlin
 fun STM.transfer(from: TVar<Int>, to: TVar<Int>, amount: Int): Unit {
   withdraw(from, amount)
   deposit(to, amount)
@@ -127,7 +127,7 @@ fun STM.withdraw(acc: TVar<Int>, amount: Int): Unit {
   // this can also be achieved by using `check(current - amount >= 0); acc.write(it + amount)`
 }
 
-fun main(): Unit = runBlocking {
+suspend fun main(): Unit {
   val acc1 = TVar.new(0)
   val acc2 = TVar.new(300)
   println("Balance account 1: ${acc1.unsafeRead()}")
@@ -172,13 +172,13 @@ well, then the whole transaction retries.
 In the example below we use `orElse` to return `null` whenever the `check`
 fails. By default `check` retries the transaction, hence the need for `orElse`.
 
-```kotlin
-import kotlinx.coroutines.runBlocking
+<!--- INCLUDE
 import arrow.fx.stm.atomically
 import arrow.fx.stm.TVar
 import arrow.fx.stm.STM
 import arrow.fx.stm.stm
-
+-->
+```kotlin
 fun STM.transaction(v: TVar<Int>): Int? =
   stm {
     val result = v.read()
@@ -186,7 +186,7 @@ fun STM.transaction(v: TVar<Int>): Int? =
     result
   } orElse { null }
 
-fun main(): Unit = runBlocking {
+suspend fun main(): Unit {
   val v = TVar.new(100)
   println("Value is ${v.unsafeRead()}")
   atomically { transaction(v) }

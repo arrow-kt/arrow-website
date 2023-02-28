@@ -10,9 +10,9 @@ class ${test.name} : StringSpec({
   <#assign method = test["mode.${case.param}"]!"custom">
   "${case.name}" {
     <#if case.param == "assert">
-    ${case.knit.package}.${case.knit.name}.main()
+    ${case.knit.package}.${case.knit.name}.example()
     <#else>
-    captureOutput("${case.name}") { ${case.knit.package}.${case.knit.name}.main() }
+    captureOutput("${case.name}") { ${case.knit.package}.${case.knit.name}.example() }
     <#if method != "custom">
       .${method}(
         <#list case.lines as line>

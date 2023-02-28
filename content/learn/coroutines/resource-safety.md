@@ -43,7 +43,7 @@ class Service(val db: DataSource, val userProcessor: UserProcessor) {
 For example, the following application would leak resources.
 
 ```kotlin
-suspend fun main(): Unit {
+suspend fun example() {
   val userProcessor = UserProcessor().also { it.start() }
   val dataSource = DataSource().also { it.connect() }
   val service = Service(dataSource, userProcessor)
@@ -75,7 +75,7 @@ class Service(val db: DataSource, val userProcessor: UserProcessor) {
 }
 -->
 ```kotlin
-suspend fun main(): Unit {
+suspend fun example() {
   UserProcessor().use { userProcessor ->
     userProcessor.start()
     DataSource().use { dataSource ->
@@ -146,7 +146,7 @@ val service: Resource<Service> = resource {
   Service(dataSource.bind(), userProcessor.bind())
 }
 
-suspend fun main(): Unit = resourceScope {
+suspend fun example(): Unit = resourceScope {
   val data = service.bind().processData()
   println(data)
 }
@@ -239,7 +239,7 @@ suspend fun ResourceScope.userProcessor(): UserProcessor =
 suspend fun ResourceScope.dataSource(): DataSource =
   install({ DataSource().also { it.connect() } }) { ds, _ -> ds.close() }
 
-suspend fun main(): Unit = resourceScope {
+suspend fun example(): Unit = resourceScope {
   val service = parZip({ userProcessor() }, { dataSource() }) { userProcessor, ds ->
     Service(ds, userProcessor)
   }

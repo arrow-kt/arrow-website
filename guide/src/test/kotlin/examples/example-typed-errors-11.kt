@@ -22,7 +22,7 @@ operator fun MyError.plus(second: MyError): MyError =
 
 val error = MyError("1 is not even, 3 is not even, 5 is not even, 7 is not even, 9 is not even").left()
 
-fun main() {
+fun example() {
   (1..10).mapOrAccumulate(MyError::plus) { isEven(it) } shouldBe error
   (1..10).mapOrAccumulate(MyError::plus) { isEven2(it).bind() } shouldBe error
 }

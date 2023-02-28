@@ -21,7 +21,7 @@ val res = either { one() }
 
 fun Raise<MyError>.res(): Int = one.bind()
 
-fun main() {
+fun example() {
   when (res) {
     is Left -> fail("No logical failure occurred!")
     is Right -> res.value shouldBe 1

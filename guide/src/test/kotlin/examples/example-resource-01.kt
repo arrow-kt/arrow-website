@@ -16,7 +16,7 @@ class Service(val db: DataSource, val userProcessor: UserProcessor) {
     throw RuntimeException("I'm going to leak resources by not closing them")
 }
 
-suspend fun main(): Unit {
+suspend fun example() {
   val userProcessor = UserProcessor().also { it.start() }
   val dataSource = DataSource().also { it.connect() }
   val service = Service(dataSource, userProcessor)

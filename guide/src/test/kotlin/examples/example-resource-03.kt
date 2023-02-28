@@ -38,7 +38,7 @@ val service: Resource<Service> = resource {
   Service(dataSource.bind(), userProcessor.bind())
 }
 
-suspend fun main(): Unit = resourceScope {
+suspend fun example(): Unit = resourceScope {
   val data = service.bind().processData()
   println(data)
 }

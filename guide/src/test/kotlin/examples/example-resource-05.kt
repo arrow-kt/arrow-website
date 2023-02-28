@@ -29,7 +29,7 @@ suspend fun ResourceScope.userProcessor(): UserProcessor =
 suspend fun ResourceScope.dataSource(): DataSource =
   install({ DataSource().also { it.connect() } }) { ds, _ -> ds.close() }
 
-suspend fun main(): Unit = resourceScope {
+suspend fun example(): Unit = resourceScope {
   val service = parZip({ userProcessor() }, { dataSource() }) { userProcessor, ds ->
     Service(ds, userProcessor)
   }

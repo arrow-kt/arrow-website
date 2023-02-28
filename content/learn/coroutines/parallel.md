@@ -125,31 +125,47 @@ a single value.
 
 ## Integration with typed errors
 
-Arrow's typed errors can seamlessly integrate with the concurrency operators, whilst supporting the patterns of structured concurrency.
+Arrow's typed errors can seamlessly integrate with the Arrow Fx Coroutines operators, whilst supporting the patterns of structured concurrency.
 The subtleties lie in the ordering of the DSLs, and how they affect the _cancellation_ of scopes of structured concurrency -and error handling.
 So it's important you understand how cancellation works in [Structured Concurrency](https://kotlinlang.org/docs/cancellation-and-timeouts.html).
 
-Before we deeply get into any examples lets define a simple `task` that we can use in all the examples below.
-Our `task` function will print a message with it's `number`, then sleep for 500ms and print a message again _if_ it's not cancelled.  If our `task` gets cancelled, it will print the `CancellationException` instead.
-
 <!--- INCLUDE
-import kotlin.coroutines.cancellation.CancellationException
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.runBlocking
-import arrow.fx.coroutines.parZip
-import arrow.core.Either
 import arrow.core.raise.either
-import io.kotest.matchers.shouldBe
+import arrow.fx.coroutines.parZip
+import kotlinx.coroutines.CancellationException
+import kotlinx.coroutines.delay
 -->
 ```kotlin
-suspend fun task(number: Int): Unit = try {
-    println("task-$number => I'm going to sleep ...")
-    delay(500)
-    println("task-$number => I finished sleeping ...")
+suspend fun logCancellation(): Unit = try {
+  println("Sleeping for 500 milliseconds ...")
+  delay(500)
 } catch (e: CancellationException) {
-  println("job: I was cancelled because of $e")
+  println("Sleep was cancelled early!")
+  throw e
 }
 ```
+
+When we nest the `Raise` DSL inside the Arrow Fx Coroutines operators lambdas the errors will remain _inside_ the lambdas. Thus, they will _not_ affect any of the regular behavior.
+For example, if we compute `Either` values inside the `parZip` any occurred _typed error_ will not affect the other computations. 
+
+```kotlin
+suspend fun example() {
+  val triple = parZip(
+    { either<String, Unit> { logCancellation() } },
+    { either<String, Unit> { delay(100); raise("Error") } },
+    { either<String, Unit> { logCancellation() } }
+  ) { a, b, c -> Triple(a, b, c) }
+  println(triple)
+}
+```
+<!--- KNIT example-parallel-04.kt -->
+
+```text
+Sleeping for 500 milliseconds ...
+Sleeping for 500 milliseconds ...
+(Either.Right(kotlin.Unit), Either.Left(Error), Either.Right(kotlin.Unit))
+```
+<!--- TEST -->
 
 :::danger
 
@@ -160,33 +176,118 @@ More information can be found in the [typed errors documentation](/content/learn
 
 ### Cancellation on Raise
 
-So let's say we want to run 3 _independent_ tasks in parallel, and if any of them fails, we want to cancel the other two. As showed above `parZip` is ideal for this.
-To mimic one of the tasks failing, we'll use the `raise` function from the [typed errors](/content/learn/typed-errors/typed-errors.md) module and we'll trigger a failure after 200ms.
+In contrast, when we nest Arrow Fx Coroutines operators inside the `Raise` DSL the errors will be observed by Structured Concurrency.
+_typed errors_ follow the same rules as [Structured Concurrency](https://kotlinlang.org/docs/cancellation-and-timeouts.html), and behave the same as `CancellationException` since they _short-circuit_ the computation.
 
+As shown above `parZip` allows running _independent_ tasks in parallel. If any of the tasks fail, the other tasks will get cancelled.
+The same semantics are also guaranteed when composing `parZip` with typed errors.
+
+The example below shows 3 `task` running in parallel, and according to the `task` implementation the `TaskId` 2 will fail.
+
+<!--- INCLUDE
+import kotlinx.coroutines.delay
+import arrow.core.raise.Raise
+import arrow.core.raise.either
+import arrow.fx.coroutines.parZip
+import kotlin.time.Duration.Companion.milliseconds
+import kotlin.coroutines.cancellation.CancellationException
+
+suspend fun logCancellation(): Unit = try {
+  println("Sleeping for 500 milliseconds ...")
+  delay(500)
+} catch (e: CancellationException) {
+  println("Sleep was cancelled early!")
+  throw e
+}
+-->
 ```kotlin
-fun main(): Unit = runBlocking {
-  either {
+suspend fun example() {
+  val res = either {
     parZip(
-      { task(1) },
-      {
-        delay(200)
-        raise("task 2 failed")
-      },
-      { task(3) }
-    ) { _, _, _ -> }
-  }.onLeft { msg -> println(msg) }
+      { logCancellation() } ,
+      { delay(100); raise("Error") },
+      { logCancellation() }
+    ) { a, b, c -> Triple(a, b, c) }
+  }
+  println(res)
 }
 ```
-<!--- KNIT example-parallel-04.kt -->
+<!--- KNIT example-parallel-05.kt -->
 
-In the output we can see that tasks `1` and `3` started, but `2` failed and cancelled the other two tasks.
+In the output we can see that tasks `1` and `3` started, but `2` _raised_ an error which triggered the cancellation of the other two tasks.
 After tasks `1` and `3` are cancelled, we see that the result of `raise` is returned and prints the error message.
 
 ```text
-task-1 => I'm going to sleep ...
-task-3 => I'm going to sleep ...
-job: I was cancelled because of arrow.core.raise.RaiseCancellationException: Raised Continuation
-job: I was cancelled because of arrow.core.raise.RaiseCancellationException: Raised Continuation
-task 2 failed
+Sleeping for 500 milliseconds ...
+Sleeping for 500 milliseconds ...
+Sleep was cancelled early!
+Sleep was cancelled early!
+Either.Left(Error)
 ```
 <!--- TEST -->
+
+Similarly, we can apply the same pattern to `parMap` when we're working with collections. Where we want all tasks to be cancelled if any of them fails.
+
+<!--- INCLUDE
+import kotlinx.coroutines.delay
+import arrow.core.raise.Raise
+import arrow.core.raise.either
+import arrow.core.raise.ensure
+import arrow.fx.coroutines.parMap
+import kotlin.coroutines.cancellation.CancellationException
+
+suspend fun logCancellation(): Unit = try {
+  println("Sleeping for 500 milliseconds ...")
+  delay(500)
+} catch (e: CancellationException) {
+  println("Sleep was cancelled early!")
+  throw e
+}
+-->
+```kotlin
+suspend fun Raise<String>.failOnEven(i: Int): Unit {
+  ensure(i % 2 != 0) { delay(100); "Error" }
+  logCancellation()
+}
+
+suspend fun example() {
+  val res = either {
+    listOf(1, 2, 3, 4).parMap { failOnEven(it) }
+  }
+  println(res)
+}
+```
+<!--- KNIT example-parallel-06.kt -->
+
+The example transforms, or maps, every element of an `Iterable` `[1, 2, 3, 4]` in _parallel_ using `parMap` and `failOnEven`.
+Since `failOnEven` raises an error when the `Int` is even, it fails for inputs 2 and 4, and the other two coroutines cancelled.
+
+```text
+Sleeping for 500 milliseconds ...
+Sleeping for 500 milliseconds ...
+Sleep was cancelled early!
+Sleep was cancelled early!
+Either.Left(Error)
+```
+<!--- TEST -->
+
+### Accumulating typed errors in parallel
+
+Arrow Fx Coroutines also provides a way to accumulate errors in parallel.
+If we want to run tasks in parallel, but we want to accumulate all errors instead of short-circuiting, we can use `parMapOrAccumulate`.
+It works the same as `parMap` from our previous example, but instead of cancellation the other coroutines when one fails, it accumulates the errors.
+So no matter how many coroutines fail, all of them will run to completion.
+
+```kotlin
+suspend fun example() {
+  val res = listOf(1, 2, 3, 4)
+    .parMapOrAccumulate { failOnEven(it) }
+  println(res)
+}
+```
+
+```text
+Sleeping for 500 milliseconds ...
+Sleeping for 500 milliseconds ...
+Either.Left(NonEmptyList(Error, Error))
+```

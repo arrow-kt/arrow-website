@@ -7,13 +7,33 @@ import kotlinx.knit.test.verifyOutputLines
 
 class ParallelTest : StringSpec({
   "ExampleParallel04" {
-    captureOutput("ExampleParallel04") { arrow.website.examples.exampleParallel04.main() }
+    captureOutput("ExampleParallel04") { arrow.website.examples.exampleParallel04.example() }
       .verifyOutputLines(
-        "task-1 => I'm going to sleep ...",
-        "task-3 => I'm going to sleep ...",
-        "job: I was cancelled because of arrow.core.raise.RaiseCancellationException: Raised Continuation",
-        "job: I was cancelled because of arrow.core.raise.RaiseCancellationException: Raised Continuation",
-        "task 2 failed"
+        "Sleeping for 500 milliseconds ...",
+        "Sleeping for 500 milliseconds ...",
+        "(Either.Right(kotlin.Unit), Either.Left(Error), Either.Right(kotlin.Unit))"
+      )
+  }
+
+  "ExampleParallel05" {
+    captureOutput("ExampleParallel05") { arrow.website.examples.exampleParallel05.example() }
+      .verifyOutputLines(
+        "Sleeping for 500 milliseconds ...",
+        "Sleeping for 500 milliseconds ...",
+        "Sleep was cancelled early!",
+        "Sleep was cancelled early!",
+        "Either.Left(Error)"
+      )
+  }
+
+  "ExampleParallel06" {
+    captureOutput("ExampleParallel06") { arrow.website.examples.exampleParallel06.example() }
+      .verifyOutputLines(
+        "Sleeping for 500 milliseconds ...",
+        "Sleeping for 500 milliseconds ...",
+        "Sleep was cancelled early!",
+        "Sleep was cancelled early!",
+        "Either.Left(Error)"
       )
   }
 

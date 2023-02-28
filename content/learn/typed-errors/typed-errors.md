@@ -66,7 +66,7 @@ fun Raise<MyError>.res(): Int = one.bind()
 We can then _inspect_ the value of `res` using Kotlin's `when`, or `fold` the _computation_ providing a lambda for both the _logical failure_ and the _success_ case.
 
 ```kotlin
-fun main() {
+fun example() {
   when (res) {
     is Left -> fail("No logical failure occurred!")
     is Right -> res.value shouldBe 1
@@ -105,7 +105,7 @@ fun Raise<MyError>.error(): Int = raise(MyError)
 We can then again use `when` or `fold` to _inspect_ or _compute_ the value and function.
 
 ```kotlin
-fun main() {
+fun example() {
   when (error) {
     is Left -> error.value shouldBe MyError
     is Right -> fail("A logical failure occurred!")
@@ -151,7 +151,7 @@ fun Raise<MyError>.isPositive(i: Int): Int {
   return i
 }
 
-fun main() {
+fun example() {
   isPositive(-1) shouldBe MyError("-1 is not positive").left()
 
   fold(
@@ -191,7 +191,7 @@ fun Raise<MyError>.increment(i: Int): Int {
   return i + 1
 }
 
-fun main() {
+fun example() {
   increment(null) shouldBe MyError("Cannot increment null").left()
 
   fold(
@@ -232,7 +232,7 @@ val fallback: Either<Nothing, Int> =
 fun Raise<Nothing>.fallback(): Int =
   recover({ error() }) { e: MyError -> 1 }
 
-fun main() {
+fun example() {
   fallback.merge() shouldBe 1
   fold(
     { fallback() },
@@ -270,7 +270,7 @@ val other: Either<OtherError, Int> =
 fun Raise<OtherError>.other(): Int =
   recover({ error() }) { _: MyError -> raise(OtherError) }
 
-fun main() {
+fun example() {
   other shouldBe OtherError.left()
   fold(
     { other() },
@@ -309,7 +309,7 @@ val other: Either<OtherError, Int> =
 fun Raise<OtherError>.other(): Int =
   recover({ raise(MyError) }) { _: MyError -> fallback.bind() }
 
-fun main() {
+fun example() {
   other shouldBe OtherError.left()
   fold(
     { other() },
@@ -344,7 +344,7 @@ suspend fun fallback(): Either<Nothing, Int> =
 suspend fun Raise<MyError>.error(): Int =
   catch({ externalSystem() }) { e: Throwable -> raise(MyError(e)) }
 
-suspend fun main() {
+suspend fun example() {
   fallback() shouldBe 1.right()
   fold(
     { error() },
@@ -381,7 +381,7 @@ suspend fun error(): Either<OtherError, Int> =
 suspend fun Raise<Nothing>.fallback(): Int =
   catch({ externalSystem() }) { e: Throwable -> 1 }
 
-suspend fun main() {
+suspend fun example() {
   error().shouldBeTypeOf<Either.Left<OtherError>>()
   fold(
     { fallback() },
@@ -427,7 +427,7 @@ The errors are accumulated into `NonEmptyList` since there needs to be at least 
 ```kotlin
 val errors = nonEmptyListOf(NotEven(1), NotEven(3), NotEven(5), NotEven(7), NotEven(9)).left()
 
-fun main() {
+fun example() {
   (1..10).mapOrAccumulate { isEven(it) } shouldBe errors
   (1..10).mapOrAccumulate { isEven2(it).bind() } shouldBe errors
 }
@@ -470,7 +470,7 @@ We can then simply pass this function to the `mapOrAccumulate` function, and it 
 ```kotlin
 val error = MyError("1 is not even, 3 is not even, 5 is not even, 7 is not even, 9 is not even").left()
 
-fun main() {
+fun example() {
   (1..10).mapOrAccumulate(MyError::plus) { isEven(it) } shouldBe error
   (1..10).mapOrAccumulate(MyError::plus) { isEven2(it).bind() } shouldBe error
 }
