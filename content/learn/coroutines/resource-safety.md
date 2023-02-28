@@ -4,6 +4,8 @@ sidebar_position: 2
 
 # Resource
 
+<!--- TEST_NAME ResourceTest -->
+
 Allocation and release of resources is not an easy task, especially when
 we have multiple resources that depend on each other. The Resource DSL
 adds the ability to _install_ resource, and ensure proper finalization even
@@ -52,9 +54,26 @@ suspend fun main(): Unit {
   userProcessor.shutdown()
 }
 ```
+<!--- KNIT example-resource-01.kt -->
 
 If we were using Kotlin JVM, we may rely on `Closeable` or `AutoCloseable` and rewrite our code.
 
+<!--- INCLUDE
+class UserProcessor : AutoCloseable {
+  fun start(): Unit = println("Creating UserProcessor")
+  override fun close(): Unit = println("Shutting down UserProcessor")
+}
+
+class DataSource : AutoCloseable{
+  fun connect(): Unit = println("Connecting dataSource")
+  override fun close(): Unit = println("Closed dataSource")
+}
+
+class Service(val db: DataSource, val userProcessor: UserProcessor) {
+  suspend fun processData(): List<String> = 
+    throw RuntimeException("I'm going to leak resources by not closing them")
+}
+-->
 ```kotlin
 suspend fun main(): Unit {
   UserProcessor().use { userProcessor ->
@@ -66,6 +85,7 @@ suspend fun main(): Unit {
   }
 }
 ```
+<!--- KNIT example-resource-02.kt -->
 
 However, while we fixed closing of `UserProcessor` and `DataSource` there are issues still with this code:
 
@@ -82,10 +102,10 @@ Resource solves of these issues. In order to use it, we need to define 3 differe
   3. Releasing `A`.
 Then we can compose several of these resources, and ensure that everything works correctly.
 
-We rewrite our previous example to [Resource] below by:
- 1. Define [Resource] for `UserProcessor`.
- 2. Define [Resource] for `DataSource`, that also logs the [ExitCase].
- 3. Compose `UserProcessor` and `DataSource` [Resource] together into a [Resource] for `Service`.
+We rewrite our previous example to [Resource](https://arrow-kt.github.io/arrow/arrow-fx-coroutines/arrow.fx.coroutines/-resource/index.html) below by:
+ 1. Define [Resource](https://arrow-kt.github.io/arrow/arrow-fx-coroutines/arrow.fx.coroutines/-resource/index.html) for `UserProcessor`.
+ 2. Define [Resource](https://arrow-kt.github.io/arrow/arrow-fx-coroutines/arrow.fx.coroutines/-resource/index.html) for `DataSource`, that also logs the [ExitCase](https://arrow-kt.github.io/arrow/arrow-fx-coroutines/arrow.fx.coroutines/-exit-case/index.html).
+ 3. Compose `UserProcessor` and `DataSource` [Resource](https://arrow-kt.github.io/arrow/arrow-fx-coroutines/arrow.fx.coroutines/-resource/index.html) together into a [Resource](https://arrow-kt.github.io/arrow/arrow-fx-coroutines/arrow.fx.coroutines/-resource/index.html) for `Service`.
 
 <!--- INCLUDE
 import arrow.fx.coroutines.Resource
@@ -134,11 +154,11 @@ suspend fun main(): Unit = resourceScope {
 <!--- KNIT example-resource-03.kt -->
 
 There is a lot going on in the snippet above, which we'll analyse in the sections below.
-Looking at the above example it should already give you some idea if the capabilities of [Resource].
+Looking at the above example it should already give you some idea if the capabilities of [Resource](https://arrow-kt.github.io/arrow/arrow-fx-coroutines/arrow.fx.coroutines/-resource/index.html).
 
 ## Resource constructors
 
-[Resource] works entirely through a DSL,
+[Resource](https://arrow-kt.github.io/arrow/arrow-fx-coroutines/arrow.fx.coroutines/-resource/index.html) works entirely through a DSL,
 which allows _installing_ a `Resource` through the `suspend fun <A> install(acquire: suspend () -> A, release: suspend (A, ExitCase) -> Unit): A` function.
 
 `acquire` is used to _allocate_ the `Resource`,
@@ -168,7 +188,7 @@ suspend fun ResourceScope.userProcessor(): UserProcessor =
   }
 ```
 
-We can of course also create `lazy` representations of this by wrapping `install` in [resource] and returning the `suspend lambda` value instead.
+We can of course also create `lazy` representations of this by wrapping `install` in [resource](https://arrow-kt.github.io/arrow/arrow-fx-coroutines/arrow.fx.coroutines/resource.html) and returning the `suspend lambda` value instead.
 
 ```kotlin
 val userProcessor: Resource<UserProcessor> = resource {
@@ -179,21 +199,11 @@ val userProcessor: Resource<UserProcessor> = resource {
   x
 }
 ```
-
-There is also a convenience operator for this pattern, but you might have preferred `ResourceScope::userProcessor` instead since it yields the same result.
-
-```kotlin
-val userProcessor2: Resource<UserProcessor> = resource({
-  UserProcessor().also { it.start() }
-}) { processor, _ -> processor.shutdown() }
-
-val userProcessor3: Resource<UserProcessor> = ResourceScope::userProcessor
-```
 <!--- KNIT example-resource-04.kt -->
 
 ## Scope DSL
 
-The [ResourceScope] DSL allows you to _install_ resources, and interact with them in a safe way.
+The [ResourceScope](https://arrow-kt.github.io/arrow/arrow-fx-coroutines/arrow.fx.coroutines.continuations/-resource-scope/index.html) DSL allows you to _install_ resources, and interact with them in a safe way.
 
 Arrow offers the same elegant `bind` DSL for Resource composition as you might be familiar with from Arrow Core. Which we've already seen above, in our first example.
 What is more interesting, is that we can also compose it with any other existing pattern from Arrow!
@@ -241,9 +251,9 @@ suspend fun main(): Unit = resourceScope {
 
 ## Conclusion
 
-[Resource] guarantee that their release finalizers are always invoked in the correct order when an exception is raised or the [kotlinx.coroutines.Job] is running gets canceled.
+[Resource](https://arrow-kt.github.io/arrow/arrow-fx-coroutines/arrow.fx.coroutines/-resource/index.html) guarantee that their release finalizers are always invoked in the correct order when an exception is raised or the [kotlinx.coroutines.Job](https://kotlinlang.org/api/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-job/) is running gets canceled.
 
-To achieve this [Resource] ensures that the `acquire` & `release` step are [NonCancellable].
+To achieve this [Resource](https://arrow-kt.github.io/arrow/arrow-fx-coroutines/arrow.fx.coroutines/-resource/index.html) ensures that the `acquire` & `release` step are [NonCancellable](https://kotlinlang.org/api/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-non-cancellable/).
 If a cancellation signal, or an exception is received during `acquire`, the resource is assumed to not have been acquired and thus will not trigger the release function.
  => Any composed resources that are already acquired they will be guaranteed to release as expected.
 

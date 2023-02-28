@@ -166,7 +166,7 @@ has side effects inside.
 ###  Branching
 
 The counterpart to `retry` is `orElse`, which allows detecting if a branch 
-has called [retry] and then use a fallback instead. If the fallback retries as 
+has called [retry](https://arrow-kt.github.io/arrow/arrow-fx-stm/arrow.fx.stm/-s-t-m/retry.html) and then use a fallback instead. If the fallback retries as 
 well, then the whole transaction retries.
 
 In the example below we use `orElse` to return `null` whenever the `check`

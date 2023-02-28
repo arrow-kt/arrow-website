@@ -4,6 +4,8 @@ sidebar_position: 1
 
 # High-level concurrency
 
+<!--- TEST_NAME ParallelTest -->
+
 [Coroutines](https://kotlinlang.org/docs/coroutines-guide.html) are one of the
 most interesting features of Kotlin. However, the ["coroutines standard library"](https://kotlinlang.org/api/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/)
 sometimes fall short, especially when you have to deal with a big amount of
@@ -25,13 +27,21 @@ from another service, there's no reason why we shouldn't do them concurrently.
 If both functions are defined as `suspend`ed, we can use `parZip` to combine the
 execution.
 
+<!--- INCLUDE
+import arrow.fx.coroutines.parZip
+typealias UserId = Int
+data class User(val name: String, val avatar: String)
+suspend fun getUserName(id: UserId): String = "$id-name"
+suspend fun getAvatar(id: UserId): String = "$id-avatar"
+-->
 ```kotlin
 suspend fun getUser(id: UserId): User =
   parZip(
-    getUserName(id),
-    getAvatar(id)
+    { getUserName(id) },
+    { getAvatar(id) }
   ) { name, avatar -> User(name, avatar) }
 ```
+<!--- KNIT example-parallel-01.kt -->
 
 The code above showcases how `parZip` is used: we have a sequence of arguments
 representing each of the computations to perform, and at the end one final
@@ -52,10 +62,18 @@ In other cases those computations depend on some form of _collection_; for examp
 we want to obtain the name of all the friends of a user. Arrow provides `parMap`
 for that use case.
 
+<!--- INCLUDE
+import arrow.fx.coroutines.parMap
+typealias UserId = Int
+data class User(val name: String)
+suspend fun getFriendIds(id: UserId): List<UserId> = listOf(1, 2, 3)
+suspend fun getUserName(id: UserId): User = User("$id-name")
+-->
 ```kotlin
-suspend fun getFriendNames(id: UserId): User =
+suspend fun getFriendNames(id: UserId): List<User> =
   getFriendIds(id).parMap { getUserName(it) }
 ```
+<!--- KNIT example-parallel-02.kt -->
 
 One potential problem with `parMap` is that we may have _too much_ concurrency
 if the amount of elements in the collection is too big. To fight against this
@@ -85,12 +103,19 @@ rest. This is an example of **racing** two computations.
 Arrow provides functions that perform racing over 2 or 3 computations, with the
 option of customizing the coroutine context.
 
+<!--- INCLUDE
+import arrow.core.merge
+import arrow.fx.coroutines.raceN
+suspend fun downloadFrom(url: String): Unit = Unit
+-->
 ```kotlin
-val file = raceN(
-  downloadFrom(server1),
-  downloadFrom(server2)
-).merge()
+suspend fun file(server1: String, server2: String) =
+  raceN(
+    { downloadFrom(server1) },
+    { downloadFrom(server2) }
+  ).merge()
 ```
+<!--- KNIT example-parallel-03.kt -->
 
 In the example above we show a common pattern used in combination with `raceN`.
 The result of the aforementioned function is `Either<A, B>`, with each type
@@ -100,4 +125,63 @@ a single value.
 
 ## Integration with typed errors
 
-It works mostly fine, but there are some subtleties.
+Arrow's typed errors can seamlessly integrate with the concurrency operators, whilst supporting the patterns of structured concurrency.
+The subtleties lie in the ordering of the DSLs, and how they affect the _cancellation_ of scopes of structured concurrency -and error handling.
+So it's important you understand how cancellation works in [Structured Concurrency](https://kotlinlang.org/docs/cancellation-and-timeouts.html).
+
+Before we deeply get into any examples lets define a simple `task` that we can use in all the examples below.
+Our `task` function will print a message with it's `number`, then sleep for 500ms and print a message again _if_ it's not cancelled.  If our `task` gets cancelled, it will print the `CancellationException` instead.
+
+<!--- INCLUDE
+import kotlin.coroutines.cancellation.CancellationException
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.runBlocking
+import arrow.fx.coroutines.parZip
+import arrow.core.Either
+import arrow.core.raise.either
+import io.kotest.matchers.shouldBe
+-->
+```kotlin
+suspend fun task(number: Int): Unit = try {
+    println("task-$number => I'm going to sleep ...")
+    delay(500)
+    println("task-$number => I finished sleeping ...")
+} catch (e: CancellationException) {
+  println("job: I was cancelled because of $e")
+}
+```
+
+:::danger
+
+Using typed errors with KotlinX Flow is prone to leaking the `raise` DSL scope, and should be used with care.
+More information can be found in the [typed errors documentation](/content/learn/typed-errors/typed-errors.md).
+
+:::
+
+### Cancellation on Raise
+
+So let's say we want to run 3 _independent_ tasks in parallel, and if any of them fails, we want to cancel the other two. As showed above `parZip` is ideal for this.
+To mimic one of the tasks failing, we'll use the `raise` function from the [typed errors](/content/learn/typed-errors/typed-errors.md) module and we'll trigger a failure after 200ms.
+
+```kotlin
+fun main(): Unit = runBlocking {
+  either {
+    parZip(
+      { task(1) },
+      {
+        delay(200)
+        raise("task 2 failed")
+      },
+      { task(3) }
+    ) { _, _, _ -> }
+  } shouldBe Either.Left("task 2 failed")
+}
+```
+<!--- KNIT example-parallel-04.kt -->
+```text
+task-1 => I'm going to sleep ...
+task-3 => I'm going to sleep ...
+job: I was cancelled because of arrow.core.raise.RaiseCancellationException: Raised Continuation
+job: I was cancelled because of arrow.core.raise.RaiseCancellationException: Raised Continuation
+```
+<!--- TEST -->
