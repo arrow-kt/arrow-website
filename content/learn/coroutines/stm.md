@@ -127,7 +127,7 @@ fun STM.withdraw(acc: TVar<Int>, amount: Int): Unit {
   // this can also be achieved by using `check(current - amount >= 0); acc.write(it + amount)`
 }
 
-suspend fun main(): Unit {
+suspend fun example() {
   val acc1 = TVar.new(0)
   val acc2 = TVar.new(300)
   println("Balance account 1: ${acc1.unsafeRead()}")
@@ -186,7 +186,7 @@ fun STM.transaction(v: TVar<Int>): Int? =
     result
   } orElse { null }
 
-suspend fun main(): Unit {
+suspend fun example() {
   val v = TVar.new(100)
   println("Value is ${v.unsafeRead()}")
   atomically { transaction(v) }

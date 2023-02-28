@@ -5,7 +5,7 @@ import arrow.core.Option
 import arrow.core.toOption
 import io.kotest.matchers.shouldBe
 
-fun main() {
+fun example() {
   val some: Option<String> = Option.fromNullable("Nullable string")
   val none: Option<String> = Option.fromNullable(null)
   

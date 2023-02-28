@@ -8,7 +8,7 @@ import arrow.core.some
 import io.kotest.assertions.fail
 import io.kotest.matchers.shouldBe
 
-fun main() {
+fun example() {
   when(val value = 20.some()) {
     is Some -> value.value shouldBe 20
     None -> fail("$value should not be None")
