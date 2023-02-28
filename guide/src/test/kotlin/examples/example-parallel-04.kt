@@ -27,5 +27,5 @@ fun main(): Unit = runBlocking {
       },
       { task(3) }
     ) { _, _, _ -> }
-  } shouldBe Either.Left("task 2 failed")
+  }.onLeft { msg -> println(msg) }
 }

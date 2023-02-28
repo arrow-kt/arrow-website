@@ -12,7 +12,8 @@ class ParallelTest : StringSpec({
         "task-1 => I'm going to sleep ...",
         "task-3 => I'm going to sleep ...",
         "job: I was cancelled because of arrow.core.raise.RaiseCancellationException: Raised Continuation",
-        "job: I was cancelled because of arrow.core.raise.RaiseCancellationException: Raised Continuation"
+        "job: I was cancelled because of arrow.core.raise.RaiseCancellationException: Raised Continuation",
+        "task 2 failed"
       )
   }
 

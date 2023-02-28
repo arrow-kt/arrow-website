@@ -174,14 +174,19 @@ fun main(): Unit = runBlocking {
       },
       { task(3) }
     ) { _, _, _ -> }
-  } shouldBe Either.Left("task 2 failed")
+  }.onLeft { msg -> println(msg) }
 }
 ```
 <!--- KNIT example-parallel-04.kt -->
+
+In the output we can see that tasks `1` and `3` started, but `2` failed and cancelled the other two tasks.
+After tasks `1` and `3` are cancelled, we see that the result of `raise` is returned and prints the error message.
+
 ```text
 task-1 => I'm going to sleep ...
 task-3 => I'm going to sleep ...
 job: I was cancelled because of arrow.core.raise.RaiseCancellationException: Raised Continuation
 job: I was cancelled because of arrow.core.raise.RaiseCancellationException: Raised Continuation
+task 2 failed
 ```
 <!--- TEST -->
