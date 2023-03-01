@@ -32,8 +32,8 @@ const config = {
       /** @type {import('@docusaurus/preset-classic').Options} */
       ({
         docs: {
-          path: 'content/learn',
-          routeBasePath: 'learn',
+          path: 'content/docs',
+          routeBasePath: '/',
           sidebarPath: require.resolve('./sidebars.js'),
           editUrl: 'https://github.com/arrow-kt/arrow-website/edit/main/',
           breadcrumbs: false,
@@ -96,17 +96,20 @@ const config = {
               {
                 label: 'Typed errors',
                 to: 'learn/category/typed-errors',
-                activeBaseRegex: '^(/learn/category/typed-errors)|^(/learn/typed-errors)',
+                activeBaseRegex:
+                  '^(/learn/category/typed-errors)|^(/learn/typed-errors)',
               },
               {
                 label: 'Coroutines',
                 to: 'learn/category/coroutines',
-                activeBaseRegex: '^(/learn/category/coroutines)|^(/learn/coroutines)',
+                activeBaseRegex:
+                  '^(/learn/category/coroutines)|^(/learn/coroutines)',
               },
               {
                 label: 'Resilience',
                 to: 'learn/category/resilience',
-                activeBaseRegex: '^(/learn/category/resilience)|^(/learn/resilience)',
+                activeBaseRegex:
+                  '^(/learn/category/resilience)|^(/learn/resilience)',
               },
               {
                 label: 'Design',
@@ -114,6 +117,11 @@ const config = {
                 activeBaseRegex: '^(/learn/category/design)|^(/learn/design)',
               },
             ],
+          },
+          {
+            to: 'incubation/overview',
+            position: 'right',
+            label: 'Incubation',
           },
           {
             to: 'projects',
@@ -177,23 +185,28 @@ const config = {
               },
               {
                 label: 'Typed errors',
-                 to: 'learn/category/typed-errors',
-                 activeBaseRegex: '^(/learn/category/typed-errors)|^(/learn/typed-errors)',
-               },
-               {
-                 label: 'Coroutines',
-                 to: 'learn/category/coroutines',
-                 activeBaseRegex: '^(/learn/category/coroutines)|^(/learn/coroutines)',
-               },
-               {
-                 label: 'Resilience',
-                 to: 'learn/category/resilience',
-                 activeBaseRegex: '^(/learn/category/resilience)|^(/learn/resilience)',
-               },
-               {
+                to: 'learn/category/typed-errors',
+              },
+              {
+                label: 'Coroutines',
+                to: 'learn/category/coroutines',
+              },
+              {
+                label: 'Resilience',
+                to: 'learn/category/resilience',
+              },
+              {
                 label: 'Design',
                 to: 'learn/category/design',
-                activeBaseRegex: '^(/learn/category/design)|^(/learn/design)',
+              },
+            ],
+          },
+          {
+            title: 'Incubation',
+            items: [
+              {
+                label: 'Overview',
+                to: 'incubation/overview',
               },
             ],
           },
