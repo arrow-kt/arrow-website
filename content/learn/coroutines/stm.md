@@ -4,6 +4,15 @@ sidebar_position: 3
 
 # Transactional memory (STM)
 
+<!--- TEST_NAME STMTest -->
+
+<!--- INCLUDE .*
+
+import io.kotest.assertions.fail
+import io.kotest.matchers.shouldBe
+
+-->
+
 Software transactional memory, or STM, is an abstraction for concurrent state modification.
 With STM one can write code that concurrently accesses state and that can easily be composed without
  exposing details of how it ensures safety guarantees.
@@ -55,21 +64,25 @@ fun STM.deposit(acc: TVar<Int>, amount: Int): Unit {
 
 fun STM.withdraw(acc: TVar<Int>, amount: Int): Unit {
   val current = acc.read()
-  if (current - amount >= 0) acc.write(current - amount)
-  else throw IllegalStateException("Not enough money in the account!")
+  require(current - amount >= 0) { "Not enough money in the account!" }
+  acc.write(current - amount)
 }
 
 suspend fun example() {
   val acc1 = TVar.new(500)
   val acc2 = TVar.new(300)
-  println("Balance account 1: ${acc1.unsafeRead()}")
-  println("Balance account 2: ${acc2.unsafeRead()}")
-  println("Performing transaction")
+  // check initial balances
+  acc1.unsafeRead() shouldBe 500
+  acc2.unsafeRead() shouldBe 300
+  // perform transaction
   atomically { transfer(acc1, acc2, 50) }
-  println("Balance account 1: ${acc1.unsafeRead()}")
-  println("Balance account 2: ${acc2.unsafeRead()}")
+  // check final balances
+  acc1.unsafeRead() shouldBe 450
+  acc2.unsafeRead() shouldBe 350
 }
 ```
+<!--- KNIT example-stm-01.kt -->
+<!--- TEST assert -->
 
 One additional guarantee of STM is that the _whole_ transaction is executed
 atomically. That means that we can modify several `TVar`s in one transaction,
@@ -85,11 +98,15 @@ The following types are built upon `TVar`s, and provided out of the box with Arr
 - `TArray`: array of `TVar`'s,
 - `TSemaphore`: transactional semaphore.
 
+:::tip
+
 Note that in most cases using these data structures is much more efficient than
 wrapping their "regular" version in a `TVar`. For example, a `TSet<A>` performs
 better than a `TVar<Set<A>>`, because the latter needs to "lock" the entire set
 on modification, whereas the former knows that only the affected entries need
 to be taken into account.
+
+:::
 
 ## Retries
 
@@ -107,6 +124,7 @@ import arrow.fx.stm.TVar
 import arrow.fx.stm.STM
 import kotlinx.coroutines.async
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.coroutineScope
 -->
 ```kotlin
 fun STM.transfer(from: TVar<Int>, to: TVar<Int>, amount: Int): Unit {
@@ -123,30 +141,34 @@ fun STM.deposit(acc: TVar<Int>, amount: Int): Unit {
 fun STM.withdraw(acc: TVar<Int>, amount: Int): Unit {
   val current = acc.read()
   if (current - amount >= 0) acc.write(current - amount)
-  else retry() // we now retry if there is not enough money in the account
-  // this can also be achieved by using `check(current - amount >= 0); acc.write(it + amount)`
+  else retry()
+  // the two lines above could also be written
+  // check(current - amount >= 0)
+  // acc.write(it - amount)`
 }
 
-suspend fun example() {
+suspend fun example() = coroutineScope {
   val acc1 = TVar.new(0)
   val acc2 = TVar.new(300)
-  println("Balance account 1: ${acc1.unsafeRead()}")
-  println("Balance account 2: ${acc2.unsafeRead()}")
+  // check initial balances
+  acc1.unsafeRead() shouldBe 0
+  acc2.unsafeRead() shouldBe 300
+  // simulate some time until the money is found
   async {
-    println("Sending money - Searching")
-    delay(2000)
-    println("Sending money - Found some")
+    delay(500)
     atomically { acc1.write(100_000_000) }
   }
-  println("Performing transaction")
+  // concurrently attempt the transaction
   atomically {
-    println("Trying to transfer")
     transfer(acc1, acc2, 50)
   }
-  println("Balance account 1: ${acc1.unsafeRead()}")
-  println("Balance account 2: ${acc2.unsafeRead()}")
+  // check final balances
+  acc1.unsafeRead() shouldBe (100_000_000 - 50)
+  acc2.unsafeRead() shouldBe 350
 }
 ```
+<!--- KNIT example-stm-02.kt -->
+<!--- TEST assert -->
 
 `retry` can be used to implement a lot of complex transactions,
 and lies at the heart of the implementation of more complex transactional
@@ -177,27 +199,29 @@ import arrow.fx.stm.atomically
 import arrow.fx.stm.TVar
 import arrow.fx.stm.STM
 import arrow.fx.stm.stm
+import arrow.fx.stm.check
 -->
 ```kotlin
 fun STM.transaction(v: TVar<Int>): Int? =
   stm {
     val result = v.read()
-    check(result in 0..10)
+    check(result in 0 .. 10)
     result
   } orElse { null }
 
 suspend fun example() {
   val v = TVar.new(100)
-  println("Value is ${v.unsafeRead()}")
-  atomically { transaction(v) }
-    .also { println("Transaction returned $it") }
-  println("Set value to 5")
-  println("Value is ${v.unsafeRead()}")
+  // check initial balance
+  v.unsafeRead() shouldBe 100
+  // value is outside the range, should fail
+  atomically { transaction(v) } shouldBe null
+  // value is outside the range, should succeed
   atomically { v.write(5) }
-  atomically { transaction(v) }
-    .also { println("Transaction returned $it") }
+  atomically { transaction(v) } shouldBe 5
 }
 ```
+<!--- KNIT example-stm-03.kt -->
+<!--- TEST assert -->
 
 ## Exceptions
 

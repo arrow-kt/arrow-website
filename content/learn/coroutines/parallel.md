@@ -24,8 +24,7 @@ rules, even when the logic grows more complex.
 Very often we have independent computations that we want to perform in parallel.
 For example, if we need to fetch a value from the database, and download a file
 from another service, there's no reason why we shouldn't do them concurrently.
-If both functions are defined as `suspend`ed, we can use `parZip` to combine the
-execution.
+We can use `parZip` to combine the execution of both computations.
 
 <!--- INCLUDE
 import arrow.fx.coroutines.parZip
