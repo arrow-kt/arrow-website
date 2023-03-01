@@ -17,6 +17,12 @@
   --ifm-color-primary-light: #497bf7;
   --ifm-color-primary-lighter: #497bf7;
   --ifm-color-primary-lightest: #497bf7;
+
+  --ifm-color-secondary: #faa73a;
+
+  --arrow-grey-primary: #222e51;
+  --arrow-grey-secondary: #222e51;
+
   --ifm-code-font-size: 95%;
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.1);
 
@@ -24,8 +30,8 @@
     -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial,
     'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
 
-  --ifm-heading-color: #222e51;
-  --ifm-font-color-base: #57607B;
+  --ifm-heading-color: var(--arrow-grey-primary);
+  --ifm-font-color-base: var(--arrow-grey-secondary);
 
   --ifm-global-radius: 0;
 }
@@ -42,7 +48,32 @@
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
 }
 
+/* Navbar */
+.navbar__inner {
+  margin: 0 auto;
+  max-width: var(--ifm-container-width-xl);
+}
+
 /* Pagination bottom buttons not needed */
 .pagination-nav {
   display: none;
+}
+
+/* Dropdowns being shown as line carets */
+.dropdown > .navbar__link::after {
+  border-color: currentColor;
+  border-width: 0 0.3em 0.3em 0;
+  top: 0.3em;
+  transform: rotate(45deg) translateY(-50%) scale(50%);
+  padding: 0.3em;
+  margin-left: 0;
+}
+
+.hero {
+  height: 600px;
+  text-align: center;
+}
+
+.button {
+  font-family: var(--ifm-font-family-base);
 }

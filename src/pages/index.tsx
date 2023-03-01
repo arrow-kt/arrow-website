@@ -1,45 +1,33 @@
 import React from 'react';
 
-import Link from '@docusaurus/Link';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import Layout from '@theme/Layout';
 
-import { HomepageFeatures } from '@site/src/components/HomepageFeatures';
+import { Hero } from '@site/src/components/Hero';
+import { SimpleCard, SimpleCardProps } from '@site/src/components/SimpleCard';
 
 import data from './index.yml';
 import styles from './index.module.css';
 
-function HomepageHeader() {
-  const { siteConfig } = useDocusaurusContext();
-  return (
-    <header className={`hero hero--primary ${styles.heroBanner}`}>
-      <div className="container">
-        <h1 className="hero__title">{siteConfig.title}</h1>
-        <p className="hero__subtitle">{siteConfig.tagline}</p>
-        <div className={styles.buttons}>
-          <Link
-            className="button button--secondary button--lg"
-            to="/learn/overview">
-            Get started
-          </Link>
-        </div>
-        {data.cards.map((card: { title: string; description: string }) => (
-          <div key={card.title}>{card.title}</div>
-        ))}
-      </div>
-    </header>
-  );
-}
-
 export default function Home(): JSX.Element {
   const { siteConfig } = useDocusaurusContext();
+
   return (
-    <Layout
-      title={`Hello from ${siteConfig.title}`}
-      description="Description will go into a meta tag in <head />">
-      <HomepageHeader />
+    <Layout description={siteConfig.tagline}>
+      <Hero />
       <main>
-        <HomepageFeatures />
+        <section className="container text--center">
+          <h1>Start learning now</h1>
+          <p>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eu
+            turpis molestie, dictum est
+          </p>
+        </section>
+        <section className={`container ${styles.cardContainer}`}>
+          {data.cards.map((card: SimpleCardProps) => (
+            <SimpleCard key={card.title} {...card} />
+          ))}
+        </section>
       </main>
     </Layout>
   );

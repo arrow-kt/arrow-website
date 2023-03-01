@@ -7,7 +7,7 @@ const darkCodeTheme = require('prism-react-renderer/themes/dracula');
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
-  title: 'Arrow website',
+  title: 'Λrrow',
   tagline: "Functional companion to Kotlin's Standard Library",
   favicon: 'img/arrow-brand-icon.svg',
   url: 'https://arrow-kt.io',
@@ -96,17 +96,20 @@ const config = {
               {
                 label: 'Typed errors',
                 to: 'learn/category/typed-errors',
-                activeBaseRegex: '^(/learn/category/typed-errors)|^(/learn/typed-errors)',
+                activeBaseRegex:
+                  '^(/learn/category/typed-errors)|^(/learn/typed-errors)',
               },
               {
                 label: 'Coroutines',
                 to: 'learn/category/coroutines',
-                activeBaseRegex: '^(/learn/category/coroutines)|^(/learn/coroutines)',
+                activeBaseRegex:
+                  '^(/learn/category/coroutines)|^(/learn/coroutines)',
               },
               {
                 label: 'Resilience',
                 to: 'learn/category/resilience',
-                activeBaseRegex: '^(/learn/category/resilience)|^(/learn/resilience)',
+                activeBaseRegex:
+                  '^(/learn/category/resilience)|^(/learn/resilience)',
               },
               {
                 label: 'Design',
@@ -177,23 +180,19 @@ const config = {
               },
               {
                 label: 'Typed errors',
-                 to: 'learn/category/typed-errors',
-                 activeBaseRegex: '^(/learn/category/typed-errors)|^(/learn/typed-errors)',
-               },
-               {
-                 label: 'Coroutines',
-                 to: 'learn/category/coroutines',
-                 activeBaseRegex: '^(/learn/category/coroutines)|^(/learn/coroutines)',
-               },
-               {
-                 label: 'Resilience',
-                 to: 'learn/category/resilience',
-                 activeBaseRegex: '^(/learn/category/resilience)|^(/learn/resilience)',
-               },
-               {
+                to: 'learn/category/typed-errors',
+              },
+              {
+                label: 'Coroutines',
+                to: 'learn/category/coroutines',
+              },
+              {
+                label: 'Resilience',
+                to: 'learn/category/resilience',
+              },
+              {
                 label: 'Design',
                 to: 'learn/category/design',
-                activeBaseRegex: '^(/learn/category/design)|^(/learn/design)',
               },
             ],
           },

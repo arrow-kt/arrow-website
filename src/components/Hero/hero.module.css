@@ -1,0 +1,26 @@
+.hero {
+  background-image: url('@site/static/img/arrow-brand-icon.svg');
+  background-repeat: no-repeat;
+  background-size: auto 150%;
+  background-position: max(-400px, calc(100vw - 3000px)) bottom;
+  /* background-position: -450px bottom; */
+  /* background-position: min(0px, calc(100vw - 1500px)) bottom; */
+}
+
+.container {
+  max-width: 900px;
+}
+
+u {
+  text-decoration: none;
+  box-shadow: 0 4px var(--ifm-color-secondary);
+  white-space: nowrap;
+}
+
+.heroCta {
+  display: flex;
+  flex-direction: row;
+  gap: var(--ifm-spacing-horizontal);
+  justify-content: center;
+  margin-top: calc(2 * var(--ifm-spacing-vertical));
+}

@@ -1,4 +1,4 @@
-.heroBanner {
+/* .heroBanner {
   padding: 4rem 0;
   text-align: center;
   position: relative;
@@ -15,4 +15,10 @@
   display: flex;
   align-items: center;
   justify-content: center;
+} */
+
+.cardContainer {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: var(--ifm-spacing-vertical) var(--ifm-spacing-horizontal);
 }

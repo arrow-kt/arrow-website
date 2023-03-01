@@ -1,12 +1,30 @@
 cards:
-  - title: quickstart
-    description: test 1
+  - title: Quickstart
+    link: learn/quickstart
+    icon: icon-quickstart.svg
+    body: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eu turpis molestie, dictum est . Etiam eu turpis
 
-  - title: docs
-    description: test 1
+  - title: Typed errors
+    link: learn/category/typed-errors
+    icon: icon-typed-errors.svg
+    body: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eu turpis molestie, dictum est . Etiam eu turpis
 
-  - title: projects
-    description: test 1
+  - title: Coroutines
+    link: learn/category/coroutines
+    icon: icon-coroutines.svg
+    body: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eu turpis molestie, dictum est . Etiam eu turpis
 
-  - title: training
-    description: test 1
+  - title: Resilience
+    link: learn/category/resilience
+    icon: icon-resilience.svg
+    body: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eu turpis molestie, dictum est . Etiam eu turpis
+
+  - title: Immutable data
+    link: learn/category/immutable-data
+    icon: icon-immutable-data.svg
+    body: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eu turpis molestie, dictum est . Etiam eu turpis
+
+  - title: Design
+    link: learn/category/design
+    icon: icon-design.svg
+    body: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eu turpis molestie, dictum est . Etiam eu turpis

@@ -1,0 +1,15 @@
+:global(.card) {
+  --ifm-link-hover-decoration: none;
+  --ifm-link-color: var(--arrow-grey-primary);
+}
+
+:global(.card:hover) {
+  --ifm-heading-color: var(--ifm-color-primary-dark);
+  --ifm-link-hover-color: var(--arrow-grey-primary);
+}
+
+.cardHeader {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
