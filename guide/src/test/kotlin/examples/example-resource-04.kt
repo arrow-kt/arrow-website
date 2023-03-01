@@ -1,9 +1,9 @@
 // This file was automatically generated from resource-safety.md by Knit tool. Do not edit.
 package arrow.website.examples.exampleResource04
 
-import arrow.fx.coroutines.ResourceScope
 import arrow.fx.coroutines.Resource
 import arrow.fx.coroutines.resource
+import arrow.fx.coroutines.resourceScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
@@ -14,15 +14,31 @@ class UserProcessor {
   }
 }
 
-suspend fun ResourceScope.userProcessor(): UserProcessor =
-  install({  UserProcessor().also { it.start() } }) { processor, _ ->
-    processor.shutdown()
-  }
+class DataSource {
+  fun connect(): Unit = println("Connecting dataSource")
+  fun close(): Unit = println("Closed dataSource")
+}
 
-val userProcessor: Resource<UserProcessor> = resource {
-  val x: UserProcessor = install(
-    {  UserProcessor().also { it.start() } },
-    { processor, _ -> processor.shutdown() }
-  )
-  x
+class Service(val db: DataSource, val userProcessor: UserProcessor) {
+  suspend fun processData(): List<String> = throw RuntimeException("I'm going to leak resources by not closing them")
+}
+
+val userProcessor: Resource<UserProcessor> = resource({
+  UserProcessor().also { it.start() }
+}) { p, _ -> p.shutdown() }
+
+val dataSource: Resource<DataSource> = resource({
+  DataSource().also { it.connect() }
+}) { ds, exitCase ->
+  println("Releasing $ds with exit: $exitCase")
+  withContext(Dispatchers.IO) { ds.close() }
+}
+
+val service: Resource<Service> = resource {
+  Service(dataSource.bind(), userProcessor.bind())
+}
+
+suspend fun example(): Unit = resourceScope {
+  val data = service.bind().processData()
+  println(data)
 }
