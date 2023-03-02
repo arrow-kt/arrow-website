@@ -172,8 +172,8 @@ running the constructor, following by calling some start method using Kotlin's
 
 :::note
 
-To achieve its behavior, `install` assumes that the `acquire` and `release` step
-are [NonCancellable](https://kotlinlang.org/api/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-non-cancellable/).
+To achieve its behavior, `install` invokes the `acquire` and `release` step
+as [NonCancellable](https://kotlinlang.org/api/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-non-cancellable/).
 If a cancellation signal, or an exception is received during `acquire`, the 
 resource is assumed to **not** have been acquired and thus will not trigger the
 release function; any composed resources that are already acquired are guaranteed 
