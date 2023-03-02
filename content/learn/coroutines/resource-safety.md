@@ -248,6 +248,13 @@ Although `resourceScope` provides nicer syntax in general, some usage patterns
 like acquiring several resources become easier when the steps are saved in
 an actual class.
 
+The actual magic is that `Resource` is nothing more than a type alias for
+parameter-less function using `ResourceScope`,
+
+```kotlin
+typealias Resource<A> = suspend ResourceScope.() -> A
+```
+
 :::
 
 Although the main usage pattern is to give `resource` the acquisition and 
