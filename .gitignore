@@ -4,6 +4,9 @@
 # Production
 /build
 
+# Gradle
+guide/bin/**
+
 # Generated files
 .docusaurus
 .cache-loader
