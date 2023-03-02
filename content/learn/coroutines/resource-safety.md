@@ -292,25 +292,25 @@ nestings of `resourceScope` and `either`.
    being called with `Cancelled`.
 
     ```kotlin
-    either<Throwable, A> {
+    either<String, Int> {
       resourceScope {
-        val a = install({ }) { _,ex -> println("Closing A: $ex") }
-        Either.catch { throw RuntimeException("Boom!") }.bind()
+        val a = install({ }) { _, ex -> println("Closing A: $ex") }
+        raise("Boom!")
       } // Closing A: ExitCase.Cancelled
-    } // Either.Left(RuntimeException(Boom!))
+    } // Either.Left(Boom!)
     ```
 
 2. With reverse nesting order of `either` and `resourceScope`, then resources
    are released with normal state, since nothing "failed".
 
-```kotlin
-resourceScope {
-  either<Throwable, A> {
-    val a = install({ }) { _,ex -> println("Closing A: $ex") }
-    Either.catch { throw RuntimeException("Boom!") }.bind()
-  } // Either.Left(RuntimeException(Boom!))
-} // Closing A: ExitCase.Completed
-```
+    ```kotlin
+    resourceScope {
+      either<String, Int> {
+        val a = install({ }) { _,ex -> println("Closing A: $ex") }
+        raise("Boom!")
+      } // Either.Left(Boom!)
+    } // Closing A: ExitCase.Completed
+    ```
 
 We remark than in both cases resources are correctly released. If you're
 finalizer works in the same way for every possible `ExitCase`, then there's no
