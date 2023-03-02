@@ -130,7 +130,7 @@ computation which may throw exceptions, and returns a `Left` if that's the case.
 Essentially, [`runCatching` from the standard library](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/run-catching.html),
 but replacing `Result` with `Either`.
 
-The rest of the API closely follows the one from [typed errors](../typed-errors/).
+The rest of the API closely follows the one from [typed errors](../../typed-errors/).
 For example, you can call `recover` or `zipOrAccumulate` directly on `Either`
 without the need of an additional `either { }` block. One potentially useful
 function which is not part of builders is [`mapLeft`](https://arrow-kt.github.io/arrow/arrow-core/arrow.core/-either/map-left.html), 
