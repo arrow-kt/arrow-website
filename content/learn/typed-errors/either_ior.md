@@ -60,6 +60,14 @@ graph LR;
   other-->|".bind()"|raise;
 ```
 
+:::tip
+
+We recommend using the [custom `NoEffectScopeBindableValueAsStatement` rule](https://github.com/woltapp/arrow-detekt-rules#noeffectscopebindablevalueasstatement)
+for [Detekt](https://detekt.dev/) to prevent forgetting `.bind()` inside
+an `either` or `ior` block.
+
+:::
+
 ### Combining Ior errors
 
 The flow in an `Either` block is simple: we execute each step, if at some point
