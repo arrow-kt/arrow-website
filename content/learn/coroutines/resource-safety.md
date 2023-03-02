@@ -282,22 +282,26 @@ val userProcessor: Resource<UserProcessor> = resource {
 
 ## Integration with typed errors
 
-Note that the combination of `resourceScope` and a [typed error builders](../../typed-errors)
-may become quite tricky. The following shows an example of `resourceScope`
-nested inside `either`. In that case, a bind that crosses the `resourceScope` 
-will result in release finalizer being called with `Cancelled`.
+Resource management cooperates with [typed error builders](../../typed-errors).
+It's important to be aware, though, that the order in which we open the scopes
+affect the behavior. To be more concrete, let's consider the two possible
+nestings of `resourceScope` and `either`.
 
-```kotlin
-either<Throwable, A> {
-  resourceScope {
-    val a = install({ }) { _,ex -> println("Closing A: $ex") }
-    Either.catch { throw RuntimeException("Boom!") }.bind()
-  } // Closing A: ExitCase.Cancelled
-} // Either.Left(RuntimeException(Boom!))
-```
+1. When `either` is in the outermost position, and `resourceScope` inside of it,
+   a bind that crosses the `resourceScope` results in the release finalizer 
+   being called with `Cancelled`.
 
-But if you switch the order of `either` and `resourceScope` then it doesn't 
-cancel, but closes with normal state since nothing "failed".
+    ```kotlin
+    either<Throwable, A> {
+      resourceScope {
+        val a = install({ }) { _,ex -> println("Closing A: $ex") }
+        Either.catch { throw RuntimeException("Boom!") }.bind()
+      } // Closing A: ExitCase.Cancelled
+    } // Either.Left(RuntimeException(Boom!))
+    ```
+
+2. With reverse nesting order of `either` and `resourceScope`, then resources
+   are released with normal state, since nothing "failed".
 
 ```kotlin
 resourceScope {
@@ -308,5 +312,13 @@ resourceScope {
 } // Closing A: ExitCase.Completed
 ```
 
-This [conversation](https://kotlinlang.slack.com/archives/C5UPMM0A0/p1677093177834299)
+We remark than in both cases resources are correctly released. If you're
+finalizer works in the same way for every possible `ExitCase`, then there's no
+visible difference between both. 
+
+:::info
+
+If you want to know more, this [conversation](https://kotlinlang.slack.com/archives/C5UPMM0A0/p1677093177834299)
 in the Kotlin Slack enters into more detail.
+
+:::
