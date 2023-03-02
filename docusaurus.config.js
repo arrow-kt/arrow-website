@@ -84,11 +84,8 @@ const config = {
             type: 'dropdown',
             position: 'right',
             label: 'Learn',
+            to: 'learn/overview',
             items: [
-              {
-                label: 'Overview',
-                to: 'learn/overview',
-              },
               {
                 label: 'Quickstart',
                 to: 'learn/quickstart',
@@ -154,7 +151,7 @@ const config = {
               },
               {
                 label: 'Learn',
-                to: 'learn/quickstart',
+                to: 'learn/overview',
               },
               {
                 label: 'Projects',
@@ -176,10 +173,6 @@ const config = {
               {
                 label: 'Quickstart',
                 to: 'learn/quickstart',
-              },
-              {
-                label: 'Overview',
-                to: 'learn/overview',
               },
               {
                 label: 'Typed errors',
