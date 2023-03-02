@@ -111,8 +111,9 @@ const config = {
               },
               {
                 label: 'Immutable data ⇄ Optics',
-                to: 'category/immutable-data',
-                activeBaseRegex: '^(/category/immutable-data)|^(/learn/immutable-data)',
+                to: 'category/immutable-data--optics',
+                activeBaseRegex:
+                  '^(/category/immutable-data--optics)|^(/learn/immutable-data--optics)',
               },
               {
                 label: 'Design',
@@ -200,7 +201,7 @@ const config = {
               },
               {
                 label: 'Immutable data ⇄ Optics',
-                to: 'category/immutable-data',
+                to: 'category/immutable-data--optics',
               },
               {
                 label: 'Design',

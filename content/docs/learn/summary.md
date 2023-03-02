@@ -99,7 +99,7 @@ For more resilience options check the `arrow-fx-resilience` package.
 </details>
 
 <details>
-<summary><span style={{ fontSize: '115%' }}>Immutable data</span> (<a href="../../category/immutable-data">guide</a>)</summary>
+<summary><span style={{ fontSize: '115%' }}>Immutable data</span> (<a href="../../category/immutable-data--optics">guide</a>)</summary>
 
 <details>
 <summary>Generate optics</summary>
