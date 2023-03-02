@@ -2,7 +2,6 @@
 id: either-and-ior
 title: Either & Ior
 description: Use cases for Either and Ior.
-slug: /either-and-ior
 sidebar_position: 3
 ---
 
