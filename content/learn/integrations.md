@@ -9,6 +9,14 @@ surrounding it. Arrow integrates with many useful libraries in the Kotlin
 ecosystem. This is a non-exhaustive list, we're happy to hear about support for
 Arrow from other libraries.
 
+:::tip
+
+There's a [custom set of rules](https://github.com/woltapp/arrow-detekt-rules)
+for [Detekt](https://detekt.dev/), which can help you refine your style when
+using Arrow.
+
+:::
+
 ## Testing
 
 ### [Kotest](https://kotest.io/)
