@@ -16,7 +16,7 @@ fun isPositive(i: Int): Either<MyError, Int> = either {
   i
 }
 
-fun main() {
+suspend fun example() {
   isPositive(-1) shouldBe MyError("-1 is not positive").left()
   isPositive(1)  shouldBe 1.right()
 }

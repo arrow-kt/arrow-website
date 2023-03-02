@@ -251,9 +251,16 @@ an actual class.
 The actual magic is that `Resource` is nothing more than a type alias for
 parameter-less function using `ResourceScope`,
 
+<!--- INCLUDE
+import arrow.fx.coroutines.ResourceScope
+-->
 ```kotlin
 typealias Resource<A> = suspend ResourceScope.() -> A
 ```
+<!--- INCLUDE
+suspend fun example() { }
+-->
+<!--- KNIT example-resource-05.kt -->
 
 :::
 
@@ -285,7 +292,7 @@ val userProcessor: Resource<UserProcessor> = resource {
   x
 }
 ```
-<!--- KNIT example-resource-05.kt -->
+<!--- KNIT example-resource-06.kt -->
 
 ## Integration with typed errors
 

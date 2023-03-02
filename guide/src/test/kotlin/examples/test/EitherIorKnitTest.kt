@@ -7,7 +7,7 @@ import kotlinx.knit.test.verifyOutputLines
 
 class EitherIorKnitTest : StringSpec({
   "ExampleEitherIor01" {
-    arrow.website.examples.exampleEitherIor01.main()
+    arrow.website.examples.exampleEitherIor01.example()
   }
 
 }) {
