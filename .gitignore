@@ -4,6 +4,7 @@
 # Production
 /build
 
+# Gradle
 guide/bin/**
 
 # Generated files

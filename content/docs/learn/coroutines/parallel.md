@@ -169,7 +169,7 @@ Sleeping for 500 milliseconds ...
 :::danger
 
 Using typed errors with KotlinX Flow is prone to leaking the `raise` DSL scope, and should be used with care.
-More information can be found in the [typed errors documentation](/content/learn/typed-errors/typed-errors.md).
+More information can be found in the [typed errors documentation](../../typed-errors).
 
 :::
 
