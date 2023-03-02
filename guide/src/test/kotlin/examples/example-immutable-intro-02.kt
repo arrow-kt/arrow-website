@@ -15,11 +15,3 @@ import arrow.optics.*
 @optics data class City(val name: String, val country: String) {
   companion object
 }
-
-fun Person.capitalizeCountryModify() =
-  Person.address.city.country.modify(this) { it.capitalize() }
-
-fun Person.capitalizeCountryCopy() =
-  this.copy {
-    Person.address.city.country transform { it.capitalize() }
-  }
