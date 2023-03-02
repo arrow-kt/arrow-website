@@ -7,6 +7,15 @@ sidebar_position: 3
 
 # Either & Ior
 
+<!--- TEST_NAME EitherIorKnitTest -->
+
+<!--- INCLUDE .*
+import io.kotest.matchers.shouldBe
+import arrow.core.left
+import arrow.core.right
+import arrow.core.Either
+-->
+
 Both [`Either<E, A>`](https://arrow-kt.github.io/arrow/arrow-core/arrow.core/-either/index.html)
 and [`Ior<E, A>`](https://arrow-kt.github.io/arrow/arrow-core/arrow.core/-ior/index.html)
 hold values which may be of type `E` or `A`.
@@ -32,13 +41,23 @@ block we can access the uniform typed errors API with functions like `raise`,
 `ensure`, and `recover`.
 
 ```kotlin
+import arrow.core.raise.either
+import arrow.core.raise.ensure
+
 data class MyError(val message: String)
 
 fun isPositive(i: Int): Either<MyError, Int> = either {
   ensure(i > 0) { MyError("$i is not positive") }
   i
 }
+
+fun main() {
+  isPositive(-1) shouldBe MyError("-1 is not positive").left()
+  isPositive(1)  shouldBe 1.right()
+}
 ```
+<!--- KNIT example-either-ior-01.kt -->
+<!--- TEST assert -->
 
 To give you the complete picture, inside those blocks the potential errors are
 represented by a receiver of type `Raise<E>`. Functions with that receiver can
@@ -88,12 +107,23 @@ provide another way to write expressions which doesn't obscure the inner content
 as much as a constructor. Validations are often written in that style.
 
 ```kotlin
+// this is the type we want to construct
+@JvmInline value class Age(val age: Int)
+
+// these are the potential problems
+sealed interface AgeProblem {
+  object InvalidAge: AgeProblem
+  object NotLegalAdult: AgeProblem
+}
+
+// validation returns either problems or the constructed value
 fun validAdult(age: Int): Either<AgeProblem, Age> = when {
-  age < 0  -> InvalidAge.left()
-  age < 18 -> NotLegalAdult.left()
+  age < 0  -> AgeProblem.InvalidAge.left()
+  age < 18 -> AgeProblem.NotLegalAdult.left()
   else     -> Age(age).right()
 }
 ```
+<!--- KNIT example-either-ior-02.kt -->
 
 Another way to obtain an `Either` is using `Either.catch`, which wraps a
 computation which may throw exceptions, and returns a `Left` if that's the case.
