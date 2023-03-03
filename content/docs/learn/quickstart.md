@@ -10,6 +10,14 @@ import TabItem from '@theme/TabItem';
 Arrow is composed of different libraries, you can just choose and pick the ones
 you need in your project.
 
+:::info Multiplatform-ready
+
+All of Arrow libraries are Multiplatform-ready, so you can use them in all of your
+[KMP](https://kotlinlang.org/docs/multiplatform.html) projects. Be aware that
+some of the instructions here may need to be slightly changed in that situation.
+
+:::
+
 ### Enable the Maven Central repository
 
 Arrow is published in [Maven Central](https://search.maven.org/), so you need to
