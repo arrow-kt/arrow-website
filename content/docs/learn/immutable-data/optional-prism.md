@@ -4,12 +4,6 @@ sidebar_position: 3
 
 # Optionals & prisms
 
-<!--- TEST_NAME Optional -->
-
-<!--- INCLUDE .*
-import io.kotest.matchers.shouldBe
--->
-
 Optionals allow focusing on elements which may not be present. This includes
 nullable values, and also elements on indexed collections such as `List` or `Map`.
 
@@ -21,6 +15,12 @@ nullable values, and also elements on indexed collections such as `List` or `Map
 - To modify the value (**only** if present), use `set` and `modify`.
 
 :::
+
+<!--- TEST_NAME Optional -->
+
+<!--- INCLUDE .*
+import io.kotest.matchers.shouldBe
+-->
 
 ## Indexed collections
 

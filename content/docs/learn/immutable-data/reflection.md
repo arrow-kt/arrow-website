@@ -4,14 +4,14 @@ sidebar_position: 5
 
 # Reflection
 
+Although we strongly recommend generating optics using the DSL and `@optics` attribute, sometimes this is not possible. For those scenarios we provide a small utility package `arrow-optics-reflect` which bridges Arrow Optics with [Kotlin's reflection](https://kotlinlang.org/docs/reflection.html) capabilities.
+
 <!--- TEST_NAME Reflection -->
 
 <!--- INCLUDE .*
 import arrow.optics.*
 import io.kotest.matchers.shouldBe
 -->
-
-Although we strongly recommend generating optics using the DSL and `@optics` attribute, sometimes this is not possible. For those scenarios we provide a small utility package `arrow-optics-reflect` which bridges Arrow Optics with [Kotlin's reflection](https://kotlinlang.org/docs/reflection.html) capabilities.
 
 Kotlin provides a simple way to obtain a reference to a member of a class, by using `ClassName::memberName`. For example, given the following class definition:
 

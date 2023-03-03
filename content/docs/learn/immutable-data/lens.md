@@ -4,12 +4,6 @@ sidebar_position: 2
 
 # Lenses
 
-<!--- TEST_NAME Lens -->
-
-<!--- INCLUDE .*
-import io.kotest.matchers.shouldBe
--->
-
 Lenses are the most common type of optic you work with. This section discusses
 them at length.
 
@@ -21,6 +15,12 @@ them at length.
   - To modify several elements at once, use `copy`.
 
 :::
+
+<!--- TEST_NAME Lens -->
+
+<!--- INCLUDE .*
+import io.kotest.matchers.shouldBe
+-->
 
 ## The `Lens` type
 

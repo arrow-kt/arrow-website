@@ -126,10 +126,10 @@ Optics form a hierarchy, which we can summarize in the diagram below.
 
 ```mermaid
 graph TD;
-  traversal{{"Traversal (0 .. ∞)<br /><code>getAll</code> (return a list)<br /><code>modify</code> and <code>set</code>"}};
-  optional{{"Optional (0 .. 1)<br /><code>getOrNull</code> (return a nullable)"}};
-  lens{{"Lens (exactly 1)<br /><code>get</code>"}};
-  prism{{"Prism<br /><code>reverseGet</code>"}};
+  traversal{{"<a href='../traversal/'>Traversal</a> (0 .. ∞)<br /><code>getAll</code> (return a list)<br /><code>modify</code> and <code>set</code>"}};
+  optional{{"<a href='../optional-prism/'>Optional</a> (0 .. 1)<br /><code>getOrNull</code> (return a nullable)"}};
+  lens{{"<a href='../lens/'>Lens</a> (exactly 1)<br /><code>get</code>"}};
+  prism{{"<a href='../optional-prism/#constructing-values'>Prism</a><br /><code>reverseGet</code>"}};
   traversal-->optional;
   optional-->lens;
   optional-->prism;
