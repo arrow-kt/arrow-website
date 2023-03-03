@@ -138,7 +138,7 @@ graph TD;
 </center>
 
 The "main line" of optics is `Traversal` → `Optional` → `Lens`, which differ
-only in the amount of elements they focus on. [`Prism`](../prism) adds a small 
+only in the amount of elements they focus on. [`Prism`](../optional-prism) adds a small 
 twist: it allows not only modifying, but also _creating_ new values and
 matching over them.
 
