@@ -4,9 +4,11 @@ sidebar_position: 2
 
 # Effects and contexts
 
-How you model data is a very important part of the design of your software. The other important side is how you model your **behaviors**. This is what we are going to talk about today: how to simplify your code with effects, avoiding heavyweight dependency injection frameworks on the go.
+:::note This article was originally published at [47 Degrees' blog](https://www.47deg.com/blog/effects-contexts/).
 
-> This article was originally published at [47 Degrees' blog](https://www.47deg.com/blog/effects-contexts/).
+:::
+
+How you model data is a very important part of the design of your software. The other important side is how you model your **behaviors**. This is what we are going to talk about today: how to simplify your code with effects, avoiding heavyweight dependency injection frameworks on the go.
 
 For every single function you write, there's often some _main_ data you require, and a bunch of other ancillary pieces, the _context_. The typical example is a function to write some user information to the database: apart from the `User` itself, you need a `DatabaseConnection`, and maybe a way to `log` potential issues. One possibility is to make everything a parameter, as follows.
 
