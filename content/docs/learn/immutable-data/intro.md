@@ -104,7 +104,7 @@ in two ways:
    `optic transform operation` to modify a focused element.
 
     ```kotlin
-    fun Person.capitalizeCountryCopy() =
+    fun Person.capitalizeCountryCopy(): Person =
       this.copy {
         Person.address.city.country transform { it.capitalize() }
       }
