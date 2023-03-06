@@ -15,16 +15,26 @@ suspend fun main(): Unit {
     exponentialBackoffFactor = 1.2,
     maxResetTimeout = 60.seconds,
   )
+
+  // normal operation
   circuitBreaker.protectOrThrow { "I am in Closed: ${circuitBreaker.state()}" }.also(::println)
 
-  println("Service getting overloaded . . .")
+  // simulate service getting overloaded
+  Either.catch { 
+    circuitBreaker.protectOrThrow { throw RuntimeException("Service overloaded") }
+  }.also(::println)
+  Either.catch {
+    circuitBreaker.protectOrThrow { throw RuntimeException("Service overloaded") }
+  }.also(::println)
+  circuitBreaker.protectEither { }
+   .also { println("I am Open and short-circuit with ${it}. ${circuitBreaker.state()}") }
 
-  Either.catch { circuitBreaker.protectOrThrow { throw RuntimeException("Service overloaded") } }.also(::println)
-  Either.catch { circuitBreaker.protectOrThrow { throw RuntimeException("Service overloaded") } }.also(::println)
-  circuitBreaker.protectEither { }.also { println("I am Open and short-circuit with ${it}. ${circuitBreaker.state()}") }
-
+  // simulate reset timeout
   println("Service recovering . . .").also { delay(2000) }
 
-  circuitBreaker.protectOrThrow { "I am running test-request in HalfOpen: ${circuitBreaker.state()}" }.also(::println)
+  // simulate test request success
+  circuitBreaker.protectOrThrow { 
+    "I am running test-request in HalfOpen: ${circuitBreaker.state()}" 
+  }.also(::println)
   println("I am back to normal state closed ${circuitBreaker.state()}")
 }

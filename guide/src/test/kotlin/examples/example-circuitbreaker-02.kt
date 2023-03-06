@@ -26,10 +26,12 @@ suspend fun main(): Unit {
   suspend fun <A> resilient(schedule: Schedule<Throwable, *>, f: suspend () -> A): A =
     schedule.retry { circuitBreaker.protectOrThrow(f) }
 
+  // simulate getting overloaded
   Either.catch {
     resilient(Schedule.recurs(5), ::apiCall)
   }.let { println("recurs(5) apiCall twice and 4x short-circuit result from CircuitBreaker: $it") }
 
+  // simulate reset timeout
   delay(2000)
   println("CircuitBreaker ready to half-open")
 
