@@ -114,9 +114,17 @@ const config = {
             ],
           },
           {
-            to: 'incubation/overview',
+            type: 'dropdown',
             position: 'right',
             label: 'Incubation',
+            to: 'incubation/overview',
+            items: [
+              {
+                label: 'Analysis',
+                to: 'category/analysis',
+                activeBaseRegex: '^(/category/analysis)|^(/incubation/analysis)',
+              },
+            ],
           },
           {
             to: 'projects',
@@ -196,10 +204,10 @@ const config = {
             title: 'Incubation',
             items: [
               {
-                label: 'Overview',
-                to: 'incubation/overview',
+                label: 'Analysis',
+                to: 'category/analysis',
               },
-            ],
+            ]
           },
           {
             title: 'Community',
