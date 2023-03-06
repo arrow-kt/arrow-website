@@ -117,6 +117,7 @@ const config = {
             type: 'dropdown',
             position: 'right',
             label: 'Incubation',
+            to: 'incubation/overview',
             items: [
               {
                 label: 'Analysis',
