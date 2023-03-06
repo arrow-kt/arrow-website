@@ -95,7 +95,7 @@ in two ways:
   (`this` in the example) and the transformation to apply to the focused element.
 
     ```kotlin
-    fun Person.capitalizeCountryModify() =
+    fun Person.capitalizeCountryModify(): Person =
       Person.address.city.country.modify(this) { it.capitalize() }
     ```
 
