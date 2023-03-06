@@ -11,7 +11,7 @@ optic.
 :::info In a rush?
 
 - Traversal focus on an indefinite number of values.
-- To access all the the value, use `getAll`.
+- To access to all the values, use `getAll`.
   - Traversals provide an API similar to those of collections.
 - To modify every value focused by the traversal, use `modify`.
 
