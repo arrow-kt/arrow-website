@@ -15,6 +15,8 @@ during peak traffics. To allow such overloaded resources from overloading,
 a **circuit breaker** protects the service by failing fast. This helps us 
 achieve stability, and prevents cascading failures in distributed systems.
 
+## Circuit breaker protocol
+
 A circuit breaker is named after a similar concept in electrical engineering.
 It may be in one of three states.
 
