@@ -16,19 +16,6 @@ detected error is fatal? Instead of predefined answers, Arrow aims to provide
 a set of **tools** which you can compose to specify your solution in a succinct
 and composable way.
 
-## In KotlinX Coroutines
-
-The coroutines standard library has some support for handling failure in an
-ordered way by means of [`SupervisorJob`](https://kotlinlang.org/api/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-supervisor-job.html).
-and [`supervisorScope`](https://kotlinlang.org/api/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/supervisor-scope.html).
-According to the documentation of the latter,
-
-> Unlike [`coroutineScope,`](https://kotlinlang.org/api/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/coroutine-scope.html) 
-  a failure of a child does not cause this scope to fail and does not affect its
-  other children, so a custom policy for handling failures of its children can be implemented.
-
-## In Arrow Fx Resilience
-
 :::caution Arrow pre-1.2.0
 
 In Arrow series 1.0.x and 1.1.x, these types were provided as part of the
