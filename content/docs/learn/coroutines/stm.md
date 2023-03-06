@@ -4,15 +4,6 @@ sidebar_position: 3
 
 # Transactional memory (STM)
 
-<!--- TEST_NAME STMTest -->
-
-<!--- INCLUDE .*
-
-import io.kotest.assertions.fail
-import io.kotest.matchers.shouldBe
-
--->
-
 Software transactional memory, or STM, is an abstraction for concurrent state modification.
 With STM one can write code that concurrently accesses state and that can easily be composed without
  exposing details of how it ensures safety guarantees.
@@ -30,7 +21,7 @@ For further information you can read [_Composable memory transactions_](https://
 
 Those values which live under the umbrella of STM must be defined as `TVar`s
 (short for _transactional variable_).
-You can think of a `TVar<A>` as a variable holding values of type `A`, but where
+You can think of a [`TVar<A>`](https://arrow-kt.github.io/arrow/arrow-fx-stm/arrow.fx.stm/-t-var/index.html) as a variable holding values of type `A`, but where
 concurrent modification is protected.
 `TVar`s are not the only transactional data structure (more on that later),
 but in any case, in order to modify one of them you need to be _inside_ the
@@ -40,11 +31,20 @@ with such receiver.
 
 By itself, a function using `STM` as receiver does _not_ perform any computations.
 We say it's just a _description_ of a transaction. Running a transaction is then
-done using `atomically`.
+done using [`atomically`](https://arrow-kt.github.io/arrow/arrow-fx-stm/arrow.fx.stm/atomically.html).
 
 The example below shows a banking service moving money from one account to the other with STM.
 Should the first account not have enough money we throw an exception. This code is guaranteed to never deadlock and to never
 produce an invalid state by committing after the read state has changed concurrently.
+
+<!--- TEST_NAME STMTest -->
+
+<!--- INCLUDE .*
+
+import io.kotest.assertions.fail
+import io.kotest.matchers.shouldBe
+
+-->
 
 ```kotlin
 import arrow.fx.stm.atomically
@@ -92,11 +92,11 @@ and we'll never observe an intermediate state.
 
 The following types are built upon `TVar`s, and provided out of the box with Arrow:
 
-- `TQueue`: transactional mutable queue,
-- `TMVar`: mutable transactional variable that may be empty,
-- `TSet`, `TMap`: transactional `Set` and `Map`,
-- `TArray`: array of `TVar`'s,
-- `TSemaphore`: transactional semaphore.
+- [`TQueue`](https://arrow-kt.github.io/arrow/arrow-fx-stm/arrow.fx.stm/-t-queue/index.html): transactional mutable queue,
+- [`TMVar`](https://arrow-kt.github.io/arrow/arrow-fx-stm/arrow.fx.stm/-t-m-var/index.html): mutable transactional variable that may be empty,
+- [`TSet`](https://arrow-kt.github.io/arrow/arrow-fx-stm/arrow.fx.stm/-t-set/index.html), [`TMap`](https://arrow-kt.github.io/arrow/arrow-fx-stm/arrow.fx.stm/-t-map/index.html): transactional `Set` and `Map`,
+- [`TArray`](https://arrow-kt.github.io/arrow/arrow-fx-stm/arrow.fx.stm/-t-array/index.html): array of `TVar`'s,
+- [`TSemaphore`](https://arrow-kt.github.io/arrow/arrow-fx-stm/arrow.fx.stm/-t-semaphore/index.html): transactional semaphore.
 
 :::tip
 
