@@ -84,11 +84,8 @@ const config = {
             type: 'dropdown',
             position: 'right',
             label: 'Learn',
+            to: 'learn/overview',
             items: [
-              {
-                label: 'Overview',
-                to: 'learn/overview',
-              },
               {
                 label: 'Quickstart',
                 to: 'learn/quickstart',
@@ -117,9 +114,17 @@ const config = {
             ],
           },
           {
-            to: 'incubation/overview',
+            type: 'dropdown',
             position: 'right',
             label: 'Incubation',
+            to: 'incubation/overview',
+            items: [
+              {
+                label: 'Analysis',
+                to: 'category/analysis',
+                activeBaseRegex: '^(/category/analysis)|^(/incubation/analysis)',
+              },
+            ],
           },
           {
             to: 'projects',
@@ -154,7 +159,7 @@ const config = {
               },
               {
                 label: 'Learn',
-                to: 'learn/quickstart',
+                to: 'learn/overview',
               },
               {
                 label: 'Projects',
@@ -178,10 +183,6 @@ const config = {
                 to: 'learn/quickstart',
               },
               {
-                label: 'Overview',
-                to: 'learn/overview',
-              },
-              {
                 label: 'Typed errors',
                 to: 'category/typed-errors',
               },
@@ -203,10 +204,10 @@ const config = {
             title: 'Incubation',
             items: [
               {
-                label: 'Overview',
-                to: 'incubation/overview',
+                label: 'Analysis',
+                to: 'category/analysis',
               },
-            ],
+            ]
           },
           {
             title: 'Community',

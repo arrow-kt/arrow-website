@@ -5,7 +5,7 @@ import arrow.core.None
 import arrow.core.Some
 import io.kotest.matchers.shouldBe
 
-fun main() {
+fun example() {
   Some("Found value").getOrNull() shouldBe "Found value"
   None.getOrNull() shouldBe null
 }

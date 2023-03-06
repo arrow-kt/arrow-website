@@ -4,6 +4,6 @@ package arrow.website.examples.exampleBasic03
 import arrow.fx.coroutines.parMap
 import kotlinx.coroutines.Dispatchers
 
-suspend fun main() {
+suspend fun example() {
   (1..100).parMap(Dispatchers.Default) { println("${Thread.currentThread().name} ~> $it") }
 }

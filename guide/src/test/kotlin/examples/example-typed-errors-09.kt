@@ -20,7 +20,7 @@ suspend fun error(): Either<OtherError, Int> =
 suspend fun Raise<Nothing>.fallback(): Int =
   catch({ externalSystem() }) { e: Throwable -> 1 }
 
-suspend fun main() {
+suspend fun example() {
   error().shouldBeTypeOf<Either.Left<OtherError>>()
   fold(
     { fallback() },

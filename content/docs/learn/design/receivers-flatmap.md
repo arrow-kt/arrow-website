@@ -4,6 +4,10 @@ sidebar_position: 3
 
 # Receivers vs. flatMap
 
+:::note This article was originally published at [Xebia's blog](https://xebia.com/blog/the-suspend-receivers-style-in-kotlin/). 
+
+:::
+
 The Arrow project promotes a particular style of Kotlin in order to achieve composability of effects. Many of the concepts are inspired by functional programming patterns, but the particular implementation is very different from Haskell's or Scala's typical way of doing things (monads, `IO`, and transformers). The aim of this article is to clarify how this style works in Kotlin, compare it to other sibling languages, and talk about the main limitations.
 
 We assume the reader is familiar with the transformer-style of effects. Good resources to understand that style are [Scala with Cats](https://underscore.io/books/scala-with-cats/), [Practical FP in Scala](https://leanpub.com/pfp-scala), or the [Book of Monads](https://leanpub.com/book-of-monads).
@@ -110,7 +114,7 @@ This signature could also be written as `suspend context(UserRepository) fun`, b
 The example above shows that if you have a `UserRepository` in your `context`, then you can call any other function which requires that context -- here `getUserById` -- without further ceremony. This composability extends as much as you want; the `getUserName` may again be called by another function with the same context. At some point we need to _inject_ the actual implementation, though; this is done using the `with` function,
 
 ```kotlin
-fun main() {
+fun example() {
   createDbConnection().use { db ->
     with(DbUserRepository(db)) {
       println(getUserName(UserId(1)))

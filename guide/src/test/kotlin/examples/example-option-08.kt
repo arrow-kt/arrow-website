@@ -7,7 +7,7 @@ import arrow.core.some
 import arrow.core.None
 import io.kotest.matchers.shouldBe
 
-fun main() {
+fun example() {
   val some: Option<String?> = Some(null)
   val none: Option<String?> = Option.fromNullable(null)
   

@@ -4,9 +4,11 @@ sidebar_position: 2
 
 # Effects and contexts
 
-How you model data is a very important part of the design of your software. The other important side is how you model your **behaviors**. This is what we are going to talk about today: how to simplify your code with effects, avoiding heavyweight dependency injection frameworks on the go.
+:::note This article was originally published at [47 Degrees' blog](https://www.47deg.com/blog/effects-contexts/).
 
-> This article was originally published at [47 Degrees' blog](https://www.47deg.com/blog/effects-contexts/).
+:::
+
+How you model data is a very important part of the design of your software. The other important side is how you model your **behaviors**. This is what we are going to talk about today: how to simplify your code with effects, avoiding heavyweight dependency injection frameworks on the go.
 
 For every single function you write, there's often some _main_ data you require, and a bunch of other ancillary pieces, the _context_. The typical example is a function to write some user information to the database: apart from the `User` itself, you need a `DatabaseConnection`, and maybe a way to `log` potential issues. One possibility is to make everything a parameter, as follows.
 
@@ -77,7 +79,7 @@ class InMemoryDatabase() : Database { ... }
 The [scope function `with`](https://kotlinlang.org/docs/scope-functions.html#with) is one of Kotlin's idiomatic ways to provide the value of a receiver. In most cases, we would use a block right after it, in which `Database` is already made available.
 
 ```kotlin
-suspend fun main() {
+suspend fun example() {
   val conn = openDatabaseConnection(connParams)
   with(DatabaseFromConnection(conn)) {
     saveUserInDb(User("Alex"))
@@ -95,7 +97,7 @@ suspend fun <A> db(
   return with(DatabaseFromConnection(conn), f)
 }
 
-suspend fun main() {
+suspend fun example() {
   db(connParams) { saveUserInDb(User("Alex")) }
 }
 ```
@@ -152,7 +154,7 @@ This pattern slowly grows on you, and at the end, you always define your functio
 The main problem is now how to inject the required instances of `Database` and `Log` so you can call `saveUserInDb`. Unfortunately, the following does **not** work, even though we have those two instances at hand.
 
 ```kotlin
-suspend fun main() {
+suspend fun example() {
   db(connParams) { stdoutLogger {
     saveUserInDb(User("Alex"))
   } }
@@ -162,7 +164,7 @@ suspend fun main() {
 The problem is that `saveUserInDb` expects both of them packed into a single context object. We can work around it by creating an object on the spot, and using delegation to refer to the previously-created instances.
 
 ```kotlin
-suspend fun main() {
+suspend fun example() {
   db(connParams) { stdoutLogger {
     with(object : Database by this@db, Logger as this@stdoutLogger) {
       saveUserInDb(User("Alex"))

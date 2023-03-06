@@ -4,9 +4,11 @@ sidebar_position: 1
 
 # Domain modeling
 
-The goal of functional domain modeling is to describe your business domain as accurately as possible to achieve more type-safety, maximize the use of the compiler with our domain and, thus, prevent bugs and reduce unit testing. Additionally, it makes it easier to communicate about the domain, since the domain is the touchpoint with the real world. Kotlin is a good fit for functional domain modeling. It offers us `data class`, `sealed class`, `enum class`, and `value class`. And we have Arrow, which offers us some interesting generic data types such as `Either` and `Ior`.
+:::note This article was originally published at [47 Degrees' blog](https://www.47deg.com/blog/functional-domain-modeling/).
 
-> This article was originally published at [47 Degrees' blog](https://www.47deg.com/blog/functional-domain-modeling/). There's a [second part](https://www.47deg.com/blog/functional-domain-modeling-part-2/) covering validation of the domain presented here.
+:::
+
+The goal of functional domain modeling is to describe your business domain as accurately as possible to achieve more type-safety, maximize the use of the compiler with our domain and, thus, prevent bugs and reduce unit testing. Additionally, it makes it easier to communicate about the domain, since the domain is the touchpoint with the real world. Kotlin is a good fit for functional domain modeling. It offers us `data class`, `sealed class`, `enum class`, and `value class`. And we have Arrow, which offers us some interesting generic data types such as `Either` and `Ior`.
 
 In some codebases, you can find the following primitive type based implementation of an `Event`:
 
