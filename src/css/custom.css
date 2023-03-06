@@ -46,9 +46,6 @@
 
   --ifm-button-padding-vertical: 0.75rem;
 
-  /* --ifm-card-vertical-spacing: calc(1.5 * var(--ifm-global-spacing));
-  --ifm-card-horizontal-spacing: calc(1.5 * var(--ifm-global-spacing)); */
-
   --ifm-card-vertical-spacing: var(--ifm-global-spacing);
   --ifm-card-horizontal-spacing: var(--ifm-global-spacing);
 
@@ -101,7 +98,7 @@ small {
   font-family: var(--ifm-font-family-base);
 }
 
-/* Global styles fro cards */
+/* Global styles for cards */
 .card {
   border: 1px solid var(--ifm-color-primary-lighter);
   box-shadow: none;
