@@ -2,8 +2,6 @@ import React from 'react';
 
 import Link from '@docusaurus/Link';
 
-// import iconArrowRight from '@site/static/img/icon-arrow-right.png';
-
 import styles from './simple-card.module.css';
 
 export interface SimpleCardProps {
@@ -13,12 +11,20 @@ export interface SimpleCardProps {
   body: string;
 }
 
-export function SimpleCard({ title, icon, link, body }: SimpleCardProps) {
-  const linkUrl = link;
+export interface BaseCard extends SimpleCardProps {
+  showFooter: boolean;
+}
 
+export function BaseCard({
+  title,
+  icon,
+  link,
+  body,
+  showFooter = true,
+}: BaseCard) {
   return (
-    <div className={`card ${styles.card}`}>
-      <Link href={linkUrl} className="link--dark">
+    <div className={`card ${styles.simpleCard}`}>
+      <Link href={link}>
         <div className={`card__header ${styles.cardHeader}`}>
           <img
             className={styles.icon}
@@ -26,12 +32,29 @@ export function SimpleCard({ title, icon, link, body }: SimpleCardProps) {
             alt={`${title} category`}
             title={`${title} category`}
           />
-          <h2 className={styles.title}>{title}</h2>
+          <h2>{title}</h2>
         </div>
         <div className="card__body">
-          <p className={styles.body}>{body}</p>
+          <p>{body}</p>
         </div>
+        {showFooter && (
+          <div className={`card__footer`}>
+            <strong>
+              <Link href={link} className={styles.link}>
+                Learn more
+              </Link>
+            </strong>
+          </div>
+        )}
       </Link>
     </div>
   );
 }
+
+export const SimpleCard = (props: SimpleCardProps) => (
+  <BaseCard showFooter={false} {...props} />
+);
+
+export const FooterCard = (props: SimpleCardProps) => (
+  <BaseCard showFooter={true} {...props} />
+);

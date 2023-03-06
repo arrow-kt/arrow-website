@@ -1,0 +1,70 @@
+:local(.card) :global(.card__image) {
+  position: relative;
+}
+
+:local(.card) :global(.card__image)::before {
+  content: '';
+  background-color: var(--ifm-color-primary-dark);
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  mix-blend-mode: color;
+  pointer-events: none;
+}
+
+:local(.card) :global(.card__image)::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background: linear-gradient(
+    112.64deg,
+    rgba(73, 123, 247, 0) 22.46%,
+    var(--ifm-color-primary-light) 81.52%
+  );
+  pointer-events: none;
+}
+
+.image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.title {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
+  overflow: hidden;
+}
+
+.text {
+  min-height: 5rem;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  overflow: hidden;
+}
+
+.link::after {
+  content: '';
+  border: solid var(--ifm-link-color);
+  border-width: 0 2px 2px 0;
+  display: inline-block;
+  padding: 4px;
+  transform: rotate(-45deg);
+  margin-left: 8px;
+  transition: margin-left var(--ifm-transition-fast);
+}
+
+.link:hover {
+  text-decoration: none;
+}
+
+.link:hover.link::after {
+  margin-left: 16px;
+}
