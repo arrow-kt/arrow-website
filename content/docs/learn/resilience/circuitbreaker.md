@@ -64,6 +64,13 @@ graph LR;
 
 </Admonition>
 
+:::info Additional context for this pattern
+
+[Circuit Breaker pattern](https://learn.microsoft.com/en-us/azure/architecture/patterns/circuit-breaker)
+in _Cloud Design Patterns_.
+
+:::
+
 ## Arrow's [`CircuitBreaker`](https://arrow-kt.github.io/arrow/arrow-fx-resilience/arrow.fx.resilience/-circuit-breaker/index.html)
 
 Let's create a circuit breaker that only allows us to call a remote service twice.

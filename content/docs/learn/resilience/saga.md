@@ -4,12 +4,6 @@ sidebar_position: 4
 
 # Saga
 
-<!--- TEST_NAME Saga -->
-
-<!--- INCLUDE .*
-import io.kotest.matchers.shouldBe
--->
-
 In a distributed system, sometimes you need a concept similar to a _transaction_
 in a database. That is, several operations spanning different microservices
 must succeed or fail as a unit; otherwise we may end up in an inconsistent state.
@@ -18,6 +12,19 @@ _compensating_ action, which is executed if any of the following steps fail.
 The role of the compensating action is to undo any changes performed by the
 action, hence taking the system to the state prior to the entire operation
 beginning its execution.
+
+:::info Additional context for this pattern
+
+[Saga distributed transactions pattern](https://learn.microsoft.com/en-us/azure/architecture/reference-architectures/saga/saga)
+in _Cloud Design Patterns_.
+
+:::
+
+<!--- TEST_NAME Saga -->
+
+<!--- INCLUDE .*
+import io.kotest.matchers.shouldBe
+-->
 
 Arrow Fx Resilience provides the [`saga`](https://arrow-kt.github.io/arrow/arrow-fx-resilience/arrow.fx.resilience/saga.html)
 function, which creates a new scope where compensating actions can be declared
@@ -38,8 +45,7 @@ import arrow.core.left
 
 ```kotlin
 import arrow.atomic.AtomicInt
-import arrow.fx.resilience.saga
-import arrow.fx.resilience.transact
+import arrow.fx.resilience.*
 
 val INITIAL_VALUE = 1
 
