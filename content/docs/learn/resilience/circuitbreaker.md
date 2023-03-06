@@ -9,7 +9,7 @@ import Admonition from '@theme/Admonition';
 <!--- TEST_NAME CircuitBreaker -->
 
 When a service is being overloaded, interacting with it more may only worsen its
-overloaded state. Especially when combined with retry mechanisms such as [`Schedule`](retry-and-repeat),
+overloaded state. Especially when combined with retry mechanisms such as [`Schedule`](../retry-and-repeat/),
 in some cases simply using a back-off retry policy might not be sufficient 
 during peak traffics. To allow such overloaded resources from overloading, 
 a **circuit breaker** protects the service by failing fast. This helps us 
