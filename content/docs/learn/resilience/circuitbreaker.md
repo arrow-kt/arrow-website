@@ -1,4 +1,8 @@
-# CircuitBreaker
+---
+sidebar_position: 3
+---
+
+# Circuit breaker
 
 https://arrow-kt.github.io/arrow/arrow-fx-resilience/arrow.fx.resilience/-circuit-breaker/index.html
 
