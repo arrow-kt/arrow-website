@@ -104,7 +104,7 @@ fun main() {
 
 The first parameter to the `index` optional represents the type of collection
 you are accessing. Currently this argument can be `Index.list`, `Index.map`,
-`Index.sequence`, or `Index.string`. The choice defined the type of keys
+`Index.sequence`, or `Index.string`. The choice defines the type of keys
 and values expected by each operation.
 
 :::
