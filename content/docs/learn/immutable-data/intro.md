@@ -24,7 +24,7 @@ name of the fields, and perform iterated copies even if we only want to touch
 one single field.
 
 ```kotlin
-fun Person.capitalizeCountry() =
+fun Person.capitalizeCountry(): Person =
   this.copy(
     address = address.copy(
       city = address.city.copy(
