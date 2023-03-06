@@ -14,7 +14,7 @@ val none: None = None
 val optionA: Option<String> = "I am wrapped in something".some()
 val optionB: Option<String> = none<String>()
 
-fun main() {
+fun example() {
   some shouldBe optionA
   none shouldBe optionB
 }

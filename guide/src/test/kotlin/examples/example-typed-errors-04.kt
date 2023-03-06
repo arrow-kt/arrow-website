@@ -22,7 +22,7 @@ fun Raise<MyError>.increment(i: Int): Int {
   return i + 1
 }
 
-fun main() {
+fun example() {
   increment(null) shouldBe MyError("Cannot increment null").left()
 
   fold(

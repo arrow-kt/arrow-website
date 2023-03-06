@@ -22,7 +22,7 @@ fun Raise<MyError>.isPositive(i: Int): Int {
   return i
 }
 
-fun main() {
+fun example() {
   isPositive(-1) shouldBe MyError("-1 is not positive").left()
 
   fold(

@@ -7,7 +7,7 @@ import arrow.core.None
 import arrow.core.none
 import io.kotest.matchers.shouldBe
 
-fun main() {
+fun example() {
   Some(1).onSome { println("I am here: $it") }
   none<Int>().onNone { println("I am here") }
   

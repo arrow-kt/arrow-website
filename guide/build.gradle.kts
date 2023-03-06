@@ -12,6 +12,7 @@ dependencies {
   testImplementation(libs.kotlinx.knit.test)
   testImplementation(libs.arrow.core)
   testImplementation(libs.arrow.fx.coroutines)
+  testImplementation(libs.arrow.fx.stm)
   testImplementation(libs.kotest.assertions.core)
   testImplementation(libs.kotest.property)
   testImplementation(libs.kotest.runner.junit)

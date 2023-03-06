@@ -20,7 +20,7 @@ fun isEven2(i: Int): Either<NotEven, Int> =
 
 val errors = nonEmptyListOf(NotEven(1), NotEven(3), NotEven(5), NotEven(7), NotEven(9)).left()
 
-fun main() {
+fun example() {
   (1..10).mapOrAccumulate { isEven(it) } shouldBe errors
   (1..10).mapOrAccumulate { isEven2(it).bind() } shouldBe errors
 }

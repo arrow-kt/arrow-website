@@ -5,7 +5,7 @@ import arrow.core.Some
 import arrow.core.none
 import io.kotest.matchers.shouldBe
 
-fun main() {
+fun example() {
   Some(1).isSome() shouldBe true
   none<Int>().isNone() shouldBe true
 }

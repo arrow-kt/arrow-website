@@ -3,6 +3,6 @@ package arrow.website.examples.exampleBasic04
 
 import io.kotest.matchers.shouldBe
 
-fun main() {
+fun example() {
     "Hello World 3!" shouldBe "Hello World 3!"
 }

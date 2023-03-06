@@ -7,26 +7,26 @@ import kotlinx.knit.test.verifyOutputLines
 
 class BasicTest : StringSpec({
   "ExampleBasic01" {
-    captureOutput("ExampleBasic01") { arrow.website.examples.exampleBasic01.main() }
+    captureOutput("ExampleBasic01") { arrow.website.examples.exampleBasic01.example() }
       .verifyOutputLines(
         "Hello World!"
       )
   }
 
   "ExampleBasic02" {
-    captureOutput("ExampleBasic02") { arrow.website.examples.exampleBasic02.main() }
+    captureOutput("ExampleBasic02") { arrow.website.examples.exampleBasic02.example() }
       .verifyOutputLines(
         "Hello World 2!"
       )
   }
 
   "ExampleBasic03" {
-    captureOutput("ExampleBasic03") { arrow.website.examples.exampleBasic03.main() }
+    captureOutput("ExampleBasic03") { arrow.website.examples.exampleBasic03.example() }
       .also { lines -> check(lines.all { it.startsWith("DefaultDispatcher-worker") } && lines.size == 100) }
   }
 
   "ExampleBasic04" {
-    arrow.website.examples.exampleBasic04.main()
+    arrow.website.examples.exampleBasic04.example()
   }
 
 }) {

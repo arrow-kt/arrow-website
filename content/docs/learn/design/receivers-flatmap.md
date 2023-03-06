@@ -114,7 +114,7 @@ This signature could also be written as `suspend context(UserRepository) fun`, b
 The example above shows that if you have a `UserRepository` in your `context`, then you can call any other function which requires that context -- here `getUserById` -- without further ceremony. This composability extends as much as you want; the `getUserName` may again be called by another function with the same context. At some point we need to _inject_ the actual implementation, though; this is done using the `with` function,
 
 ```kotlin
-fun main() {
+fun example() {
   createDbConnection().use { db ->
     with(DbUserRepository(db)) {
       println(getUserName(UserId(1)))
