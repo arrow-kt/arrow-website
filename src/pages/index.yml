@@ -1,12 +1,89 @@
-cards:
-  - title: quickstart
-    description: test 1
+features:
+  - title: Quickstart
+    link: learn/quickstart
+    icon: icon-quickstart.svg
+    body: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eu turpis molestie, dictum est . Etiam eu turpis
 
-  - title: docs
-    description: test 1
+  - title: Typed errors
+    link: category/typed-errors
+    icon: icon-typed-errors.svg
+    body: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eu turpis molestie, dictum est . Etiam eu turpis
 
-  - title: projects
-    description: test 1
+  - title: Coroutines
+    link: category/coroutines
+    icon: icon-coroutines.svg
+    body: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eu turpis molestie, dictum est . Etiam eu turpis
 
-  - title: training
-    description: test 1
+  - title: Resilience
+    link: category/resilience
+    icon: icon-resilience.svg
+    body: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eu turpis molestie, dictum est . Etiam eu turpis
+
+  - title: Immutable data
+    link: category/design
+    icon: icon-immutable-data.svg
+    body: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eu turpis molestie, dictum est . Etiam eu turpis
+
+  - title: Design
+    link: category/design
+    icon: icon-design.svg
+    body: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eu turpis molestie, dictum est . Etiam eu turpis
+
+
+projects:
+  - title: Case study 1
+
+  - title: Case study 2
+
+  - title: Case study 3
+
+  - title: Case study 4
+
+
+quotes:
+  - name: Francico Díaz
+    position: Principal at Xebia Functional
+    image: quoted-person-a.jpg
+    body: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eu turpis molestie, dictum est . Etiam eu turpis Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eu turpis molestie, dictum est . Etiam eu turpis
+
+  - name: Vicky Ruste
+    position: Software Engineer
+    image: quoted-person-b.jpg
+    body: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eu turpis molestie, dictum est . Etiam eu turpis Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eu turpis molestie, dictum est . Etiam eu turpis
+
+
+navs:
+  - title: Support
+    link: community/support
+    icon: icon-support.svg
+    body: Lorem ipsum dolor sit amet, consectetur adipiscing eliorem ipsum dolor sit amet
+
+  - title: Blog
+    link: community/blog
+    icon: icon-blog.svg
+    body: Lorem ipsum dolor sit amet, consectetur adipiscing eliorem ipsum dolor sit amet
+
+  - title: Events
+    link: community/events
+    icon: icon-events.svg
+    body: Lorem ipsum dolor sit amet, consectetur adipiscing eliorem ipsum dolor sit amet
+
+
+companies:
+  - name: Verizon
+    logo: company-logo-0.png
+
+  - name: Scalefocus
+    logo: company-logo-1.png
+
+  - name: Unity
+    logo: company-logo-2.png
+
+  - name: Santander
+    logo: company-logo-3.png
+
+  - name: Google
+    logo: company-logo-4.png
+
+  - name: Microsoft
+    logo: company-logo-5.png
