@@ -6,7 +6,7 @@ data class Address(val street: Street, val city: City)
 data class Street(val name: String, val number: Int?)
 data class City(val name: String, val country: String)
 
-fun Person.capitalizeCountry() =
+fun Person.capitalizeCountry(): Person =
   this.copy(
     address = address.copy(
       city = address.city.copy(

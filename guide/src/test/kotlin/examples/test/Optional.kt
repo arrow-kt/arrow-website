@@ -7,15 +7,15 @@ import kotlinx.knit.test.verifyOutputLines
 
 class Optional : StringSpec({
   "ExampleOptional01" {
-    arrow.website.examples.exampleOptional01.main()
+    arrow.website.examples.exampleOptional01.example()
   }
 
   "ExampleOptional02" {
-    arrow.website.examples.exampleOptional02.main()
+    arrow.website.examples.exampleOptional02.example()
   }
 
   "ExampleOptional04" {
-    arrow.website.examples.exampleOptional04.main()
+    arrow.website.examples.exampleOptional04.example()
   }
 
 }) {

@@ -7,15 +7,15 @@ import kotlinx.knit.test.verifyOutputLines
 
 class Lens : StringSpec({
   "ExampleLens03" {
-    arrow.website.examples.exampleLens03.main()
+    arrow.website.examples.exampleLens03.example()
   }
 
   "ExampleLensDomain01" {
-    arrow.website.examples.exampleLensDomain01.main()
+    arrow.website.examples.exampleLensDomain01.example()
   }
 
   "ExampleLensDomain02" {
-    arrow.website.examples.exampleLensDomain02.main()
+    arrow.website.examples.exampleLensDomain02.example()
   }
 
 }) {

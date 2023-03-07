@@ -7,15 +7,15 @@ import kotlinx.knit.test.verifyOutputLines
 
 class Reflection : StringSpec({
   "ExampleReflection01" {
-    arrow.website.examples.exampleReflection01.main()
+    arrow.website.examples.exampleReflection01.example()
   }
 
   "ExampleReflection02" {
-    arrow.website.examples.exampleReflection02.main()
+    arrow.website.examples.exampleReflection02.example()
   }
 
   "ExampleReflection03" {
-    arrow.website.examples.exampleReflection03.main()
+    arrow.website.examples.exampleReflection03.example()
   }
 
 }) {
