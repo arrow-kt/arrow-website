@@ -7,7 +7,7 @@ import arrow.core.Some
 import arrow.core.getOrElse
 import io.kotest.matchers.shouldBe
 
-fun main() {
+fun example() {
   Some( "Found value").getOrElse { "No value" } shouldBe "Found value"
   None.getOrElse { "No value" } shouldBe "No value"
 }

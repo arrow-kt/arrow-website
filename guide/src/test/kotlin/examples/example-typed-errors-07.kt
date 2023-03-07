@@ -23,7 +23,7 @@ val other: Either<OtherError, Int> =
 fun Raise<OtherError>.other(): Int =
   recover({ raise(MyError) }) { _: MyError -> fallback.bind() }
 
-fun main() {
+fun example() {
   other shouldBe OtherError.left()
   fold(
     { other() },

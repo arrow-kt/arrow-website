@@ -5,6 +5,6 @@ import io.kotest.matchers.shouldBe
 
 fun <A> List<A>.firstOrElse(default: () -> A): A = firstOrNull() ?: default()
 
-fun main() {
+fun example() {
   listOf(null, 2, 3).firstOrElse { -1 } shouldBe null
 }

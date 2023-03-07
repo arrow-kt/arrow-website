@@ -23,7 +23,7 @@ val fallback: Either<Nothing, Int> =
 fun Raise<Nothing>.fallback(): Int =
   recover({ error() }) { e: MyError -> 1 }
 
-fun main() {
+fun example() {
   fallback.merge() shouldBe 1
   fold(
     { fallback() },

@@ -24,7 +24,7 @@ import io.kotest.matchers.shouldBe
 ```kotlin
 fun <A> List<A>.firstOrElse(default: () -> A): A = firstOrNull() ?: default()
 
-fun main() {
+fun example() {
   emptyList<Int?>().firstOrElse { -1 } shouldBe -1
   listOf(1, null, 3).firstOrElse { -1 } shouldBe 1
 }
@@ -44,7 +44,7 @@ import io.kotest.matchers.shouldBe
 fun <A> List<A>.firstOrElse(default: () -> A): A = firstOrNull() ?: default()
 -->
 ```kotlin
-fun main() {
+fun example() {
   listOf(null, 2, 3).firstOrElse { -1 } shouldBe null
 }
 ```
@@ -98,7 +98,7 @@ fun <A> List<A>.firstOrElse(default: () -> A): A =
 If we now run our previous examples again, they all behave as expected since we can rely on `None` to detect the case where the list is empty.
 
 ```kotlin
-fun main() {
+fun example() {
   emptyList<Int?>().firstOrElse { -1 } shouldBe -1
   listOf(1, null, 3).firstOrElse { -1 } shouldBe 1
   listOf(null, 2, 3).firstOrElse { -1 } shouldBe null
@@ -138,7 +138,7 @@ val none: None = None
 val optionA: Option<String> = "I am wrapped in something".some()
 val optionB: Option<String> = none<String>()
 
-fun main() {
+fun example() {
   some shouldBe optionA
   none shouldBe optionB
 }
@@ -154,7 +154,7 @@ import arrow.core.toOption
 import io.kotest.matchers.shouldBe
 -->
 ```kotlin
-fun main() {
+fun example() {
   val some: Option<String> = Option.fromNullable("Nullable string")
   val none: Option<String> = Option.fromNullable(null)
   
@@ -178,7 +178,7 @@ import arrow.core.None
 import io.kotest.matchers.shouldBe
 -->
 ```kotlin
-fun main() {
+fun example() {
   val some: Option<String?> = Some(null)
   val none: Option<String?> = Option.fromNullable(null)
   
@@ -200,7 +200,7 @@ import arrow.core.Some
 import io.kotest.matchers.shouldBe
 -->
 ```kotlin
-fun main() {
+fun example() {
   Some("Found value").getOrNull() shouldBe "Found value"
   None.getOrNull() shouldBe null
 }
@@ -219,7 +219,7 @@ import arrow.core.getOrElse
 import io.kotest.matchers.shouldBe
 -->
 ```kotlin
-fun main() {
+fun example() {
   Some( "Found value").getOrElse { "No value" } shouldBe "Found value"
   None.getOrElse { "No value" } shouldBe "No value"
 }
@@ -238,7 +238,7 @@ import io.kotest.assertions.fail
 import io.kotest.matchers.shouldBe
 -->
 ```kotlin
-fun main() {
+fun example() {
   when(val value = 20.some()) {
     is Some -> value.value shouldBe 20
     None -> fail("$value should not be None")
@@ -367,7 +367,7 @@ import arrow.core.none
 import io.kotest.matchers.shouldBe
 -->
 ```kotlin
-fun main() {
+fun example() {
   Some(1).isSome() shouldBe true
   none<Int>().isNone() shouldBe true
 }
@@ -385,7 +385,7 @@ import arrow.core.none
 import io.kotest.matchers.shouldBe
 -->
 ```kotlin
-fun main() {
+fun example() {
   Some(2).isSome { it % 2 == 0 } shouldBe true
   Some(1).isSome { it % 2 == 0 } shouldBe false
   none<Int>().isSome { it % 2 == 0 } shouldBe false
@@ -404,7 +404,7 @@ import arrow.core.none
 import io.kotest.matchers.shouldBe
 -->
 ```kotlin
-fun main() {
+fun example() {
   Some(1).onSome { println("I am here: $it") }
   none<Int>().onNone { println("I am here") }
   

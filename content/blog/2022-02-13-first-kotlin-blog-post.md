@@ -14,7 +14,7 @@ Here we tell knit to generate both the example and the test by adding the **link
 When the link matches the `knit.dir` specified in `knit.properties` it will generate both the example and the test.
 
 ```kotlin
-fun main() {
+fun example() {
     println("Hello World!")
 }
 ```
@@ -29,7 +29,7 @@ Hello World!
 We can do the same for another snippet, but this time we specify knit to generate an example using the `KNIT` directive.
 
 ```kotlin
-fun main() {
+fun example() {
     println("Hello World 2!")
 }
 ```
@@ -51,7 +51,7 @@ import arrow.fx.coroutines.parMap
 import kotlinx.coroutines.Dispatchers
 -->
 ```kotlin
-suspend fun main() {
+suspend fun example() {
   (1..100).parMap(Dispatchers.Default) { println("${Thread.currentThread().name} ~> $it") }
 }
 ```
@@ -68,7 +68,7 @@ We in this case add an import for `shouldBe`, and specify the `TEST assert` para
 import io.kotest.matchers.shouldBe
 -->
 ```kotlin
-fun main() {
+fun example() {
     "Hello World 3!" shouldBe "Hello World 3!"
 }
 ```

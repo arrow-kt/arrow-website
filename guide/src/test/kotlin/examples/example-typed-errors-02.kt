@@ -16,7 +16,7 @@ val error: Either<MyError, Int> = MyError.left()
 
 fun Raise<MyError>.error(): Int = raise(MyError)
 
-fun main() {
+fun example() {
   when (error) {
     is Left -> error.value shouldBe MyError
     is Right -> fail("A logical failure occurred!")

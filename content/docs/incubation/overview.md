@@ -2,6 +2,7 @@
 sidebar_position: 1
 ---
 
-# Experimental features
+# Incubation
 
-Welcome to Arrow Incubation docs. Here you will find all the information to start experimneting with new features in our library.
+This section describes functionality developed under the umbrella of the
+Arrow project, but which may not be ready for production work.
