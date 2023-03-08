@@ -30,17 +30,17 @@ of the libraries which compose Arrow.
 introduce Arrow in your project.
 - No library lives in a vacuum, and Arrow enjoys
 [integrations](../integrations/) with many other popular Kotlin libraries.
-- We also provide some guidance on [broader design and architecture](../design)
+- We also provide some guidance on [broader design and architecture](../../category/design)
 using functional programming concepts.
 
 | Library | Features |
 |---------|-|
-| `arrow-core` <br /> _Companion to [Kotlin's standard library](https://kotlinlang.org/api/latest/jvm/stdlib/)_ | [Typed errors](../typed-errors), including `Raise`, `Either`, and `Option` <br /> Non-empty [list](https://arrow-kt.github.io/arrow/arrow-core/arrow.core/-non-empty-list/index.html) and [set](https://arrow-kt.github.io/arrow/arrow-core/arrow.core/-non-empty-set/index.html) |
-| `arrow-fx-coroutines` <br /> _Companion to [KotlinX Coroutines](https://kotlinlang.org/api/kotlinx.coroutines/kotlinx-coroutines-core/)_ | [High-level concurrency](../coroutines/parallel), including `parMap` and `parZip` <br /> [Resource management](../coroutines/resource) |
-| `arrow-fx-resilience` | [Resilience patterns](../resilience) |
-| `arrow-fx-stm` | [Software Transactional Memory](../coroutines/stm) (STM) |
-| `arrow-optics` + `arrow-optics-ksp-plugin` <br /> _Companion to [data](https://kotlinlang.org/docs/data-classes.html) and [sealed](https://kotlinlang.org/docs/sealed-classes.html) classes_ | Utilities for [immutable data](../immutable-data/) |
-| `arrow-atomic` | [Atomic references](../coroutines/concurrency-primitives/#atomic) |
+| `arrow-core` <br /> _Companion to [Kotlin's standard library](https://kotlinlang.org/api/latest/jvm/stdlib/)_ | [Typed errors](../typed-errors/), including `Raise`, `Either`, and `Option` <br /> Non-empty [list](https://arrow-kt.github.io/arrow/arrow-core/arrow.core/-non-empty-list/index.html) and [set](https://arrow-kt.github.io/arrow/arrow-core/arrow.core/-non-empty-set/index.html) |
+| `arrow-fx-coroutines` <br /> _Companion to [KotlinX Coroutines](https://kotlinlang.org/api/kotlinx.coroutines/kotlinx-coroutines-core/)_ | [High-level concurrency](../coroutines/parallel), including `parMap` and `parZip` <br /> [Resource management](../coroutines/resource-safety/) |
+| `arrow-fx-resilience` | [Resilience patterns](../resilience/) |
+| `arrow-fx-stm` | [Software Transactional Memory](../coroutines/stm/) (STM) |
+| `arrow-optics` + `arrow-optics-ksp-plugin` <br /> _Companion to [data](https://kotlinlang.org/docs/data-classes.html) and [sealed](https://kotlinlang.org/docs/sealed-classes.html) classes_ | Utilities for [immutable data](../immutable-data/intro/) |
+| `arrow-atomic` <br /> _Multiplatform-ready [references](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.native.concurrent/-atomic-reference/)_ | [Atomic references](../coroutines/concurrency-primitives/#atomic) |
 
 :::note We'd love to hear from you!
 
