@@ -120,6 +120,11 @@ const config = {
             ],
           },
           {
+            label: 'API Docs',
+            position: 'right',
+            to: 'https://arrow-kt.github.io/arrow/index.html',
+          },
+          {
             type: 'dropdown',
             position: 'right',
             label: 'Incubation',
@@ -211,8 +216,12 @@ const config = {
             ],
           },
           {
-            title: 'Incubation',
+            title: 'More',
             items: [
+              {
+                label: 'API Docs',
+                to: 'https://arrow-kt.github.io/arrow/index.html',
+              },
               {
                 label: 'Analysis',
                 to: 'category/analysis',
