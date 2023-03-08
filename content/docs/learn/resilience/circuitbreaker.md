@@ -75,7 +75,7 @@ in _Cloud Design Patterns_.
 
 Let's create a circuit breaker that only allows us to call a remote service twice.
 After that, whenever more than two requests fail with an exception, 
-the circuit breaker starts short-circuiting failing-fast.
+the circuit breaker starts short-circuiting / failing-fast.
 
 A new instance of `CircuitBreaker` is created using [`of`](https://arrow-kt.github.io/arrow/arrow-fx-resilience/arrow.fx.resilience/-circuit-breaker/-companion/of.html); there we specify
 the different options. Then we wrap every call to the service which may
