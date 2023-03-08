@@ -55,7 +55,7 @@ Schedule policies also return values on each step, which can be used to
 take decisions based on previous values.
 
 One of the simplest policies is recurring 10 times. This means that if we
-call `repeat` the same action is performed 10 times, and is we call `retry`
+call `repeat`, the same action is performed 10 times, and if we call `retry`,
 the action is attempted until successful for a maximum of 10 times.
 
 ```kotlin
