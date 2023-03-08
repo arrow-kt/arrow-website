@@ -36,10 +36,7 @@ export default function Home(): JSX.Element {
         <section
           className={`container text--center ${styles.textContainer} ${styles.verticalRhythm}`}>
           <h1>What can Λrrow do</h1>
-          <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eu
-            turpis molestie, dictum est
-          </p>
+          <p>Use cases and complete projects using Arrow</p>
         </section>
         <section
           className={`container ${styles.projectsContainer} ${styles.verticalRhythm}`}>

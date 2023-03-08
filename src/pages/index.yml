@@ -31,13 +31,9 @@ features:
 
 
 projects:
-  - title: Case study 1
-
-  - title: Case study 2
-
-  - title: Case study 3
-
-  - title: Case study 4
+  - title: GitHub Alerts
+    body: Notify in Slack when an event occurs in a GitHub repository
+    link: use_cases/gh_alerts
 
 
 quotes:
