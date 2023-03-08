@@ -7,7 +7,7 @@ sidebar_position: 1
 Most, if not all, of the systems we develop nowadays require the cooperation of
 other services, which may live in the same process, in the same machine, or may
 require some network communication. This creates a lot of potential different
-scenarios when things may fail. **Resilience** is the ability for your system 
+scenarios where things may fail. **Resilience** is the ability of your system 
 to act in an organized way when those events occur.
 
 Your particular approach to resilience depends on multiple factors. Is it
