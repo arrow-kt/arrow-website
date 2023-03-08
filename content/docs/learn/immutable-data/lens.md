@@ -117,7 +117,7 @@ import arrow.optics.*
 
 Code speaks louder than words (well, sometimes). Here's a small snippet showcasing
 the three operations applied to an instance of our `Person` class. Notice how
-the three operations live on the lens, and get the value the operate on as an
+the three operations live on the lens, and get the value they operate on as an
 argument.
 
 ```kotlin
