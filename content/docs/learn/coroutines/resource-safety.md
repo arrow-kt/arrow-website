@@ -12,6 +12,13 @@ adds the ability to _install_ resources, and ensure proper finalization even
 in the face of exceptions and cancellations. Arrow's Resource co-operated
 with Structured Concurrency, and KotlinX Coroutines.
 
+:::info Media resources
+
+- [_Graceful Resource Handling_](https://www.youtube.com/watch?v=zKrTBH8jqH4) by Simon Vergauwen
+- [_Graceful Shutdown with Structured Concurrency_](https://kotlindevday.com/videos/grateful-shutdown-with-structured-concurrency-simon-vergauwen/) by Simon Vergauwen
+
+:::
+
 ## Understanding the problem
 
 The following program is **not** safe because it is prone to leak `dataSource` 

@@ -31,6 +31,14 @@ pattern around resilience:
 - Protect other services from been overloaded using [`CircuitBreaker`](circuitbreaker),
 - Implement transactional behavior in distributed systems in the form of [`Saga`](saga).
 
+:::info Media resources
+
+The following videos showcase how to introduce resilience in your applications.
+
+- [_Functional Programming in Kotlin with Arrow_](https://www.youtube.com/watch?v=IDMmmrRhUvQ) by Simon Vergauwen and Alejandro Serrano
+- [_Building applications with Kotlin and Arrow.kt in style_](https://www.youtube.com/watch?v=g79A6HmbW5M) by Simon Vergauwen
+
+:::
 
 :::tip Further reading
 
