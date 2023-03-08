@@ -131,7 +131,7 @@ import arrow.optics.*
 
 The Arrow Optics plug-in generates two optics within `User`, namely
 `User.person` and `User.company`. These optics only focus on a value when
-it has the corresponding type. This is often use to modify a value only
+it has the corresponding type. This is often used to modify a value only
 for a certain type in the hierarchy, leaving the rest untouched. This is
 exactly what happens in the function below: `Person`s get their age incremented,
 but `Company`s remains unchanged.
