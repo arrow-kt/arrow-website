@@ -3,7 +3,7 @@ import React from 'react';
 
 import Link from '@docusaurus/Link';
 
-import styles from './HomepageFeatures.module.css';
+import styles from './homepage-features.module.css';
 
 type FeatureItem = {
   title: string;

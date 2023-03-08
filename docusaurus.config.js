@@ -7,7 +7,7 @@ const darkCodeTheme = require('prism-react-renderer/themes/dracula');
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
-  title: 'Arrow website',
+  title: 'Λrrow',
   tagline: "Functional companion to Kotlin's Standard Library",
   favicon: 'img/arrow-brand-icon.svg',
   url: 'https://arrow-kt.io',

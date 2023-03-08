@@ -1,0 +1,58 @@
+.quoteCard {
+  --ifm-card-background-color: var(--ifm-color-primary-lightest);
+  position: relative;
+  border: none;
+}
+
+.quoteCard:hover {
+  box-shadow: none;
+  transform: none;
+}
+
+.quoteCard::before {
+  background-image: url('@site/static/img/icon-quote.png');
+  background-repeat: no-repeat;
+  background-size: var(--ifm-card-vertical-spacing) auto;
+  background-position: var(--ifm-card-vertical-spacing) var(--ifm-card-vertical-spacing);
+  width: 100%;
+  height: 100%;
+  content: '';
+  position: absolute;
+  top: 0;
+  pointer-events: none;
+}
+
+:local(.quoteCard) :global(.card__body) {
+  padding-top: calc(2.5 * var(--ifm-card-vertical-spacing));
+}
+
+:local(.quoteCard) :global(.avatar__photo-wrapper) {
+  position: relative;
+}
+
+:local(.quoteCard) :global(.avatar__photo-wrapper)::before {
+  content: '';
+  background-color: var(--ifm-color-primary);
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  mix-blend-mode: color;
+  pointer-events: none;
+  opacity: 0.8;
+}
+
+:local(.quoteCard) :global(.avatar__photo-wrapper)::after {
+  content: '';
+  background-color: #fff;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  mix-blend-mode: lighten;
+  pointer-events: none;
+  opacity: 0.33;
+  border-radius: 50%;
+}
