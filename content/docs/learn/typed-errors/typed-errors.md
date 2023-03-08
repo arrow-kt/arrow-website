@@ -18,6 +18,14 @@ Working with typed errors offers a couple of advantages over using exceptions:
 
 In summary, typed errors provide a more structured, predictable, and efficient way of handling errors, and can make it easier to write high-quality, maintainable code.
 
+:::info Media resources
+
+- [_Functional Error Handling - A Practical Approach_](https://kotlindevday.com/videos/functional-error-handling-a-practical-approach-bas-de-groot/) by Bas de Groot
+- [_Exception handling in Kotlin with Arrow_](https://www.youtube.com/watch?v=ipF540mBG9w) by Ramandeep Kaur
+- [_Por qué no uso excepciones en mi código_](https://www.youtube.com/watch?v=8WdprhzmQe4) by Raúl Raja and [Codely](https://codely.com/)
+
+:::
+
 ## Different types
 
 There are 3 ways of working with errors (excluding _nullable_):
