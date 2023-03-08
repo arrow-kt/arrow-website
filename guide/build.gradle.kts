@@ -1,6 +1,7 @@
 @Suppress("DSL_SCOPE_VIOLATION")
 plugins {
   id(libs.plugins.kotlin.jvm.get().pluginId)
+  alias(libs.plugins.ksp)
 }
 
 repositories {
@@ -14,10 +15,13 @@ dependencies {
   testImplementation(libs.arrow.fx.coroutines)
   testImplementation(libs.arrow.fx.resilience)
   testImplementation(libs.arrow.fx.stm)
+  testImplementation(libs.arrow.optics)
+  testImplementation(libs.arrow.opticsReflect)
   testImplementation(libs.kotest.assertions.core)
   testImplementation(libs.kotest.property)
   testImplementation(libs.kotest.runner.junit)
   testImplementation(libs.kotest.framework.engine)
+  ksp(libs.arrow.opticsPlugin)
 }
 
 sourceSets.test {
