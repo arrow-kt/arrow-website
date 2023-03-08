@@ -28,7 +28,7 @@ export function BaseCard({
         <div className={`card__header ${styles.cardHeader}`}>
           <img
             className={styles.icon}
-            src={`img/${icon}`}
+            src={`/img/${icon}`}
             alt={`${title} category`}
             title={`${title} category`}
           />
