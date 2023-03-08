@@ -78,7 +78,15 @@ After that, whenever more than two requests fail with an exception,
 the circuit breaker starts short-circuiting / failing-fast.
 
 A new instance of `CircuitBreaker` is created using [`of`](https://arrow-kt.github.io/arrow/arrow-fx-resilience/arrow.fx.resilience/-circuit-breaker/-companion/of.html); there we specify
-the different options. Then we wrap every call to the service which may
+the different options. 
+
+:::caution Deprecation in Arrow 1.2
+
+The `of` constructor function has been deprecated in favor of exposing the `CircuitBreaker` constructor.
+
+:::
+
+Then we wrap every call to the service which may
 potentially fail with [`protectOrThrow`](https://arrow-kt.github.io/arrow/arrow-fx-resilience/arrow.fx.resilience/-circuit-breaker/protect-or-throw.html) or [`protectEither`](https://arrow-kt.github.io/arrow/arrow-fx-resilience/arrow.fx.resilience/-circuit-breaker/protect-either.html), depending on how we
 want this error to be communicated back. If the error arises, the internal state
 of the circuit breaker also changes.

@@ -8,11 +8,12 @@ import arrow.fx.resilience.*
 import io.kotest.matchers.shouldBe
 
 suspend fun example(): Unit {
-  var counter = 0
+  var result = ""
 
-  Schedule.doWhile<Int>{ it <= 5 }.repeat {
-    counter++
+  Schedule.doWhile<String> { it.length <= 5 }.repeat {
+    result += "a"
+    result
   }
   
-  counter shouldBe 7
+  result shouldBe "aaaaaa"
 }

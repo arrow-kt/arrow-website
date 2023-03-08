@@ -76,6 +76,7 @@ val exponential = Schedule.exponential<Unit>(250.milliseconds)
 Here's a much more complex schedule. Let's walk through it step by step:
 - It recurs with exponential backoff as long as the delay is less than 60 seconds.
 - Afterwards, we have a spaced (constant) delay of 60 seconds for up to 100 attempts.
+- Some random noise is added by calling `jittered`.
 - We also collect every input to the schedule and return it.
 
 ```kotlin
@@ -188,13 +189,14 @@ to repeat an action while or until its produced result matches a given predicate
 
 ```kotlin
 suspend fun example(): Unit {
-  var counter = 0
+  var result = ""
 
-  Schedule.doWhile<Int>{ it <= 5 }.repeat {
-    counter++
+  Schedule.doWhile<String> { it.length <= 5 }.repeat {
+    result += "a"
+    result
   }
   
-  counter shouldBe 7
+  result shouldBe "aaaaaa"
 }
 ```
 <!--- KNIT example-schedule-08.kt -->
