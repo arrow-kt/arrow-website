@@ -6,7 +6,7 @@ import io.kotest.matchers.shouldBe
 
 data class Person(val name: String, val friends: List<String>)
 
-fun main() {
+fun example() {
   val p = Person("me", listOf("pat", "mat"))
   val m = Person::name.lens.modify(p) { it.capitalize() }
   m.name shouldBe "Me"

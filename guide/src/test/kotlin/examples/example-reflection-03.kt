@@ -8,7 +8,7 @@ sealed interface Cutlery
 object Fork: Cutlery
 object Spoon: Cutlery
 
-fun main() {
+fun example() {
   val things = listOf(Fork, Spoon, Fork)
   val forks = Every.list<Cutlery>() compose instance<Cutlery, Fork>()
   val noOfForks = forks.size(things)

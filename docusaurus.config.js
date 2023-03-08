@@ -107,10 +107,10 @@ const config = {
                 activeBaseRegex: '^(/category/resilience)|^(/learn/resilience)',
               },
               {
-                label: 'Immutable data ⇄ Optics',
-                to: 'category/immutable-data--optics',
+                label: 'Immutable data',
+                to: 'category/immutable-data',
                 activeBaseRegex:
-                  '^(/category/immutable-data--optics)|^(/learn/immutable-data--optics)',
+                  '^(/category/immutable-data)|^(/learn/immutable-data)',
               },
               {
                 label: 'Design',
@@ -201,8 +201,8 @@ const config = {
                 to: 'category/resilience',
               },
               {
-                label: 'Immutable data ⇄ Optics',
-                to: 'category/immutable-data--optics',
+                label: 'Immutable data',
+                to: 'category/immutable-data',
               },
               {
                 label: 'Design',

@@ -20,8 +20,8 @@ val db = Db(mapOf(
   "Ambrosio"  to City("Ciudad Real", "Spain")
 ))
 
-fun main() {
+fun example() {
   val dbWithJack = Db.cities.index(Index.map(), "Jack").set(db, City("London", "UK"))
   // Jack was not really added to the database
-  dbWithJack shouldBe db
+  ("Jack" in dbWithJack.cities) shouldBe false
 }

@@ -29,7 +29,7 @@ Person::name.lens
 which you can later use as any other lens:
 
 ```kotlin
-fun main() {
+fun example() {
   val p = Person("me", listOf("pat", "mat"))
   val m = Person::name.lens.modify(p) { it.capitalize() }
   m.name shouldBe "Me"
@@ -56,7 +56,7 @@ data class Person(val name: String, val friends: List<String>)
 -->
 
 ```kotlin
-fun main() {
+fun example() {
   val p = Person("me", listOf("pat", "mat"))
   val m = Person::friends.every.modify(p) { it.capitalize() }
   m.friends shouldBe listOf("Pat", "Mat")
@@ -84,7 +84,7 @@ instance<Cutlery, Fork>()
 You can compose this optic freely with others. Here's an example in which we obtain the number of forks in a list of cutlery using optics:
 
 ```kotlin
-fun main() {
+fun example() {
   val things = listOf(Fork, Spoon, Fork)
   val forks = Every.list<Cutlery>() compose instance<Cutlery, Fork>()
   val noOfForks = forks.size(things)

@@ -14,8 +14,12 @@ class Optional : StringSpec({
     arrow.website.examples.exampleOptional02.example()
   }
 
-  "ExampleOptional04" {
-    arrow.website.examples.exampleOptional04.example()
+  "ExampleOptional03" {
+    arrow.website.examples.exampleOptional03.example()
+  }
+
+  "ExampleOptional05" {
+    arrow.website.examples.exampleOptional05.example()
   }
 
 }) {

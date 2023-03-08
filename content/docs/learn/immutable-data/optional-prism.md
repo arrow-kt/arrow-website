@@ -56,7 +56,7 @@ val db = Db(mapOf(
   "Ambrosio"  to City("Ciudad Real", "Spain")
 ))
 
-fun main() {
+fun example() {
   Db.cities.index(Index.map(), "Alejandro").country.getOrNull(db) shouldBe "Netherlands"
   Db.cities.index(Index.map(), "Jack").country.getOrNull(db) shouldBe null
 }
@@ -90,15 +90,48 @@ val db = Db(mapOf(
 -->
 
 ```kotlin
-fun main() {
+fun example() {
   val dbWithJack = Db.cities.index(Index.map(), "Jack").set(db, City("London", "UK"))
   // Jack was not really added to the database
-  dbWithJack shouldBe db
+  ("Jack" in dbWithJack.cities) shouldBe false
 }
 ```
 <!--- KNIT example-optional-02.kt -->
 <!--- TEST assert -->
 
+If you want to perform a change over the collection, use `modify` over the
+lens that corresponds to that field.
+
+
+<!--- INCLUDE
+
+import arrow.optics.*
+import arrow.optics.dsl.*
+import arrow.optics.typeclasses.*
+
+@optics data class Db(val cities: Map<String, City>) {
+  companion object
+}
+@optics data class City(val name: String, val country: String) {
+  companion object
+}
+
+val db = Db(mapOf(
+  "Alejandro" to City("Hilversum", "Netherlands"),
+  "Ambrosio"  to City("Ciudad Real", "Spain")
+))
+
+-->
+
+```kotlin
+fun example() {
+  val dbWithJack = Db.cities.modify(db) { it + ("Jack" to City("London", "UK")) }
+  // now Jack is finally in the database
+  ("Jack" in dbWithJack.cities) shouldBe true
+}
+```
+<!--- KNIT example-optional-03.kt -->
+<!--- TEST assert -->
 
 :::tip More indexed collections
 
@@ -140,7 +173,7 @@ but `Company`s remains unchanged.
 fun List<User>.happyBirthday() =
   map { User.person.age.modify(it) { age -> age + 1 } }
 ```
-<!--- KNIT example-optional-03.kt -->
+<!--- KNIT example-optional-04.kt -->
 
 Several of the types in Arrow Core fit this pattern of sealed hierarchy, and
 Arrow Optics contains optics matching those. One example is `Either`, with
@@ -162,15 +195,17 @@ import arrow.optics.*
 -->
 
 ```kotlin
-fun main() {
+fun example() {
   val x = Prism.left<Int, String>().reverseGet(5)
   x shouldBe Either.Left(5)
 }
 ```
-<!--- KNIT example-optional-04.kt -->
+<!--- KNIT example-optional-05.kt -->
 <!--- TEST assert -->
 
-:::danger Nullable types
+## Nullable types
+
+:::danger Breaking change in Arrow 2.x
 
 The Arrow Optics plug-in in Arrow 1.x creates optionals for field with nullable
 types. This has sometimes led to surprises, because with an optional you cannot
@@ -178,3 +213,18 @@ modify that value if it's `null`. In Arrow 2.x every field gives rise to a lens
 instead. The old behavior is available via the `notNull` extension function.
 
 :::
+
+Kotlin supports the notion of [nullable types](https://kotlinlang.org/docs/null-safety.html),
+which clearly specify when a value may be absent. The compiler prevents you from
+calling a method or function that requires a non-`null` value with a potentially
+absent one. This checks are also in place when working with Arrow Optics;
+if you have a `nickname: Lens<Person, String?>`, then you need to account for
+nullability in each potential modification.
+
+It's also possible to turn a lens over a nullable type into an optional of the
+unwrapped type by means of `notNull`. In the example above, `nickname.notNull`
+has the type `Optional<Person, String>` (notice the lack of `?` at the end
+of the second type parameter). However, you should be aware that in the same way
+that with indexed collections you could not add or remove elements, with
+`notNull` you cannot change whether the value is `null` or not, only modify
+it if it's already not null.

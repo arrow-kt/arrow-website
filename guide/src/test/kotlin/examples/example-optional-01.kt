@@ -19,7 +19,7 @@ val db = Db(mapOf(
   "Ambrosio"  to City("Ciudad Real", "Spain")
 ))
 
-fun main() {
+fun example() {
   Db.cities.index(Index.map(), "Alejandro").country.getOrNull(db) shouldBe "Netherlands"
   Db.cities.index(Index.map(), "Jack").country.getOrNull(db) shouldBe null
 }

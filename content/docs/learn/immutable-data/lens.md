@@ -121,7 +121,7 @@ the three operations live on the lens, and get the value they operate on as an
 argument.
 
 ```kotlin
-fun main() {
+fun example() {
   val me = Person(
     "Alejandro", 35, 
     Address(Street("Kotlinstraat", 1), City("Hilversum", "Netherlands"))
@@ -170,7 +170,7 @@ import arrow.optics.*
 val personCity: Lens<Person, String> =
   Person.address compose Address.city compose City.name
 
-fun main() {
+fun example() {
   val me = Person(
     "Alejandro", 35, 
     Address(Street("Kotlinstraat", 1), City("Hilversum", "Netherlands"))
@@ -190,7 +190,7 @@ regular dot operation to access composed lenses. The code above can be rewritten
 in that form:
 
 ```kotlin
-fun main() {
+fun example() {
   val me = Person(
     "Alejandro", 35, 
     Address(Street("Kotlinstraat", 1), City("Hilversum", "Netherlands"))

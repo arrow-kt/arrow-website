@@ -21,7 +21,7 @@ import arrow.optics.*
 val personCity: Lens<Person, String> =
   Person.address compose Address.city compose City.name
 
-fun main() {
+fun example() {
   val me = Person(
     "Alejandro", 35, 
     Address(Street("Kotlinstraat", 1), City("Hilversum", "Netherlands"))
