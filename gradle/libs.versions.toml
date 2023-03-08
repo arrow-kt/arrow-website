@@ -15,6 +15,7 @@ kotest-runner-junit = { module = "io.kotest:kotest-runner-junit5", version.ref =
 kotlin-stdlib = { module = "org.jetbrains.kotlin:kotlin-stdlib" }
 arrow-core = { module = "io.arrow-kt:arrow-core", version.ref = "arrow" }
 arrow-fx-coroutines = { module = "io.arrow-kt:arrow-fx-coroutines", version.ref = "arrow" }
+arrow-fx-resilience = { module = "io.arrow-kt:arrow-fx-resilience", version.ref = "arrow" }
 arrow-fx-stm = { module = "io.arrow-kt:arrow-fx-stm", version.ref = "arrow" }
 arrow-optics = { module = "io.arrow-kt:arrow-optics", version.ref = "arrow" }
 arrow-opticsPlugin = { module = "io.arrow-kt:arrow-optics-ksp-plugin", version.ref = "arrow" }
