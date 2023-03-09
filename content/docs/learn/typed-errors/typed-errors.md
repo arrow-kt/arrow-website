@@ -403,10 +403,65 @@ suspend fun example() {
 
 Just like `recover` the `catch` function works DSL based, and we can thus mix both types seamlessly with each-other again like the example above.
 
-## Accumulating errors
+## Validation: accumulating errors
 
 All the behavior above work similar to `Throwable`, but in a typed manner. This means that if we encounter a typed error, or _logical failure_, that error is propagated, and we can't continue with the computation and _short-circuit_.
-When we need to work with collections, or `Iterable`, we often want to accumulate all the errors, and not short-circuit. Lets take a look at how we can do this.
+In some cases, like validation, we want to accumulate all the errors, and not short-circuit. Let's take a look at how we can do this.
+
+There is two different ways to accumulate errors:
+ - `zipOrAccumulate` if you're working with independent computations
+ - `mapOrAccumulate` if you're applying a computation over a collection.
+
+It returns a `NonEmptyList` of all the errors, or requires a function to _accumulate_ all errors into a single error.
+
+### Independent computations
+
+We define three functions that return a typed error of `MyError`
+`one` returns `Either`, `two` returns `EitherNel`, and `three` works directly over the `Raise` DSL.
+
+<!--- INCLUDE
+import arrow.core.Either
+import arrow.core.left
+import arrow.core.NonEmptyList
+import arrow.core.nonEmptyListOf
+import arrow.core.raise.Raise
+import arrow.core.raise.either
+import arrow.core.raise.zipOrAccumulate
+import io.kotest.matchers.shouldBe
+-->
+```kotlin
+data class MyError(val message: String)
+
+fun one(): Either<MyError, Int> =
+  MyError("first-error").left()
+
+fun two(): Either<NonEmptyList<MyError>, Long> =
+  nonEmptyListOf(MyError("second-error"), MyError("third-error")).left()
+
+fun Raise<MyError>.three(): Double =
+  raise(MyError("fourth-error"))
+```
+
+`zipOrAccumulate` allows us to seamlessly `bind` or _invoke_ these functions and combine them into a `Triple`, or accumulate all the errors into `NonEmptyList`.
+This functionality is available on the `Either` companion, which returns the value immediately wrapped in `Either` instead.
+
+```kotlin
+fun example() {
+  fun Raise<NonEmptyList<MyError>>.triple(): Triple<Int, Long, Double> =
+    zipOrAccumulate({ one().bind() }, { two().bindNel() }, { three() }, ::Triple)
+
+  val errors = nonEmptyListOf(MyError("first-error"), MyError("second-error"), MyError("third-error"), MyError("fourth-error"))
+  
+  either { triple() } shouldBe errors.left()
+}
+```
+<!--- KNIT example-typed-errors-10.kt -->
+<!--- TEST assert -->
+
+### Collections
+
+When we need to work with collections, or `Iterable`, we often want to accumulate all the errors, and not short-circuit.
+As an example let's write a function that checks if a number is even, and returns a typed error if it's not.
 
 <!--- INCLUDE
 import arrow.core.Either
@@ -421,16 +476,14 @@ import io.kotest.matchers.shouldBe
 ```kotlin
 data class NotEven(val i: Int)
 
-fun Raise<NotEven>.isEven(i: Int): Int =
-  i.also { ensure(i % 2 == 0) { NotEven(i) } }
+fun Raise<NotEven>.isEven(i: Int): Int = i.also { ensure(i % 2 == 0) { NotEven(i) } }
 
-fun isEven2(i: Int): Either<NotEven, Int> =
-  either { isEven(i) }
+fun isEven2(i: Int): Either<NotEven, Int> = either { isEven(i) }
 ```
 
 First we define two functions that return a typed error if the value is not even.
 If we want to accumulate all the errors we can use `mapOrAccumulate` on `Iterable` to accumulate all the errors, and doing so for `(0..10)` should return the following `errors`.
-The errors are accumulated into `NonEmptyList` since there needs to be at least one error, or we would succeeded with the computation.
+The errors are accumulated into `NonEmptyList` since there needs to be at least one error, or we would succeed with the computation.
 
 ```kotlin
 val errors = nonEmptyListOf(NotEven(1), NotEven(3), NotEven(5), NotEven(7), NotEven(9)).left()
@@ -440,7 +493,7 @@ fun example() {
   (1..10).mapOrAccumulate { isEven2(it).bind() } shouldBe errors
 }
 ```
-<!--- KNIT example-typed-errors-10.kt -->
+<!--- KNIT example-typed-errors-11.kt -->
 <!--- TEST assert -->
 
 We can also provide custom logic to accumulate the errors, typically when we have custom types.
@@ -483,7 +536,7 @@ fun example() {
   (1..10).mapOrAccumulate(MyError::plus) { isEven2(it).bind() } shouldBe error
 }
 ```
-<!--- KNIT example-typed-errors-11.kt -->
+<!--- KNIT example-typed-errors-12.kt -->
 <!--- TEST assert -->
 
 # Conclusion

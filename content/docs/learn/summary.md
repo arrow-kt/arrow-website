@@ -59,10 +59,10 @@ These functions allow raising errors of the same type that the surrounding block
 <details>
 <summary>Accumulate independent errors</summary>
 
-These functions use `NonEmptyList<E>` as the surrounding error type.
+These functions use `NonEmptyList<E>` as the surrounding error type, or take `(E, E) -> E` as the error accumulator.
 
-- `mapOrAccumulate` to operate over a collection of items.
 - `zipOrAccumulate` to operate over independent blocks, with potentially different types.
+- `mapOrAccumulate` to operate over a collection of items.
 
 </details>
 

@@ -3,24 +3,29 @@ package arrow.website.examples.exampleTypedErrors10
 
 import arrow.core.Either
 import arrow.core.left
+import arrow.core.NonEmptyList
 import arrow.core.nonEmptyListOf
-import arrow.core.mapOrAccumulate
-import arrow.core.raise.either
-import arrow.core.raise.ensure
 import arrow.core.raise.Raise
+import arrow.core.raise.either
+import arrow.core.raise.zipOrAccumulate
 import io.kotest.matchers.shouldBe
 
-data class NotEven(val i: Int)
+data class MyError(val message: String)
 
-fun Raise<NotEven>.isEven(i: Int): Int =
-  i.also { ensure(i % 2 == 0) { NotEven(i) } }
+fun one(): Either<MyError, Int> =
+  MyError("first-error").left()
 
-fun isEven2(i: Int): Either<NotEven, Int> =
-  either { isEven(i) }
+fun two(): Either<NonEmptyList<MyError>, Long> =
+  nonEmptyListOf(MyError("second-error"), MyError("third-error")).left()
 
-val errors = nonEmptyListOf(NotEven(1), NotEven(3), NotEven(5), NotEven(7), NotEven(9)).left()
+fun Raise<MyError>.three(): Double =
+  raise(MyError("fourth-error"))
 
 fun example() {
-  (1..10).mapOrAccumulate { isEven(it) } shouldBe errors
-  (1..10).mapOrAccumulate { isEven2(it).bind() } shouldBe errors
+  fun Raise<NonEmptyList<MyError>>.triple(): Triple<Int, Long, Double> =
+    zipOrAccumulate({ one().bind() }, { two().bindNel() }, { three() }, ::Triple)
+
+  val errors = nonEmptyListOf(MyError("first-error"), MyError("second-error"), MyError("third-error"), MyError("fourth-error"))
+  
+  either { triple() } shouldBe errors.left()
 }
