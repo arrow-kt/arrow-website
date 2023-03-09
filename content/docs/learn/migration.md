@@ -1,0 +1,236 @@
+---
+sidebar_position: 12
+---
+
+# Migration Guide
+
+Arrow 1.2.0-RC is a big step in Arrow and marks the last minor version in the 1.x series, and serves as a long term version to over a graceful transition to Arrow 2.0.
+All non-deprecated code in 1.2.0-RC is source compatible with 2.0.0, so you can slowly and gracefully migrate your codebase to Arrow 2.0.0 as soon as you want.
+
+Arrow includes a lot of improvements and changes in Arrow 1.2.0-RC, all based on the feedback we've received from the community, and experience from teaching Functional Programming, building applications and knowledge from the other languages and communities.
+Any criticism is welcome, and we'll try to improve the migration guide and the library to make it as easy as possible to migrate to Arrow 2.0.0.
+
+In case a deprecated method is crucial for you, please file an issue in the [Arrow repository](https://github.com/arrow-kt/arrow/issues), and so Arrow can consider to keep it in the library or find alternative solution.
+For any issues or have any questions, feel free to reach out to the Arrow maintainers in the [KotlinSlack Arrow Channel](https://arrow-kt.io/slack/).
+
+
+## Either DSL, Effect & EffectScope
+
+Arrow 1.0.0 introduced DSLs to work over functional data types such as `Either`, and enabled several DSLs to work with _typed errors_ in convenient ways.
+These DSLs were build on top of `Effect` and `EffectScope`, from the `arrow.core.continuations` package and had several issues, and were deprecated in Arrow 1.2.0-RC.
+The biggest issue being that they were not compatible with Kotlin's `suspend` functions, and you need to explicitly differentiate between `suspend` and `non-suspend` functions.
+
+Arrow 1.2.0-RC introduces a new [`Raise` DSL](https://github.com/arrow-kt/arrow/pull/2912), which resolves this problem and allows Arrow to provide uniform APIs for typed errors across the board.
+This heavily reduces the API surface, and makes it easier to learn and use Arrow, and additionally it allows us to build more powerful and flexible APIs.
+If you want to learn more about the new `Raise` DSL, check out the [Typed Errors](../typed-errors) guide.
+
+There are two ways of migrating from the old `Either` DSL to the new `Raise` based DSL.
+
+<details>
+<summary>Manual migration using Find + Replace</summary>
+
+## Using `Either`
+### Replace `either { }`
+
+- Find + Replace `arrow.core.continuations.either` -> `arrow.core.raise.either`
+- Find + Replace `arrow.core.continuations.ensureNotNull` -> `arrow.core.raise.ensureNotNull`
+- Find + Replace `arrow.core.computations.either` -> `arrow.core.raise.either`
+- Find + Replace `arrow.core.computations.ensureNotNull` -> `arrow.core.raise.ensureNotNull`
+
+### Replace `either.eager { }`
+
+- Find + Replace `arrow.core.continuations.either.eager` -> `arrow.core.raise.either`
+  => Might introduce duplicate import for `arrow.core.raise.either`
+- Find + Replace `either.eager {` -> `either {`
+
+### Replace `EffectScope`/`EagerEffectScope`
+
+- Find + Replace `arrow.core.continuations.EffectScope` -> `arrow.core.raise.Raise`
+- Find + Replace `arrow.core.continuations.EagerEffectScope` -> `arrow.core.raise.Raise`
+- Find + Replace `arrow.core.continuations.ensureNotNull` -> `arrow.core.raise.ensureNotNull`
+
+## Using `Effect`
+
+- Find + Replace `arrow.core.continuations.Effect` -> `arrow.core.raise.Effect`
+- Find + Replace `arrow.core.continuations.ensureNotNull` -> `arrow.core.raise.ensureNotNull`
+
+=> Requires manually adding missing imports for `fold`, error handlers, and all `Effect` methods since they're replaced by extension functions.
+
+## Using `EagerEffect`
+
+- Find + Replace `arrow.core.continuations.EagerEffect` -> `arrow.core.raise.EagerEffect`
+- Find + Replace `arrow.core.continuations.ensureNotNull` -> `arrow.core.raise.ensureNotNull`
+
+=> Requires manually adding missing imports for `fold`, error handlers, and all `EagerEffect` methods since they're replaced by extension functions.
+</details>
+
+<details>
+<summary>Semi-automated using KScript and IntelliJ</summary>
+
+This migration script attempts to automatically migrate `arrow.core.computations.*` and `arrow.core.continuations.*` on a best effort to `arrow.core.raise.*`.
+It has been tested on serveral real-life projects with 100% success, being able to automatically migrate the entire codebase.
+
+The run this `kts` script you need `kotlinc` install on your machine.
+The official documentation on how to install [`kotlinc`](https://kotlinlang.org/docs/command-line.html).
+
+Some methods like `ensure` in the DSL became top-level, and `fold` if you're using `Effect` or `EagerEffect`.
+These new _top-level imports_ cannot be automatically migrated, and there are two ways of dealing with the necessary imports.
+
+There is two ways to use this script for migration:
+ - Recommended: automatic _imports_ handling, adds too many imports and uses IntelliJ's _optimise imports_
+ - Manual imports, doesn't add import for `fold`, and `ensure` and requires manually importing them on a usage basis.
+
+<details>
+<summary>Recommended usage</summary>
+
+Once installed you can run the script with default params: `kotlinc -script migrate.main.kts .`.
+
+You need to have Arrow version `1.2.0` (`1.1.6-alpha.28`) in order to compile your project after the script finishes running.
+
+The script _might_ leave you with some unused imports, to fix this you can run _optimise imports_ on your _project root_ or _src_ folder.
+- Select _src_ or _project root` + `⌃ ⌥ O` or `Ctrl+Alt+O`.
+- Right-click _project root_ or _src_ in _project view_, and select _Optimise imports_
+
+This should remove all _unused imports_ this might also affect other unrelated imports.
+</details>
+
+<details>
+<summary>Alternative</summary>
+## Alternative
+
+If you don't want to rely on IntelliJ's _optimise imports_ you can still use the migration script to do 99,99% of the work,
+except import `ensure` (and `fold` for `Effect`/`EagerEffect`).
+
+Easiest way to fix the imports is run `./gradlew build` and add missing imports in files that fail to compile.
+
+Thank you for using Arrow, and your support. I hope this script was able to simplify your migration process to 2.0.0
+
+</details>
+</details>
+
+### Traverse
+
+All `traverse` functionality has been deprecated in favor of Kotlin's `map` function, and it _should_ be possible to migrate automatically using Kotlin & IntelliJ's `ReplaceWith`.
+Let's look at a simple example to illustrate the difference between `traverse`, and the _new_ resulting code. We'll be using `Either` in this example, but it should be the same for any other collection type that has a `traverse` method.
+The rationale behind this change is while `traverse` is a very well known method within the FP community, it's not as well known outside of it.
+Using `map` is more familiar to most developers, and using `bind` gives a more consistent experience with the rest of the DSL. Additionally, when working over `Raise<E>` the `bind` method would disappear and `map === traverse`.
+
+:::warning accumulating errors
+If you're refactoring code using `Validated` check the [Validated & Either](#validated--either) section.
+:::
+
+```kotlin
+fun one(): Either<String, Int> = Either.Right(1)
+
+val old: Either<String, List<Int>> = 
+  listOf(1, 2, 3).traverse { one() }
+
+val new: Either<String, List<Int>> = either {
+  listOf(1, 2, 3).map { one().bind() }
+}
+```
+
+### Zip
+
+In similar fashion to `traverse`, all `zip` methods have been deprecated in favor of the DSL, and it _should_ be possible to migrate automatically using Kotlin & IntelliJ's `ReplaceWith`.
+Let's look at a simple example to illustrate the difference between `zip`, and the _new_ resulting code.
+We'll be using `Either` in this example, but it should be the same for any other data type that has a `zip` method.
+
+:::warning accumulating errors
+If you're refactoring code using `Validated` check the [Validated & Either](#validated--either) section.
+:::
+
+```kotlin
+fun one(): Either<String, Int> = Either.Right(1)
+
+val old: Either<String, Int> = Either.zip(one(), one()) { x, y -> x + y }
+
+val new: Either<String, Int> =
+  either { one().bind() + one().bind() }
+
+val new2 : Either<String, Int> = either { 
+  val x = one().bind()
+  val y = one().bind()
+  x + y
+}
+```
+
+## Validated & Either
+
+In Arrow 1.2.0-RC we've deprecated `Validated` in favor of `Either`, and `ValidatedNel` in favor of `EitherNel`.
+Rationale was that `Either` and `Validated` offer the same abstraction of _either_ an error of type `E` or a value of type `A`.
+The two main reasons are that `zip`, and `traverse` behave differently between the two. Where `Validated` allows _accumulating errors_ using `zip` and `traverse`, `Either` short-circuits on the first error.
+
+This behavior can be bridged by concrete APIs in the new `Raise` DSL whilst supporting **both** working over `E` and `NonEmptyList<E>` in singular APIs.
+So you don't have to redundantly lift all your return types to work over `NonEmptyList<E>` when you're actually returning a single error `E`. That can be transparently supported inside the new `Raise` DSL APIs to _accumulate_ errors.
+These new APIs still support `Validated` until it's actually removed in Arrow 2.0.0, and we advise to migrate those before actually migrating `Validated` to `Either`. 
+
+To migrate from `Validated` to `Either` you need to simply construct `Either` values instead of `Validated`, and leverage the new APIs clarified below.
+
+<details>
+<summary>Semi-automatic migration using ReplaceWith</summary>
+
+1. Start leveraging the `Raise` _accumulate error_ APIs before migrating `Validated` to `Either`: `zip` -> `zipOrAccumulate` & `traverse` to `mapOrAccumulate` using _Replace in entire project action_ from IntelliJ
+2. Migrate all remaining APIs to their `Either` equivalent `tapInvalid`, `withEither`, etc. All overlapping APIs such as `map`, `fold`, `getOrElse` can be ignored. 
+3. Migrate all constructors:
+    - `Validated.Valid` -> `Either.Right`
+    - `Validated.Invalid` -> `Either.Left`
+    - `A.valid()` -> `A.right()`
+    - `A.validNel()` -> `A.right()`
+    - `E.invalid()` -> `E.left()`
+    - `E.invalidNel()` -> `E.leftNel()`
+
+4. Replace in entire project `Either#toEither()` intermediate method
+
+<video width="100%" height="100%" data-autoplay data-loop src="https://user-images.githubusercontent.com/12424668/220732907-27933876-3349-41d5-b0f2-a53b12f2f217.mov" type="video/webm"></video>
+
+</details>
+
+
+### Traverse ~> mapOrAccumulate
+
+The behavior of `traverse` for `Validated` is now supported by `mapOrAccumulate` so let's take a quick look at what it looks like:
+
+```kotlin
+fun one(): Either<String, Int> = "error-1".left()
+fun two(): Either<NonEmptyList<String>, Int> = nonEmptyListOf("error-2", "error-3").left()
+
+fun example() {
+  listOf(1, 2).mapOrAccumulate {
+    one().bind()
+  } shouldBe nonEmptyListOf("error-1", "error-1").left()
+  
+  listOf(1, 2).mapOrAccumulate {
+    two().bind()
+  } shouldBe nonEmptyListOf("error-2", "error-3", "error-2", "error-3").left()
+}
+```
+
+### Zip
+
+The behavior of `zip` for `Validated` is now supported by `zipOrAccumulate` so let's take a quick look at what it looks like:
+
+```kotlin
+fun one(): Either<String, Int> = "error-1".left()
+fun two(): Either<NonEmptyList<String>, Int> = nonEmptyListOf("error-2", "error-3").left()
+
+fun example() {
+  either {
+    zipOrAccumulate(
+      { one().bind() },
+      { one().bindNel() }
+    ) { x, y -> x + y }
+  } shouldBe nonEmptyListOf("error-1", "error-2", "error-3").left()
+
+  either {
+    zipOrAccumulate(
+      { one() },
+      { two().bindNel() }
+    ) { x, y -> x + y }
+  } shouldBe nonEmptyListOf("error-1", "error-2", "error-3").left()
+}
+```
+
+## Semigroup & Monoid
+
+// TODO
