@@ -19,7 +19,7 @@ const createConfig = async () => {
   /** @type {import('@docusaurus/types').Config} */
   const config = {
     title: 'Λrrow',
-    tagline: "Functional companion to Kotlin's Standard Library",
+    tagline: 'Idiomatic functional programming for Kotlin',
     favicon: 'img/arrow-brand-icon.svg',
     url: 'https://arrow-kt.io',
     baseUrl: '/',

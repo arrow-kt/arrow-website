@@ -9,7 +9,7 @@ export function Hero({ className: classNameProp }): JSX.Element {
     <div className={`hero ${styles.hero} ${classNameProp}`}>
       <div className={`container ${styles.container}`}>
         <h1 className="hero__title">
-          Λrrow is a library for Typed <u>Functional Programming</u> in Kotlin
+          Λrrow brings idiomatic <u>functional programming</u> to Kotlin
         </h1>
         <div className={styles.heroCta}>
           <Link
