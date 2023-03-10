@@ -9,7 +9,7 @@
 }
 
 .icon {
-  margin-right: 1rem;
+  margin-right: calc(var(--ifm-global-spacing) / 2);
 }
 
 .cardHeader {

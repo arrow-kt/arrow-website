@@ -1,8 +1,4 @@
 {
   "label": "Resilience",
-  "position": 5,
-  "link": {
-    "type": "generated-index",
-    "description": "Resilience is the ability for your system to act in an organized way when failures occur."
-  }
+  "position": 5
 }

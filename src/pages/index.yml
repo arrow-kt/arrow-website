@@ -1,31 +1,31 @@
 features:
   - title: Quickstart
-    link: learn/quickstart
+    link: /learn/quickstart
     icon: icon-quickstart.svg
     body: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eu turpis molestie, dictum est . Etiam eu turpis
 
   - title: Typed errors
-    link: category/typed-errors
+    link: /learn/typed-errors
     icon: icon-typed-errors.svg
     body: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eu turpis molestie, dictum est . Etiam eu turpis
 
   - title: Coroutines
-    link: category/coroutines
+    link: /learn/coroutines
     icon: icon-coroutines.svg
     body: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eu turpis molestie, dictum est . Etiam eu turpis
 
   - title: Resilience
-    link: category/resilience
+    link: /learn/resilience
     icon: icon-resilience.svg
     body: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eu turpis molestie, dictum est . Etiam eu turpis
 
   - title: Immutable data
-    link: category/design
+    link: /learn/design
     icon: icon-immutable-data.svg
     body: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eu turpis molestie, dictum est . Etiam eu turpis
 
   - title: Design
-    link: category/design
+    link: /learn/design
     icon: icon-design.svg
     body: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eu turpis molestie, dictum est . Etiam eu turpis
 

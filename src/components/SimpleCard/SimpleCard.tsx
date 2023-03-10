@@ -1,6 +1,7 @@
 import React from 'react';
 
 import Link from '@docusaurus/Link';
+import useBaseUrl from '@docusaurus/useBaseUrl';
 
 import styles from './simple-card.module.css';
 
@@ -28,7 +29,7 @@ export function BaseCard({
         <div className={`card__header ${styles.cardHeader}`}>
           <img
             className={styles.icon}
-            src={`img/${icon}`}
+            src={useBaseUrl(`/img/${icon}`)}
             alt={`${title} category`}
             title={`${title} category`}
           />

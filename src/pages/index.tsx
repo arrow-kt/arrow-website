@@ -1,6 +1,7 @@
 import React from 'react';
 
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
+import useBaseUrl from '@docusaurus/useBaseUrl';
 import Layout from '@theme/Layout';
 
 import { Hero } from '@site/src/components/Hero';
@@ -73,7 +74,7 @@ export default function Home(): JSX.Element {
             {data.companies.map((company: { name: string; logo: string }) => (
               <img
                 key={company.name}
-                src={`img/${company.logo}`}
+                src={useBaseUrl(`/img/${company.logo}`)}
                 alt={company.name}
                 title={company.name}
               />

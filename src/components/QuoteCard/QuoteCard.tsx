@@ -1,5 +1,7 @@
 import React from 'react';
 
+import useBaseUrl from '@docusaurus/useBaseUrl';
+
 import styles from './quote-card.module.css';
 
 export interface QuoteCardProps {
@@ -12,7 +14,7 @@ export interface QuoteCardProps {
 export function QuoteCard({
   name = 'Francisco Díaz',
   position = 'Principal at Xebia Functional',
-  image = 'img/sample-image.jpg',
+  image = useBaseUrl('/img/sample-image.jpg'),
   body,
 }: QuoteCardProps) {
   return (
@@ -24,7 +26,7 @@ export function QuoteCard({
         <div className="avatar__photo-wrapper">
           <img
             className="avatar__photo"
-            src={`img/${image}`}
+            src={useBaseUrl(`/img/${image}`)}
             alt={name}
             title={name}
           />

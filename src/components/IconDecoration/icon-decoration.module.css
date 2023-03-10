@@ -1,0 +1,5 @@
+.icon {
+  pointer-events: none;
+  vertical-align: -1rem;
+  margin-right: calc(var(--ifm-global-spacing) / 2);
+}

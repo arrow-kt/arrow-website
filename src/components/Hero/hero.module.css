@@ -29,7 +29,7 @@
 
 u {
   text-decoration: none;
-  box-shadow: 0 4px var(--ifm-color-secondary);
+  box-shadow: 0 4px var(--arrow-color-secondary);
   white-space: nowrap;
 }
 

@@ -1,11 +1,12 @@
 ---
+title: Quickstart
 sidebar_position: 2
 ---
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-# Quickstart
+# <icon-decoration icon="icon-quickstart.svg">Quickstart</icon-decoration>
 
 Arrow is composed of different libraries, you can just choose and pick the ones
 you need in your project.

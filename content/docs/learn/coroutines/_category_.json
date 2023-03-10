@@ -1,8 +1,4 @@
 {
   "label": "Coroutines",
-  "position": 4,
-  "link": {
-    "type": "generated-index",
-    "description": "Concurrency and parallelism"
-  }
+  "position": 4
 }

@@ -1,6 +1,7 @@
 import React from 'react';
 
 import Link from '@docusaurus/Link';
+import useBaseUrl from '@docusaurus/useBaseUrl';
 
 import styles from './image-card.module.css';
 
@@ -13,7 +14,7 @@ export interface ImageCardProps {
 
 export function ImageCard({
   title = 'Case study',
-  image = 'img/sample-image.jpg',
+  image = useBaseUrl('/img/sample-image.jpg'),
   body = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eu turpis molestie',
   link = 'about/use-cases',
 }: ImageCardProps) {

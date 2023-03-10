@@ -1,8 +1,4 @@
 {
   "label": "Design",
-  "position": 7,
-  "link": {
-    "type": "generated-index",
-    "description": "Recipes for designing nice Kotlin code"
-  }
+  "position": 7
 }
