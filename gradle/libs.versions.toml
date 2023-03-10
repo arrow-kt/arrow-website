@@ -3,7 +3,7 @@ coroutines = "1.6.4"
 kotest = "5.5.5"
 kotlin = "1.8.10"
 knit = "0.4.0"
-arrow = "1.1.6-alpha.46"
+arrow = "1.1.6-alpha.48"
 ksp = "1.8.10-1.0.9"
 
 [libraries]
