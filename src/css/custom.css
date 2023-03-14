@@ -26,18 +26,6 @@
   --ifm-color-primary-lighter: #dce3f5;
   --ifm-color-primary-lightest: #f6f8fd;
 
-  /* --ifm-color-emphasis-0: var(--ifm-color-white);
-  --ifm-color-emphasis-100: #ebf0fe;
-  --ifm-color-emphasis-200: #d7e2fd;
-  --ifm-color-emphasis-300: #c2d3fc;
-  --ifm-color-emphasis-400: #497bf7;
-  --ifm-color-emphasis-500: #aec4fb;
-  --ifm-color-emphasis-600: #9ab6fb;
-  --ifm-color-emphasis-700: #86a7fa;
-  --ifm-color-emphasis-800: #7198f9;
-  --ifm-color-emphasis-900: #5d8af8;
-  --ifm-color-emphasis-1000: var(--ifm-color-primary); */
-
   --ifm-color-secondary: #5b88f8;
   --ifm-color-secondary-dark: #2455cf;
 
@@ -100,7 +88,6 @@
   --ifm-menu-color-background-active: var(--ifm-color-primary);
   --ifm-menu-link-padding-vertical: calc(var(--ifm-spacing-vertical) / 3);
   --ifm-menu-link-padding-horizontal: var(--ifm-spacing-horizontal);
-  /* --ifm-menu-color-background-hover:  */
 }
 
 /* Custom Media query mimicking the one from Infima */
@@ -240,6 +227,7 @@ code {
   filter: invert(100%);
 }
 
+/* TODO: Adapt these styles for narrow-window versions */
 /* .menu__list-item-collapsible--active .menu__caret::before,
 .menu__link--active ~ .menu__caret::before {
   filter: invert(100%);
