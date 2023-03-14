@@ -1,6 +1,7 @@
 // @ts-check
 /* eslint-disable @typescript-eslint/no-var-requires */
 /* eslint-disable no-undef */
+/* eslint-disable @typescript-eslint/ban-ts-comment */
 
 /*
  * The following is a workaround when importing some pure ESM packages
@@ -311,6 +312,21 @@ const createConfig = async () => {
               ],
             },
           };
+        },
+      }),
+      () => ({
+        name: 'docusaurus-custom-media',
+        configurePostCss(postcssOptions) {
+          // Appends Global Data, Custom Media and AutoPrefixer.
+          postcssOptions.plugins.push(
+            // @ts-ignore
+            require('@csstools/postcss-global-data')({
+              files: ['./src/css/custom.css'],
+            }),
+          );
+          postcssOptions.plugins.push(require('postcss-custom-media'));
+          postcssOptions.plugins.push(require('autoprefixer'));
+          return postcssOptions;
         },
       }),
     ],

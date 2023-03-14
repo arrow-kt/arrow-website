@@ -103,6 +103,9 @@
   /* --ifm-menu-color-background-hover:  */
 }
 
+/* Custom Media query mimicking the one from Infima */
+@custom-media --ifm-narrow-window (max-width: 996px);
+
 small {
   font-size: 0.9rem;
 }
