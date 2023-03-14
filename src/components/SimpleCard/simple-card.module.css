@@ -16,9 +16,14 @@
   display: flex;
   justify-content: flex-start;
   align-items: center;
+  padding: calc(var(--ifm-card-vertical-spacing) / 2) var(--ifm-card-horizontal-spacing);
 }
 
-.body {
+.cardBody {
+  padding: calc(var(--ifm-card-vertical-spacing) / 4) var(--ifm-card-horizontal-spacing) calc(var(--ifm-card-vertical-spacing) / 2) var(--ifm-card-horizontal-spacing);
+}
+
+.paragraph {
   min-height: 3rem;
   line-height: 1.5rem;
   display: -webkit-box;

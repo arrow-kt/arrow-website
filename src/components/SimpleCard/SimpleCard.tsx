@@ -39,8 +39,8 @@ export function BaseCard({
             {title}
           </h2>
         </div>
-        <div className={`card__body`}>
-          <p className={`${styles.body}`}>{body}</p>
+        <div className={`card__body ${styles.cardBody}`}>
+          <p className={`${styles.paragraph}`}>{body}</p>
         </div>
         {showFooter && (
           <div className={`card__footer`}>
