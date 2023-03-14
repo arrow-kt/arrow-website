@@ -102,6 +102,12 @@ small {
   font-size: 0.9rem;
 }
 
+/* Fix for table not being shown at 100% of the width */
+table {
+  display: table;
+  width: 100%;
+}
+
 /* Custom classes for docs */
 .add-icon {
   color: var(--arrow-icon);
