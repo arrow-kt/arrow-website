@@ -293,8 +293,25 @@ const createConfig = async () => {
         },
         prism: {
           theme: darkCodeTheme,
-          additionalLanguages: ['kotlin', 'groovy'],
+          additionalLanguages: ['kotlin', 'java', 'groovy'],
           defaultLanguage: 'kotlin',
+        },
+        mermaid: {
+          theme: {
+            light: 'base',
+            dark: 'base',
+          },
+          options: {
+            themeVariables: {
+              fontFamily:
+                "'Inter', open sans, sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'",
+              fontSize: '14px',
+              primaryColor: '#2455cf',
+              primaryTextColor: '#fff',
+              secondaryColor: '#e88d15',
+              lineColor: '#222e51',
+            },
+          },
         },
       }),
 

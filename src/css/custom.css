@@ -42,8 +42,8 @@
     -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial,
     'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
 
-  --ifm-font-family-monospace: 'JetBrains Mono', SFMono-Regular, Menlo, Monaco, Consolas,
-    'Liberation Mono', 'Courier New', monospace;
+  --ifm-font-family-monospace: 'JetBrains Mono', SFMono-Regular, Menlo, Monaco,
+    Consolas, 'Liberation Mono', 'Courier New', monospace;
 
   --ifm-heading-color: var(--arrow-grey-primary);
   --ifm-font-color-base: var(--arrow-grey-primary);
@@ -55,8 +55,7 @@
 
   --ifm-color-info-contrast-background: #e7f2f9;
   --ifm-color-secondary-contrast-background: #eaeefb;
-  --ifm-alert-border-color: blue;
-  --ifm-color-success-contrast-background: #E7F5EB;
+  --ifm-color-success-contrast-background: #e7f5eb;
   --ifm-color-warning-contrast-background: #fef1df;
   --ifm-color-danger-contrast-background: #fee5df;
 
@@ -93,6 +92,12 @@
 /* Custom Media query mimicking the one from Infima */
 @custom-media --ifm-narrow-window (max-width: 996px);
 
+/* Small hack for mermaid edgeLabels having boxes too narrowed */
+foreignObject .edgeLabel {
+  padding: 8px;
+  font-size: 12px;
+}
+
 small {
   font-size: 0.9rem;
 }
@@ -125,7 +130,7 @@ small {
   height: 100%;
 }
 
-@media (max-width: 996px) {
+@media (--ifm-narrow-window) {
   .navbar__item {
     display: none;
   }
