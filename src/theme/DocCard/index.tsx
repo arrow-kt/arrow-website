@@ -9,7 +9,7 @@ import type {
 
 import { SimpleCard, SimpleCardProps } from '@site/src/components/SimpleCard';
 
-const defaultIcon = 'arrow-brand-icon.svg';
+const defaultIcon = 'icon-tutorial.svg';
 
 /**
  * useCustomCurrentSidebarCategory gets the category associated with the current location.
