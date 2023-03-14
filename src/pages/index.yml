@@ -20,7 +20,7 @@ features:
     body: Make your code respond to failures in an organized way
 
   - title: Immutable data
-    link: /learn/design
+    link: /learn/immutable-data
     icon: icon-immutable-data.svg
     body: Great tooling for dealing with immutable data and sealed hierarchies
 
