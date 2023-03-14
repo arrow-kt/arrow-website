@@ -2,10 +2,11 @@
 title: Coroutines
 ---
 
+import { useCurrentSidebarCategory } from '@docusaurus/theme-common';
 import DocCardList from '@theme/DocCardList';
 
-# <icon-decoration icon="icon-coroutines.svg">Coroutines</icon-decoration>
+# <decorated-text icon={useCurrentSidebarCategory().customProps.icon} title={frontMatter.title} />
 
-Concurrency and parallelism
+<p>{useCurrentSidebarCategory().customProps.description}</p>
 
 <DocCardList />

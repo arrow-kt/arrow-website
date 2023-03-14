@@ -2,11 +2,12 @@
 title: Resilience
 ---
 
+import { useCurrentSidebarCategory } from '@docusaurus/theme-common';
 import DocCardList from '@theme/DocCardList';
 
-# <icon-decoration icon="icon-resilience.svg">Resilience</icon-decoration>
+# <decorated-text icon={useCurrentSidebarCategory().customProps.icon} title={frontMatter.title} />
 
-Resilience is the ability for your system to act in an organized way when failures occur."
+<p>{useCurrentSidebarCategory().customProps.description}</p>
 
 <DocCardList />
 

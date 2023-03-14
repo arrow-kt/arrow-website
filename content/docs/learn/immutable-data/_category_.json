@@ -1,4 +1,9 @@
 {
   "label": "Immutable data",
-  "position": 6
+  "position": 6,
+  "customProps": {
+    "icon": "icon-immutable-data.svg",
+    "description": "Optics and other ways to handle immutable data",
+    "overview": true
+  }
 }

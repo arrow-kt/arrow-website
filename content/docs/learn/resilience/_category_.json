@@ -1,4 +1,9 @@
 {
   "label": "Resilience",
-  "position": 5
+  "position": 5,
+  "customProps": {
+    "icon": "icon-resilience.svg",
+    "description": "Resilience is the ability for your system to act in an organized way when failures occur.",
+    "overview": true
+  }
 }

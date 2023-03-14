@@ -1,4 +1,9 @@
 {
   "label": "Coroutines",
-  "position": 4
+  "position": 4,
+  "customProps": {
+    "icon": "icon-coroutines.svg",
+    "description": "Concurrency and parallelism",
+    "overview": true
+  }
 }

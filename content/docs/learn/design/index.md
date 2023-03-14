@@ -2,10 +2,11 @@
 title: Design
 ---
 
+import { useCurrentSidebarCategory } from '@docusaurus/theme-common';
 import DocCardList from '@theme/DocCardList';
 
-# <icon-decoration icon="icon-design.svg">Design</icon-decoration>
+# <decorated-text icon={useCurrentSidebarCategory().customProps.icon} title={frontMatter.title} />
 
-Recipes for designing nice Kotlin code
+<p>{useCurrentSidebarCategory().customProps.description}</p>
 
 <DocCardList />

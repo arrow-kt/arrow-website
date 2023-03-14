@@ -2,10 +2,11 @@
 title: Immutable Data
 ---
 
+import { useCurrentSidebarCategory } from '@docusaurus/theme-common';
 import DocCardList from '@theme/DocCardList';
 
-# <icon-decoration icon="icon-immutable-data.svg">Immutable Data</icon-decoration>
+# <decorated-text icon={useCurrentSidebarCategory().customProps.icon} title={frontMatter.title} />
 
-Optics and other ways to handle immutable data
+<p>{useCurrentSidebarCategory().customProps.description}</p>
 
 <DocCardList />

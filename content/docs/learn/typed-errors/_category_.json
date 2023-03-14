@@ -1,4 +1,9 @@
 {
   "label": "Typed errors",
-  "position": 3
+  "position": 3,
+  "customProps": {
+    "icon": "icon-typed-errors.svg",
+    "description": "Learn how to work with typed errors",
+    "overview": true
+  }
 }

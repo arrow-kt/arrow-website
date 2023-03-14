@@ -2,10 +2,11 @@
 title: Typed Errors
 ---
 
+import { useCurrentSidebarCategory } from '@docusaurus/theme-common';
 import DocCardList from '@theme/DocCardList';
 
-# <icon-decoration icon="icon-typed-errors.svg">Typed Errors</icon-decoration>
+# <decorated-text icon={useCurrentSidebarCategory().customProps.icon} title={frontMatter.title} />
 
-Learn how to work with typed errors
+<p>{useCurrentSidebarCategory().customProps.description}</p>
 
 <DocCardList />
