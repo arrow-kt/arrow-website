@@ -18,6 +18,14 @@
   align-items: center;
 }
 
+.body {
+  min-height: 3rem;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+}
+
 .link::after {
   content: '';
   border: solid var(--ifm-link-color);

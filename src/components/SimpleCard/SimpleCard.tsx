@@ -32,11 +32,15 @@ export function BaseCard({
             src={useBaseUrl(`/img/${icon}`)}
             alt={`${title} category`}
             title={`${title} category`}
+            width="64px"
+            height="64px"
           />
-          <h2>{title}</h2>
+          <h2 title={title} className={`text--truncate`}>
+            {title}
+          </h2>
         </div>
-        <div className="card__body">
-          <p>{body}</p>
+        <div className={`card__body`}>
+          <p className={`${styles.body}`}>{body}</p>
         </div>
         {showFooter && (
           <div className={`card__footer`}>

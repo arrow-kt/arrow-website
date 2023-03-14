@@ -1,0 +1,11 @@
+.container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: var(--ifm-spacing-vertical) var(--ifm-spacing-horizontal);
+}
+
+@media (--ifm-narrow-window) {
+  .container {
+    grid-template-columns: 1fr;
+  }
+}
