@@ -21,6 +21,8 @@ export const DecoratedText = ({
       src={useBaseUrl(`/img/${icon}`)}
       alt={'Icon'}
       title={'Icon'}
+      width="64px"
+      height="64px"
     />
     {title ? title : children}
   </>

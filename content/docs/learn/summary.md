@@ -1,8 +1,12 @@
 ---
+title: Summary
+description: Summary
 sidebar_position: 11
+sidebar_custom_props:
+  icon: icon-tutorial.svg
 ---
 
-# Summary
+# <decorated-text icon={frontMatter.sidebar_custom_props.icon} title={frontMatter.title} />
 
 <details>
 <summary><span style={{ fontSize: '115%' }}>Typed errors</span> (<a href="../typed-errors">guide</a>)</summary>

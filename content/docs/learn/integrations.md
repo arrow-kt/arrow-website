@@ -1,8 +1,12 @@
 ---
+title: Integrations
+description: Arrow is composed of different libraries, each of them improving or extending one commonly-used library in the Kotlin ecosystem, or a particular Kotlin language feature.
 sidebar_position: 10
+sidebar_custom_props:
+  icon: icon-generic-6.svg
 ---
 
-# Integrations
+# <decorated-text icon={frontMatter.sidebar_custom_props.icon} title={frontMatter.title} />
 
 A library is stronger if it plays well together with the rest of the ecosystem 
 surrounding it. Arrow integrates with many useful libraries in the Kotlin

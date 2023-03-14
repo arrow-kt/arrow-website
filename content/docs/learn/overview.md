@@ -1,11 +1,15 @@
 ---
+title: Overview
+description: Arrow is composed of different libraries, each of them improving or extending one commonly-used library in the Kotlin ecosystem, or a particular Kotlin language feature.
 sidebar_position: 1
+sidebar_custom_props:
+  icon: icon-docs.svg
 ---
 
-import DocCardList from '@theme/DocCardList';
 import { useDocsSidebar } from '@docusaurus/theme-common/internal';
+import DocCardList from '@theme/DocCardList';
 
-# Overview
+# <decorated-text icon={frontMatter.sidebar_custom_props.icon} title={frontMatter.title} />
 
 Arrow's goal is to bring _idiomatic_ _functional programming_ to Kotlin. This means that Arrow is inspired by the great work made in other functional programming communities, yet exposes these ideas and concepts in a way that do not feel alien to Kotlin programmers.
 
