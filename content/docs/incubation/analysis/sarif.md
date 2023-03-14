@@ -1,8 +1,11 @@
 ---
+title: GitHub Actions / SARIF
 sidebar_position: 9
+sidebar_custom_props:
+  icon: icon-github.svg
 ---
 
-# GitHub Actions / SARIF
+# <decorated-text icon={frontMatter.sidebar_custom_props.icon}>GitHub Actions / SARIF</decorated-text>
 
 :::caution
 

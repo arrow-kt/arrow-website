@@ -1,4 +1,8 @@
 {
   "label": "Analysis",
-  "position": 2
+  "position": 2,
+  "customProps": {
+    "icon": "arrow-analysis-icon.svg",
+    "description": "Arrow Analysis introduces new checks in your compilation pipeline, which warn about common mistakes like out of bounds indexing"
+  }
 }

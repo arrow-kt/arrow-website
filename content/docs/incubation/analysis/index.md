@@ -2,10 +2,11 @@
 title: Analysis
 ---
 
+import { useCurrentSidebarCategory } from '@docusaurus/theme-common';
 import DocCardList from '@theme/DocCardList';
 
-# Analysis
+# <decorated-text icon={useCurrentSidebarCategory().customProps.icon} title={frontMatter.title} />
 
-Arrow Analysis introduces new checks in your compilation pipeline, which warn about common mistakes like out of bounds indexing
+<p>{useCurrentSidebarCategory().customProps.description}</p>
 
 <DocCardList />
