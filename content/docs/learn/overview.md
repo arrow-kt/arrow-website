@@ -24,7 +24,7 @@ Each section in the documentation roughly corresponds to one of the libraries wh
 
 - In our [Quickstart](../quickstart) you can read how to introduce Arrow in your project.
 - No library lives in a vacuum, and Arrow enjoys [integrations](../integrations/) with many other popular Kotlin libraries.
-- We also provide some guidance on [broader design and architecture](../../category/design) using functional programming concepts.
+- We also provide some guidance on [broader design and architecture](../design) using functional programming concepts.
 
 | Library | Features |
 | --- | --- |
