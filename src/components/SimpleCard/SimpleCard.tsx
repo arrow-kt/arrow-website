@@ -1,6 +1,7 @@
 import React from 'react';
 
 import Link from '@docusaurus/Link';
+import useBaseUrl from '@docusaurus/useBaseUrl';
 
 import styles from './simple-card.module.css';
 
@@ -28,14 +29,18 @@ export function BaseCard({
         <div className={`card__header ${styles.cardHeader}`}>
           <img
             className={styles.icon}
-            src={`img/${icon}`}
+            src={useBaseUrl(`/img/${icon}`)}
             alt={`${title} category`}
             title={`${title} category`}
+            width="64px"
+            height="64px"
           />
-          <h2>{title}</h2>
+          <h2 title={title} className={`text--truncate`}>
+            {title}
+          </h2>
         </div>
-        <div className="card__body">
-          <p>{body}</p>
+        <div className={`card__body ${styles.cardBody}`}>
+          <p className={`${styles.paragraph}`}>{body}</p>
         </div>
         {showFooter && (
           <div className={`card__footer`}>

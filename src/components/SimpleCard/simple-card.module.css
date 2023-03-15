@@ -9,13 +9,27 @@
 }
 
 .icon {
-  margin-right: 1rem;
+  margin-right: calc(var(--ifm-global-spacing) / 2);
 }
 
 .cardHeader {
   display: flex;
   justify-content: flex-start;
   align-items: center;
+  padding: calc(var(--ifm-card-vertical-spacing) / 2) var(--ifm-card-horizontal-spacing);
+}
+
+.cardBody {
+  padding: calc(var(--ifm-card-vertical-spacing) / 4) var(--ifm-card-horizontal-spacing) calc(var(--ifm-card-vertical-spacing) / 2) var(--ifm-card-horizontal-spacing);
+}
+
+.paragraph {
+  min-height: 3rem;
+  line-height: 1.5rem;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
 }
 
 .link::after {

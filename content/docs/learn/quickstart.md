@@ -1,11 +1,16 @@
 ---
+title: Quickstart
+description: Gradle or Maven, JVM or Multiplatform, Λrrow fits in all your projects
 sidebar_position: 2
+sidebar_custom_props:
+  icon: icon-quickstart.svg
+  overview: true
 ---
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-# Quickstart
+# <decorated-text icon={frontMatter.sidebar_custom_props.icon}>Quickstart</decorated-text>
 
 Arrow is composed of different libraries, you can just choose and pick the ones
 you need in your project.

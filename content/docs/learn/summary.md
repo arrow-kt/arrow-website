@@ -1,8 +1,12 @@
 ---
+title: Summary
+description: Summary
 sidebar_position: 11
+sidebar_custom_props:
+  icon: icon-tutorial.svg
 ---
 
-# Summary
+# <decorated-text icon={frontMatter.sidebar_custom_props.icon} title={frontMatter.title} />
 
 <details>
 <summary><span style={{ fontSize: '115%' }}>Typed errors</span> (<a href="../typed-errors">guide</a>)</summary>
@@ -99,7 +103,7 @@ For more resilience options check the `arrow-fx-resilience` package.
 </details>
 
 <details>
-<summary><span style={{ fontSize: '115%' }}>Immutable data</span> (<a href="../../category/immutable-data">guide</a>)</summary>
+<summary><span style={{ fontSize: '115%' }}>Immutable data</span> (<a href="../immutable-data">guide</a>)</summary>
 
 <details>
 <summary>Generate optics</summary>

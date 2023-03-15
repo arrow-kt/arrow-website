@@ -1,40 +1,37 @@
 ---
+title: Overview
+description: Arrow is composed of different libraries, each of them improving or extending one commonly-used library in the Kotlin ecosystem, or a particular Kotlin language feature.
 sidebar_position: 1
+sidebar_custom_props:
+  icon: icon-docs.svg
 ---
 
-import { SimpleCard, SimpleCardProps } from '@site/src/components/SimpleCard';
-import styles from '@site/src/pages/index.module.css';
+import { useDocsSidebar } from '@docusaurus/theme-common/internal';
+import DocCardList from '@theme/DocCardList';
 
-# Overview
+# <decorated-text icon={frontMatter.sidebar_custom_props.icon} title={frontMatter.title} />
 
-Arrow's goal is to bring _idiomatic_ _functional programming_ to Kotlin.
-This means that Arrow is inspired by the great work made in other functional
-programming communities, yet exposes these ideas and concepts in a way that
-do not feel alien to Kotlin programmers.
+Arrow's goal is to bring _idiomatic_ _functional programming_ to Kotlin. This means that Arrow is inspired by the great work made in other functional programming communities, yet exposes these ideas and concepts in a way that do not feel alien to Kotlin programmers.
 
-Arrow is composed of different libraries, each of them improving or extending
-one commonly-used library in the Kotlin ecosystem, or a particular Kotlin
-language feature.
+Arrow is composed of different libraries, each of them improving or extending one commonly-used library in the Kotlin ecosystem, or a particular Kotlin language feature.
 
 :::info In a rush?
 
-Our [summary](../summary) is designed to help you find your way in the Arrow
-ecosystem.
+Our [summary](../summary) is designed to help you find your way in the Arrow ecosystem.
 
 :::
 
-Each section in the documentation roughly corresponds to one
-of the libraries which compose Arrow.
+<DocCardList className="margin-bottom--lg" items={useDocsSidebar().items.filter(item => item.customProps?.overview )}/>
 
-- In our [Quickstart](../quickstart) you can read how to
-introduce Arrow in your project.
-- No library lives in a vacuum, and Arrow enjoys
-[integrations](../integrations/) with many other popular Kotlin libraries.
-- We also provide some guidance on [broader design and architecture](../../category/design)
-using functional programming concepts.
+
+Each section in the documentation roughly corresponds to one of the libraries which compose Arrow.
+
+- In our [Quickstart](../quickstart) you can read how to introduce Arrow in your project.
+- No library lives in a vacuum, and Arrow enjoys [integrations](../integrations/) with many other popular Kotlin libraries.
+- We also provide some guidance on [broader design and architecture](../design) using functional programming concepts.
 
 | Library | Features |
-|---------|-|
+| --- | --- |
 | `arrow-core` <br /> _Companion to [Kotlin's standard library](https://kotlinlang.org/api/latest/jvm/stdlib/)_ | [Typed errors](../typed-errors/), including `Raise`, `Either`, and `Option` <br /> Non-empty [list](https://arrow-kt.github.io/arrow/arrow-core/arrow.core/-non-empty-list/index.html) and [set](https://arrow-kt.github.io/arrow/arrow-core/arrow.core/-non-empty-set/index.html) |
 | `arrow-fx-coroutines` <br /> _Companion to [KotlinX Coroutines](https://kotlinlang.org/api/kotlinx.coroutines/kotlinx-coroutines-core/)_ | [High-level concurrency](../coroutines/parallel), including `parMap` and `parZip` <br /> [Resource management](../coroutines/resource-safety/) |
 | `arrow-fx-resilience` | [Resilience patterns](../resilience/) |
@@ -44,8 +41,6 @@ using functional programming concepts.
 
 :::note We'd love to hear from you!
 
-We're always looking for ways to improve the libraries and the documentation.
-Feel free to [open an issue](https://github.com/arrow-kt/arrow/issues) in our 
-repository with any suggestion or feedback you may have. Thanks in advance! 🤩
+We're always looking for ways to improve the libraries and the documentation. Feel free to [open an issue](https://github.com/arrow-kt/arrow/issues) in our repository with any suggestion or feedback you may have. Thanks in advance! 🤩
 
 :::

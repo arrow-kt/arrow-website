@@ -27,9 +27,9 @@ even though a migration window is in place until Arrow 2.0.
 The Arrow Fx Resilience library implements three of the most important design
 pattern around resilience:
 
-- Retry and repeat computations by means of [`Schedule`](retry-and-repeat),
-- Protect other services from been overloaded using [`CircuitBreaker`](circuitbreaker),
-- Implement transactional behavior in distributed systems in the form of [`Saga`](saga).
+- Retry and repeat computations by means of [`Schedule`](../retry-and-repeat),
+- Protect other services from been overloaded using [`CircuitBreaker`](../circuitbreaker),
+- Implement transactional behavior in distributed systems in the form of [`Saga`](../saga).
 
 :::info Media resources
 

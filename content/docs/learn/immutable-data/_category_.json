@@ -1,8 +1,9 @@
 {
   "label": "Immutable data",
   "position": 6,
-  "link": {
-    "type": "generated-index",
-    "description": "Optics and other ways to handle immutable data"
+  "customProps": {
+    "icon": "icon-immutable-data.svg",
+    "description": "Optics and other ways to handle immutable data",
+    "overview": true
   }
 }

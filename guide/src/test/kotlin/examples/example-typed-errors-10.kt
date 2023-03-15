@@ -1,4 +1,4 @@
-// This file was automatically generated from typed-errors.md by Knit tool. Do not edit.
+// This file was automatically generated from working-with-typed-errors.md by Knit tool. Do not edit.
 package arrow.website.examples.exampleTypedErrors10
 
 import arrow.core.Either

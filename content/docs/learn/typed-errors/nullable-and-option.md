@@ -2,7 +2,6 @@
 id: nullable-and-option
 title: Why nullable types & Option?
 description: Difference between nullable types and Option, and when to use each.
-slug: /nullable-and-option
 sidebar_position: 2
 ---
 
