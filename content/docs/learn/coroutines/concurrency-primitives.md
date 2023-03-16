@@ -4,14 +4,14 @@ sidebar_position: 4
 
 # Concurrency primitives
 
-These types are not usually found in application code, but provide important
-foundation blocks for larger patterns. They are also useful during testing,
+These types are not usually found in application code, but provide essential
+foundation blocks for larger patterns. They are also helpful during testing
 to simulate synchronization between different systems.
 
 :::info Multiplatform-ready
 
 The Arrow Fx library is Multiplatform-ready, so you can use it in all of your
-[KMP](https://kotlinlang.org/docs/multiplatform.html) projects. In most cases
+[KMP](https://kotlinlang.org/docs/multiplatform.html) projects. In most cases,
 the API provided by Arrow Fx follows the one for similar concepts in the JVM.
 
 :::
@@ -37,7 +37,7 @@ performing these operations and getting an inconsistent state at the end.
 :::warning Atomic primitive types
 
 You should not use generic `Atomic` references with primitive types like
-`Int` or `Boolean`, they break in unexpected ways in Kotlin Native. Use instead
+`Int` or `Boolean`, as they break in unexpected ways in Kotlin Native. Instead, use
 the provided `AtomicInt`, `AtomicBoolean`, and so forth.
 
 :::
@@ -59,15 +59,15 @@ This type models the behavior of [`java.util.concurrent.CountDownLatch`](https:/
 A [`CyclicBarrier`](https://arrow-kt.github.io/arrow/arrow-fx-coroutines/arrow.fx.coroutines/-cyclic-barrier/index.html)
 is a synchronization mechanism that allows a set of coroutines to wait for each
 other to reach a certain point before continuing execution. It is called _cyclic_
-because it can be reused after all coroutines have reached the barrier and released.
+because it can be reused after all coroutines have reached the barrier and been released.
 
 To use a `CyclicBarrier`, each coroutine must call the `await` method on the 
 barrier object, which will cause the coroutine to suspend until the required 
 number of coroutines have reached the barrier. 
-Once all coroutines have reached the barrier, all of them resume execution.
+Once all coroutines have reached the barrier, they resume execution.
 
 :::info
 
-This type the behavior of [`java.util.concurrent.CyclicBarrier`](https://docs.oracle.com/javase/8/docs/api/java/util/concurrent/CyclicBarrier.html).
+This type models the behavior of [`java.util.concurrent.CyclicBarrier`](https://docs.oracle.com/javase/8/docs/api/java/util/concurrent/CyclicBarrier.html).
 
 :::
