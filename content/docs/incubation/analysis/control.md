@@ -4,7 +4,7 @@ sidebar_position: 3
 
 # Control operators
 
-When dealing with pre-conditions, the _environment_ in which a call takes place is very important. You introduce new information in the environment every time you use a control operator like `if` or `when`. For example, the following is accepted by Arrow Analysis, since you are manually checking whether the `size` of the list if enough for `get`in the right value:
+When dealing with pre-conditions, the _environment_ in which a call takes place is very important. You introduce new information in the environment every time you use a control operator like `if` or `when`. For example, the following is accepted by Arrow Analysis, when you manually checking whether the `size` of the list is enough for `get`in the right value:
 
 ```kotlin
 fun <A> List<A>.firstOr(default: A) =
@@ -25,7 +25,7 @@ e: Example.kt: (2, 35): pre-condition `index within bounds` is not satisfied in 
 
 This tells you that at that point you know that the `size` is not greater than 0 (note the `!` at the beginning of the expression). Unfortunately, sometimes "garbage" formulae (such as `cond17`) above appear in the output. We are working on ways to prune these useless constraints, in the time being just ignore them.
 
-The environment is also important when checking post-conditions. Whenever you have some branching operation, like `if` or `when`, the post-condition is checked on **each** branch **separately**, even when the `post` appears as part of a common expression. This allows Arrow Analysis to accept the following, in which whether the result is non-negative depends on the prior check over `n`.
+The environment is also important when checking post-conditions. Whenever you have some branching operations, like `if` or `when`, the post-condition is checked on **each** branch **separately**, even when the `post` appears as part of a common expression. This allows Arrow Analysis to accept the following, in which whether the result is non-negative depends on the prior check over `n`.
 
 ```kotlin
 import arrow.analysis.post
@@ -69,7 +69,7 @@ val okButRejected = listOf(-1).map { absoluteValue(it) }.first()
   .post({ it >= 0 }) { "result is non-negative" }
 ```
 
-This does not mean that the tool is useless on such operations. In this case, we can still express the fact that the size is maintained by `map`, since that condition does *not* depend on the transformation function. As a result, the following is accepted, since Arrow Analysis tracks the length of the list through `map`, and can see that the call to `first()` is correct.
+This does not mean that the tool is useless on such operations. In this case, we can still express the fact that the size is maintained by `map`, since that condition does *not* depend on the transformation function. As a result, the following is accepted since Arrow Analysis tracks the length of the list through `map` and can see that the call to `first()` is correct.
 
 ```kotlin
 val ok = listOf(-1).map { absoluteValue(it) }.first()
@@ -77,7 +77,7 @@ val ok = listOf(-1).map { absoluteValue(it) }.first()
 
 ### Scope functions
 
-There's a handful of higher-order functions which play a significant role in Kotlin programs, the so-called [scope functions](https://kotlinlang.org/docs/scope-functions.html) `let`, `run`, `with`, `apply`, and `also`. Given its importance, Arrow Analysis ships with special support for them: when used with a lambda as second argument, the tool can "look inside" the body during the checks.
+There are a handful of higher-order functions which play a significant role in Kotlin programs, the so-called [scope functions](https://kotlinlang.org/docs/scope-functions.html) `let`, `run`, `with`, `apply`, and `also`. Given their importance, Arrow Analysis ships with special support for them: when used with a lambda as second argument, the tool can "look inside" the body during the checks.
 
 This means you can choose whatever code style suits you best. Arrow Analysis can handle local variables,
 
@@ -108,7 +108,7 @@ fun double2(n: Int): Int {
 
 ## Null safety
 
-Arrow Analysis can reason about `null` values, in a similar way as the [Kotlin compiler does](https://kotlinlang.org/docs/null-safety.html). The Elvis safe call operator `?.` is recognized, and in combination with the aforementioned support for scope functions, the tool can handle idiomatic code such as the following.
+Arrow Analysis can reason about `null` values, in a similar way as the [Kotlin compiler does](https://kotlinlang.org/docs/null-safety.html). The Elvis safe call operator `?.` is recognized, and in combination with the aforementioned support for scope functions. The tool can handle idiomatic code such as the following:
 
 ```kotlin
 import arrow.analysis.pre
