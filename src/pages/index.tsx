@@ -1,11 +1,12 @@
 import React from 'react';
+import parse from 'html-react-parser';
 
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import useBaseUrl from '@docusaurus/useBaseUrl';
 import Layout from '@theme/Layout';
 
 import { Hero } from '@site/src/components/Hero';
-import { SimpleCard, SimpleCardProps } from '@site/src/components/SimpleCard';
+import { LinkCard, LinkCardProps } from '@site/src/components/LinkCard/index';
 import { ImageCard, ImageCardProps } from '@site/src/components/ImageCard';
 import { QuoteCard, QuoteCardProps } from '@site/src/components/QuoteCard';
 import { BorderlessCard } from '@site/src/components/BorderlessCard';
@@ -18,7 +19,11 @@ export default function Home(): JSX.Element {
 
   return (
     <Layout description={siteConfig.tagline}>
-      <Hero className={styles.verticalRhythm} />
+      <Hero
+        title={parse(data.hero.title)}
+        ctaList={data.hero.ctaList}
+        className={styles.verticalRhythm}
+      />
       <main>
         <section
           className={`container text--center ${styles.textContainer} ${styles.verticalRhythm}`}>
@@ -30,8 +35,8 @@ export default function Home(): JSX.Element {
         </section>
         <section
           className={`container ${styles.featuresContainer} ${styles.verticalRhythm}`}>
-          {data.features.map((feature: SimpleCardProps) => (
-            <SimpleCard key={feature.title} {...feature} />
+          {data.features.map((feature: LinkCardProps) => (
+            <LinkCard key={feature.title} {...feature} />
           ))}
         </section>
         <section
