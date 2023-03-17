@@ -1,0 +1,17 @@
+.wrapperContainer {
+  background-color: var(--ifm-color-primary-lighter);
+}
+
+.container {
+  max-width: 700px;
+  padding: calc(2 * var(--ifm-spacing-vertical)) 0;
+  text-align: center;
+}
+
+.ctaList {
+  display: flex;
+  flex-direction: row;
+  gap: var(--ifm-spacing-horizontal);
+  justify-content: center;
+  margin-top: var(--ifm-spacing-vertical);
+}
