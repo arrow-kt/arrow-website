@@ -7,14 +7,41 @@
   transform: none;
 }
 
+.infoMode {
+  text-align: center;
+}
+
 .icon {
   margin-right: calc(var(--ifm-global-spacing) / 2);
+}
+
+.infoMode .icon {
+  margin-right: 0;
 }
 
 .cardHeader {
   display: flex;
   justify-content: flex-start;
   align-items: center;
+}
+
+.infoMode .cardHeader {
+  flex-direction: column;
+}
+
+.title {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
+  white-space: pre-wrap;
+}
+
+.cardBody,
+.cardFooter {
+  padding: calc(var(--ifm-card-vertical-spacing) / 2)
+    var(--ifm-card-vertical-spacing) var(--ifm-card-vertical-spacing)
+    var(--ifm-card-vertical-spacing);
 }
 
 .link::after {

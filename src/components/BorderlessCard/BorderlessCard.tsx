@@ -3,32 +3,49 @@ import React from 'react';
 import Link from '@docusaurus/Link';
 import useBaseUrl from '@docusaurus/useBaseUrl';
 
-import { SimpleCardProps } from '@site/src/components/SimpleCard';
+import { LinkCardProps } from '@site/src/components/LinkCard/index';
 
 import styles from './borderless-card.module.css';
 
-export function BorderlessCard({ title, icon, link, body }: SimpleCardProps) {
+export type BorderlessCardProps = PartiallyOptional<LinkCardProps, 'href'>;
+
+export function BorderlessCard({
+  title,
+  icon,
+  href,
+  body,
+}: BorderlessCardProps) {
+  const infoMode = !href;
+  const iconSize = infoMode ? '64px' : '32px';
+
   return (
-    <div className={`card ${styles.borderlessCard}`}>
+    <div
+      className={`card ${styles.borderlessCard} ${
+        infoMode && styles.infoMode
+      }`}>
       <div className={`card__header ${styles.cardHeader}`}>
         <img
           className={styles.icon}
           src={useBaseUrl(`/img/${icon}`)}
           alt={`${title} category`}
           title={`${title} category`}
+          height={iconSize}
+          width={iconSize}
         />
-        <h2>{title}</h2>
+        <h3 className={styles.title}>{title}</h3>
       </div>
-      <div className="card__body">
+      <div className={`card__body ${styles.cardBody}`}>
         <p>{body}</p>
       </div>
-      <div className={`card__footer`}>
-        <strong>
-          <Link href={link} className={styles.link}>
-            Learn more
-          </Link>
-        </strong>
-      </div>
+      {!infoMode && (
+        <div className={`card__footer ${styles.cardFooter}`}>
+          <strong>
+            <Link href={href} className={styles.link}>
+              Learn more
+            </Link>
+          </strong>
+        </div>
+      )}
     </div>
   );
 }
