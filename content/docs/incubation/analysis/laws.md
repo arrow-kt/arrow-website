@@ -25,7 +25,7 @@ As a practical tip, we find useful to mark the function as `inline`. That way yo
 
 ### Organizing laws
 
-If you want to define pre and postconditions for an entire library, it's often useful to organize those by package or type. To help with this task, you can define several laws inside an `object` marked with the `@Laws` annotation (notice the final `s`.)
+If you want to define pre and post-conditions for an entire library, it's often useful to organize those by package or type. To help with this task, you can define several laws inside an `object` marked with the `@Laws` annotation (notice the final `s`.)
 
 ```kotlin
 import arrow.analysis.Law
