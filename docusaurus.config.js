@@ -60,7 +60,11 @@ const createConfig = async () => {
             editUrl: 'https://github.com/arrow-kt/arrow-website/edit/main/',
           },
           theme: {
-            customCss: require.resolve('./src/css/custom.css'),
+            customCss: [
+              require.resolve('./src/css/typography.css'),
+              require.resolve('./src/css/vars.css'),
+              require.resolve('./src/css/custom.css'),
+            ],
           },
         }),
       ],
