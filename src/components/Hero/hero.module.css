@@ -21,7 +21,7 @@
 }
 
 .container {
-  max-width: 900px;
+  max-width: 700px;
 }
 
 u {
@@ -30,7 +30,11 @@ u {
   white-space: nowrap;
 }
 
-.heroCta {
+.subtitle {
+  font-weight: normal;
+}
+
+.ctaList {
   display: flex;
   flex-direction: row;
   gap: var(--ifm-spacing-horizontal);
