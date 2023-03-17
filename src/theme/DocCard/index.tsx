@@ -7,7 +7,7 @@ import type {
   PropSidebarItemLink,
 } from '@docusaurus/plugin-content-docs';
 
-import { SimpleCard, SimpleCardProps } from '@site/src/components/SimpleCard';
+import { LinkCard, LinkCardProps } from '@site/src/components/LinkCard/index';
 
 const defaultIcon = 'icon-tutorial.svg';
 
@@ -35,14 +35,14 @@ export default function DocCard({
   const title = item.label;
   const icon =
     (item.customProps?.icon as string) || sidebarCategoryIcon || defaultIcon;
-  const link = item.href;
+  const href = item.href;
   const body =
     (item.customProps?.description as string) ??
     ((item.type === 'link' && useDocById(item.docId ?? undefined))
       .description as string) ??
     undefined;
 
-  const props: SimpleCardProps = { title, icon, link, body };
+  const props: LinkCardProps = { title, icon, href, body };
 
-  return <SimpleCard {...props} />;
+  return <LinkCard {...props} />;
 }
