@@ -1,0 +1,33 @@
+.linkCard {
+  --ifm-link-hover-decoration: none;
+  --ifm-link-color: var(--arrow-grey-primary);
+}
+
+.linkCard:hover {
+  --ifm-heading-color: var(--ifm-color-primary-dark);
+  --ifm-link-hover-color: var(--arrow-grey-primary);
+}
+
+.icon {
+  margin-right: calc(var(--ifm-global-spacing) / 2);
+}
+
+.cardHeader {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.cardBody {
+  padding: calc(var(--ifm-card-vertical-spacing) / 2) var(--ifm-card-vertical-spacing) var(--ifm-card-vertical-spacing) var(--ifm-card-vertical-spacing);
+}
+
+.paragraph {
+  min-height: 3rem;
+  line-height: 1.5rem;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+}
+
