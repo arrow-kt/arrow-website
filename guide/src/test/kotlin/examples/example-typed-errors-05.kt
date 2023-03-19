@@ -3,31 +3,32 @@ package arrow.website.examples.exampleTypedErrors05
 
 import arrow.core.Either
 import arrow.core.left
-import arrow.core.merge
-import arrow.core.recover
+import arrow.core.raise.ensureNotNull
+import arrow.core.raise.either
 import arrow.core.raise.Raise
 import arrow.core.raise.fold
-import arrow.core.raise.recover
 import io.kotest.assertions.fail
 import io.kotest.matchers.shouldBe
 
-object MyError
+data class User(val id: Long)
+data class UserNotFound(val message: String)
 
-val error: Either<MyError, Int> = MyError.left()
+fun process(user: User?): Either<UserNotFound, Long> = either {
+  ensureNotNull(user) { UserNotFound("Cannot process null user") }
+  user.id // smart-casted to non-null
+}
 
-fun Raise<MyError>.error(): Int = raise(MyError)
-
-val fallback: Either<Nothing, Int> =
-  error.recover { e: MyError -> 1 }
-
-fun Raise<Nothing>.fallback(): Int =
-  recover({ error() }) { e: MyError -> 1 }
+fun Raise<UserNotFound>.process(user: User?): Long {
+  ensureNotNull(user) { UserNotFound("Cannot process null user") }
+  return user.id // smart-casted to non-null
+}
 
 fun example() {
-  fallback.merge() shouldBe 1
+  process(null) shouldBe UserNotFound("Cannot process null user").left()
+
   fold(
-    { fallback() },
-    { e: MyError -> fail("No logical failure occurred!") },
-    { i: Int -> i shouldBe 1 }
+    { process(User(1)) },
+    { _: UserNotFound -> fail("No logical failure occurred!") },
+    { i: Long -> i shouldBe 1L }
   )
 }

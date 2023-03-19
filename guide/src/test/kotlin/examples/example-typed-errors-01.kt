@@ -11,25 +11,26 @@ import arrow.core.raise.fold
 import io.kotest.assertions.fail
 import io.kotest.matchers.shouldBe
 
-object MyError
+object UserNotFound
+data class User(val id: Long)
 
-val one: Either<MyError, Int> = 1.right()
+val user: Either<UserNotFound, User> = User(1).right()
 
-fun Raise<MyError>.one(): Int = 1
+fun Raise<UserNotFound>.user(): User = User(1)
 
-val res = either { one() }
+val res = either { user() }
 
-fun Raise<MyError>.res(): Int = one.bind()
+fun Raise<UserNotFound>.res(): User = user.bind()
 
 fun example() {
   when (res) {
     is Left -> fail("No logical failure occurred!")
-    is Right -> res.value shouldBe 1
+    is Right -> res.value shouldBe User(1)
   }
 
   fold(
-    { res() },
-    { _: MyError -> fail("No logical failure occurred!") },
-    { i: Int -> i shouldBe 1 }
+    program = { res() },
+    recover = { _: UserNotFound -> fail("No logical failure occurred!") },
+    transform = { i: User -> i shouldBe User(1) }
   )
 }

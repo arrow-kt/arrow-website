@@ -2,29 +2,30 @@
 package arrow.website.examples.exampleTypedErrors09
 
 import arrow.core.Either
-import arrow.core.catch
-import arrow.core.raise.Raise
 import arrow.core.raise.catch
-import arrow.core.raise.fold
-import io.kotest.assertions.fail
-import io.kotest.matchers.shouldBe
-import io.kotest.matchers.types.shouldBeTypeOf
+import arrow.core.raise.Raise
+import java.sql.SQLException
 
-suspend fun externalSystem(): Int = throw RuntimeException("Boom!")
-
-data class OtherError(val cause: RuntimeException)
-
-suspend fun error(): Either<OtherError, Int> =
-  Either.catch { externalSystem() }.catch { e: RuntimeException -> raise(OtherError(e)) }
-
-suspend fun Raise<Nothing>.fallback(): Int =
-  catch({ externalSystem() }) { e: Throwable -> 1 }
-
-suspend fun example() {
-  error().shouldBeTypeOf<Either.Left<OtherError>>()
-  fold(
-    { fallback() },
-    { _: Nothing -> fail("No logical failure occurred!") },
-    { i: Int -> i shouldBe 1 }
-  )
+object UsersQueries {
+  fun insert(username: String, email: String): Long = 1L
 }
+
+fun SQLException.isUniqueViolation(): Boolean = true
+
+data class UserAlreadyExists(val username: String, val email: String)
+
+suspend fun Raise<UserAlreadyExists>.insertUser(username: String, email: String): Long =
+  catch({
+    UsersQueries.insert(username, email)
+  }) { e: SQLException ->
+    if (e.isUniqueViolation()) raise(UserAlreadyExists(username, email))
+    else throw e
+  }
+
+suspend fun insertUser(username: String, email: String): Either<UserAlreadyExists, Long> =
+  Either.catchOrThrow<SQLException, Long> {
+    UsersQueries.insert(username, email)
+  }.mapLeft { e ->
+    if (e.isUniqueViolation()) UserAlreadyExists(username, email)
+    else throw e
+  }

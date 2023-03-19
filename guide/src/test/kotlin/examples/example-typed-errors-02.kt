@@ -10,21 +10,22 @@ import arrow.core.raise.fold
 import io.kotest.assertions.fail
 import io.kotest.matchers.shouldBe
 
-object MyError
+object UserNotFound
+data class User(val id: Long)
 
-val error: Either<MyError, Int> = MyError.left()
+val error: Either<UserNotFound, User> = UserNotFound.left()
 
-fun Raise<MyError>.error(): Int = raise(MyError)
+fun Raise<UserNotFound>.error(): User = raise(UserNotFound)
 
 fun example() {
   when (error) {
-    is Left -> error.value shouldBe MyError
+    is Left -> error.value shouldBe UserNotFound
     is Right -> fail("A logical failure occurred!")
   }
 
   fold(
     { error() },
-    { e: MyError -> e shouldBe MyError },
-    { i: Int -> fail("A logical failure occurred!") }
+    { e: UserNotFound -> e shouldBe e shouldBe UserNotFound },
+    { i: User -> fail("A logical failure occurred!") }
   )
 }

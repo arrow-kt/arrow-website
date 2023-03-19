@@ -1,30 +1,21 @@
 // This file was automatically generated from working-with-typed-errors.md by Knit tool. Do not edit.
 package arrow.website.examples.exampleTypedErrors08
 
-import arrow.core.Either
-import arrow.core.catch
 import arrow.core.raise.Raise
-import arrow.core.raise.catch
-import arrow.core.raise.fold
-import arrow.core.right
-import io.kotest.assertions.fail
-import io.kotest.matchers.shouldBe
+import arrow.core.raise.ensure
+import arrow.core.raise.recover
 
-data class MyError(val cause: Throwable)
+data class User(val id: Long)
+data class UserNotFound(val message: String)
 
-suspend fun externalSystem(): Int = throw RuntimeException("Boom!")
-
-suspend fun fallback(): Either<Nothing, Int> =
-  Either.catch { externalSystem() }.catch { e: Throwable -> 1 }
-
-suspend fun Raise<MyError>.error(): Int =
-  catch({ externalSystem() }) { e: Throwable -> raise(MyError(e)) }
-
-suspend fun example() {
-  fallback() shouldBe 1.right()
-  fold(
-    { error() },
-    { e: MyError -> e.cause.message shouldBe "Boom!" },
-    { _: Int -> fail("A logical failure occurred!") }
-  )
+suspend fun Raise<UserNotFound>.fetchUser(id: Long): User {
+  ensure(id > 0) { UserNotFound("Invalid id: $id") }
+  return User(id)
 }
+
+object OtherError
+
+suspend fun Raise<OtherError>.recovery(): User =
+  recover({
+    fetchUser(-1)
+  }) { _: UserNotFound -> raise(OtherError) }
