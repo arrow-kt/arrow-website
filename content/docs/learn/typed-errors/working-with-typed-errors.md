@@ -127,8 +127,8 @@ fun example() {
 
   fold(
     { error() },
-    { e: UserNotFound -> e shouldBe e shouldBe UserNotFound },
-    { i: User -> fail("A logical failure occurred!") }
+    { e: UserNotFound -> e shouldBe UserNotFound },
+    { _: User -> fail("A logical failure occurred!") }
   )
 }
 ```
