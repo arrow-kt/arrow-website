@@ -157,9 +157,9 @@ const createConfig = async () => {
               ],
             },
             {
-              to: '/projects',
+              to: '/libraries',
               position: 'right',
-              label: 'Projects',
+              label: 'Libraries',
             },
             {
               to: '/training',
@@ -192,8 +192,8 @@ const createConfig = async () => {
                   to: '/learn/overview',
                 },
                 {
-                  label: 'Projects',
-                  to: '/projects',
+                  label: 'Libraries',
+                  to: '/libraries',
                 },
                 {
                   label: 'Training',

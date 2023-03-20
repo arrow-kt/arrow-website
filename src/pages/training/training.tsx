@@ -51,8 +51,8 @@ export default function Home(): JSX.Element {
         </section>
         <section
           className={`container ${styles.projectsContainer} ${styles.verticalRhythm}`}>
-          {data.projects.map((project: ImageCardProps) => (
-            <ImageCard key={project.title} {...project} />
+          {data.trainings.map((training: ImageCardProps) => (
+            <ImageCard key={training.title} {...training} />
           ))}
         </section>
         <section

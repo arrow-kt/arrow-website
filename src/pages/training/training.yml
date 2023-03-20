@@ -18,7 +18,7 @@ info:
     icon: icon-community.svg
     body: Lorem ipsum dolor sit amet, consectetur adipiscing elit. In pretium ligula nec mi facilisis malesuada. Donec sed massa finibus, laoreet tellus
 
-projects:
+trainings:
   - title: Training 1
     subtitle: By Xebia Functional
     body: Lorem ipsum dolor sit amet, consectetur adipiscing elit. In pretium ligula nec mi facilisis malesuada.
