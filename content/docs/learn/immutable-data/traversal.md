@@ -10,9 +10,9 @@ optic.
 
 :::info In a rush?
 
-- Traversal focus on an indefinite number of values.
-- To access to all the values, use `getAll`.
-  - Traversals provide an API similar to those of collections.
+- Traversals focus on an indefinite number of values.
+- To access all the values, use `getAll`.
+- Traversals provide an API similar to those of collections.
 - To modify every value focused by the traversal, use `modify`.
 
 :::
@@ -25,12 +25,12 @@ import io.kotest.matchers.shouldBe
 
 ## `Every` element in a collection
 
-As the other kinds of optics, `Traversal<T, A>` represents a reference to elements
+As with other kinds of optics, `Traversal<T, A>` represents a reference to elements
 of type `A` within a larger structure of type `T`. As hinted above, most
-traversals arise from focusing on elements in a collection; in Arrow Optics
+traversals arise from focusing on elements in a collection; in Arrow Optics,
 those basic traversals live in the `Every` object.
 
-Let's introduce a small data class for our examples,
+Let's introduce a small data class for our examples:
 
 <!--- INCLUDE
 import arrow.optics.*
@@ -51,7 +51,7 @@ fun List<Person>.happyBirthdayMap(): List<Person> =
   map { Person.age.modify(it) { age -> age + 1 } }
 ```
 
-The same code can be rewritten using only optics, by leveraging a traversal for
+The same code can be rewritten using only optics by leveraging a traversal for
 lists.
 
 ```kotlin
@@ -101,6 +101,6 @@ by a `Traversal`, we provide a [large API](https://arrow-kt.github.io/arrow/arro
 based on Kotlin's collections in the standard library.
 
 For example, you can call `isEmpty` to check whether the traversal matches any
-element. Or more generally, you can call `size` to obtain the amount of elements
-matches by it. Note that in any case these operations are "optics-first", so
+element. Or, more generally, you can call `size` to obtain the number of elements
+it matches. Note that, in any case, these operations are "optics-first", so
 you need to provide the value they operate on as an argument.
