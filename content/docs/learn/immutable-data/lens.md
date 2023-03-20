@@ -12,7 +12,7 @@ them at length.
 - Lenses represent references to fields.
 - To access the value, use `get`.
 - To modify the value, use `set` and `modify`.
-  - To modify several elements at once, use `copy`.
+- To modify several elements at once, use `copy`.
 
 :::
 
@@ -29,7 +29,7 @@ represent access to data. You can draw parallels with how function values
 represent behavior.
 
 Let's introduce a few data classes and kindly ask the Arrow Optics plug-in to
-generate lenses for every field by having an `@optics` annotation,
+generate lenses for every field by having an `@optics` annotation:
 
 ```kotlin
 import arrow.optics.*
@@ -80,7 +80,7 @@ data class Person(val name: String, val age: Int, val address: Address) {
 <!--- KNIT example-lens-02.kt -->
 
 Notice that lenses in Arrow are _typed_, which means that they "know"
-both the type of the bigger value, and the type of the element we focus on.
+both the type of the larger value and the type of the element we focus on.
 
 ```plain
                   ↱ this lens operates on 'Person'
@@ -90,11 +90,11 @@ val address: Lens<Person, Address>
 
 ### Operations
 
-Lenses provide three main operations:
+Lenses provide three primary operations:
 
-- `get` obtains the elements focused on a lens,
-- `set` changes the value of the focus to a new one,
-- `modify` transforms the value of the focus, by applying a given function.
+- `get` obtains the elements focused on a lens.
+- `set` changes the value of the focus to a new one.
+- `modify` transforms the value of the focus by applying a given function.
 
 <!--- INCLUDE
 
@@ -117,7 +117,7 @@ import arrow.optics.*
 
 Code speaks louder than words (well, sometimes). Here's a small snippet showcasing
 the three operations applied to an instance of our `Person` class. Notice how
-the three operations live on the lens, and get the value they operate on as an
+the three operations live on the lens and get the value they operate on as an
 argument.
 
 ```kotlin
@@ -144,8 +144,8 @@ fun example() {
 
 The power of lenses (and optics in general) lies in the ability to _compose_
 them to get to nested values. The type parameters in `Lens` ensure that the
-composition accesses values which are really there. For example, here's a lens
-which focuses on the city where a `Person` lives,
+composition accesses values that are really there. For example, here's a lens
+that focuses on the city where a `Person` lives:
 
 <!--- INCLUDE .*-domain-.*
 
@@ -185,7 +185,7 @@ fun example() {
 
 The `compose` infix function is an integral part of the library, but you almost
 never see it mentioned explicitly. As part of its job, the Arrow Optics compiler
-plug-in introduces additional extension functions which allow you to use the
+plug-in introduces additional extension functions that allow you to use the
 regular dot operation to access composed lenses. The code above can be rewritten
 in that form:
 
@@ -205,9 +205,9 @@ fun example() {
 
 ### More powerful `copy`
 
-Everything we've discussed until this point is enough to make transformation
-of nested data much nicer, without the nested of nested `copy` calls. However,
-if we need to modify more than one field we need to nest calls to `set` or `modify`.
+Everything we've discussed to this point is enough to make the transformation
+of nested data much nicer without the nesting of nested `copy` calls. However,
+if we need to modify more than one field, we must nest calls to `set` or `modify`.
 
 ```kotlin
 fun Person.moveToAmsterdamModify(): Person =
@@ -217,9 +217,9 @@ fun Person.moveToAmsterdamModify(): Person =
   )
 ```
 
-Arrow Optics provides a `copy` function which replicates the ability of the
-built-in `copy` to modify more than one field. The syntax is slightly different,
-though: after the `copy` you need to start a block; and within that block you
+Arrow Optics provides a `copy` function that replicates the 
+built-in `copy` ability to modify more than one field. The syntax is slightly different,
+though. After the `copy`, you need to start a block. And within that block, you
 can use the name of a lens to perform an operation.
 
 ```kotlin
@@ -229,7 +229,7 @@ fun Person.moveToAmsterdamCopy(): Person = copy {
 }
 ```
 
-One additional nicety is that you can condense those operations which share
+Another nicety is that you can condense those operations that share
 part of the journey to their focus. In our case, we are modifying two elements
 in `address.city`, which we can join using `inside`.
 

@@ -4,11 +4,11 @@ sidebar_position: 2
 
 # Pre and post-conditions
 
-In the Quickstart we've introduced the idea of pre and post-conditions of functions as promises that either the caller or the body of the function should obbey. Here we go deeper in the topic, about how these conditions may look, how they compose, and which way they are checked.
+In Quickstart we've introduced the idea of pre and post-conditions of functions as promises that either the caller or the body of the function should obey. Here we go deeper in the topic, about how these conditions may look, how they compose, and which way they are checked.
 
 ## Pre-conditions
 
-When using Arrow Analysis, each function may declare one or more _pre-conditions_, which describe what should be true of the arguments of each call to it. In other words, the **caller** of the function must ensure that pre-conditions are true on every single call.
+When using Arrow Analysis, each function may declare one or more _pre-conditions_, which describes what should be true of the arguments of each call to it. In other words, the **caller** of the function must ensure that pre-conditions are true on every single call.
 
 ```kotlin
 import arrow.analysis.pre
@@ -22,7 +22,7 @@ fun increment(x: Int): Int {
 Each pre-condition takes a Boolean condition and a block with a message describing such condition. Even though the Kotlin compiler allows any expression to appear in those positions, there are heavy restrictions on what is actually understood by Arrow Analysis.
 
 - Pre-conditions may only talk about parameters to the function, including `this` when inside a class method or defining an extension function;
-- You can only create Boolean expressions using basic arithmetic operations (addition, subtraction, ...), comparisons, and simple Boolean operations (and, or, not). In particular, you cannot define a Boolean function and use it in a condition;
+- You can only create Boolean expressions using basic arithmetic operations (addition, subtraction, etc.), comparisons, and simple Boolean operations (and, or, not). In particular, you cannot define a Boolean function and use it in a condition;
 - You may use `if` or `when`, but in the latter case only _without_ a subject;
 - The final block must be a simple constant string. We follow this pattern for compatibility with Kotlin's built-in `require` function.
 

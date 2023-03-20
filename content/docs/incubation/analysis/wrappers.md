@@ -24,7 +24,7 @@ class List<T> {
 }
 ```
 
-We use the word **field** to collectively refer to those elements of an argument we are allowed to refer to in a pre- or postcondition, or an invariant of a mutable variable or type. There are two sources for fields:
+We use the word **field** to collectively refer to those elements of an argument we are allowed to refer to in a pre- or post-condition, or an invariant of a mutable variable or type. There are two sources for fields:
 
 1. Properties and fields, like `size` above.
 2. Instance or extension methods with _no_ arguments, this allows you to use `isNotEmpty()` as a field.
@@ -46,9 +46,9 @@ Actually, if you think about it, the fact that the previous code snippet is acce
 
 It is very common, though, to have this kind of relationship between properties. Furthermore, many style guidelines suggest to use simpler Boolean predicates like `isNotEmpty()` instead of the longer `size > 0`. To establish this broken link, Arrow Analysis follows this rule:
 
-> If a field declares **no** preconditions, and a **single** postcondition of the form `{ it == SOMETHING }`, then `SOMETHING` is taken as the **definition** of that field.
+> If a field declares **no** pre-conditions, and a **single** post-condition of the form `{ it == SOMETHING }`, then `SOMETHING` is taken as the **definition** of that field.
 
-The tool then deems each usage of the derived field as being equivalent to its definition. In our case, the `List` class would declare the postcondition in `isNotEmpty`.
+The tool then deems each usage of the derived field as being equivalent to its definition. In our case, the `List` class would declare the post-condition in `isNotEmpty`.
 
 ```kotlin
 import arrow.analysis.post
@@ -66,7 +66,7 @@ We remark that this definition only applies at the level of Arrow Analysis. The 
 
 ## Inline classes
 
-Sometimes there's a particular invariant we repeat over and over in our code. For example, a list not being empty, or a number being positive:
+Sometimes there's a particular invariant we repeat over and over in our code. For example, a list not being empty or a number being positive:
 
 ```kotlin
 fun average(xs: List<Int>): Int {
