@@ -1,0 +1,17 @@
+/* Fonts */
+@font-face {
+  font-family: 'Inter';
+  font-weight: 100 900;
+  font-display: swap;
+  font-style: normal;
+  font-named-instance: 'Regular';
+  src: url('/static/fonts/Inter-Roman-Var.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-weight: 400;
+  font-display: swap;
+  font-style: normal;
+  src: url('/static/fonts/JetBrainsMono-Medium.woff2') format('woff2');
+}

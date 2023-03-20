@@ -1,34 +1,42 @@
+hero:
+  title: Λrrow brings idiomatic <u>functional programming</u> to Kotlin
+  ctaList:
+    - title: What is Λrrow
+      href: /learn/overview
+
+    - title: Get Started
+      href: /learn/quickstart
+
 features:
   - title: Quickstart
-    link: /learn/quickstart
+    href: /learn/quickstart
     icon: icon-quickstart.svg
     body: Gradle or Maven, JVM or Multiplatform, Λrrow fits in all your projects
 
   - title: Typed errors
-    link: /learn/typed-errors
+    href: /learn/typed-errors
     icon: icon-typed-errors.svg
     body: Structured, predictable, and efficient handling of errors
 
   - title: Coroutines
-    link: /learn/coroutines
+    href: /learn/coroutines
     icon: icon-coroutines.svg
     body: High-level utilities for working with coroutines, and correctly managing resources and shared data
 
   - title: Resilience
-    link: /learn/resilience
+    href: /learn/resilience
     icon: icon-resilience.svg
     body: Make your code respond to failures in an organized way
 
   - title: Immutable data
-    link: /learn/immutable-data
+    href: /learn/immutable-data
     icon: icon-immutable-data.svg
     body: Great tooling for dealing with immutable data and sealed hierarchies
 
   - title: Design
-    link: /learn/design
+    href: /learn/design
     icon: icon-design.svg
     body: Recipes for designing nice, readable, and maintainable Kotlin code
-
 
 projects:
   - title: Case study 1
@@ -38,7 +46,6 @@ projects:
   - title: Case study 3
 
   - title: Case study 4
-
 
 quotes:
   - name: Francico Díaz
@@ -51,23 +58,21 @@ quotes:
     image: quoted-person-b.jpg
     body: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eu turpis molestie, dictum est . Etiam eu turpis Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eu turpis molestie, dictum est . Etiam eu turpis
 
-
 navs:
   - title: Support
-    link: community/support
+    href: /community/support
     icon: icon-support.svg
     body: Lorem ipsum dolor sit amet, consectetur adipiscing eliorem ipsum dolor sit amet
 
   - title: Blog
-    link: community/blog
+    href: /community/blog
     icon: icon-blog.svg
     body: Lorem ipsum dolor sit amet, consectetur adipiscing eliorem ipsum dolor sit amet
 
   - title: Events
-    link: community/events
+    href: /community/events
     icon: icon-events.svg
     body: Lorem ipsum dolor sit amet, consectetur adipiscing eliorem ipsum dolor sit amet
-
 
 companies:
   - name: Verizon

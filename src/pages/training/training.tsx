@@ -1,30 +1,46 @@
 import React from 'react';
-import parse from 'html-react-parser';
 
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
-import useBaseUrl from '@docusaurus/useBaseUrl';
 import Layout from '@theme/Layout';
 
 import { Hero } from '@site/src/components/Hero';
-import { LinkCard, LinkCardProps } from '@site/src/components/LinkCard/index';
 import { ImageCard, ImageCardProps } from '@site/src/components/ImageCard';
 import { QuoteCard, QuoteCardProps } from '@site/src/components/QuoteCard';
-import { BorderlessCard } from '@site/src/components/BorderlessCard';
+import {
+  BorderlessCard,
+  BorderlessCardProps,
+} from '@site/src/components/BorderlessCard';
+import { Banner } from '@site/src/components/Banner';
 
-import data from './index.yml';
-import styles from './index.module.css';
+import data from './training.yml';
+import styles from './training.module.css';
 
-export default function Home(): JSX.Element {
+export default function Training(): JSX.Element {
   const { siteConfig } = useDocusaurusContext();
 
   return (
-    <Layout description={siteConfig.tagline}>
+    <Layout title="Training" description={siteConfig.tagline}>
       <Hero
-        title={parse(data.hero.title)}
+        title={data.hero.title}
+        subtitle={data.hero.subtitle}
         ctaList={data.hero.ctaList}
         className={styles.verticalRhythm}
       />
       <main>
+        <section
+          className={`container text--center ${styles.textContainer} ${styles.verticalRhythm}`}>
+          <h1>Learn with Λrrow</h1>
+          <p>
+            Λrrow is composed of different libraries that greatly improve your
+            developer experience using Kotlin
+          </p>
+        </section>
+        <section
+          className={`container ${styles.navigationContainer} ${styles.verticalRhythm}`}>
+          {data.info.map((info: BorderlessCardProps) => (
+            <BorderlessCard key={info.title} {...info} />
+          ))}
+        </section>
         <section
           className={`container text--center ${styles.textContainer} ${styles.verticalRhythm}`}>
           <h1>Start learning now</h1>
@@ -34,28 +50,14 @@ export default function Home(): JSX.Element {
           </p>
         </section>
         <section
-          className={`container ${styles.featuresContainer} ${styles.verticalRhythm}`}>
-          {data.features.map((feature: LinkCardProps) => (
-            <LinkCard key={feature.title} {...feature} />
-          ))}
-        </section>
-        <section
-          className={`container text--center ${styles.textContainer} ${styles.verticalRhythm}`}>
-          <h1>What can Λrrow do</h1>
-          <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eu
-            turpis molestie, dictum est
-          </p>
-        </section>
-        <section
           className={`container ${styles.projectsContainer} ${styles.verticalRhythm}`}>
-          {data.projects.map((project: ImageCardProps) => (
-            <ImageCard key={project.title} {...project} />
+          {data.trainings.map((training: ImageCardProps) => (
+            <ImageCard key={training.title} {...training} />
           ))}
         </section>
         <section
           className={`container text--center ${styles.textContainer} ${styles.verticalRhythm}`}>
-          <h1>What the community say</h1>
+          <h1>About our courses</h1>
           <p>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eu
             turpis molestie, dictum est
@@ -69,22 +71,12 @@ export default function Home(): JSX.Element {
         </section>
         <section
           className={`container ${styles.navigationContainer} ${styles.verticalRhythm}`}>
-          {data.navs.map((nav: SimpleCardProps) => (
+          {data.navs.map((nav: BorderlessCardProps) => (
             <BorderlessCard key={nav.title} {...nav} />
           ))}
         </section>
-        <section
-          className={`${styles.usageWrapperContainer} ${styles.verticalRhythm}`}>
-          <div className={`container ${styles.usageContainer}`}>
-            {data.companies.map((company: { name: string; logo: string }) => (
-              <img
-                key={company.name}
-                src={useBaseUrl(`/img/${company.logo}`)}
-                alt={company.name}
-                title={company.name}
-              />
-            ))}
-          </div>
+        <section>
+          <Banner title={data.banner.title} ctaList={data.banner.ctaList} />
         </section>
       </main>
     </Layout>

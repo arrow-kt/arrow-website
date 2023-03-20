@@ -60,7 +60,11 @@ const createConfig = async () => {
             editUrl: 'https://github.com/arrow-kt/arrow-website/edit/main/',
           },
           theme: {
-            customCss: require.resolve('./src/css/custom.css'),
+            customCss: [
+              require.resolve('./src/css/typography.css'),
+              require.resolve('./src/css/vars.css'),
+              require.resolve('./src/css/custom.css'),
+            ],
           },
         }),
       ],
@@ -153,9 +157,9 @@ const createConfig = async () => {
               ],
             },
             {
-              to: '/projects',
+              to: '/libraries',
               position: 'right',
-              label: 'Projects',
+              label: 'Libraries',
             },
             {
               to: '/training',
@@ -188,8 +192,8 @@ const createConfig = async () => {
                   to: '/learn/overview',
                 },
                 {
-                  label: 'Projects',
-                  to: '/projects',
+                  label: 'Libraries',
+                  to: '/libraries',
                 },
                 {
                   label: 'Training',

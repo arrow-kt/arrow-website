@@ -4,13 +4,13 @@ sidebar_position: 3
 
 # Optionals & prisms
 
-Optionals allow focusing on elements which may not be present. This includes
-nullable values, and also elements on indexed collections such as `List` or `Map`.
+Optionals allow focusing on elements that may not be present. This includes
+nullable values and elements on indexed collections such as `List` or `Map`.
 
 :::info In a rush?
 
 - Optionals represent potentially missing values.
-- Prisms extends optionals to represent class hierarchies.
+- Prisms extend optionals to represent class hierarchies.
 - To access the value, use `getOrNull`.
 - To modify the value (**only** if present), use `set` and `modify`.
 
@@ -24,8 +24,8 @@ import io.kotest.matchers.shouldBe
 
 ## Indexed collections
 
-To exemplify why optionals are useful, let's introduce a few domain classes,
-which model a small in-memory database mapping person names to the city in
+To exemplify why optionals are helpful, let's introduce a few domain classes
+that model a small in-memory database mapping person names to the city in
 which they live.
 
 ```kotlin
@@ -42,9 +42,9 @@ import arrow.optics.typeclasses.*
 ```
 
 There's a notion of elements within a map, which we refer to by their key.
-We cannot model them as lenses, though, because we don't know upfront whether
-a certain key is present in the map. Optionals come to the rescue: they are
-optics whose focus may not exist for a certain value.
+However, we cannot model them as lenses because we don't know whether
+a particular key is present in the map. Optionals come to the rescue: they are
+optics whose focus may not exist for a specific value.
 
 As a result, the `get` operation is replaced by `getOrNull`, where `null`
 indicates that the value is not present. The following code snippet provides
@@ -65,7 +65,7 @@ fun example() {
 <!--- TEST assert -->
 
 One important (and sometimes surprising) behavior of optionals is that using
-`set` or `modify` only transforms the value if it was already present. That means
+`set` or `modify` only transforms the value if it is already present. That means
 that we cannot use `index` to _add_ elements to the database, only to _modify_
 those already present.
 
@@ -136,7 +136,7 @@ fun example() {
 :::tip More indexed collections
 
 The first parameter to the `index` optional represents the type of collection
-you are accessing. Currently this argument can be `Index.list`, `Index.map`,
+you are accessing. Currently, this argument can be `Index.list`, `Index.map`,
 `Index.sequence`, or `Index.string`. The choice defines the type of keys
 and values expected by each operation.
 
@@ -144,9 +144,9 @@ and values expected by each operation.
 
 ## (Sealed) class hierarchies
 
-Other important use case for optionals is matching different kinds of values
+Another critical use case for optionals is matching different values
 within a (sealed) class hierarchy. The following is an example of `User` where
-we have two options, either being a person or a company.
+we have two options: a person or a company.
 
 ```kotlin
 import arrow.optics.*
@@ -165,8 +165,8 @@ import arrow.optics.*
 The Arrow Optics plug-in generates two optics within `User`, namely
 `User.person` and `User.company`. These optics only focus on a value when
 it has the corresponding type. This is often used to modify a value only
-for a certain type in the hierarchy, leaving the rest untouched. This is
-exactly what happens in the function below: `Person`s get their age incremented,
+for a specific type in the hierarchy, leaving the rest untouched. This is
+precisely what happens in the function below: `Person`s get their age incremented,
 but `Company`s remains unchanged.
 
 ```kotlin
@@ -207,9 +207,9 @@ fun example() {
 
 :::danger Breaking change in Arrow 2.x
 
-The Arrow Optics plug-in in Arrow 1.x creates optionals for field with nullable
-types. This has sometimes led to surprises, because with an optional you cannot
-modify that value if it's `null`. In Arrow 2.x every field gives rise to a lens
+The Arrow Optics plug-in in Arrow 1.x creates optionals for fields with nullable
+types. This has sometimes led to surprises because, with an optional, you cannot
+modify that value if it's `null`. In Arrow 2.x, every field gives rise to a lens
 instead. The old behavior is available via the `notNull` extension function.
 
 :::
@@ -217,14 +217,14 @@ instead. The old behavior is available via the `notNull` extension function.
 Kotlin supports the notion of [nullable types](https://kotlinlang.org/docs/null-safety.html),
 which clearly specify when a value may be absent. The compiler prevents you from
 calling a method or function that requires a non-`null` value with a potentially
-absent one. This checks are also in place when working with Arrow Optics;
-if you have a `nickname: Lens<Person, String?>`, then you need to account for
+absent one. These checks are also in place when working with Arrow Optics;
+if you have a `nickname: Lens<Person, String?>`, you must account for
 nullability in each potential modification.
 
 It's also possible to turn a lens over a nullable type into an optional of the
-unwrapped type by means of `notNull`. In the example above, `nickname.notNull`
+unwrapped type using `notNull`. In the example above, `nickname.notNull`
 has the type `Optional<Person, String>` (notice the lack of `?` at the end
-of the second type parameter). However, you should be aware that in the same way
-that with indexed collections you could not add or remove elements, with
-`notNull` you cannot change whether the value is `null` or not, only modify
+of the second type parameter). However, you should be aware that, in the same way
+as with indexed collections where you could not add or remove elements, with
+`notNull`, you cannot change whether the value is `null` or not; only modify
 it if it's already not null.
