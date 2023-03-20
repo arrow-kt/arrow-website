@@ -28,7 +28,7 @@ In summary, typed errors provide a more structured, predictable, and efficient w
 
 ## Different types
 
-There are 3 ways of working with errors (excluding _nullability_, or absence of value):
+There are 3 ways of working with errors (in addition to [_nullability_ and `Option`](../nullable-and-option), which model simple absence of value):
 
 - `Either<E, A>` represents a _computed value_ of _either_ a _logical failure_ of `E` or a _success_ value `A`.
 
@@ -40,7 +40,7 @@ Below we'll cover how you can work with these types, and the differences and sim
 
 ## Working with errors
 
-Let's define a simple program that _raises_ a _logical failure_ of `UserNotFound` or returns an `User`. We can represent this as a value `Either<UserNotFound, User>`, or a _computation_ using `Raise<UserNotFound>`.
+Let's define a simple program that _raises_ a _logical failure_ of `UserNotFound` or returns an `User`. We can represent this both as a value `Either<UserNotFound, User>`, and as a _computation_ (using `Raise<UserNotFound>`).
 
 <!--- INCLUDE
 import arrow.core.Either
@@ -92,7 +92,7 @@ fun example() {
 <!--- TEST assert -->
 
 :::info Fold over all possible cases
-`fold` is also available with a `catch` argument to recover from any `Throwable` that might've been thrown.
+Unless you explicitly wrap your code to catch exceptions as part of `Either` or `Raise`, exceptions bubble up in the usual way. If you need to handle those exceptions, `fold` is also available with a `catch` argument to recover from any `Throwable` that might've been thrown.
 :::
 
 To create a _value_ of a _logical failure_ we use the `left` _smart-constructor_ for `Either`, or `raise` DSL function for a _logical failure_ inside a `Raise` _computation_.
@@ -198,7 +198,7 @@ fun User.isValid(): Unit =
 <!--- KNIT example-typed-errors-04.kt -->
 
 ::: info 
-The [Arrow Detekt Rules]((https://github.com/woltapp/arrow-detekt-rules) project has a set of rules to _detekt_ you call `bind` on all `Either` values.
+The [Arrow Detekt Rules]((https://github.com/woltapp/arrow-detekt-rules) project has a set of rules to _detekt_ you call `bind` on every `Either` value.
 :::
 
 `ensureNotNull` takes a _nullable value_ and a _lazy_ `UserNotFound` value, when the value is null the _computation_ will result in a _logical failure_ of `UserNotFound`.
@@ -503,7 +503,7 @@ fun example() {
 <!--- KNIT example-typed-errors-11.kt -->
 <!--- TEST assert -->
 
-## Creating your own DSLs
+## Creating your own error wrappers
 
 `Raise` is a very powerful tool that allows us to create our own DSLs that can raise typed errors.
 It easily allows integrating with existing libraries, and frameworks, that offer similar data types like `Either`. Or even your own custom types.
