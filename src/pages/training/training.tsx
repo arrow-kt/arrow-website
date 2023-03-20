@@ -15,7 +15,7 @@ import { Banner } from '@site/src/components/Banner';
 import data from './training.yml';
 import styles from './training.module.css';
 
-export default function Home(): JSX.Element {
+export default function Training(): JSX.Element {
   const { siteConfig } = useDocusaurusContext();
 
   return (
