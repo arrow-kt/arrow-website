@@ -6,17 +6,17 @@ sidebar_position: 1
 
 <!--- TEST_NAME TypedErrorsTest -->
 
-Working with typed errors offers a couple of advantages over using exceptions:
+Working with typed errors offers a few advantages over using exceptions:
 
 - **Type Safety:** Typed errors allow the compiler to find type mismatches early, making it easier to catch bugs before they make it to production. However, with exceptions, the type information is lost, making it more difficult to detect errors at compile-time.
 
-- **Predictability:** When using typed errors, the possible error conditions are explicitly listed in the type signature of a function. This makes it easier to understand the possible error conditions and to write tests to cover all error scenarios.
+- **Predictability:** When using typed errors, the possible error conditions are explicitly listed in the type signature of a function. This makes it easier to understand the possible error conditions and write tests covering all error scenarios.
 
-- **Composability:** Typed errors can be easily combined and propagated through a series of function calls, making it easier to write modular, composable code. With exceptions, it can be difficult to ensure that errors are properly propagated through a complex codebase.
+- **Composability:** Typed errors can be easily combined and propagated through a series of function calls, making writing modular, composable code easier. With exceptions, ensuring errors are correctly propagated through a complex codebase can be difficult.
 
-- **Performance:** Exception handling can have a significant impact on performance, especially in languages that don't have a dedicated stack for exceptions. Typed errors can be handled more efficiently, as the compiler has more information about the possible error conditions.
+- **Performance:** Exception handling can significantly impact performance, especially in languages that don't have a dedicated stack for exceptions. Typed errors can be handled more efficiently as the compiler has more information about the possible error conditions.
 
-In summary, typed errors provide a more structured, predictable, and efficient way of handling errors, and can make it easier to write high-quality, maintainable code.
+In summary, typed errors provide a more structured, predictable, and efficient way of handling errors and make writing high-quality, maintainable code easier.
 
 :::info Media resources
 
@@ -28,7 +28,7 @@ In summary, typed errors provide a more structured, predictable, and efficient w
 
 ## Different types
 
-There are 3 ways of working with errors (in addition to [_nullability_ and `Option`](../nullable-and-option), which model simple absence of value):
+There are three ways of working with errors (in addition to [_nullability_ and `Option`](../nullable-and-option), which model simple absence of value):
 
 - `Either<E, A>` represents a _computed value_ of _either_ a _logical failure_ of `E` or a _success_ value `A`.
 
@@ -36,11 +36,11 @@ There are 3 ways of working with errors (in addition to [_nullability_ and `Opti
 
 - `Raise<E>` represents a _computation_ that might result in a _logical failure_ of `E`.
 
-Below we'll cover how you can work with these types, and the differences and similarities using some examples. All of these types expose a similar API, and allow working in a similar fashion.
+Below, we'll cover how you can work with these types and the differences and similarities using some examples. These types expose a similar API and allow working in a similar fashion.
 
 ## Working with errors
 
-Let's define a simple program that _raises_ a _logical failure_ of `UserNotFound` or returns an `User`. We can represent this both as a value `Either<UserNotFound, User>`, and as a _computation_ (using `Raise<UserNotFound>`).
+Let's define a simple program that _raises_ a _logical failure_ of `UserNotFound` or returns a `User`. We can represent this both as a value `Either<UserNotFound, User>`, and as a _computation_ (using `Raise<UserNotFound>`).
 
 <!--- INCLUDE
 import arrow.core.Either
@@ -62,9 +62,9 @@ val user: Either<UserNotFound, User> = User(1).right()
 fun Raise<UserNotFound>.user(): User = User(1)
 ```
 
-Above we clearly show the difference between a _value_, or `val`, of `Either` and a _computation_, or `fun`, using `Raise<UserNotFound>`. Since **both** represent _either_ `UserNotFound` or `User` we can easily work with both together.
+Above, we clearly show the difference between a _value_, or `val`, of `Either` and a _computation_, or `fun`, using `Raise<UserNotFound>`. Since **both** represent _either_ `UserNotFound` or `User`, we can easily work with both together.
 
-We can easily turn our _computation_ `user()` into a _value_ of `Either` by wrapping it inside the `either` DSL, and we can do the opposite for our `Either` value by _safely_ unwrapping it using `bind()`.
+We can quickly turn our _computation_ `user()` into a _value_ of `Either` by wrapping it inside the `either` DSL, and we can do the opposite for our `Either` value by _safely_ unwrapping it using `bind()`.
 
 ```kotlin
 val res = either { user() }
@@ -95,7 +95,7 @@ fun example() {
 Unless you explicitly wrap your code to catch exceptions as part of `Either` or `Raise`, exceptions bubble up in the usual way. If you need to handle those exceptions, `fold` is also available with a `catch` argument to recover from any `Throwable` that might've been thrown.
 :::
 
-To create a _value_ of a _logical failure_ we use the `left` _smart-constructor_ for `Either`, or `raise` DSL function for a _logical failure_ inside a `Raise` _computation_.
+To create a _value_ of a _logical failure_, we use the `left` _smart-constructor_ for `Either`, or `raise` DSL function for a _logical failure_ inside a `Raise` _computation_.
 
 <!--- INCLUDE
 import arrow.core.Either
@@ -135,12 +135,12 @@ fun example() {
 <!--- KNIT example-typed-errors-02.kt -->
 <!--- TEST assert -->
 
-Beside `raise`, or `left` there are also several DSLs available to check invariants.
+Besides `raise` or `left`, several DSLs are also available to check invariants.
 `either { }` and `Raise` offer `ensure` and `ensureNotNull`, in spirit with `require` and `requireNotNull` from the Kotlin Std.
 Instead of throwing an exception, they result in a _logical failure_ with the given error if the predicate is not satisfied.
 
-`ensure` takes a _predicate_ and a _lazy_ `UserNotFound` value, when the _predicate_ is not matched the _computation_ will result in a _logical failure_ of `UserNotFound`.
-In the function below we show how we can use `ensure` to check if a given `User` has a valid id, and if not we return a _logical failure_ of `UserNotFound`.
+`ensure` takes a _predicate_ and a _lazy_ `UserNotFound` value. When the _predicate_ is not matched, the _computation_ will result in a _logical failure_ of `UserNotFound`.
+In the function below, we show how we can use `ensure` to check if a given `User` has a valid id, and if not, we return a _logical failure_ of `UserNotFound`.
 
 <!--- INCLUDE
 import arrow.core.Either
@@ -180,8 +180,8 @@ fun example() {
 <!--- KNIT example-typed-errors-03.kt -->
 <!--- TEST assert -->
 
-Without context receivers these functions look quite different depending on if we use `Raise` or `Either`, this is because we sacrifice our _extension receiver_ for `Raise`.
-And thus the `Raise` based computation cannot be an extension function on `User`, with context receivers we could've defined it:
+Without context receivers, these functions look pretty different depending on if we use `Raise` or `Either`. This is because we sacrifice our _extension receiver_ for `Raise`.
+And thus, the `Raise` based computation cannot be an extension function on `User`. With context receivers, we could've defined it as:
 
 <!--- INCLUDE
 import arrow.core.raise.Raise
@@ -201,9 +201,9 @@ fun User.isValid(): Unit =
 The [Arrow Detekt Rules]((https://github.com/woltapp/arrow-detekt-rules) project has a set of rules to _detekt_ you call `bind` on every `Either` value.
 :::
 
-`ensureNotNull` takes a _nullable value_ and a _lazy_ `UserNotFound` value, when the value is null the _computation_ will result in a _logical failure_ of `UserNotFound`.
-Otherwise, the value will be _smart-casted_ to non-null, and you will be able to operate on it without checking nullability.
-In the function below we show how we can use `ensureNotNull` to check if a given `User` is non-null, and if not we return a _logical failure_ of `UserNotFound`.
+`ensureNotNull` takes a _nullable value_ and a _lazy_ `UserNotFound` value. When the value is null, the _computation_ will result in a _logical failure_ of `UserNotFound`.
+Otherwise, the value will be _smart-casted_ to non-null, and you can operate on it without checking nullability.
+In the function below, we show how we can use `ensureNotNull` to check if a given `User` is non-null, and if not, we return a _logical failure_ of `UserNotFound`.
 
 <!--- INCLUDE
 import arrow.core.Either
@@ -244,8 +244,8 @@ fun example() {
 
 ## Recovering from typed errors
 
-When working with values or functions that can result in a typed error we often need to _recover_ to be able to provide, or calculate, fallback values.
-To demonstrate some ways we can _recover_ from _logical failures_ let's define a simple function that returns our `User` in case the `id > 0`, otherwise it returns `UserNotFound`.
+When working with values or functions that can result in a typed error, we often need to _recover_ to provide or calculate fallback values.
+To demonstrate how we can _recover_ from _logical failures_, let's define a simple function that returns our `User` in case the `id > 0`; otherwise it returns `UserNotFound`.
 
 <!--- INCLUDE
 import arrow.core.Either
@@ -273,8 +273,8 @@ suspend fun Raise<UserNotFound>.fetchUser(id: Long): User {
 }
 ```
 
-To recover from any errors on a `Either` value we can most conveniently use `getOrElse`, since it allows us to _unwrap_ the `Either` and provide a fallback value.
-The same can be done for the `Raise` based computation by using the `recover` DSL instead.
+To recover from any errors on a `Either` value, we can most conveniently use `getOrElse`, since it allows us to _unwrap_ the `Either` and provide a fallback value.
+The same can be done for the `Raise` based computation using the `recover` DSL instead.
 
 ```kotlin
 suspend fun example() {
@@ -289,9 +289,9 @@ suspend fun example() {
 <!--- KNIT example-typed-errors-06.kt -->
 <!--- TEST assert -->
 
-Default to `null` is typically not desired, since we've effectively swallowed our _logical failure_ and ignored our error. If that was desirable we could've just used nullable types from the beginning.
-When encountering a _logical failure_ and not being able to provide a proper fallback value we typically want to execute another operation that might fail with `OtherError`.
-As a result our `Either` value doesn't get _unwrapped_ like it did with `getOrElse`, since a different _logical failure_ might've occurred.
+Default to `null` is typically not desired since we've effectively swallowed our _logical failure_ and ignored our error. If that was desirable, we could've used nullable types initially.
+When encountering a _logical failure_ and not being able to provide a proper fallback value, we typically want to execute another operation that might fail with `OtherError`.
+As a result, our `Either` value doesn't get _unwrapped_ as it did with `getOrElse`, since a different _logical failure_ might've occurred.
 
 <!--- INCLUDE
 import arrow.core.Either
@@ -333,8 +333,8 @@ fun example() {
 <!--- KNIT example-typed-errors-07.kt -->
 <!--- TEST assert -->
 
-The type system now tracks that a new error of `OtherError` might have occurred, but that we recovered from any possible errors of `UserNotFound `. This is useful across application layers, or in the service layer, where we might want to `recover` from a `DatabaseError` with a `NetworkError` when we want to load data from the network when a database operation failed.
-In order to achieve the same with the `Raise` DSL we need to be inside the context of `Raise<OtherError>` to be able to `raise` it.
+The type system now tracks that a new error of `OtherError` might have occurred, but we recovered from any possible errors of `UserNotFound `. This is useful across application layers or in the service layer, where we might want to `recover` from a `DatabaseError` with a `NetworkError` when we want to load data from the network when a database operation failed.
+To achieve the same with the `Raise` DSL, we need to be inside the context of `Raise<OtherError>` to `raise` it.
 
 <!--- INCLUDE
 import arrow.core.raise.Raise
@@ -360,25 +360,25 @@ suspend fun Raise<OtherError>.recovery(): User =
 <!--- KNIT example-typed-errors-08.kt -->
 
 ::: tip DSLs everywhere
-Since recover for both `Either` and `Raise` is DSL based you can also call `bind`, or `raise` from both.
-This allows seamless interop between both types both when creating programs that can fail, but also when recovering from them.
+Since recovery for both `Either` and `Raise` is DSL based, you can also call `bind` or `raise` from both.
+This allows seamless interop between both types when creating programs that can fail and recovering from them.
 :::
 
-## Recovering from exceptions, and wrapping foreign code
+## Recovering from exceptions and wrapping foreign code
 
-When building applications we often need to wrap side effects or foreign code, for example when interacting with the network or databases.
-Wrapping such APIs requires handling the possibility of failure, and we can do so by returning a _logical failure_. The question is often do we need to take into **all** exceptions, or just a subset of them?
-The answer is that it depends on the use case, but in general we should try to be as specific as possible, and only handle the exceptions that we can recover from or expect.
-However, when interacting with improperly defined systems you might want to be more defensive.
+When building applications, we often need to wrap side effects or foreign code, like when interacting with the network or databases.
+Wrapping such APIs requires handling the possibility of failure, and we can do so by returning a _logical failure_. The question is often, do we need to take into **all** exceptions or just a subset of them?
+The answer is that it depends on the use case, but, in general, we should try to be as specific as possible and only handle the exceptions that we can recover from or expect.
+However, you might want to be more defensive when interacting with improperly defined systems.
 
-Let's take a look at an example where we interact with a database, and we want to insert a new user. If the user already exists we want to return a _logical failure_ of `UserAlreadyExists`, otherwise we want to return the newly created user.
-We again showcase both the code for `Either`, and `Raise` based computation and see that both are almost the same.
+Let's look at an example where we interact with a database and want to insert a new user. If the user already exists, we want to return a _logical failure_ of `UserAlreadyExists`. Otherwise, we want to return the newly created user.
+We again showcase both the code for `Either` and `Raise` based computation and see that both are almost the same.
 
-The `catch` DSL allows us to wrap foreign functions, and capture any `Throwable` or `T: Throwable` that might be thrown. It automatically avoids capturing [fatal exceptions](https://arrow-kt.github.io/arrow/arrow-core/arrow.core/-non-fatal.html) such as `OutOfMemoryError`, or Kotlin's `CancellationException`.
-It requires two functions, or lambdas, as arguments. One for wrapping our _foreign code_, and another one for resolving the captured `Throwable` or `T : Throwable`. In this case instead of providing a fallback value, we `raise` a _logical failure_.
+The `catch` DSL allows us to wrap foreign functions and capture any `Throwable` or `T: Throwable` that might be thrown. It automatically avoids capturing [fatal exceptions](https://arrow-kt.github.io/arrow/arrow-core/arrow.core/-non-fatal.html) such as `OutOfMemoryError`, or Kotlin's `CancellationException`.
+It requires two functions, or lambdas, as arguments: One for wrapping our _foreign code_ and another for resolving the captured `Throwable` or `T : Throwable`. In this case, instead of providing a fallback value, we `raise` a _logical failure_.
 
-We expect `SQLException` since we're only _expect_ it to be thrown, and rethrow any other `Throwable`.
-We can then operate on the captured `SQLException` to check if our insertion failed with a unique violation, and in that case we turn it into a `UserAlreadyExists` _logical failure_.
+We expect `SQLException` since we only _expect_ it to be thrown and rethrow any other `Throwable`.
+We can then operate on the captured `SQLException` to check if our insertion failed with a unique violation, and, in that case, we turn it into a `UserAlreadyExists` _logical failure_.
 
 <!--- INCLUDE
 import arrow.core.Either
@@ -404,8 +404,8 @@ suspend fun Raise<UserAlreadyExists>.insertUser(username: String, email: String)
   }
 ```
 
-Since we also have `raise` available inside `either` we can also write the same code using `either`, or even execute this function inside an `either` block as shown above.
-This behavior is also available as top-level functionality on `Either` itself if you prefer to use that. It can be achieved by using `catchOrThrow` instead of `catch`, and `mapLeft` to transform `SQLException` into `UserAlreadyExists`.
+Since we also have `raise` available inside `either`, we can also write the same code using `either` or execute this function inside an `either` block as shown above.
+This behavior is also available as top-level functionality on `Either` itself if you prefer to use that. It can be achieved using `catchOrThrow` instead of `catch` and `mapLeft` to transform `SQLException` into `UserAlreadyExists`.
 
 ```kotlin
 suspend fun insertUser(username: String, email: String): Either<UserAlreadyExists, Long> =
@@ -422,8 +422,8 @@ This pattern allows us to turn exceptions we want to track into _typed errors_, 
 
 ## Accumulating errors
 
-All the behavior above work similar to `Throwable`, but in a typed manner. This means that if we encounter a typed error, or _logical failure_, that error is propagated, and we can't continue with the computation and _short-circuit_.
-When we need to work with collections, or `Iterable`, we often want to accumulate all the errors, and not short-circuit. Lets take a look at how we can do this.
+All the behavior above works similarly to `Throwable`, but in a typed manner. This means that if we encounter a typed error or _logical failure_, that error is propagated, and we can't continue with the computation and _short-circuit_.
+When we need to work with collections, or `Iterable`, we often want to accumulate all the errors and not short-circuit. Let's take a look at how we can do this.
 
 <!--- INCLUDE
 import arrow.core.Either
@@ -445,9 +445,9 @@ fun isEven2(i: Int): Either<NotEven, Int> =
   either { isEven(i) }
 ```
 
-First we define two functions that return a typed error if the value is not even.
-If we want to accumulate all the errors we can use `mapOrAccumulate` on `Iterable` to accumulate all the errors, and doing so for `(0..10)` should return the following `errors`.
-The errors are accumulated into `NonEmptyList` since there needs to be at least one error, or we would succeeded with the computation.
+First, we define two functions that return a typed error if the value is not even.
+If we want to accumulate all the errors, we can use `mapOrAccumulate` on `Iterable` to get all the errors, and doing so for `(0..10)` should return the following `errors`.
+The errors are accumulated into `NonEmptyList` since there needs to be at least one error, or we would succeed with the computation.
 
 ```kotlin
 val errors = nonEmptyListOf(NotEven(1), NotEven(3), NotEven(5), NotEven(7), NotEven(9)).left()
@@ -461,7 +461,7 @@ fun example() {
 <!--- TEST assert -->
 
 We can also provide custom logic to accumulate the errors, typically when we have custom types.
-Below instead of `NonEmptyList<NotEven>` we have a `MyError` type that builds a String with all the error messages.
+Below, instead of `NonEmptyList<NotEven>`, we have a `MyError` type that builds a String with all the error messages.
 So we again define two functions that return a typed error if the value is not even.
 
 <!--- INCLUDE
@@ -505,9 +505,9 @@ fun example() {
 
 ## Creating your own error wrappers
 
-`Raise` is a very powerful tool that allows us to create our own DSLs that can raise typed errors.
-It easily allows integrating with existing libraries, and frameworks, that offer similar data types like `Either`. Or even your own custom types.
-As an example let's take a popular ADT that is often used in the frontend, a type that models `Loading`, `Content`, or `Failure`, often abbreviated as `LCE`.
+`Raise` is a powerful tool that allows us to create our own DSLs to raise typed errors.
+It easily allows integration with existing libraries and frameworks that offer similar data types like `Either` or even your own custom types.
+For example, let's take a popular ADT often used in the front end, a type that models `Loading`, `Content`, or `Failure`, often abbreviated as `LCE`.
 
 <!--- INCLUDE
 import arrow.core.raise.Raise
@@ -524,9 +524,9 @@ sealed interface Lce<out E, out A> {
 }
 ```
 
-Let's say that once a `Failure` or `Loading` case is encountered we want to short-circuit, and not continue with the computation.
-It's easy to define a `Raise` instance for `Lce` that does just that. To do this **without** context receivers we'll use the composition pattern.
-Since we need to _raise_ both `Lce.Loading` and `Lce.Failure` our `Raise` instance will need to be able to `raise` `Lce<E, Nothing>`, and we wrap that in a `LceRaise` class.
+Let's say that once a `Failure` or `Loading` case is encountered, we want to short-circuit and not continue with the computation.
+It's easy to define a `Raise` instance for `Lce` that does just that. We'll use the composition pattern to do this **without** context receivers.
+Since we need to _raise_ both `Lce.Loading` and `Lce.Failure`, our `Raise` instance will need to be able to `raise` `Lce<E, Nothing>`, and we wrap that in a `LceRaise` class.
 Within that class, a `bind` function can be defined to short-circuit any encountered `Failure` or `Loading` case or otherwise return the `Content` value.
 
 ```kotlin
@@ -540,8 +540,8 @@ value class LceRaise<E>(val raise: Raise<Lce<E, Nothing>>) : Raise<Lce<E, Nothin
 }
 ```
 
-All that is required now is a DSL function. We can use the `recover`, or `fold`, function to summon an instance of `RaiseLce<E, Nothing>` from the `Raise` type class.
-We wrap the `block` in an `Lce.Content` value, and return any encountered `Lce<E, Nothing>` value. We can call `block` by wrapping `Raise<Lce<E, Nothing>>` in `LceRaise`.
+All that is required now is a DSL function. We can use the `recover` or `fold` function to summon an instance of `RaiseLce<E, Nothing>` from the `Raise` type class.
+We wrap the `block` in an `Lce.Content` value and return any encountered `Lce<E, Nothing>` value. We can call `block` by wrapping `Raise<Lce<E, Nothing>>` in `LceRaise`.
 
 ```kotlin
 @OptIn(ExperimentalTypeInference::class)
@@ -549,8 +549,8 @@ inline fun <E, A> lce(@BuilderInference block: LceRaise<E>.() -> A): Lce<E, A> =
   recover({ Lce.Content(block(LceRaise(this))) }) { e: Lce<E, Nothing> -> e }
 ```
 
-We can now use this DSL to compose our computations, and `Lce` values, in the same way as we've discussed above in this document.
-Furthermore, since this DSL is built on top of `Raise` we can use all the functions we've discussed above.
+We can now use this DSL to compose our computations and `Lce` values in the same way as we've discussed above in this document.
+Furthermore, since this DSL is built on top of `Raise`, we can use all the functions we've discussed above.
 
 ```kotlin
 fun example() {
@@ -570,7 +570,7 @@ fun example() {
 <!--- KNIT example-typed-errors-12.kt -->
 <!--- TEST assert -->
 
-If we'd use _context receivers_ defining this DSL is even simpler, and we can use the `Raise` type class directly.
+If we'd used _context receivers_, defining this DSL would be even more straightforward, and we could use the `Raise` type class directly.
 
 ```kotlin
 context(Raise<Lce<E, Nothing>>)
@@ -587,6 +587,6 @@ inline fun <E, A> lce(@BuilderInference block: Raise<Lce<E, Nothing>>.() -> A): 
 # Conclusion
 
 Working with typed errors in Kotlin with Arrow is a breeze. We can use the `Either` type to represent a value that can either be a success or a failure, and we can use the `Raise` DSL to raise typed errors without _wrappers_.
-Since all these functions, and builders are build on top of `Raise` they all meaninglessly work together, and we can mix and match them as we please.
+Since all these functions and builders are built on top of `Raise`, they all seamlessly work together, and we can mix and match them as we please.
 
 If you have any questions or feedback, please reach out to us on [Slack](https://slack-chats.kotlinlang.org/c/arrow) or [Github](https://github.com/arrow-kt/arrow/issues).
