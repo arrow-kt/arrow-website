@@ -333,7 +333,7 @@ fun example() {
 <!--- KNIT example-typed-errors-07.kt -->
 <!--- TEST assert -->
 
-The type system now tracks that a new error of `OtherError` might have occurred, but that we recovered from any possible errors of `MyError`. This is useful across application layers, or in the service layer, where we might want to `recover` from a `DatabaseError` with a `NetworkError` when we want to load data from the network when a database operation failed.
+The type system now tracks that a new error of `OtherError` might have occurred, but that we recovered from any possible errors of `UserNotFound `. This is useful across application layers, or in the service layer, where we might want to `recover` from a `DatabaseError` with a `NetworkError` when we want to load data from the network when a database operation failed.
 In order to achieve the same with the `Raise` DSL we need to be inside the context of `Raise<OtherError>` to be able to `raise` it.
 
 <!--- INCLUDE
@@ -527,7 +527,7 @@ sealed interface Lce<out E, out A> {
 Let's say that once a `Failure` or `Loading` case is encountered we want to short-circuit, and not continue with the computation.
 It's easy to define a `Raise` instance for `Lce` that does just that. To do this **without** context receivers we'll use the composition pattern.
 Since we need to _raise_ both `Lce.Loading` and `Lce.Failure` our `Raise` instance will need to be able to `raise` `Lce<E, Nothing>`, and we wrap that in a `LceRaise` class.
-Within that class a `bind` function can be defined a that will short-circuit any encountered `Failure` or `Loading` case, and otherwise return the `Content` value.
+Within that class, a `bind` function can be defined to short-circuit any encountered `Failure` or `Loading` case or otherwise return the `Content` value.
 
 ```kotlin
 @JvmInline
