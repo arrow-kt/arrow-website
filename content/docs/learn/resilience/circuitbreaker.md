@@ -8,12 +8,12 @@ import Admonition from '@theme/Admonition';
 
 <!--- TEST_NAME CircuitBreaker -->
 
-When a service is being overloaded, interacting with it more may only worsen its
-overloaded state. Especially when combined with retry mechanisms such as [`Schedule`](../retry-and-repeat/),
-in some cases simply using a back-off retry policy might not be sufficient 
-during peak traffics. To prevent such overloaded resources from overloading, 
+When a service is overloaded, additional interaction may only worsen its
+overloaded state. This is especially true when combined with retry mechanisms such as [`Schedule`](../retry-and-repeat/).
+Sometimes, simply using a back-off retry policy might not be sufficient 
+during peak traffic. To prevent such overloaded resources from overloading, 
 a **circuit breaker** protects the service by failing fast. This helps us 
-achieve stability, and prevents cascading failures in distributed systems.
+achieve stability and prevents cascading failures in distributed systems.
 
 ## Circuit breaker protocol
 
@@ -35,7 +35,7 @@ graph LR;
 
 - This is the state in which the circuit breaker starts.
 - Requests are made normally in this state:
-  - When an exception occurs it increments the failure counter.
+  - When an exception occurs, it increments the failure counter.
     - When the failure counter reaches the given `maxFailures` threshold, 
       the breaker moves to the _Open_ state.
   - A successful request will reset the failure counter to zero.
@@ -44,22 +44,22 @@ graph LR;
 
 <Admonition type="note" icon="⏹️" title="Open">
 
-- In this state the circuit breaker short-circuits / fails-fast all requests.
-  - This is done using by throwing the `ExecutionRejected` exception.
+- In this state, the circuit breaker short-circuits/fails-fast all requests.
+  - This is done by throwing the `ExecutionRejected` exception.
 - If a request is made after the configured `resetTimeout`, 
-  the breaker moves to the the _Half Open_ state,
+  the breaker moves to the _Half Open_ state,
   allowing one request to go through as a test.
 
 </Admonition>
 
 <Admonition type="note" icon="⤴️" title="Half Open">
 
-- The circuit breaker is in this state while it's allowing a request to go through, as a _test request_.
-  - All other requests made while test request` is still running short-circuit / fail-fast.
-- If the test request succeeds then the circuit breaker is tripped back into _Closed_,
+- The circuit breaker is in this state while allowing a request to go through as a _test request_.
+  - All other requests made while test request` is still running short-circuit/fail-fast.
+- If the test request succeeds, the circuit breaker is tripped back into _Closed_,
   with the `resetTimeout` and the `failures` count also reset to initial values.
-- If the test request fails, then the circuit breaker moves back to _Open_, 
-  the `resetTimeout` is multiplied by the `exponentialBackoffFactor`, 
+- If the test request fails, the circuit breaker moves back to _Open_, 
+  and the `resetTimeout` is multiplied by the `exponentialBackoffFactor` 
   up to the configured `maxResetTimeout`.
 
 </Admonition>
@@ -75,9 +75,9 @@ in _Cloud Design Patterns_.
 
 Let's create a circuit breaker that only allows us to call a remote service twice.
 After that, whenever more than two requests fail with an exception, 
-the circuit breaker starts short-circuiting / failing-fast.
+the circuit breaker starts short-circuiting/failing-fast.
 
-A new instance of `CircuitBreaker` is created using [`of`](https://arrow-kt.github.io/arrow/arrow-fx-resilience/arrow.fx.resilience/-circuit-breaker/-companion/of.html); there we specify
+A new instance of `CircuitBreaker` is created using [`of`](https://arrow-kt.github.io/arrow/arrow-fx-resilience/arrow.fx.resilience/-circuit-breaker/-companion/of.html); there, we specify
 the different options. 
 
 :::caution Deprecation in Arrow 1.2
@@ -86,7 +86,7 @@ The `of` constructor function has been deprecated in favor of exposing the `Circ
 
 :::
 
-Then we wrap every call to the service which may
+Then we wrap every call to the service that may
 potentially fail with [`protectOrThrow`](https://arrow-kt.github.io/arrow/arrow-fx-resilience/arrow.fx.resilience/-circuit-breaker/protect-or-throw.html) or [`protectEither`](https://arrow-kt.github.io/arrow/arrow-fx-resilience/arrow.fx.resilience/-circuit-breaker/protect-either.html), depending on how we
 want this error to be communicated back. If the error arises, the internal state
 of the circuit breaker also changes.
@@ -135,9 +135,8 @@ suspend fun main(): Unit {
 <!--- KNIT example-circuitbreaker-01.kt -->
 
 A common pattern to make resilient systems is to compose a circuit breaker with 
-a backing-off policy that prevents the resource from overloading. The reason
-why `Schedule` is not sufficient to make your system resilient is because you 
-also have to take into account parallel calls to your functions.
+a backing-off policy that prevents the resource from overloading. `Schedule` is insufficient to make your system resilient because you 
+also have to consider parallel calls to your functions.
 In contrast, a circuit breaker track failures of every function call or 
 even different functions to the same resource or service.
 

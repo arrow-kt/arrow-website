@@ -6,9 +6,9 @@ sidebar_position: 2
 
 A common demand when working with actions is to retry or repeat them when 
 (adverse) certain circumstances happen. Usually, the retrial or repetition does 
-not happen right away; rather, it is done based on a policy. For instance, when
-fetching content from a network request, we may want to retry it when it fails,
-using an exponential backoff algorithm, for a maximum of 15 seconds or 5 
+not occur immediately; instead, it is done based on a policy. For instance, when
+fetching content from a network request, we may want to retry it when it fails
+using an exponential backoff algorithm for a maximum of 15 seconds or 5 
 attempts, whatever happens first.
 
 :::info Additional context for this pattern
@@ -23,18 +23,18 @@ in _Cloud Design Patterns_.
 allows you to define and compose powerful yet simple policies. There are two
 steps involved in using `Schedule`.
 
-1. First we need to **construct** a policy, which specifies the amount and the
+1. First, we need to **construct** a policy, which specifies the amount and the
    delay in repetition.
 2. Then we **run** this schedule with a specified action. There are two ways to do so:
    - [`retry`](https://arrow-kt.github.io/arrow/arrow-fx-resilience/arrow.fx.resilience/retry.html)
      executes the action once, and if it fails, it is reattempted based
-     on the scheduling policy. It stops when the action succeeds, or when the policy 
+     on the scheduling policy. It stops when the action succeeds or when the policy 
      determines it should not be reattempted again.
    - [`repeat`](https://arrow-kt.github.io/arrow/arrow-fx-resilience/arrow.fx.resilience/-schedule/repeat.html)
-     executes the action, and if it succeeds, keep executing it again based on
+     executes the action, and if it succeeds, keeps executing it again based on
      the scheduling policy passed as an argument. It stops if the action 
-     fails, or the policy determines it should not be executed again. 
-     It returns the last internal state of the scheduling policy, 
+     fails or the policy determines it should not be executed again. 
+     It returns the last internal state of the scheduling policy 
      or the error that happened running the action.
 
 ## Constructing a policy
@@ -54,17 +54,17 @@ companion object](https://arrow-kt.github.io/arrow/arrow-fx-resilience/arrow.fx.
 Schedule policies also return values on each step, which can be used to
 take decisions based on previous values.
 
-One of the simplest policies is recurring 10 times. This means that if we
-call `repeat`, the same action is performed 10 times, and if we call `retry`,
-the action is attempted until successful for a maximum of 10 times.
+One of the simplest policies is recurring ten times. This means that if we
+call `repeat`, the same action is performed ten times, and if we call `retry`,
+the action is attempted until successful for a maximum of ten times.
 
 ```kotlin
 fun <A> recurTenTimes() = Schedule.recurs<A>(10)
 ```
 <!--- KNIT example-schedule-01.kt -->
 
-A common algorithm to retry operations communicating with external services, 
-such as network requests, is the exponential backoff algorithm. Roughly, this
+The exponential backoff algorithm is a standard algorithm to retry operations communicating with external services, 
+such as network requests. Roughly, this
 means that the delay between attempts increases by the given factor.
 
 ```kotlin
@@ -92,8 +92,8 @@ fun <A> complexPolicy(): Schedule<A, List<A>> =
 
 When we repeat an action, we do it as long as it is successful and the 
 scheduling policy tells us to keep recursing. 
-For example, this block repeats an action 3 times after its first successful
-execution (so 4 times in total).
+For example, this block repeats an action three times after its first successful
+execution (so four times in total).
 
 ```kotlin
 suspend fun example(): Unit {
@@ -107,16 +107,16 @@ suspend fun example(): Unit {
 <!--- KNIT example-schedule-04.kt -->
 <!--- TEST assert -->
 
-Notice that we did not handle the error case, there are overloads 
+Notice that we did not handle the error case. There are overloads 
 [`repeatOrElse`](https://arrow-kt.github.io/arrow/arrow-fx-resilience/arrow.fx.resilience/-schedule/repeat-or-else.html)
 and [`repeatOrElseEither`](https://arrow-kt.github.io/arrow/arrow-fx-resilience/arrow.fx.resilience/-schedule/repeat-or-else-either.html)
-which offer that capability, repeat will just rethrow any error encountered.
+offering that capability. Repeat will just rethrow any error encountered.
 
 ### Collecting values
 
-Using `repeat` the resulting value is the number of iterations it has performed.
+Using `repeat`, the resulting value is the number of iterations it has performed.
 We're throwing away any value produced by each iteration of the repetition. 
-But we have other three possibilities:
+But we have three other possibilities:
 - Discard all results; that is, return `Unit`.
 - Discard all intermediate results and just keep the last produced result.
 - Keep all intermediate results.
@@ -181,7 +181,7 @@ suspend fun example(): Unit {
 <!--- KNIT example-schedule-07.kt -->
 <!--- TEST assert -->
 
-### Until / while it produces a certain value
+### Until/while it produces a certain value
 
 We can make use of the policies [`doWhile`](https://arrow-kt.github.io/arrow/arrow-fx-resilience/arrow.fx.resilience/-schedule/-companion/do-while.html)
 and [`doUntil`](https://arrow-kt.github.io/arrow/arrow-fx-resilience/arrow.fx.resilience/-schedule/-companion/do-until.html) 

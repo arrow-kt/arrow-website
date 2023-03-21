@@ -6,14 +6,14 @@ sidebar_position: 1
 
 Most, if not all, of the systems we develop nowadays require the cooperation of
 other services, which may live in the same process, in the same machine, or may
-require some network communication. This creates a lot of potential different
+require some network communication. This creates a lot of different potential
 scenarios where things may fail. **Resilience** is the ability of your system 
 to act in an organized way when those events occur.
 
 Your particular approach to resilience depends on multiple factors. Is it
-possible to try again that request? Should the administrator be alerted if the
+possible to try that request again? Should the administrator be alerted if the
 detected error is fatal? Instead of predefined answers, Arrow aims to provide
-a set of **tools** which you can compose to specify your solution in a succinct
+a set of **tools** that you can compose to specify your solution in a concise
 and composable way.
 
 :::caution Arrow pre-1.2.0
@@ -24,14 +24,14 @@ even though a migration window is in place until Arrow 2.0.
 
 :::
 
-The Arrow Fx Resilience library implements three of the most important design
+The Arrow Fx Resilience library implements three of the most critical design
 pattern around resilience:
 
-- Retry and repeat computations by means of [`Schedule`](../retry-and-repeat),
-- Protect other services from been overloaded using [`CircuitBreaker`](../circuitbreaker),
+- Retry and repeat computations using [`Schedule`](../retry-and-repeat),
+- Protect other services from being overloaded using [`CircuitBreaker`](../circuitbreaker),
 - Implement transactional behavior in distributed systems in the form of [`Saga`](../saga).
 
-:::info Media resources
+:::info Media Resources
 
 The following videos showcase how to introduce resilience in your applications.
 
@@ -40,7 +40,7 @@ The following videos showcase how to introduce resilience in your applications.
 
 :::
 
-:::tip Further reading
+:::tip Further Reading
 
 If you want to know more about these patterns, you can check some of these guides:
 
