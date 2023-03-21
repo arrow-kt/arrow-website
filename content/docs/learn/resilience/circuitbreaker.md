@@ -91,17 +91,19 @@ potentially fail with [`protectOrThrow`](https://arrow-kt.github.io/arrow/arrow-
 want this error to be communicated back. If the error arises, the internal state
 of the circuit breaker also changes.
 
-```kotlin
+<!--- INCLUDE
 import arrow.core.Either
 import arrow.fx.resilience.CircuitBreaker
+import arrow.fx.resilience.CircuitBreaker.OpeningStrategy
 import kotlin.time.Duration.Companion.seconds
 import kotlin.time.ExperimentalTime
 import kotlinx.coroutines.delay
-
+-->
+```kotlin
 @ExperimentalTime
 suspend fun main(): Unit {
-  val circuitBreaker = CircuitBreaker.of(
-    maxFailures = 2,
+  val circuitBreaker = CircuitBreaker(
+    openingStrategy = OpeningStrategy.Count(2),
     resetTimeout = 2.seconds,
     exponentialBackoffFactor = 1.2,
     maxResetTimeout = 60.seconds,
@@ -139,15 +141,17 @@ also have to take into account parallel calls to your functions.
 In contrast, a circuit breaker track failures of every function call or 
 even different functions to the same resource or service.
 
-```kotlin
+<!--- INCLUDE
 import arrow.core.Either
 import arrow.fx.resilience.CircuitBreaker
+import arrow.fx.resilience.CircuitBreaker.OpeningStrategy
 import arrow.fx.resilience.Schedule
 import arrow.fx.resilience.retry
 import kotlin.time.Duration.Companion.seconds
 import kotlin.time.ExperimentalTime
 import kotlinx.coroutines.delay
-
+-->
+```kotlin
 @ExperimentalTime
 suspend fun main(): Unit {
   suspend fun apiCall(): Unit {
@@ -155,11 +159,11 @@ suspend fun main(): Unit {
     throw RuntimeException("Overloaded service")
   }
 
-  val circuitBreaker = CircuitBreaker.of(
-    maxFailures = 2,
+  val circuitBreaker = CircuitBreaker(
+    openingStrategy = OpeningStrategy.Count(2),
     resetTimeout = 2.seconds,
-    exponentialBackoffFactor = 2.0, // enable exponentialBackoffFactor
-    maxResetTimeout = 60.seconds, // limit exponential back-off time
+    exponentialBackoffFactor = 1.2,
+    maxResetTimeout = 60.seconds,
   )
 
   suspend fun <A> resilient(schedule: Schedule<Throwable, *>, f: suspend () -> A): A =

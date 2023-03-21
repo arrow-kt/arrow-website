@@ -82,7 +82,7 @@ Here's a much more complex schedule. Let's walk through it step by step:
 ```kotlin
 @ExperimentalTime
 fun <A> complexPolicy(): Schedule<A, List<A>> =
-  Schedule.exponential<A>(10.milliseconds).whileOutput { it < 60.seconds }
+  Schedule.exponential<A>(10.milliseconds).doWhile { _, duration -> duration < 60.seconds }
     .andThen(Schedule.spaced<A>(60.seconds) and Schedule.recurs(100)).jittered()
     .zipRight(Schedule.identity<A>().collect())
 ```
@@ -131,10 +131,10 @@ combinators, which keep just the output of one of the policies:
 suspend fun example(): Unit {
   var counter = 0
 
-  val keepLeft = (Schedule.unit<Unit>() zipLeft Schedule.recurs(3)).repeat {
+  val keepLeft = (Schedule.identity<Unit>() zipLeft Schedule.recurs(3)).repeat {
     counter++
   }
-  val keepRight = (Schedule.recurs<Unit>(3) zipRight Schedule.unit()).repeat {
+  val keepRight = (Schedule.recurs<Unit>(3) zipRight Schedule.identity<Unit>()).repeat {
     counter++
   }
 
@@ -191,7 +191,7 @@ to repeat an action while or until its produced result matches a given predicate
 suspend fun example(): Unit {
   var result = ""
 
-  Schedule.doWhile<String> { it.length <= 5 }.repeat {
+  Schedule.doWhile<String>  { input, _ -> input.length <= 5 }.repeat {
     result += "a"
     result
   }

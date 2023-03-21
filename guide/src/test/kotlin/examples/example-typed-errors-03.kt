@@ -10,24 +10,25 @@ import arrow.core.raise.fold
 import io.kotest.assertions.fail
 import io.kotest.matchers.shouldBe
 
-data class MyError(val message: String)
+data class User(val id: Long)
 
-fun isPositive(i: Int): Either<MyError, Int> = either {
-  ensure(i > 0) { MyError("$i is not positive") }
-  i
+data class UserNotFound(val message: String)
+
+fun User.isValid(): Either<UserNotFound, Unit> = either {
+  ensure(id > 0) { UserNotFound("User without a valid id: $id") }
 }
 
-fun Raise<MyError>.isPositive(i: Int): Int {
-  ensure(i > 0) { MyError("$i is not positive") }
-  return i
+fun Raise<UserNotFound>.isValid(user: User): User {
+  ensure(user.id > 0) { UserNotFound("User without a valid id: ${user.id}") }
+  return user
 }
 
 fun example() {
-  isPositive(-1) shouldBe MyError("-1 is not positive").left()
+  User(-1).isValid() shouldBe UserNotFound("User without a valid id: -1").left()
 
   fold(
-    { isPositive(1) },
-    { _: MyError -> fail("No logical failure occurred!") },
-    { i: Int -> i shouldBe 1 }
+    { isValid(User(1)) },
+    { _: UserNotFound -> fail("No logical failure occurred!") },
+    { user: User -> user.id shouldBe 1 }
   )
 }
