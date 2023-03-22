@@ -32,19 +32,6 @@ export default function Libraries(): JSX.Element {
             <LinkCard key={library.title} {...library} />
           ))}
         </section>
-        <section className={`container text--center ${styles.textContainer}`}>
-          <h1>More libraries</h1>
-          <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eu
-            turpis molestie, dictum est
-          </p>
-        </section>
-        <section
-          className={`container ${styles.featuresContainer} ${styles.verticalRhythm}`}>
-          {data.more_libraries.map((library: LinkCardProps) => (
-            <LinkCard key={library.title} {...library} />
-          ))}
-        </section>
         <section
           className={`container ${styles.navigationContainer} ${styles.verticalRhythm}`}>
           {data.navs.map((nav: BorderlessCardProps) => (
