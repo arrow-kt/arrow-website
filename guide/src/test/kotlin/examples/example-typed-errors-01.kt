@@ -29,7 +29,7 @@ fun example() {
   }
 
   fold(
-    program = { res() },
+    block = { res() },
     recover = { _: UserNotFound -> fail("No logical failure occurred!") },
     transform = { i: User -> i shouldBe User(1) }
   )
