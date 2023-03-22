@@ -3,6 +3,7 @@ package arrow.website.examples.exampleCircuitbreaker02
 
 import arrow.core.Either
 import arrow.fx.resilience.CircuitBreaker
+import arrow.fx.resilience.CircuitBreaker.OpeningStrategy
 import arrow.fx.resilience.Schedule
 import arrow.fx.resilience.retry
 import kotlin.time.Duration.Companion.seconds
@@ -16,11 +17,11 @@ suspend fun main(): Unit {
     throw RuntimeException("Overloaded service")
   }
 
-  val circuitBreaker = CircuitBreaker.of(
-    maxFailures = 2,
+  val circuitBreaker = CircuitBreaker(
+    openingStrategy = OpeningStrategy.Count(2),
     resetTimeout = 2.seconds,
-    exponentialBackoffFactor = 2.0, // enable exponentialBackoffFactor
-    maxResetTimeout = 60.seconds, // limit exponential back-off time
+    exponentialBackoffFactor = 1.2,
+    maxResetTimeout = 60.seconds,
   )
 
   suspend fun <A> resilient(schedule: Schedule<Throwable, *>, f: suspend () -> A): A =

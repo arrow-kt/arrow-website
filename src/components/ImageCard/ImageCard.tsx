@@ -1,25 +1,33 @@
 import React from 'react';
 
 import Link from '@docusaurus/Link';
+import useBaseUrl from '@docusaurus/useBaseUrl';
 
 import styles from './image-card.module.css';
 
 export interface ImageCardProps {
   title?: string;
+  subtitle?: string;
   image?: string;
   body?: string;
-  link?: string;
+  href?: string;
 }
 
 export function ImageCard({
   title = 'Case study',
-  image = 'img/sample-image.jpg',
+  subtitle,
+  image = useBaseUrl('/img/sample-image.jpg'),
   body = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eu turpis molestie',
-  link = 'about/use-cases',
+  href = '/about/use-cases',
 }: ImageCardProps) {
+  const landscapeMode = !!subtitle;
+
   return (
-    <div className={`card ${styles.card}`}>
-      <div className="card__image text--center">
+    <div
+      className={`card ${styles.card} ${
+        landscapeMode && styles.landscapeMode
+      }`}>
+      <div className={`card__image ${styles.imageContainer}`}>
         <img
           className={styles.image}
           src={image}
@@ -27,13 +35,12 @@ export function ImageCard({
           title={`${title} category`}
         />
       </div>
-      <div className="card__body">
-        <h2 className={styles.title}>{title}</h2>
+      <div className={`card__body ${styles.body}`}>
+        <h3 className={styles.title}>{title}</h3>
+        <h5 className={styles.subtitle}>{subtitle}</h5>
         <p className={styles.text}>{body}</p>
-      </div>
-      <div className={`card__footer`}>
         <strong>
-          <Link href={link} className={styles.link}>
+          <Link href={href} className={styles.link}>
             Learn more
           </Link>
         </strong>
