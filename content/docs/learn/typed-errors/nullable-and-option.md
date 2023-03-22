@@ -9,13 +9,13 @@ sidebar_position: 2
 
 <!--- TEST_NAME OptionAndNullableKnitTest -->
 
-If you have worked with Java at all in the past, it is very likely that you have come across a `NullPointerException` at some time (other languages will throw similarly named errors in such a case).
-Usually this happens because some method returns `null` when you weren't expecting it and, thus, isn't dealing with that possibility in your client code.
-A value of `null` is often abused to represent an absent optional value. Kotlin already solves the problem by getting rid of `null` values altogether, and providing its own special syntax [Null-safety machinery based on `?`](https://kotlinlang.org/docs/reference/null-safety.html).
+If you have worked with Java at all in the past, you have likely come across a `NullPointerException` at some time (other languages will throw similarly named errors in such a case).
+Usually, this happens because some method returns `null` when you weren't expecting it and, thus, isn't dealing with that possibility in your client code.
+A value of `null` is often abused to represent an absent optional value. Kotlin already solves the problem by getting rid of `null` values altogether and providing its own unique syntax [Null-safety machinery based on `?`](https://kotlinlang.org/docs/reference/null-safety.html).
 
 Since Kotlin already has nullable types, why do we need Arrow's `Option` type? There are only **a few** cases where you should use `Option` instead of nullable types, and one is the _nested nullability_ problem. Let's see an example:
 
-We write a small `firstOrElse` function, and it should return the first element of a list, or the default value if the list is **empty**.
+We write a small `firstOrElse` function, which should return the list's first element or the default value if the list is **empty**.
 
 <!--- INCLUDE
 import io.kotest.matchers.shouldBe
@@ -31,10 +31,10 @@ fun example() {
 <!--- KNIT example-option-01.kt -->
 <!--- TEST assert -->
 
-When run this code with an `emptyList`, or a non-empty list it seems to work as expect.
+Running this code with an `emptyList` or a non-empty list seems to work as expected.
 
 :::danger Unexpected result
-If we run this function with a list that contains `null` as the **first** value we get an unexpected result.
+We get an unexpected result if we run this function with a list that contains `null` as the **first** value.
 :::
 
 <!--- INCLUDE
@@ -51,17 +51,17 @@ fun example() {
 <!--- TEST lines.first().startsWith("Exception in thread \"main\" java.lang.AssertionError: Expected null but actual was -1") -->
 
 Now we're executing the function on a list that `isNotEmpty`, so we expect it to return the first element of value `null`.
-Instead however it returns `-1`, which is the default value we specified in case the list `isEmpty`!
+Instead, it returns `-1`, the default value we specified in case the list `isEmpty`!
 
 ```
 Exception in thread "main" java.lang.AssertionError: Expected null but actual was -1
 ```
 
-This is known as the _nested nullability_ problem, and it is an issue that can be solved by using `Option` instead of nullable types.
-So let's analyse what is going wrong here, and how we can fix it. When we look at the implementation of our `firstOrElse` function,
-we see that we're using `firstOrNull` to get the first element of the list, and if that is `null` we return the default value.
+This is known as the _nested nullability_ problem, which can be solved using `Option` instead of nullable types.
+So let's analyze what is going wrong here and how we can fix it. When we look at the implementation of our `firstOrElse` function,
+we see that we're using `firstOrNull` to get the first element of the list, and if that is `null`, we return the default value.
 
-Our generic parameter of `Any` however has an upperbound of `Any?`, so we can pass in a list of nullable values.
+However, our generic parameter of `Any` has an upperbound of `Any?`, so we can pass in a list of nullable values.
 This means that `firstOrNull` can return `null` if the first element of the list is `null`, and we're not handling that case.
 
 ```kotlin
@@ -69,7 +69,7 @@ fun <A> List<A>.firstOrElse(default: () -> A): A = firstOrNull() ?: default()
 ```
 <!--- KNIT example-option-03.kt -->
 
-We can solve this in two ways, one is by restricting `A` to have an upperbound of `Any` instead,
+We can solve this in two ways. One is by restricting `A` to have an upperbound of `Any` instead,
 but then we limit this function to only work with non-nullable types.
 
 ```kotlin
@@ -78,7 +78,7 @@ fun <A : Any> List<A>.firstOrElse(default: () -> A): A = firstOrNull() ?: defaul
 <!--- KNIT example-option-04.kt -->
 
 Our previous examples of `List<Int?>` would not even compile in that case, so this is not a good solution.
-Instead, we could use `firstOrNone` and then we can handle the case where the first element is `null`:
+Instead, we could use `firstOrNone`, and then we can handle the case where the first element is `null`:
 
 <!--- INCLUDE
 import arrow.core.None
@@ -94,7 +94,7 @@ fun <A> List<A>.firstOrElse(default: () -> A): A =
   }
 ```
 
-If we now run our previous examples again, they all behave as expected since we can rely on `None` to detect the case where the list is empty.
+If we rerun our previous examples, they all behave as expected since we can rely on `None` to detect the case where the list is empty.
 
 ```kotlin
 fun example() {
@@ -116,11 +116,11 @@ Arrow also provides special DSL syntax for _nullable_ & `Option` types
 
 ## Working with Option
 
-Arrow offers a special DSL syntax for all of its types, and it also offers it for _nullable types_ so let's review both below.
-Before we get started we need to know how to construct an `Option` from a (nullable) value, and vice versa.
+Arrow offers a special DSL syntax for all of its types and provides it for _nullable types_. So let's review both below.
+Before we get started, we need to know how to construct an `Option` from a (nullable) value and vice versa.
 
-`Option<A>` is a container for an optional value of type `A`. If the value of type `A` is present, the `Option<A>` is an instance of `Some<A>`, containing the present value of type `A`. If the value is absent, the `Option<A>` is the object `None`.
-And we have 4 constructors available to create an `Option<A>`, their regular `class` constructors and 2 extension functions that return `Option<A>`.
+`Option<A>` is a container for an optional value of type `A`. If the value of type `A` is present, the `Option<A>` is an instance of `Some<A>`, containing the current value of type `A`. If the value is absent, the `Option<A>` is the object `None`.
+And we have four constructors available to create an `Option<A>`, their regular `class` constructors, and two extension functions that return `Option<A>`.
 
 <!--- INCLUDE
 import arrow.core.Option
@@ -145,7 +145,7 @@ fun example() {
 <!--- KNIT example-option-06.kt -->
 <!--- TEST assert -->
 
-Creating a `Option<A>` from a nullable type `A?` can be useful for when we need to lift nullable values into Option. This can be done with the `Option.fromNullable` function, or the `A?.toOption()` extension function.
+Creating a `Option<A>` from a nullable type `A?` can be helpful when we need to lift nullable values into Option. This can be done with the `Option.fromNullable` function or the `A?.toOption()` extension function.
 
 <!--- INCLUDE
 import arrow.core.Option
@@ -165,7 +165,7 @@ fun example() {
 <!--- TEST assert -->
 
 :::danger Take care
-If `A?` is null then you should be explicitly using the `Some` or `.some()` constructor.
+If `A?` is null, you should explicitly use the `Some` or `.some()` constructor.
 Otherwise, you will get a `None` instead of a `Some` due to the _nested nullable_ problem.
 :::
 
@@ -191,7 +191,7 @@ fun example() {
 ## Extracting values from Option
 
 So now that we know how to construct `Option` values, how can we extract the value from it?
-The easiest way to extract the `String` value from the `Option` would be to turn it into a _nullable type_ using `getOrNull` and work with it like we would normally do with nullable types.
+The easiest way to extract the `String` value from the `Option` would be to turn it into a _nullable type_ using `getOrNull` and work with it as we would typically do with nullable types.
 
 <!--- INCLUDE
 import arrow.core.None
@@ -207,8 +207,8 @@ fun example() {
 <!--- KNIT example-option-09.kt -->
 <!--- TEST assert -->
 
-Another way would be to provide a default value using `getOrElse`. This is similar to the `?:` operator in Kotlin, but instead of providing a default value for `null`, we provide a default value for `None`.
-In the example below we provide a default value of `"No value"` for when the `Option` is `None`.
+Another way would be to provide a default value using `getOrElse`. This is similar to the `?:` operator in Kotlin, but instead of giving a default value for `null`, we provide a default value for `None`.
+In the example below, we provide a default value of `"No value"`when the `Option` is `None`.
 
 <!--- INCLUDE
 import arrow.core.None
@@ -226,7 +226,7 @@ fun example() {
 <!--- KNIT example-option-10.kt -->
 <!--- TEST assert -->
 
-Since `Option` is modeled as a `sealed class` we can use exhaustive `when` statements to _pattern match_ on the possible cases.
+Since `Option` is modeled as a `sealed class`, we can use exhaustive `when` statements to _pattern match_ on the possible cases.
 
 <!--- INCLUDE
 import arrow.core.None
@@ -254,13 +254,13 @@ fun example() {
 
 ## Option & nullable DSL
 
-Now that we know how to construct `Option` values, and turn `Option` back into regular (nullable) values.
-Let's see how we can use the `Option` and nullable DSL to work with `Option` & nullable values in an imperative way.
+Now that we know how to construct `Option` values and turn `Option` back into regular (nullable) values,
+let's see how we can use the `Option` and nullable DSL to work with `Option` & nullable values in an imperative way.
 
-When working with nullable types, we often need to check if the value is `null` or not, and then do something with it. We typically do that by using `?.let { }` but this quickly results in a lot of nested `?.let { }` blocks.
-Arrow offers `bind()`, and `ensureNotNull`, to get rid of this issue, so let's look at an example. As well as some other interesting functions that Arrow provides in its DSL.
+When working with nullable types, we often need to check if the value is `null` or not and then do something with it. We typically do that by using `?.let { }`, but this quickly results in a lot of nested `?.let { }` blocks.
+Arrow offers `bind()` and `ensureNotNull` to get rid of this issue, so let's look at an example and some other interesting functions that Arrow provides in its DSL.
 
-Imagine we have a `User` domain class that has _nullable_ email address, and we want to find a user by their id, and then email them.
+Imagine we have a `User` domain class that has _nullable_ email address, and we want to find a user by their id and then email them.
 
 <!--- INCLUDE
 typealias Email = String
@@ -286,7 +286,7 @@ fun sendEmail(params: QueryParameters): SendResult? =
 ```
 <!--- KNIT example-option-12.kt -->
 
-There is already quite some nesting going on, and quite a lot of `?` but we can use `bind()`, and `ensureNotNull`, to get rid of the nesting.
+There is already quite some nesting going on and quite a lot of `?`, but we can use `bind()` and `ensureNotNull` to get rid of the nesting.
 
 :::tip Seamlessly mix
 The `nullable` DSL can seamlessly be mixed with `Option` by calling `bind` on `Option` values.
@@ -319,10 +319,10 @@ fun sendEmail(params: QueryParameters): SendResult? = nullable {
 ```
 <!--- KNIT example-option-13.kt -->
 
-Similarly, this same pattern is applicable to `Option` as well as other data types such as `Either` which is covered in other sections.
+Similarly, this same pattern applies to `Option` and other data types such as `Either`, which is covered in other sections.
 
 :::tip Seamlessly mix
-The `Option` DSL can seamlessly be mixed with _nullable types_ by using `ensureNotNull`.
+The `Option` DSL can seamlessly be mixed with _nullable types_ using `ensureNotNull`.
 :::
 
 <!--- INCLUDE
@@ -357,8 +357,8 @@ fun sendEmail(params: QueryParameters): Option<SendResult> = option {
 
 ## Inspecting `Option` values
 
-Beside extracting the value from an `Option`, or sequencing nullable or `Option` based logic, we often just need to _inspect_ the values inside it.
-With _nullable types_ we can simply use `!= null` to inspect the value, but with `Option` we can check whether option has value or not using `isSome` and `isNone`.
+Besides extracting the value from an `Option` or sequencing nullable or `Option` based logic, we often just need to _inspect_ the values inside it.
+With _nullable types_, we can simply use `!= null` to inspect the value, but with `Option`, we can check whether option has value or not using `isSome` and `isNone`.
 
 <!--- INCLUDE
 import arrow.core.Some
@@ -374,7 +374,7 @@ fun example() {
 <!--- KNIT example-option-15.kt -->
 <!--- TEST assert -->
 
-The same function exists to check if `Some` contains a value that passes a certain predicate. For _nullable types_ we would use `?.let { } ?: false`.
+The same function exists to check if `Some` contains a value that passes a certain predicate. For _nullable types_, we would use `?.let { } ?: false`.
 
 <!--- INCLUDE
 import arrow.core.Option
@@ -393,7 +393,7 @@ fun example() {
 <!--- KNIT example-option-16.kt -->
 <!--- TEST assert -->
 
-And finally sometimes we just need to execute a side effect, if the value is present. For _nullable types_ we would use `?.also { }` or `?.also { if(it != null) { } }`.
+And, finally, sometimes we just need to execute a side effect if the value is present. For _nullable types_, we would use `?.also { }` or `?.also { if(it != null) { } }`.
 
 <!--- INCLUDE
 import arrow.core.Option
@@ -420,8 +420,8 @@ I am here
 
 ## Conclusion
 
-Typically, when working in Kotlin you should prefer working with _nullable types_ over `Option` as it is more idiomatic.
-However, when writing generic code we sometimes need `Option` to avoid the _nested nullability_ issue. Or when working with libraries that don't support _null values_ such as Project Reactor or RxJava.
+Typically, when working in Kotlin, you should prefer working with _nullable types_ over `Option` as it is more idiomatic.
+However, when writing generic code, we sometimes need `Option` to avoid the _nested nullability_ issues, or when working with libraries that don't support _null values_ such as Project Reactor or RxJava.
 
 Arrow offers a neat DSL to work with `Option` and _nullable types_ in an imperative way, which makes it easy to work with them both in a functional way.
-They seamlessly integrate with each other, so you can use whatever you need and prefer when you need it.
+They seamlessly integrate, so you can use whatever you need and prefer when you need it.
