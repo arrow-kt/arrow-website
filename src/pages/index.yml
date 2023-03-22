@@ -41,7 +41,7 @@ features:
 projects:
   - title: GitHub Alerts
     body: Notify in Slack when an event occurs in a GitHub repository
-    link: use_cases/gh_alerts
+    href: /use_cases/gh_alerts
 
 quotes:
   - name: Francico Díaz
