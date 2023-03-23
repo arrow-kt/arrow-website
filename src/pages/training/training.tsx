@@ -4,7 +4,10 @@ import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import Layout from '@theme/Layout';
 
 import { Hero } from '@site/src/components/Hero';
-import { ImageCard, ImageCardProps } from '@site/src/components/ImageCard';
+import {
+  ImageCardLandscape,
+  ImageCardProps,
+} from '@site/src/components/ImageCard';
 import { QuoteCard, QuoteCardProps } from '@site/src/components/QuoteCard';
 import {
   BorderlessCard,
@@ -52,7 +55,7 @@ export default function Training(): JSX.Element {
         <section
           className={`container ${styles.projectsContainer} ${styles.verticalRhythm}`}>
           {data.trainings.map((training: ImageCardProps) => (
-            <ImageCard key={training.title} {...training} />
+            <ImageCardLandscape key={training.title} {...training} />
           ))}
         </section>
         <section
