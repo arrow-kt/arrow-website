@@ -57,6 +57,12 @@ const createConfig = async () => {
             path: 'content/blog',
             routeBasePath: 'community/blog',
             showReadingTime: true,
+            blogSidebarCount: 0,
+            blogListComponent: '@site/src/components/Blog/BlogListPage',
+            blogTagsPostsComponent:
+              '@site/src/components/Blog/BlogTagsPostsPage',
+            postsPerPage: 8,
+            archiveBasePath: null,
             editUrl: 'https://github.com/arrow-kt/arrow-website/edit/main/',
           },
           theme: {
@@ -342,7 +348,7 @@ const createConfig = async () => {
           postcssOptions.plugins.push(
             // @ts-ignore
             require('@csstools/postcss-global-data')({
-              files: ['./src/css/custom.css'],
+              files: ['./src/css/vars.css'],
             }),
           );
           postcssOptions.plugins.push(require('postcss-custom-media'));
