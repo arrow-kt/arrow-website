@@ -1,6 +1,7 @@
 .avatar {
   flex-direction: column;
   align-items: center;
+  margin-top: var(--ifm-spacing-vertical);
 }
 
 .imageContainer {
