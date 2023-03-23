@@ -9,6 +9,6 @@ import io.kotest.matchers.shouldBe
 
 @ExperimentalTime
 fun <A> complexPolicy(): Schedule<A, List<A>> =
-  Schedule.exponential<A>(10.milliseconds).whileOutput { it < 60.seconds }
+  Schedule.exponential<A>(10.milliseconds).doWhile { _, duration -> duration < 60.seconds }
     .andThen(Schedule.spaced<A>(60.seconds) and Schedule.recurs(100)).jittered()
     .zipRight(Schedule.identity<A>().collect())

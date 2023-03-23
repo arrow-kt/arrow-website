@@ -1,3 +1,5 @@
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+
 @Suppress("DSL_SCOPE_VIOLATION")
 plugins {
   id(libs.plugins.kotlin.jvm.get().pluginId)
@@ -34,6 +36,12 @@ tasks {
     testLogging {
       setExceptionFormat("full")
       setEvents(listOf("passed", "skipped", "failed", "standardOut", "standardError"))
+    }
+  }
+
+  withType<KotlinCompile>().configureEach {
+    kotlinOptions {
+      freeCompilerArgs = freeCompilerArgs + "-Xcontext-receivers"
     }
   }
 }

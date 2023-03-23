@@ -10,10 +10,10 @@ import io.kotest.matchers.shouldBe
 suspend fun example(): Unit {
   var counter = 0
 
-  val keepLeft = (Schedule.unit<Unit>() zipLeft Schedule.recurs(3)).repeat {
+  val keepLeft = (Schedule.identity<Unit>() zipLeft Schedule.recurs(3)).repeat {
     counter++
   }
-  val keepRight = (Schedule.recurs<Unit>(3) zipRight Schedule.unit()).repeat {
+  val keepRight = (Schedule.recurs<Unit>(3) zipRight Schedule.identity<Unit>()).repeat {
     counter++
   }
 

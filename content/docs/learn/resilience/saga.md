@@ -6,11 +6,11 @@ sidebar_position: 4
 
 In a distributed system, sometimes you need a concept similar to a _transaction_
 in a database. That is, several operations spanning different microservices
-must succeed or fail as a unit; otherwise we may end up in an inconsistent state.
+must succeed or fail as a unit; otherwise, we may end up in an inconsistent state.
 A **saga** implements this concept by providing for each action a corresponding
 _compensating_ action, which is executed if any of the following steps fail.
 The role of the compensating action is to undo any changes performed by the
-action, hence taking the system to the state prior to the entire operation
+action, hence taking the system to the state before the entire operation
 beginning its execution.
 
 :::info Additional context for this pattern
@@ -30,11 +30,11 @@ Arrow Fx Resilience provides the [`saga`](https://arrow-kt.github.io/arrow/arrow
 function, which creates a new scope where compensating actions can be declared
 alongside the action to perform. This is done by the [`saga` function in
 `SagaScope`](https://arrow-kt.github.io/arrow/arrow-fx-resilience/arrow.fx.resilience/-saga-scope/saga.html).
-The resulting `Saga<A>` doesn't perform any actions, though, you need to call
+The resulting `Saga<A>` doesn't perform any actions, though; you need to call
 [`transact`](https://arrow-kt.github.io/arrow/arrow-fx-resilience/arrow.fx.resilience/transact.html)
 to keep the chain going.
 
-Let's use a small counter as example, which we implement using the
+Let's use a small counter as an example, which we implement using the
 [`Atomic`](../../coroutines/concurrency-primitives/#atomic) type provided
 by Arrow.
 
@@ -90,7 +90,7 @@ val transaction: Saga<Int> = saga {
 Executing the transaction gives the expected results:
 
 - The exception raised in the second step bubbles up to the caller of
-  `transact`. In this case we use `Either.catch` to turn it into `Either`.
+  `transact`. In this case, we use `Either.catch` to turn it into `Either`.
 - The counter has been correctly decremented as part of the compensation
   process in the saga.
 
@@ -108,8 +108,8 @@ suspend fun example() {
 :::info Saga and [Resource](../../coroutines/resource-safety/)
 
 `SagaScope` has many parallels with `ResourceScope`: both ensure that some
-operations are performed at certain point, and `saga` and `install` require
-an action which "undoes" something. The main difference is that `ResourceScope`
+operations are performed at a certain point, and `saga` and `install` require
+an action that "undoes" something. The main difference is that `ResourceScope`
 **always** runs the release actions, whereas `SagaScope` only runs compensation
 **if** the entire action fails.
 

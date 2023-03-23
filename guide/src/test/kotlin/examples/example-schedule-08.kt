@@ -10,7 +10,7 @@ import io.kotest.matchers.shouldBe
 suspend fun example(): Unit {
   var result = ""
 
-  Schedule.doWhile<String> { it.length <= 5 }.repeat {
+  Schedule.doWhile<String>  { input, _ -> input.length <= 5 }.repeat {
     result += "a"
     result
   }
