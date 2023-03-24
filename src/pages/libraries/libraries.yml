@@ -16,7 +16,7 @@ libraries:
   - title: kotlinx-serialization-jsonpath 
     href: https://nomisrev.github.io/kotlinx-serialization-jsonpath/
     icon: icon-design.svg
-    body: JSON serialization based on KotlinX Serialization and Arrow Optics
+    body: DSL for accessing and modifying deeply nested JSON for KotlinX Serialization with Arrow Optics
 
   - title: Hoplite
     href: https://github.com/sksamuel/hoplite
