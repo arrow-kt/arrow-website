@@ -2,6 +2,7 @@
 slug: long-blog-post
 title: Long Blog Post
 authors: endi
+image: https://repository-images.githubusercontent.com/94911145/de889380-2905-11eb-9e9b-9332f0537e38
 tags: [hello, docusaurus]
 ---
 

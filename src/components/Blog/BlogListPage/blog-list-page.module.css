@@ -1,0 +1,9 @@
+.verticalRhythm {
+  margin-bottom: calc(2 * var(--ifm-spacing-vertical));
+}
+
+.projectsContainer {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  gap: var(--ifm-spacing-vertical) var(--ifm-spacing-horizontal);
+}

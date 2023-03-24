@@ -13,15 +13,18 @@ export interface ImageCardProps {
   href?: string;
 }
 
-export function ImageCard({
+export interface ImageCardOptionsProps extends ImageCardProps {
+  landscapeMode: boolean;
+}
+
+export function ImageCardBase({
   title = 'Case study',
   subtitle,
   image = useBaseUrl('/img/sample-image.jpg'),
   body = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eu turpis molestie',
   href = '/about/use-cases',
-}: ImageCardProps) {
-  const landscapeMode = !!subtitle;
-
+  landscapeMode = false,
+}: ImageCardOptionsProps) {
   return (
     <div
       className={`card ${styles.card} ${
@@ -48,3 +51,11 @@ export function ImageCard({
     </div>
   );
 }
+
+export const ImageCardLandscape = (props: ImageCardProps) => (
+  <ImageCardBase landscapeMode {...props} />
+);
+
+export const ImageCard = (props: ImageCardProps) => (
+  <ImageCardBase landscapeMode={false} {...props} />
+);

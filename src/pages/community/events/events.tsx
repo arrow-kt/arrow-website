@@ -4,7 +4,10 @@ import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import Layout from '@theme/Layout';
 
 import { Hero } from '@site/src/components/Hero';
-import { ImageCard, ImageCardProps } from '@site/src/components/ImageCard';
+import {
+  ImageCardLandscape,
+  ImageCardProps,
+} from '@site/src/components/ImageCard';
 import { Banner } from '@site/src/components/Banner';
 
 import data from './events.yml';
@@ -25,7 +28,7 @@ export default function Events(): JSX.Element {
         <section
           className={`container ${styles.projectsContainer} ${styles.verticalRhythm}`}>
           {data.events.map((training: ImageCardProps) => (
-            <ImageCard key={training.title} {...training} />
+            <ImageCardLandscape key={training.title} {...training} />
           ))}
         </section>
         <section>

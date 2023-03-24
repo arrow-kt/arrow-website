@@ -2,6 +2,7 @@
 slug: welcome
 title: Welcome
 authors: [slorber, yangshun]
+image: https://repository-images.githubusercontent.com/94911145/de889380-2905-11eb-9e9b-9332f0537e38
 tags: [arrow-kt, hello, docusaurus]
 ---
 

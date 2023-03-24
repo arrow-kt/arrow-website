@@ -16,19 +16,19 @@
   /* composes: container from global; */
   display: grid;
   grid-template-columns: 1fr 1fr;
-  grid-gap: var(--ifm-spacing-vertical) var(--ifm-spacing-horizontal);
+  gap: var(--ifm-spacing-vertical) var(--ifm-spacing-horizontal);
 }
 
 .projectsContainer {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  grid-gap: var(--ifm-spacing-vertical) var(--ifm-spacing-horizontal);
+  gap: var(--ifm-spacing-vertical) var(--ifm-spacing-horizontal);
 }
 
 .navigationContainer {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
-  grid-gap: var(--ifm-spacing-vertical) var(--ifm-spacing-horizontal);
+  gap: var(--ifm-spacing-vertical) var(--ifm-spacing-horizontal);
 }
 
 .usageWrapperContainer {

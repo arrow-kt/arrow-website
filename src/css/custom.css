@@ -43,13 +43,13 @@ table {
 }
 
 @media (--ifm-narrow-window) {
-  .navbar__item {
+  .navbar__items.navbar__items--right {
     display: none;
   }
 }
 
 /* Pagination bottom buttons not needed */
-.pagination-nav {
+.plugin-docs .pagination-nav {
   display: none;
 }
 
@@ -93,6 +93,17 @@ table {
 }
 
 .card:hover {
+  box-shadow: var(--ifm-global-shadow-lw);
+  transform: translate3d(0px, -4px, 0px);
+}
+
+.pagination-nav__link {
+  box-shadow: none;
+  transition: box-shadow var(--ifm-transition-fast),
+    transform var(--ifm-transition-fast);
+}
+
+.pagination-nav__link:hover {
   box-shadow: var(--ifm-global-shadow-lw);
   transform: translate3d(0px, -4px, 0px);
 }

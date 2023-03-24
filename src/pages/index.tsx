@@ -69,12 +69,11 @@ export default function Home(): JSX.Element {
         </section>
         <section
           className={`container ${styles.navigationContainer} ${styles.verticalRhythm}`}>
-          {data.navs.map((nav: SimpleCardProps) => (
+          {data.navs.map((nav: LinkCardProps) => (
             <BorderlessCard key={nav.title} {...nav} />
           ))}
         </section>
-        <section
-          className={`${styles.usageWrapperContainer} ${styles.verticalRhythm}`}>
+        <section className={`${styles.usageWrapperContainer}`}>
           <div className={`container ${styles.usageContainer}`}>
             {data.companies.map((company: { name: string; logo: string }) => (
               <img
