@@ -32,18 +32,14 @@ export default function Libraries(): JSX.Element {
             <LinkCard key={library.title} {...library} />
           ))}
         </section>
-        <section className={`container text--center ${styles.textContainer}`}>
-          <h1>More libraries</h1>
+        <section className={`container text--center`}>
+          <h1>More libraries?</h1>
           <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eu
-            turpis molestie, dictum est
+            We'd love to{' '}
+            <a href="https://github.com/arrow-kt/arrow/issues">hear</a> about
+            other library which complements the Arrow libraries and should be
+            featured here!
           </p>
-        </section>
-        <section
-          className={`container ${styles.featuresContainer} ${styles.verticalRhythm}`}>
-          {data.more_libraries.map((library: LinkCardProps) => (
-            <LinkCard key={library.title} {...library} />
-          ))}
         </section>
         <section
           className={`container ${styles.navigationContainer} ${styles.verticalRhythm}`}>
