@@ -32,6 +32,15 @@ export default function Libraries(): JSX.Element {
             <LinkCard key={library.title} {...library} />
           ))}
         </section>
+        <section className={`container text--center`}>
+          <h1>More libraries?</h1>
+          <p>
+            We'd love to{' '}
+            <a href="https://github.com/arrow-kt/arrow/issues">hear</a> about
+            other library which complements the Arrow libraries and should be
+            featured here!
+          </p>
+        </section>
         <section
           className={`container ${styles.navigationContainer} ${styles.verticalRhythm}`}>
           {data.navs.map((nav: BorderlessCardProps) => (

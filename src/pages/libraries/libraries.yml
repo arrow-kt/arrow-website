@@ -8,15 +8,20 @@ libraries:
     icon: icon-coroutines.svg
     body: Reason about resource-safety in the same way you reason about Structured Concurrency
 
-  - title: Hoplite
-    href: https://github.com/sksamuel/hoplite
-    icon: icon-quickstart.svg
-    body: Boilerplate-free Kotlin config library for loading configuration files as data classes
+  - title: Quiver
+    href: https://cashapp.github.io/quiver/
+    icon: icon-support.svg
+    body: Additional functional programming idioms over and above what is available from Arrow.
 
   - title: kotlinx-serialization-jsonpath 
     href: https://nomisrev.github.io/kotlinx-serialization-jsonpath/
     icon: icon-design.svg
     body: JSON serialization based on KotlinX Serialization and Arrow Optics
+
+  - title: Hoplite
+    href: https://github.com/sksamuel/hoplite
+    icon: icon-quickstart.svg
+    body: Boilerplate-free Kotlin config library for loading configuration files as data classes
 
   - title: Tribune
     href: https://github.com/sksamuel/tribune
@@ -37,11 +42,6 @@ libraries:
     href: http://serranofp.com/inikio/
     icon: icon-resilience.svg
     body: Better initial-style DSLs in Kotlin
-
-  - title: More libraries!
-    href: https://github.com/arrow-kt/arrow/issues
-    icon: icon-support.svg
-    body: We'd love to hear from any other library which complements the Arrow libraries and should be featured here
 
 more_libraries:
   - title: Library 5
