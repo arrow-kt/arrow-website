@@ -1,31 +1,31 @@
-.hero {
+.background {
   position: relative;
-  z-index: 1;
 }
 
-.hero::before {
+.background::before {
   background-image: url('@site/static/img/arrow-brand-icon.svg');
   background-repeat: no-repeat;
   background-size: auto 150%;
   background-position: max(-400px, calc(100vw - 3000px)) bottom;
   width: 100%;
-  height: 100%;
+  height: 600px;
   content: '';
   position: absolute;
-  left: 0;
+  right: 0;
   pointer-events: none;
   z-index: -1;
   transition: opacity var(--ifm-transition-fast);
 }
 
-.hero::after {
+.background::after {
   background-image: url('@site/static/img/hero-pattern.svg');
   background-repeat: no-repeat;
   background-position: right;
   width: 100%;
-  height: 100%;
+  height: 600px;
   content: '';
   position: absolute;
+  top: 0;
   right: 0;
   pointer-events: none;
   z-index: -2;
@@ -33,34 +33,11 @@
 }
 
 @media (--ifm-narrow-window) {
-  .hero::before {
+  .background::before {
     opacity: 0.1;
   }
 
-  .hero::after {
+  .background::after {
     opacity: 0.5;
   }
-}
-
-
-.container {
-  max-width: 700px;
-}
-
-u {
-  text-decoration: none;
-  box-shadow: 0 4px var(--arrow-color-secondary);
-  white-space: nowrap;
-}
-
-.subtitle {
-  font-weight: normal;
-}
-
-.ctaList {
-  display: flex;
-  flex-direction: row;
-  gap: var(--ifm-spacing-horizontal);
-  justify-content: center;
-  margin-top: calc(2 * var(--ifm-spacing-vertical));
 }

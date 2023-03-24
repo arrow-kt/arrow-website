@@ -43,6 +43,10 @@
   --ifm-color-warning-contrast-background: #fef1df;
   --ifm-color-danger-contrast-background: #fee5df;
 
+  --ifm-hr-background-color: none;
+
+  --ifm-pagination-nav-color-hover: var(--ifm-color-primary-lighter);
+
   --ifm-navbar-height: 4rem;
   --ifm-navbar-shadow: none;
   --ifm-navbar-padding-vertical: 0;
@@ -71,6 +75,10 @@
   --ifm-menu-color-background-active: var(--ifm-color-primary);
   --ifm-menu-link-padding-vertical: calc(var(--ifm-spacing-vertical) / 3);
   --ifm-menu-link-padding-horizontal: var(--ifm-spacing-horizontal);
+}
+
+.plugin-blog {
+  --ifm-avatar-photo-size: 2rem;
 }
 
 /* Custom Media query mimicking the one from Infima */

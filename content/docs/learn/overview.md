@@ -1,6 +1,6 @@
 ---
 title: Overview
-description: Arrow is composed of different libraries, each of them improving or extending one commonly-used library in the Kotlin ecosystem, or a particular Kotlin language feature.
+description: Arrow comprises different libraries, each improving or extending one commonly-used library in the Kotlin ecosystem or a particular Kotlin language feature.
 sidebar_position: 1
 sidebar_custom_props:
   icon: icon-docs.svg
@@ -11,9 +11,9 @@ import DocCardList from '@theme/DocCardList';
 
 # <decorated-text icon={frontMatter.sidebar_custom_props.icon} title={frontMatter.title} />
 
-Arrow's goal is to bring _idiomatic_ _functional programming_ to Kotlin. This means that Arrow is inspired by the great work made in other functional programming communities, yet exposes these ideas and concepts in a way that do not feel alien to Kotlin programmers.
+Arrow aims to bring _idiomatic_ _functional programming_ to Kotlin. This means Arrow is inspired by the great work made in other functional programming communities, yet exposes these ideas and concepts in ways that do not feel alien to Kotlin programmers.
 
-Arrow is composed of different libraries, each of them improving or extending one commonly-used library in the Kotlin ecosystem, or a particular Kotlin language feature.
+Arrow comprises different libraries, each improving or extending one commonly-used library in the Kotlin ecosystem or a particular Kotlin language feature.
 
 :::info In a rush?
 
@@ -24,11 +24,11 @@ Our [summary](../summary) is designed to help you find your way in the Arrow eco
 <DocCardList className="margin-bottom--lg" items={useDocsSidebar().items.filter(item => item.customProps?.overview )}/>
 
 
-Each section in the documentation roughly corresponds to one of the libraries which compose Arrow.
+Each section in the documentation roughly corresponds to one of the libraries that compose Arrow.
 
-- In our [Quickstart](../quickstart) you can read how to introduce Arrow in your project.
+- In our [Quickstart](../quickstart), you can read how to introduce Arrow in your project.
 - No library lives in a vacuum, and Arrow enjoys [integrations](../integrations/) with many other popular Kotlin libraries.
-- We also provide some guidance on [broader design and architecture](../design) using functional programming concepts.
+- We also provide guidance on [broader design and architecture](../design) using functional programming concepts.
 
 | Library | Features |
 | --- | --- |
@@ -41,6 +41,6 @@ Each section in the documentation roughly corresponds to one of the libraries wh
 
 :::note We'd love to hear from you!
 
-We're always looking for ways to improve the libraries and the documentation. Feel free to [open an issue](https://github.com/arrow-kt/arrow/issues) in our repository with any suggestion or feedback you may have. Thanks in advance! 🤩
+We're always looking for ways to improve the libraries and the documentation. Feel free to [open an issue](https://github.com/arrow-kt/arrow/issues) in our repository with any suggestions or feedback. Thanks in advance! 🤩
 
 :::

@@ -37,6 +37,14 @@
   flex-basis: 40%;
 }
 
+.landscapeMode {
+  flex-direction: row;
+}
+
+.imageContainer {
+  flex-basis: 40%;
+}
+
 .image {
   width: 100%;
   height: 100%;
@@ -44,7 +52,7 @@
 }
 
 .body {
-  flex-basis: 60%;;
+  flex-basis: 60%;
 }
 
 .title {

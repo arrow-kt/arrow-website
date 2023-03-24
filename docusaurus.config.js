@@ -57,6 +57,12 @@ const createConfig = async () => {
             path: 'content/blog',
             routeBasePath: 'community/blog',
             showReadingTime: true,
+            blogSidebarCount: 0,
+            blogListComponent: '@site/src/components/Blog/BlogListPage',
+            blogTagsPostsComponent:
+              '@site/src/components/Blog/BlogTagsPostsPage',
+            postsPerPage: 8,
+            archiveBasePath: null,
             editUrl: 'https://github.com/arrow-kt/arrow-website/edit/main/',
           },
           theme: {
@@ -97,16 +103,15 @@ const createConfig = async () => {
               activeBaseRegex: '^/+$',
             },
             {
-              to: '/about/what-is-arrow',
-              position: 'right',
-              label: 'About',
-            },
-            {
               type: 'dropdown',
               position: 'right',
               label: 'Learn',
               to: '/learn/overview',
               items: [
+                {
+                  label: 'Overview',
+                  to: '/learn/overview',
+                },
                 {
                   label: 'Quickstart',
                   to: '/learn/quickstart',
@@ -136,12 +141,16 @@ const createConfig = async () => {
                   to: '/learn/design',
                   activeBaseRegex: '^(/learn/design)',
                 },
+                {
+                  label: 'Integrations',
+                  to: '/learn/integrations',
+                },
               ],
             },
             {
               label: 'API Docs',
               position: 'right',
-              to: 'https://arrow-kt.github.io/arrow/index.html',
+              href: 'https://arrow-kt.github.io/arrow/index.html',
             },
             {
               type: 'dropdown',
@@ -184,10 +193,6 @@ const createConfig = async () => {
               title: 'Menu',
               items: [
                 {
-                  label: 'About',
-                  to: '/about/what-is-arrow',
-                },
-                {
                   label: 'Learn',
                   to: '/learn/overview',
                 },
@@ -210,7 +215,7 @@ const createConfig = async () => {
               items: [
                 {
                   label: 'Quickstart',
-                  to: 'learn/quickstart',
+                  to: '/learn/quickstart',
                 },
                 {
                   label: 'Typed errors',
@@ -224,6 +229,11 @@ const createConfig = async () => {
                   label: 'Resilience',
                   to: '/learn/resilience',
                 },
+              ],
+            },
+            {
+              title: 'More',
+              items: [
                 {
                   label: 'Immutable data',
                   to: '/learn/immutable-data',
@@ -232,14 +242,9 @@ const createConfig = async () => {
                   label: 'Design',
                   to: '/learn/design',
                 },
-              ],
-            },
-            {
-              title: 'More',
-              items: [
                 {
-                  label: 'API Docs',
-                  to: 'https://arrow-kt.github.io/arrow/index.html',
+                  label: 'Integrations',
+                  to: '/learn/integrations',
                 },
                 {
                   label: 'Analysis',
@@ -342,7 +347,7 @@ const createConfig = async () => {
           postcssOptions.plugins.push(
             // @ts-ignore
             require('@csstools/postcss-global-data')({
-              files: ['./src/css/custom.css'],
+              files: ['./src/css/vars.css'],
             }),
           );
           postcssOptions.plugins.push(require('postcss-custom-media'));
