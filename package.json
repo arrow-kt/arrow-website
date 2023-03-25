@@ -36,7 +36,7 @@
     "eslint-import-resolver-typescript": "3.5.3",
     "eslint-plugin-import": "2.27.5",
     "eslint-plugin-prettier": "4.2.1",
-    "html-react-parser": "3.0.14",
+    "html-react-parser": "3.0.15",
     "husky": "8.0.3",
     "postcss-custom-media": "9.1.2",
     "prettier": "2.8.6",
