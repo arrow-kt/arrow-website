@@ -34,15 +34,15 @@ export function ImageCardBase({
         <img
           className={styles.image}
           src={image}
-          alt={`${title} category`}
-          title={`${title} category`}
+          alt={`${title}`}
+          title={`${title}`}
         />
       </div>
       <div className={`card__body ${styles.body}`}>
         <h3 className={styles.title}>{title}</h3>
         <h5 className={styles.subtitle}>{subtitle}</h5>
         <p className={styles.text}>{body}</p>
-        <strong>
+        <strong className={styles.linkContainer}>
           <Link href={href} className={styles.link}>
             Learn more
           </Link>
