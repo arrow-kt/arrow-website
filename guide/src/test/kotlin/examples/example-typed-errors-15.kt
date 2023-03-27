@@ -1,41 +1,31 @@
 // This file was automatically generated from working-with-typed-errors.md by Knit tool. Do not edit.
 package arrow.website.examples.exampleTypedErrors15
 
-import arrow.core.raise.Raise
+import arrow.core.Either
+import arrow.core.Either.Left
+import arrow.core.NonEmptyList
+import arrow.core.nonEmptyListOf
+import arrow.core.raise.either
 import arrow.core.raise.ensure
-import arrow.core.raise.recover
+import arrow.core.raise.zipOrAccumulate
 import io.kotest.matchers.shouldBe
-import kotlin.experimental.ExperimentalTypeInference
 
-sealed interface Lce<out E, out A> {
-  object Loading : Lce<Nothing, Nothing>
-  data class Content<A>(val value: A) : Lce<Nothing, A>
-  data class Failure<E>(val error: E) : Lce<E, Nothing>
+sealed interface UserProblem {
+  object EmptyName: UserProblem
+  data class NegativeAge(val age: Int): UserProblem
 }
 
-@JvmInline
-value class LceRaise<E>(val raise: Raise<Lce<E, Nothing>>) : Raise<Lce<E, Nothing>> by raise {
-  fun <A> Lce<E, A>.bind(): A =  when (this) {
-    is Lce.Content -> value
-    is Lce.Failure -> raise.raise(this)
-    Lce.Loading -> raise.raise(Lce.Loading)
+data class User private constructor(val name: String, val age: Int) {
+  companion object {
+    operator fun invoke(name: String, age: Int): Either<NonEmptyList<UserProblem>, User> = either {
+      zipOrAccumulate(
+        { ensure(name.isNotEmpty()) { UserProblem.EmptyName } },
+        { ensure(age >= 0) { UserProblem.NegativeAge(age) } }
+      ) { _, _ -> User(name, age) }
+    }
   }
 }
 
-@OptIn(ExperimentalTypeInference::class)
-inline fun <E, A> lce(@BuilderInference block: LceRaise<E>.() -> A): Lce<E, A> =
-  recover({ Lce.Content(block(LceRaise(this))) }) { e: Lce<E, Nothing> -> e }
-
 fun example() {
-  lce {
-    val a = Lce.Content(1).bind()
-    val b = Lce.Content(1).bind()
-    a + b
-  } shouldBe Lce.Content(2)
-
-  lce {
-    val a = Lce.Content(1).bind()
-    ensure(a > 1) { Lce.Failure("a is not greater than 1") }
-    a + 1
-  } shouldBe Lce.Failure("a is not greater than 1")
+  User("", -1) shouldBe Left(nonEmptyListOf(UserProblem.EmptyName, UserProblem.NegativeAge(-1)))
 }

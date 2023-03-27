@@ -2,25 +2,30 @@
 package arrow.website.examples.exampleTypedErrors10
 
 import arrow.core.Either
-import arrow.core.left
-import arrow.core.nonEmptyListOf
-import arrow.core.mapOrAccumulate
-import arrow.core.raise.either
-import arrow.core.raise.ensure
+import arrow.core.raise.catch
 import arrow.core.raise.Raise
-import io.kotest.matchers.shouldBe
+import java.sql.SQLException
 
-data class NotEven(val i: Int)
-
-fun Raise<NotEven>.isEven(i: Int): Int =
-  i.also { ensure(i % 2 == 0) { NotEven(i) } }
-
-fun isEven2(i: Int): Either<NotEven, Int> =
-  either { isEven(i) }
-
-val errors = nonEmptyListOf(NotEven(1), NotEven(3), NotEven(5), NotEven(7), NotEven(9)).left()
-
-fun example() {
-  (1..10).mapOrAccumulate { isEven(it) } shouldBe errors
-  (1..10).mapOrAccumulate { isEven2(it).bind() } shouldBe errors
+object UsersQueries {
+  fun insert(username: String, email: String): Long = 1L
 }
+
+fun SQLException.isUniqueViolation(): Boolean = true
+
+data class UserAlreadyExists(val username: String, val email: String)
+
+suspend fun Raise<UserAlreadyExists>.insertUser(username: String, email: String): Long =
+  catch({
+    UsersQueries.insert(username, email)
+  }) { e: SQLException ->
+    if (e.isUniqueViolation()) raise(UserAlreadyExists(username, email))
+    else throw e
+  }
+
+suspend fun insertUser(username: String, email: String): Either<UserAlreadyExists, Long> =
+  Either.catchOrThrow<SQLException, Long> {
+    UsersQueries.insert(username, email)
+  }.mapLeft { e ->
+    if (e.isUniqueViolation()) UserAlreadyExists(username, email)
+    else throw e
+  }

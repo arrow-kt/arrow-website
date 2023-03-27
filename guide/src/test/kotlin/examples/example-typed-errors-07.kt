@@ -3,35 +3,32 @@ package arrow.website.examples.exampleTypedErrors07
 
 import arrow.core.Either
 import arrow.core.left
-import arrow.core.raise.Raise
-import arrow.core.raise.either
+import arrow.core.getOrElse
 import arrow.core.raise.ensure
-import arrow.core.recover
-import arrow.core.right
+import arrow.core.raise.either
+import arrow.core.raise.Raise
+import arrow.core.raise.recover
+import io.kotest.assertions.fail
 import io.kotest.matchers.shouldBe
 
 data class User(val id: Long)
 data class UserNotFound(val message: String)
 
-fun fetchUser(id: Long): Either<UserNotFound, User> = either {
+suspend fun fetchUser(id: Long): Either<UserNotFound, User> = either {
   ensure(id > 0) { UserNotFound("Invalid id: $id") }
   User(id)
 }
 
-fun Raise<UserNotFound>.fetchUser(id: Long): User {
+suspend fun Raise<UserNotFound>.fetchUser(id: Long): User {
   ensure(id > 0) { UserNotFound("Invalid id: $id") }
   return User(id)
 }
 
-object OtherError
-
-fun example() {
-  val either: Either<OtherError, User> =
-    fetchUser(1)
-      .recover { _: UserNotFound -> raise(OtherError) }
-  
-  either shouldBe User(1).right()
-
+suspend fun example() {
   fetchUser(-1)
-    .recover { _: UserNotFound -> raise(OtherError) } shouldBe OtherError.left()
+    .getOrElse { e: UserNotFound -> null } shouldBe null
+
+  recover({
+    fetchUser(1)
+  }) { e: UserNotFound -> null } shouldBe User(1)
 }
