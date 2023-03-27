@@ -18,6 +18,9 @@ import { Banner } from '@site/src/components/Banner';
 import data from './blog-list-page.yml';
 import styles from './blog-list-page.module.css';
 
+const formatSubtitle = (name: string | undefined, date: string): string =>
+  name ? `${name}, ${date}` : `${date}`;
+
 function BlogListPageMetadata(props: Props): JSX.Element {
   const { metadata } = props;
   const {
@@ -39,7 +42,10 @@ function BlogListPageContent(props: Props): JSX.Element {
 
   const posts = items.map((item) => ({
     title: item.content.metadata.title,
-    subtitle: `${item.content.metadata.authors[0].name}, ${item.content.metadata.formattedDate}`,
+    subtitle: formatSubtitle(
+      item.content.metadata.authors[0]?.name,
+      item.content.metadata.formattedDate,
+    ),
     image: item.content.frontMatter.image,
     body: item.content.metadata.description,
     href: item.content.metadata.permalink,

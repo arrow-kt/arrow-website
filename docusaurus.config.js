@@ -62,7 +62,6 @@ const createConfig = async () => {
             blogTagsPostsComponent:
               '@site/src/components/Blog/BlogTagsPostsPage',
             postsPerPage: 8,
-            archiveBasePath: null,
             editUrl: 'https://github.com/arrow-kt/arrow-website/edit/main/',
           },
           theme: {

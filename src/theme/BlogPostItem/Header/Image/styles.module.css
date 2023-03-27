@@ -13,6 +13,7 @@
   left: 0;
   mix-blend-mode: color;
   pointer-events: none;
+  opacity: 0.7;
 }
 
 .imageContainer::after {
@@ -28,6 +29,7 @@
     var(--ifm-color-primary-light) 81.52%
   );
   pointer-events: none;
+  opacity: 0.8;
 }
 
 .image {

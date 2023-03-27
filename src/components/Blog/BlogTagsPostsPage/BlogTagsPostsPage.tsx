@@ -17,6 +17,9 @@ import { ImageCard, ImageCardProps } from '@site/src/components/ImageCard';
 
 import styles from './blog-tags-posts-page.module.css';
 
+const formatSubtitle = (name: string | undefined, date: string): string =>
+  name ? `${name}, ${date}` : `${date}`;
+
 // Very simple pluralization: probably good enough for now
 function useBlogPostsPlural() {
   const { selectMessage } = usePluralForm();
@@ -68,7 +71,10 @@ function BlogTagsPostsPageContent(props: Props): JSX.Element {
 
   const posts = items.map((item) => ({
     title: item.content.metadata.title,
-    subtitle: `${item.content.metadata.authors[0].name}, ${item.content.metadata.formattedDate}`,
+    subtitle: formatSubtitle(
+      item.content.metadata.authors[0]?.name,
+      item.content.metadata.formattedDate,
+    ),
     image: item.content.frontMatter.image,
     body: item.content.metadata.description,
     href: item.content.metadata.permalink,
