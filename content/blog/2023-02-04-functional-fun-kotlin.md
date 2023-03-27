@@ -10,5 +10,3 @@ event: FOSDEM
 # Functional Fun in Kotlin
 
 [Simon Vergauwen](https://twitter.com/vergauwen_simon) shares why he thinks Kotlin is great language to do modern functional programming, and why he believes it's perhaps the best language to do modern mainstream (hardcore) functional programming.
-
-https://speakerdeck.com/nomisrev/functional-fun-in-kotlin
