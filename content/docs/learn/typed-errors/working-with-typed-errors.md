@@ -452,7 +452,7 @@ If we want to accumulate all the errors, we can use `mapOrAccumulate` on `Iterab
 
 Since you have potentially more than one failure, the error type in `Either` must be some sort of list.
 However, we know that if we are not in the happy path, then _at least one_ error must have occurred.
-Arrow makes this fact explicit by making the return type of `parZip` a `NonEmptyList`, or `Nel` for short.
+Arrow makes this fact explicit by making the return type of `mapOrAccumulate ` a `NonEmptyList`, or `Nel` for short.
 
 :::
 
