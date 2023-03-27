@@ -22,24 +22,20 @@ class TypedErrorsTest : StringSpec({
     arrow.website.examples.exampleTypedErrors05.example()
   }
 
-  "ExampleTypedErrors06" {
-    arrow.website.examples.exampleTypedErrors06.example()
-  }
-
   "ExampleTypedErrors07" {
     arrow.website.examples.exampleTypedErrors07.example()
   }
 
-  "ExampleTypedErrors10" {
-    arrow.website.examples.exampleTypedErrors10.example()
+  "ExampleTypedErrors08" {
+    arrow.website.examples.exampleTypedErrors08.example()
   }
 
   "ExampleTypedErrors11" {
     arrow.website.examples.exampleTypedErrors11.example()
   }
 
-  "ExampleTypedErrors13" {
-    arrow.website.examples.exampleTypedErrors13.example()
+  "ExampleTypedErrors12" {
+    arrow.website.examples.exampleTypedErrors12.example()
   }
 
   "ExampleTypedErrors14" {
@@ -48,6 +44,10 @@ class TypedErrorsTest : StringSpec({
 
   "ExampleTypedErrors15" {
     arrow.website.examples.exampleTypedErrors15.example()
+  }
+
+  "ExampleTypedErrors16" {
+    arrow.website.examples.exampleTypedErrors16.example()
   }
 
 }) {
