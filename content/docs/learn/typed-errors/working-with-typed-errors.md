@@ -447,7 +447,14 @@ fun isEven2(i: Int): Either<NotEven, Int> =
 
 First, we define two functions that return a typed error if the value is not even.
 If we want to accumulate all the errors, we can use `mapOrAccumulate` on `Iterable` to get all the errors, and doing so for `(0..10)` should return the following `errors`.
-The errors are accumulated into `NonEmptyList` since there needs to be at least one error, or we would succeed with the computation.
+
+:::info Non-empty lists
+
+Since you have potentially more than one failure, the error type in `Either` must be some sort of list.
+However, we know that if we are not in the happy path, then _at least one_ error must have occurred.
+Arrow makes this fact explicit by making the return type of `parZip` a `NonEmptyList`, or `Nel` for short.
+
+:::
 
 ```kotlin
 val errors = nonEmptyListOf(NotEven(1), NotEven(3), NotEven(5), NotEven(7), NotEven(9)).left()
@@ -502,6 +509,112 @@ fun example() {
 ```
 <!--- KNIT example-typed-errors-11.kt -->
 <!--- TEST assert -->
+
+### Accumulating different computations
+
+In the example above we are providing one single function to operate on a sequence of elements.
+Another important and related scenario is accumulating different errors, but each of them coming from different computations.
+For example, you need to perform validation over the different fields of a form, and accumulate the errors, but each field has different constraints.
+
+As a guiding example, let's consider information about a user, where the name shouldn't be empty and the age should be non-negative.
+
+```kotlin
+data class User(val name: String, val age: Int)
+```
+<!--- KNIT example-typed-errors-12.kt -->
+
+It's customary to define the different problems that may arise from validation as a sealed interface:
+
+<!--- INCLUDE
+import arrow.core.Either
+import arrow.core.Either.Left
+import arrow.core.raise.either
+import arrow.core.raise.ensure
+import io.kotest.matchers.shouldBe
+-->
+
+```kotlin
+sealed interface UserProblem {
+  object EmptyName: UserProblem
+  data class NegativeAge(val age: Int): UserProblem
+}
+```
+
+Let's define validation as a _smart constructor_, that is, by creating a function which looks like the `User` constructor, but performs additional checks.
+
+```kotlin
+data class User private constructor(val name: String, val age: Int) {
+  companion object {
+    operator fun invoke(name: String, age: Int): Either<UserProblem, User> = either {
+      ensure(name.isNotEmpty()) { UserProblem.EmptyName }
+      ensure(age >= 0) { UserProblem.NegativeAge(age) }
+      User(name, age)
+    }
+  }
+}
+```
+
+Alas, that implementation stops after the first error. We can see this if we try to validate a `User` with both an empty name and a wrong age.
+
+```kotlin
+fun example() {
+  User("", -1) shouldBe Left(UserProblem.EmptyName)
+}
+```
+<!--- KNIT example-typed-errors-13.kt -->
+<!--- TEST assert -->
+
+<!--- INCLUDE
+import arrow.core.Either
+import arrow.core.Either.Left
+import arrow.core.NonEmptyList
+import arrow.core.nonEmptyListOf
+import arrow.core.raise.either
+import arrow.core.raise.ensure
+import arrow.core.raise.zipOrAccumulate
+import io.kotest.matchers.shouldBe
+
+sealed interface UserProblem {
+  object EmptyName: UserProblem
+  data class NegativeAge(val age: Int): UserProblem
+}
+-->
+
+If you want to gather as many validation problems as possible, you need to switch to _accumulation_, as done above with `mapOrAccumulate`.
+When each of the validations is different, you should reach to `zipOrAccumulate`: each of the arguments defines one independent validation,
+and the final block defines what to do when all the validations were successful, that is, when no problem was `raise`d during execution.
+
+```kotlin
+data class User private constructor(val name: String, val age: Int) {
+  companion object {
+    operator fun invoke(name: String, age: Int): Either<NonEmptyList<UserProblem>, User> = either {
+      zipOrAccumulate(
+        { ensure(name.isNotEmpty()) { UserProblem.EmptyName } },
+        { ensure(age >= 0) { UserProblem.NegativeAge(age) } }
+      ) { _, _ -> User(name, age) }
+    }
+  }
+}
+```
+
+With this change, the problems are correctly accumulated. Now we can present the user all the problems in the form at once.
+
+```kotlin
+fun example() {
+  User("", -1) shouldBe Left(nonEmptyListOf(UserProblem.EmptyName, UserProblem.NegativeAge(-1)))
+}
+```
+<!--- KNIT example-typed-errors-14.kt -->
+<!--- TEST assert -->
+
+:::tip Error accumulation and concurrency
+
+In addition to accumulating errors, you may want to perform each of the tasks within `zipOrAccumulate` or `mapOrAccumulate` in parallel.
+Arrow Fx features [`parZipOrAccumulate` and `parMapOrAccumulate`](../../coroutines/parallel/#accumulating-typed-errors-in-parallel) to cover
+those cases, in addition to [`parZip` and `parMap`](../../coroutines/parallel/#integration-with-typed-errors)
+which follow a short-circuiting approach.
+
+:::
 
 ## Creating your own error wrappers
 
@@ -567,7 +680,7 @@ fun example() {
   } shouldBe Lce.Failure("a is not greater than 1")
 }
 ```
-<!--- KNIT example-typed-errors-12.kt -->
+<!--- KNIT example-typed-errors-15.kt -->
 <!--- TEST assert -->
 
 If we'd used _context receivers_, defining this DSL would be even more straightforward, and we could use the `Raise` type class directly.
