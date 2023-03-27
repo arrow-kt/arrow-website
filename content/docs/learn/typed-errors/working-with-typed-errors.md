@@ -283,8 +283,9 @@ We've already hinted this distinction above, but with working with type errors i
 - _Logical failures_ indicate problems within the domain, and which should be handled as part of the usual domain logic. For example, trying to find a user which doesn't exist, or validating input data.
 - _Exceptions_ indicate problems which affect the system's ability to continue working. For example, if the database connection breaks this is something outside your domain logic.
 
-Due to historical baggage, exceptions are often used for both cases. Arrow provides a uniform interface to handle both using `Raise`.
-In practice, exception handling is often used while wrapping foreign or older code.
+Historically exceptions have been used for both cases. For example, throwing a `UserNotValidException` when the input data was wrong.
+We advocate for making this distinction clear in the types, and leave exceptions only for exceptional cases.
+However, we're also aware of the historical baggage, so we provide tools to transforms those exceptions which shouldn't have been exceptions into typed errors.
 
 ### From logical failures
 
