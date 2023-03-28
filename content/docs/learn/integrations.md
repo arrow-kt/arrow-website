@@ -3,6 +3,7 @@ title: Integrations
 description: Arrow comprises different libraries, each improving or extending one commonly-used library in the Kotlin ecosystem or a particular Kotlin language feature.
 sidebar_position: 10
 sidebar_custom_props:
+  description: Playing nice with the rest of the ecosystem
   icon: icon-generic-5.svg
   overview: true
 ---

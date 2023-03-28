@@ -36,7 +36,7 @@ features:
   - title: Functions and collections
     href: /learn/functions-collections
     icon: icon-generic-6.svg
-    body: Utilities for more productive basics
+    body: Powerful additions to the basics to make your code more expressive
 
 projects:
   - title: Case study 1
