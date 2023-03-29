@@ -1,6 +1,6 @@
 {
   "label": "Design",
-  "position": 7,
+  "position": 8,
   "customProps": {
     "icon": "icon-design.svg",
     "description": "Recipes for designing nice Kotlin code",

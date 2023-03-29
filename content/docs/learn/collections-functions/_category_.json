@@ -1,0 +1,9 @@
+{
+  "label": "Collections and functions",
+  "position": 7,
+  "customProps": {
+    "icon": "icon-generic-6.svg",
+    "description": "Utilities for more productive basics",
+    "overview": true
+  }
+}
