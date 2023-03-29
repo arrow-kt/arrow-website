@@ -6,9 +6,7 @@ description: Working with collections with at least one element
 # Non-empty collections
 
 Nullable types give us the ability to have zero or one appearance of a value,
-collections allow us to have any number of them. However, in some
-scenarios we are fine working with any amount of values, but we need
-**at least one**. Arrow provides both [`NonEmptyList`](https://arrow-kt.github.io/arrow/arrow-core/arrow.core/-non-empty-list/index.html)
+collections allow us to have any number of them. However, in some scenarios, we need to work with collections that should contain **at least one** element. Arrow provides both [`NonEmptyList`](https://arrow-kt.github.io/arrow/arrow-core/arrow.core/-non-empty-list/index.html)
 and [`NonEmptySet`](https://arrow-kt.github.io/arrow/arrow-core/arrow.core/-non-empty-set/index.html).
 
 One concrete example is given by [error accumulation](../../typed-errors/working-with-typed-errors/#accumulating-errors).
