@@ -258,7 +258,7 @@ const createConfig = async () => {
                 },
                 {
                   label: 'Analysis',
-                  to: '/incubation/analysis',
+                  to: '/ecosystem/analysis',
                 },
                 {
                   label: 'More libraries',
