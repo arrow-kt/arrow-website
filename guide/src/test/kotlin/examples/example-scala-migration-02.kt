@@ -1,4 +1,4 @@
-// This file was automatically generated from scala.md by Knit tool. Do not edit.
+// This file was automatically generated from from-fp.md by Knit tool. Do not edit.
 package arrow.website.examples.exampleScalaMigration02
 
 import arrow.core.*
