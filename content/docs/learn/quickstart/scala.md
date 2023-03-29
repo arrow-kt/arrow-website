@@ -96,7 +96,7 @@ type to mark side-effects.
 
 :::info Read more
 
-Our [_Design_](../design/) section includes a [post](../../design/receivers-flatmap/)
+Our [_Design_](../../design/) section includes a [post](../../design/receivers-flatmap/)
 comparing the different approaches for effect handling.
 
 :::
