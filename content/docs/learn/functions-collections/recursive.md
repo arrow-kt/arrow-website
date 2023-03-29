@@ -162,4 +162,9 @@ above, the cache is shared among **all** calls to your function. In the worst
 case, this may result in memory which cannot be reclaimed throughout the whole
 execution, so you should apply this technique carefully.
 
+There's some literature about [eviction policies for memoization](https://otee.dev/2021/08/18/cache-replacement-policy.html),
+but at the moment of writing memoize doesn't offer any type of control over the
+cached values. [Aedile](https://github.com/sksamuel/aedile) is a Kotlin-first
+caching library which you can use to manually tweak your memoization.
+
 :::
