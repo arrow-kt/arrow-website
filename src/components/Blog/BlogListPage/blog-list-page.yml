@@ -1,0 +1,12 @@
+hero:
+  title: Blog
+  subtitle: Morbi ornare arcu massa, a sodales augue vulputate quis. Nunc faucibus lectus augue, posuere pulvina
+  ctaList:
+    - title: Learn about our courses
+      href: /learn/overview
+
+banner:
+  title: Do you want to publish a new post?
+  ctaList:
+    - title: Contact us
+      href: /learn/overview

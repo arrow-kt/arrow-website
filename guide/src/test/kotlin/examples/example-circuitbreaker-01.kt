@@ -3,14 +3,15 @@ package arrow.website.examples.exampleCircuitbreaker01
 
 import arrow.core.Either
 import arrow.fx.resilience.CircuitBreaker
+import arrow.fx.resilience.CircuitBreaker.OpeningStrategy
 import kotlin.time.Duration.Companion.seconds
 import kotlin.time.ExperimentalTime
 import kotlinx.coroutines.delay
 
 @ExperimentalTime
 suspend fun main(): Unit {
-  val circuitBreaker = CircuitBreaker.of(
-    maxFailures = 2,
+  val circuitBreaker = CircuitBreaker(
+    openingStrategy = OpeningStrategy.Count(2),
     resetTimeout = 2.seconds,
     exponentialBackoffFactor = 1.2,
     maxResetTimeout = 60.seconds,

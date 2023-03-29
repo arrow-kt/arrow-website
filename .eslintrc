@@ -19,7 +19,7 @@
     "prettier/prettier": "error",
     "import/no-unresolved": [
       "error",
-      {"ignore": ["^@theme", "^@docusaurus", "^@site"]}
+      { "ignore": ["^@theme", "^@docusaurus", "^@site"] }
     ],
     "import/order": [
       "error",
@@ -54,7 +54,8 @@
         ],
         "newlines-between": "always"
       }
-    ]
+    ],
+    "@typescript-eslint/no-unused-vars": ["error", { "argsIgnorePattern": "^_" }]
   },
   "settings": {
     "import/parsers": {

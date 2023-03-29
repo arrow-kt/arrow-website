@@ -1,8 +1,8 @@
 {
   "label": "Analysis",
   "position": 2,
-  "link": {
-    "type": "generated-index",
-    "description": "Arrow Analysis introduces new checks in your compilation pipeline, which warn about common mistakes like out of bounds indexing."
+  "customProps": {
+    "icon": "arrow-analysis-icon.svg",
+    "description": "Arrow Analysis introduces new checks in your compilation pipeline, which warn about common mistakes like out of bounds indexing"
   }
 }

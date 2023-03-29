@@ -1,13 +1,21 @@
 .hero {
   position: relative;
+  z-index: 1;
+}
+
+.hero::before {
   background-image: url('@site/static/img/arrow-brand-icon.svg');
   background-repeat: no-repeat;
   background-size: auto 150%;
   background-position: max(-400px, calc(100vw - 3000px)) bottom;
-  /* TODO: Decide what to do with this background-position */
-  /* background-position: -450px bottom; */
-  /* background-position: min(0px, calc(100vw - 1500px)) bottom; */
-  z-index: 1;
+  width: 100%;
+  height: 100%;
+  content: '';
+  position: absolute;
+  left: 0;
+  pointer-events: none;
+  z-index: -1;
+  transition: opacity var(--ifm-transition-fast);
 }
 
 .hero::after {
@@ -20,20 +28,36 @@
   position: absolute;
   right: 0;
   pointer-events: none;
-  z-index: -1;
+  z-index: -2;
+  transition: opacity var(--ifm-transition-fast);
 }
 
+@media (--ifm-narrow-window) {
+  .hero::before {
+    opacity: 0.1;
+  }
+
+  .hero::after {
+    opacity: 0.5;
+  }
+}
+
+
 .container {
-  max-width: 900px;
+  max-width: 700px;
 }
 
 u {
   text-decoration: none;
-  box-shadow: 0 4px var(--ifm-color-secondary);
+  box-shadow: 0 4px var(--arrow-color-secondary);
   white-space: nowrap;
 }
 
-.heroCta {
+.subtitle {
+  font-weight: normal;
+}
+
+.ctaList {
   display: flex;
   flex-direction: row;
   gap: var(--ifm-spacing-horizontal);

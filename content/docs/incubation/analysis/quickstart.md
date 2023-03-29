@@ -1,11 +1,14 @@
 ---
+title: Quickstart
 sidebar_position: 1
+sidebar_custom_props:
+  icon: icon-quickstart.svg
 ---
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-# Quickstart
+# <decorated-text icon={frontMatter.sidebar_custom_props.icon}>Quickstart</decorated-text>
 
 This Quickstart explains how to set up Arrow Analysis in your Gradle project, and how to use it to get further insight in your code, and to introduce additional checks in your own functions and classes.
 

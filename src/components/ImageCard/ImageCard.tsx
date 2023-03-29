@@ -1,39 +1,49 @@
 import React from 'react';
 
 import Link from '@docusaurus/Link';
+import useBaseUrl from '@docusaurus/useBaseUrl';
 
 import styles from './image-card.module.css';
 
 export interface ImageCardProps {
   title?: string;
+  subtitle?: string;
   image?: string;
   body?: string;
-  link?: string;
+  href?: string;
 }
 
-export function ImageCard({
+export interface ImageCardOptionsProps extends ImageCardProps {
+  landscapeMode: boolean;
+}
+
+export function ImageCardBase({
   title = 'Case study',
-  image = 'img/sample-image.jpg',
+  subtitle,
+  image = useBaseUrl('/img/sample-image.jpg'),
   body = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eu turpis molestie',
-  link = 'about/use-cases',
-}: ImageCardProps) {
+  href = '/about/use-cases',
+  landscapeMode = false,
+}: ImageCardOptionsProps) {
   return (
-    <div className={`card ${styles.card}`}>
-      <div className="card__image text--center">
+    <div
+      className={`card ${styles.card} ${
+        landscapeMode && styles.landscapeMode
+      }`}>
+      <div className={`card__image ${styles.imageContainer}`}>
         <img
           className={styles.image}
           src={image}
-          alt={`${title} category`}
-          title={`${title} category`}
+          alt={`${title}`}
+          title={`${title}`}
         />
       </div>
-      <div className="card__body">
-        <h2 className={styles.title}>{title}</h2>
+      <div className={`card__body ${styles.body}`}>
+        <h3 className={styles.title}>{title}</h3>
+        <h5 className={styles.subtitle}>{subtitle}</h5>
         <p className={styles.text}>{body}</p>
-      </div>
-      <div className={`card__footer`}>
-        <strong>
-          <Link href={link} className={styles.link}>
+        <strong className={styles.linkContainer}>
+          <Link href={href} className={styles.link}>
             Learn more
           </Link>
         </strong>
@@ -41,3 +51,11 @@ export function ImageCard({
     </div>
   );
 }
+
+export const ImageCardLandscape = (props: ImageCardProps) => (
+  <ImageCardBase landscapeMode {...props} />
+);
+
+export const ImageCard = (props: ImageCardProps) => (
+  <ImageCardBase landscapeMode={false} {...props} />
+);

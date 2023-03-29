@@ -1,0 +1,44 @@
+hero:
+  title: Support
+  subtitle: Morbi ornare arcu massa, a sodales augue vulputate quis. Nunc faucibus lectus augue, posuere pulvina
+  ctaList:
+    - title: Our Slack channel
+      href: /learn/overview
+
+links:
+  - title: Documentation
+    href: /learn/quickstart
+    icon: icon-quickstart.svg
+    body: Lorem ipsum dolor sit amet, consectetur adipiscing elit. In pretium ligula nec mi facilisis malesuada. Donec sed massa finibus, laoreet tellus vel...
+
+  - title: GitHub
+    href: /learn/typed-errors
+    icon: icon-typed-errors.svg
+    body: Lorem ipsum dolor sit amet, consectetur adipiscing elit. In pretium ligula nec mi facilisis malesuada. Donec sed massa finibus, laoreet tellus vel...
+
+  - title: Slack channel
+    href: /learn/immutable-data
+    icon: icon-immutable-data.svg
+    body: Lorem ipsum dolor sit amet, consectetur adipiscing elit. In pretium ligula nec mi facilisis malesuada. Donec sed massa finibus, laoreet tellus vel...
+
+  - title: Stack Overflow
+    href: /learn/design
+    icon: icon-design.svg
+    body: Lorem ipsum dolor sit amet, consectetur adipiscing elit. In pretium ligula nec mi facilisis malesuada. Donec sed massa finibus, laoreet tellus vel...
+
+  - title: Blog
+    href: /learn/design
+    icon: icon-design.svg
+    body: Lorem ipsum dolor sit amet, consectetur adipiscing elit. In pretium ligula nec mi facilisis malesuada. Donec sed massa finibus, laoreet tellus vel...
+
+  - title: Events
+    href: /learn/design
+    icon: icon-design.svg
+    body: Lorem ipsum dolor sit amet, consectetur adipiscing elit. In pretium ligula nec mi facilisis malesuada. Donec sed massa finibus, laoreet tellus vel...
+
+
+banner:
+  title: Want to know more about Λrrow?
+  ctaList:
+    - title: Read the docs
+      href: /learn/overview

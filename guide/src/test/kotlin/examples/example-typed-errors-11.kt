@@ -1,4 +1,4 @@
-// This file was automatically generated from typed-errors.md by Knit tool. Do not edit.
+// This file was automatically generated from working-with-typed-errors.md by Knit tool. Do not edit.
 package arrow.website.examples.exampleTypedErrors11
 
 import arrow.core.Either
@@ -12,9 +12,11 @@ import io.kotest.matchers.shouldBe
 
 data class NotEven(val i: Int)
 
-fun Raise<NotEven>.isEven(i: Int): Int = i.also { ensure(i % 2 == 0) { NotEven(i) } }
+fun Raise<NotEven>.isEven(i: Int): Int =
+  i.also { ensure(i % 2 == 0) { NotEven(i) } }
 
-fun isEven2(i: Int): Either<NotEven, Int> = either { isEven(i) }
+fun isEven2(i: Int): Either<NotEven, Int> =
+  either { isEven(i) }
 
 val errors = nonEmptyListOf(NotEven(1), NotEven(3), NotEven(5), NotEven(7), NotEven(9)).left()
 

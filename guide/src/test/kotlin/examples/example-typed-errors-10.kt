@@ -1,31 +1,31 @@
-// This file was automatically generated from typed-errors.md by Knit tool. Do not edit.
+// This file was automatically generated from working-with-typed-errors.md by Knit tool. Do not edit.
 package arrow.website.examples.exampleTypedErrors10
 
 import arrow.core.Either
-import arrow.core.left
-import arrow.core.NonEmptyList
-import arrow.core.nonEmptyListOf
+import arrow.core.raise.catch
 import arrow.core.raise.Raise
-import arrow.core.raise.either
-import arrow.core.raise.zipOrAccumulate
-import io.kotest.matchers.shouldBe
+import java.sql.SQLException
 
-data class MyError(val message: String)
-
-fun one(): Either<MyError, Int> =
-  MyError("first-error").left()
-
-fun two(): Either<NonEmptyList<MyError>, Long> =
-  nonEmptyListOf(MyError("second-error"), MyError("third-error")).left()
-
-fun Raise<MyError>.three(): Double =
-  raise(MyError("fourth-error"))
-
-fun example() {
-  fun Raise<NonEmptyList<MyError>>.triple(): Triple<Int, Long, Double> =
-    zipOrAccumulate({ one().bind() }, { two().bindNel() }, { three() }, ::Triple)
-
-  val errors = nonEmptyListOf(MyError("first-error"), MyError("second-error"), MyError("third-error"), MyError("fourth-error"))
-  
-  either { triple() } shouldBe errors.left()
+object UsersQueries {
+  fun insert(username: String, email: String): Long = 1L
 }
+
+fun SQLException.isUniqueViolation(): Boolean = true
+
+data class UserAlreadyExists(val username: String, val email: String)
+
+suspend fun Raise<UserAlreadyExists>.insertUser(username: String, email: String): Long =
+  catch({
+    UsersQueries.insert(username, email)
+  }) { e: SQLException ->
+    if (e.isUniqueViolation()) raise(UserAlreadyExists(username, email))
+    else throw e
+  }
+
+suspend fun insertUser(username: String, email: String): Either<UserAlreadyExists, Long> =
+  Either.catchOrThrow<SQLException, Long> {
+    UsersQueries.insert(username, email)
+  }.mapLeft { e ->
+    if (e.isUniqueViolation()) UserAlreadyExists(username, email)
+    else throw e
+  }

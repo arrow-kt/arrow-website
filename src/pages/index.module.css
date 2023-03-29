@@ -4,31 +4,31 @@
 
 .textContainer {
   max-width: 480px;
-  /* Waiting on https://github.com/mrmckeb/typescript-plugin-css-modules/issues/207 */
+  /* TODO: Waiting on https://github.com/mrmckeb/typescript-plugin-css-modules/issues/207 */
   /* composes: container from global;
   composes: text--center from global; */
 }
 
 .featuresContainer,
 .quotesContainer {
-  /* Waiting on https://github.com/mrmckeb/typescript-plugin-css-modules/issues/207 */
+  /* TODO: Waiting on https://github.com/mrmckeb/typescript-plugin-css-modules/issues/207 */
   /* https://github.com/css-modules/css-modules#composing-from-other-files */
   /* composes: container from global; */
   display: grid;
   grid-template-columns: 1fr 1fr;
-  grid-gap: var(--ifm-spacing-vertical) var(--ifm-spacing-horizontal);
+  gap: var(--ifm-spacing-vertical) var(--ifm-spacing-horizontal);
 }
 
 .projectsContainer {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
-  grid-gap: var(--ifm-spacing-vertical) var(--ifm-spacing-horizontal);
+  gap: var(--ifm-spacing-vertical) var(--ifm-spacing-horizontal);
 }
 
 .navigationContainer {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
-  grid-gap: var(--ifm-spacing-vertical) var(--ifm-spacing-horizontal);
+  gap: var(--ifm-spacing-vertical) var(--ifm-spacing-horizontal);
 }
 
 .usageWrapperContainer {

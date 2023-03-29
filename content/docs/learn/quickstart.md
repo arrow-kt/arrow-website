@@ -1,27 +1,32 @@
 ---
+title: Quickstart
+description: Gradle or Maven, JVM or Multiplatform, Λrrow fits in all your projects
 sidebar_position: 2
+sidebar_custom_props:
+  icon: icon-quickstart.svg
+  overview: true
 ---
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-# Quickstart
+# <decorated-text icon={frontMatter.sidebar_custom_props.icon}>Quickstart</decorated-text>
 
-Arrow is composed of different libraries, you can just choose and pick the ones
+Arrow is composed of different libraries; simply select the ones
 you need in your project.
 
 :::info Multiplatform-ready
 
-All of Arrow libraries are Multiplatform-ready, so you can use them in all of your
+All Arrow libraries are Multiplatform-ready, so you can use them in all of your
 [KMP](https://kotlinlang.org/docs/multiplatform.html) projects. Be aware that
-some of the instructions here may need to be slightly changed in that situation.
+some instructions here may need to be slightly changed in that situation.
 
 :::
 
 ### Enable the Maven Central repository
 
 Arrow is published in [Maven Central](https://search.maven.org/), so you need to
-enable it as source of dependencies in your build.
+enable it as a source of dependencies in your build.
 
 <Tabs groupId="build">
   <TabItem value="gradleKotlin" label="Gradle (Kotlin)">
@@ -55,12 +60,12 @@ Maven includes the Maven Central repository by default.
 
 ### Include the dependencies
 
-You're now ready to include Arrow in your project. You have three possibilities,
-which correspond to three different ways of handling versioning in your build.
+You're now ready to include Arrow in your project. You have three possibilities
+that correspond to three different ways of handling versioning in your build.
 
 #### One by one
 
-Simply include the desired library in your `dependencies` block, or as a
+Simply include the desired library in your `dependencies` block or as a
 `<dependency>` if you're using Maven.
 
 <Tabs groupId="build">
@@ -217,7 +222,7 @@ dependencies {
 ### Additional setup for plug-ins
 
 If you're using the Optics component of Arrow, we provide a Kotlin compiler 
-plug-in which can derive most of the boilerplate required to use it. This
+plug-in that can derive most of the boilerplate required to use it. This
 plug-in is built with [KSP](https://kotlinlang.org/docs/ksp-overview.html),
 which requires an additional configuration step.
 

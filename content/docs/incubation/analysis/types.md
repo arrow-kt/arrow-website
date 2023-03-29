@@ -45,7 +45,7 @@ class Positive(val value: Int) {
   constructor() : this(0) { }
 }
 ```
-Types like `Positive` above are a special case of [wrappers]({{ '/wrappers' | relative_url }}), a way to attach additional invariants to already existing types (`Int`in this case.)
+Types like `Positive` above are a special case of [wrappers](../wrappers), a way to attach additional invariants to already existing types (`Int`in this case.)
 
 ## Initializers with `pre` and `post`
 
@@ -67,7 +67,7 @@ The most common scenario for this split is when a secondary constructor enforces
 
 ## Inheritance
 
-Classes and interfaces do not live in the vacuum, in fact they often go into relationships with each other. This brings up the question of the relation of pre and post-conditions between parent and subclasses. To understand how Arrow Analysis approaches this problem, we need to look at the [Liskov Substitution Principle](https://en.wikipedia.org/wiki/Liskov_substitution_principle), which roughly states:
+Classes and interfaces do not live in a vacuum, in fact they often go into relationships with each other. This brings up the question of the relation of pre and post-conditions between parent and subclasses. To understand how Arrow Analysis approaches this problem, we need to look at the [Liskov Substitution Principle](https://en.wikipedia.org/wiki/Liskov_substitution_principle), which roughly states:
 
 > If `B` is a subclass of `A`, then we should be able to use `B` (and any of its methods) **anywhere** we use `A`
 
@@ -90,7 +90,7 @@ class B(): A() {
 }
 ```
 
-None of `A.f` nor `B.f` declare a pre-condition, so in particular they are equivalent. In the post-condition front, `A.f` declares that the result must be _strictly_ greater than 0, whereas `B.f` also allows `0` in its post-condition. That means that the post-condition of `B.f` is weaker than that of `A.f`, and the code is rejected.
+None of `A.f` nor `B.f` declare a pre-condition, so in particular they are equivalent. In the post-condition front, `A.f` declares that the result must be _strictly_ greater than 0, whereas `B.f` also allows `0` in its post-condition. This means that the post-condition of `B.f` is weaker than that of `A.f`, and the code is rejected.
 
 ```plain
 e: post-condition `greater than 0` from overridden member is not satisfied
@@ -114,7 +114,7 @@ class B(): A() {
 }
 ```
 
-There are exceptions to this implicit inheritance: initializer blocks and constructors. That means that invariants that hold in the parent class must be guaranteed in the subclasses, in the most extreme case by repeating those invariants.
+There are exceptions to this implicit inheritance: initializer blocks and constructors. Meaning that invariants which hold in the parent class must be guaranteed in the subclasses, in the most extreme case by repeating those invariants.
 
 ### Post-condition or invariant?
 
@@ -137,7 +137,7 @@ The differences between both ways are:
 
 ## Interfaces and abstract members
 
-We have mentioned that by using pre and postconditions we have enforce a particular contract on a hierarchy of types. This holds also for `interfaces`, but we need to use a different way to attach those pre- and postconditions, since abstract members don't have a body where we can include `pre` and `post` blocks. The solution is to use the `@Law` annotation (you can learn more about it in the section about integration with 3rd-party libraries.)
+We have mentioned that by using pre and post-conditions we have enforce a particular contract on a hierarchy of types. This holds also for `interfaces`, but we need to use a different way to attach those pre- and postconditions, since abstract members don't have a body where we can include `pre` and `post` blocks. The solution is to use the `@Law` annotation (you can learn more about it in the section about integration with 3rd-party libraries.)
 
 Following our example, this is how we would declare `A` as an interface while keeping the promise of `f` always returning a positive number. We add an additional member marked with the `@Law` annotation, and whose body consists **only** of `pre` and `post` blocks and a call to the function we want to decorate (the name is irrelevant, but we often use `method_Law` or something similar.)
 
