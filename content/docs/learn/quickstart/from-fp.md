@@ -140,7 +140,7 @@ comparing the different approaches for effect handling.
 
 ## Higher-kinded abstractions
 
-Both Scala and Haskell allow abstraction that operate at the level of
+Both Scala and Haskell allow abstractions that operate at the level of
 type constructors. For example, a function like `flatMap` which always has
 the form `F<A>.flatMap(next: (A) -> F<B>): F<B>` is part of an interface /
 type class called `Monad`. Kotlin doesn't provide this feature, but Arrow
