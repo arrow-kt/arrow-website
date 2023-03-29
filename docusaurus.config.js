@@ -154,20 +154,22 @@ const createConfig = async () => {
             {
               type: 'dropdown',
               position: 'right',
-              label: 'Incubation',
-              to: '/incubation/overview',
+              label: 'Ecosystem',
               items: [
                 {
+                  label: 'SuspendApp',
+                  href: 'https://arrow-kt.github.io/suspendapp/',
+                },
+                {
                   label: 'Analysis',
-                  to: '/incubation/analysis',
-                  activeBaseRegex: '^(/incubation/analysis)',
+                  to: '/ecosystem/analysis',
+                  activeBaseRegex: '^(/ecosystem/analysis)',
+                },
+                {
+                  label: 'More libraries',
+                  to: '/libraries',
                 },
               ],
-            },
-            {
-              to: '/libraries',
-              position: 'right',
-              label: 'Libraries',
             },
             {
               to: '/training',
@@ -245,9 +247,22 @@ const createConfig = async () => {
                   label: 'Integrations',
                   to: '/learn/integrations',
                 },
+              ],
+            },
+            {
+              title: 'Ecosystem',
+              items: [
+                {
+                  label: 'SuspendApp',
+                  href: 'https://arrow-kt.github.io/suspendapp/',
+                },
                 {
                   label: 'Analysis',
                   to: '/incubation/analysis',
+                },
+                {
+                  label: 'More libraries',
+                  to: '/libraries',
                 },
               ],
             },
