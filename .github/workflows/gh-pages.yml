@@ -1,12 +1,11 @@
-name: "pull_request"
+name: Deploy to GitHub Pages
 
 on:
-  pull_request:
-    branches:
-      - main
+  release:
+    types: [published]
 
 jobs:
-  build:
+  deploy:
     runs-on: ubuntu-latest
     timeout-minutes: 30
 
@@ -37,6 +36,12 @@ jobs:
 
       - name: Run website tests
         run: npm run test --if-present
-      
+
       - name: Build website
         run: npm run build
+
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./build
