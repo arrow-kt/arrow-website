@@ -1,5 +1,6 @@
 ---
 sidebar_position: 2
+description: Making functions stack-safe and efficient
 ---
 
 # Recursive functions
