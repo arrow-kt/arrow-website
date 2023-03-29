@@ -137,3 +137,33 @@ Our [_Design_](../../design/) section includes a [post](../../design/receivers-f
 comparing the different approaches for effect handling.
 
 :::
+
+## Higher-kinded abstractions
+
+Both Scala and Haskell allow abstraction that operate at the level of
+type constructors. For example, a function like `flatMap` which always has
+the form `F<A>.flatMap(next: (A) -> F<B>): F<B>` is part of an interface /
+type class called `Monad`. Kotlin doesn't provide this feature, but Arrow
+still follows the naming convention for consistency. The following list
+relates the names to abstractions in [Cats](https://typelevel.org/cats/)
+and [Haskell's `base`](https://hackage.haskell.org/package/base).
+
+- `map` comes from [`Functor`](https://typelevel.org/cats/typeclasses/functor.html).
+- `contramap` comes from [`Contravariant`](https://typelevel.org/cats/typeclasses/contravariant.html) functors.
+- `fold` comes from [`Foldable`](https://typelevel.org/cats/typeclasses/foldable.html).
+- `zip` comes from [`Applicative`](https://typelevel.org/cats/typeclasses/applicative.html),
+  although it's called `product` or `(&&)` in other languages.
+- `traverse` and `sequence` come from [`Traversable`](https://typelevel.org/cats/typeclasses/traverse.html),
+  but those functions are being **deprecated**, because the same behavior can
+  be achieved with regular list functions and computation blocks.
+
+:::danger Semigroup and Monoid
+
+Arrow Core contains `Semigroup` and `Monoid` as interfaces. They are, however,
+marked as deprecated, and due for removal in Arrow 2.0. Functions that required
+a `Semigroup` or `Monoid` argument have been replaced by variants which take
+the combination function, and the corresponding empty element. This design
+fits better with other parts of the Kotlin ecosystem, like the [`fold`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/fold.html)
+function in `kotlin.collections`.
+
+:::
