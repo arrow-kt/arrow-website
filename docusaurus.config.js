@@ -203,8 +203,8 @@ const createConfig = async () => {
                   to: '/learn/overview',
                 },
                 {
-                  label: 'Libraries',
-                  to: '/libraries',
+                  label: 'API Docs',
+                  href: 'https://arrow-kt.github.io/arrow/index.html',
                 },
                 {
                   label: 'Training',
