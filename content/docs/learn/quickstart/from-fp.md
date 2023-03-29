@@ -1,19 +1,35 @@
-# Migration from Scala
+# From other FP languages
 
-The Scala language and libraries have a heavy influence of functional
-programming, as Arrow does. The Scala Standard Library, for example, contains
+Arrow is heavily influenced by functional programming. If you're used to working
+with those concepts, the journey to Arrow should be a pleasant one. In this
+section we review the most important different with other ecosystems.
+
+:::note scala
+
+The [Scala Standard Library](https://www.scala-lang.org/api/current/scala/index.html) contains
 many of the types provided by Arrow like [`Either`](https://www.scala-lang.org/api/current/scala/util/Either.html).
 There's also a vibrant community which brings even more functional features,
-like the [Typelevel ecosystem](https://typelevel.org/). If you're used to those
-concepts, the journey to Arrow should be a pleasant one.
+like the [Typelevel ecosystem](https://typelevel.org/). 
+
+:::
+
+:::note haskell
+
+[Haskell](https://www.haskell.org/) is often considered the prime example of a 
+pure functional programming language. Most of the utilities in Arrow are
+found in [their `base` library](https://hackage.haskell.org/package/base).
+
+:::
 
 <!--- TEST_NAME ScalaMigrationTest -->
 
 ## Computation blocks
 
-Scala has special support for types which define a `flatMap` operation, namely
-[`for` comprehensions](https://docs.scala-lang.org/tour/for-comprehensions.html).
-`Either` is one such type, so you can use `for` to perform validation.
+Both Scala and Haskell have special support for types which define a 
+`flatMap` or bind operation, namely
+[`for` comprehensions](https://docs.scala-lang.org/tour/for-comprehensions.html)
+and [`do` notation](https://en.wikibooks.org/wiki/Haskell/do_notation).
+`Either` is one such type, so you can use `for` or `do` to perform validation.
 
 ```scala
 def mkPerson(name: String, age: Int): Either[Problem, Person] = for {
@@ -22,13 +38,29 @@ def mkPerson(name: String, age: Int): Either[Problem, Person] = for {
 } yield Person(name_, age_)
 ```
 
+```haskell
+mkPerson :: String -> Int -> Either Problem Person
+mkPerson name age = do
+  name_ <- validName name
+  age_  <- validAge age
+  pure (Person name_ age_)
+```
+
+In Haskell you can get closer to this style using `Applicative` operators.
+The code still looks different than its pure counterpart, since you need
+to sprinkle `(<$>)` and `(<*>)`.
+
+```haskell
+mkPerson name age = Person <$> validName name <*> validAge age
+```
+
 Kotlin doesn't provide such a generic construct. Arrow provides similar
 syntax for [error types](../../typed-errors/working-with-typed-errors/).
 
 - You must explicitly request to work with an error type, using `either`,
   `result`, or `nullable`, instead of `for`. Those functions live in
   the [`arrow.core.raise`](https://arrow-kt.github.io/arrow/arrow-core/arrow.core.raise/index.html) package.
-- Every usage of `<-` in Scala translates into a call to `.bind()`.
+- Every usage of `<-` translates into a call to `.bind()`.
 
 <!--- INCLUDE
 import arrow.core.*
@@ -50,7 +82,9 @@ fun mkUser(name: String, age: Int): Either<Problem, Person> = either {
 <!--- KNIT example-scala-migration-01.kt -->
 
 Furthermore, the result of `.bind()` is just of regular type, so you can
-completely inline the calls if desired.
+completely inline the calls if desired. This style is very similar to
+Haskell's use of `Applicative` operators, except that operators appear
+at the level of arguments, instead of at the level of functions.
 
 <!--- INCLUDE
 import arrow.core.*
@@ -69,15 +103,16 @@ fun mkUser(name: String, age: Int): Either<Problem, Person> = either {
 ```
 <!--- KNIT example-scala-migration-02.kt -->
 
-:::info No zip
+:::tip No zip
 
-It's common in Scala to use functions like `zip` to combine values inside a 
-wrapper, instead of a `for` comprehension. In Arrow we prefer to use blocks,
+It's common to use functions like `zip` to combine values inside a 
+wrapper, instead of a `for` comprehension. In Haskell this often takes
+the form of `(<$>)` and `(<*>)`. In Arrow we prefer to use blocks,
 except when [dealing with concurrency](../../coroutines/parallel/).
 
 :::
 
-:::info No traverse
+:::tip No traverse
 
 If you want to apply an effectful operation to every element of a collection,
 you need to use a function different from `map`, usually called `traverse`.
@@ -86,13 +121,15 @@ and love from the collections API inside one of these blocks.
 
 :::
 
-## `suspend` for `IO`
+## `suspend` instead of `IO`
 
 The utilities provided by Arrow for working with side effects are based on 
 [coroutines](https://kotlinlang.org/docs/coroutines-guide.html), that is,
-functions marked as `suspend`. In contrast, popular Scala libraries like
-[Cats Effect](https://typelevel.org/cats-effect/) introduce an `IO` wrapper
-type to mark side-effects.
+functions marked as `suspend`. In contrast, 
+Haskell introduces a special `IO` wrapper
+type to mark side-effects, as done by
+popular Scala libraries like
+[Cats Effect](https://typelevel.org/cats-effect/). 
 
 :::info Read more
 
