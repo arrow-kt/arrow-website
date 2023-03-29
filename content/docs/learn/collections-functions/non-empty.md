@@ -12,7 +12,7 @@ and [`NonEmptySet`](https://arrow-kt.github.io/arrow/arrow-core/arrow.core/-non-
 One concrete example is given by [error accumulation](../../typed-errors/working-with-typed-errors/#accumulating-errors).
 A type like `Either<List<Problem>, Result>` may take us to the weird case in
 which we end with `Left`, but we have no `Problem`s in the `List`. To avoid
-this problem, Arrow makes `mapOrAccumulate` and `zipOrAccumulate` return
+this issue, Arrow makes `mapOrAccumulate` and `zipOrAccumulate` return
 `Either<NonEmptyList<Problem>, Result>` instead.
 
 The API of non-empty collections follows the conventions from [`kotlin.collections`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/).
