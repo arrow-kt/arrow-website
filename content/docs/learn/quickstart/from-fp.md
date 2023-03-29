@@ -54,7 +54,7 @@ to sprinkle `(<$>)` and `(<*>)`.
 mkPerson name age = Person <$> validName name <*> validAge age
 ```
 
-Kotlin doesn't provide such a generic construct. Arrow provides similar
+Kotlin doesn't provide such a generic construct. However, Arrow provides a similar
 syntax for [error types](../../typed-errors/working-with-typed-errors/).
 
 - You must explicitly request to work with an error type, using `either`,
