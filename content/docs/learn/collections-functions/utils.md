@@ -1,9 +1,9 @@
 ---
-sidebar_position: 1
+sidebar_position: 3
 description: Composition, partial application, and currying
 ---
 
-# Working with functions
+# Utilities for functions
 
 Functions are an important part of functional programming. Every time we use
 `map` or `filter` we are using functions as arguments, every block is creating
@@ -19,6 +19,15 @@ programming called _point-free_. The name stems from the fact that you never
 mention explicit arguments, or _points_, in your code.
 Some functional programming communities, like Haskell, use this style quite
 often.
+
+:::
+
+:::danger Not idiomatic
+
+Although the following functions are very commonly used in other functional
+languages, they are not considered idiomatic Kotlin. Most Kotlin developers
+prefer a block with an explicit call, `{ dance(2, it) }`, instead of 
+manipulating the function value as described in this section, `::dance.partially1(2)`.
 
 :::
 

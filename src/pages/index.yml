@@ -33,8 +33,8 @@ features:
     icon: icon-immutable-data.svg
     body: Great tooling for dealing with immutable data and sealed hierarchies
 
-  - title: Functions and collections
-    href: /learn/functions-collections
+  - title: Collections and functions
+    href: /learn/collections-functions
     icon: icon-generic-6.svg
     body: Powerful additions to the basics to make your code more expressive
 

@@ -32,7 +32,7 @@ Each section in the documentation roughly corresponds to one of the libraries th
 
 | Library | Features |
 | --- | --- |
-| `arrow-core` <br /> _Companion to [Kotlin's standard library](https://kotlinlang.org/api/latest/jvm/stdlib/)_ | [Typed errors](../typed-errors/), including `Raise`, `Either`, and `Option` <br /> [Utilities for functions](../functions-collections/utils/) and [memoization](../functions-collections/recursive/) <br /> [Non-empty collections](../functions-collections/non-empty) |
+| `arrow-core` <br /> _Companion to [Kotlin's standard library](https://kotlinlang.org/api/latest/jvm/stdlib/)_ | [Typed errors](../typed-errors/), including `Raise`, `Either`, and `Option` <br /> [Non-empty collections](../collections-functions/non-empty) <br /> [Utilities for functions](../collections-functions/utils/) and [memoization](../collections-functions/recursive/) |
 | `arrow-fx-coroutines` <br /> _Companion to [KotlinX Coroutines](https://kotlinlang.org/api/kotlinx.coroutines/kotlinx-coroutines-core/)_ | [High-level concurrency](../coroutines/parallel), including `parMap` and `parZip` <br /> [Resource management](../coroutines/resource-safety/) |
 | `arrow-fx-resilience` | [Resilience patterns](../resilience/) |
 | `arrow-fx-stm` | [Software Transactional Memory](../coroutines/stm/) (STM) |

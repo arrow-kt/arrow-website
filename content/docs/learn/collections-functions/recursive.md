@@ -25,9 +25,9 @@ which solves this problem by keeping the call stack in the heap, which usually
 has a much bigger memory space allocated to it.
 
 The [Fibonacci sequence](https://en.wikipedia.org/wiki/Fibonacci_sequence) is
-a all-time favorite example of a recursive operation which requires a deep stack
-even for small values. The function is only defined only for non-negative `n`,
-so we split the actual worker function from the top-level one which checks the
+an all-time favorite example of a recursive operation which requires a deep stack
+even for small values. The function is only defined for non-negative `n`,
+so we split the actual worker function from the top-level one, which checks the
 constraint over the argument.
 
 ```kotlin

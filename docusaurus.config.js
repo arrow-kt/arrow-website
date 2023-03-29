@@ -136,9 +136,9 @@ const createConfig = async () => {
                   activeBaseRegex: '^(/learn/immutable-data)',
                 },
                 {
-                  label: 'Functions and collections',
-                  to: '/learn/functions-collections',
-                  activeBaseRegex: '^(/learn/functions-collections)',
+                  label: 'Collections and functions',
+                  to: '/learn/collections-functions',
+                  activeBaseRegex: '^(/learn/collections-functions)',
                 },
                 {
                   label: 'Design',
@@ -243,8 +243,8 @@ const createConfig = async () => {
                   to: '/learn/immutable-data',
                 },
                 {
-                  label: 'Functions and collections',
-                  to: '/learn/functions-collections',
+                  label: 'Collections and functions',
+                  to: '/learn/collections-functions',
                 },
                 {
                   label: 'Design',
