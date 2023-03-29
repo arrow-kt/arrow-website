@@ -114,6 +114,7 @@ const createConfig = async () => {
                 {
                   label: 'Quickstart',
                   to: '/learn/quickstart',
+                  activeBaseRegex: '^(/learn/quickstart)',
                 },
                 {
                   label: 'Typed errors',

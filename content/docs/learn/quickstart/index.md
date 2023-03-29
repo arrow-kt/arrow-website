@@ -1,7 +1,4 @@
 ---
-title: Quickstart
-description: Gradle or Maven, JVM or Multiplatform, Λrrow fits in all your projects
-sidebar_position: 2
 sidebar_custom_props:
   icon: icon-quickstart.svg
   overview: true
