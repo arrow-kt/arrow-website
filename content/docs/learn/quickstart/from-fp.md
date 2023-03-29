@@ -2,7 +2,7 @@
 
 Arrow is heavily influenced by functional programming. If you're used to working
 with those concepts, the journey to Arrow should be a pleasant one. In this
-section we review the most important different with other ecosystems.
+section, we review the most important differences with other ecosystems.
 
 :::note scala
 
