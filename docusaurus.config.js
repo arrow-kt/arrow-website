@@ -302,7 +302,7 @@ const createConfig = async () => {
         },
         prism: {
           theme: darkCodeTheme,
-          additionalLanguages: ['kotlin', 'java', 'groovy'],
+          additionalLanguages: ['kotlin', 'java', 'groovy', 'scala', 'haskell'],
           defaultLanguage: 'kotlin',
         },
         mermaid: {
