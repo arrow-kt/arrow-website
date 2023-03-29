@@ -233,4 +233,101 @@ fun example() {
 
 ## Semigroup & Monoid
 
-// TODO
+Both `Semigroup` and `Monoid` are deprecated in Arrow `1.2.0` and will be removed in `2.0.0`. The migration of 
+some deprecated methods may need to add an extra manual step, besides the automatic replacement. 
+
+### foldMap
+The replacement of deprecated `foldMap` for `Iterable`, `Option` and `Either` requires to replace the `Monoid` parameter
+with an `empty` of the type contained in the removed `Monoid`.
+Let's see this in action:
+```kotlin
+fun booleanToString(b: Boolean): String = if (b) "IS TRUE! :)" else "IS FALSE.... :(" 
+
+val e1: Either<String, Boolean> = false.right()
+e1.foldMap(Monoid.string(), ::booleanToString) shouldBe "IS FALSE.... :("
+```
+```kotlin
+// Executing automatic replacement
+e1.fold({empty}, ::booleanToString) // empty is not found
+```
+```kotlin
+// Adding the empty value to complete the replacement of the deprecated method
+e1.fold("", ::booleanToString) shouldBe "IS FALSE.... :("
+```
+
+### combine
+All deprecated `combine` methods are suggested to be replaced by the lambda `{a, b -> a + b}`, which will cover almost all
+possible replacements successfully. One of the cases that will need some manual fix is the following:
+
+```kotlin
+val nullableLongMonoid = object : Monoid<Long?> {
+   override fun empty(): Long? = 0
+   override fun Long?.combine(b: Long?): Long? =
+      nullable { this@combine.bind() + b.bind() }
+}
+
+val validated: Validated<Long?, Int?> = 3.valid()
+val res = validated.zip(nullableLongMonoid, Valid(Unit)) { a, _ -> a } // zip and Monoid are deprecated
+res shouldBe Validated.Valid(3)
+```
+When we replace the deprecated `zip` method:
+```kotlin
+// Executing automatic replacement
+val res = Either.zipOrAccumulate(
+   { e1, e2 -> e1 + e2 }, // compilation error
+   validated.toEither(), 
+   Valid(Unit).toEither()) { a, _ -> a }.toValidated()
+```
+In this case, we do not have the `+` operation for `Long?`, so we need to add it manually:
+```kotlin
+val validated: Validated<Long?, Int?> = 3.valid() 
+val res = Either.zipOrAccumulate(
+   { e1, e2 -> nullable { e1.bind() + e2.bind() } }, 
+   validated.toEither(), 
+   Valid(Unit).toEither()) { a, _ -> a }.toValidated()
+res shouldBe Validated.Valid(3)
+```
+
+### combineAll
+In a similar situation like [foldMap](#foldMap), the replacement of deprecated `combineAll` for `Iterable`, `Option` and 
+`Validate` needs to add manually the `initialValue` parameter, in the replacement with `fold` method. Let's do a replacement
+to see how to achieve this:
+```kotlin
+ val l: List<Int> = listOf(1,2,3,4,5)
+ l.combineAll(Monoid.int()) shouldBe 10
+```
+
+```kotlin
+// Executing automatic replacement
+l.fold(initialValue) { a1, a2 -> a1 + a2 } // initialValue is not found
+```
+
+```kotlin
+// Adding the empty value to complete the replacement of the deprecated method
+l.fold(0) { a1, a2 -> a1 + a2 } shouldBe 10
+```
+
+### replicate
+`replicate` also needs a bit of *help* when removing the deprecated `Monoid` for `Option` and `Either`. As it's again
+recommended to replace the method using a `fold`, we'll need to provide the empty value in the `fold`. Let's see this
+with an `Either`:
+```kotlin
+val rEither: Either<String, Int> = 125.right()
+val n = 3
+rEither.replicate(n, Monoid.int()) shouldBe Either.Right(375)
+```
+
+```kotlin
+// Executing automatic replacement
+val res = if (n <= 0) Either.Right(empty) 
+else rEither.map { b -> List<Int>(n) { b }.fold(empty) { r, t -> r + t } } // empty is not found
+```
+
+```kotlin
+// Adding the empty value to complete the replacement of the deprecated method
+val res = if (n <= 0) Either.Right(0) 
+    else rEither.map { b -> List<Int>(n) { b }.fold(0) { r, t -> r + t } }
+
+res shouldBe Either.Right(375)
+```
+
