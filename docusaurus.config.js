@@ -21,7 +21,7 @@ const createConfig = async () => {
   const config = {
     title: 'Λrrow',
     tagline: 'Idiomatic functional programming for Kotlin',
-    favicon: 'img/arrow-brand-icon.svg',
+    favicon: '/img/arrow-brand-icon.svg',
     url: 'https://arrow-kt.io',
     baseUrl: '/',
     trailingSlash: true,
@@ -78,7 +78,7 @@ const createConfig = async () => {
     themeConfig:
       /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
       ({
-        image: 'img/docusaurus-social-card.jpg',
+        image: '/img/docusaurus-social-card.jpg',
         colorMode: {
           defaultMode: 'light',
           disableSwitch: true,
@@ -92,7 +92,7 @@ const createConfig = async () => {
         navbar: {
           logo: {
             alt: 'Arrow Logo',
-            src: 'img/arrow-brand.svg',
+            src: '/img/arrow-brand.svg',
           },
           items: [
             {
@@ -295,31 +295,40 @@ const createConfig = async () => {
               items: [
                 {
                   label: 'Twitter',
-                  href: 'https://twitter.com/arrow-kt',
+                  href: 'https://twitter.com/arrow_kt',
+                  icon: '/img/icon-social-twitter.svg',
                 },
                 {
-                  label: 'GitHub',
-                  href: 'https://github.com/arrow-kt',
+                  label: 'Slack',
+                  href: 'https://slack-chats.kotlinlang.org/c/arrow',
+                  icon: '/img/icon-social-slack.svg',
                 },
                 {
                   label: 'YouTube',
                   href: 'https://www.youtube.com/@xebiafunctional',
+                  icon: '/img/icon-social-youtube.svg',
+                },
+                {
+                  label: 'GitHub',
+                  href: 'https://github.com/arrow-kt',
+                  icon: '/img/icon-social-github.svg',
                 },
                 {
                   label: 'Stack Overflow',
                   href: 'https://stackoverflow.com/questions/tagged/arrow-kt',
+                  icon: '/img/icon-social-stackoverflow.svg',
                 },
               ],
             },
           ],
           logo: {
             alt: 'Arrow Logo',
-            src: 'img/arrow-brand.svg',
+            src: '/img/arrow-brand.svg',
             href: 'https://arrow-kt.io',
             width: 128,
             height: 42,
           },
-          copyright: `Arrow is designed and developed by ARROW with support from Xebia Functional`,
+          copyright: `Arrow is designed and developed by ARROW with support from <a href="https://47deg.com" target="_blank" rel="noopener noreferrer">Xebia Functional</a>`,
         },
         prism: {
           theme: darkCodeTheme,
