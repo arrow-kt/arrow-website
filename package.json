@@ -39,7 +39,7 @@
     "html-react-parser": "3.0.15",
     "husky": "8.0.3",
     "postcss-custom-media": "9.1.2",
-    "prettier": "2.8.6",
+    "prettier": "2.8.7",
     "typescript": "4.9.5",
     "typescript-plugin-css-modules": "5.0.0",
     "yaml-loader": "0.8.0"
