@@ -227,7 +227,7 @@ fun triple(): IO<Triple<Int, Int, Int>> =
   }
 ```
 
-This is necessary so when `unsafeRun` is invoked the `IO` program can find the branch representing the kind of operation of `IO` that needs to be interpreted. In the example above `IO.Bind`, `IO.Map` or `IO.Just`
+This is necessary so when `unsafeRun` is invoked the `IO` program can find the branch representing the kind of operation of `IO` that needs to be interpreted. In the example above `IO.FlatMap`, `IO.Map` or `IO.Pure`
 
 In contrast, `suspend` can simply be wired by the Kotlin compiler eliminating the need for additional `sealed class` declarations and allocations keeping computations in the stack instead of maintaining value level in memory representations of our program. 
 The Kotlin compiler rewrites the suspend program to a super fast runtime which uses a switch table and mutable state machine to run the `suspend` program.
