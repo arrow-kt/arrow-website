@@ -68,7 +68,7 @@ There are two ways of migrating from the old `Either` DSL to the new `Raise` bas
 <summary>Semi-automated using KScript and IntelliJ</summary>
 
 This migration script attempts to automatically migrate `arrow.core.computations.*` and `arrow.core.continuations.*` on a best effort to `arrow.core.raise.*`.
-It has been tested on serveral real-life projects with 100% success, being able to automatically migrate the entire codebase.
+It has been tested on several real-life projects with 100% success, being able to automatically migrate the entire codebase.
 
 The run this `kts` script you need `kotlinc` install on your machine.
 The official documentation on how to install [`kotlinc`](https://kotlinlang.org/docs/command-line.html).
@@ -308,8 +308,8 @@ l.fold(0) { a1, a2 -> a1 + a2 } shouldBe 10
 ```
 
 ### replicate
-`replicate` also needs a bit of *help* when removing the deprecated `Monoid` for `Option` and `Either`. As it's again
-recommended to replace the method using a `fold`, we'll need to provide the empty value in the `fold`. Let's see this
+`replicate` also needs a bit of *help* when removing the deprecated `Monoid` for `Option` and `Either`. Again,
+`fold` is the recommended replacement method, so we'll need to provide the `initial` parameter in the `fold`. Let's see this
 with an `Either`:
 ```kotlin
 val rEither: Either<String, Int> = 125.right()
@@ -319,8 +319,8 @@ rEither.replicate(n, Monoid.int()) shouldBe Either.Right(375)
 
 ```kotlin
 // Executing automatic replacement
-val res = if (n <= 0) Either.Right(empty) 
-else rEither.map { b -> List<Int>(n) { b }.fold(empty) { r, t -> r + t } } // empty is not found
+val res = if (n <= 0) Either.Right(initial) 
+else rEither.map { b -> List<Int>(n) { b }.fold(initial) { r, t -> r + t } } // empty is not found
 ```
 
 ```kotlin
