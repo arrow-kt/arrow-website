@@ -1,0 +1,8 @@
+{
+  "label": "SuspendApp",
+  "position": 1,
+  "customProps": {
+    "icon": "icon-coroutines.svg",
+    "description": "Graceful shutdowns"
+  }
+}

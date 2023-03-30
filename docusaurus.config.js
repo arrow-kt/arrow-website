@@ -164,7 +164,8 @@ const createConfig = async () => {
               items: [
                 {
                   label: 'SuspendApp',
-                  href: 'https://arrow-kt.github.io/suspendapp/',
+                  to: '/ecosystem/suspendapp',
+                  activeBaseRegex: '^(/ecosystem/suspendapp)',
                 },
                 {
                   label: 'Analysis',
@@ -260,7 +261,7 @@ const createConfig = async () => {
               items: [
                 {
                   label: 'SuspendApp',
-                  href: 'https://arrow-kt.github.io/suspendapp/',
+                  href: '/ecosystem/suspendapp/',
                 },
                 {
                   label: 'Analysis',

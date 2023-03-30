@@ -5,6 +5,8 @@ kotlin = "1.8.10"
 knit = "0.4.0"
 arrow = "1.1.6-alpha.64"
 ksp = "1.8.10-1.0.9"
+suspendapp = "0.4.0"
+kotlinKafka = "0.3.0"
 
 [libraries]
 coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "coroutines" }
@@ -22,6 +24,8 @@ arrow-opticsPlugin = { module = "io.arrow-kt:arrow-optics-ksp-plugin", version.r
 arrow-opticsReflect = { module = "io.arrow-kt:arrow-optics-reflect", version.ref = "arrow" }
 kotlinx-knit = { module = "org.jetbrains.kotlinx:kotlinx-knit", version.ref = "knit" }
 kotlinx-knit-test = { module = "org.jetbrains.kotlinx:kotlinx-knit-test", version.ref = "knit" }
+suspendapp = { module = "io.arrow-kt:suspendapp", version.ref = "suspendapp" }
+kafka-kotlin = { module = "io.github.nomisrev:kotlin-kafka", version.ref = "kotlinKafka" }
 
 [plugins]
 kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
