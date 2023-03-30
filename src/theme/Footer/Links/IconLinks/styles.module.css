@@ -1,0 +1,12 @@
+.container {
+  display: flex;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+  align-content: flex-start;
+  row-gap: 2rem;
+}
+
+.starsContainer {
+  flex-basis: 100%;
+  text-align: center;
+}
