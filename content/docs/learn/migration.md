@@ -22,7 +22,7 @@ The biggest issue being that they were not compatible with Kotlin's `suspend` fu
 
 Arrow 1.2.0-RC introduces a new [`Raise` DSL](https://github.com/arrow-kt/arrow/pull/2912), which resolves this problem and allows Arrow to provide uniform APIs for typed errors across the board.
 This heavily reduces the API surface, and makes it easier to learn and use Arrow, and additionally it allows us to build more powerful and flexible APIs.
-If you want to learn more about the new `Raise` DSL, check out the [Typed Errors](../typed-errors) guide.
+If you want to learn more about the new `Raise` DSL, check out the [Typed Errors](./typed-errors) guide.
 
 There are two ways of migrating from the old `Either` DSL to the new `Raise` based DSL.
 
@@ -289,7 +289,7 @@ res shouldBe Validated.Valid(3)
 ```
 
 ### combineAll
-In a similar situation like [foldMap](#foldMap), the replacement of deprecated `combineAll` for `Iterable`, `Option` and 
+In a similar situation like [foldMap](#foldmap), the replacement of deprecated `combineAll` for `Iterable`, `Option` and 
 `Validate` needs to add manually the `initialValue` parameter, in the replacement with `fold` method. Let's do a replacement
 to see how to achieve this:
 ```kotlin
