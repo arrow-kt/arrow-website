@@ -56,7 +56,7 @@ quotes:
   - name: Ilyan Germanov
     position: Co-founder of Ivy Apps
     image: quoted-person-b.jpg
-    body: This week, I'm into sharing things that made my life as an Android developer with Kotlin easier. IMO, functional programming is an awesome paradigm and can be a first-class citizen in Kotlin. [..] Arrow is a "Functional companion to Kotlin's Standard Library" and provides the core constructs from the FP world to get you started.
+    body: This week, I'm into sharing things that made my life as an Android developer with Kotlin easier. In my opinion, functional programming is an awesome paradigm and can be a first-class citizen in Kotlin. [..] Arrow is a "Functional companion to Kotlin's Standard Library" and provides the core constructs from the FP world to get you started.
 
 navs:
   - title: Support
