@@ -1,6 +1,7 @@
 import React from 'react';
 
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
+import Link from '@docusaurus/Link';
 import Layout from '@theme/Layout';
 
 import { Hero } from '@site/src/components/Hero';
@@ -32,13 +33,16 @@ export default function Libraries(): JSX.Element {
             <LinkCard key={library.title} {...library} />
           ))}
         </section>
-        <section className={`container text--center`}>
-          <h1>More libraries?</h1>
+        <section
+          className={`container text--center ${styles.textContainer} ${styles.verticalRhythm}`}>
+          <h1>Even more libraries?</h1>
           <p>
-            We'd love to{' '}
-            <a href="https://github.com/arrow-kt/arrow/issues">hear</a> about
-            other library which complements the Arrow libraries and should be
-            featured here!
+            We'd love to
+            <Link href="https://github.com/arrow-kt/arrow-website/issues">
+              {' hear '}
+            </Link>
+            about other library which complements the Arrow libraries and should
+            be featured here!
           </p>
         </section>
         <section

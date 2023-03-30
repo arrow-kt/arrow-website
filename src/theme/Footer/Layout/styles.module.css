@@ -1,0 +1,26 @@
+.container {
+  display: grid;
+  grid-template-columns: 1fr 3fr 1fr;
+  grid-gap: calc(2 * var(--ifm-spacing-horizontal));
+}
+
+@media (--ifm-narrow-window) {
+  .container {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+}
+
+.logo {
+  margin-top: -1rem;
+}
+
+.logo a {
+  opacity: 1;
+  display: block;
+  transition: transform var(--ifm-transition-fast);
+}
+
+.logo a:hover {
+  transform: translate3d(0px, -4px, 0px);
+}
