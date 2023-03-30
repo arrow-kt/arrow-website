@@ -23,6 +23,8 @@ dependencies {
   testImplementation(libs.kotest.property)
   testImplementation(libs.kotest.runner.junit)
   testImplementation(libs.kotest.framework.engine)
+  testImplementation(libs.suspendapp)
+  testImplementation(libs.kafka.kotlin)
   ksp(libs.arrow.opticsPlugin)
 }
 
