@@ -1,5 +1,5 @@
 ---
-title: Grateful Shutdown with Structured Concurrency
+title: Graceful Shutdown with Structured Concurrency
 image: https://img.youtube.com/vi/A69_t_oEP_E/maxresdefault.jpg
 category: videos
 tags: [core, videos]

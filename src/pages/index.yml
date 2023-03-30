@@ -33,10 +33,10 @@ features:
     icon: icon-immutable-data.svg
     body: Great tooling for dealing with immutable data and sealed hierarchies
 
-  - title: Design
-    href: /learn/design
-    icon: icon-design.svg
-    body: Recipes for designing nice, readable, and maintainable Kotlin code
+  - title: Collections and functions
+    href: /learn/collections-functions
+    icon: icon-generic-6.svg
+    body: Powerful additions to the basics to make your code more expressive
 
 projects:
   - title: Case study 1

@@ -3,7 +3,7 @@
   "position": 6,
   "customProps": {
     "icon": "icon-immutable-data.svg",
-    "description": "Optics and other ways to handle immutable data",
+    "description": "Concise ways to handle immutable data",
     "overview": true
   }
 }
