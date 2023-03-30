@@ -114,6 +114,7 @@ const createConfig = async () => {
                 {
                   label: 'Quickstart',
                   to: '/learn/quickstart',
+                  activeBaseRegex: '^(/learn/quickstart)',
                 },
                 {
                   label: 'Typed errors',
@@ -136,6 +137,11 @@ const createConfig = async () => {
                   activeBaseRegex: '^(/learn/immutable-data)',
                 },
                 {
+                  label: 'Collections and functions',
+                  to: '/learn/collections-functions',
+                  activeBaseRegex: '^(/learn/collections-functions)',
+                },
+                {
                   label: 'Design',
                   to: '/learn/design',
                   activeBaseRegex: '^(/learn/design)',
@@ -154,20 +160,22 @@ const createConfig = async () => {
             {
               type: 'dropdown',
               position: 'right',
-              label: 'Incubation',
-              to: '/incubation/overview',
+              label: 'Ecosystem',
               items: [
                 {
+                  label: 'SuspendApp',
+                  href: 'https://arrow-kt.github.io/suspendapp/',
+                },
+                {
                   label: 'Analysis',
-                  to: '/incubation/analysis',
-                  activeBaseRegex: '^(/incubation/analysis)',
+                  to: '/ecosystem/analysis',
+                  activeBaseRegex: '^(/ecosystem/analysis)',
+                },
+                {
+                  label: 'More libraries',
+                  to: '/libraries',
                 },
               ],
-            },
-            {
-              to: '/libraries',
-              position: 'right',
-              label: 'Libraries',
             },
             {
               to: '/training',
@@ -196,8 +204,8 @@ const createConfig = async () => {
                   to: '/learn/overview',
                 },
                 {
-                  label: 'Libraries',
-                  to: '/libraries',
+                  label: 'API Docs',
+                  href: 'https://arrow-kt.github.io/arrow/index.html',
                 },
                 {
                   label: 'Training',
@@ -238,16 +246,29 @@ const createConfig = async () => {
                   to: '/learn/immutable-data',
                 },
                 {
+                  label: 'Collections and functions',
+                  to: '/learn/collections-functions',
+                },
+                {
                   label: 'Design',
                   to: '/learn/design',
                 },
+              ],
+            },
+            {
+              title: 'Ecosystem',
+              items: [
                 {
-                  label: 'Integrations',
-                  to: '/learn/integrations',
+                  label: 'SuspendApp',
+                  href: 'https://arrow-kt.github.io/suspendapp/',
                 },
                 {
                   label: 'Analysis',
-                  to: '/incubation/analysis',
+                  to: '/ecosystem/analysis',
+                },
+                {
+                  label: 'More libraries',
+                  to: '/libraries',
                 },
               ],
             },
@@ -301,7 +322,7 @@ const createConfig = async () => {
         },
         prism: {
           theme: darkCodeTheme,
-          additionalLanguages: ['kotlin', 'java', 'groovy'],
+          additionalLanguages: ['kotlin', 'java', 'groovy', 'scala', 'haskell'],
           defaultLanguage: 'kotlin',
         },
         mermaid: {
