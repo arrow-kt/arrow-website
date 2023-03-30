@@ -18,7 +18,7 @@ export default function Libraries(): JSX.Element {
   const { siteConfig } = useDocusaurusContext();
 
   return (
-    <Layout title="Libraries" description={siteConfig.tagline}>
+    <Layout title="More libraries" description={siteConfig.tagline}>
       <Hero
         title={data.hero.title}
         subtitle={data.hero.subtitle}
