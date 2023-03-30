@@ -5,7 +5,7 @@ sidebar_position: 4
 # Why suspend over IO
 
 Other functional ecosystems, Scala and Haskell among others,
-use a monadic model for side effects. The key component of this model
+use a [monadic model for side effects](../../quickstart/from-fp/#computation-blocks). The key component of this model
 is a wrapper called `IO`. Arrow has adopted a different model,
 based on `suspend` and top-level extension functions over
 `suspend () -> A`. This section explains the rationale behind this choice.
@@ -184,6 +184,12 @@ suspend fun <R> R.getProcessedUsers(): Either<PersistenceError, List<ProcessedUs
         where R : Repo,
               R : Persistence = fetchUsers().process()
 ```
+
+:::info Context receivers
+
+[Context receivers](../receivers-flatmap/) offer a nicer approach to composition of layers.
+
+:::
 
 ## Performance
 
