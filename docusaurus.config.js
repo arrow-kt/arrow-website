@@ -389,7 +389,24 @@ const createConfig = async () => {
     markdown: {
       mermaid: true,
     },
-    themes: ['@docusaurus/theme-mermaid'],
+    themes: [
+      '@docusaurus/theme-mermaid',
+      [
+        // https://github.com/easyops-cn/docusaurus-search-local
+        require.resolve('@easyops-cn/docusaurus-search-local'),
+        {
+          docsRouteBasePath: '/',
+          docsDir: 'content/docs',
+          hashed: true,
+          indexBlog: false,
+          highlightSearchTermsOnTargetPage: false,
+          searchResultLimits: 8,
+          searchBarShortcutHint: false,
+          searchContextByPaths: ['learn', 'ecosystem'],
+          useAllContextsWithNoSearchContext: true,
+        },
+      ],
+    ],
   };
 
   return config;

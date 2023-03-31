@@ -32,6 +32,8 @@
   --ifm-heading-color: var(--arrow-grey-primary);
   --ifm-font-color-base: var(--arrow-grey-primary);
 
+  --ifm-color-content-secondary: var(--arrow-grey-secondary);
+
   --ifm-link-hover-color: var(--ifm-color-primary-dark);
   --ifm-link-hover-decoration: none;
 
@@ -80,6 +82,13 @@
   --ifm-footer-background-color: var(--ifm-color-white);
   --ifm-footer-link-color: var(--arrow-grey-primary);
   --ifm-footer-padding-vertical: calc(3 * var(--ifm-spacing-vertical));
+
+  --ifm-navbar-search-input-background-color: var(--ifm-color-primary-lightest);
+
+  --search-local-modal-background: var(--ifm-color-primary-lightest);
+  --search-local-modal-shadow: var(--ifm-global-shadow-lw);
+  --search-local-hit-shadow: none;
+  --search-local-icon-stroke-width: 1;
 }
 
 .plugin-blog {
