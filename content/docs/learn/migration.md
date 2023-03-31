@@ -13,7 +13,6 @@ Any criticism is welcome, and we'll try to improve the migration guide and the l
 In case a deprecated method is crucial for you, please file an issue in the [Arrow repository](https://github.com/arrow-kt/arrow/issues), and so Arrow can consider to keep it in the library or find alternative solution.
 For any issues or have any questions, feel free to reach out to the Arrow maintainers in the [KotlinSlack Arrow Channel](https://arrow-kt.io/slack/).
 
-
 ## Either DSL, Effect & EffectScope
 
 Arrow 1.0.0 introduced DSLs to work over functional data types such as `Either`, and enabled several DSLs to work with _typed errors_ in convenient ways.
@@ -25,6 +24,8 @@ This heavily reduces the API surface, and makes it easier to learn and use Arrow
 If you want to learn more about the new `Raise` DSL, check out the [Typed Errors](../typed-errors) guide.
 
 There are two ways of migrating from the old `Either` DSL to the new `Raise` based DSL.
+A third way using [OpenRewrite](https://docs.openrewrite.org) is in the works, and will be added to this guide once it's ready.
+You can track the progress in [rewrite-arrow](https://github.com/arrow-kt/rewrite-arrow), and will provide fully automated large-scale migrations.
 
 <details>
 <summary>Manual migration using Find + Replace</summary>
@@ -108,6 +109,12 @@ Thank you for using Arrow, and your support. I hope this script was able to simp
 </details>
 </details>
 
+::: info
+Below we discuss `traverse` & `zip` which will be adopted by [Quiver](https://github.com/cashapp/quiver) in the future.
+So if you like using these _functional combinators_ you can ignore their deprecated status, and continue using them with [Quiver](https://github.com/cashapp/quiver) after 2.0.0
+We will also provide [OpenRewrite](https://docs.openrewrite.org) recipes through [rewrite-arrow](https://github.com/arrow-kt/rewrite-arrow) when 2.0.0 is released to automatically migrate to [Quiver](https://github.com/cashapp/quiver).
+:::
+
 ### Traverse
 
 All `traverse` functionality has been deprecated in favor of Kotlin's `map` function, and it _should_ be possible to migrate automatically using Kotlin & IntelliJ's `ReplaceWith`.
@@ -133,6 +140,10 @@ val new: Either<String, List<Int>> = either {
 ### Zip
 
 In similar fashion to `traverse`, all `zip` methods have been deprecated in favor of the DSL, and it _should_ be possible to migrate automatically using Kotlin & IntelliJ's `ReplaceWith`.
+The rationale behind deprecating `zip` was that it's behavior is now duplicated by the `bind` method, and since the DSLs are now fully `inline` it makes `zip` redundant.
+Working with `zip` requires dealing with the _arity-n_ problem, which means that the `zip` method is only defined for `9 arguments` in Arrow but can be defined for any `n` number of arguments.
+The DSL, and `bind`, don't suffer from this problem, and it's possible to use `bind` with any number of arguments thus getting rid of this problem. See [this question on StackOverflow](https://stackoverflow.com/questions/72782045/arrow-validation-more-then-10-fields/72782420#72782420). 
+
 Let's look at a simple example to illustrate the difference between `zip`, and the _new_ resulting code.
 We'll be using `Either` in this example, but it should be the same for any other data type that has a `zip` method.
 
