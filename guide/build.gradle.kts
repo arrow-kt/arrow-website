@@ -15,7 +15,7 @@ dependencies {
   testImplementation(libs.kotlinx.knit.test)
   testImplementation(libs.arrow.core)
   testImplementation(libs.arrow.fx.coroutines)
-  testImplementation(libs.arrow.fx.resilience)
+  testImplementation(libs.arrow.resilience)
   testImplementation(libs.arrow.fx.stm)
   testImplementation(libs.arrow.optics)
   testImplementation(libs.arrow.opticsReflect)

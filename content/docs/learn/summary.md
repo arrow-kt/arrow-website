@@ -96,7 +96,7 @@ These functions use `NonEmptyList<E>` as the surrounding error type.
 - `Schedule.repeat` to repeat an action, correctly handling problems.
 - `resourceScope` for correct acquisition and release of resources.
 
-For more resilience options check the `arrow-fx-resilience` package.
+For more resilience options check the [corresponding section in the docs](../resilience/).
 
 </details>
 

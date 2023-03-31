@@ -4,7 +4,7 @@ package arrow.website.examples.exampleSchedule08
 import kotlin.time.Duration.Companion.milliseconds
 import kotlin.time.Duration.Companion.seconds
 import kotlin.time.ExperimentalTime
-import arrow.fx.resilience.*
+import arrow.resilience.*
 import io.kotest.matchers.shouldBe
 
 suspend fun example(): Unit {
