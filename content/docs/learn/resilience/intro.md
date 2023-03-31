@@ -19,7 +19,7 @@ and composable way.
 :::caution Arrow pre-1.2.0
 
 In Arrow series 1.0.x and 1.1.x, these types were provided as part of the
-`arrow-fx-coroutines` library. They currently live in `arrow-fx-resilience`,
+`arrow-fx-coroutines` library. From 1.2.0 on they live in `arrow-resilience`,
 even though a migration window is in place until Arrow 2.0.
 
 :::

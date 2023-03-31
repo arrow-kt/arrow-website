@@ -7,7 +7,7 @@ import arrow.core.Either
 import arrow.core.left
 
 import arrow.atomic.AtomicInt
-import arrow.fx.resilience.*
+import arrow.resilience.*
 
 val INITIAL_VALUE = 1
 

@@ -71,13 +71,13 @@ in _Cloud Design Patterns_.
 
 :::
 
-## Arrow's [`CircuitBreaker`](https://arrow-kt.github.io/arrow/arrow-fx-resilience/arrow.fx.resilience/-circuit-breaker/index.html)
+## Arrow's [`CircuitBreaker`](https://arrow-kt.github.io/arrow/arrow-resilience/arrow.resilience/-circuit-breaker/index.html)
 
 Let's create a circuit breaker that only allows us to call a remote service twice.
 After that, whenever more than two requests fail with an exception, 
 the circuit breaker starts short-circuiting/failing-fast.
 
-A new instance of `CircuitBreaker` is created using [`of`](https://arrow-kt.github.io/arrow/arrow-fx-resilience/arrow.fx.resilience/-circuit-breaker/-companion/of.html); there, we specify
+A new instance of `CircuitBreaker` is created using [`of`](https://arrow-kt.github.io/arrow/arrow-resilience/arrow.resilience/-circuit-breaker/-companion/of.html); there, we specify
 the different options. 
 
 :::caution Deprecation in Arrow 1.2
@@ -87,14 +87,14 @@ The `of` constructor function has been deprecated in favor of exposing the `Circ
 :::
 
 Then we wrap every call to the service that may
-potentially fail with [`protectOrThrow`](https://arrow-kt.github.io/arrow/arrow-fx-resilience/arrow.fx.resilience/-circuit-breaker/protect-or-throw.html) or [`protectEither`](https://arrow-kt.github.io/arrow/arrow-fx-resilience/arrow.fx.resilience/-circuit-breaker/protect-either.html), depending on how we
+potentially fail with [`protectOrThrow`](https://arrow-kt.github.io/arrow/arrow-resilience/arrow.resilience/-circuit-breaker/protect-or-throw.html) or [`protectEither`](https://arrow-kt.github.io/arrow/arrow-resilience/arrow.resilience/-circuit-breaker/protect-either.html), depending on how we
 want this error to be communicated back. If the error arises, the internal state
 of the circuit breaker also changes.
 
 <!--- INCLUDE
 import arrow.core.Either
-import arrow.fx.resilience.CircuitBreaker
-import arrow.fx.resilience.CircuitBreaker.OpeningStrategy
+import arrow.resilience.CircuitBreaker
+import arrow.resilience.CircuitBreaker.OpeningStrategy
 import kotlin.time.Duration.Companion.seconds
 import kotlin.time.ExperimentalTime
 import kotlinx.coroutines.delay
@@ -142,10 +142,10 @@ even different functions to the same resource or service.
 
 <!--- INCLUDE
 import arrow.core.Either
-import arrow.fx.resilience.CircuitBreaker
-import arrow.fx.resilience.CircuitBreaker.OpeningStrategy
-import arrow.fx.resilience.Schedule
-import arrow.fx.resilience.retry
+import arrow.resilience.CircuitBreaker
+import arrow.resilience.CircuitBreaker.OpeningStrategy
+import arrow.resilience.Schedule
+import arrow.resilience.retry
 import kotlin.time.Duration.Companion.seconds
 import kotlin.time.ExperimentalTime
 import kotlinx.coroutines.delay

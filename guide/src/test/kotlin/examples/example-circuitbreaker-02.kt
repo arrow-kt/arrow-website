@@ -2,10 +2,10 @@
 package arrow.website.examples.exampleCircuitbreaker02
 
 import arrow.core.Either
-import arrow.fx.resilience.CircuitBreaker
-import arrow.fx.resilience.CircuitBreaker.OpeningStrategy
-import arrow.fx.resilience.Schedule
-import arrow.fx.resilience.retry
+import arrow.resilience.CircuitBreaker
+import arrow.resilience.CircuitBreaker.OpeningStrategy
+import arrow.resilience.Schedule
+import arrow.resilience.retry
 import kotlin.time.Duration.Companion.seconds
 import kotlin.time.ExperimentalTime
 import kotlinx.coroutines.delay

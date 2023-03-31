@@ -34,7 +34,7 @@ Each section in the documentation roughly corresponds to one of the libraries th
 | --- | --- |
 | `arrow-core` <br /> _Companion to [Kotlin's standard library](https://kotlinlang.org/api/latest/jvm/stdlib/)_ | [Typed errors](../typed-errors/), including `Raise`, `Either`, and `Option` <br /> [Non-empty collections](../collections-functions/non-empty) <br /> [Utilities for functions](../collections-functions/utils/) and [memoization](../collections-functions/recursive/) |
 | `arrow-fx-coroutines` <br /> _Companion to [KotlinX Coroutines](https://kotlinlang.org/api/kotlinx.coroutines/kotlinx-coroutines-core/)_ | [High-level concurrency](../coroutines/parallel), including `parMap` and `parZip` <br /> [Resource management](../coroutines/resource-safety/) |
-| `arrow-fx-resilience` | [Resilience patterns](../resilience/) |
+| `arrow-resilience` | [Resilience patterns](../resilience/) |
 | `arrow-fx-stm` | [Software Transactional Memory](../coroutines/stm/) (STM) |
 | `arrow-optics` + `arrow-optics-ksp-plugin` <br /> _Companion to [data](https://kotlinlang.org/docs/data-classes.html) and [sealed](https://kotlinlang.org/docs/sealed-classes.html) classes_ | Utilities for [immutable data](../immutable-data/intro/) |
 | `arrow-atomic` <br /> _Multiplatform-ready [references](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.native.concurrent/-atomic-reference/)_ | [Atomic references](../coroutines/concurrency-primitives/#atomic) |
