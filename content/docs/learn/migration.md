@@ -366,3 +366,97 @@ val res = if (n <= 0) Either.Right(0)
 res shouldBe Either.Right(375)
 ```
 
+## Ior
+Most of the `Ior` data type deprecated method migrations related to `traverse` and `crosswalk`, 
+must be replaced manually. The main reason is that `Intellij` does not know how to infer some types when we're using 
+generics. Although this situation can be a bit annoying, this is a good excuse for the user to navigate and get more expertise
+on the `Arrow` source code. Let's see a few examples to be more familiar with these special cases:
+
+### crosswalk
+Given the `Ior` implementation of `crosswalk`:
+```kotlin
+public inline fun <C> crosswalk(fa: (B) -> Iterable<C>): List<Ior<A, C>> =
+    fold(
+      { emptyList() },
+      { b -> fa(b).map { Right(it) } },
+      { a, b -> fa(b).map { Both(a, it) } }
+    )
+```
+
+And an example that use `crosswalk`:
+<!--- INCLUDE
+import arrow.core.Ior
+import arrow.core.listOf
+import io.kotest.matchers.shouldBe
+-->
+```kotlin
+val rightIor: Ior<String, Int> = Ior.Right(125)
+val result = rightIor.crosswalk { listOf(it) } 
+result shouldBe listOf(Ior.Right(124))
+```
+<!--- KNIT example-migration-guide-05.kt -->
+
+The result of replacing manually the `crosswalk` call using the `fold` implementation would be:
+<!--- INCLUDE
+import arrow.core.Ior
+import arrow.core.listOf
+import io.kotest.matchers.shouldBe
+-->
+```kotlin
+val rightIor: Ior<String, Int> = Ior.Right(124)
+val result = rightIor.fold(
+    { emptyList<Int>() },
+    { b -> listOf(b).map { Ior.Right(it) } },
+    { a, b -> listOf(b).map { Ior.Both(a, it) } }
+)
+result shouldBe listOf(Ior.Right(124))
+```
+<!--- KNIT example-migration-guide-06.kt -->
+
+### traverse
+In a similar situation we have the `Ior` `traverse` method for a function that returns an `Option`.
+Given the implementation of `traverse`:
+```kotlin
+public inline fun <C> traverse(fa: (B) -> Option<C>): Option<Ior<A, C>> {
+    return fold(
+      { a -> Some(Left(a)) },
+      { b -> fa(b).map { Right(it) } },
+      { a, b -> fa(b).map { Both(a, it) } }
+    )
+  }
+```
+
+And an example that use `traverse`:
+<!--- INCLUDE
+import arrow.core.Ior
+import arrow.core.listOf
+import io.kotest.matchers.shouldBe
+-->
+```kotlin
+fun evenOpt(i: Int): Option<Int> = if(i % 2 == 0) i.some() else None
+
+val rightIor: Ior<String, Int> = Ior.Right(124)
+val result = rightIor.traverse {evenOpt(it)}
+
+result shouldBe Some(Ior.Right(124))
+```
+<!--- KNIT example-migration-guide-07.kt -->
+The result of replacing manually the `traverse` call using the `fold` implementation would be:
+<!--- INCLUDE
+import arrow.core.Ior
+import arrow.core.listOf
+import io.kotest.matchers.shouldBe
+-->
+```kotlin
+fun evenOpt(i: Int): Option<Int> = if(i % 2 == 0) i.some() else None
+
+val rightIor: Ior<String, Int> = Ior.Right(124)
+val result = rightIor.fold(
+   { a -> Some(Ior.Left(a)) },
+   { b -> evenOpt(b).map { Ior.Right(it) } },
+   { a, b -> evenOpt(b).map { Ior.Both(a, it) } }
+)           
+
+result shouldBe Some(Ior.Right(124))
+```
+<!--- KNIT example-migration-guide-08.kt -->
