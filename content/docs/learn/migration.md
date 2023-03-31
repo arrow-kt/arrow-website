@@ -126,6 +126,11 @@ Using `map` is more familiar to most developers, and using `bind` gives a more c
 If you're refactoring code using `Validated` check the [Validated & Either](#validated--either) section.
 :::
 
+<!--- INCLUDE
+import arrow.core.Either
+import arrow.core.traverse
+import arrow.core.raise.either
+-->
 ```kotlin
 fun one(): Either<String, Int> = Either.Right(1)
 
@@ -136,6 +141,7 @@ val new: Either<String, List<Int>> = either {
   listOf(1, 2, 3).map { one().bind() }
 }
 ```
+<!--- KNIT example-migration-guide-01.kt -->
 
 ### Zip
 
@@ -151,10 +157,15 @@ We'll be using `Either` in this example, but it should be the same for any other
 If you're refactoring code using `Validated` check the [Validated & Either](#validated--either) section.
 :::
 
+<!--- INCLUDE
+import arrow.core.Either
+import arrow.core.zip
+import arrow.core.raise.either
+-->
 ```kotlin
 fun one(): Either<String, Int> = Either.Right(1)
 
-val old: Either<String, Int> = Either.zip(one(), one()) { x, y -> x + y }
+val old: Either<String, Int> = one().zip(one()) { x, y -> x + y }
 
 val new: Either<String, Int> =
   either { one().bind() + one().bind() }
@@ -165,6 +176,7 @@ val new2 : Either<String, Int> = either {
   x + y
 }
 ```
+<!--- KNIT example-migration-guide-02.kt -->
 
 ## Validated & Either
 
@@ -202,6 +214,14 @@ To migrate from `Validated` to `Either` you need to simply construct `Either` va
 
 The behavior of `traverse` for `Validated` is now supported by `mapOrAccumulate` so let's take a quick look at what it looks like:
 
+<!--- INCLUDE
+import arrow.core.Either
+import arrow.core.left
+import arrow.core.NonEmptyList
+import arrow.core.nonEmptyListOf
+import arrow.core.mapOrAccumulate
+import io.kotest.matchers.shouldBe
+-->
 ```kotlin
 fun one(): Either<String, Int> = "error-1".left()
 fun two(): Either<NonEmptyList<String>, Int> = nonEmptyListOf("error-2", "error-3").left()
@@ -216,31 +236,35 @@ fun example() {
   } shouldBe nonEmptyListOf("error-2", "error-3", "error-2", "error-3").left()
 }
 ```
+<!--- KNIT example-migration-guide-03.kt -->
 
 ### Zip
 
 The behavior of `zip` for `Validated` is now supported by `zipOrAccumulate` so let's take a quick look at what it looks like:
 
+<!--- INCLUDE
+import arrow.core.Either
+import arrow.core.left
+import arrow.core.NonEmptyList
+import arrow.core.nonEmptyListOf
+import arrow.core.raise.either
+import arrow.core.raise.zipOrAccumulate
+import io.kotest.matchers.shouldBe
+-->
 ```kotlin
 fun one(): Either<String, Int> = "error-1".left()
 fun two(): Either<NonEmptyList<String>, Int> = nonEmptyListOf("error-2", "error-3").left()
 
 fun example() {
-  either {
+  either<NonEmptyList<String>, Int> {
     zipOrAccumulate(
       { one().bind() },
-      { one().bindNel() }
-    ) { x, y -> x + y }
-  } shouldBe nonEmptyListOf("error-1", "error-2", "error-3").left()
-
-  either {
-    zipOrAccumulate(
-      { one() },
       { two().bindNel() }
     ) { x, y -> x + y }
   } shouldBe nonEmptyListOf("error-1", "error-2", "error-3").left()
 }
 ```
+<!--- KNIT example-migration-guide-04.kt -->
 
 ## Semigroup & Monoid
 
