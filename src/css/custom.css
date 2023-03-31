@@ -43,9 +43,57 @@ table {
 }
 
 @media (--ifm-narrow-window) {
-  .navbar__items.navbar__items--right {
+  .navbar__items.navbar__items--right .navbar__item {
     display: none;
   }
+}
+
+/* Search */
+.navbar__search-input {
+  border-radius: var(--ifm-global-radius);
+}
+
+.navbar__search[class*='searchBarContainer'] {
+  margin-left: 0;
+}
+
+.navbar__search [class*='searchBar'] [class*='dropdownMenu'] {
+  border-radius: var(--ifm-global-radius);
+  margin-top: 1rem;
+}
+
+.navbar__search
+  [class*='searchBar']
+  [class*='dropdownMenu']
+  [class*='suggestion'] {
+  border-radius: var(--ifm-global-radius);
+  margin-bottom: 0;
+}
+
+.navbar__search
+  [class*='searchBar']
+  [class*='dropdownMenu']
+  [class*='suggestion']:not(:last-child) {
+  margin-bottom: 0;
+}
+
+[class*='hitAction'] {
+  display: none;
+}
+
+.navbar__search [class*='hitFooter'] {
+  margin: 1.5rem 1rem 1rem 1rem;
+}
+
+.navbar__search [class*='hitFooter'] a {
+  color: var(--ifm-link-color);
+  text-decoration: none;
+  font-weight: var(--ifm-font-weight-semibold);
+  font-size: 1rem;
+}
+
+.navbar__search [class*='hitFooter'] a:hover {
+  color: var(--ifm-link-hover-color);
 }
 
 /* Pagination bottom buttons not needed */
