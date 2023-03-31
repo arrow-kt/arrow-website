@@ -10,14 +10,14 @@ All non-deprecated code in 1.2.0-RC is source compatible with 2.0.0, so you can 
 Arrow includes a lot of improvements and changes in Arrow 1.2.0-RC, all based on the feedback we've received from the community, and experience from teaching Functional Programming, building applications and knowledge from the other languages and communities.
 Any criticism is welcome, and we'll try to improve the migration guide and the library to make it as easy as possible to migrate to Arrow 2.0.0.
 
-In case a deprecated method is crucial for you, please file an issue in the [Arrow repository](https://github.com/arrow-kt/arrow/issues), and so Arrow can consider to keep it in the library or find alternative solution.
+In case a deprecated method is crucial for you, please file an issue in the [Arrow repository](https://github.com/arrow-kt/arrow/issues), and so Arrow can consider keeping it in the library or finding an alternative solution.
 For any issues or have any questions, feel free to reach out to the Arrow maintainers in the [KotlinSlack Arrow Channel](https://arrow-kt.io/slack/).
 
 ## Either DSL, Effect & EffectScope
 
 Arrow 1.0.0 introduced DSLs to work over functional data types such as `Either`, and enabled several DSLs to work with _typed errors_ in convenient ways.
-These DSLs were build on top of `Effect` and `EffectScope`, from the `arrow.core.continuations` package and had several issues, and were deprecated in Arrow 1.2.0-RC.
-The biggest issue being that they were not compatible with Kotlin's `suspend` functions, and you need to explicitly differentiate between `suspend` and `non-suspend` functions.
+These DSLs were built on top of `Effect` and `EffectScope`, from the `arrow.core.continuations` package and had several issues, and were deprecated in Arrow 1.2.0-RC.
+The biggest issue was that they were not compatible with Kotlin's `suspend` functions, and you needed to explicitly differentiate between `suspend` and `non-suspend` functions.
 
 Arrow 1.2.0-RC introduces a new [`Raise` DSL](https://github.com/arrow-kt/arrow/pull/2912), which resolves this problem and allows Arrow to provide uniform APIs for typed errors across the board.
 This heavily reduces the API surface, and makes it easier to learn and use Arrow, and additionally it allows us to build more powerful and flexible APIs.
@@ -182,7 +182,7 @@ val new2 : Either<String, Int> = either {
 
 In Arrow 1.2.0-RC we've deprecated `Validated` in favor of `Either`, and `ValidatedNel` in favor of `EitherNel`.
 Rationale was that `Either` and `Validated` offer the same abstraction of _either_ an error of type `E` or a value of type `A`.
-The two main reasons are that `zip`, and `traverse` behave differently between the two. Where `Validated` allows _accumulating errors_ using `zip` and `traverse`, `Either` short-circuits on the first error.
+The main reason is that `zip` and `traverse` behave differently in these data types. Where `Validated` allows _accumulating errors_ using `zip` and `traverse`, `Either` short-circuits on the first error.
 
 This behavior can be bridged by concrete APIs in the new `Raise` DSL whilst supporting **both** working over `E` and `NonEmptyList<E>` in singular APIs.
 So you don't have to redundantly lift all your return types to work over `NonEmptyList<E>` when you're actually returning a single error `E`. That can be transparently supported inside the new `Raise` DSL APIs to _accumulate_ errors.
