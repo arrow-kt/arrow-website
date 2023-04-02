@@ -126,6 +126,9 @@ Using `map` is more familiar to most developers, and using `bind` gives a more c
 If you're refactoring code using `Validated` check the [Validated & Either](#validated--either) section.
 :::
 
+<!--- TEST_NAME Migration -->
+
+
 <!--- INCLUDE
 import arrow.core.Either
 import arrow.core.traverse
@@ -275,19 +278,43 @@ some deprecated methods may need to add an extra manual step, besides the automa
 The replacement of deprecated `foldMap` for `Iterable`, `Option` and `Either` requires to replace the `Monoid` parameter
 with an `empty` of the type contained in the removed `Monoid`.
 Let's see this in action:
+<!--- INCLUDE
+import arrow.core.Either
+import arrow.core.replicate
+import arrow.core.Valid
+import arrow.core.Validated
+import arrow.core.combineAll
+import arrow.core.Ior
+import arrow.core.raise.nullable
+import arrow.core.right
+import arrow.core.valid
+import arrow.core.zip
+import arrow.typeclasses.Monoid
+import io.kotest.matchers.shouldBe
+-->
+
 ```kotlin
 fun booleanToString(b: Boolean): String = if (b) "IS TRUE! :)" else "IS FALSE.... :(" 
 
-val e1: Either<String, Boolean> = false.right()
-e1.foldMap(Monoid.string(), ::booleanToString) shouldBe "IS FALSE.... :("
+fun deprecatedFoldMap() {
+   val e1: Either<String, Boolean> = false.right()
+   e1.foldMap(Monoid.string(), ::booleanToString) shouldBe "IS FALSE.... :("
+}
 ```
-```kotlin
+```
 // Executing automatic replacement
-e1.fold({empty}, ::booleanToString) // empty is not found
+fun migrateFoldMap() {
+   val e1: Either<String, Boolean> = false.right()
+   e1.fold({empty}, ::booleanToString) shouldBe "IS FALSE.... :(" // empty is not found
+}
+ 
 ```
 ```kotlin
 // Adding the empty value to complete the replacement of the deprecated method
-e1.fold("", ::booleanToString) shouldBe "IS FALSE.... :("
+fun migrateFoldMap() {
+   val e1: Either<String, Boolean> = false.right()
+   e1.fold({""}, ::booleanToString) shouldBe "IS FALSE.... :("
+}
 ```
 
 ### combine
@@ -295,32 +322,39 @@ All deprecated `combine` methods are suggested to be replaced by the lambda `{a,
 possible replacements successfully. One of the cases that will need some manual fix is the following:
 
 ```kotlin
-val nullableLongMonoid = object : Monoid<Long?> {
-   override fun empty(): Long? = 0
-   override fun Long?.combine(b: Long?): Long? =
-      nullable { this@combine.bind() + b.bind() }
-}
+fun deprecatedZip() {
+   val nullableLongMonoid = object : Monoid<Long?> {
+      override fun empty(): Long? = 0
+      override fun Long?.combine(b: Long?): Long? =
+         nullable { this@combine.bind() + b.bind() }
+   }
 
-val validated: Validated<Long?, Int?> = 3.valid()
-val res = validated.zip(nullableLongMonoid, Valid(Unit)) { a, _ -> a } // zip and Monoid are deprecated
-res shouldBe Validated.Valid(3)
+   val validated: Validated<Long?, Int?> = 3.valid()
+   val res = validated.zip(nullableLongMonoid, Valid(Unit)) { a, _ -> a } // zip and Monoid are deprecated
+   res shouldBe Validated.Valid(3)
+}
 ```
 When we replace the deprecated `zip` method:
-```kotlin
+```
 // Executing automatic replacement
-val res = Either.zipOrAccumulate(
-   { e1, e2 -> e1 + e2 }, // compilation error
-   validated.toEither(), 
-   Valid(Unit).toEither()) { a, _ -> a }.toValidated()
+fun migrateZip(){ 
+   val res = Either.zipOrAccumulate(
+      { e1, e2 -> e1 + e2 }, // compilation error
+      validated.toEither(), 
+      Valid(Unit).toEither()) { a, _ -> a }.toValidated()
+}
 ```
 In this case, we do not have the `+` operation for `Long?`, so we need to add it manually:
 ```kotlin
-val validated: Validated<Long?, Int?> = 3.valid() 
-val res = Either.zipOrAccumulate(
-   { e1, e2 -> nullable { e1.bind() + e2.bind() } }, 
-   validated.toEither(), 
-   Valid(Unit).toEither()) { a, _ -> a }.toValidated()
-res shouldBe Validated.Valid(3)
+fun migrateZip() {
+   val validated: Validated<Long?, Int?> = 3.valid()
+   val res = Either.zipOrAccumulate(
+      { e1, e2 -> nullable { e1.bind() + e2.bind() } },
+      validated.toEither(),
+      Valid(Unit).toEither()
+   ) { a, _ -> a }.toValidated()
+   res shouldBe Validated.Valid(3)
+}
 ```
 
 ### combineAll
@@ -328,18 +362,26 @@ In a similar situation like [foldMap](#foldmap), the replacement of deprecated `
 `Validate` needs to add manually the `initialValue` parameter, in the replacement with `fold` method. Let's do a replacement
 to see how to achieve this:
 ```kotlin
- val l: List<Int> = listOf(1,2,3,4,5)
- l.combineAll(Monoid.int()) shouldBe 10
+fun deprecatedCombineAll() {
+   val l: List<Int> = listOf(1, 2, 3, 4, 5)
+   l.combineAll(Monoid.int()) shouldBe 10
+}
 ```
 
-```kotlin
+```
 // Executing automatic replacement
-l.fold(initialValue) { a1, a2 -> a1 + a2 } // initialValue is not found
+fun migrateCombineAll(){
+   val l: List<Int> = listOf(1, 2, 3, 4, 5) 
+   l.fold(initialValue) { a1, a2 -> a1 + a2 } shouldBe 10 // initialValue is not found
+}
 ```
 
 ```kotlin
 // Adding the empty value to complete the replacement of the deprecated method
-l.fold(0) { a1, a2 -> a1 + a2 } shouldBe 10
+fun migrateCombineAll() {
+   val l: List<Int> = listOf(1, 2, 3, 4, 5)
+   l.fold(0) { a1, a2 -> a1 + a2 } shouldBe 10
+}
 ```
 
 ### replicate
@@ -347,23 +389,34 @@ l.fold(0) { a1, a2 -> a1 + a2 } shouldBe 10
 `fold` is the recommended replacement method, so we'll need to provide the `initial` parameter in the `fold`. Let's see this
 with an `Either`:
 ```kotlin
-val rEither: Either<String, Int> = 125.right()
-val n = 3
-rEither.replicate(n, Monoid.int()) shouldBe Either.Right(375)
+fun deprecatedReplicate() {
+   val rEither: Either<String, Int> = 125.right()
+   val n = 3
+   rEither.replicate(n, Monoid.int()) shouldBe Either.Right(375)
+}
 ```
 
-```kotlin
+```
 // Executing automatic replacement
-val res = if (n <= 0) Either.Right(initial) 
-else rEither.map { b -> List<Int>(n) { b }.fold(initial) { r, t -> r + t } } // empty is not found
+fun migrateReplicate(){
+   val rEither: Either<String, Int> = 125.right() 
+   val n = 3
+   val res = if (n <= 0) Either.Right(initial) 
+   else rEither.map { b -> List<Int>(n) { b }.fold(initial) { r, t -> r + t } } // empty is not found
+   res shouldBe Either.Right(375)
+}
 ```
 
 ```kotlin
 // Adding the empty value to complete the replacement of the deprecated method
-val res = if (n <= 0) Either.Right(0) 
-    else rEither.map { b -> List<Int>(n) { b }.fold(0) { r, t -> r + t } }
+fun migrateReplicate() {
+   val rEither: Either<String, Int> = 125.right()
+   val n = 3
+   val res = if (n <= 0) Either.Right(0)
+   else rEither.map { b -> List<Int>(n) { b }.fold(0) { r, t -> r + t } }
 
-res shouldBe Either.Right(375)
+   res shouldBe Either.Right(375)
+}
 ```
 
 ## Ior
@@ -374,7 +427,7 @@ on the `Arrow` source code. Let's see a few examples to be more familiar with th
 
 ### crosswalk
 Given the `Ior` implementation of `crosswalk`:
-```kotlin
+```
 public inline fun <C> crosswalk(fa: (B) -> Iterable<C>): List<Ior<A, C>> =
     fold(
       { emptyList() },
@@ -384,39 +437,37 @@ public inline fun <C> crosswalk(fa: (B) -> Iterable<C>): List<Ior<A, C>> =
 ```
 
 And an example that use `crosswalk`:
-<!--- INCLUDE
-import arrow.core.Ior
-import arrow.core.listOf
-import io.kotest.matchers.shouldBe
--->
 ```kotlin
-val rightIor: Ior<String, Int> = Ior.Right(125)
-val result = rightIor.crosswalk { listOf(it) } 
-result shouldBe listOf(Ior.Right(124))
+fun deprecatedCrosswalk() {
+   val rightIor: Ior<String, Int> = Ior.Right(125)
+   val result = rightIor.crosswalk { listOf(it) }
+   result shouldBe listOf(Ior.Right(124))
+}
 ```
 <!--- KNIT example-migration-guide-05.kt -->
 
 The result of replacing manually the `crosswalk` call using the `fold` implementation would be:
 <!--- INCLUDE
 import arrow.core.Ior
-import arrow.core.listOf
 import io.kotest.matchers.shouldBe
 -->
 ```kotlin
-val rightIor: Ior<String, Int> = Ior.Right(124)
-val result = rightIor.fold(
-    { emptyList<Int>() },
-    { b -> listOf(b).map { Ior.Right(it) } },
-    { a, b -> listOf(b).map { Ior.Both(a, it) } }
-)
-result shouldBe listOf(Ior.Right(124))
+fun migrateCrosswalk() {
+   val rightIor: Ior<String, Int> = Ior.Right(124)
+   val result = rightIor.fold(
+      { emptyList<Int>() },
+      { b -> listOf(b).map { Ior.Right(it) } },
+      { a, b -> listOf(b).map { Ior.Both(a, it) } }
+   )
+   result shouldBe listOf(Ior.Right(124))
+}
 ```
 <!--- KNIT example-migration-guide-06.kt -->
 
 ### traverse
 In a similar situation we have the `Ior` `traverse` method for a function that returns an `Option`.
 Given the implementation of `traverse`:
-```kotlin
+```
 public inline fun <C> traverse(fa: (B) -> Option<C>): Option<Ior<A, C>> {
     return fold(
       { a -> Some(Left(a)) },
@@ -429,34 +480,44 @@ public inline fun <C> traverse(fa: (B) -> Option<C>): Option<Ior<A, C>> {
 And an example that use `traverse`:
 <!--- INCLUDE
 import arrow.core.Ior
-import arrow.core.listOf
+import arrow.core.None
+import arrow.core.Option
+import arrow.core.Some
+import arrow.core.some
 import io.kotest.matchers.shouldBe
 -->
 ```kotlin
 fun evenOpt(i: Int): Option<Int> = if(i % 2 == 0) i.some() else None
 
-val rightIor: Ior<String, Int> = Ior.Right(124)
-val result = rightIor.traverse {evenOpt(it)}
+fun deprecatedTraverse() {
+   val rightIor: Ior<String, Int> = Ior.Right(124)
+   val result = rightIor.traverse { evenOpt(it) }
 
-result shouldBe Some(Ior.Right(124))
+   result shouldBe Some(Ior.Right(124))
+}
 ```
 <!--- KNIT example-migration-guide-07.kt -->
 The result of replacing manually the `traverse` call using the `fold` implementation would be:
 <!--- INCLUDE
 import arrow.core.Ior
-import arrow.core.listOf
+import arrow.core.None
+import arrow.core.Option
+import arrow.core.Some
+import arrow.core.some
 import io.kotest.matchers.shouldBe
 -->
 ```kotlin
 fun evenOpt(i: Int): Option<Int> = if(i % 2 == 0) i.some() else None
 
-val rightIor: Ior<String, Int> = Ior.Right(124)
-val result = rightIor.fold(
-   { a -> Some(Ior.Left(a)) },
-   { b -> evenOpt(b).map { Ior.Right(it) } },
-   { a, b -> evenOpt(b).map { Ior.Both(a, it) } }
-)           
+fun migrateTraverse() {
+   val rightIor: Ior<String, Int> = Ior.Right(124)
+   val result = rightIor.fold(
+      { a -> Some(Ior.Left(a)) },
+      { b -> evenOpt(b).map { Ior.Right(it) } },
+      { a, b -> evenOpt(b).map { Ior.Both(a, it) } }
+   )
 
-result shouldBe Some(Ior.Right(124))
+   result shouldBe Some(Ior.Right(124))
+}
 ```
 <!--- KNIT example-migration-guide-08.kt -->

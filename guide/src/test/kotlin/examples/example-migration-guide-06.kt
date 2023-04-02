@@ -2,13 +2,14 @@
 package arrow.website.examples.exampleMigrationGuide06
 
 import arrow.core.Ior
-import arrow.core.listOf
 import io.kotest.matchers.shouldBe
 
-val rightIor: Ior<String, Int> = Ior.Right(124)
-val result = rightIor.fold(
-    { emptyList<Int>() },
-    { b -> listOf(b).map { Ior.Right(it) } },
-    { a, b -> listOf(b).map { Ior.Both(a, it) } }
-)
-result shouldBe listOf(Ior.Right(124))
+fun migrateCrosswalk() {
+   val rightIor: Ior<String, Int> = Ior.Right(124)
+   val result = rightIor.fold(
+      { emptyList<Int>() },
+      { b -> listOf(b).map { Ior.Right(it) } },
+      { a, b -> listOf(b).map { Ior.Both(a, it) } }
+   )
+   result shouldBe listOf(Ior.Right(124))
+}
