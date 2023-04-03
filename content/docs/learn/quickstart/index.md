@@ -1,4 +1,5 @@
 ---
+title: Quickstart
 sidebar_custom_props:
   icon: icon-quickstart.svg
   overview: true

@@ -14,18 +14,22 @@ sidebar_custom_props:
 <details>
 <summary>Run a computation with potential errors</summary>
 
+For any given value of `val program: Raise<E>.() -> A`, the following functions are available:
+
 #### Handle any potential outcomes
 
-- `fold(program, failure, success)` to handle the main two cases, and re-throw any exceptions.
-- `fold(program, error, failure, success)` to handle all three potential cases.
+- `recover(program, error)` to recover from any error.
+- `fold(program, error, success)` to handle error and success case, and re-throw any exceptions.
+- `fold(program, exception, error, success)` to handle exception, error and success case.
 
 #### Obtain the result as a wrapper type
 
-These functions create a new scope where all the operators in this section become available.
+These functions create a `Raise` scope where all the operators in this section become available.
 
-- `result` to obtain `Result<A>`, the error type is fixed to `Throwable`.
-- `either` to obtain `Either<E, A>`.
-- `nullable` and `option` discard any error information.
+- `either(program)` to obtain `Either<E, A>`.
+- `result(program)` to obtain `Result<A>`, the error type is fixed to `Throwable`.
+- `nullable(program)` to obtain `A?`, the error type is fixed to `Null`.
+- `option(program)` to obtain `Option<A>`, the error type is fixed to `None`.
 
 #### Embed any potential errors in the block
 
@@ -51,22 +55,22 @@ These functions create a new scope where all the operators in this section becom
 </details>
 
 <details>
-<summary>Handle potential errors</summary>
+<summary>Handle potential errors (<a href="../typed-errors/#recovering-from-typed-errors-and-exceptions">guide</a>)</summary>
 
 These functions allow raising errors of the same type that the surrounding block.
 
-- `recover` to perform some action when the block fails.
-- `catch` to perform some action when the block throws an exception.
+- `recover(program, error)` to recover from any error.
+- `catch(program, exception)` to perform some action when the block throws an exception.
 
 </details>
 
 <details>
-<summary>Accumulate independent errors</summary>
+<summary>Accumulate errors (<a href="../typed-errors/#validation-accumulating-errors">guide</a>)</summary>
 
-These functions use `NonEmptyList<E>` as the surrounding error type.
+These functions use `NonEmptyList<E>` as the surrounding error type, or take `(E, E) -> E` as the error accumulator.
 
-- `mapOrAccumulate` to operate over a collection of items.
 - `zipOrAccumulate` to operate over independent blocks, with potentially different types.
+- `mapOrAccumulate` to operate over a collection of items.
 
 </details>
 

@@ -1,3 +1,9 @@
+---
+id: from-fp
+title: From other FP languages
+sidebar_position: 1
+---
+
 # From other FP languages
 
 Arrow is heavily influenced by functional programming. If you're used to working
