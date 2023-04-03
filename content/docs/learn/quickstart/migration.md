@@ -24,7 +24,7 @@ The biggest issue was that they were not compatible with Kotlin's `suspend` func
 
 Arrow 1.2.0-RC introduces a new [`Raise` DSL](https://github.com/arrow-kt/arrow/pull/2912), which resolves this problem and allows Arrow to provide uniform APIs for typed errors across the board.
 This heavily reduces the API surface, and makes it easier to learn and use Arrow, and additionally it allows us to build more powerful and flexible APIs.
-If you want to learn more about the new `Raise` DSL, check out the [Typed Errors](../typed-errors) guide.
+If you want to learn more about the new `Raise` DSL, check out the [Typed Errors](../../typed-errors) guide.
 
 There are two ways of migrating from the old `Either` DSL to the new `Raise` based DSL.
 A third way using [OpenRewrite](https://docs.openrewrite.org) is in the works, and will be added to this guide once it's ready.
