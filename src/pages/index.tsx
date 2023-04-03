@@ -39,31 +39,30 @@ export default function Home(): JSX.Element {
             <LinkCard key={feature.title} {...feature} />
           ))}
         </section>
-        <section
-          className={`container text--center ${styles.textContainer} ${styles.verticalRhythm}`}>
-          <h1>What can Λrrow do</h1>
-          <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eu
-            turpis molestie, dictum est
-          </p>
-        </section>
-        <section
-          className={`container ${styles.projectsContainer} ${styles.verticalRhythm}`}>
-          {data.projects.map((project: ImageCardProps) => (
-            <ImageCard key={project.title} {...project} />
-          ))}
-        </section>
+{/*         <section */}
+{/*           className={`container text--center ${styles.textContainer} ${styles.verticalRhythm}`}> */}
+{/*           <h1>What can Λrrow do</h1> */}
+{/*           <p> */}
+{/*             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eu */}
+{/*             turpis molestie, dictum est */}
+{/*           </p> */}
+{/*         </section> */}
+{/*         <section */}
+{/*           className={`container ${styles.projectsContainer} ${styles.verticalRhythm}`}> */}
+{/*           {data.projects?.map((project: ImageCardProps) => ( */}
+{/*             <ImageCard key={project.title} {...project} /> */}
+{/*           ))} */}
+{/*         </section> */}
         <section
           className={`container text--center ${styles.textContainer} ${styles.verticalRhythm}`}>
           <h1>What the community say</h1>
           <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eu
-            turpis molestie, dictum est
+            {/* Pending to add a brief introduction for testimonials */}
           </p>
         </section>
         <section
           className={`container ${styles.quotesContainer} ${styles.verticalRhythm}`}>
-          {data.quotes.map((quote: QuoteCardProps) => (
+          {data.quotes?.map((quote: QuoteCardProps) => (
             <QuoteCard key={quote.name} {...quote} />
           ))}
         </section>
@@ -75,7 +74,7 @@ export default function Home(): JSX.Element {
         </section>
         <section className={`${styles.usageWrapperContainer}`}>
           <div className={`container ${styles.usageContainer}`}>
-            {data.companies.map((company: { name: string; logo: string }) => (
+            {data.companies?.map((company: { name: string; logo: string }) => (
               <img
                 key={company.name}
                 src={useBaseUrl(`/img/${company.logo}`)}
