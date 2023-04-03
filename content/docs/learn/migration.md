@@ -11,7 +11,7 @@ Arrow includes a lot of improvements and changes in Arrow 1.2.0-RC, all based on
 Any criticism is welcome, and we'll try to improve the migration guide and the library to make it as easy as possible to migrate to Arrow 2.0.0.
 
 In case a deprecated method is crucial for you, please file an issue in the [Arrow repository](https://github.com/arrow-kt/arrow/issues), and so Arrow can consider keeping it in the library or finding an alternative solution.
-For any issues or have any questions, feel free to reach out to the Arrow maintainers in the [KotlinSlack Arrow Channel](https://arrow-kt.io/slack/).
+If you have any issues or questions, feel free to contact the Arrow maintainers in the [KotlinSlack Arrow Channel](https://arrow-kt.io/slack/).
 
 ## Either DSL, Effect & EffectScope
 
