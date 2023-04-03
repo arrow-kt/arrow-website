@@ -86,7 +86,7 @@ There is two ways to use this script for migration:
 
 Once installed you can run the script with default params: `kotlinc -script migrate.main.kts .`.
 
-You need to have Arrow version `1.2.0` (`1.1.6-alpha.28`) in order to compile your project after the script finishes running.
+You need to have Arrow version `1.2.0-RC` (or newer) in order to compile your project after the script finishes running.
 
 The script _might_ leave you with some unused imports, to fix this you can run _optimise imports_ on your _project root_ or _src_ folder.
 - Select _src_ or _project root` + `⌃ ⌥ O` or `Ctrl+Alt+O`.
