@@ -1,4 +1,4 @@
-// This file was automatically generated from optional-prism.md by Knit tool. Do not edit.
+// This file was automatically generated from optional.md by Knit tool. Do not edit.
 package arrow.website.examples.exampleOptional01
 
 import io.kotest.matchers.shouldBe

@@ -126,11 +126,11 @@ Optics form a hierarchy that we can summarize in the diagram below.
 
 ```mermaid
 graph TD;
-  traversal{{"<a href='../traversal/'>Traversal</a> (0 .. ∞)<br /><tt>getAll</tt> (return a list)<br /><tt>modify</tt> and <tt>set</tt>"}};
-  optional{{"<a href='../optional-prism/'>Optional</a> (0 .. 1)<br /><tt>getOrNull</tt> (return a nullable)"}};
-  lens{{"<a href='../lens/'>Lens</a> (exactly 1)<br /><tt>get</tt>"}};
-  prism{{"<a href='../optional-prism/#constructing-values'>Prism</a><br /><tt>reverseGet</tt>"}};
-  iso{{Iso}}
+  traversal{{"<a href='../traversal/'><b>Traversal</b></a> (0 .. ∞)<br /><tt>getAll</tt> (return a list)<br /><tt>modify</tt> and <tt>set</tt>"}};
+  optional{{"<a href='../optional/'><b>Optional</b></a> (0 .. 1)<br /><tt>getOrNull</tt> (return a nullable)"}};
+  lens{{"<a href='../lens/'><b>Lens</b></a> (exactly 1)<br /><tt>get</tt>"}};
+  prism{{"<a href='../prism-iso/'><b>Prism<b></a><br /><tt>reverseGet</tt>"}};
+  iso{{"<a href='../prism-iso/#isomorphisms'><b>Iso<b></a>"}}
   traversal-->optional;
   optional-->lens;
   optional-->prism;
@@ -141,14 +141,42 @@ graph TD;
 </center>
 
 The "main line" of optics is `Traversal` → `Optional` → `Lens`, which differ
-only in the number of elements they focus on. [`Prism`](../optional-prism) adds a slight 
-twist: it allows not only modifying, but also _creating_ new values and
+only in the number of elements they focus on. [`Prism` and `Iso`](../prism-iso) add a slight 
+twist: they allow not only modifying, but also _creating_ new values and
 matching over them.
 
 :::info Even more optics
 
 Arrow 1.x features a larger hierarchy of optics because the operations of
 "getting" values and "modifying" them live in different interfaces.
-Arrow 2.x simplifies the hierarchy to the four optics described in this section.
+Arrow 2.x simplifies the hierarchy to the five optics described in this section.
+
+```mermaid
+graph TD;
+  subgraph <h4>only access</h4>
+    fold{{"<b>Fold</b> (0 .. ∞)<br /><tt>getAll</tt>"}};
+    optionalFold{{"<b>OptionalFold</b> (0 .. 1)<br /><tt>getOrNull</tt>"}};
+    getter{{"<b>Getter</b> (exactly 1)<br /><tt>get</tt>"}};
+  end
+  setter{{"<b>Setter</b><br /><tt>modify</tt> and <tt>set</tt>"}};
+  subgraph <h4>Arrow 2.x</h4>
+    traversal{{"<b>Traversal</b>"}};
+    optional{{"<b>Optional</b>"}};
+    lens{{"<b>Lens</b>"}};
+    prism{{"<b>Prism<b><br /><tt>reverseGet</tt>"}};
+    iso{{"<b>Iso<b>"}}
+  end
+  fold-->traversal;
+  setter-->traversal;
+  fold-->optionalFold;
+  optionalFold-->getter;
+  optionalFold-->optional;
+  traversal-->optional;
+  getter-->lens;
+  optional-->lens;
+  optional-->prism;
+  lens-->iso;
+  prism-->iso;
+```
 
 :::

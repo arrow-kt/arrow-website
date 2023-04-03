@@ -1,5 +1,5 @@
-// This file was automatically generated from optional-prism.md by Knit tool. Do not edit.
-package arrow.website.examples.exampleOptional04
+// This file was automatically generated from prism-iso.md by Knit tool. Do not edit.
+package arrow.website.examples.examplePrismIso01
 
 import io.kotest.matchers.shouldBe
 
