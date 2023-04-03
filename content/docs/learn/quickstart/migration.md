@@ -1,8 +1,11 @@
 ---
-sidebar_position: 12
+id: migration
+title: Migration to Arrow 1.2.0
+description: Migration guide to upgrade to Arrow 1.2.0.
+sidebar_position: 2
 ---
 
-# Migration to 1.2.0
+# Migration to Arrow 1.2.0
 
 Arrow 1.2.0-RC is a big step in Arrow and marks the last minor version in the 1.x series, and serves as a long term version to over a graceful transition to Arrow 2.0.
 All non-deprecated code in 1.2.0-RC is source compatible with 2.0.0, so you can slowly and gracefully migrate your codebase to Arrow 2.0.0 as soon as you want.
