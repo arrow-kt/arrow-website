@@ -1,4 +1,4 @@
-// This file was automatically generated from optional-prism.md by Knit tool. Do not edit.
+// This file was automatically generated from optional.md by Knit tool. Do not edit.
 package arrow.core.examples.test
 
 import io.kotest.core.spec.style.StringSpec
@@ -16,10 +16,6 @@ class Optional : StringSpec({
 
   "ExampleOptional03" {
     arrow.website.examples.exampleOptional03.example()
-  }
-
-  "ExampleOptional05" {
-    arrow.website.examples.exampleOptional05.example()
   }
 
 }) {

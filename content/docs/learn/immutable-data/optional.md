@@ -2,7 +2,7 @@
 sidebar_position: 3
 ---
 
-# Optionals & prisms
+# Optionals
 
 Optionals allow focusing on elements that may not be present. This includes
 nullable values and elements on indexed collections such as `List` or `Map`.
@@ -141,67 +141,6 @@ you are accessing. Currently, this argument can be `Index.list`, `Index.map`,
 and values expected by each operation.
 
 :::
-
-## (Sealed) class hierarchies
-
-Another critical use case for optionals is matching different values
-within a (sealed) class hierarchy. The following is an example of `User` where
-we have two options: a person or a company.
-
-```kotlin
-import arrow.optics.*
-
-@optics sealed interface User {
-  companion object
-}
-@optics data class Person(val name: String, val age: Int): User {
-  companion object
-}
-@optics data class Company(val name: String, val country: String): User {
-  companion object
-}
-```
-
-The Arrow Optics plug-in generates two optics within `User`, namely
-`User.person` and `User.company`. These optics only focus on a value when
-it has the corresponding type. This is often used to modify a value only
-for a specific type in the hierarchy, leaving the rest untouched. This is
-precisely what happens in the function below: `Person`s get their age incremented,
-but `Company`s remains unchanged.
-
-```kotlin
-fun List<User>.happyBirthday() =
-  map { User.person.age.modify(it) { age -> age + 1 } }
-```
-<!--- KNIT example-optional-04.kt -->
-
-Several of the types in Arrow Core fit this pattern of sealed hierarchy, and
-Arrow Optics contains optics matching those. One example is `Either`, with
-the corresponding `left` and `right`.
-
-### Constructing values
-
-The optics we're discussing in this section provide an added feature: they can
-be used to _create_ new values in addition to inspecting or modifying existing
-ones. Optionals with this power are called **prisms**, and this power is
-available as the `reverseGet` operation.
-
-For example, we can build a `Left` value using the corresponding prism
-instead of the constructor.
-
-<!--- INCLUDE
-import arrow.core.Either
-import arrow.optics.*
--->
-
-```kotlin
-fun example() {
-  val x = Prism.left<Int, String>().reverseGet(5)
-  x shouldBe Either.Left(5)
-}
-```
-<!--- KNIT example-optional-05.kt -->
-<!--- TEST assert -->
 
 ## Nullable types
 
