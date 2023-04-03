@@ -24,7 +24,7 @@ even though a migration window is in place until Arrow 2.0.
 
 :::
 
-The Arrow Fx Resilience library implements three of the most critical design
+The Arrow Resilience library implements three of the most critical design
 pattern around resilience:
 
 - Retry and repeat computations using [`Schedule`](../retry-and-repeat),
