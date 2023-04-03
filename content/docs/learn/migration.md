@@ -97,7 +97,6 @@ This should remove all _unused imports_ this might also affect other unrelated i
 
 <details>
 <summary>Alternative</summary>
-## Alternative
 
 If you don't want to rely on IntelliJ's _optimise imports_ you can still use the migration script to do 99,99% of the work,
 except import `ensure` (and `fold` for `Effect`/`EagerEffect`).
