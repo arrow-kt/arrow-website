@@ -337,10 +337,12 @@ When we replace the deprecated `zip` method:
 ```
 // Executing automatic replacement
 fun migrateZip(){ 
+   val validated: Validated<Long?, Int?> = 3.valid()
    val res = Either.zipOrAccumulate(
       { e1, e2 -> e1 + e2 }, // compilation error
       validated.toEither(), 
-      Valid(Unit).toEither()) { a, _ -> a }.toValidated()
+      Valid(Unit).toEither()
+   ) { a, _ -> a }.toValidated()
 }
 ```
 In this case, we do not have the `+` operation for `Long?`, so we need to add it manually:
@@ -358,7 +360,7 @@ fun migrateZip() {
 
 ### combineAll
 In a similar situation like [foldMap](#foldmap), the replacement of deprecated `combineAll` for `Iterable`, `Option` and 
-`Validate` needs to add manually the `initialValue` parameter, in the replacement with `fold` method. Let's do a replacement
+`Validate` needs to add manually the `initial` parameter, in the replacement with `fold` method. Let's do a replacement
 to see how to achieve this:
 ```kotlin
 fun deprecatedCombineAll() {
@@ -371,12 +373,12 @@ fun deprecatedCombineAll() {
 // Executing automatic replacement
 fun migrateCombineAll(){
    val l: List<Int> = listOf(1, 2, 3, 4, 5) 
-   l.fold(initialValue) { a1, a2 -> a1 + a2 } shouldBe 10 // initialValue is not found
+   l.fold(initial) { a1, a2 -> a1 + a2 } shouldBe 10 // initial is not found
 }
 ```
 
 ```kotlin
-// Adding the empty value to complete the replacement of the deprecated method
+// Adding the initial value to complete the replacement of the deprecated method
 fun migrateCombineAll() {
    val l: List<Int> = listOf(1, 2, 3, 4, 5)
    l.fold(0) { a1, a2 -> a1 + a2 } shouldBe 10
@@ -401,7 +403,7 @@ fun migrateReplicate(){
    val rEither: Either<String, Int> = 125.right() 
    val n = 3
    val res = if (n <= 0) Either.Right(initial) 
-   else rEither.map { b -> List<Int>(n) { b }.fold(initial) { r, t -> r + t } } // empty is not found
+   else rEither.map { b -> List<Int>(n) { b }.fold(initial) { r, t -> r + t } } // initial is not found
    res shouldBe Either.Right(375)
 }
 ```

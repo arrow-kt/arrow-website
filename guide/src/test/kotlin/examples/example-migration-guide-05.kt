@@ -54,7 +54,7 @@ fun deprecatedCombineAll() {
    l.combineAll(Monoid.int()) shouldBe 10
 }
 
-// Adding the empty value to complete the replacement of the deprecated method
+// Adding the initial value to complete the replacement of the deprecated method
 fun migrateCombineAll() {
    val l: List<Int> = listOf(1, 2, 3, 4, 5)
    l.fold(0) { a1, a2 -> a1 + a2 } shouldBe 10
