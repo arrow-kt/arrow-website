@@ -109,7 +109,7 @@ Thank you for using Arrow, and your support. I hope this script was able to simp
 </details>
 </details>
 
-::: info
+:::info
 Below we discuss `traverse` & `zip` which will be adopted by [Quiver](https://github.com/cashapp/quiver) in the future.
 So if you like using these _functional combinators_ you can ignore their deprecated status, and continue using them with [Quiver](https://github.com/cashapp/quiver) after 2.0.0
 We will also provide [OpenRewrite](https://docs.openrewrite.org) recipes through [rewrite-arrow](https://github.com/arrow-kt/rewrite-arrow) when 2.0.0 is released to automatically migrate to [Quiver](https://github.com/cashapp/quiver).
