@@ -77,7 +77,7 @@ fun migrateReplicate() {
 }
 
 fun deprecatedCrosswalk() {
-   val rightIor: Ior<String, Int> = Ior.Right(125)
+   val rightIor: Ior<String, Int> = Ior.Right(124)
    val result = rightIor.crosswalk { listOf(it) }
    result shouldBe listOf(Ior.Right(124))
 }
