@@ -10,6 +10,10 @@ class PrismIso : StringSpec({
     arrow.website.examples.examplePrismIso02.example()
   }
 
+  "ExamplePrismIso03" {
+    arrow.website.examples.examplePrismIso03.example()
+  }
+
 }) {
   override fun timeout(): Long = 1000
 }
