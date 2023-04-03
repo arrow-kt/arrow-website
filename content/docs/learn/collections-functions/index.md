@@ -1,5 +1,5 @@
 ---
-title: Functions and collections
+title: Collections and functions
 ---
 
 import { useCurrentSidebarCategory } from '@docusaurus/theme-common';
