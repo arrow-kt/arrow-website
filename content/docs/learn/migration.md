@@ -276,7 +276,7 @@ some deprecated methods may need to add an extra manual step, besides the automa
 
 ### foldMap
 The replacement of deprecated `foldMap` for `Iterable`, `Option` and `Either` requires to replace the `Monoid` parameter
-with an `empty` of the type contained in the removed `Monoid`.
+with an `empty` value of the type contained in the removed `Monoid`.
 Let's see this in action:
 <!--- INCLUDE
 import arrow.core.Either
