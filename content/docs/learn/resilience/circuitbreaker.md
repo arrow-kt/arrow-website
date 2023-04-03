@@ -71,6 +71,19 @@ in _Cloud Design Patterns_.
 
 :::
 
+## Opening strategies
+
+Arrow offers different strategies to determine when the circuit breaker should open and short-circuit all incoming requests. The currently available ones are:
+
+- [_Count_](https://arrow-kt.github.io/arrow/arrow-resilience/arrow.resilience/-circuit-breaker/-opening-strategy/-count/index.html).
+  This strategy sets a maximum number of failures. Once this threshold is reached, the circuit breaker moves to _Open_. 
+  Note that every time a request succeeds, the counter is set back to zero; the circuit breaker only
+  moves to _Open_ when the maximum number of failures happen **consecutively**.
+- [_Sliding Window_](https://arrow-kt.github.io/arrow/arrow-resilience/arrow.resilience/-circuit-breaker/-opening-strategy/-sliding-window/index.html).
+  This strategy counts the number of failures within a given time window. Unlike the `Count` approach, the circuit breaker
+  will only move to `Open` if the number of failing requests tracked within the given period exceeds the threshold. As the
+  time window slides, the failures out of the window limits are ignored.
+
 ## Arrow's [`CircuitBreaker`](https://arrow-kt.github.io/arrow/arrow-resilience/arrow.resilience/-circuit-breaker/index.html)
 
 Let's create a circuit breaker that only allows us to call a remote service twice.
