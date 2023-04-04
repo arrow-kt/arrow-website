@@ -29,7 +29,7 @@ export default function Home(): JSX.Element {
           className={`container text--center ${styles.textContainer} ${styles.verticalRhythm}`}>
           <h1>Start learning now</h1>
           <p>
-            Λrrow is composed of different libraries that greatly improve your
+            Arrow is composed of different libraries that greatly improve your
             developer experience using Kotlin
           </p>
         </section>
@@ -41,7 +41,7 @@ export default function Home(): JSX.Element {
         </section>
 {/*         <section */}
 {/*           className={`container text--center ${styles.textContainer} ${styles.verticalRhythm}`}> */}
-{/*           <h1>What can Λrrow do</h1> */}
+{/*           <h1>What can Arrow do</h1> */}
 {/*           <p> */}
 {/*             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eu */}
 {/*             turpis molestie, dictum est */}

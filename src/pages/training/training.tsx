@@ -32,9 +32,9 @@ export default function Training(): JSX.Element {
       <main>
         <section
           className={`container text--center ${styles.textContainer} ${styles.verticalRhythm}`}>
-          <h1>Learn with Λrrow</h1>
+          <h1>Learn with Arrow</h1>
           <p>
-            Λrrow is composed of different libraries that greatly improve your
+            Arrow is composed of different libraries that greatly improve your
             developer experience using Kotlin
           </p>
         </section>
@@ -48,7 +48,7 @@ export default function Training(): JSX.Element {
           className={`container text--center ${styles.textContainer} ${styles.verticalRhythm}`}>
           <h1>Start learning now</h1>
           <p>
-            Λrrow is composed of different libraries that greatly improve your
+            Arrow is composed of different libraries that greatly improve your
             developer experience using Kotlin
           </p>
         </section>
