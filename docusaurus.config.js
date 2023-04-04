@@ -155,7 +155,7 @@ const createConfig = async () => {
             {
               label: 'API Docs',
               position: 'right',
-              href: 'https://arrow-kt.github.io/arrow/index.html',
+              href: 'https://apidocs.arrow-kt.io',
             },
             {
               type: 'dropdown',
@@ -206,7 +206,7 @@ const createConfig = async () => {
                 },
                 {
                   label: 'API Docs',
-                  href: 'https://arrow-kt.github.io/arrow/index.html',
+                  href: 'https://apidocs.arrow-kt.io',
                 },
                 {
                   label: 'Training',
