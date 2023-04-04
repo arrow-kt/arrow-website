@@ -1,7 +1,7 @@
 hero:
-  title: Λrrow brings idiomatic <u>functional programming</u> to Kotlin
+  title: Arrow brings idiomatic <u>functional programming</u> to Kotlin
   ctaList:
-    - title: What is Λrrow
+    - title: What is Arrow
       href: /learn/overview
 
     - title: Get Started
@@ -11,7 +11,7 @@ features:
   - title: Quickstart
     href: /learn/quickstart
     icon: icon-quickstart.svg
-    body: Gradle or Maven, JVM or Multiplatform, Λrrow fits in all your projects
+    body: Gradle or Maven, JVM or Multiplatform, Arrow fits in all your projects
 
   - title: Typed errors
     href: /learn/typed-errors

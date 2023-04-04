@@ -6,4 +6,4 @@ tags: [core, videos]
 link: https://youtu.be/_QBlKtUY6ac
 event: Kotlin User Group, Hyderabad, Online Meetup
 ---
-Learn about the magic of Ad-hoc polymorphism using Λrrow typeclasses with simple examples.
+Learn about the magic of Ad-hoc polymorphism using Arrow typeclasses with simple examples.

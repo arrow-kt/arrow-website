@@ -3,7 +3,7 @@
   "position": 2,
   "customProps": {
     "icon": "icon-quickstart.svg",
-    "description": "Gradle or Maven, JVM or Multiplatform, Λrrow fits in all your projects",
+    "description": "Gradle or Maven, JVM or Multiplatform, Arrow fits in all your projects",
     "overview": true
   }
 }
