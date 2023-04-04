@@ -25,8 +25,6 @@ const createConfig = async () => {
     url: 'https://arrow-kt.io',
     baseUrl: '/',
     trailingSlash: true,
-    // GitHub pages deployment config.
-    // If you aren't using GitHub pages, you don't need these.
     organizationName: 'arrow-kt', // Usually your GitHub org/user name.
     projectName: 'arrow-website', // Usually your repo name.
 
@@ -178,20 +176,11 @@ const createConfig = async () => {
                 },
               ],
             },
-//            {
-//              to: '/training',
-//              position: 'right',
-//              label: 'Training',
-//            },
             {
               type: 'dropdown',
               position: 'right',
               label: 'Community',
-              items: [
-//                { to: '/community/support', label: 'Support' },
-                { to: '/community/blog', label: 'Blog' },
-//                { to: '/community/events', label: 'Events' },
-              ],
+              items: [{ to: '/community/blog', label: 'Blog' }],
             },
           ],
         },
@@ -208,10 +197,6 @@ const createConfig = async () => {
                   label: 'API Docs',
                   href: 'https://apidocs.arrow-kt.io',
                 },
-//                {
-//                  label: 'Training',
-//                  to: '/training',
-//                },
                 {
                   label: 'Community',
                   to: '/community/support',
@@ -276,14 +261,6 @@ const createConfig = async () => {
             {
               title: 'Community',
               items: [
-//                {
-//                  label: 'Support',
-//                  to: '/community/support',
-//                },
-//                {
-//                  label: 'Events',
-//                  to: '/community/events',
-//                },
                 {
                   label: 'Blog',
                   to: '/community/blog',

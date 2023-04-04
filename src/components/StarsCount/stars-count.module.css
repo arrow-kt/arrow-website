@@ -1,8 +1,19 @@
 .link {
   font-weight: 500;
+  font-size: 0.9rem;
+  white-space: nowrap;
 }
 
 .icon {
-  vertical-align: top;
+  vertical-align: text-top;
   margin-right: 0.4rem;
+}
+
+.starIcon {
+  margin-left: 0.4rem;
+  vertical-align: text-top;
+}
+
+.link:hover .icon, .link:hover .starIcon  {
+  filter: brightness(0.8);
 }

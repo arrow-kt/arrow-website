@@ -43,43 +43,6 @@ libraries:
     icon: icon-resilience.svg
     body: Better initial-style DSLs in Kotlin
 
-more_libraries:
-  - title: Library 5
-    href: /learn/coroutines
-    icon: icon-coroutines.svg
-    body: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eu turpis molestie, dictum est . Etiam eu turpis
-
-  - title: Library 6
-    href: /learn/resilience
-    icon: icon-resilience.svg
-    body: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eu turpis molestie, dictum est . Etiam eu turpis
-
-  - title: Library 7
-    href: /learn/immutable-data
-    icon: icon-immutable-data.svg
-    body: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eu turpis molestie, dictum est . Etiam eu turpis
-
-  - title: Library 8
-    href: /learn/design
-    icon: icon-design.svg
-    body: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eu turpis molestie, dictum est . Etiam eu turpis
-
-navs:
-#  - title: Support
-#    href: /community/support
-#    icon: icon-support.svg
-#    body: Lorem ipsum dolor sit amet, consectetur adipiscing eliorem ipsum dolor sit amet
-#
-#  - title: Blog
-#    href: /community/blog
-#    icon: icon-blog.svg
-#    body: Lorem ipsum dolor sit amet, consectetur adipiscing eliorem ipsum dolor sit amet
-#
-#  - title: Events
-#    href: /community/events
-#    icon: icon-events.svg
-#    body: Lorem ipsum dolor sit amet, consectetur adipiscing eliorem ipsum dolor sit amet
-
 banner:
   title: Want to know more about Arrow?
   ctaList:

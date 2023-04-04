@@ -10,10 +10,12 @@ import styles from './stars-count.module.css';
 
 const githubLink = 'https://github.com/arrow-kt/arrow';
 const icon = '/img/icon-social-github.svg';
+const starIcon = '/img/icon-star.svg';
 
 export const StarsCount = () => {
   const isBrowser = useIsBrowser();
   const iconPath = useBaseUrl(`${icon}`);
+  const starIconPath = useBaseUrl(`${starIcon}`);
   const { githubInfo } = useGithubInfo();
 
   if (!isBrowser) {
@@ -33,10 +35,17 @@ export const StarsCount = () => {
             src={iconPath}
             className={styles.icon}
             alt="GitHub"
-            height="24px"
-            width="24px"
+            height="20px"
+            width="20px"
           />
-          arrow • {stars.toLocaleString()} <span>⭐</span>
+          arrow • {stars.toLocaleString()}
+          <img
+            src={starIconPath}
+            className={styles.starIcon}
+            alt="Star"
+            height="16px"
+            width="16px"
+          />
         </Link>
       )}
     </>

@@ -20,12 +20,6 @@ table {
   background: var(--background);
 }
 
-/* To set the ToC properly aligned */
-.plugin-docs main .theme-doc-toc-desktop {
-  top: var(--ifm-navbar-height);
-  margin-top: -1rem;
-}
-
 /* Navbar */
 .plugin-docs .navbar {
   border-bottom: 1px solid var(--ifm-toc-border-color);
@@ -51,6 +45,7 @@ table {
 /* Search */
 .navbar__search-input {
   border-radius: var(--ifm-global-radius);
+  transition: width var(--ifm-transition-fast);
 }
 
 .navbar__search[class*='searchBarContainer'] {
@@ -95,6 +90,56 @@ table {
 .navbar__search [class*='hitFooter'] a:hover {
   color: var(--ifm-link-hover-color);
 }
+
+/* Navbar sidebar */
+.navbar-sidebar__item {
+  padding: 0
+}
+
+.navbar-sidebar__back {
+  margin: 0;
+  padding: var(--ifm-spacing-vertical) var(--ifm-spacing-horizontal);
+  top: 0;
+  background: var(--ifm-navbar-background-color);
+  color: var(--ifm-menu-color);
+}
+
+.navbar-sidebar__back:hover {
+  background: var(--ifm-menu-color-background-hover);
+}
+
+.navbar-sidebar__close {
+  transition: transform var(--ifm-transition-fast);
+}
+
+.navbar-sidebar__close:hover {
+  transform: rotateZ(90deg);
+}
+
+.navbar-sidebar .menu__link {
+  border-radius: var(--ifm-global-radius);
+}
+
+.navbar-sidebar .menu__link:hover {
+  cursor: pointer;
+}
+
+.menu__link.menu__link--sublist.menu__link--active {
+  color: var(--ifm-menu-color);
+}
+
+.menu__list-item-collapsible--active .menu__link.menu__link--active {
+  color: var(--ifm-menu-color-active);
+}
+
+/* To set the ToC properly aligned */
+.plugin-docs main .theme-doc-toc-desktop {
+  top: var(--ifm-navbar-height);
+  margin-top: -1rem;
+}
+
+/* Collapsible ToC */ 
+
 
 /* Pagination bottom buttons not needed */
 .plugin-docs .pagination-nav {
@@ -229,11 +274,13 @@ code {
   color: var(--ifm-menu-color-active);
 }
 
+
 .menu__list-item-collapsible {
   border-radius: var(--ifm-global-radius);
 }
 
-.plugin-docs .theme-doc-sidebar-container .menu__list-item-collapsible--active {
+.plugin-docs .theme-doc-sidebar-container .menu__list-item-collapsible--active,
+.theme-doc-sidebar-menu .menu__list-item-collapsible--active {
   background: var(--ifm-menu-color-background-active);
 }
 

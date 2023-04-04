@@ -38,57 +38,11 @@ features:
     icon: icon-generic-6.svg
     body: Powerful additions to the basics to make your code more expressive
 
-projects:
-#  - title: Case study 1
-#
-#  - title: Case study 2
-#
-#  - title: Case study 3
-#
-#  - title: Case study 4
-
 quotes:
   - name: George Popides
     position: Software Engineer at Katanox
-    image: quoted-person-a.jpg
     body: Our system consists of multiple services built with Kotlin and Spring Boot and the communication between the services is done through GRPC. The more services involved the more the failure points which means we need a streamlined way to handle failures and errors without affecting the operation of our system. [..] By using Either and Validated, we have eliminated unexpected exceptions in our system and we can now have a look on errors through our logs without worrying about unexpected exceptions that can bring our system down
 
   - name: Ilyan Germanov
     position: Co-founder of Ivy Apps
-    image: quoted-person-b.jpg
     body: This week, I'm into sharing things that made my life as an Android developer with Kotlin easier. In my opinion, functional programming is an awesome paradigm and can be a first-class citizen in Kotlin. [..] Arrow is a "Functional companion to Kotlin's Standard Library" and provides the core constructs from the FP world to get you started.
-
-navs:
-#  - title: Support
-#    href: /community/support
-#    icon: icon-support.svg
-#    body: Lorem ipsum dolor sit amet, consectetur adipiscing eliorem ipsum dolor sit amet
-#
-#  - title: Blog
-#    href: /community/blog
-#    icon: icon-blog.svg
-#    body: Lorem ipsum dolor sit amet, consectetur adipiscing eliorem ipsum dolor sit amet
-#
-#  - title: Events
-#    href: /community/events
-#    icon: icon-events.svg
-#    body: Lorem ipsum dolor sit amet, consectetur adipiscing eliorem ipsum dolor sit amet
-
-companies:
-#  - name: Verizon
-#    logo: company-logo-0.png
-#
-#  - name: Scalefocus
-#    logo: company-logo-1.png
-#
-#  - name: Unity
-#    logo: company-logo-2.png
-#
-#  - name: Santander
-#    logo: company-logo-3.png
-#
-#  - name: Google
-#    logo: company-logo-4.png
-#
-#  - name: Microsoft
-#    logo: company-logo-5.png

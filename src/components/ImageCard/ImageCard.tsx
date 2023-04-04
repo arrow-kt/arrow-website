@@ -22,7 +22,7 @@ export function ImageCardBase({
   subtitle,
   image = useBaseUrl('/img/sample-image.jpg'),
   body = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eu turpis molestie',
-  href = '/about/use-cases',
+  href,
   landscapeMode = false,
 }: ImageCardOptionsProps) {
   return (

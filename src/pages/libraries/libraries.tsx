@@ -45,12 +45,14 @@ export default function Libraries(): JSX.Element {
             be featured here!
           </p>
         </section>
-        <section
-          className={`container ${styles.navigationContainer} ${styles.verticalRhythm}`}>
-          {data.navs?.map((nav: BorderlessCardProps) => (
-            <BorderlessCard key={nav.title} {...nav} />
-          ))}
-        </section>
+        {data.navs && (
+          <section
+            className={`container ${styles.navigationContainer} ${styles.verticalRhythm}`}>
+            {data.navs.map((nav: BorderlessCardProps) => (
+              <BorderlessCard key={nav.title} {...nav} />
+            ))}
+          </section>
+        )}
         <section>
           <Banner title={data.banner.title} ctaList={data.banner.ctaList} />
         </section>
