@@ -2,44 +2,15 @@
   margin-bottom: calc(2 * var(--ifm-spacing-vertical));
 }
 
-.textContainer {
-  max-width: 480px;
-  /* TODO: Waiting on https://github.com/mrmckeb/typescript-plugin-css-modules/issues/207 */
-  /* composes: container from global;
-  composes: text--center from global; */
-}
-
-.featuresContainer,
-.quotesContainer {
-  /* TODO: Waiting on https://github.com/mrmckeb/typescript-plugin-css-modules/issues/207 */
-  /* https://github.com/css-modules/css-modules#composing-from-other-files */
-  /* composes: container from global; */
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: var(--ifm-spacing-vertical) var(--ifm-spacing-horizontal);
-}
-
 .projectsContainer {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: var(--ifm-spacing-vertical) var(--ifm-spacing-horizontal);
 }
 
-.navigationContainer {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  gap: var(--ifm-spacing-vertical) var(--ifm-spacing-horizontal);
+@media (--ifm-narrow-window) {
+  .projectsContainer {
+    grid-template-columns: 1fr;
+  }
 }
 
-.usageWrapperContainer {
-  background-color: var(--ifm-color-primary-light);
-}
-
-.usageContainer {
-  display: flex;
-  align-content: center;
-  justify-content: space-between;
-  padding: calc(2 * var(--ifm-spacing-vertical)) var(--ifm-spacing-horizontal);
-  flex-wrap: wrap;
-  row-gap: var(--ifm-spacing-vertical);
-}

@@ -19,27 +19,20 @@
   gap: var(--ifm-spacing-vertical) var(--ifm-spacing-horizontal);
 }
 
-.projectsContainer {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: var(--ifm-spacing-vertical) var(--ifm-spacing-horizontal);
-}
-
 .navigationContainer {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   gap: var(--ifm-spacing-vertical) var(--ifm-spacing-horizontal);
 }
 
-.usageWrapperContainer {
-  background-color: var(--ifm-color-primary-light);
+@media (--ifm-narrow-window) {
+  .featuresContainer {
+    grid-template-columns: 1fr;
+  }
 }
 
-.usageContainer {
-  display: flex;
-  align-content: center;
-  justify-content: space-between;
-  padding: calc(2 * var(--ifm-spacing-vertical)) var(--ifm-spacing-horizontal);
-  flex-wrap: wrap;
-  row-gap: var(--ifm-spacing-vertical);
+@media (--arrow-mobile-window) {
+  .navigationContainer {
+    grid-template-columns: 1fr;
+  }
 }

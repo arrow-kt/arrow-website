@@ -24,6 +24,7 @@
 
 :local(.quoteCard) :global(.card__body) {
   padding-top: calc(2.5 * var(--ifm-card-vertical-spacing));
+  font-size: 0.9rem;
 }
 
 :local(.quoteCard) :global(.avatar__photo-wrapper) {

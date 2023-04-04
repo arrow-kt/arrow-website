@@ -97,3 +97,5 @@
 
 /* Custom Media query mimicking the one from Infima */
 @custom-media --ifm-narrow-window (max-width: 996px);
+
+@custom-media --arrow-mobile-window (max-width: 768px);

@@ -31,6 +31,21 @@
   gap: var(--ifm-spacing-vertical) var(--ifm-spacing-horizontal);
 }
 
+@media (--ifm-narrow-window) {
+  .projectsContainer {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (--arrow-mobile-window) {
+  .featuresContainer,
+  .quotesContainer,
+  .projectsContainer,
+  .navigationContainer {
+    grid-template-columns: 1fr;
+  }
+}
+
 .usageWrapperContainer {
   background-color: var(--ifm-color-primary-light);
 }

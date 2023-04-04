@@ -42,7 +42,6 @@
   }
 }
 
-
 .container {
   max-width: 700px;
 }
@@ -51,6 +50,12 @@ u {
   text-decoration: none;
   box-shadow: 0 4px var(--arrow-color-secondary);
   white-space: nowrap;
+}
+
+@media (--arrow-mobile-window) {
+  u {
+    white-space: normal;
+  }
 }
 
 .subtitle {
@@ -64,3 +69,10 @@ u {
   justify-content: center;
   margin-top: calc(2 * var(--ifm-spacing-vertical));
 }
+
+@media (--arrow-mobile-window) {
+  .ctaList {
+    flex-direction: column;
+  }
+}
+

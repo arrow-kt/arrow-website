@@ -7,3 +7,15 @@
   grid-template-columns: 1fr 1fr 1fr 1fr;
   gap: var(--ifm-spacing-vertical) var(--ifm-spacing-horizontal);
 }
+
+@media (--ifm-narrow-window) {
+  .projectsContainer {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (--arrow-mobile-window) {
+  .projectsContainer {
+    grid-template-columns: 1fr;
+  }
+}
