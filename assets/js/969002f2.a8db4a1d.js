@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkarrow_website=self.webpackChunkarrow_website||[]).push([[4953],{71368:a=>{a.exports=JSON.parse('{"label":"arrow-kt","permalink":"/community/blog/tags/arrow-kt","allTagsPath":"/community/blog/tags","count":1}')}}]);

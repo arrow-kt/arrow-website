@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkarrow_website=self.webpackChunkarrow_website||[]).push([[4057],{70571:e=>{e.exports=JSON.parse('{"label":"kotlin","permalink":"/community/blog/tags/kotlin","allTagsPath":"/community/blog/tags","count":1}')}}]);
