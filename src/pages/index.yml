@@ -39,13 +39,13 @@ features:
     body: Powerful additions to the basics to make your code more expressive
 
 projects:
-  - title: Case study 1
-
-  - title: Case study 2
-
-  - title: Case study 3
-
-  - title: Case study 4
+#  - title: Case study 1
+#
+#  - title: Case study 2
+#
+#  - title: Case study 3
+#
+#  - title: Case study 4
 
 quotes:
   - name: George Popides
@@ -59,36 +59,36 @@ quotes:
     body: This week, I'm into sharing things that made my life as an Android developer with Kotlin easier. In my opinion, functional programming is an awesome paradigm and can be a first-class citizen in Kotlin. [..] Arrow is a "Functional companion to Kotlin's Standard Library" and provides the core constructs from the FP world to get you started.
 
 navs:
-  - title: Support
-    href: /community/support
-    icon: icon-support.svg
-    body: Lorem ipsum dolor sit amet, consectetur adipiscing eliorem ipsum dolor sit amet
-
-  - title: Blog
-    href: /community/blog
-    icon: icon-blog.svg
-    body: Lorem ipsum dolor sit amet, consectetur adipiscing eliorem ipsum dolor sit amet
-
-  - title: Events
-    href: /community/events
-    icon: icon-events.svg
-    body: Lorem ipsum dolor sit amet, consectetur adipiscing eliorem ipsum dolor sit amet
+#  - title: Support
+#    href: /community/support
+#    icon: icon-support.svg
+#    body: Lorem ipsum dolor sit amet, consectetur adipiscing eliorem ipsum dolor sit amet
+#
+#  - title: Blog
+#    href: /community/blog
+#    icon: icon-blog.svg
+#    body: Lorem ipsum dolor sit amet, consectetur adipiscing eliorem ipsum dolor sit amet
+#
+#  - title: Events
+#    href: /community/events
+#    icon: icon-events.svg
+#    body: Lorem ipsum dolor sit amet, consectetur adipiscing eliorem ipsum dolor sit amet
 
 companies:
-  - name: Verizon
-    logo: company-logo-0.png
-
-  - name: Scalefocus
-    logo: company-logo-1.png
-
-  - name: Unity
-    logo: company-logo-2.png
-
-  - name: Santander
-    logo: company-logo-3.png
-
-  - name: Google
-    logo: company-logo-4.png
-
-  - name: Microsoft
-    logo: company-logo-5.png
+#  - name: Verizon
+#    logo: company-logo-0.png
+#
+#  - name: Scalefocus
+#    logo: company-logo-1.png
+#
+#  - name: Unity
+#    logo: company-logo-2.png
+#
+#  - name: Santander
+#    logo: company-logo-3.png
+#
+#  - name: Google
+#    logo: company-logo-4.png
+#
+#  - name: Microsoft
+#    logo: company-logo-5.png

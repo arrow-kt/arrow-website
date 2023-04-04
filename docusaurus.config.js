@@ -178,19 +178,19 @@ const createConfig = async () => {
                 },
               ],
             },
-            {
-              to: '/training',
-              position: 'right',
-              label: 'Training',
-            },
+//            {
+//              to: '/training',
+//              position: 'right',
+//              label: 'Training',
+//            },
             {
               type: 'dropdown',
               position: 'right',
               label: 'Community',
               items: [
-                { to: '/community/support', label: 'Support' },
+//                { to: '/community/support', label: 'Support' },
                 { to: '/community/blog', label: 'Blog' },
-                { to: '/community/events', label: 'Events' },
+//                { to: '/community/events', label: 'Events' },
               ],
             },
           ],
@@ -208,10 +208,10 @@ const createConfig = async () => {
                   label: 'API Docs',
                   href: 'https://apidocs.arrow-kt.io',
                 },
-                {
-                  label: 'Training',
-                  to: '/training',
-                },
+//                {
+//                  label: 'Training',
+//                  to: '/training',
+//                },
                 {
                   label: 'Community',
                   to: '/community/support',
@@ -276,14 +276,14 @@ const createConfig = async () => {
             {
               title: 'Community',
               items: [
-                {
-                  label: 'Support',
-                  to: '/community/support',
-                },
-                {
-                  label: 'Events',
-                  to: '/community/events',
-                },
+//                {
+//                  label: 'Support',
+//                  to: '/community/support',
+//                },
+//                {
+//                  label: 'Events',
+//                  to: '/community/events',
+//                },
                 {
                   label: 'Blog',
                   to: '/community/blog',
