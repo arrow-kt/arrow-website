@@ -65,7 +65,7 @@ syntax for [error types](../../typed-errors/working-with-typed-errors/).
 
 - You must explicitly request to work with an error type, using `either`,
   `result`, or `nullable`, instead of `for`. Those functions live in
-  the [`arrow.core.raise`](https://arrow-kt.github.io/arrow/arrow-core/arrow.core.raise/index.html) package.
+  the [`arrow.core.raise`](https://apidocs.arrow-kt.io/arrow-core/arrow.core.raise/index.html) package.
 - Every usage of `<-` translates into a call to `.bind()`.
 
 <!--- INCLUDE

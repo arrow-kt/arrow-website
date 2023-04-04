@@ -28,7 +28,7 @@ away when you use Arrow Fx [high-level operations](../parallel).
 
 ## Atomic
 
-The separate [`arrow-atomic` library](https://arrow-kt.github.io/arrow/arrow-atomic/arrow.atomic/index.html) 
+The separate [`arrow-atomic` library](https://apidocs.arrow-kt.io/arrow-atomic/arrow.atomic/index.html) 
 provides Multiplatform-ready atomic references.
 In particular, their `getAndSet`, `getAndUpdate`, and `compareAndSet` operations
 are guaranteed to happen atomically; there's no possibility of two computations
@@ -44,7 +44,7 @@ the provided `AtomicInt`, `AtomicBoolean`, and so forth.
 
 ## CountDownLatch
 
-[`CountDownLatch`](https://arrow-kt.github.io/arrow/arrow-fx-coroutines/arrow.fx.coroutines/-count-down-latch/index.html) 
+[`CountDownLatch`](https://apidocs.arrow-kt.io/arrow-fx-coroutines/arrow.fx.coroutines/-count-down-latch/index.html) 
 allows for awaiting a given number of countdown signals.
 
 
@@ -56,7 +56,7 @@ This type models the behavior of [`java.util.concurrent.CountDownLatch`](https:/
 
 ## CyclicBarrier
 
-A [`CyclicBarrier`](https://arrow-kt.github.io/arrow/arrow-fx-coroutines/arrow.fx.coroutines/-cyclic-barrier/index.html)
+A [`CyclicBarrier`](https://apidocs.arrow-kt.io/arrow-fx-coroutines/arrow.fx.coroutines/-cyclic-barrier/index.html)
 is a synchronization mechanism that allows a set of coroutines to wait for each
 other to reach a certain point before continuing execution. It is called _cyclic_
 because it can be reused after all coroutines have reached the barrier and been released.

@@ -125,7 +125,7 @@ Fibonacci is a pure function, in other words, given the same argument we always
 obtain the same result. This means that once we've computed a value, we can just
 _record_ in some cache, so later invocations only have to look there. This
 technique is known as **memoization**, and Arrow provides an implementation
-in the form of [`memoize`](https://arrow-kt.github.io/arrow/arrow-core/arrow.core/memoize.html).
+in the form of [`memoize`](https://apidocs.arrow-kt.io/arrow-core/arrow.core/memoize.html).
 
 ```kotlin
 import arrow.core.memoize

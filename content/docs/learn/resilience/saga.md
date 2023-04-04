@@ -26,12 +26,12 @@ in _Cloud Design Patterns_.
 import io.kotest.matchers.shouldBe
 -->
 
-Arrow Resilience provides the [`saga`](https://arrow-kt.github.io/arrow/arrow-resilience/arrow.resilience/saga.html)
+Arrow Resilience provides the [`saga`](https://apidocs.arrow-kt.io/arrow-resilience/arrow.resilience/saga.html)
 function, which creates a new scope where compensating actions can be declared
 alongside the action to perform. This is done by the [`saga` function in
-`SagaScope`](https://arrow-kt.github.io/arrow/arrow-resilience/arrow.resilience/-saga-scope/saga.html).
+`SagaScope`](https://apidocs.arrow-kt.io/arrow-resilience/arrow.resilience/-saga-scope/saga.html).
 The resulting `Saga<A>` doesn't perform any actions, though; you need to call
-[`transact`](https://arrow-kt.github.io/arrow/arrow-resilience/arrow.resilience/transact.html)
+[`transact`](https://apidocs.arrow-kt.io/arrow-resilience/arrow.resilience/transact.html)
 to keep the chain going.
 
 Let's use a small counter as an example, which we implement using the

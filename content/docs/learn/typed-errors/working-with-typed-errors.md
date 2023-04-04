@@ -419,7 +419,7 @@ However, you might want to be more defensive when interacting with improperly de
 Let's look at an example where we interact with a database and want to insert a new user. If the user already exists, we want to return a _logical failure_ of `UserAlreadyExists`. Otherwise, we want to return the newly created user.
 We again showcase both the code for `Either` and `Raise` based computation and see that both are almost the same.
 
-The `catch` DSL allows us to wrap foreign functions and capture any `Throwable` or `T: Throwable` that might be thrown. It automatically avoids capturing [fatal exceptions](https://arrow-kt.github.io/arrow/arrow-core/arrow.core/-non-fatal.html) such as `OutOfMemoryError`, or Kotlin's `CancellationException`.
+The `catch` DSL allows us to wrap foreign functions and capture any `Throwable` or `T: Throwable` that might be thrown. It automatically avoids capturing [fatal exceptions](https://apidocs.arrow-kt.io/arrow-core/arrow.core/-non-fatal.html) such as `OutOfMemoryError`, or Kotlin's `CancellationException`.
 It requires two functions, or lambdas, as arguments: One for wrapping our _foreign code_ and another for resolving the captured `Throwable` or `T : Throwable`. In this case, instead of providing a fallback value, we `raise` a _logical failure_.
 
 We expect `SQLException` since we only _expect_ it to be thrown and rethrow any other `Throwable`.

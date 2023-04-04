@@ -16,8 +16,8 @@ import arrow.core.right
 import arrow.core.Either
 -->
 
-Both [`Either<E, A>`](https://arrow-kt.github.io/arrow/arrow-core/arrow.core/-either/index.html)
-and [`Ior<E, A>`](https://arrow-kt.github.io/arrow/arrow-core/arrow.core/-ior/index.html)
+Both [`Either<E, A>`](https://apidocs.arrow-kt.io/arrow-core/arrow.core/-either/index.html)
+and [`Ior<E, A>`](https://apidocs.arrow-kt.io/arrow-core/arrow.core/-ior/index.html)
 hold values that may be of type `E` or `A`.
 By convention, the type `E` represents _errors_ and the type `A` represents
 _success_. For example, `Either<DbError, User>` could be a good result type for
@@ -133,7 +133,7 @@ but replacing `Result` with `Either`.
 The rest of the API closely follows the one from [typed errors](../../typed-errors/).
 For example, you can call `recover` or `zipOrAccumulate` directly on `Either`
 without the need for an additional `either { }` block. One potentially useful
-function not part of builders is [`mapLeft`](https://arrow-kt.github.io/arrow/arrow-core/arrow.core/-either/map-left.html), 
+function not part of builders is [`mapLeft`](https://apidocs.arrow-kt.io/arrow-core/arrow.core/-either/map-left.html), 
 which applies a function when the value represents an error. This scenario often
 arises when your code has a hierarchy of different error types.
 
@@ -155,8 +155,8 @@ arising in a piece of code.
   whose failure is _independent_ of each other.
 
 By default, an `either` block follows the first approach. If you want to accumulate
-errors instead, you should use [`zipOrAccumulate`](https://arrow-kt.github.io/arrow/arrow-core/arrow.core/-either/-companion/zip-or-accumulate.html),
-or [`mapOrAccumulate`](https://arrow-kt.github.io/arrow/arrow-core/arrow.core/map-or-accumulate.html).
+errors instead, you should use [`zipOrAccumulate`](https://apidocs.arrow-kt.io/arrow-core/arrow.core/-either/-companion/zip-or-accumulate.html),
+or [`mapOrAccumulate`](https://apidocs.arrow-kt.io/arrow-core/arrow.core/map-or-accumulate.html).
 The difference is that the former takes the different computations as arguments,
 and they can return different types, whereas the latter applies the same computation
 uniformly to elements of an `Iterable`.
