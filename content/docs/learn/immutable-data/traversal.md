@@ -97,7 +97,7 @@ to _check_ that our usage is correct.
 The counterpart to `get` and `getOrNull` when speaking about traversals is called
 `getAll`, and returns a list of focused elements. But you don't always have to 
 go through an intermediate list to obtain information about the elements focused
-by a `Traversal`, we provide a [large API](https://arrow-kt.github.io/arrow/arrow-optics/arrow.optics/-getter/index.html)
+by a `Traversal`, we provide a [large API](https://apidocs.arrow-kt.io/arrow-optics/arrow.optics/-getter/index.html)
 based on Kotlin's collections in the standard library.
 
 For example, you can call `isEmpty` to check whether the traversal matches any

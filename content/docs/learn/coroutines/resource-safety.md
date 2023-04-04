@@ -201,7 +201,7 @@ to release as expected.
 
 If you're running on the JVM, Arrow provides built-in integration with
 [`AutoCloseable`](https://docs.oracle.com/javase/8/docs/api/java/lang/AutoCloseable.html)
-in the form of the [`closeable`](https://arrow-kt.github.io/arrow/arrow-fx-coroutines/arrow.fx.coroutines/closeable.html) function.
+in the form of the [`closeable`](https://apidocs.arrow-kt.io/arrow-fx-coroutines/arrow.fx.coroutines/closeable.html) function.
 
 ### Using `Resource`
 

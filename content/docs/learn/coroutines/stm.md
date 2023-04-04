@@ -21,7 +21,7 @@ For further information, you can read [_Composable memory transactions_](https:/
 
 Those values that live under the umbrella of STM must be defined as `TVar`s
 (short for _transactional variable_).
-You can think of a [`TVar<A>`](https://arrow-kt.github.io/arrow/arrow-fx-stm/arrow.fx.stm/-t-var/index.html) as a variable holding values of type `A`, but where
+You can think of a [`TVar<A>`](https://apidocs.arrow-kt.io/arrow-fx-stm/arrow.fx.stm/-t-var/index.html) as a variable holding values of type `A`, but where
 concurrent modification is protected.
 `TVar`s are not the only transactional data structure (more on that later),
 but in any case, to modify one, you need to be _inside_ the
@@ -31,7 +31,7 @@ with such a receiver.
 
 By itself, a function using `STM` as a receiver does _not_ perform any computations.
 We say it's just a _description_ of a transaction. Running a transaction is then
-done using [`atomically`](https://arrow-kt.github.io/arrow/arrow-fx-stm/arrow.fx.stm/atomically.html).
+done using [`atomically`](https://apidocs.arrow-kt.io/arrow-fx-stm/arrow.fx.stm/atomically.html).
 
 The example below shows a banking service moving money from one account to another with STM.
 Should the first account not have enough money, we throw an exception. This code is guaranteed never to deadlock and to never
@@ -92,11 +92,11 @@ and we'll never observe an intermediate state.
 
 The following types are built upon `TVar`s and provided out of the box with Arrow:
 
-- [`TQueue`](https://arrow-kt.github.io/arrow/arrow-fx-stm/arrow.fx.stm/-t-queue/index.html): transactional mutable queue,
-- [`TMVar`](https://arrow-kt.github.io/arrow/arrow-fx-stm/arrow.fx.stm/-t-m-var/index.html): mutable transactional variable that may be empty,
-- [`TSet`](https://arrow-kt.github.io/arrow/arrow-fx-stm/arrow.fx.stm/-t-set/index.html), [`TMap`](https://arrow-kt.github.io/arrow/arrow-fx-stm/arrow.fx.stm/-t-map/index.html): transactional `Set` and `Map`,
-- [`TArray`](https://arrow-kt.github.io/arrow/arrow-fx-stm/arrow.fx.stm/-t-array/index.html): array of `TVar`s,
-- [`TSemaphore`](https://arrow-kt.github.io/arrow/arrow-fx-stm/arrow.fx.stm/-t-semaphore/index.html): transactional semaphore.
+- [`TQueue`](https://apidocs.arrow-kt.io/arrow-fx-stm/arrow.fx.stm/-t-queue/index.html): transactional mutable queue,
+- [`TMVar`](https://apidocs.arrow-kt.io/arrow-fx-stm/arrow.fx.stm/-t-m-var/index.html): mutable transactional variable that may be empty,
+- [`TSet`](https://apidocs.arrow-kt.io/arrow-fx-stm/arrow.fx.stm/-t-set/index.html), [`TMap`](https://apidocs.arrow-kt.io/arrow-fx-stm/arrow.fx.stm/-t-map/index.html): transactional `Set` and `Map`,
+- [`TArray`](https://apidocs.arrow-kt.io/arrow-fx-stm/arrow.fx.stm/-t-array/index.html): array of `TVar`s,
+- [`TSemaphore`](https://apidocs.arrow-kt.io/arrow-fx-stm/arrow.fx.stm/-t-semaphore/index.html): transactional semaphore.
 
 :::tip
 
@@ -188,7 +188,7 @@ has side effects inside.
 ###  Branching
 
 The counterpart to `retry` is `orElse`, which allows detecting if a branch 
-has called [retry](https://arrow-kt.github.io/arrow/arrow-fx-stm/arrow.fx.stm/-s-t-m/retry.html) and then use a fallback instead. If the fallback retries as 
+has called [retry](https://apidocs.arrow-kt.io/arrow-fx-stm/arrow.fx.stm/-s-t-m/retry.html) and then use a fallback instead. If the fallback retries as 
 well, then the whole transaction retries.
 
 In the example below, we use `orElse` to return `null` whenever the `check`

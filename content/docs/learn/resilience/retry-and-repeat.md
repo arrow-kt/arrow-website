@@ -19,18 +19,18 @@ in _Cloud Design Patterns_.
 :::
 
 
-[`Schedule`](https://arrow-kt.github.io/arrow/arrow-resilience/arrow.resilience/-schedule/index.html)
+[`Schedule`](https://apidocs.arrow-kt.io/arrow-resilience/arrow.resilience/-schedule/index.html)
 allows you to define and compose powerful yet simple policies. There are two
 steps involved in using `Schedule`.
 
 1. First, we need to **construct** a policy, which specifies the amount and the
    delay in repetition.
 2. Then we **run** this schedule with a specified action. There are two ways to do so:
-   - [`retry`](https://arrow-kt.github.io/arrow/arrow-resilience/arrow.resilience/retry.html)
+   - [`retry`](https://apidocs.arrow-kt.io/arrow-resilience/arrow.resilience/retry.html)
      executes the action once, and if it fails, it is reattempted based
      on the scheduling policy. It stops when the action succeeds or when the policy 
      determines it should not be reattempted again.
-   - [`repeat`](https://arrow-kt.github.io/arrow/arrow-resilience/arrow.resilience/-schedule/repeat.html)
+   - [`repeat`](https://apidocs.arrow-kt.io/arrow-resilience/arrow.resilience/-schedule/repeat.html)
      executes the action, and if it succeeds, keeps executing it again based on
      the scheduling policy passed as an argument. It stops if the action 
      fails or the policy determines it should not be executed again. 
@@ -50,7 +50,7 @@ import io.kotest.matchers.shouldBe
 -->
 
 Scheduling policies are constructed using the methods in [`Schedule`'s
-companion object](https://arrow-kt.github.io/arrow/arrow-resilience/arrow.resilience/-schedule/-companion/index.html).
+companion object](https://apidocs.arrow-kt.io/arrow-resilience/arrow.resilience/-schedule/-companion/index.html).
 Schedule policies also return values on each step, which can be used to
 take decisions based on previous values.
 
@@ -108,8 +108,8 @@ suspend fun example(): Unit {
 <!--- TEST assert -->
 
 Notice that we did not handle the error case. There are overloads 
-[`repeatOrElse`](https://arrow-kt.github.io/arrow/arrow-resilience/arrow.resilience/-schedule/repeat-or-else.html)
-and [`repeatOrElseEither`](https://arrow-kt.github.io/arrow/arrow-resilience/arrow.resilience/-schedule/repeat-or-else-either.html)
+[`repeatOrElse`](https://apidocs.arrow-kt.io/arrow-resilience/arrow.resilience/-schedule/repeat-or-else.html)
+and [`repeatOrElseEither`](https://apidocs.arrow-kt.io/arrow-resilience/arrow.resilience/-schedule/repeat-or-else-either.html)
 offering that capability. Repeat will just rethrow any error encountered.
 
 ### Collecting values
@@ -122,9 +122,9 @@ But we have three other possibilities:
 - Keep all intermediate results.
 
 To discard the values provided by the repetition of the action, we combine our 
-policy with [`Schedule.unit`](https://arrow-kt.github.io/arrow/arrow-resilience/arrow.resilience/-schedule/-companion/unit.html), 
-using the [`zipLeft`](https://arrow-kt.github.io/arrow/arrow-resilience/arrow.resilience/-schedule/zip-left.html)
-or [`zipRight`](https://arrow-kt.github.io/arrow/arrow-resilience/arrow.resilience/-schedule/zip-right.html)
+policy with [`Schedule.unit`](https://apidocs.arrow-kt.io/arrow-resilience/arrow.resilience/-schedule/-companion/unit.html), 
+using the [`zipLeft`](https://apidocs.arrow-kt.io/arrow-resilience/arrow.resilience/-schedule/zip-left.html)
+or [`zipRight`](https://apidocs.arrow-kt.io/arrow-resilience/arrow.resilience/-schedule/zip-right.html)
 combinators, which keep just the output of one of the policies:
 
 ```kotlin
@@ -146,7 +146,7 @@ suspend fun example(): Unit {
 <!--- KNIT example-schedule-05.kt -->
 <!--- TEST assert -->
 
-Following the same strategy, we can zip it with the [`Schedule.identity`](https://arrow-kt.github.io/arrow/arrow-resilience/arrow.resilience/-schedule/-companion/identity.html) 
+Following the same strategy, we can zip it with the [`Schedule.identity`](https://apidocs.arrow-kt.io/arrow-resilience/arrow.resilience/-schedule/-companion/identity.html) 
 policy to keep only the last result of the action.
 
 ```kotlin
@@ -164,7 +164,7 @@ suspend fun example(): Unit {
 <!--- TEST assert -->
 
 Finally, if we want to keep all intermediate results, we can zip the policy with
-[`Schedule.collect`](https://arrow-kt.github.io/arrow/arrow-resilience/arrow.resilience/-schedule/-companion/collect.html).
+[`Schedule.collect`](https://apidocs.arrow-kt.io/arrow-resilience/arrow.resilience/-schedule/-companion/collect.html).
 
 ```kotlin
 suspend fun example(): Unit {
@@ -183,8 +183,8 @@ suspend fun example(): Unit {
 
 ### Until/while it produces a certain value
 
-We can make use of the policies [`doWhile`](https://arrow-kt.github.io/arrow/arrow-resilience/arrow.resilience/-schedule/-companion/do-while.html)
-and [`doUntil`](https://arrow-kt.github.io/arrow/arrow-resilience/arrow.resilience/-schedule/-companion/do-until.html) 
+We can make use of the policies [`doWhile`](https://apidocs.arrow-kt.io/arrow-resilience/arrow.resilience/-schedule/-companion/do-while.html)
+and [`doUntil`](https://apidocs.arrow-kt.io/arrow-resilience/arrow.resilience/-schedule/-companion/do-until.html) 
 to repeat an action while or until its produced result matches a given predicate.
 
 ```kotlin
