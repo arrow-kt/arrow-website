@@ -78,7 +78,7 @@ const createConfig = async () => {
     themeConfig:
       /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
       ({
-        image: '/img/docusaurus-social-card.jpg',
+        image: '/img/social-card.jpg',
         colorMode: {
           defaultMode: 'light',
           disableSwitch: true,
