@@ -57,7 +57,7 @@ export default function Home(): JSX.Element {
           className={`container text--center ${styles.textContainer} ${styles.verticalRhythm}`}>
           <h1>What the community says</h1>
           <p>
-            {/* Pending to add a brief introduction for testimonials */}
+            Read reviews about Arrow from the community and its practitioners
           </p>
         </section>
         <section
