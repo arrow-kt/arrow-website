@@ -59,20 +59,20 @@ quotes:
     body: This week, I'm into sharing things that made my life as an Android developer with Kotlin easier. In my opinion, functional programming is an awesome paradigm and can be a first-class citizen in Kotlin. [..] Arrow is a "Functional companion to Kotlin's Standard Library" and provides the core constructs from the FP world to get you started.
 
 navs:
-  - title: Support
-    href: /community/support
-    icon: icon-support.svg
-    body: Lorem ipsum dolor sit amet, consectetur adipiscing eliorem ipsum dolor sit amet
-
-  - title: Blog
-    href: /community/blog
-    icon: icon-blog.svg
-    body: Lorem ipsum dolor sit amet, consectetur adipiscing eliorem ipsum dolor sit amet
-
-  - title: Events
-    href: /community/events
-    icon: icon-events.svg
-    body: Lorem ipsum dolor sit amet, consectetur adipiscing eliorem ipsum dolor sit amet
+#  - title: Support
+#    href: /community/support
+#    icon: icon-support.svg
+#    body: Lorem ipsum dolor sit amet, consectetur adipiscing eliorem ipsum dolor sit amet
+#
+#  - title: Blog
+#    href: /community/blog
+#    icon: icon-blog.svg
+#    body: Lorem ipsum dolor sit amet, consectetur adipiscing eliorem ipsum dolor sit amet
+#
+#  - title: Events
+#    href: /community/events
+#    icon: icon-events.svg
+#    body: Lorem ipsum dolor sit amet, consectetur adipiscing eliorem ipsum dolor sit amet
 
 companies:
 #  - name: Verizon

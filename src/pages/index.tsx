@@ -68,7 +68,7 @@ export default function Home(): JSX.Element {
         </section>
         <section
           className={`container ${styles.navigationContainer} ${styles.verticalRhythm}`}>
-          {data.navs.map((nav: LinkCardProps) => (
+          {data.navs?.map((nav: LinkCardProps) => (
             <BorderlessCard key={nav.title} {...nav} />
           ))}
         </section>
