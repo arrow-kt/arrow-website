@@ -138,8 +138,24 @@ table {
   margin-top: -1rem;
 }
 
-/* Collapsible ToC */ 
+/* Collapsible ToC */
+.theme-doc-toc-mobile[class*='tocCollapsible'] {
+  background-color: var(--ifm-color-primary-lightest);
+}
 
+.theme-doc-toc-mobile [class*='tocCollapsibleButton'] {
+  font-weight: 500;
+}
+
+.theme-doc-toc-mobile[class*='tocCollapsible'] ul.table-of-contents {
+  border: none;
+  font-size: 0.85rem;
+  padding: 0 0 0.3rem 0;
+}
+
+.theme-doc-toc-mobile[class*='tocCollapsible'] ul.table-of-contents li {
+  margin: calc(var(--ifm-spacing-vertical) / 2) 0.8rem;
+}
 
 /* Pagination bottom buttons not needed */
 .plugin-docs .pagination-nav {
@@ -310,4 +326,8 @@ code {
 
 .menu__list-item:not(:first-child) {
   margin-top: 0;
+}
+
+.theme-back-to-top-button.theme-back-to-top-button::after {
+  background-color: var(--ifm-color-primary-darkest);
 }
