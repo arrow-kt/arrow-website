@@ -93,7 +93,7 @@ table {
 
 /* Navbar sidebar */
 .navbar-sidebar__item {
-  padding: 0
+  padding: 0;
 }
 
 .navbar-sidebar__back {
@@ -267,13 +267,20 @@ code {
   color: var(--ifm-menu-color);
 }
 
+/*
+ * The .menu__link--active class duplication is a subtle trick to increase the
+ * specificity of this selector, as it would clash with an infima styling otherwise.
+ * CSS injection order is affecting this. But it doesn't seem like is an easy task to solve.
+ * More info:
+ *
+ * https://github.com/facebook/docusaurus/issues/3678
+ */
 .plugin-docs
   .theme-doc-sidebar-container
   .menu__list-item-collapsible--active
-  .menu__link--active {
+  .menu__link--active.menu__link--active {
   color: var(--ifm-menu-color-active);
 }
-
 
 .menu__list-item-collapsible {
   border-radius: var(--ifm-global-radius);
@@ -287,21 +294,6 @@ code {
 .menu__list-item-collapsible--active .menu__caret::before {
   filter: invert(100%);
 }
-
-/* TODO: Adapt these styles for narrow-window versions */
-/* .menu__list-item-collapsible--active .menu__caret::before,
-.menu__link--active ~ .menu__caret::before {
-  filter: invert(100%);
-}
-
-.menu__link--active ~ .menu__caret {
-  background: var(--ifm-menu-color-background-active);
-}
-
-.menu__list-item-collapsible:not(.menu__list-item-collapsible--active)
-  .menu__link--active {
-  background: var(--ifm-menu-color-background-active) !important;
-} */
 
 .menu__caret {
   border-radius: var(--ifm-global-radius);
