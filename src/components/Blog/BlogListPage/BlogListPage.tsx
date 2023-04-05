@@ -76,12 +76,8 @@ function BlogListPageContent(props: Props): JSX.Element {
         <section
           className={`margin-top--md margin-bottom--md ${styles.linksContainer}`}>
           <Link href="/community/blog/archive">Archive</Link>
-          <Link href="https://arrow-kt.io/community/blog/atom.xml">
-            Atom feed
-          </Link>
-          <Link href="https://arrow-kt.io/community/blog/rss.xml">
-            RSS feed
-          </Link>
+          <Link href="/community/blog/atom.xml">Atom feed</Link>
+          <Link href="/community/blog/rss.xml">RSS feed</Link>
         </section>
       </main>
     </Layout>
