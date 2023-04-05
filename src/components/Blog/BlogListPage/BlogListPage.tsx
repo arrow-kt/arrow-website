@@ -1,5 +1,6 @@
 import React from 'react';
 
+import Link from '@docusaurus/Link';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import {
   PageMetadata,
@@ -71,6 +72,16 @@ function BlogListPageContent(props: Props): JSX.Element {
         </section>
         <section>
           <Banner title={data.banner.title} ctaList={data.banner.ctaList} />
+        </section>
+        <section
+          className={`margin-top--md margin-bottom--md ${styles.linksContainer}`}>
+          <Link href="/community/blog/archive">Archive</Link>
+          <Link href="https://arrow-kt.io/community/blog/atom.xml">
+            Atom feed
+          </Link>
+          <Link href="https://arrow-kt.io/community/blog/rss.xml">
+            RSS feed
+          </Link>
         </section>
       </main>
     </Layout>
