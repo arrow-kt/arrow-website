@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkarrow_website=self.webpackChunkarrow_website||[]).push([[257],{94944:e=>{e.exports=JSON.parse('{"permalink":"/community/blog/tags/core/page/2","page":2,"postsPerPage":8,"totalPages":10,"totalCount":74,"previousPage":"/community/blog/tags/core","nextPage":"/community/blog/tags/core/page/3","blogDescription":"Blog","blogTitle":"Blog"}')}}]);

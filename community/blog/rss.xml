@@ -4,10 +4,20 @@
         <title>Arrow Blog</title>
         <link>https://arrow-kt.io/community/blog</link>
         <description>Arrow Blog</description>
-        <lastBuildDate>Sat, 04 Feb 2023 00:00:00 GMT</lastBuildDate>
+        <lastBuildDate>Tue, 04 Apr 2023 00:00:00 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
         <generator>https://github.com/jpmonette/feed</generator>
         <language>en</language>
+        <item>
+            <title><![CDATA[Arrow 1.2.0-RC Release Summary]]></title>
+            <link>https://arrow-kt.io/community/blog/2023/04/04/arrow-1-2-0-rc-summary</link>
+            <guid>https://arrow-kt.io/community/blog/2023/04/04/arrow-1-2-0-rc-summary</guid>
+            <pubDate>Tue, 04 Apr 2023 00:00:00 GMT</pubDate>
+            <description><![CDATA[We're excited to announce Arrow 1.2.0-RC alongside a new Arrow website. To briefly summarize, this release:]]></description>
+            <content:encoded><![CDATA[<p>We're excited to announce Arrow 1.2.0-RC alongside a new Arrow website. To briefly summarize, this release:</p><ul><li>Introduces a brand new <a href="http://arrow-kt.io/learn/typed-errors/working-with-typed-errors/" target="_blank" rel="noopener noreferrer">typed errors</a> module.</li><li>Adds more options for <a href="http://arrow-kt.io/learn/resilience/" target="_blank" rel="noopener noreferrer">resilience</a>.</li><li>Marks every function and type we intend to remove in 2.0 as <code>@Deprecated</code>.</li></ul><p>Read more details in the full <a href="https://xebia.com/blog/arrow-1-2-0-rc-is-now-available/" target="_blank" rel="noopener noreferrer">Arrow 1.2.0 release announcement</a>.</p>]]></content:encoded>
+            <category>core</category>
+            <category>articles</category>
+        </item>
         <item>
             <title><![CDATA[Functional Fun in Kotlin]]></title>
             <link>https://arrow-kt.io/community/blog/2023/02/04/functional-fun-kotlin</link>

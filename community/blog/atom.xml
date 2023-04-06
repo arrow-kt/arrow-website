@@ -2,11 +2,21 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://arrow-kt.io/community/blog</id>
     <title>Arrow Blog</title>
-    <updated>2023-02-04T00:00:00.000Z</updated>
+    <updated>2023-04-04T00:00:00.000Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://arrow-kt.io/community/blog"/>
     <subtitle>Arrow Blog</subtitle>
     <icon>https://arrow-kt.io/img/arrow-brand-icon.svg</icon>
+    <entry>
+        <title type="html"><![CDATA[Arrow 1.2.0-RC Release Summary]]></title>
+        <id>https://arrow-kt.io/community/blog/2023/04/04/arrow-1-2-0-rc-summary</id>
+        <link href="https://arrow-kt.io/community/blog/2023/04/04/arrow-1-2-0-rc-summary"/>
+        <updated>2023-04-04T00:00:00.000Z</updated>
+        <summary type="html"><![CDATA[We're excited to announce Arrow 1.2.0-RC alongside a new Arrow website. To briefly summarize, this release:]]></summary>
+        <content type="html"><![CDATA[<p>We're excited to announce Arrow 1.2.0-RC alongside a new Arrow website. To briefly summarize, this release:</p><ul><li>Introduces a brand new <a href="http://arrow-kt.io/learn/typed-errors/working-with-typed-errors/" target="_blank" rel="noopener noreferrer">typed errors</a> module.</li><li>Adds more options for <a href="http://arrow-kt.io/learn/resilience/" target="_blank" rel="noopener noreferrer">resilience</a>.</li><li>Marks every function and type we intend to remove in 2.0 as <code>@Deprecated</code>.</li></ul><p>Read more details in the full <a href="https://xebia.com/blog/arrow-1-2-0-rc-is-now-available/" target="_blank" rel="noopener noreferrer">Arrow 1.2.0 release announcement</a>.</p>]]></content>
+        <category label="core" term="core"/>
+        <category label="articles" term="articles"/>
+    </entry>
     <entry>
         <title type="html"><![CDATA[Functional Fun in Kotlin]]></title>
         <id>https://arrow-kt.io/community/blog/2023/02/04/functional-fun-kotlin</id>
