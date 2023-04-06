@@ -33,7 +33,7 @@ export default function Home(): JSX.Element {
           </p>
         </section>
         <section
-          className={`container ${styles.featuresContainer} ${styles.verticalRhythm}`}>
+          className={`${styles.featuresContainer} ${styles.verticalRhythm}`}>
           {data.features.map((feature: LinkCardProps) => (
             <LinkCard key={feature.title} {...feature} />
           ))}
@@ -46,7 +46,7 @@ export default function Home(): JSX.Element {
           </p>
         </section>
         <section
-          className={`container ${styles.quotesContainer} ${styles.verticalRhythm}`}>
+          className={`${styles.quotesContainer} ${styles.verticalRhythm}`}>
           {data.quotes?.map((quote: QuoteCardProps) => (
             <QuoteCard key={quote.name} {...quote} />
           ))}

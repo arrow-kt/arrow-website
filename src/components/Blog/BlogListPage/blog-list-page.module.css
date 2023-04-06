@@ -2,6 +2,15 @@
   margin-bottom: calc(2 * var(--ifm-spacing-vertical));
 }
 
+.linksContainer {
+  composes: container from global;
+  composes: text--center from global;
+  font-size: 0.8rem;
+  display: flex;
+  justify-content: center;
+  gap: var(--ifm-spacing-horizontal);
+}
+
 .projectsContainer {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;

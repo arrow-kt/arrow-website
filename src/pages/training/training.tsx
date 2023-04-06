@@ -67,7 +67,7 @@ export default function Training(): JSX.Element {
           </p>
         </section>
         <section
-          className={`container ${styles.quotesContainer} ${styles.verticalRhythm}`}>
+          className={`${styles.quotesContainer} ${styles.verticalRhythm}`}>
           {data.quotes.map((quote: QuoteCardProps) => (
             <QuoteCard key={quote.name} {...quote} />
           ))}

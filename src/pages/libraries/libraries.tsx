@@ -28,7 +28,7 @@ export default function Libraries(): JSX.Element {
       />
       <main>
         <section
-          className={`container ${styles.featuresContainer} ${styles.verticalRhythm}`}>
+          className={`${styles.featuresContainer} ${styles.verticalRhythm}`}>
           {data.libraries.map((library: LinkCardProps) => (
             <LinkCard key={library.title} {...library} />
           ))}
