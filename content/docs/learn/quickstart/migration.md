@@ -71,7 +71,7 @@ You can track the progress in [rewrite-arrow](https://github.com/arrow-kt/rewrit
 <details>
 <summary>Semi-automated using KScript and IntelliJ</summary>
 
-This migration script attempts to automatically migrate `arrow.core.computations.*` and `arrow.core.continuations.*` on a best effort to `arrow.core.raise.*`.
+[This migration script](https://gist.github.com/nomisRev/e01ddc354c84b8b626c23d024706b916#file-migrate-main-kts) attempts to automatically migrate `arrow.core.computations.*` and `arrow.core.continuations.*` on a best effort to `arrow.core.raise.*`.
 It has been tested on several real-life projects with 100% success, being able to automatically migrate the entire codebase.
 
 The run this `kts` script you need `kotlinc` install on your machine.
