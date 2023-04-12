@@ -244,3 +244,59 @@ the error value, whereas in the former you can use any typed error computation.
 The result of the mapping is a `List<Author>`, that we can now use to create the
 final `Book`. This value is available in the last lambda of `zipOrAccumulate`,
 that we've called `validatedAuthors` in the code above.
+
+
+<!--- INCLUDE
+sealed interface BookValidationError
+object EmptyTitle: BookValidationError
+object NoAuthors: BookValidationError
+data class EmptyAuthor(val index: Int): BookValidationError
+
+object EmptyAuthorName
+
+data class Author private constructor(val name: String) {
+  companion object {
+    operator fun invoke(name: String): Either<EmptyAuthorName, Author> = either {
+      ensure(name.isNotEmpty()) { EmptyAuthorName }
+      Author(name)
+    }
+  }
+}
+
+data class Book private constructor(val title: String, val authors: List<Author>) {
+  companion object {
+    operator fun invoke(
+      title: String, authors: List<String>
+    ): Either<NonEmptyList<BookValidationError>, Book> = either {
+      zipOrAccumulate(
+        { ensure(title.isNotEmpty()) { EmptyTitle } },
+        { 
+          ensure(authors.isNotEmpty()) { NoAuthors }
+          authors.withIndex().mapOrAccumulate { a ->
+            Author(a.value).mapLeft { EmptyAuthor(a.index) }
+          }.bindAll()
+        }
+      ) { _, validatedAuthors ->
+        Book(title, validatedAuthors)
+      }
+    }
+  }
+}
+-->
+<!--- KNIT example-validation-08.kt -->
+
+:::info Bind All
+
+Another way to write the code above is creating a list of `Either` using
+`mapOrAccumulate`, and then using `.bindAll()` at the very end.
+
+```
+authors.withIndex().mapOrAccumulate { a ->
+  Author(a.value).mapLeft { EmptyAuthor(a.index) }
+}.bindAll()
+```
+
+This is equivalent to the code above, given that the validation function
+doesn't perform any side effects.
+
+:::
