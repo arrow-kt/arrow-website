@@ -300,12 +300,13 @@ Another way to write the code above is creating a list of `Either` using
 `mapOrAccumulate`, and then using `.bindAll()` at the very end.
 
 ```
-authors.withIndex().mapOrAccumulate { a ->
-  Author(a.value).mapLeft { EmptyAuthor(a.index) }
+authors.withIndex().mapOrAccumulate { nameAndIx ->
+  Author(nameAndIx.value).mapLeft { EmptyAuthor(nameAndIx.index) }
 }.bindAll()
 ```
 
-This is equivalent to the code above, given that the validation function
-doesn't perform any side effects.
+Using `.bind()` inside the `mapOrAccumulate` block, or leaving `.bindAll()`
+until the end is equivalent, given that the function that validates each of
+the elements doesn't perform any side effects.
 
 :::
