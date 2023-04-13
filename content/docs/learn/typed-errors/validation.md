@@ -169,6 +169,15 @@ trailing lambda. In this case we are not using them: we have the `title`
 already available, and for the list of authors we still need to perform the
 conversion from `String` to `Author`.
 
+:::tip Arguments to zipOrAccumulate
+
+All but the last argument to `zipOrAccumulate` represent the different
+validations we want to run aggregating their output. Those arguments are
+often _blocks_ wrapped in `{` curly braces `}`, which is a bit unusual for
+most Kotliners.
+
+:::
+
 ## Validating a list
 
 The next step is turning the given `authors`, which is a list of `String`s, into
