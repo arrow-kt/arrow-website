@@ -64,7 +64,7 @@ as their first type parameter.
 | Type | Failure | Simultaneous <br /> success and failure? | Kotlin stdlib. or Arrow? |
 |---|---------|------|---|
 | `A?` | No information | | <img src="https://upload.wikimedia.org/wikipedia/commons/3/37/Kotlin_Icon_2021.svg" style={{height: '20px'}} /> |
-| `Option<A>` | No information | | <img src="https://upload.wikimedia.org/wikipedia/commons/3/37/Kotlin_Icon_2021.svg" style={{height: '20px'}} /> |
+| `Option<A>` | No information | | <img src="/img/arrow-brand-icon.svg" style={{height: '20px'}} /> |
 | `Result<A>` | Of type `Throwable`, <br /> inspection possible at runtime | | <img src="https://upload.wikimedia.org/wikipedia/commons/3/37/Kotlin_Icon_2021.svg" style={{height: '20px'}} /> |
 | `Either<E, A>` | Of generic type `E` | | <img src="/img/arrow-brand-icon.svg" style={{height: '20px'}} /> |
 | `Ior<E, A>` | Of generic type `E` | ✔️ | <img src="/img/arrow-brand-icon.svg" style={{height: '20px'}} /> |
