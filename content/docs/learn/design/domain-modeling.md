@@ -1,8 +1,11 @@
 ---
+title: Domain modeling
 sidebar_position: 1
 ---
 
-# Domain modeling
+<head>
+  <link rel="canonical" href="https://www.47deg.com/blog/functional-domain-modeling/" />
+</head>
 
 :::note This article was originally published in the [47 Degrees blog](https://www.47deg.com/blog/functional-domain-modeling/).
 

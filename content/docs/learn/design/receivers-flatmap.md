@@ -1,8 +1,11 @@
 ---
+title: Receivers vs. flatMap
 sidebar_position: 3
 ---
 
-# Receivers vs. flatMap
+<head>
+  <link rel="canonical" href="https://xebia.com/blog/the-suspend-receivers-style-in-kotlin/" />
+</head>
 
 :::note This article was originally published at [Xebia's blog](https://xebia.com/blog/the-suspend-receivers-style-in-kotlin/). 
 
