@@ -1,21 +1,21 @@
 // This file was automatically generated from working-with-typed-errors.md by Knit tool. Do not edit.
 package arrow.website.examples.exampleTypedErrors09
 
+import arrow.core.Either
+import arrow.core.Either.Left
+import arrow.core.Either.Right
+import arrow.core.right
 import arrow.core.raise.Raise
-import arrow.core.raise.ensure
-import arrow.core.raise.recover
+import arrow.core.raise.either
+import arrow.core.raise.fold
+import io.kotest.assertions.fail
+import io.kotest.matchers.shouldBe
 
-data class User(val id: Long)
-data class UserNotFound(val message: String)
+object Problem
 
-suspend fun Raise<UserNotFound>.fetchUser(id: Long): User {
-  ensure(id > 0) { UserNotFound("Invalid id: $id") }
-  return User(id)
+val maybeTwo: Either<Problem, Int> = either { 2 }
+val maybeFive: Either<Problem, Int> = either { raise(Problem) }
+
+val maybeSeven: Either<Problem, Int> = either {
+  maybeTwo.bind() + maybeFive.bind()
 }
-
-object OtherError
-
-suspend fun Raise<OtherError>.recovery(): User =
-  recover({
-    fetchUser(-1)
-  }) { _: UserNotFound -> raise(OtherError) }

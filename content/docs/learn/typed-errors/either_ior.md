@@ -72,8 +72,8 @@ or `Ior`.
 
 ```mermaid
 graph LR;
-  raise{{"Raise<E>.() -> A"}};
-  other{{"Either<E, A> / Ior<E, A>"}};
+  raise{{"Raise&lt;E&gt;.() -> A"}};
+  other{{"Either&lt;E, A&gt; / Ior&lt;E, A&gt;"}};
   raise-->|either / ior|other;
   other-->|".bind()"|raise;
 ```

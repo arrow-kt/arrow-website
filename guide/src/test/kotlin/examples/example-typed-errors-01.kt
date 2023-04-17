@@ -17,20 +17,3 @@ data class User(val id: Long)
 val user: Either<UserNotFound, User> = User(1).right()
 
 fun Raise<UserNotFound>.user(): User = User(1)
-
-val res = either { user() }
-
-fun Raise<UserNotFound>.res(): User = user.bind()
-
-fun example() {
-  when (res) {
-    is Left -> fail("No logical failure occurred!")
-    is Right -> res.value shouldBe User(1)
-  }
-
-  fold(
-    block = { res() },
-    recover = { _: UserNotFound -> fail("No logical failure occurred!") },
-    transform = { i: User -> i shouldBe User(1) }
-  )
-}

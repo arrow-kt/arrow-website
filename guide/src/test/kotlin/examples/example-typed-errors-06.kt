@@ -2,18 +2,30 @@
 package arrow.website.examples.exampleTypedErrors06
 
 import arrow.core.Either
-import arrow.core.raise.either
-import arrow.core.raise.nullable
+import arrow.core.Either.Left
+import arrow.core.Either.Right
+import arrow.core.left
+import arrow.core.raise.Raise
+import arrow.core.raise.fold
+import io.kotest.assertions.fail
+import io.kotest.matchers.shouldBe
 
-object Problem
+object UserNotFound
+data class User(val id: Long)
 
-fun problematic(n: Int): Either<Problem, Int?> =
-  either { 
-    nullable { 
-      when {
-        n < 0  -> raise(Problem)
-        n == 0 -> raise(null)
-        else   -> n
-      }
-    }
+val error: Either<UserNotFound, User> = UserNotFound.left()
+
+fun Raise<UserNotFound>.error(): User = raise(UserNotFound)
+
+fun example() {
+  when (error) {
+    is Left -> error.value shouldBe UserNotFound
+    is Right -> fail("A logical failure occurred!")
   }
+
+  fold(
+    block = { error() },
+    recover = { e: UserNotFound -> e shouldBe UserNotFound },
+    transform = { _: User -> fail("A logical failure occurred!") }
+  )
+}

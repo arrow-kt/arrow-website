@@ -6,14 +6,6 @@ import arrow.website.captureOutput
 import kotlinx.knit.test.verifyOutputLines
 
 class TypedErrorsTest : StringSpec({
-  "ExampleTypedErrors01" {
-    arrow.website.examples.exampleTypedErrors01.example()
-  }
-
-  "ExampleTypedErrors02" {
-    arrow.website.examples.exampleTypedErrors02.example()
-  }
-
   "ExampleTypedErrors03" {
     arrow.website.examples.exampleTypedErrors03.example()
   }
@@ -22,12 +14,12 @@ class TypedErrorsTest : StringSpec({
     arrow.website.examples.exampleTypedErrors05.example()
   }
 
-  "ExampleTypedErrors07" {
-    arrow.website.examples.exampleTypedErrors07.example()
+  "ExampleTypedErrors06" {
+    arrow.website.examples.exampleTypedErrors06.example()
   }
 
-  "ExampleTypedErrors08" {
-    arrow.website.examples.exampleTypedErrors08.example()
+  "ExampleTypedErrors07" {
+    arrow.website.examples.exampleTypedErrors07.example()
   }
 
   "ExampleTypedErrors11" {
@@ -38,12 +30,20 @@ class TypedErrorsTest : StringSpec({
     arrow.website.examples.exampleTypedErrors12.example()
   }
 
-  "ExampleTypedErrors14" {
-    arrow.website.examples.exampleTypedErrors14.example()
-  }
-
   "ExampleTypedErrors15" {
     arrow.website.examples.exampleTypedErrors15.example()
+  }
+
+  "ExampleTypedErrors16" {
+    arrow.website.examples.exampleTypedErrors16.example()
+  }
+
+  "ExampleTypedErrors18" {
+    arrow.website.examples.exampleTypedErrors18.example()
+  }
+
+  "ExampleTypedErrors19" {
+    arrow.website.examples.exampleTypedErrors19.example()
   }
 
 }) {

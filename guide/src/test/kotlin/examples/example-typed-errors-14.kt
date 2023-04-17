@@ -2,26 +2,30 @@
 package arrow.website.examples.exampleTypedErrors14
 
 import arrow.core.Either
-import arrow.core.Either.Left
-import arrow.core.raise.either
-import arrow.core.raise.ensure
-import io.kotest.matchers.shouldBe
+import arrow.core.raise.catch
+import arrow.core.raise.Raise
+import java.sql.SQLException
 
-sealed interface UserProblem {
-  object EmptyName: UserProblem
-  data class NegativeAge(val age: Int): UserProblem
+object UsersQueries {
+  fun insert(username: String, email: String): Long = 1L
 }
 
-data class User private constructor(val name: String, val age: Int) {
-  companion object {
-    operator fun invoke(name: String, age: Int): Either<UserProblem, User> = either {
-      ensure(name.isNotEmpty()) { UserProblem.EmptyName }
-      ensure(age >= 0) { UserProblem.NegativeAge(age) }
-      User(name, age)
-    }
+fun SQLException.isUniqueViolation(): Boolean = true
+
+data class UserAlreadyExists(val username: String, val email: String)
+
+suspend fun Raise<UserAlreadyExists>.insertUser(username: String, email: String): Long =
+  catch({
+    UsersQueries.insert(username, email)
+  }) { e: SQLException ->
+    if (e.isUniqueViolation()) raise(UserAlreadyExists(username, email))
+    else throw e
   }
-}
 
-fun example() {
-  User("", -1) shouldBe Left(UserProblem.EmptyName)
-}
+suspend fun insertUser(username: String, email: String): Either<UserAlreadyExists, Long> =
+  Either.catchOrThrow<SQLException, Long> {
+    UsersQueries.insert(username, email)
+  }.mapLeft { e ->
+    if (e.isUniqueViolation()) UserAlreadyExists(username, email)
+    else throw e
+  }
