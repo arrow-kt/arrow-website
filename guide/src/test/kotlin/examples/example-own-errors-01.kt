@@ -1,5 +1,5 @@
-// This file was automatically generated from working-with-typed-errors.md by Knit tool. Do not edit.
-package arrow.website.examples.exampleTypedErrors16
+// This file was automatically generated from own-error-types.md by Knit tool. Do not edit.
+package arrow.website.examples.exampleOwnErrors01
 
 import arrow.core.raise.Raise
 import arrow.core.raise.ensure

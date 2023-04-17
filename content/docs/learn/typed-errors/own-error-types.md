@@ -5,6 +5,8 @@ sidebar_position: 5
 
 # Creating your own error wrappers
 
+<!--- TEST_NAME OwnErrorsTest -->
+
 `Raise` is a powerful tool that allows us to create our own DSLs to raise typed errors.
 It easily allows integration with existing libraries and frameworks that offer similar data types like `Either` or even your own custom types.
 For example, let's take a popular ADT often used in the front end, a type that models `Loading`, `Content`, or `Failure`, often abbreviated as `LCE`.
@@ -69,7 +71,7 @@ fun example() {
   } shouldBe Lce.Failure("a is not greater than 1")
 }
 ```
-<!--- KNIT example-typed-errors-16.kt -->
+<!--- KNIT example-own-errors-01.kt -->
 <!--- TEST assert -->
 
 If we'd used _context receivers_, defining this DSL would be even more straightforward, and we could use the `Raise` type class directly.

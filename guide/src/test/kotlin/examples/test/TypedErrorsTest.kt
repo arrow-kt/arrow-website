@@ -46,10 +46,6 @@ class TypedErrorsTest : StringSpec({
     arrow.website.examples.exampleTypedErrors15.example()
   }
 
-  "ExampleTypedErrors16" {
-    arrow.website.examples.exampleTypedErrors16.example()
-  }
-
 }) {
   override fun timeout(): Long = 1000
 }
