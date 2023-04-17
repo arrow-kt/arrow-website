@@ -5,8 +5,9 @@ import arrow.core.left
 import arrow.core.right
 import arrow.core.Either
 import arrow.core.NonEmptyList
+import arrow.core.toNonEmptyListOrNull
 import arrow.core.recover
 import arrow.core.raise.*
 
 data class Author(val name: String)
-data class Book(val title: String, val authors: List<Author>)
+data class Book(val title: String, val authors: NonEmptyList<Author>)

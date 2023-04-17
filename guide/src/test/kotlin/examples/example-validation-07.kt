@@ -5,6 +5,7 @@ import arrow.core.left
 import arrow.core.right
 import arrow.core.Either
 import arrow.core.NonEmptyList
+import arrow.core.toNonEmptyListOrNull
 import arrow.core.recover
 import arrow.core.raise.*
 
@@ -24,23 +25,25 @@ data class Author private constructor(val name: String) {
   }
 }
 
-data class Book private constructor(val title: String, val authors: List<Author>) {
+data class Book private constructor(
+  val title: String, val authors: NonEmptyList<Author>
+) {
   companion object {
     operator fun invoke(
-      title: String, authors: List<String>
+      title: String, authors: Iterable<String>
     ): Either<NonEmptyList<BookValidationError>, Book> = either {
       zipOrAccumulate(
         { ensure(title.isNotEmpty()) { EmptyTitle } },
         { 
-          ensure(authors.isNotEmpty()) { NoAuthors }
-          authors.withIndex().mapOrAccumulate {
+          val validatedAuthors = mapOrAccumulate(authors.withIndex()) {
             Author(it.value)
               .recover { _ -> raise(EmptyAuthor(it.index)) }
               .bind()
           }
+          ensureNotNull(validatedAuthors.toNonEmptyListOrNull()) { NoAuthors }
         }
-      ) { _, validatedAuthors ->
-        Book(title, validatedAuthors)
+      ) { _, authorsNel ->
+        Book(title, authorsNel)
       }
     }
   }

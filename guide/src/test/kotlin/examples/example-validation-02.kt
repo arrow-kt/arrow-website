@@ -5,6 +5,7 @@ import arrow.core.left
 import arrow.core.right
 import arrow.core.Either
 import arrow.core.NonEmptyList
+import arrow.core.toNonEmptyListOrNull
 import arrow.core.recover
 import arrow.core.raise.*
 
