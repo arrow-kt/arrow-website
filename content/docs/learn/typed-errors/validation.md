@@ -16,6 +16,7 @@ import arrow.core.Either
 import arrow.core.NonEmptyList
 import arrow.core.toNonEmptyListOrNull
 import arrow.core.recover
+import arrow.core.mapOrAccumulate
 import arrow.core.raise.*
 -->
 
@@ -265,6 +266,29 @@ The result of the mapping is a `List<Author>`, that we can now use to create the
 final `Book`. This value is available in the last lambda of `zipOrAccumulate`,
 that we've called `validatedAuthors` in the code above.
 
+### Variants of map + accumulation
+
+In the code above there's one section which can be written in several different
+ways, namely the mapping over a list while accumulating any errors raised
+during the processing of each of the elements.
+
+```
+val validatedAuthors = mapOrAccumulate(authors.withIndex()) { nameAndIx ->
+  Author(nameAndIx.value)
+    .mapLeft { EmptyAuthor(nameAndIx.index) }
+    .bind()
+}
+```
+
+This first version uses the variant of `mapOrAccumulate` which lives in
+`Raise` and takes the collection to work on as first argument. This variant
+provides `Raise` inside the block (hence the need to call `.bind()`), and
+`raise`s automatically if any error is found.
+
+Another way to write the code above is creating a list of `Either` using
+`map`, and then using `.bindAll()` at the very end. This often turns into
+simpler code when your validations use wrapper types, as we do here, since
+you don't need to call the intermediate `.bind()`.
 
 <!--- INCLUDE
 sealed interface BookValidationError
@@ -291,8 +315,9 @@ data class Book private constructor(val title: String, val authors: NonEmptyList
       zipOrAccumulate(
         { ensure(title.isNotEmpty()) { EmptyTitle } },
         { 
-          val validatedAuthors = authors.withIndex().map { a ->
-            Author(a.value).mapLeft { EmptyAuthor(a.index) }
+          val validatedAuthors = authors.withIndex().map { nameAndIx ->
+            Author(nameAndIx.value)
+              .mapLeft { EmptyAuthor(nameAndIx.index) }
           }.bindAll()
           ensureNotNull(validatedAuthors.toNonEmptyListOrNull()) { NoAuthors }
         }
@@ -303,21 +328,56 @@ data class Book private constructor(val title: String, val authors: NonEmptyList
   }
 }
 -->
-<!--- KNIT example-validation-08.kt -->
-
-:::info Bind All
-
-Another way to write the code above is creating a list of `Either` using
-`mapOrAccumulate`, and then using `.bindAll()` at the very end.
+<!--- KNIT example-validation-09.kt -->
 
 ```
-authors.withIndex().map { nameAndIx ->
-  Author(nameAndIx.value).mapLeft { EmptyAuthor(nameAndIx.index) }
+val validatedAuthors = authors.withIndex().map { nameAndIx ->
+  Author(nameAndIx.value)
+    .mapLeft { EmptyAuthor(nameAndIx.index) }
 }.bindAll()
 ```
 
-Using `.bind()` inside the `mapOrAccumulate` block, or leaving `.bindAll()`
-until the end is equivalent, given that the function that validates each of
-the elements doesn't perform any side effects.
 
-:::
+<!--- INCLUDE
+sealed interface BookValidationError
+object EmptyTitle: BookValidationError
+object NoAuthors: BookValidationError
+data class EmptyAuthor(val index: Int): BookValidationError
+
+object EmptyAuthorName
+
+data class Author private constructor(val name: String) {
+  companion object {
+    operator fun invoke(name: String): Either<EmptyAuthorName, Author> = either {
+      ensure(name.isNotEmpty()) { EmptyAuthorName }
+      Author(name)
+    }
+  }
+}
+
+data class Book private constructor(val title: String, val authors: NonEmptyList<Author>) {
+  companion object {
+    operator fun invoke(
+      title: String, authors: Iterable<String>
+    ): Either<NonEmptyList<BookValidationError>, Book> = either {
+      zipOrAccumulate<BookValidationError, Unit, NonEmptyList<Author>, Book>(
+        { ensure(title.isNotEmpty()) { EmptyTitle } },
+        { 
+          val validatedAuthors: Either<NonEmptyList<BookValidationError>, List<Author>> = either { authors.withIndex().mapOrAccumulate { nameAndIx ->
+            Author(nameAndIx.value)
+              .mapLeft { EmptyAuthor(nameAndIx.index) }
+              .bind()
+          } }
+          ensureNotNull(validatedAuthors.bindNel().toNonEmptyListOrNull()) { NoAuthors }
+        }
+      ) { _, validatedAuthors ->
+        Book(title, validatedAuthors)
+      }
+    }
+  }
+}
+-->
+<!--- KNIT example-validation-08.kt -->
+
+Any of these approaches are equivalent, given that the function that validates
+each of the elements doesn't perform any side effects.

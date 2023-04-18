@@ -7,6 +7,7 @@ import arrow.core.Either
 import arrow.core.NonEmptyList
 import arrow.core.toNonEmptyListOrNull
 import arrow.core.recover
+import arrow.core.mapOrAccumulate
 import arrow.core.raise.*
 
 sealed interface BookValidationError
@@ -30,13 +31,15 @@ data class Book private constructor(val title: String, val authors: NonEmptyList
     operator fun invoke(
       title: String, authors: Iterable<String>
     ): Either<NonEmptyList<BookValidationError>, Book> = either {
-      zipOrAccumulate(
+      zipOrAccumulate<BookValidationError, Unit, NonEmptyList<Author>, Book>(
         { ensure(title.isNotEmpty()) { EmptyTitle } },
         { 
-          val validatedAuthors = authors.withIndex().map { a ->
-            Author(a.value).mapLeft { EmptyAuthor(a.index) }
-          }.bindAll()
-          ensureNotNull(validatedAuthors.toNonEmptyListOrNull()) { NoAuthors }
+          val validatedAuthors: Either<NonEmptyList<BookValidationError>, List<Author>> = either { authors.withIndex().mapOrAccumulate { nameAndIx ->
+            Author(nameAndIx.value)
+              .mapLeft { EmptyAuthor(nameAndIx.index) }
+              .bind()
+          } }
+          ensureNotNull(validatedAuthors.bindNel().toNonEmptyListOrNull()) { NoAuthors }
         }
       ) { _, validatedAuthors ->
         Book(title, validatedAuthors)

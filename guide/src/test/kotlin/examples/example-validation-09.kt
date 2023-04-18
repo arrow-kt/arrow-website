@@ -1,5 +1,5 @@
 // This file was automatically generated from validation.md by Knit tool. Do not edit.
-package arrow.website.examples.exampleValidation07
+package arrow.website.examples.exampleValidation09
 
 import arrow.core.left
 import arrow.core.right
@@ -26,9 +26,7 @@ data class Author private constructor(val name: String) {
   }
 }
 
-data class Book private constructor(
-  val title: String, val authors: NonEmptyList<Author>
-) {
+data class Book private constructor(val title: String, val authors: NonEmptyList<Author>) {
   companion object {
     operator fun invoke(
       title: String, authors: Iterable<String>
@@ -36,15 +34,14 @@ data class Book private constructor(
       zipOrAccumulate(
         { ensure(title.isNotEmpty()) { EmptyTitle } },
         { 
-          val validatedAuthors = mapOrAccumulate(authors.withIndex()) {
-            Author(it.value)
-              .recover { _ -> raise(EmptyAuthor(it.index)) }
-              .bind()
-          }
+          val validatedAuthors = authors.withIndex().map { nameAndIx ->
+            Author(nameAndIx.value)
+              .mapLeft { EmptyAuthor(nameAndIx.index) }
+          }.bindAll()
           ensureNotNull(validatedAuthors.toNonEmptyListOrNull()) { NoAuthors }
         }
-      ) { _, authorsNel ->
-        Book(title, authorsNel)
+      ) { _, validatedAuthors ->
+        Book(title, validatedAuthors)
       }
     }
   }
