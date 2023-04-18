@@ -31,14 +31,15 @@ data class Book private constructor(val title: String, val authors: NonEmptyList
     operator fun invoke(
       title: String, authors: Iterable<String>
     ): Either<NonEmptyList<BookValidationError>, Book> = either {
-      zipOrAccumulate(
+      zipOrAccumulate<BookValidationError, Unit, NonEmptyList<Author>, Book>(
         { ensure(title.isNotEmpty()) { EmptyTitle } },
         { 
-          val validatedAuthors = authors.withIndex().map { nameAndIx ->
+          val validatedAuthors: Either<NonEmptyList<BookValidationError>, List<Author>> = either { authors.withIndex().mapOrAccumulate { nameAndIx ->
             Author(nameAndIx.value)
               .mapLeft { EmptyAuthor(nameAndIx.index) }
-          }.bindAll()
-          ensureNotNull(validatedAuthors.toNonEmptyListOrNull()) { NoAuthors }
+              .bind()
+          } }
+          ensureNotNull(validatedAuthors.bindNel().toNonEmptyListOrNull()) { NoAuthors }
         }
       ) { _, validatedAuthors ->
         Book(title, validatedAuthors)

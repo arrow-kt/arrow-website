@@ -328,7 +328,7 @@ data class Book private constructor(val title: String, val authors: NonEmptyList
   }
 }
 -->
-<!--- KNIT example-validation-09.kt -->
+<!--- KNIT example-validation-08.kt -->
 
 ```
 val validatedAuthors = authors.withIndex().map { nameAndIx ->
@@ -377,7 +377,7 @@ data class Book private constructor(val title: String, val authors: NonEmptyList
   }
 }
 -->
-<!--- KNIT example-validation-08.kt -->
+<!--- KNIT example-validation-09.kt -->
 
 Any of these approaches are equivalent, given that the function that validates
 each of the elements doesn't perform any side effects.
