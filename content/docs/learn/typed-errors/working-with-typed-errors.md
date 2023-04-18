@@ -18,6 +18,7 @@ leading to a defensive mode of error handling.
 - [_Functional Error Handling - A Practical Approach_](https://kotlindevday.com/videos/functional-error-handling-a-practical-approach-bas-de-groot/) by Bas de Groot
 - [_Exception handling in Kotlin with Arrow_](https://www.youtube.com/watch?v=ipF540mBG9w) by Ramandeep Kaur
 - [_Por qué no uso excepciones en mi código_](https://www.youtube.com/watch?v=8WdprhzmQe4) by Raúl Raja and [Codely](https://codely.com/)
+- [_Typed error handling in Kotlin_](https://medium.com/@mitchellyuwono/typed-error-handling-in-kotlin-11ff25882880) by Mitchell Yuwono
 
 :::
 
@@ -30,8 +31,9 @@ In the rest of the documentation we often refer to a few concepts related to err
 We use the term _logical failure_ to describe a situation not deemed as successful in your domain, but that it's still within the realms of that domain.
 For example, if you are implementing a repository for users, not finding a user for a certain query is a logical failure.
 
-In contrast to logical failures we have _real exceptions_, which are problems, usually technical, which do not fit in the domain.
-For example, if the connection to the database suddenly drops, or the connection credentials are wrong.
+In contrast to logical failures we have _real exceptions_, which are problems, usually technical, which are _truly exceptional_ and are thus not part of our domain.
+For example, if the connection to the database suddenly drops, or network times out, host unavailable, etcetera.
+Those cases benefit from the [resilience mechanisms](../../resilience/) provided by Arrow.
 
 :::
 
@@ -63,11 +65,11 @@ as their first type parameter.
 
 | Type | Failure | Simultaneous <br /> success and failure? | Kotlin stdlib. or Arrow? |
 |---|---------|------|---|
-| `A?` | No information | | <img src="https://upload.wikimedia.org/wikipedia/commons/3/37/Kotlin_Icon_2021.svg" style={{height: '20px'}} /> |
-| `Option<A>` | No information | | <img src="/img/arrow-brand-icon.svg" style={{height: '20px'}} /> |
-| `Result<A>` | Of type `Throwable`, <br /> inspection possible at runtime | | <img src="https://upload.wikimedia.org/wikipedia/commons/3/37/Kotlin_Icon_2021.svg" style={{height: '20px'}} /> |
-| `Either<E, A>` | Of generic type `E` | | <img src="/img/arrow-brand-icon.svg" style={{height: '20px'}} /> |
-| `Ior<E, A>` | Of generic type `E` | ✔️ | <img src="/img/arrow-brand-icon.svg" style={{height: '20px'}} /> |
+| `A?` | `null` | No | <img src="https://upload.wikimedia.org/wikipedia/commons/3/37/Kotlin_Icon_2021.svg" style={{height: '20px'}} /> |
+| `Option<A>` | `None` | No | <img src="/img/arrow-brand-icon.svg" style={{height: '20px'}} /> |
+| `Result<A>` | `Failure` contains a `Throwable`, <br /> inspection possible at runtime | No | <img src="https://upload.wikimedia.org/wikipedia/commons/3/37/Kotlin_Icon_2021.svg" style={{height: '20px'}} /> |
+| `Either<E, A>` | `Left` contains value of type `E` | No | <img src="/img/arrow-brand-icon.svg" style={{height: '20px'}} /> |
+| `Ior<E, A>` | `Left` contains value of type `E` | Yes, using `Both` | <img src="/img/arrow-brand-icon.svg" style={{height: '20px'}} /> |
 
 
 The second approach is describing errors as part of the _computation context_ of the function.
