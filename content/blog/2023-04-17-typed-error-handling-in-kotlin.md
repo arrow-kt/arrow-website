@@ -21,4 +21,4 @@ Arrow's `context(Raise<E>)` achieved the most optimized score on all aspects of
 developer productivity. This includes having the lowest cognitive complexity, the lowest cyclomatic complexity 
 as well as the most succinct with the least lines of codes.
 
-Read the full article: [Typed Error Handling in Koltin](https://medium.com/@mitchellyuwono/typed-error-handling-in-kotlin-11ff25882880).
+Read the full article: [Typed Error Handling in Kotlin](https://medium.com/@mitchellyuwono/typed-error-handling-in-kotlin-11ff25882880).
