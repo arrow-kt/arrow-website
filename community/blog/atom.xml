@@ -2,11 +2,36 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://arrow-kt.io/community/blog</id>
     <title>Arrow Blog</title>
-    <updated>2023-04-04T00:00:00.000Z</updated>
+    <updated>2023-04-17T00:00:00.000Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://arrow-kt.io/community/blog"/>
     <subtitle>Arrow Blog</subtitle>
     <icon>https://arrow-kt.io/img/arrow-brand-icon.svg</icon>
+    <entry>
+        <title type="html"><![CDATA[Typed Error Handling in Kotlin]]></title>
+        <id>https://arrow-kt.io/community/blog/2023/04/17/typed-error-handling-in-kotlin</id>
+        <link href="https://arrow-kt.io/community/blog/2023/04/17/typed-error-handling-in-kotlin"/>
+        <updated>2023-04-17T00:00:00.000Z</updated>
+        <summary type="html"><![CDATA[A comparative study about several typed-error handling practices in Kotlin.]]></summary>
+        <content type="html"><![CDATA[<p>A comparative study about several typed-error handling practices in Kotlin.</p><p>There are various approaches to error handling in the Kotlin community.
+In this article we’ve explored a small subset of typed error handling practices in the community. </p><p>From the approaches explored, there were three patterns that aligns with Kotlin recommendation with
+relatively low cognitive complexity including: Sealed class matching with early returns, Arrow's <code>either { }</code> builder,
+and Arrow's <code>context(Raise&lt;E&gt;)</code> with context-receivers. </p><p>Arrow's <code>context(Raise&lt;E&gt;)</code> achieved the most optimized score on all aspects of
+developer productivity. This includes having the lowest cognitive complexity, the lowest cyclomatic complexity
+as well as the most succinct with the least lines of codes.</p><p>Read the full article: <a href="https://medium.com/@mitchellyuwono/typed-error-handling-in-kotlin-11ff25882880" target="_blank" rel="noopener noreferrer">Typed Error Handling in Kotlin</a>.</p>]]></content>
+        <category label="core" term="core"/>
+        <category label="articles" term="articles"/>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Arrow 2.0's Trajectory]]></title>
+        <id>https://arrow-kt.io/community/blog/2023/04/16/arrow-2-0-trajectory</id>
+        <link href="https://arrow-kt.io/community/blog/2023/04/16/arrow-2-0-trajectory"/>
+        <updated>2023-04-16T00:00:00.000Z</updated>
+        <summary type="html"><![CDATA[A full transcript and the slides from Simon Vergauwen's presentation from KotlinConf 2023 about the history of Arrow and where it's going.]]></summary>
+        <content type="html"><![CDATA[<p>A full transcript and the slides from <a href="https://twitter.com/vergauwen_simon" target="_blank" rel="noopener noreferrer">Simon Vergauwen's</a> presentation from KotlinConf 2023 about the history of Arrow and where it's going.</p>]]></content>
+        <category label="core" term="core"/>
+        <category label="slidedecks" term="slidedecks"/>
+    </entry>
     <entry>
         <title type="html"><![CDATA[Arrow 1.2.0-RC Release Summary]]></title>
         <id>https://arrow-kt.io/community/blog/2023/04/04/arrow-1-2-0-rc-summary</id>
