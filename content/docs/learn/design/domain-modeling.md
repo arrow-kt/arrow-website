@@ -222,7 +222,7 @@ interface EventService {
 }
 ```
 
-Since `Either` is defined as a `sealed class` in [Arrow Core](https://arrow-kt.io/docs/core/), we can use the same technique we used above with `when` to extract the `Error` or `Event` in a safe way.
+Since `Either` is defined as a `sealed class` in [Arrow Core](https://apidocs.arrow-kt.io/arrow-core/index.html), we can use the same technique we used above with `when` to extract the `Error` or `Event` in a safe way.
 
 In this article, we've seen how we can improve our domain by:
  - Eliminating primitive types in our domain definition and using `value class` to prevent runtime overhead.
