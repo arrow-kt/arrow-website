@@ -1,6 +1,9 @@
 # Dependencies
 /node_modules
 
+# EnhanceDocs
+.enhancedocs
+
 # Production
 /build
 
