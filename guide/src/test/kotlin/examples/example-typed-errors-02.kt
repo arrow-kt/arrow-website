@@ -16,16 +16,3 @@ data class User(val id: Long)
 val error: Either<UserNotFound, User> = UserNotFound.left()
 
 fun Raise<UserNotFound>.error(): User = raise(UserNotFound)
-
-fun example() {
-  when (error) {
-    is Left -> error.value shouldBe UserNotFound
-    is Right -> fail("A logical failure occurred!")
-  }
-
-  fold(
-    { error() },
-    { e: UserNotFound -> e shouldBe UserNotFound },
-    { _: User -> fail("A logical failure occurred!") }
-  )
-}

@@ -2,30 +2,18 @@
 package arrow.website.examples.exampleTypedErrors10
 
 import arrow.core.Either
-import arrow.core.raise.catch
-import arrow.core.raise.Raise
-import java.sql.SQLException
+import arrow.core.raise.either
+import arrow.core.raise.nullable
 
-object UsersQueries {
-  fun insert(username: String, email: String): Long = 1L
-}
+object Problem
 
-fun SQLException.isUniqueViolation(): Boolean = true
-
-data class UserAlreadyExists(val username: String, val email: String)
-
-suspend fun Raise<UserAlreadyExists>.insertUser(username: String, email: String): Long =
-  catch({
-    UsersQueries.insert(username, email)
-  }) { e: SQLException ->
-    if (e.isUniqueViolation()) raise(UserAlreadyExists(username, email))
-    else throw e
-  }
-
-suspend fun insertUser(username: String, email: String): Either<UserAlreadyExists, Long> =
-  Either.catchOrThrow<SQLException, Long> {
-    UsersQueries.insert(username, email)
-  }.mapLeft { e ->
-    if (e.isUniqueViolation()) UserAlreadyExists(username, email)
-    else throw e
+fun problematic(n: Int): Either<Problem, Int?> =
+  either { 
+    nullable { 
+      when {
+        n < 0  -> raise(Problem)
+        n == 0 -> raise(null)
+        else   -> n
+      }
+    }
   }
