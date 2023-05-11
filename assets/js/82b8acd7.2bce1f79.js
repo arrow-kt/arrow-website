@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkarrow_website=self.webpackChunkarrow_website||[]).push([[9991],{27351:s=>{s.exports=JSON.parse('{"label":"optics","permalink":"/community/blog/tags/optics","allTagsPath":"/community/blog/tags","count":6}')}}]);

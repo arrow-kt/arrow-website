@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkarrow_website=self.webpackChunkarrow_website||[]).push([[1065],{56341:e=>{e.exports=JSON.parse('{"permalink":"/community/blog/tags/videos/page/2","page":2,"postsPerPage":8,"totalPages":6,"totalCount":47,"previousPage":"/community/blog/tags/videos","nextPage":"/community/blog/tags/videos/page/3","blogDescription":"Blog","blogTitle":"Blog"}')}}]);

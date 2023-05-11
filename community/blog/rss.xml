@@ -4,10 +4,20 @@
         <title>Arrow Blog</title>
         <link>https://arrow-kt.io/community/blog</link>
         <description>Arrow Blog</description>
-        <lastBuildDate>Mon, 17 Apr 2023 00:00:00 GMT</lastBuildDate>
+        <lastBuildDate>Thu, 04 May 2023 00:00:00 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
         <generator>https://github.com/jpmonette/feed</generator>
         <language>en</language>
+        <item>
+            <title><![CDATA[Nicer data transformation with KopyKat and Optics]]></title>
+            <link>https://arrow-kt.io/community/blog/2023/05/04/data-transformation-kotlinconf</link>
+            <guid>https://arrow-kt.io/community/blog/2023/05/04/data-transformation-kotlinconf</guid>
+            <pubDate>Thu, 04 May 2023 00:00:00 GMT</pubDate>
+            <description><![CDATA[Watch Alejandro Serrano's presentation from KotlinConf 2023 about data transformation.]]></description>
+            <content:encoded><![CDATA[<p>Watch <a href="https://twitter.com/trupill" target="_blank" rel="noopener noreferrer">Alejandro Serrano</a>'s presentation from KotlinConf 2023 about data transformation.</p><p>Data classes are incredibly useful when modeling our domain in an immutable way. The Kotlin compiler gives us many niceties, including 'copy' to create a new value based on a previous one. However, this 'copy' often falls short. This talk explores two alternatives: KopyKat, a plug-in to generate additional variations of 'copy', and Arrow Optics, a whole framework to transform this immutable data.</p>]]></content:encoded>
+            <category>optics</category>
+            <category>videos</category>
+        </item>
         <item>
             <title><![CDATA[Typed Error Handling in Kotlin]]></title>
             <link>https://arrow-kt.io/community/blog/2023/04/17/typed-error-handling-in-kotlin</link>
