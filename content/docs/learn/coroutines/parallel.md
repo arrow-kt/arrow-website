@@ -81,13 +81,13 @@ tells how many computations should be dispatched in parallel.
 
 ### Flows
 
-The [`parMap`](https://arrow-kt.io/docs/apidocs/arrow-fx-coroutines/arrow.fx.coroutines/par-map.html)
+The [`parMap`](https://apidocs.arrow-kt.io/arrow-fx-coroutines/arrow.fx.coroutines/par-map.html)
 function is also provided for [`Flow`](https://kotlinlang.org/api/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.flow/).
 If the concurrency factor is more than 1, then inner flows are collected by this operator concurrently.
 When this factor is one, calling `parMap` is identical to calling `map` on the flow.
 
 Additional performance can be gained if we don't impose the same ordering on
-the mapping output as the one in the source flow. Just call [`parMapUnordered`](https://arrow-kt.io/docs/apidocs/arrow-fx-coroutines/arrow.fx.coroutines/par-map-unordered.html)
+the mapping output as the one in the source flow. Just call [`parMapUnordered`](https://apidocs.arrow-kt.io/arrow-fx-coroutines/arrow.fx.coroutines/par-map-unordered.html)
 in that case. As with `parMap`, the concurrency factor defines how many
 computations should be executed concurrently at most.
 
