@@ -6,7 +6,7 @@ knit = "0.4.0"
 arrow = "1.2.0-RC"
 ksp = "1.8.10-1.0.9"
 suspendapp = "0.4.0"
-kotlinKafka = "0.3.0"
+kotlinKafka = "0.3.1"
 
 [libraries]
 coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "coroutines" }
