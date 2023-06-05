@@ -51,8 +51,5 @@ jobs:
         with:
           api-key: ${{ secrets.ENHANCEDOCS_API_KEY }}
 
-      - name: Build Docs
-        run: enhancedocs build content
-
-      - name: Pushish Docs
-        run: enhancedocs push --project 6442ad83351c12aba70adc49
+      - name: Update Docs
+        run: enhancedocs alpha sources web --project 6442ad83351c12aba70adc49 https://arrow-kt.io
