@@ -17,7 +17,7 @@ In some codebases, you can find the following primitive type-based implementatio
 
 ```kotlin
 data class Event(
-  val id: Long
+  val id: Long,
   val title: String,
   val organizer: String,
   val description: String,
@@ -48,7 +48,7 @@ So how do we prevent this from happening, or how can we improve our domain model
 @JvmInline value class Description(val value: String)
 
 data class Event(
-  val id: EventId
+  val id: EventId,
   val title: Title,
   val organizer: Organizer,
   val description: Description,
@@ -101,7 +101,7 @@ With online events on the rise, we have a different kind of event that doesn't o
 data class Address(val city: City, val street: Street)
 
 data class Event(
-  val id: EventId
+  val id: EventId,
   val title: Title,
   val organizer: Organizer,
   val description: Description,

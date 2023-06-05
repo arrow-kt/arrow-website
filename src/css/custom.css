@@ -331,3 +331,8 @@ code {
 .theme-back-to-top-button.theme-back-to-top-button::after {
   background-color: var(--ifm-color-primary-darkest);
 }
+
+/* EnhancedChat */
+.EnhancedChat, .EnhancedChat__ChatPopover {
+  left: 20px;
+}

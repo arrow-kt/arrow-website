@@ -50,14 +50,6 @@ jobs:
         uses: enhancedocs/setup-enhancedocs@v0.1.3
         with:
           api-key: ${{ secrets.ENHANCEDOCS_API_KEY }}
-      - name: Checkout
-        uses: actions/checkout@v3
-        with:
-          repository: arrow-kt/arrow
-          path: src
 
-      - name: Build Docs
-        run: enhancedocs build content src/arrow-libs
-
-      - name: Push Docs
-        run: enhancedocs push --project ${{ secrets.ENHANCEDOCS_PROJECT_ID }}
+      - name: Update Docs
+        run: enhancedocs alpha sources web --project ${{ secrets.ENHANCEDOCS_PROJECT_ID }} https://arrow-kt.io
