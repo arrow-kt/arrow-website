@@ -231,7 +231,7 @@ We propose to move away from this style in Kotlin and simply enlarge the `contex
 
 ## Errors everywhere!
 
-One interesting application of this style is an ergonomic interface for errors. In Arrow 2.0 [`Raise<E>`](https://github.com/arrow-kt/arrow/blob/arrow-2/arrow-libs/core/arrow-core/src/commonMain/kotlin/arrow/core/continuations/Raise.kt) is the name of the scope/effect of short-circuiting with an error of type `E`. A function with signature
+One interesting application of this style is an ergonomic interface for errors. In Arrow 2.0 [`Raise<E>`](https://github.com/arrow-kt/arrow/blob/main/arrow-libs/core/arrow-core/src/commonMain/kotlin/arrow/core/raise/Raise.kt) is the name of the scope/effect of short-circuiting with an error of type `E`. A function with signature
 
 ```kotlin
 context(Raise<E>) () -> A
