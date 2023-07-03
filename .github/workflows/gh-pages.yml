@@ -52,4 +52,4 @@ jobs:
           api-key: ${{ secrets.ENHANCEDOCS_API_KEY }}
 
       - name: Update Docs
-        run: enhancedocs alpha sources web --project 6442ad83351c12aba70adc49 https://arrow-kt.io
+        run: enhancedocs alpha sources web --project ${{ secrets.ENHANCEDOCS_PROJECT_ID }} https://arrow-kt.io
