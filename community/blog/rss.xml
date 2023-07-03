@@ -9,6 +9,16 @@
         <generator>https://github.com/jpmonette/feed</generator>
         <language>en</language>
         <item>
+            <title><![CDATA[Arrow 2.0's Trajectory - Video]]></title>
+            <link>https://arrow-kt.io/community/blog/2023/05/04/arrow-trajectory-kotlinconf</link>
+            <guid>https://arrow-kt.io/community/blog/2023/05/04/arrow-trajectory-kotlinconf</guid>
+            <pubDate>Thu, 04 May 2023 00:00:00 GMT</pubDate>
+            <description><![CDATA[Watch Simon Vergauwen's presentation from KotlinConf 2023 about the history of Arrow, and the trajectory for Arrow 2.0.]]></description>
+            <content:encoded><![CDATA[<p>Watch <a href="https://twitter.com/vergauwen_simon" target="_blank" rel="noopener noreferrer">Simon Vergauwen</a>'s presentation from KotlinConf 2023 about the history of Arrow, and the trajectory for Arrow 2.0.</p>]]></content:encoded>
+            <category>core</category>
+            <category>videos</category>
+        </item>
+        <item>
             <title><![CDATA[Nicer data transformation with KopyKat and Optics]]></title>
             <link>https://arrow-kt.io/community/blog/2023/05/04/data-transformation-kotlinconf</link>
             <guid>https://arrow-kt.io/community/blog/2023/05/04/data-transformation-kotlinconf</guid>

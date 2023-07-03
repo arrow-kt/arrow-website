@@ -8,6 +8,16 @@
     <subtitle>Arrow Blog</subtitle>
     <icon>https://arrow-kt.io/img/arrow-brand-icon.svg</icon>
     <entry>
+        <title type="html"><![CDATA[Arrow 2.0's Trajectory - Video]]></title>
+        <id>https://arrow-kt.io/community/blog/2023/05/04/arrow-trajectory-kotlinconf</id>
+        <link href="https://arrow-kt.io/community/blog/2023/05/04/arrow-trajectory-kotlinconf"/>
+        <updated>2023-05-04T00:00:00.000Z</updated>
+        <summary type="html"><![CDATA[Watch Simon Vergauwen's presentation from KotlinConf 2023 about the history of Arrow, and the trajectory for Arrow 2.0.]]></summary>
+        <content type="html"><![CDATA[<p>Watch <a href="https://twitter.com/vergauwen_simon" target="_blank" rel="noopener noreferrer">Simon Vergauwen</a>'s presentation from KotlinConf 2023 about the history of Arrow, and the trajectory for Arrow 2.0.</p>]]></content>
+        <category label="core" term="core"/>
+        <category label="videos" term="videos"/>
+    </entry>
+    <entry>
         <title type="html"><![CDATA[Nicer data transformation with KopyKat and Optics]]></title>
         <id>https://arrow-kt.io/community/blog/2023/05/04/data-transformation-kotlinconf</id>
         <link href="https://arrow-kt.io/community/blog/2023/05/04/data-transformation-kotlinconf"/>
