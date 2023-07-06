@@ -42,17 +42,7 @@ for Arrow types.
 
 ## Serialization
 
-### [Jackson](https://github.com/FasterXML/jackson)
-
-If you're using Jackson for serialization, [this module](https://github.com/arrow-kt/arrow-integrations#jackson-module)
-adds support for Arrow types. You just need to call an additional method when
-creating the mapper.
-
-```kotlin
-val mapper = ObjectMapper()
-    .registerKotlinModule()
-    .registerArrowModule()   // <- this is the one
-```
+See the [corresponding section](../quickstart/serialization).
 
 ## Configuration
 
@@ -71,9 +61,15 @@ may come in quite handy.
 
 ### [Ktor](https://ktor.io/)
 
-For client or server purposes, you can set up Ktor to [use Jackson
-with your custom mapper](https://github.com/arrow-kt/arrow-integrations#ktor).
-That way, you can access (de)serialization for Arrow types.
+The main point of contact between Ktor and Arrow is in
+[serialization](../quickstart/serialization).
+
+If you're using kotlinx.serialization, you need no further changes other than
+importing the serializers with `@UseSerializers`.
+
+If you're using Jackson, you can use the
+[custom mapper](https://github.com/arrow-kt/arrow-integrations#ktor),
+and pass it to the `ContentNegotiation` configuration.
 
 ```kotlin
 install(ContentNegotiation) {
