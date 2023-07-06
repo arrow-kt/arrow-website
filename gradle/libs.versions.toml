@@ -1,10 +1,10 @@
 [versions]
 coroutines = "1.7.2"
 kotest = "5.6.2"
-kotlin = "1.8.10"
+kotlin = "1.8.22"
 knit = "0.4.0"
 arrow = "1.2.0-RC"
-ksp = "1.8.10-1.0.9"
+ksp = "1.8.22-1.0.11"
 suspendapp = "0.4.0"
 kotlinKafka = "0.3.1"
 
