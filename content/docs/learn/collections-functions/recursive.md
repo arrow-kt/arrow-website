@@ -86,7 +86,7 @@ can call it as if it was a function, so no changes are required for `fibonacci`.
 
 :::
 
-## Memoization
+## Memoized recursive functions
 
 There's an enormous amount of duplicate work being done in a call to `fibonacci`.
 Here is the call tree of `fibonacciWorker(4)`, you can see that we end up in
