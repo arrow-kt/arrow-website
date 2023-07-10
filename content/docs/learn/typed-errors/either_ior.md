@@ -35,7 +35,7 @@ like a compiler that finishes successfully but has some warnings. Nevertheless,
 
 ## Using builders
 
-The preferred way to work with `Either` and `Ior` is to use [builders](../../typed-errors/).
+The preferred way to work with `Either` and `Ior` is to use [builders](../../typed-errors/working-with-typed-errors/#running-and-inspecting-results).
 Those start with a call to `either` or `ior` followed by a lambda; inside that
 block, we can access the uniform typed errors API with functions like `raise`,
 `ensure`, and `recover`.
