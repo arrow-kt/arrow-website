@@ -86,7 +86,7 @@ can call it as if it was a function, so no changes are required for `fibonacci`.
 
 :::
 
-## Memoization
+## Memoized recursive functions
 
 There's an enormous amount of duplicate work being done in a call to `fibonacci`.
 Here is the call tree of `fibonacciWorker(4)`, you can see that we end up in
@@ -125,33 +125,30 @@ Fibonacci is a pure function, in other words, given the same argument we always
 obtain the same result. This means that once we've computed a value, we can just
 _record_ in some cache, so later invocations only have to look there. This
 technique is known as **memoization**, and Arrow provides an implementation
-in the form of [`memoize`](https://apidocs.arrow-kt.io/arrow-core/arrow.core/memoize.html).
+in the form of [`MemoizedDeepRecursiveFunction`](https://apidocs.arrow-kt.io/arrow-core/arrow.core/-memoized-deep-recursive-function.html).
+No changes other than the outer call are required.
 
 ```kotlin
-import arrow.core.memoize
+import arrow.core.MemoizedDeepRecursiveFunction
 
-val fibonacciMemoized = ::fibonacciWorker.memoize()
-
+val fibonacciWorker = MemoizedDeepRecursiveFunction<Int, Int> { n ->
+  when (n) {
+    0 -> 0
+    1 -> 1
+    else -> callRecursive(n - 1) + callRecursive(n - 2)
+  }
+}
+```
+<!--- INCLUDE
 fun fibonacci(n: Int): Int {
   require(n >= 0)
-  return fibonacciMemoized(n)
+  return fibonacciWorker(n)
 }
 
 fun example() {
   fibonacci(6) shouldBe 8
 }
-```
-
-<!--- INCLUDE
-
-fun fibonacciWorker(n: Int): Int = when (n) {
-  0 -> 0
-  1 -> 1
-  else -> fibonacciWorker(n - 1) + fibonacciWorker(n - 2)
-}
-
 -->
-
 <!--- KNIT example-recursive-03.kt -->
 <!--- TEST assert -->
 
