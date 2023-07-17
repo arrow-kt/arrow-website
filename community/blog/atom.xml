@@ -2,11 +2,26 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://arrow-kt.io/community/blog</id>
     <title>Arrow Blog</title>
-    <updated>2023-05-04T00:00:00.000Z</updated>
+    <updated>2023-07-12T00:00:00.000Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://arrow-kt.io/community/blog"/>
     <subtitle>Arrow Blog</subtitle>
     <icon>https://arrow-kt.io/img/arrow-brand-icon.svg</icon>
+    <entry>
+        <title type="html"><![CDATA[Arrow releases stable 1.2.0 version]]></title>
+        <id>https://arrow-kt.io/community/blog/2023/07/12/arrow-1-2-0</id>
+        <link href="https://arrow-kt.io/community/blog/2023/07/12/arrow-1-2-0"/>
+        <updated>2023-07-12T00:00:00.000Z</updated>
+        <summary type="html"><![CDATA[We're excited to announce the stable Arrow 1.2.0 version. To briefly summarize, this release:]]></summary>
+        <content type="html"><![CDATA[<p>We're excited to announce the stable Arrow 1.2.0 version. To briefly summarize, this release:</p><ul><li>Improves the API for <a href="http://arrow-kt.io/learn/typed-errors/working-with-typed-errors/" target="_blank" rel="noopener noreferrer">typed errors</a>,
+including <a href="https://apidocs.arrow-kt.io/arrow-core/arrow.core.raise/with-error.html" target="_blank" rel="noopener noreferrer"><code>withError</code></a>
+and <a href="https://apidocs.arrow-kt.io/arrow-core/arrow.core.raise/merge.html" target="_blank" rel="noopener noreferrer"><code>merge</code></a>.</li><li>Adds <a href="https://apidocs.arrow-kt.io/arrow-core/arrow.core/-non-empty-collection/index.html" target="_blank" rel="noopener noreferrer"><code>NonEmptyCollection</code></a>
+as common parent of <a href="https://apidocs.arrow-kt.io/arrow-core/arrow.core/-non-empty-list/index.html" target="_blank" rel="noopener noreferrer"><code>NonEmptyList</code></a>
+and <a href="https://apidocs.arrow-kt.io/arrow-core/arrow.core/-non-empty-set/index.html" target="_blank" rel="noopener noreferrer"><code>NonEmptySet</code></a>.</li><li>Introduces <a href="https://arrow-kt.io/learn/quickstart/serialization/" target="_blank" rel="noopener noreferrer"><code>arrow-core-serialization</code></a>
+to be used alongside KotlinX Serialization.</li><li>Fixes a few issues found in the Release Candidate.</li></ul><p>Read more details in the full <a href="https://xebia.com/blog/a-new-module-for-typed-errors-in-arrow-1-2-0/" target="_blank" rel="noopener noreferrer">Arrow 1.2.0 release announcement</a>.</p>]]></content>
+        <category label="core" term="core"/>
+        <category label="articles" term="articles"/>
+    </entry>
     <entry>
         <title type="html"><![CDATA[Arrow 2.0's Trajectory - Video]]></title>
         <id>https://arrow-kt.io/community/blog/2023/05/04/arrow-trajectory-kotlinconf</id>
