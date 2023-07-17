@@ -202,3 +202,11 @@ suspend fun main(): Unit {
 }
 ```
 <!--- KNIT example-circuitbreaker-02.kt -->
+
+:::tip One circuit breaker to rule them all
+
+If several (concurrent) threads access the same service, they should be
+protected by the _same_ circuit breaker. That is, not circuit breakers created
+with the same parameters, literally the _same instance_.
+
+:::
