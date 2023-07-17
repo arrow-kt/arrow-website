@@ -43,6 +43,14 @@ The list above mentions all the serializers, but you only need to add those
 which are used in your fields. Don't worry too much: if you miss one, the
 kotlinx.serialization plug-in gives you an error.
 
+:::info Additional reading
+
+[_Marshalling Arrow Types in Ktor_](https://garthgilmour.medium.com/marshalling-arrow-types-in-ktor-bc471aa3650)
+by Garth Gilmour includes additional information about using Arrow Core types
+in a Ktor project.
+
+:::
+
 ## [Jackson](https://github.com/FasterXML/jackson)
 
 If you're using Jackson for serialization, [this module](https://github.com/arrow-kt/arrow-integrations#jackson-module)
