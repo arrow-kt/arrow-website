@@ -814,6 +814,12 @@ which follow a short-circuiting approach.
 
 We call this approach _typed_ errors because at every point the signatures state which is the type of errors that may be raised from some computation. This type is checked when `.bind`ing, which means that you cannot directly consume computation with a given error type within a block with a different one. The solution is to _transform_ the error, which is achieved using [`withError`](https://apidocs.arrow-kt.io/arrow-core/arrow.core.raise/with-error.html).
 
+<!--- INCLUDE
+import arrow.core.*
+import arrow.core.raise.*
+import io.kotest.matchers.shouldBe
+-->
+
 ```kotlin
 val stringError: Either<String, Boolean> = "problem".left()
 
@@ -826,7 +832,7 @@ val intError: Either<Int, Boolean> = either {
 ```
 <!--- INCLUDE
 fun example() {
-  intError shouldBe Left("problem".length)
+  intError shouldBe Either.Left("problem".length)
 }
 -->
 <!--- KNIT example-typed-errors-20.kt -->
