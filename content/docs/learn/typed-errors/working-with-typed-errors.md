@@ -810,6 +810,36 @@ which follow a short-circuiting approach.
 
 :::
 
+## Transforming errors
+
+We call this approach _typed_ errors because at every point the signatures state which is the type of errors that may be raised from some computation. This type is checked when `.bind`ing, which means that you cannot directly consume computation with a given error type within a block with a different one. The solution is to _transform_ the error, which is achieved using [`withError`](https://apidocs.arrow-kt.io/arrow-core/arrow.core.raise/with-error.html).
+
+```kotlin
+val stringError: Either<String, Boolean> = "problem".left()
+
+val intError: Either<Int, Boolean> = either {
+  // transform error String -> Int
+  withError({ it.length }) { 
+    stringError.bind()
+  }
+}
+```
+<!--- INCLUDE
+fun example() {
+  intError shouldBe Left("problem".length)
+}
+-->
+<!--- KNIT example-typed-errors-20.kt -->
+<!--- TEST assert -->
+
+A very common pattern is using `withError` to "bridge" validation errors of sub-components into validation errors of the larger value.
+
+:::tip Ignoring errors
+
+In the context of [nullable and `Option`](../nullable-and-option) you often need to "forget" the error type if consuming more informative types like `Either`. Although you can achieve this behavior using `withError`, we provide a more declarative version called `ignoreErrors`.
+
+:::
+
 ## Summary
 
 At this point we can summarize the advantages that typed errors offer over using exceptions:

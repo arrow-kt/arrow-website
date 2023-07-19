@@ -325,6 +325,12 @@ Similarly, this same pattern applies to `Option` and other data types such as `E
 The `Option` DSL can seamlessly be mixed with _nullable types_ using `ensureNotNull`.
 :::
 
+:::tip Ignoring errors
+
+Sometimes you need to "forget" the error type if consuming more informative types like `Either`. Wrap the `.bind()` in `ignoreErrors` to make this explicit.
+
+:::
+
 <!--- INCLUDE
 import arrow.core.Option
 import arrow.core.raise.option
