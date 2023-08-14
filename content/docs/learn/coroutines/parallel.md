@@ -70,7 +70,7 @@ suspend fun getUserName(id: UserId): User = User("$id-name")
 -->
 ```kotlin
 suspend fun getFriendNames(id: UserId): List<User> =
-  getFriendIds(id).parMap { getUserName(it) }
+  getFriendIds(id).parMap { getUserName(id) }
 ```
 <!--- KNIT example-parallel-02.kt -->
 
