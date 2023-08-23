@@ -94,7 +94,7 @@ fun getUserName(id: UserId, k: Continuation<String?>) =
   getUserById(id) { user -> user?.let { k.resume(it.name) } }
 ```
 
-At a conceptual level, you can think of `Continuation<A>` as simply a function `(A) -> Unit`. This means the caller can change how the function "returns," but changing the continuation passed as parameter `k`.
+At a conceptual level, you can think of `Continuation<A>` as simply a function `(A) -> Unit`. This means the caller can change how the function "returns," by changing the continuation passed as parameter `k`.
 
 The second feature in the Kotlin language required for the proposed style is [context receivers](https://github.com/Kotlin/KEEP/blob/master/proposals/context-receivers.md), which were introduced in version 1.6.20. For an in-depth discussion of this new feature, you can check this [talk](https://www.youtube.com/watch?v=2oiRCYnqhDs) or the corresponding [slides](https://serranofp.com/kotlin-xl-ctx/slides). Very briefly, context receivers can be thought of as _implicit_ parameters, or as a sort of built-in dependency injection. Let's say we define an interface for our user repository,
 
