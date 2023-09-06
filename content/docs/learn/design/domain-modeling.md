@@ -96,8 +96,8 @@ With online events on the rise, we have a different kind of event that doesn't o
 ```kotlin
 @JvmInline value class Url(val value: String)
 
-@JvmInline value  class City(val value: String)
-@JvmInline value  class Street(val value: String)
+@JvmInline value class City(val value: String)
+@JvmInline value class Street(val value: String)
 data class Address(val city: City, val street: Street)
 
 data class Event(
