@@ -224,9 +224,9 @@ data class Book private constructor(
       zipOrAccumulate(
         { ensure(title.isNotEmpty()) { EmptyTitle } },
         { 
-          val validatedAuthors = mapOrAccumulate(authors.withIndex()) { authorName ->
-            Author(authorName.value)
-              .recover { _ -> raise(EmptyAuthor(authorName.index)) }
+          val validatedAuthors = mapOrAccumulate(authors.withIndex()) { nameAndIx ->
+            Author(nameAndIx.value)
+              .recover { _ -> raise(EmptyAuthor(nameAndIx.index)) }
               .bind()
           }
           ensureNotNull(validatedAuthors.toNonEmptyListOrNull()) { NoAuthors }

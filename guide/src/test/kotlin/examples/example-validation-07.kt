@@ -1,13 +1,10 @@
 // This file was automatically generated from validation.md by Knit tool. Do not edit.
 package arrow.website.examples.exampleValidation07
 
-import arrow.core.left
-import arrow.core.right
 import arrow.core.Either
 import arrow.core.NonEmptyList
 import arrow.core.toNonEmptyListOrNull
 import arrow.core.recover
-import arrow.core.mapOrAccumulate
 import arrow.core.raise.*
 
 sealed interface BookValidationError
@@ -35,10 +32,10 @@ data class Book private constructor(
     ): Either<NonEmptyList<BookValidationError>, Book> = either {
       zipOrAccumulate(
         { ensure(title.isNotEmpty()) { EmptyTitle } },
-        { 
-          val validatedAuthors = mapOrAccumulate(authors.withIndex()) {
-            Author(it.value)
-              .recover { _ -> raise(EmptyAuthor(it.index)) }
+        {
+          val validatedAuthors = mapOrAccumulate(authors.withIndex()) { nameAndIx ->
+            Author(nameAndIx.value)
+              .recover { _ -> raise(EmptyAuthor(nameAndIx.index)) }
               .bind()
           }
           ensureNotNull(validatedAuthors.toNonEmptyListOrNull()) { NoAuthors }
