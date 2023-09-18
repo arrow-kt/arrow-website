@@ -24,7 +24,7 @@ rules, even when the logic grows more complex.
 We often have independent computations that we want to perform in parallel.
 For example, if we need to fetch a value from the database and download a file
 from another service, there's no reason why we shouldn't do them concurrently.
-We can use `parZip` to combine the execution of both computations.
+We can use `parZip` (PARallel ZIP) to combine the execution of both computations.
 
 <!--- INCLUDE
 import arrow.fx.coroutines.parZip
@@ -58,7 +58,7 @@ and canceling running computations whenever one of the tasks fails.
 
 In the code above, we had a fixed sequence of computations to perform in parallel.
 In other cases, those computations depend on some form of _collection_; for example,
-we want to obtain the name of all a user's friends. Arrow provides `parMap`
+we want to obtain the name of all a user's friends. Arrow provides `parMap` (PARallel MAP)
 for that use case.
 
 <!--- INCLUDE
