@@ -40,6 +40,11 @@ extension library. If you're using property-based testing (you should!), you can
 use [generators](https://kotest.io/docs/proptest/property-test-generators-arrow.html)
 for Arrow types.
 
+### [AssertJ](https://assertj.github.io/doc/)
+
+Assertions covering `Either` and `Option` are provided by
+[this library](https://github.com/rcardin/assertj-arrow-core).
+
 ## Serialization
 
 See the [corresponding section](../quickstart/serialization).
