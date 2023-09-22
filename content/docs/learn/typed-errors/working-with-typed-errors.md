@@ -19,6 +19,7 @@ leading to a defensive mode of error handling.
 - [_Exception handling in Kotlin with Arrow_](https://www.youtube.com/watch?v=ipF540mBG9w) by Ramandeep Kaur
 - [_Por qué no uso excepciones en mi código_](https://www.youtube.com/watch?v=8WdprhzmQe4) by Raúl Raja and [Codely](https://codely.com/)
 - [_Typed error handling in Kotlin_](https://medium.com/@mitchellyuwono/typed-error-handling-in-kotlin-11ff25882880) by Mitchell Yuwono
+- _Functional Error Handling in Kotlin_ by Riccardo Cardin (video and text): [part 1](https://blog.rockthejvm.com/functional-error-handling-in-kotlin/), [part 2](https://blog.rockthejvm.com/functional-error-handling-in-kotlin-part-2/), and [part 3](https://blog.rockthejvm.com/functional-error-handling-in-kotlin-part-3/)
 
 :::
 
