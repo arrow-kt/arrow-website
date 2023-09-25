@@ -12,28 +12,28 @@ links:
     body: Lorem ipsum dolor sit amet, consectetur adipiscing elit. In pretium ligula nec mi facilisis malesuada. Donec sed massa finibus, laoreet tellus vel...
 
   - title: GitHub
-    href: /learn/typed-errors
-    icon: icon-typed-errors.svg
+    href: https://github.com/arrow-kt
+    icon: icon-social-github.svg
     body: Lorem ipsum dolor sit amet, consectetur adipiscing elit. In pretium ligula nec mi facilisis malesuada. Donec sed massa finibus, laoreet tellus vel...
 
   - title: Slack channel
-    href: /learn/immutable-data
-    icon: icon-immutable-data.svg
+    href: https://kotlinlang.slack.com/messages/C5UPMM0A0
+    icon: icon-slack.svg
     body: Lorem ipsum dolor sit amet, consectetur adipiscing elit. In pretium ligula nec mi facilisis malesuada. Donec sed massa finibus, laoreet tellus vel...
 
   - title: Stack Overflow
-    href: /learn/design
-    icon: icon-design.svg
+    href: https://stackoverflow.com/questions/tagged/arrow-kt
+    icon: icon-social-stackoverflow.svg
     body: Lorem ipsum dolor sit amet, consectetur adipiscing elit. In pretium ligula nec mi facilisis malesuada. Donec sed massa finibus, laoreet tellus vel...
 
   - title: Blog
-    href: /learn/design
-    icon: icon-design.svg
+    href: /community/blog
+    icon: icon-blog.svg
     body: Lorem ipsum dolor sit amet, consectetur adipiscing elit. In pretium ligula nec mi facilisis malesuada. Donec sed massa finibus, laoreet tellus vel...
 
   - title: Events
-    href: /learn/design
-    icon: icon-design.svg
+    href: /community/events/
+    icon: icon-community-2.svg
     body: Lorem ipsum dolor sit amet, consectetur adipiscing elit. In pretium ligula nec mi facilisis malesuada. Donec sed massa finibus, laoreet tellus vel...
 
 
