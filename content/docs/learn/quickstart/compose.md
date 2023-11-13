@@ -38,7 +38,7 @@ is also explicitly marked, and often separated in a `ViewModel`.
 As a consequence, Arrow and Compose make great dancing partners. Below we
 discuss a few feature which we think are an immediately gain for Android
 (and with Compose Multiplatform, other UI) developers. In the same vein, our
-[design](../design/) section readily applies to projects using Compose. 
+[design](../../design/) section readily applies to projects using Compose. 
 
 ## Simpler effectful code
 
@@ -52,13 +52,23 @@ where different actions must happen concurrently, ensuring that all rules
 of Structured Concurrency are followed, but without the hassle.
 
 ```kotlin
-suspend fun loadUserData(userId: UserId): UserData =
-  parZip(
-    { downloadAvatar(userId) },
-    { UserRepository.getById(userId) }
-  ) { avatarFile, user ->
-    // this code is called once both finish
-  }
+class UserSettingsModel: ViewModel() {
+  private val _userData = mutableStateOf<UserData?>(null)
+  val userData: State<UserData?> get() = _userData
+
+  suspend fun loadUserData(userId: UserId) =
+    parZip(
+      { downloadAvatar(userId) },
+      { UserRepository.getById(userId) }
+    ) { avatarFile, user ->
+      // this code is called once both finish
+      _userData.value = UserData(
+        id = userId,
+        details = user,
+        avatar = Avatar(avatarFile)
+      )
+    }
+}
 ```
 
 Anything outside your own application is the wilderness: connections are
