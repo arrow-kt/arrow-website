@@ -77,6 +77,37 @@ module provides several ready-to-use patterns to better handle those situations,
 including [retry policies](../../resilience/retry-and-repeat/)
 and [circuit breakers](../../resilience/circuitbreaker/).
 
+## Built-in error types
+
+One key part of every application is how the domain is modelled.
+Arrow emphasizes using [immutable data](../../design/domain-modeling/).
+In particular, sealed hierarchies take the important role of describing the
+different states.
+
+Although every application is unique, a common scenario in interactive
+applications involve having a "success state" and an "error state".
+For example, correctly loading the user data, or encountering a problem
+with connection or authentication. Instead of rolling your own types,
+Arrow (and our sibling library [Quiver](https://cashapp.github.io/quiver/))
+provide out-of-the-box solutions:
+
+- [`Either`](../../typed-errors/either-and-ior/) describes a model
+  in which the application has either completely succeeded, or
+  some amount of errors have occured. Validation is a prime example,
+  since we usually require for all fields to be valid before
+  moving forward with the data.
+- [`Ior`](../../typed-errors/either-and-ior/) introduces a third
+  option, namely succeeding but still with some problems along the way.
+  This type is useful to model domains where we can work with some
+  erroneous or missing information.
+- [`Outcome`](https://cashapp.github.io/quiver/-quiver%20-library/app.cash.quiver/-outcome/index.html)
+  models success, failure, and absence. The latter case is useful
+  when the application may be in _loading_ state: still no problems,
+  but no data ready either.
+
+Given the commonalities, Arrow provides a [uniform API](../../typed-errors/working-with-typed-errors/)
+to work with values of those types.
+
 ## Updating the model
 
 One potential drawback of using
