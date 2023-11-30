@@ -23,6 +23,10 @@ Service to create an answer quizzes, written in a functional style. Apart from A
 - [http4k](https://www.http4k.org/) as HTTP framework.
 - [Exposed](https://github.com/JetBrains/Exposed) for database access.
 
+## [MasterMind](https://gist.github.com/jakzal/3f0ee968fe8073ee81e328ecbd59fe8b)
+
+Implementation of the game using functional event sourcing. The [accompanying blog post](https://dev.to/jakub_zalas/functional-event-sourcing-example-in-kotlin-3245) is part of a series that covers both domain modelling and event sourcing.
+
 ## [Weather App](https://github.com/serras/WeatherApp)
 
 Small weather forecast application built with [Compose Multiplatform](https://www.jetbrains.com/lp/compose-multiplatform/) Desktop.
