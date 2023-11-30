@@ -86,3 +86,10 @@ install(ContentNegotiation) {
 
 This library adds support for JSON Web Signatures and JSON Web Tokens
 to the Kotlin and Arrow ecosystems.
+
+## Caching
+
+### [cache4k](https://reactivecircus.github.io/cache4k/)
+
+You can easily integrate [cache4k](https://reactivecircus.github.io/cache4k/)
+as caching mechanism for [memoization](../collections-functions/recursive/#memoization-takes-memory).
