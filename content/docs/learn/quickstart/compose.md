@@ -1,5 +1,5 @@
 ---
-id: from-fp
+id: compose
 title: Compose and UIs
 sidebar_position: 3
 ---
@@ -136,7 +136,8 @@ class UserSettingsModel: ViewModel() {
 
 Arrow Optics addresses these drawbacks, providing 
 [tools for manipulating and transforming _immutable_ data](../../immutable-data/intro/).
-The code above can be rewritten without boring repetition.
+The code above can be rewritten without boring repetition using
+the [dedicated `copy` for `MutableState`](../../immutable-data/lens/#more-powerful-copy).
 
 ```kotlin
 class UserSettingsModel: ViewModel() {
@@ -146,7 +147,7 @@ class UserSettingsModel: ViewModel() {
   fun updateName(
     newFirstName: String, newLastName: String
   ) {
-    _userData.value = _userData.value.copy {
+    _userData.updateCopy {
       inside(UserData.details.name) {
         Name.firstName set newFirstName
         Name.lastName  set newLastName

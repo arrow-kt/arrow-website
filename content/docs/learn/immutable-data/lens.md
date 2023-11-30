@@ -242,3 +242,33 @@ fun Person.moveToAmsterdamInside(): Person = copy {
 }
 ```
 <!--- KNIT example-lens-domain-03.kt -->
+
+If you are using Compose, either in [Android](https://developer.android.com/jetpack/compose)
+or [Multiplaftorm](https://www.jetbrains.com/lp/compose-multiplatform/)
+flavors, you often need to update a [`MutableState`](https://developer.android.com/jetpack/compose/state)
+by applying some modification to the previous value.
+The `arrow-optics-compose` package provides a version of
+`copy` useful in those situations.
+
+```
+class AppViewModel: ViewModel() {
+  private val _personData = mutableStateOf<Person>(...)
+
+  fun updatePersonalData(
+    newName: String, newAge: Int
+  ) {
+    _personData.updateCopy {
+      Person.name set newName
+      Person.age set newAge
+    }
+  }
+}
+```
+
+:::note Compose and Snapshots
+
+`updateCopy` uses the [snapshot system](https://dev.to/zachklipp/introduction-to-the-compose-snapshot-system-19cn)
+in Compose to ensure that all the modifications in the
+block happen atomically.
+
+:::

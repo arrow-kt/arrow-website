@@ -37,6 +37,7 @@ Each section in the documentation roughly corresponds to one of the libraries th
 | `arrow-resilience` | [Resilience patterns](../resilience/) |
 | `arrow-fx-stm` | [Software Transactional Memory](../coroutines/stm/) (STM) |
 | `arrow-optics` + `arrow-optics-ksp-plugin` <br /> _Companion to [data](https://kotlinlang.org/docs/data-classes.html) and [sealed](https://kotlinlang.org/docs/sealed-classes.html) classes_ | Utilities for [immutable data](../immutable-data/intro/) |
+| `arrow-optics-compose` | Extensions for Compose |
 | `arrow-atomic` <br /> _Multiplatform-ready [references](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.native.concurrent/-atomic-reference/)_ | [Atomic references](../coroutines/concurrency-primitives/#atomic) |
 
 :::note We'd love to hear from you!
