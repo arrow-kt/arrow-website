@@ -79,7 +79,7 @@ fun validAge(age: Int): Either<Problem, Int> = TODO()
 -->
 
 ```kotlin
-fun mkUser(name: String, age: Int): Either<Problem, Person> = either {
+fun mkPerson(name: String, age: Int): Either<Problem, Person> = either {
   val name_ = validName(name).bind()
   val age_  = validAge(age).bind()
   Person(name_, age_)
@@ -103,7 +103,7 @@ fun validAge(age: Int): Either<Problem, Int> = TODO()
 -->
 
 ```kotlin
-fun mkUser(name: String, age: Int): Either<Problem, Person> = either {
+fun mkPerson(name: String, age: Int): Either<Problem, Person> = either {
   Person(validName(name).bind(), validAge(age).bind())
 }
 ```
