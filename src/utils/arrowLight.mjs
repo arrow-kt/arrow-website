@@ -1,4 +1,4 @@
-import lightTheme from 'prism-react-renderer/themes/github/index.cjs.js';
+import themes from 'prism-react-renderer';
 
 const arrowLight = {
   plain: {
@@ -6,7 +6,7 @@ const arrowLight = {
     backgroundColor: '#f8fafd',
   },
   styles: [
-    ...lightTheme.styles,
+    ...themes.github.styles,
     {
       types: ['title'],
       style: {
