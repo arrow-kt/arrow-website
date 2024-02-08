@@ -242,3 +242,31 @@ fun Person.moveToAmsterdamInside(): Person = copy {
 }
 ```
 <!--- KNIT example-lens-domain-03.kt -->
+
+### Sealed class hierarchies
+
+If you have a set of classes with a common sealed parent, then lenses
+can be generated for those properties shared by all of them.
+Those properties must appear already in the common parent.
+
+For example, the plug-in generates a lens of the `name` field given
+the code below. This lens complements the [prisms](../prism-iso)
+that are generated to focus on each of the two subclasses.
+
+```kotlin
+@optics sealed interface User {
+  val name: String
+
+  companion object
+
+  data class Person(
+    override val name: String,
+    val age: Int
+  ): User
+
+  data class Company(
+    override val name: String,
+    val vat: VATNumber
+  ): User
+}
+```
