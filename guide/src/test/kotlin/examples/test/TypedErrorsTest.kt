@@ -38,8 +38,8 @@ class TypedErrorsTest : StringSpec({
     arrow.website.examples.exampleTypedErrors16.example()
   }
 
-  "ExampleTypedErrors18" {
-    arrow.website.examples.exampleTypedErrors18.example()
+  "ExampleTypedErrors17" {
+    arrow.website.examples.exampleTypedErrors17.example()
   }
 
   "ExampleTypedErrors19" {
@@ -48,6 +48,10 @@ class TypedErrorsTest : StringSpec({
 
   "ExampleTypedErrors20" {
     arrow.website.examples.exampleTypedErrors20.example()
+  }
+
+  "ExampleTypedErrors21" {
+    arrow.website.examples.exampleTypedErrors21.example()
   }
 
 }) {

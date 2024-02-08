@@ -1,4 +1,8 @@
 // This file was automatically generated from working-with-typed-errors.md by Knit tool. Do not edit.
 package arrow.website.examples.exampleTypedErrors17
 
-data class User(val name: String, val age: Int)
+fun example() {
+  (1..10).forEachAccumulating { i ->
+    ensure(i % 2 == 0) { "$i is not even" }
+  }
+}

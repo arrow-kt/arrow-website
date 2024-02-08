@@ -711,6 +711,22 @@ fun example() {
 <!--- KNIT example-typed-errors-16.kt -->
 <!--- TEST assert -->
 
+:::tip Accumulating errors but not values
+
+If you need to execute a computation that may `raise` errors over all the elements of an iterable or sequence, but without storing the resulting values, `forEachAccumulating` is your tool of choice. The relation between `mapOrAccumulate` and `forEachAccumulating` is similar to that of `map` and `forEach` in Kotlin's standard library.
+
+```kotlin
+fun example() {
+  (1..10).forEachAccumulating { i ->
+    ensure(i % 2 == 0) { "$i is not even" }
+  }
+}
+```
+<!--- KNIT example-typed-errors-17.kt -->
+<!--- TEST assert -->
+
+:::
+
 ### Accumulating different computations
 
 In the example above we are providing one single function to operate on a sequence of elements.
@@ -722,7 +738,7 @@ As a guiding example, let's consider information about a user, where the name sh
 ```kotlin
 data class User(val name: String, val age: Int)
 ```
-<!--- KNIT example-typed-errors-17.kt -->
+<!--- KNIT example-typed-errors-18.kt -->
 
 It's customary to define the different problems that may arise from validation as a sealed interface:
 
@@ -762,7 +778,7 @@ fun example() {
   User("", -1) shouldBe Left(UserProblem.EmptyName)
 }
 ```
-<!--- KNIT example-typed-errors-18.kt -->
+<!--- KNIT example-typed-errors-19.kt -->
 <!--- TEST assert -->
 
 <!--- INCLUDE
@@ -805,7 +821,7 @@ fun example() {
   User("", -1) shouldBe Left(nonEmptyListOf(UserProblem.EmptyName, UserProblem.NegativeAge(-1)))
 }
 ```
-<!--- KNIT example-typed-errors-19.kt -->
+<!--- KNIT example-typed-errors-20.kt -->
 <!--- TEST assert -->
 
 :::tip Error accumulation and concurrency
@@ -842,7 +858,7 @@ fun example() {
   intError shouldBe Either.Left("problem".length)
 }
 -->
-<!--- KNIT example-typed-errors-20.kt -->
+<!--- KNIT example-typed-errors-21.kt -->
 <!--- TEST assert -->
 
 A very common pattern is using `withError` to "bridge" validation errors of sub-components into validation errors of the larger value.
