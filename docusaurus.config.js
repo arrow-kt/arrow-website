@@ -79,7 +79,7 @@ const createConfig = async () => {
         image: '/img/social-card.jpg',
         colorMode: {
           defaultMode: 'light',
-          disableSwitch: true,
+          disableSwitch: false,
           respectPrefersColorScheme: false,
         },
         docs: {

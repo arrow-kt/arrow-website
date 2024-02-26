@@ -91,6 +91,12 @@
   --search-local-icon-stroke-width: 1;
 }
 
+[data-theme="dark"]:root {
+  --arrow-grey-primary: rgb(218, 221, 225);
+  --arrow-grey-secondary: rgb(218, 221, 225);
+  --ifm-footer-background-color: var(--ifm-color-black);
+}
+
 .plugin-blog {
   --ifm-avatar-photo-size: 2rem;
 }
