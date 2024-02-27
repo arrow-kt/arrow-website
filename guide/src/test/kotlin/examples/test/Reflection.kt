@@ -1,23 +1,22 @@
 // This file was automatically generated from reflection.md by Knit tool. Do not edit.
 package arrow.core.examples.test
 
-import io.kotest.core.spec.style.StringSpec
+import kotlin.test.Test
+import kotlinx.coroutines.test.runTest
 import arrow.website.captureOutput
 import kotlinx.knit.test.verifyOutputLines
 
-class Reflection : StringSpec({
-  "ExampleReflection01" {
+class Reflection {
+  @Test fun ExampleReflection01() = runTest {
     arrow.website.examples.exampleReflection01.example()
   }
 
-  "ExampleReflection02" {
+  @Test fun ExampleReflection02() = runTest {
     arrow.website.examples.exampleReflection02.example()
   }
 
-  "ExampleReflection03" {
+  @Test fun ExampleReflection03() = runTest {
     arrow.website.examples.exampleReflection03.example()
   }
 
-}) {
-  override fun timeout(): Long = 1000
 }

@@ -1,14 +1,15 @@
 // This file was automatically generated from ${file.name} by Knit tool. Do not edit.
 package ${test.package}
 
-import io.kotest.core.spec.style.StringSpec
+import kotlin.test.Test
+import kotlinx.coroutines.test.runTest
 import arrow.website.captureOutput
 import kotlinx.knit.test.verifyOutputLines
 
-class ${test.name} : StringSpec({
+class ${test.name} {
 <#list cases as case>
   <#assign method = test["mode.${case.param}"]!"custom">
-  "${case.name}" {
+  @Test fun ${case.name}() = runTest {
     <#if case.param == "assert">
     ${case.knit.package}.${case.knit.name}.example()
     <#else>
@@ -26,6 +27,4 @@ class ${test.name} : StringSpec({
   }
 
 </#list>
-}) {
-  override fun timeout(): Long = 1000
 }

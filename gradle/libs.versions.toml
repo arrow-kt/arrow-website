@@ -10,18 +10,26 @@ kotlinKafka = "0.3.1"
 
 [libraries]
 coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "coroutines" }
+coroutines-test = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-test", version.ref = "coroutines" }
 kotest-assertions-core = { module = "io.kotest:kotest-assertions-core", version.ref = "kotest" }
-kotest-framework-engine = { module = "io.kotest:kotest-framework-engine", version.ref = "kotest" }
 kotest-property = { module = "io.kotest:kotest-property", version.ref = "kotest" }
-kotest-runner-junit = { module = "io.kotest:kotest-runner-junit5", version.ref = "kotest" }
 kotlin-stdlib = { module = "org.jetbrains.kotlin:kotlin-stdlib" }
-arrow-core = { module = "io.arrow-kt:arrow-core", version.ref = "arrow" }
+kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test" }
+arrow-core-lib = { module = "io.arrow-kt:arrow-core", version.ref = "arrow" }
+arrow-core-highArity = { module = "io.arrow-kt:arrow-core-high-arity", version.ref = "arrow" }
+arrow-core-serialization = { module = "io.arrow-kt:arrow-core-serialization", version.ref = "arrow" }
 arrow-fx-coroutines = { module = "io.arrow-kt:arrow-fx-coroutines", version.ref = "arrow" }
+arrow-autoclose = { module = "io.arrow-kt:arrow-autoclose", version.ref = "arrow" }
 arrow-resilience = { module = "io.arrow-kt:arrow-resilience", version.ref = "arrow" }
+arrow-atomic = { module = "io.arrow-kt:arrow-atomic", version.ref = "arrow" }
 arrow-fx-stm = { module = "io.arrow-kt:arrow-fx-stm", version.ref = "arrow" }
-arrow-optics = { module = "io.arrow-kt:arrow-optics", version.ref = "arrow" }
-arrow-opticsPlugin = { module = "io.arrow-kt:arrow-optics-ksp-plugin", version.ref = "arrow" }
-arrow-opticsReflect = { module = "io.arrow-kt:arrow-optics-reflect", version.ref = "arrow" }
+arrow-optics-lib = { module = "io.arrow-kt:arrow-optics", version.ref = "arrow" }
+arrow-optics-plugin = { module = "io.arrow-kt:arrow-optics-ksp-plugin", version.ref = "arrow" }
+arrow-optics-reflect = { module = "io.arrow-kt:arrow-optics-reflect", version.ref = "arrow" }
+arrow-optics-compose = { module = "io.arrow-kt:arrow-optics-compose", version.ref = "arrow" }
+arrow-collectors = { module = "io.arrow-kt:arrow-collectors", version.ref = "arrow" }
+arrow-eval = { module = "io.arrow-kt:arrow-eval", version.ref = "arrow" }
+arrow-cache4k = { module = "io.arrow-kt:arrow-cache4k", version.ref = "arrow" }
 kotlinx-knit = { module = "org.jetbrains.kotlinx:kotlinx-knit", version.ref = "knit" }
 kotlinx-knit-test = { module = "org.jetbrains.kotlinx:kotlinx-knit-test", version.ref = "knit" }
 suspendapp = { module = "io.arrow-kt:suspendapp", version.ref = "suspendapp" }
@@ -30,4 +38,5 @@ kafka-kotlin = { module = "io.github.nomisrev:kotlin-kafka", version.ref = "kotl
 [plugins]
 kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
 kotlinx-knit = { id = "org.jetbrains.kotlinx.knit", version.ref = "knit" }
+kotlinx-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
 ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
