@@ -2,8 +2,9 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 @Suppress("DSL_SCOPE_VIOLATION")
 plugins {
-  id(libs.plugins.kotlin.jvm.get().pluginId)
+  alias(libs.plugins.kotlin.jvm)
   alias(libs.plugins.ksp)
+  alias(libs.plugins.kotlinx.serialization)
 }
 
 repositories {
@@ -16,7 +17,7 @@ dependencies {
   testImplementation(libs.coroutines.test)
   testImplementation(libs.kotlinx.knit.test)
   testImplementation(libs.arrow.core.lib)
-  testImplementation(libs.arrow.core.highArity)
+  // testImplementation(libs.arrow.core.highArity)
   testImplementation(libs.arrow.core.serialization)
   testImplementation(libs.arrow.fx.coroutines)
   testImplementation(libs.arrow.autoclose)
@@ -25,7 +26,7 @@ dependencies {
   testImplementation(libs.arrow.fx.stm)
   testImplementation(libs.arrow.optics.lib)
   testImplementation(libs.arrow.optics.reflect)
-  testImplementation(libs.arrow.optics.compose)
+  // testImplementation(libs.arrow.optics.compose)
   testImplementation(libs.arrow.collectors)
   testImplementation(libs.arrow.eval)
   testImplementation(libs.arrow.cache4k)
