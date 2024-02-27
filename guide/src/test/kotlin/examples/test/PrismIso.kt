@@ -1,19 +1,18 @@
 // This file was automatically generated from prism-iso.md by Knit tool. Do not edit.
 package arrow.core.examples.test
 
-import io.kotest.core.spec.style.StringSpec
+import kotlin.test.Test
+import kotlinx.coroutines.test.runTest
 import arrow.website.captureOutput
 import kotlinx.knit.test.verifyOutputLines
 
-class PrismIso : StringSpec({
-  "ExamplePrismIso02" {
+class PrismIso {
+  @Test fun ExamplePrismIso02() = runTest {
     arrow.website.examples.examplePrismIso02.example()
   }
 
-  "ExamplePrismIso03" {
+  @Test fun ExamplePrismIso03() = runTest {
     arrow.website.examples.examplePrismIso03.example()
   }
 
-}) {
-  override fun timeout(): Long = 1000
 }

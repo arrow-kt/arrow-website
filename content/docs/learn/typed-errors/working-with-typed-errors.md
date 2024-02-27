@@ -715,9 +715,14 @@ fun example() {
 
 If you need to execute a computation that may `raise` errors over all the elements of an iterable or sequence, but without storing the resulting values, `forEachAccumulating` is your tool of choice. The relation between `mapOrAccumulate` and `forEachAccumulating` is similar to that of `map` and `forEach` in Kotlin's standard library.
 
+<!--- INCLUDE
+import arrow.core.raise.either
+import arrow.core.raise.ensure
+import arrow.core.raise.forEachAccumulating
+-->
 ```kotlin
-fun example() {
-  (1..10).forEachAccumulating { i ->
+fun example() = either {
+  forEachAccumulating(1 .. 10) { i ->
     ensure(i % 2 == 0) { "$i is not even" }
   }
 }

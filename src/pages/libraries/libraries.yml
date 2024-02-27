@@ -27,6 +27,11 @@ libraries:
     href: https://github.com/sksamuel/tribune
     icon: icon-typed-errors.svg
     body: Toolset for creating simple parsers from raw input types, to properly validated parsed types
+  
+  - title: Akkurate
+    href: https://akkurate.dev/
+    icon: icon-events.svg
+    body: Expressive validation library for Kotlin
 
   - title: Parsus
     href: https://github.com/alllex/parsus
