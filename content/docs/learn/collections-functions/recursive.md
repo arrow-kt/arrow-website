@@ -168,13 +168,14 @@ library that covers all your desired caching options, in the form of
 
 ```kotlin
 import arrow.core.MemoizedDeepRecursiveFunction
-import arrow.core.buildCache4k
+import arrow.core.Cache4kMemoizationCache
+import arrow.core.buildCache4K
 
-val cache = buildCache4k {
-  maximumCacheSize(100)
-}
+val cache = buildCache4K<Int, Int> { maximumCacheSize(100) }
 
-val fibonacciWorker = MemoizedDeepRecursiveFunction<Int, Int>(cache) { n ->
+val fibonacciWorker = MemoizedDeepRecursiveFunction<Int, Int>(
+  Cache4kMemoizationCache(cache)
+) { n ->
   when (n) {
     0 -> 0
     1 -> 1
