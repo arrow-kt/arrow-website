@@ -56,6 +56,12 @@ See the [corresponding section](../quickstart/serialization).
 Hoplite is a great library for handling configurations and supporting various sources, formats, and cascading setups. The library supports most
 Arrow types for [decoding](https://github.com/sksamuel/hoplite#decoders).
 
+## Validation
+
+### [Akkurate](https://akkurate.dev/)
+
+Akkurate provides a language to describe complex validation code. It provides [integration](https://akkurate.dev/docs/arrow-integration.html) with Arrow's typed error mechanism.
+
 ## HTTP
 
 ### [Retrofit](https://square.github.io/retrofit/)
