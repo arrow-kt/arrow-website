@@ -34,6 +34,7 @@ dependencies {
   testImplementation(libs.kotest.property)
   testImplementation(libs.suspendapp)
   testImplementation(libs.kafka.kotlin)
+  testImplementation(libs.cache4k)
   ksp(libs.arrow.optics.plugin)
 }
 

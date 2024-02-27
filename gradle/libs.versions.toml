@@ -7,6 +7,7 @@ arrow = "1.2.2"
 ksp = "1.9.22-1.0.17"
 suspendapp = "0.4.0"
 kotlinKafka = "0.3.1"
+cache4k = "0.13.0"
 
 [libraries]
 coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "coroutines" }
@@ -34,6 +35,7 @@ kotlinx-knit = { module = "org.jetbrains.kotlinx:kotlinx-knit", version.ref = "k
 kotlinx-knit-test = { module = "org.jetbrains.kotlinx:kotlinx-knit-test", version.ref = "knit" }
 suspendapp = { module = "io.arrow-kt:suspendapp", version.ref = "suspendapp" }
 kafka-kotlin = { module = "io.github.nomisrev:kotlin-kafka", version.ref = "kotlinKafka" }
+cache4k = { module = "io.github.reactivecircus.cache4k:cache4k", version.ref = "cache4k" }
 
 [plugins]
 kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }

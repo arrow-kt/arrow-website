@@ -19,4 +19,8 @@ class RecursiveFunctionsTest {
     arrow.website.examples.exampleRecursive03.example()
   }
 
+  @Test fun ExampleRecursive04() = runTest {
+    arrow.website.examples.exampleRecursive04.example()
+  }
+
 }
