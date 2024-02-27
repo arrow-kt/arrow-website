@@ -32,12 +32,23 @@ Each section in the documentation roughly corresponds to one of the libraries th
 
 | Library | Features |
 | --- | --- |
-| `arrow-core` <br /> _Companion to [Kotlin's standard library](https://kotlinlang.org/api/latest/jvm/stdlib/)_ | [Typed errors](../typed-errors/), including `Raise`, `Either`, and `Option` <br /> [Non-empty collections](../collections-functions/non-empty) <br /> [Utilities for functions](../collections-functions/utils/) and [memoization](../collections-functions/recursive/) |
-| `arrow-fx-coroutines` <br /> _Companion to [KotlinX Coroutines](https://kotlinlang.org/api/kotlinx.coroutines/kotlinx-coroutines-core/)_ | [High-level concurrency](../coroutines/parallel), including `parMap` and `parZip` <br /> [Resource management](../coroutines/resource-safety/) |
+| `arrow-core` <br /> _Companion to [Kotlin's standard library](https://kotlinlang.org/api/latest/jvm/stdlib/)_ | [Typed errors](../typed-errors/), including `Raise`, `Either`, and `Option` <br /> [Non-empty collections](../collections-functions/non-empty) <br /> [Memoized recursive functions](../collections-functions/recursive/) |
+| `arrow-fx-coroutines` <br /> _Companion to [KotlinX Coroutines](https://kotlinlang.org/api/kotlinx.coroutines/kotlinx-coroutines-core/)_ | [High-level concurrency](../coroutines/parallel), including `parMap` and `parZip` <br /> [Resource management](../coroutines/resource-safety/) (with `suspend`) |
+| `arrow-autoclose` | [Resource management](../coroutines/resource-safety/) (no `suspend`) |
 | `arrow-resilience` | [Resilience patterns](../resilience/) |
-| `arrow-fx-stm` | [Software Transactional Memory](../coroutines/stm/) (STM) |
 | `arrow-optics` + `arrow-optics-ksp-plugin` <br /> _Companion to [data](https://kotlinlang.org/docs/data-classes.html) and [sealed](https://kotlinlang.org/docs/sealed-classes.html) classes_ | Utilities for [immutable data](../immutable-data/intro/) |
+| `arrow-fx-stm` | [Software Transactional Memory](../coroutines/stm/) (STM) |
 | `arrow-atomic` <br /> _Multiplatform-ready [references](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.native.concurrent/-atomic-reference/)_ | [Atomic references](../coroutines/concurrency-primitives/#atomic) |
+| `arrow-collectors` <br /> _Kotlin-ready [collectors](https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/stream/package-summary.html)_ | Better aggregation over sequences |
+| `arrow-eval` <br /> _More powerful [laziness](https://kotlinlang.org/docs/delegated-properties.html#lazy-properties)_ | [Control over evaluation](../collections-functions/eval/) |
+| `arrow-functions` <br /> <small>Part of `arrow-core` in 1.x</small> | [Utilities for functions](../collections-functions/utils/) |
+| `arrow-core-high-arity` | `arrow-core` for more than 10 parameters |
+
+| Library | Integrates with |
+| --- | --- |
+| `arrow-core-serialization` | [KotlinX Serialization](https://kotlinlang.org/docs/serialization.html) for core types |
+| `arrow-cache4k` | [cache4k](https://reactivecircus.github.io/cache4k/) for [memoization](../collections-functions/recursive/) |
+| `arrow-optics-compose` | [Compose state management](https://developer.android.com/jetpack/compose/state) with [optics](../immutable-data/intro/) |
 
 :::note We'd love to hear from you!
 
