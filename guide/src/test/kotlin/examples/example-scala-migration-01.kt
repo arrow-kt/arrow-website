@@ -9,7 +9,7 @@ interface Problem
 fun validName(name: String): Either<Problem, String> = TODO()
 fun validAge(age: Int): Either<Problem, Int> = TODO()
 
-fun mkUser(name: String, age: Int): Either<Problem, Person> = either {
+fun mkPerson(name: String, age: Int): Either<Problem, Person> = either {
   val name_ = validName(name).bind()
   val age_  = validAge(age).bind()
   Person(name_, age_)

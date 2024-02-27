@@ -1,4 +1,4 @@
-import darkTheme from 'prism-react-renderer/themes/vsDark/index.cjs.js';
+import { themes } from 'prism-react-renderer';
 
 const arrowDark = {
   plain: {
@@ -6,7 +6,7 @@ const arrowDark = {
     backgroundColor: '#222E51',
   },
   styles: [
-    ...darkTheme.styles,
+    ...themes.vsDark.styles,
     {
       types: ['title'],
       style: {
