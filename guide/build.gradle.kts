@@ -12,6 +12,8 @@ repositories {
 
 dependencies {
   testImplementation(libs.kotlin.stdlib)
+  testImplementation(libs.kotlin.test)
+  testImplementation(libs.coroutines.test)
   testImplementation(libs.kotlinx.knit.test)
   testImplementation(libs.arrow.core.lib)
   testImplementation(libs.arrow.core.highArity)
@@ -29,15 +31,9 @@ dependencies {
   testImplementation(libs.arrow.cache4k)
   testImplementation(libs.kotest.assertions.core)
   testImplementation(libs.kotest.property)
-  testImplementation(libs.kotest.runner.junit)
-  testImplementation(libs.kotest.framework.engine)
   testImplementation(libs.suspendapp)
   testImplementation(libs.kafka.kotlin)
   ksp(libs.arrow.optics.plugin)
-}
-
-sourceSets.test {
-  java.srcDirs("examples", "test")
 }
 
 tasks {

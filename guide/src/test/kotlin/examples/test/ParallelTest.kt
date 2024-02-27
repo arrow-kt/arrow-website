@@ -1,12 +1,13 @@
 // This file was automatically generated from parallel.md by Knit tool. Do not edit.
 package arrow.core.examples.test
 
-import io.kotest.core.spec.style.StringSpec
+import kotlin.test.Test
+import kotlinx.coroutines.test.runTest
 import arrow.website.captureOutput
 import kotlinx.knit.test.verifyOutputLines
 
-class ParallelTest : StringSpec({
-  "ExampleParallel04" {
+class ParallelTest {
+  @Test fun ExampleParallel04() = runTest {
     captureOutput("ExampleParallel04") { arrow.website.examples.exampleParallel04.example() }
       .verifyOutputLines(
         "Sleeping for 500 milliseconds ...",
@@ -15,7 +16,7 @@ class ParallelTest : StringSpec({
       )
   }
 
-  "ExampleParallel05" {
+  @Test fun ExampleParallel05() = runTest {
     captureOutput("ExampleParallel05") { arrow.website.examples.exampleParallel05.example() }
       .verifyOutputLines(
         "Sleeping for 500 milliseconds ...",
@@ -26,7 +27,7 @@ class ParallelTest : StringSpec({
       )
   }
 
-  "ExampleParallel06" {
+  @Test fun ExampleParallel06() = runTest {
     captureOutput("ExampleParallel06") { arrow.website.examples.exampleParallel06.example() }
       .verifyOutputLines(
         "Sleeping for 500 milliseconds ...",
@@ -37,6 +38,4 @@ class ParallelTest : StringSpec({
       )
   }
 
-}) {
-  override fun timeout(): Long = 1000
 }

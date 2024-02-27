@@ -10,11 +10,11 @@ kotlinKafka = "0.3.1"
 
 [libraries]
 coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "coroutines" }
+coroutines-test = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-test", version.ref = "coroutines" }
 kotest-assertions-core = { module = "io.kotest:kotest-assertions-core", version.ref = "kotest" }
-kotest-framework-engine = { module = "io.kotest:kotest-framework-engine", version.ref = "kotest" }
 kotest-property = { module = "io.kotest:kotest-property", version.ref = "kotest" }
-kotest-runner-junit = { module = "io.kotest:kotest-runner-junit5", version.ref = "kotest" }
 kotlin-stdlib = { module = "org.jetbrains.kotlin:kotlin-stdlib" }
+kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test" }
 arrow-core-lib = { module = "io.arrow-kt:arrow-core", version.ref = "arrow" }
 arrow-core-highArity = { module = "io.arrow-kt:arrow-core-high-arity", version.ref = "arrow" }
 arrow-core-serialization = { module = "io.arrow-kt:arrow-core-serialization", version.ref = "arrow" }
