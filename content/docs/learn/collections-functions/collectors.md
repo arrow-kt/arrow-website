@@ -11,6 +11,10 @@ guaranteeing that those values are consumed only once.
 Take for example the computation of the average of a list. You can 
 certainly write a simple version using the built-in functions,
 
+<!--- INCLUDE
+val list = listOf(1, 2, 3)
+-->
+
 ```kotlin
 val average = list.sum() / list.size
 ```
@@ -28,10 +32,18 @@ to perform from the actual collection. To create a new collector
 you use one of the built-in ones, and combine them using `zip`.
 
 ```kotlin
-val averageCollector = zip(Collectors.sum, Collectors.length) { s, l -> 
-  s.toDouble() / l.toDouble() 
-}
+import arrow.collectors.Collectors
+import arrow.collectors.collect
+import arrow.collectors.zip
+
+fun divide(x: Int, y: Int): Double = x.toDouble() / y.toDouble()
+
+val averageCollector = zip(Collectors.sum, Collectors.length, ::divide)
 ```
+
+<!--- INCLUDE
+val list = listOf(1, 2, 3)
+-->
 
 You then may apply the collector to the sequence or collection you want.
 
