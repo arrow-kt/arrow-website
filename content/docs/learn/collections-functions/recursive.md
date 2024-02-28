@@ -1,5 +1,5 @@
 ---
-sidebar_position: 2
+sidebar_position: 3
 description: Making functions stack-safe and efficient
 ---
 
@@ -152,16 +152,46 @@ fun example() {
 <!--- KNIT example-recursive-03.kt -->
 <!--- TEST assert -->
 
-:::caution Memoization takes memory
+### Memoization takes memory
 
-If you define the memoized version of your function as a `val`, as we've done
+If you define the memoized version of your function as a `val` as we've done
 above, the cache is shared among **all** calls to your function. In the worst
 case, this may result in memory which cannot be reclaimed throughout the whole
-execution, so you should apply this technique carefully.
+execution. If this may pose a problem in your application, you should
+consider a better [eviction policy for the cache](https://otee.dev/2021/08/18/cache-replacement-policy.html).
 
-There's some literature about [eviction policies for memoization](https://otee.dev/2021/08/18/cache-replacement-policy.html),
-but at the moment of writing memoize doesn't offer any type of control over the
-cached values. [Aedile](https://github.com/sksamuel/aedile) is a Kotlin-first
-caching library which you can use to manually tweak your memoization.
+You can tweak `MemoizedDeepRecursiveFunction`'s caching mechanism using
+the `cache` parameter. Apart from the built-in options, we provide integration
+with [cache4k](https://reactivecircus.github.io/cache4k/), a Multiplatform-ready
+library that covers all your desired caching options, in the form of
+`arrow-cache4k`.
 
-:::
+```kotlin
+import arrow.core.MemoizedDeepRecursiveFunction
+import arrow.core.Cache4kMemoizationCache
+import arrow.core.buildCache4K
+
+val cache = buildCache4K<Int, Int> { maximumCacheSize(100) }
+
+val fibonacciWorker = MemoizedDeepRecursiveFunction<Int, Int>(
+  Cache4kMemoizationCache(cache)
+) { n ->
+  when (n) {
+    0 -> 0
+    1 -> 1
+    else -> callRecursive(n - 1) + callRecursive(n - 2)
+  }
+}
+```
+<!--- INCLUDE
+fun fibonacci(n: Int): Int {
+  require(n >= 0)
+  return fibonacciWorker(n)
+}
+
+fun example() {
+  fibonacci(6) shouldBe 8
+}
+-->
+<!--- KNIT example-recursive-04.kt -->
+<!--- TEST assert -->

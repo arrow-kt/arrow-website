@@ -1,5 +1,5 @@
 ---
-sidebar_position: 3
+sidebar_position: 4
 description: Avoiding duplicate work for pure functions
 ---
 
@@ -8,9 +8,19 @@ description: Avoiding duplicate work for pure functions
 Say that your function is pure, that is, given the same inputs it always
 produces the same outputs and it doesn't produce any other effects like printing
 to the screen. Then, once you execute the function for a given input, you could
-save (or cache) the result, so the next time you need you don't to compute it
+save (or cache) the result, so the next time you need you don't compute it
 again. The general technique of saving outputs to avoid double computation of
 pure functions is known as _memoization_.
+
+:::warning `MemoizedDeepRecursiveFunction` recommended
+
+The techniques in this section are quite low-level, and require careful
+attention when used in recursive functions. 
+[`MemoizedDeepRecursiveFunction`](../recursive/#memoized-recursive-functions)
+is an easier-to-use alternative, which also provides more options for
+configuring the caching policy.
+
+:::
 
 ## Simple memoization
 

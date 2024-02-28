@@ -71,8 +71,8 @@ Simply include the desired library in your `dependencies` block or as a
 
 ```kotlin
 dependencies {
-  implementation("io.arrow-kt:arrow-core:1.2.0")
-  implementation("io.arrow-kt:arrow-fx-coroutines:1.2.0")
+  implementation("io.arrow-kt:arrow-core:1.2.1")
+  implementation("io.arrow-kt:arrow-fx-coroutines:1.2.1")
 }
 ```
 
@@ -81,8 +81,8 @@ dependencies {
 
 ```groovy
 dependencies {
-  implementation 'io.arrow-kt:arrow-core:1.2.0'
-  implementation 'io.arrow-kt:arrow-fx-coroutines:1.2.0'
+  implementation 'io.arrow-kt:arrow-core:1.2.1'
+  implementation 'io.arrow-kt:arrow-fx-coroutines:1.2.1'
 }
 ```
 
@@ -94,12 +94,12 @@ dependencies {
 <dependency>
   <groupId>io.arrow-kt</groupId>
   <artifactId>arrow-core</artifactId>
-  <version>1.2.0</version>
+  <version>1.2.1</version>
 </dependency>
 <dependency>
   <groupId>io.arrow-kt</groupId>
   <artifactId>arrow-fx-coroutines</artifactId>
-  <version>1.2.0</version>
+  <version>1.2.1</version>
 </dependency>
 ```
 
@@ -118,7 +118,7 @@ your Gradle build has several subprojects.
 
 ```yaml
 [versions]
-arrow = "1.2.0"
+arrow = "1.2.1"
 # other versions
 
 [libraries]
@@ -172,7 +172,7 @@ to include `arrow-stack`, which declares versions for the rest of the components
 
 ```kotlin
 dependencies {
-  implementation(platform("io.arrow-kt:arrow-stack:1.2.0"))
+  implementation(platform("io.arrow-kt:arrow-stack:1.2.1"))
   // no versions on libraries
   implementation("io.arrow-kt:arrow-core")
   implementation("io.arrow-kt:arrow-fx-coroutines")
@@ -184,7 +184,7 @@ dependencies {
 
 ```groovy
 dependencies {
-  implementation platform('io.arrow-kt:arrow-stack:1.2.0')
+  implementation platform('io.arrow-kt:arrow-stack:1.2.1')
   // no versions on libraries
   implementation 'io.arrow-kt:arrow-core'
   implementation 'io.arrow-kt:arrow-fx-coroutines'
@@ -199,7 +199,7 @@ dependencies {
 <dependency>
     <groupId>io.arrow-kt</groupId>
     <artifactId>arrow-stack</artifactId>
-    <version>1.2.0</version>
+    <version>1.2.1</version>
     <type>pom</type>
     <scope>import</scope>
 </dependency>
@@ -234,8 +234,8 @@ plugins {
 }
 
 dependencies {
-  implementation("io.arrow-kt:arrow-optics:1.2.0")
-  ksp("io.arrow-kt:arrow-optics-ksp-plugin:1.2.0")
+  implementation("io.arrow-kt:arrow-optics:1.2.1")
+  ksp("io.arrow-kt:arrow-optics-ksp-plugin:1.2.1")
 }
 ```
 
@@ -248,8 +248,8 @@ plugins {
 }
 
 dependencies {
-  implementation 'io.arrow-kt:arrow-optics:1.2.0'
-  ksp 'io.arrow-kt:arrow-optics-ksp-plugin:1.2.0'
+  implementation 'io.arrow-kt:arrow-optics:1.2.1'
+  ksp 'io.arrow-kt:arrow-optics-ksp-plugin:1.2.1'
 }
 ```
 
