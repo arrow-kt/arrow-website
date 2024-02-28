@@ -39,8 +39,8 @@ class TypedErrorsTest {
     arrow.website.examples.exampleTypedErrors16.example()
   }
 
-  @Test fun ExampleTypedErrors18() = runTest {
-    arrow.website.examples.exampleTypedErrors18.example()
+  @Test fun ExampleTypedErrors17() = runTest {
+    arrow.website.examples.exampleTypedErrors17.example()
   }
 
   @Test fun ExampleTypedErrors19() = runTest {
@@ -49,6 +49,10 @@ class TypedErrorsTest {
 
   @Test fun ExampleTypedErrors20() = runTest {
     arrow.website.examples.exampleTypedErrors20.example()
+  }
+
+  @Test fun ExampleTypedErrors21() = runTest {
+    arrow.website.examples.exampleTypedErrors21.example()
   }
 
 }
