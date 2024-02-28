@@ -88,7 +88,7 @@ val address: Lens<Person, Address>
                           ↳ this lens gives access to an 'Address' value
 ```
 
-### Operations
+## Operations
 
 Lenses provide three primary operations:
 
@@ -243,7 +243,7 @@ fun Person.moveToAmsterdamInside(): Person = copy {
 ```
 <!--- KNIT example-lens-domain-03.kt -->
 
-### Sealed class hierarchies
+## Sealed class hierarchies
 
 If you have a set of classes with a common sealed parent, then lenses
 can be generated for those properties shared by all of them.
@@ -279,3 +279,35 @@ typealias VATNumber = Int
 }
 ```
 <!--- KNIT example-sealed-domain-01.kt -->
+
+## Integration with Compose
+
+If you are using Compose, either in [Android](https://developer.android.com/jetpack/compose)
+or [Multiplaftorm](https://www.jetbrains.com/lp/compose-multiplatform/)
+flavors, you often need to update a [`MutableState`](https://developer.android.com/jetpack/compose/state)
+by applying some modification to the previous value.
+The `arrow-optics-compose` package provides a version of
+`copy` useful in those situations.
+
+```
+class AppViewModel: ViewModel() {
+  private val _personData = mutableStateOf<Person>(...)
+
+  fun updatePersonalData(
+    newName: String, newAge: Int
+  ) {
+    _personData.updateCopy {
+      Person.name set newName
+      Person.age set newAge
+    }
+  }
+}
+```
+
+:::note Compose and Snapshots
+
+`updateCopy` uses the [snapshot system](https://dev.to/zachklipp/introduction-to-the-compose-snapshot-system-19cn)
+in Compose to ensure that all the modifications in the
+block happen atomically.
+
+:::
