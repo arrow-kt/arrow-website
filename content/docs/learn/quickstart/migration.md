@@ -2,7 +2,7 @@
 id: migration
 title: Migration to Arrow 1.2.0
 description: Migration guide to upgrade to Arrow 1.2.0.
-sidebar_position: 3
+sidebar_position: 4
 ---
 
 # Migration to Arrow 1.2.0

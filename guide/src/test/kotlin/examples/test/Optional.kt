@@ -1,23 +1,22 @@
 // This file was automatically generated from optional.md by Knit tool. Do not edit.
 package arrow.core.examples.test
 
-import io.kotest.core.spec.style.StringSpec
+import kotlin.test.Test
+import kotlinx.coroutines.test.runTest
 import arrow.website.captureOutput
 import kotlinx.knit.test.verifyOutputLines
 
-class Optional : StringSpec({
-  "ExampleOptional01" {
+class Optional {
+  @Test fun ExampleOptional01() = runTest {
     arrow.website.examples.exampleOptional01.example()
   }
 
-  "ExampleOptional02" {
+  @Test fun ExampleOptional02() = runTest {
     arrow.website.examples.exampleOptional02.example()
   }
 
-  "ExampleOptional03" {
+  @Test fun ExampleOptional03() = runTest {
     arrow.website.examples.exampleOptional03.example()
   }
 
-}) {
-  override fun timeout(): Long = 1000
 }
