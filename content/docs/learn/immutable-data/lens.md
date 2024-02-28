@@ -253,20 +253,29 @@ For example, the plug-in generates a lens of the `name` field given
 the code below. This lens complements the [prisms](../prism-iso)
 that are generated to focus on each of the two subclasses.
 
+<!--- INCLUDE
+typealias VATNumber = Int
+-->
+
 ```kotlin
-@optics sealed interface User {
+@optics sealed interface SUser {
   val name: String
 
   companion object
+}
 
-  data class Person(
-    override val name: String,
-    val age: Int
-  ): User
+@optics data class SPerson(
+  override val name: String,
+  val age: Int
+): SUser {
+  companion object
+}
 
-  data class Company(
-    override val name: String,
-    val vat: VATNumber
-  ): User
+@optics data class SCompany(
+  override val name: String,
+  val vat: VATNumber
+): SUser {
+  companion object
 }
 ```
+<!--- KNIT example-sealed-domain-01.kt -->
