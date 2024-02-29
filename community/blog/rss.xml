@@ -4,22 +4,130 @@
         <title>Arrow Blog</title>
         <link>https://arrow-kt.io/community/blog</link>
         <description>Arrow Blog</description>
-        <lastBuildDate>Wed, 12 Jul 2023 00:00:00 GMT</lastBuildDate>
+        <lastBuildDate>Wed, 28 Feb 2024 00:00:00 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
         <generator>https://github.com/jpmonette/feed</generator>
         <language>en</language>
+        <item>
+            <title><![CDATA[Arrow 1.2.3 release]]></title>
+            <link>https://arrow-kt.io/community/blog/2024/02/28/arrow-1-2-3</link>
+            <guid>https://arrow-kt.io/community/blog/2024/02/28/arrow-1-2-3</guid>
+            <pubDate>Wed, 28 Feb 2024 00:00:00 GMT</pubDate>
+            <description><![CDATA[We are happy to announce the availability of version 1.2.3 of the Arrow collection of libraries.]]></description>
+            <content:encoded><![CDATA[<p>We are happy to announce the availability of version 1.2.3 of the Arrow collection of libraries.
+According to our plan, this is the last non-bugfix release of the 1.x series.
+From now on, our <code>main</code> branch targets Arrow 2.0, which should be the next major release.</p>
+<p>We are incredibly thankful to the many people that have contributed to this release,
+bringing new ideas and quite some code.</p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="new-features">New features<a href="https://arrow-kt.io/community/blog/2024/02/28/arrow-1-2-3#new-features" class="hash-link" aria-label="Direct link to New features" title="Direct link to New features">​</a></h2>
+<p>A version number like 1.2.3 sounds like a small bugfix release, but this is far from truth in
+this case: this release is full of new modules to help you be productive when writing Kotlin.</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="improved-focus-on-compose">Improved focus on Compose<a href="https://arrow-kt.io/community/blog/2024/02/28/arrow-1-2-3#improved-focus-on-compose" class="hash-link" aria-label="Direct link to Improved focus on Compose" title="Direct link to Improved focus on Compose">​</a></h3>
+<p>Arrow provides building blocks relevant to many projects using Kotlin.
+A large part of our community is doing frontend work, and during the latest months,
+the team has been trying to understand their needs, in order to make Arrow
+a relevant tool in that space.</p>
+<p>From that journey, we have put together a new documentation page highlighting
+different ways in which Arrow may be useful in your Compose application.
+There is also a new <a href="https://arrow-kt.io/learn/immutable-data/lens/#integration-with-compose"><code>arrow-optics-compose</code> module</a>
+that includes utilities to work with immutable data inside a <code>MutableState</code>
+or <code>MutableStateFlow</code>.</p>
+<p>We are eager to hear more use cases or needs where Arrow may help the lives
+of Kotlin developers. Feel free to drop by the <code>#arrow</code> channel in the Kotlin Slack,
+or open an issue or discussion in our <a href="https://github.com/arrow-kt/arrow" target="_blank" rel="noopener noreferrer">repository</a>.</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="non-suspend-resource-management">Non-<code>suspend</code> resource management<a href="https://arrow-kt.io/community/blog/2024/02/28/arrow-1-2-3#non-suspend-resource-management" class="hash-link" aria-label="Direct link to non-suspend-resource-management" title="Direct link to non-suspend-resource-management">​</a></h3>
+<p><a href="https://arrow-kt.io/learn/coroutines/resource-safety/">Resource safety</a> in Arrow
+has been traditionally tied to the use of coroutines and <code>suspend</code> functions.
+This is the right choice for Kotlin-first libraries, like Ktor or Koin, but many
+libraries still come from a Java background where no such feature exists.
+Beginning with this version, we provide two "variations" of resource management:</p>
+<ul>
+<li><code>Resource</code>, from the <code>arrow-fx-coroutines</code> module, is based on <code>suspend</code>
+and ensures the desired behavior alongside coroutines (including cancellation).</li>
+<li><code>AutoClose</code>, from the new <code>arrow-autoclose</code> module, provides almost the
+same API as <code>Resource</code>, but without the <code>suspend</code> requirement.</li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="forward-compatible-eval">Forward compatible <code>Eval</code><a href="https://arrow-kt.io/community/blog/2024/02/28/arrow-1-2-3#forward-compatible-eval" class="hash-link" aria-label="Direct link to forward-compatible-eval" title="Direct link to forward-compatible-eval">​</a></h3>
+<p>One of our goals is to make the transition to 2.0 as smooth as possible.
+You can <a href="https://arrow-kt.io/learn/quickstart/migration/">already migrate</a>
+to the new APIs by using Arrow 1.2.3, and then ensuring that you get no deprecation warnings.</p>
+<p>During this process, we were <a href="https://github.com/arrow-kt/arrow/issues/3039" target="_blank" rel="noopener noreferrer">made aware</a> that
+there was no clear story for the migration of <code>Eval</code>. On the other hand, the use cases are very narrow.
+The decision was to create a new <a href="https://arrow-kt.io/learn/collections-functions/eval/"><code>arrow-eval</code> module</a>,
+present since this release, and mark the one from <code>arrow-core</code> point the new module,
+instead of entirely removing this functionality from Arrow.</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="collectors">Collectors<a href="https://arrow-kt.io/community/blog/2024/02/28/arrow-1-2-3#collectors" class="hash-link" aria-label="Direct link to Collectors" title="Direct link to Collectors">​</a></h3>
+<p>The new <a href="https://arrow-kt.io/learn/collections-functions/collectors/"><code>arrow-collectors</code> module</a>
+allows composing operations over sequences of values
+(lists, flows, sequences) while ensuring that the sequence is traversed only once.
+This property is especially relevant when building the sequence is expensive, or simply
+cannot be reproduced, like a stream of data from a database or a flow of actions.</p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="improved-features">Improved features<a href="https://arrow-kt.io/community/blog/2024/02/28/arrow-1-2-3#improved-features" class="hash-link" aria-label="Direct link to Improved features" title="Direct link to Improved features">​</a></h2>
+<p>Several features in the library have been improved, to ensure that Arrow covers a variety
+of use cases.</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="lenses-for-sealed-classes">Lenses for sealed classes<a href="https://arrow-kt.io/community/blog/2024/02/28/arrow-1-2-3#lenses-for-sealed-classes" class="hash-link" aria-label="Direct link to Lenses for sealed classes" title="Direct link to Lenses for sealed classes">​</a></h3>
+<p>This was once of the <a href="https://github.com/arrow-kt/arrow/issues/2829" target="_blank" rel="noopener noreferrer">older feature requests</a>
+still in our issue tracker, which is now closed thanks to a wonderful
+<a href="https://github.com/arrow-kt/arrow/pull/3359" target="_blank" rel="noopener noreferrer">contribution</a>!</p>
+<p>From now on, the Optics KSP plug-in can generate
+<a href="https://arrow-kt.io/learn/immutable-data/lens/#sealed-class-hierarchies">lenses for sealed hierarchies</a>,
+given that the field lives in the common parent. For example, the following code</p>
+<div class="language-kotlin codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#D4D4D4;--prism-background-color:#222E51"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-kotlin codeBlock_bY9V thin-scrollbar" style="color:#D4D4D4;background-color:#222E51"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#D4D4D4"><span class="token label symbol" style="color:#c57a17">@optics</span><span class="token plain"> </span><span class="token keyword" style="color:#82a2f3">sealed</span><span class="token plain"> </span><span class="token keyword" style="color:#82a2f3">interface</span><span class="token plain"> User </span><span class="token punctuation" style="color:rgb(212, 212, 212)">{</span><span class="token plain"></span><br></span><span class="token-line" style="color:#D4D4D4"><span class="token plain">  </span><span class="token keyword" style="color:#82a2f3">val</span><span class="token plain"> name</span><span class="token operator" style="color:rgb(212, 212, 212)">:</span><span class="token plain"> String</span><br></span><span class="token-line" style="color:#D4D4D4"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#D4D4D4"><span class="token plain">  </span><span class="token keyword" style="color:#82a2f3">data</span><span class="token plain"> </span><span class="token keyword" style="color:#82a2f3">class</span><span class="token plain"> </span><span class="token function" style="color:#EDB368">Person</span><span class="token punctuation" style="color:rgb(212, 212, 212)">(</span><span class="token keyword" style="color:#82a2f3">override</span><span class="token plain"> </span><span class="token keyword" style="color:#82a2f3">val</span><span class="token plain"> name</span><span class="token operator" style="color:rgb(212, 212, 212)">:</span><span class="token plain"> String</span><span class="token punctuation" style="color:rgb(212, 212, 212)">,</span><span class="token plain"> </span><span class="token keyword" style="color:#82a2f3">val</span><span class="token plain"> age</span><span class="token operator" style="color:rgb(212, 212, 212)">:</span><span class="token plain"> Int</span><span class="token punctuation" style="color:rgb(212, 212, 212)">)</span><span class="token operator" style="color:rgb(212, 212, 212)">:</span><span class="token plain"> User</span><br></span><span class="token-line" style="color:#D4D4D4"><span class="token plain">  </span><span class="token keyword" style="color:#82a2f3">data</span><span class="token plain"> </span><span class="token keyword" style="color:#82a2f3">class</span><span class="token plain"> </span><span class="token function" style="color:#EDB368">Company</span><span class="token punctuation" style="color:rgb(212, 212, 212)">(</span><span class="token keyword" style="color:#82a2f3">override</span><span class="token plain"> </span><span class="token keyword" style="color:#82a2f3">val</span><span class="token plain"> name</span><span class="token operator" style="color:rgb(212, 212, 212)">:</span><span class="token plain"> String</span><span class="token punctuation" style="color:rgb(212, 212, 212)">,</span><span class="token plain"> </span><span class="token keyword" style="color:#82a2f3">val</span><span class="token plain"> vat</span><span class="token operator" style="color:rgb(212, 212, 212)">:</span><span class="token plain"> VATNumber</span><span class="token punctuation" style="color:rgb(212, 212, 212)">)</span><span class="token operator" style="color:rgb(212, 212, 212)">:</span><span class="token plain"> User</span><br></span><span class="token-line" style="color:#D4D4D4"><span class="token plain"></span><span class="token punctuation" style="color:rgb(212, 212, 212)">}</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+<p>generates from this version on both prisms for each choice, and a lens for <code>name</code>.</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="higher-arity-functions">Higher-arity functions<a href="https://arrow-kt.io/community/blog/2024/02/28/arrow-1-2-3#higher-arity-functions" class="hash-link" aria-label="Direct link to Higher-arity functions" title="Direct link to Higher-arity functions">​</a></h3>
+<p>We have traditionally been reluctant to add variations of <code>zip</code> with more than
+10 parameters, because we felt that the narrow use cases did not balance out
+the increase in binary size. Since this release Arrow provides those functions
+in a new <code>arrow-core-high-arity</code> module.</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="more-accumulating-functions-for-raise">More accumulating functions for <code>Raise</code><a href="https://arrow-kt.io/community/blog/2024/02/28/arrow-1-2-3#more-accumulating-functions-for-raise" class="hash-link" aria-label="Direct link to more-accumulating-functions-for-raise" title="Direct link to more-accumulating-functions-for-raise">​</a></h3>
+<p><a href="https://arrow-kt.io/learn/typed-errors/working-with-typed-errors/">Typed errors</a>
+provide two essential ways to <a href="https://arrow-kt.io/learn/typed-errors/working-with-typed-errors/#accumulating-errors">accumulate errors</a>: <code>zipOrAccumulate</code> and <code>mapOrAccumulate</code>. Those correspond
+to accumulating over a fixed number of computations of different types, or
+accumulating over an unknown quantity of computations with the same type.</p>
+<p>The <code>mapOrAccumulate</code> function <em>always</em> returns a new list. In some cases, you
+don't really care about this result, just about the iteration behavior.
+This is similar to the different between <code>map</code> and <code>forEach</code> in the standard
+library. From there Arrow takes the name of the new function: <code>forEachAccumulating</code>.</p>
+<p>One potential use case is performing validation over elements of a list,
+but keeping the values intact.</p>
+<div class="language-kotlin codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#D4D4D4;--prism-background-color:#222E51"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-kotlin codeBlock_bY9V thin-scrollbar" style="color:#D4D4D4;background-color:#222E51"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#D4D4D4"><span class="token plain">people</span><span class="token punctuation" style="color:rgb(212, 212, 212)">.</span><span class="token function" style="color:#EDB368">forEachAccumulating</span><span class="token plain"> </span><span class="token punctuation" style="color:rgb(212, 212, 212)">{</span><span class="token plain"> person </span><span class="token operator" style="color:rgb(212, 212, 212)">-&gt;</span><span class="token plain"></span><br></span><span class="token-line" style="color:#D4D4D4"><span class="token plain">  </span><span class="token function" style="color:#EDB368">ensure</span><span class="token punctuation" style="color:rgb(212, 212, 212)">(</span><span class="token plain">person</span><span class="token punctuation" style="color:rgb(212, 212, 212)">.</span><span class="token plain">age </span><span class="token operator" style="color:rgb(212, 212, 212)">&gt;=</span><span class="token plain"> </span><span class="token number" style="color:#cfcd9a">0</span><span class="token punctuation" style="color:rgb(212, 212, 212)">)</span><span class="token plain"> </span><span class="token punctuation" style="color:rgb(212, 212, 212)">{</span><span class="token plain"> </span><span class="token function" style="color:#EDB368">InvalidAge</span><span class="token punctuation" style="color:rgb(212, 212, 212)">(</span><span class="token plain">person</span><span class="token punctuation" style="color:rgb(212, 212, 212)">.</span><span class="token plain">name</span><span class="token punctuation" style="color:rgb(212, 212, 212)">)</span><span class="token plain"> </span><span class="token punctuation" style="color:rgb(212, 212, 212)">}</span><span class="token plain"></span><br></span><span class="token-line" style="color:#D4D4D4"><span class="token plain"></span><span class="token punctuation" style="color:rgb(212, 212, 212)">}</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="better-memoization">Better memoization<a href="https://arrow-kt.io/community/blog/2024/02/28/arrow-1-2-3#better-memoization" class="hash-link" aria-label="Direct link to Better memoization" title="Direct link to Better memoization">​</a></h3>
+<p><a href="https://arrow-kt.io/learn/collections-functions/recursive/#memoized-recursive-functions"><code>MemoizedDeepRecursiveFunction</code></a>
+is a powerful tool to express recursive algorithms without worries over stack overflow or recomputation.
+However, there was a lack of control over how memoized values were stored or evicted, which made the
+type less useful than intended.</p>
+<p>From this release on, there are new overloads to support custom memoization policies.
+Furthermore, the new <a href="https://arrow-kt.io/learn/collections-functions/recursive/#memoization-takes-memory"><code>arrow-cache4k</code> module</a>
+provides integration with the excellent
+<a href="https://github.com/ReactiveCircus/cache4k" target="_blank" rel="noopener noreferrer">cache4k</a> library.</p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="more-integrations">More integrations<a href="https://arrow-kt.io/community/blog/2024/02/28/arrow-1-2-3#more-integrations" class="hash-link" aria-label="Direct link to More integrations" title="Direct link to More integrations">​</a></h2>
+<p>Although not part of this release, we would like to highlight that
+<a href="https://akkurate.dev/" target="_blank" rel="noopener noreferrer">Akkurate</a>, which provides a wonderful DSL for validation over data,
+has released an <a href="https://akkurate.dev/docs/arrow-integration.html" target="_blank" rel="noopener noreferrer">integration module for Arrow</a>.
+This adds to the <a href="https://arrow-kt.io/learn/integrations/">rest of integrations</a>
+and shows the collaborative spirit of the Kotlin community.</p>]]></content:encoded>
+            <category>core</category>
+            <category>articles</category>
+        </item>
         <item>
             <title><![CDATA[Arrow releases stable 1.2.0 version]]></title>
             <link>https://arrow-kt.io/community/blog/2023/07/12/arrow-1-2-0</link>
             <guid>https://arrow-kt.io/community/blog/2023/07/12/arrow-1-2-0</guid>
             <pubDate>Wed, 12 Jul 2023 00:00:00 GMT</pubDate>
             <description><![CDATA[We're excited to announce the stable Arrow 1.2.0 version. To briefly summarize, this release:]]></description>
-            <content:encoded><![CDATA[<p>We're excited to announce the stable Arrow 1.2.0 version. To briefly summarize, this release:</p><ul><li>Improves the API for <a href="http://arrow-kt.io/learn/typed-errors/working-with-typed-errors/" target="_blank" rel="noopener noreferrer">typed errors</a>,
+            <content:encoded><![CDATA[<p>We're excited to announce the stable Arrow 1.2.0 version. To briefly summarize, this release:</p>
+<ul>
+<li>Improves the API for <a href="http://arrow-kt.io/learn/typed-errors/working-with-typed-errors/" target="_blank" rel="noopener noreferrer">typed errors</a>,
 including <a href="https://apidocs.arrow-kt.io/arrow-core/arrow.core.raise/with-error.html" target="_blank" rel="noopener noreferrer"><code>withError</code></a>
-and <a href="https://apidocs.arrow-kt.io/arrow-core/arrow.core.raise/merge.html" target="_blank" rel="noopener noreferrer"><code>merge</code></a>.</li><li>Adds <a href="https://apidocs.arrow-kt.io/arrow-core/arrow.core/-non-empty-collection/index.html" target="_blank" rel="noopener noreferrer"><code>NonEmptyCollection</code></a>
+and <a href="https://apidocs.arrow-kt.io/arrow-core/arrow.core.raise/merge.html" target="_blank" rel="noopener noreferrer"><code>merge</code></a>.</li>
+<li>Adds <a href="https://apidocs.arrow-kt.io/arrow-core/arrow.core/-non-empty-collection/index.html" target="_blank" rel="noopener noreferrer"><code>NonEmptyCollection</code></a>
 as common parent of <a href="https://apidocs.arrow-kt.io/arrow-core/arrow.core/-non-empty-list/index.html" target="_blank" rel="noopener noreferrer"><code>NonEmptyList</code></a>
-and <a href="https://apidocs.arrow-kt.io/arrow-core/arrow.core/-non-empty-set/index.html" target="_blank" rel="noopener noreferrer"><code>NonEmptySet</code></a>.</li><li>Introduces <a href="https://arrow-kt.io/learn/quickstart/serialization/" target="_blank" rel="noopener noreferrer"><code>arrow-core-serialization</code></a>
-to be used alongside KotlinX Serialization.</li><li>Fixes a few issues found in the Release Candidate.</li></ul><p>Read more details in the full <a href="https://xebia.com/blog/a-new-module-for-typed-errors-in-arrow-1-2-0/" target="_blank" rel="noopener noreferrer">Arrow 1.2.0 release announcement</a>.</p>]]></content:encoded>
+and <a href="https://apidocs.arrow-kt.io/arrow-core/arrow.core/-non-empty-set/index.html" target="_blank" rel="noopener noreferrer"><code>NonEmptySet</code></a>.</li>
+<li>Introduces <a href="https://arrow-kt.io/learn/quickstart/serialization/" target="_blank" rel="noopener noreferrer"><code>arrow-core-serialization</code></a>
+to be used alongside KotlinX Serialization.</li>
+<li>Fixes a few issues found in the Release Candidate.</li>
+</ul>
+<p>Read more details in the full <a href="https://xebia.com/blog/a-new-module-for-typed-errors-in-arrow-1-2-0/" target="_blank" rel="noopener noreferrer">Arrow 1.2.0 release announcement</a>.</p>]]></content:encoded>
             <category>core</category>
             <category>articles</category>
         </item>
@@ -39,7 +147,8 @@ to be used alongside KotlinX Serialization.</li><li>Fixes a few issues found in 
             <guid>https://arrow-kt.io/community/blog/2023/05/04/data-transformation-kotlinconf</guid>
             <pubDate>Thu, 04 May 2023 00:00:00 GMT</pubDate>
             <description><![CDATA[Watch Alejandro Serrano's presentation from KotlinConf 2023 about data transformation.]]></description>
-            <content:encoded><![CDATA[<p>Watch <a href="https://twitter.com/trupill" target="_blank" rel="noopener noreferrer">Alejandro Serrano</a>'s presentation from KotlinConf 2023 about data transformation.</p><p>Data classes are incredibly useful when modeling our domain in an immutable way. The Kotlin compiler gives us many niceties, including 'copy' to create a new value based on a previous one. However, this 'copy' often falls short. This talk explores two alternatives: KopyKat, a plug-in to generate additional variations of 'copy', and Arrow Optics, a whole framework to transform this immutable data.</p>]]></content:encoded>
+            <content:encoded><![CDATA[<p>Watch <a href="https://twitter.com/trupill" target="_blank" rel="noopener noreferrer">Alejandro Serrano</a>'s presentation from KotlinConf 2023 about data transformation.</p>
+<p>Data classes are incredibly useful when modeling our domain in an immutable way. The Kotlin compiler gives us many niceties, including 'copy' to create a new value based on a previous one. However, this 'copy' often falls short. This talk explores two alternatives: KopyKat, a plug-in to generate additional variations of 'copy', and Arrow Optics, a whole framework to transform this immutable data.</p>]]></content:encoded>
             <category>optics</category>
             <category>videos</category>
         </item>
@@ -49,12 +158,16 @@ to be used alongside KotlinX Serialization.</li><li>Fixes a few issues found in 
             <guid>https://arrow-kt.io/community/blog/2023/04/17/typed-error-handling-in-kotlin</guid>
             <pubDate>Mon, 17 Apr 2023 00:00:00 GMT</pubDate>
             <description><![CDATA[A comparative study about several typed-error handling practices in Kotlin.]]></description>
-            <content:encoded><![CDATA[<p>A comparative study about several typed-error handling practices in Kotlin.</p><p>There are various approaches to error handling in the Kotlin community.
-In this article we’ve explored a small subset of typed error handling practices in the community. </p><p>From the approaches explored, there were three patterns that aligns with Kotlin recommendation with
+            <content:encoded><![CDATA[<p>A comparative study about several typed-error handling practices in Kotlin.</p>
+<p>There are various approaches to error handling in the Kotlin community.
+In this article we’ve explored a small subset of typed error handling practices in the community.</p>
+<p>From the approaches explored, there were three patterns that aligns with Kotlin recommendation with
 relatively low cognitive complexity including: Sealed class matching with early returns, Arrow's <code>either { }</code> builder,
-and Arrow's <code>context(Raise&lt;E&gt;)</code> with context-receivers. </p><p>Arrow's <code>context(Raise&lt;E&gt;)</code> achieved the most optimized score on all aspects of
+and Arrow's <code>context(Raise&lt;E&gt;)</code> with context-receivers.</p>
+<p>Arrow's <code>context(Raise&lt;E&gt;)</code> achieved the most optimized score on all aspects of
 developer productivity. This includes having the lowest cognitive complexity, the lowest cyclomatic complexity
-as well as the most succinct with the least lines of codes.</p><p>Read the full article: <a href="https://medium.com/@mitchellyuwono/typed-error-handling-in-kotlin-11ff25882880" target="_blank" rel="noopener noreferrer">Typed Error Handling in Kotlin</a>.</p>]]></content:encoded>
+as well as the most succinct with the least lines of codes.</p>
+<p>Read the full article: <a href="https://medium.com/@mitchellyuwono/typed-error-handling-in-kotlin-11ff25882880" target="_blank" rel="noopener noreferrer">Typed Error Handling in Kotlin</a>.</p>]]></content:encoded>
             <category>core</category>
             <category>articles</category>
         </item>
@@ -74,7 +187,13 @@ as well as the most succinct with the least lines of codes.</p><p>Read the full 
             <guid>https://arrow-kt.io/community/blog/2023/04/04/arrow-1-2-0-rc-summary</guid>
             <pubDate>Tue, 04 Apr 2023 00:00:00 GMT</pubDate>
             <description><![CDATA[We're excited to announce Arrow 1.2.0-RC alongside a new Arrow website. To briefly summarize, this release:]]></description>
-            <content:encoded><![CDATA[<p>We're excited to announce Arrow 1.2.0-RC alongside a new Arrow website. To briefly summarize, this release:</p><ul><li>Introduces a brand new <a href="http://arrow-kt.io/learn/typed-errors/working-with-typed-errors/" target="_blank" rel="noopener noreferrer">typed errors</a> module.</li><li>Adds more options for <a href="http://arrow-kt.io/learn/resilience/" target="_blank" rel="noopener noreferrer">resilience</a>.</li><li>Marks every function and type we intend to remove in 2.0 as <code>@Deprecated</code>.</li></ul><p>Read more details in the full <a href="https://xebia.com/blog/arrow-1-2-0-rc-is-now-available/" target="_blank" rel="noopener noreferrer">Arrow 1.2.0 release announcement</a>.</p>]]></content:encoded>
+            <content:encoded><![CDATA[<p>We're excited to announce Arrow 1.2.0-RC alongside a new Arrow website. To briefly summarize, this release:</p>
+<ul>
+<li>Introduces a brand new <a href="http://arrow-kt.io/learn/typed-errors/working-with-typed-errors/" target="_blank" rel="noopener noreferrer">typed errors</a> module.</li>
+<li>Adds more options for <a href="http://arrow-kt.io/learn/resilience/" target="_blank" rel="noopener noreferrer">resilience</a>.</li>
+<li>Marks every function and type we intend to remove in 2.0 as <code>@Deprecated</code>.</li>
+</ul>
+<p>Read more details in the full <a href="https://xebia.com/blog/arrow-1-2-0-rc-is-now-available/" target="_blank" rel="noopener noreferrer">Arrow 1.2.0 release announcement</a>.</p>]]></content:encoded>
             <category>core</category>
             <category>articles</category>
         </item>
@@ -212,884 +331,6 @@ as well as the most succinct with the least lines of codes.</p><p>Read the full 
             <content:encoded><![CDATA[<p>Alejandro Serrano presents Arrow Analysis, a Kotlin compiler plug-in that does pre-and post-condition and type invariant checking at compile time.</p>]]></content:encoded>
             <category>analysis</category>
             <category>videos</category>
-        </item>
-        <item>
-            <title><![CDATA[Functional programming in Kotlin: exploring Arrow by Ties Van de Ven]]></title>
-            <link>https://arrow-kt.io/community/blog/2022/05/18/functional-programming-kotlin-exploring-arrow-ties-van-de-ven</link>
-            <guid>https://arrow-kt.io/community/blog/2022/05/18/functional-programming-kotlin-exploring-arrow-ties-van-de-ven</guid>
-            <pubDate>Wed, 18 May 2022 00:00:00 GMT</pubDate>
-            <description><![CDATA[A talk by Ties van de Ven that shows how Arrow helps to unleash the full FP power of Kotlin.]]></description>
-            <content:encoded><![CDATA[<p>A talk by Ties van de Ven that shows how Arrow helps to unleash the full FP power of Kotlin.</p>]]></content:encoded>
-            <category>core</category>
-            <category>optics</category>
-            <category>videos</category>
-        </item>
-        <item>
-            <title><![CDATA[Domain Model Validation In Kotlin: Part 4]]></title>
-            <link>https://arrow-kt.io/community/blog/2022/03/31/domain-model-validation-in-kotlin-part-4</link>
-            <guid>https://arrow-kt.io/community/blog/2022/03/31/domain-model-validation-in-kotlin-part-4</guid>
-            <pubDate>Thu, 31 Mar 2022 00:00:00 GMT</pubDate>
-            <description><![CDATA[In this final part of the series, Tiberiu puts everything together in a small CLI application, using Arrow data types and computation blocks]]></description>
-            <content:encoded><![CDATA[<p>In this final part of the series, Tiberiu puts everything together in a small CLI application, using Arrow data types and computation blocks
-to handle validation errors and exceptions in a unitary and composable way.</p>]]></content:encoded>
-            <category>core</category>
-            <category>articles</category>
-        </item>
-        <item>
-            <title><![CDATA[Domain Model Validation In Kotlin: Part 3]]></title>
-            <link>https://arrow-kt.io/community/blog/2022/03/10/domain-model-validation-in-kotlin-part-3</link>
-            <guid>https://arrow-kt.io/community/blog/2022/03/10/domain-model-validation-in-kotlin-part-3</guid>
-            <pubDate>Thu, 10 Mar 2022 00:00:00 GMT</pubDate>
-            <description><![CDATA[In the third part of the series, Tiberiu Tofan explores multiple techniques of using a context when doing validations]]></description>
-            <content:encoded><![CDATA[<p>In the third part of the series, Tiberiu Tofan explores multiple techniques of using a context when doing validations
-and how the context can be changed in the tests to simulate success or failure. All using just Kotlin standard library.</p>]]></content:encoded>
-            <category>core</category>
-            <category>articles</category>
-        </item>
-        <item>
-            <title><![CDATA[Domain Model Validation In Kotlin: Part 2]]></title>
-            <link>https://arrow-kt.io/community/blog/2022/03/03/domain-model-validation-in-kotlin-part-2</link>
-            <guid>https://arrow-kt.io/community/blog/2022/03/03/domain-model-validation-in-kotlin-part-2</guid>
-            <pubDate>Thu, 03 Mar 2022 00:00:00 GMT</pubDate>
-            <description><![CDATA[In the second article in this series, Tiberiu Tofan writes how Validated type can be]]></description>
-            <content:encoded><![CDATA[<p>In the second article in this series, Tiberiu Tofan writes how Validated type can be
-used to validate multiple properties, accumulate the errors, apply individual
-element validations to lists of elements, and create rules that
-depend on numerous properties.</p>]]></content:encoded>
-            <category>core</category>
-            <category>articles</category>
-        </item>
-        <item>
-            <title><![CDATA[Domain Model Validation In Kotlin: Part 1]]></title>
-            <link>https://arrow-kt.io/community/blog/2022/02/22/domain-model-validation-in-kotlin-part-1</link>
-            <guid>https://arrow-kt.io/community/blog/2022/02/22/domain-model-validation-in-kotlin-part-1</guid>
-            <pubDate>Tue, 22 Feb 2022 00:00:00 GMT</pubDate>
-            <description><![CDATA[In the first article in this series, Tiberiu Tofan describes his team's journey using Kotlin and Arrow for domain model validation,]]></description>
-            <content:encoded><![CDATA[<p>In the first article in this series, Tiberiu Tofan describes his team's journey using Kotlin and Arrow for domain model validation,
-starting by setting the domain model's foundation in a type-safe way.</p>]]></content:encoded>
-            <category>core</category>
-            <category>articles</category>
-        </item>
-        <item>
-            <title><![CDATA[Announcing Arrow Analysis - a Kotlin compiler plug-in]]></title>
-            <link>https://arrow-kt.io/community/blog/2022/02/02/announcing-arrow-analysis</link>
-            <guid>https://arrow-kt.io/community/blog/2022/02/02/announcing-arrow-analysis</guid>
-            <pubDate>Wed, 02 Feb 2022 00:00:00 GMT</pubDate>
-            <description><![CDATA[Announcing Arrow Analysis - a Kotlin compiler plug-in.]]></description>
-            <content:encoded><![CDATA[<p>Announcing Arrow Analysis - a Kotlin compiler plug-in.</p>]]></content:encoded>
-            <category>meta</category>
-            <category>articles</category>
-        </item>
-        <item>
-            <title><![CDATA[Functional programming in Kotlin with Arrow]]></title>
-            <link>https://arrow-kt.io/community/blog/2021/12/15/functional-programming-in-kotlin-with-arrow</link>
-            <guid>https://arrow-kt.io/community/blog/2021/12/15/functional-programming-in-kotlin-with-arrow</guid>
-            <pubDate>Wed, 15 Dec 2021 00:00:00 GMT</pubDate>
-            <description><![CDATA[A presentation by Simon Vergauwen and Alejandro Serrano presented on the official Kotlin YouTube channel.]]></description>
-            <content:encoded><![CDATA[<p>A presentation by Simon Vergauwen and Alejandro Serrano presented on the official Kotlin YouTube channel.</p>]]></content:encoded>
-            <category>core</category>
-            <category>videos</category>
-        </item>
-        <item>
-            <title><![CDATA[Functional programming in Kotlin: Exploring Arrow]]></title>
-            <link>https://arrow-kt.io/community/blog/2021/11/30/functional-programming-kotlin-exploring-arrow</link>
-            <guid>https://arrow-kt.io/community/blog/2021/11/30/functional-programming-kotlin-exploring-arrow</guid>
-            <pubDate>Tue, 30 Nov 2021 00:00:00 GMT</pubDate>
-            <description><![CDATA[A talk by Ties van de Ven explaining how to use the Either monad in practice, and how to use Arrow Optics lenses.]]></description>
-            <content:encoded><![CDATA[<p>A talk by Ties van de Ven explaining how to use the Either monad in practice, and how to use Arrow Optics lenses.</p>]]></content:encoded>
-            <category>core</category>
-            <category>optics</category>
-            <category>videos</category>
-        </item>
-        <item>
-            <title><![CDATA[Arrow of Outrageous Error Handling]]></title>
-            <link>https://arrow-kt.io/community/blog/2021/08/12/arrow-of-outrageous-error-handling</link>
-            <guid>https://arrow-kt.io/community/blog/2021/08/12/arrow-of-outrageous-error-handling</guid>
-            <pubDate>Thu, 12 Aug 2021 00:00:00 GMT</pubDate>
-            <description><![CDATA[An Android Worldwide talk by David Rawson about error handling on Android using Arrow.]]></description>
-            <content:encoded><![CDATA[<p>An Android Worldwide talk by David Rawson about error handling on Android using Arrow.</p>]]></content:encoded>
-            <category>core</category>
-            <category>videos</category>
-        </item>
-        <item>
-            <title><![CDATA[Functional Domain Modeling in Kotlin - Validation]]></title>
-            <link>https://arrow-kt.io/community/blog/2021/04/13/functional-domain-modeling-kotlin-validation</link>
-            <guid>https://arrow-kt.io/community/blog/2021/04/13/functional-domain-modeling-kotlin-validation</guid>
-            <pubDate>Tue, 13 Apr 2021 00:00:00 GMT</pubDate>
-            <description><![CDATA[In part two of Functional Domain Modeling in Kotlin, Simon Vergauwen shows how to improve a domain with validation.]]></description>
-            <content:encoded><![CDATA[<p>In part two of Functional Domain Modeling in Kotlin, Simon Vergauwen shows how to improve a domain with validation.</p>]]></content:encoded>
-            <category>core</category>
-            <category>articles</category>
-        </item>
-        <item>
-            <title><![CDATA[Functional Domain Modeling in Kotlin]]></title>
-            <link>https://arrow-kt.io/community/blog/2021/04/11/functional-domain-modeling-kotlin</link>
-            <guid>https://arrow-kt.io/community/blog/2021/04/11/functional-domain-modeling-kotlin</guid>
-            <pubDate>Sun, 11 Apr 2021 00:00:00 GMT</pubDate>
-            <description><![CDATA[Learn how to leverage Functional Domain Modeling to fully utilize the Kotlin type system and prevent bugs.]]></description>
-            <content:encoded><![CDATA[<p>Learn how to leverage Functional Domain Modeling to fully utilize the Kotlin type system and prevent bugs.</p>]]></content:encoded>
-            <category>core</category>
-            <category>articles</category>
-        </item>
-        <item>
-            <title><![CDATA[Your own custom Spring Data repository]]></title>
-            <link>https://arrow-kt.io/community/blog/2021/04/11/your-own-custom-spring-data-repository</link>
-            <guid>https://arrow-kt.io/community/blog/2021/04/11/your-own-custom-spring-data-repository</guid>
-            <pubDate>Sun, 11 Apr 2021 00:00:00 GMT</pubDate>
-            <description><![CDATA[How to integrate Spring Data Repository with Arrow.]]></description>
-            <content:encoded><![CDATA[<p>How to integrate Spring Data Repository with Arrow.</p>]]></content:encoded>
-            <category>core</category>
-            <category>articles</category>
-        </item>
-        <item>
-            <title><![CDATA[Arrow 0.12.0 & 0.13.1 are now available]]></title>
-            <link>https://arrow-kt.io/community/blog/2021/04/01/arrow-0-12-0-0-13-1-release</link>
-            <guid>https://arrow-kt.io/community/blog/2021/04/01/arrow-0-12-0-0-13-1-release</guid>
-            <pubDate>Thu, 01 Apr 2021 00:00:00 GMT</pubDate>
-            <description><![CDATA[Arrow 0.12.0 & 0.13.1 are now available, featuring streamlining of the library for 1.0.0.]]></description>
-            <content:encoded><![CDATA[<p>Arrow 0.12.0 &amp; 0.13.1 are now available, featuring streamlining of the library for 1.0.0.</p>]]></content:encoded>
-            <category>core</category>
-            <category>articles</category>
-        </item>
-        <item>
-            <title><![CDATA[Advanced FP for the Enterprise Bee: Shiny Things]]></title>
-            <link>https://arrow-kt.io/community/blog/2021/02/26/advanced-fp-enterprise-bee-shiny-things</link>
-            <guid>https://arrow-kt.io/community/blog/2021/02/26/advanced-fp-enterprise-bee-shiny-things</guid>
-            <pubDate>Fri, 26 Feb 2021 00:00:00 GMT</pubDate>
-            <description><![CDATA[Garth Gilmour concludes his 8-part series introducing advanced FP concepts via Kotlin and Arrow.]]></description>
-            <content:encoded><![CDATA[<p>Garth Gilmour concludes his 8-part series introducing advanced FP concepts via Kotlin and Arrow.</p>]]></content:encoded>
-            <category>core</category>
-            <category>articles</category>
-        </item>
-        <item>
-            <title><![CDATA[Advanced FP for the Enterprise Bee: State]]></title>
-            <link>https://arrow-kt.io/community/blog/2021/02/19/advanced-fp-enterprise-bee-state</link>
-            <guid>https://arrow-kt.io/community/blog/2021/02/19/advanced-fp-enterprise-bee-state</guid>
-            <pubDate>Fri, 19 Feb 2021 00:00:00 GMT</pubDate>
-            <description><![CDATA[This is the seventh post in a series written by Garth Gilmour introducing advanced FP concepts via Kotlin and Arrow. This article explores the world of Monads, and, in particular, the State type.]]></description>
-            <content:encoded><![CDATA[<p>This is the seventh post in a series written by Garth Gilmour introducing advanced FP concepts via Kotlin and Arrow. This article explores the world of Monads, and, in particular, the State type.</p>]]></content:encoded>
-            <category>core</category>
-            <category>articles</category>
-        </item>
-        <item>
-            <title><![CDATA[Hands-on Arrow]]></title>
-            <link>https://arrow-kt.io/community/blog/2021/02/12/hands-on-arrow</link>
-            <guid>https://arrow-kt.io/community/blog/2021/02/12/hands-on-arrow</guid>
-            <pubDate>Fri, 12 Feb 2021 00:00:00 GMT</pubDate>
-            <description><![CDATA[A video from the meetup of the Google Developer Group based in Nuremberg with a presentation by Karin-Aleksandra Monoid about using Arrow.]]></description>
-            <content:encoded><![CDATA[<p>A video from the meetup of the Google Developer Group based in Nuremberg with a presentation by Karin-Aleksandra Monoid about using Arrow.</p>]]></content:encoded>
-            <category>core</category>
-            <category>videos</category>
-        </item>
-        <item>
-            <title><![CDATA[Advanced FP for the Enterprise Bee: Optics]]></title>
-            <link>https://arrow-kt.io/community/blog/2021/02/10/advanced-fp-enterprise-bee-optics</link>
-            <guid>https://arrow-kt.io/community/blog/2021/02/10/advanced-fp-enterprise-bee-optics</guid>
-            <pubDate>Wed, 10 Feb 2021 00:00:00 GMT</pubDate>
-            <description><![CDATA[This is the sixth post in a series introducing advanced FP concepts via Kotlin and Arrow. This article covers Optics with Kotlin and Arrow.]]></description>
-            <content:encoded><![CDATA[<p>This is the sixth post in a series introducing advanced FP concepts via Kotlin and Arrow. This article covers Optics with Kotlin and Arrow.</p>]]></content:encoded>
-            <category>core</category>
-            <category>articles</category>
-        </item>
-        <item>
-            <title><![CDATA[Advanced FP for the Enterprise Bee: Typeclasses]]></title>
-            <link>https://arrow-kt.io/community/blog/2021/02/05/advanced-fp-enterprise-bee-typeclasses</link>
-            <guid>https://arrow-kt.io/community/blog/2021/02/05/advanced-fp-enterprise-bee-typeclasses</guid>
-            <pubDate>Fri, 05 Feb 2021 00:00:00 GMT</pubDate>
-            <description><![CDATA[This fifth post in a series introduces advanced FP concepts via Kotlin and Arrow. This article introduces Typeclasses, and reviews a practical example of Typeclasses from the Arrow library.]]></description>
-            <content:encoded><![CDATA[<p>This fifth post in a series introduces advanced FP concepts via Kotlin and Arrow. This article introduces Typeclasses, and reviews a practical example of Typeclasses from the Arrow library.</p>]]></content:encoded>
-            <category>core</category>
-            <category>articles</category>
-        </item>
-        <item>
-            <title><![CDATA[Advanced FP for the Enterprise Bee: Kleisli]]></title>
-            <link>https://arrow-kt.io/community/blog/2021/01/29/advanced-fp-enterprise-bee-kleisli</link>
-            <guid>https://arrow-kt.io/community/blog/2021/01/29/advanced-fp-enterprise-bee-kleisli</guid>
-            <pubDate>Fri, 29 Jan 2021 00:00:00 GMT</pubDate>
-            <description><![CDATA[This fourth post in a series introduces advanced FP concepts via Kotlin and Arrow. This article looks at the Kleisli type.]]></description>
-            <content:encoded><![CDATA[<p>This fourth post in a series introduces advanced FP concepts via Kotlin and Arrow. This article looks at the Kleisli type.</p>]]></content:encoded>
-            <category>core</category>
-            <category>articles</category>
-        </item>
-        <item>
-            <title><![CDATA[Advanced FP for the Enterprise Bee: Higher Kinded Types]]></title>
-            <link>https://arrow-kt.io/community/blog/2021/01/22/advanced-fp-enterprise-bee-higher-kinded-types</link>
-            <guid>https://arrow-kt.io/community/blog/2021/01/22/advanced-fp-enterprise-bee-higher-kinded-types</guid>
-            <pubDate>Fri, 22 Jan 2021 00:00:00 GMT</pubDate>
-            <description><![CDATA[This third post in a series introduces advanced FP concepts via Kotlin and Arrow. This article shows the usefulness of Higher Kinded Types.]]></description>
-            <content:encoded><![CDATA[<p>This third post in a series introduces advanced FP concepts via Kotlin and Arrow. This article shows the usefulness of Higher Kinded Types.</p>]]></content:encoded>
-            <category>core</category>
-            <category>articles</category>
-        </item>
-        <item>
-            <title><![CDATA[FP concepts with Arrow]]></title>
-            <link>https://arrow-kt.io/community/blog/2021/01/20/fp-concepts-with-arrow</link>
-            <guid>https://arrow-kt.io/community/blog/2021/01/20/fp-concepts-with-arrow</guid>
-            <pubDate>Wed, 20 Jan 2021 00:00:00 GMT</pubDate>
-            <description><![CDATA[A video from the Belfast Kotlin User Group with a presentation by Katie Levy and Shelby Cohen covering FP concepts with Arrow.]]></description>
-            <content:encoded><![CDATA[<p>A video from the Belfast Kotlin User Group with a presentation by Katie Levy and Shelby Cohen covering FP concepts with Arrow.</p>]]></content:encoded>
-            <category>core</category>
-            <category>videos</category>
-        </item>
-        <item>
-            <title><![CDATA[Advanced FP for the Enterprise Bee: Applicatives]]></title>
-            <link>https://arrow-kt.io/community/blog/2021/01/15/advanced-fp-enterprise-bee-applicatives</link>
-            <guid>https://arrow-kt.io/community/blog/2021/01/15/advanced-fp-enterprise-bee-applicatives</guid>
-            <pubDate>Fri, 15 Jan 2021 00:00:00 GMT</pubDate>
-            <description><![CDATA[This second post in a series introduces advanced FP concepts via Kotlin and Arrow. This article takes a deep dive into Applicatives.]]></description>
-            <content:encoded><![CDATA[<p>This second post in a series introduces advanced FP concepts via Kotlin and Arrow. This article takes a deep dive into Applicatives.</p>]]></content:encoded>
-            <category>core</category>
-            <category>articles</category>
-        </item>
-        <item>
-            <title><![CDATA[Functional Android]]></title>
-            <link>https://arrow-kt.io/community/blog/2021/01/13/functional-android</link>
-            <guid>https://arrow-kt.io/community/blog/2021/01/13/functional-android</guid>
-            <pubDate>Wed, 13 Jan 2021 00:00:00 GMT</pubDate>
-            <description><![CDATA[In this talk from the January 13th, 2021 Kotlin London User Group meetup, Jorge Castillo shows how to seamlessly integrate the functional programming paradigm with our Android architecture to get the most out of both worlds.]]></description>
-            <content:encoded><![CDATA[<p>In this talk from the January 13th, 2021 Kotlin London User Group meetup, Jorge Castillo shows how to seamlessly integrate the functional programming paradigm with our Android architecture to get the most out of both worlds.</p>]]></content:encoded>
-            <category>fx</category>
-            <category>videos</category>
-        </item>
-        <item>
-            <title><![CDATA[Advanced FP for the Enterprise Bee: Traverse]]></title>
-            <link>https://arrow-kt.io/community/blog/2021/01/08/advanced-fp-enterprise-bee-traverse</link>
-            <guid>https://arrow-kt.io/community/blog/2021/01/08/advanced-fp-enterprise-bee-traverse</guid>
-            <pubDate>Fri, 08 Jan 2021 00:00:00 GMT</pubDate>
-            <description><![CDATA[This first post in a series introduces advanced FP concepts via Kotlin and Arrow. This article takes a deep dive into the Traverse operation.]]></description>
-            <content:encoded><![CDATA[<p>This first post in a series introduces advanced FP concepts via Kotlin and Arrow. This article takes a deep dive into the Traverse operation.</p>]]></content:encoded>
-            <category>core</category>
-            <category>articles</category>
-        </item>
-        <item>
-            <title><![CDATA[Roll your own Computation blocks in Kotlin]]></title>
-            <link>https://arrow-kt.io/community/blog/2020/12/16/roll-your-own-computation-blocks-kotlin</link>
-            <guid>https://arrow-kt.io/community/blog/2020/12/16/roll-your-own-computation-blocks-kotlin</guid>
-            <pubDate>Wed, 16 Dec 2020 00:00:00 GMT</pubDate>
-            <description><![CDATA[Computation blocks empower library authors and users to build ad-hoc operators and DSLs over any data-type getting rid of API complexity and simplifying composition. In this talk, we will learn how we can build Computation blocks over Kotlin suspend functions & the Arrow Continuations library's reset / shift capabilities. We will demonstrate the composition of well known JVM data-types and patterns such as lists, futures, streams, and IOs, where callback chains can be simply replaced by a single]]></description>
-            <content:encoded><![CDATA[<p>Computation blocks empower library authors and users to build ad-hoc operators and DSLs over any data-type getting rid of API complexity and simplifying composition. In this talk, we will learn how we can build Computation blocks over Kotlin suspend functions &amp; the Arrow Continuations library's <code>reset</code> / <code>shift</code> capabilities. We will demonstrate the composition of well known JVM data-types and patterns such as lists, futures, streams, and IOs, where callback chains can be simply replaced by a single
-suspended operator. The Kotlin suspension system provides enough capabilities to implement delimited continuations allowing us to ignore methods such as <code>map</code> &amp; <code>flatMap</code> on your favorite data-type in favor of direct imperative syntax. Leveraging Kotlin suspension &amp; thinking of Continuations as "The Mother of all Monads", we will embark on this journey where we'll build and roll our own computation blocks with Arrow Continuations.</p>]]></content:encoded>
-            <category>core</category>
-            <category>fx</category>
-            <category>videos</category>
-        </item>
-        <item>
-            <title><![CDATA[Fight Complexity with Functional Programming]]></title>
-            <link>https://arrow-kt.io/community/blog/2020/11/19/fight-complexity-with-functional-programming</link>
-            <guid>https://arrow-kt.io/community/blog/2020/11/19/fight-complexity-with-functional-programming</guid>
-            <pubDate>Thu, 19 Nov 2020 00:00:00 GMT</pubDate>
-            <description><![CDATA[A Metric-driven approach to reduce Cognitive Complexity in a code base, using Functional Programming, demoed hands-on, by solving a complex real-world ubiquitous design challenge - REST API Bulk Request Validation, with an extensible Framework that separates what-to-do (Validations) from how-to-do (Validation Orchestration). Let's do a case study of a successful implementation done by our team in the world's largest SaaS org, Salesforce, using Kotlin and Arrow.]]></description>
-            <content:encoded><![CDATA[<p>A Metric-driven approach to reduce Cognitive Complexity in a code base, using Functional Programming, demoed hands-on, by solving a complex real-world ubiquitous design challenge - REST API Bulk Request Validation, with an extensible Framework that separates what-to-do (Validations) from how-to-do (Validation Orchestration). Let's do a case study of a successful implementation done by our team in the world's largest SaaS org, Salesforce, using Kotlin and Arrow.</p>]]></content:encoded>
-            <category>core</category>
-            <category>videos</category>
-        </item>
-        <item>
-            <title><![CDATA[Arrow Promoted to Adopt by Technology Radar]]></title>
-            <link>https://arrow-kt.io/community/blog/2020/10/28/arrow-promoted-to-adopt</link>
-            <guid>https://arrow-kt.io/community/blog/2020/10/28/arrow-promoted-to-adopt</guid>
-            <pubDate>Wed, 28 Oct 2020 00:00:00 GMT</pubDate>
-            <description><![CDATA[Arrow is promoted as the functional companion for Kotlin's standard library. Indeed, the package of ready-to-use higher-level abstractions delivered by Arrow has proven so useful that our teams now consider Arrow a sensible default when working with Kotlin. Recently, in preparation for the 1.0 release, the Arrow team introduced several changes, including the addition of new modules but also some deprecations and removals.]]></description>
-            <content:encoded><![CDATA[<p>Arrow is promoted as the functional companion for Kotlin's standard library. Indeed, the package of ready-to-use higher-level abstractions delivered by Arrow has proven so useful that our teams now consider Arrow a sensible default when working with Kotlin. Recently, in preparation for the 1.0 release, the Arrow team introduced several changes, including the addition of new modules but also some deprecations and removals.</p>]]></content:encoded>
-            <category>core</category>
-            <category>articles</category>
-        </item>
-        <item>
-            <title><![CDATA[How to fix the pain of modifying Kotlin nested data classes]]></title>
-            <link>https://arrow-kt.io/community/blog/2020/10/28/modifying-kotlin-nested-data-classes</link>
-            <guid>https://arrow-kt.io/community/blog/2020/10/28/modifying-kotlin-nested-data-classes</guid>
-            <pubDate>Wed, 28 Oct 2020 00:00:00 GMT</pubDate>
-            <description><![CDATA[Lenses are not part of the Kotlin Standard Library yet, so we will need to use an Open Source library called Arrow-kt. Arrow-kt is a huge community effort to bring some of the missing functional programming features to Kotlin.]]></description>
-            <content:encoded><![CDATA[<p>Lenses are not part of the Kotlin Standard Library yet, so we will need to use an Open Source library called Arrow-kt. Arrow-kt is a huge community effort to bring some of the missing functional programming features to Kotlin.</p>]]></content:encoded>
-            <category>core</category>
-            <category>articles</category>
-        </item>
-        <item>
-            <title><![CDATA[Technology Radar Promotes Arrow to 'Adopt']]></title>
-            <link>https://arrow-kt.io/community/blog/2020/10/28/technology-radar-promotes-arrow</link>
-            <guid>https://arrow-kt.io/community/blog/2020/10/28/technology-radar-promotes-arrow</guid>
-            <pubDate>Wed, 28 Oct 2020 00:00:00 GMT</pubDate>
-            <description><![CDATA[Arrow has been promoted to “Adopt” by ThoughtWorks’ technology guide Technology Radar.]]></description>
-            <content:encoded><![CDATA[<p>Arrow has been promoted to “Adopt” by ThoughtWorks’ technology guide <em>Technology Radar</em>.</p>]]></content:encoded>
-            <category>core</category>
-            <category>articles</category>
-        </item>
-        <item>
-            <title><![CDATA[Writing Kotlin Compiler Plugins with Arrow Meta]]></title>
-            <link>https://arrow-kt.io/community/blog/2020/10/08/writing-kotlin-compiler-plugins-talk</link>
-            <guid>https://arrow-kt.io/community/blog/2020/10/08/writing-kotlin-compiler-plugins-talk</guid>
-            <pubDate>Thu, 08 Oct 2020 00:00:00 GMT</pubDate>
-            <description><![CDATA[Lean how to write and test compiler plugins and IDE plugins with Arrow Meta.]]></description>
-            <content:encoded><![CDATA[<p>Lean how to write and test compiler plugins and IDE plugins with Arrow Meta.</p>]]></content:encoded>
-            <category>meta</category>
-            <category>videos</category>
-        </item>
-        <item>
-            <title><![CDATA[Type Proofs and FP for the Kotlin Type System]]></title>
-            <link>https://arrow-kt.io/community/blog/2020/06/16/type-proofs-fp-kotlin-talk</link>
-            <guid>https://arrow-kt.io/community/blog/2020/06/16/type-proofs-fp-kotlin-talk</guid>
-            <pubDate>Tue, 16 Jun 2020 00:00:00 GMT</pubDate>
-            <description><![CDATA[Type Proofs is a new compiler plugin built on Arrow Meta enabling new features in the Kotlin type system, such as Type Classes, Union Types, Type Refinements, and many other extensions that make Functional Programming easier in Kotlin.]]></description>
-            <content:encoded><![CDATA[<p>Type Proofs is a new compiler plugin built on Arrow Meta enabling new features in the Kotlin type system, such as Type Classes, Union Types, Type Refinements, and many other extensions that make Functional Programming easier in Kotlin.</p><p>Type Proofs propositions are expressed as extension functions that unlock new relationships between types ad-hoc whilst remaining fully compatible with subtype polymorphism and the existing inheritance type system.</p><p>This talk demonstrates some of the new features the Arrow team is introducing in Arrow at the type level and IDE and how others can benefit from them when building libraries and applications.</p>]]></content:encoded>
-            <category>meta</category>
-            <category>videos</category>
-        </item>
-        <item>
-            <title><![CDATA[Asynchronisme et hexagone en Kotlin avec ArrowKt]]></title>
-            <link>https://arrow-kt.io/community/blog/2020/06/11/asynchronisme-et-hexagone-en-kotlin-avec-Arrow</link>
-            <guid>https://arrow-kt.io/community/blog/2020/06/11/asynchronisme-et-hexagone-en-kotlin-avec-Arrow</guid>
-            <pubDate>Thu, 11 Jun 2020 00:00:00 GMT</pubDate>
-            <description><![CDATA[J'aime bien le DDD et surtout les architectures hexagonales. Avoir un domaine auto-portant et non couplé à des blocs techniques comme Spring (ou autres) apporte beaucoup dans la testabilité et l'évolutivité de l'application.]]></description>
-            <content:encoded><![CDATA[<p>J'aime bien le DDD et surtout les architectures hexagonales. Avoir un domaine auto-portant et non couplé à des blocs techniques comme Spring (ou autres) apporte beaucoup dans la testabilité et l'évolutivité de l'application.
-Les modèles d'asynchronismes (programmation réactive, retardée, coroutines...) empêchent la dissociation stricte de notre modèle métier et de notre code infra dans un langage comme Kotlin.
-Obligé d'utiliser une lib de coroutine ou autre programmation reactive.
-Deux solutions s'offrent alors :</p><ul><li>Définir que les modèles d'asynchronisme sont des invariants de notre domaine et accepter ce couplage</li><li>Chercher comment modéliser notre domaine comme un ensemble de comportements asynchrones
-Dans ce talk nous allons voir comment réaliser la deuxième solution en utilisant la librairie Arrow et son modèle conceptuel d'asynchronisme pour nous permettre de découpler notre domaine de toute logique d'infrastructure.</li></ul>]]></content:encoded>
-            <category>core</category>
-            <category>videos</category>
-        </item>
-        <item>
-            <title><![CDATA[Arrow Fx: Functional Domain Modeling with Kotlin]]></title>
-            <link>https://arrow-kt.io/community/blog/2020/06/05/functional-domain-modeling-kotlin</link>
-            <guid>https://arrow-kt.io/community/blog/2020/06/05/functional-domain-modeling-kotlin</guid>
-            <pubDate>Fri, 05 Jun 2020 00:00:00 GMT</pubDate>
-            <description><![CDATA[Arrow Fx is a purely functional concurrency framework for Kotlin’s suspend system.]]></description>
-            <content:encoded><![CDATA[<p>Arrow Fx is a purely functional concurrency framework for Kotlin’s suspend system.</p><p>In this talk, we will learn how typed functional programming and functional domain modeling powered by Arrow Optics, Fx, and Meta can be applied to assemble powerful applications and architectures from small and simple building blocks.</p><p>Simon and Raul will cover important topics and patterns such as optics, union types, refined types, type classes, automatic task cancellation, safe resource handling, and compare how Arrow Fx differs from KotlinX coroutines.</p>]]></content:encoded>
-            <category>fx</category>
-            <category>videos</category>
-        </item>
-        <item>
-            <title><![CDATA[Type Proofs and FP for the Kotlin Type System]]></title>
-            <link>https://arrow-kt.io/community/blog/2020/05/27/type-proofs-fp-kotlin-talk</link>
-            <guid>https://arrow-kt.io/community/blog/2020/05/27/type-proofs-fp-kotlin-talk</guid>
-            <pubDate>Wed, 27 May 2020 00:00:00 GMT</pubDate>
-            <description><![CDATA[Type Proofs is a new compiler plugin built on Arrow Meta enabling new features in the Kotlin type system, such as Type Classes, Union Types, Type Refinements, and many other extensions that make Functional Programming easier in Kotlin.]]></description>
-            <content:encoded><![CDATA[<p>Type Proofs is a new compiler plugin built on Arrow Meta enabling new features in the Kotlin type system, such as Type Classes, Union Types, Type Refinements, and many other extensions that make Functional Programming easier in Kotlin.</p><p>Type Proofs propositions are expressed as extension functions that unlock new relationships between types ad-hoc whilst remaining fully compatible with subtype polymorphism and the existing inheritance type system.</p><p>This talk demonstrates some of the new features the Arrow team is introducing in Arrow at the type level and IDE and how others can benefit from them when building libraries and applications.</p>]]></content:encoded>
-            <category>meta</category>
-            <category>videos</category>
-        </item>
-        <item>
-            <title><![CDATA[Android architectures with Arrow Fx]]></title>
-            <link>https://arrow-kt.io/community/blog/2020/05/06/android-architectures-arrow-fx</link>
-            <guid>https://arrow-kt.io/community/blog/2020/05/06/android-architectures-arrow-fx</guid>
-            <pubDate>Wed, 06 May 2020 00:00:00 GMT</pubDate>
-            <description><![CDATA[May 2020 Online Kotlin Meetup]]></description>
-            <content:encoded><![CDATA[<p>May 2020 Online Kotlin Meetup</p><p>Daniel Montoya Ramos - Senior Software Engineer @47deg
-Android Jetpack Compose</p><p>Dani will show a new way of building UI's in Android using Jetpack Compose, comparing Imperative vs Declarative approaches. He'll look at managing state changes, composing functions as well as some of the gotchas and wishes for the future.</p><p>Alberto Ballano - Senior Software Engineer @47deg
-Android architectures with Arrow Fx</p><p>Alberto will talk about typical Android architectures, and how can they benefit from Functional Programming techniques available in Arrow.</p>]]></content:encoded>
-            <category>fx</category>
-            <category>videos</category>
-        </item>
-        <item>
-            <title><![CDATA[Writing a Kotlin Compiler Plugin with Arrow Meta]]></title>
-            <link>https://arrow-kt.io/community/blog/2020/04/08/writing-compiler-plugin-with-with-arrow-meta</link>
-            <guid>https://arrow-kt.io/community/blog/2020/04/08/writing-compiler-plugin-with-with-arrow-meta</guid>
-            <pubDate>Wed, 08 Apr 2020 00:00:00 GMT</pubDate>
-            <description><![CDATA[Learn how to write and test the debuglog compiler plugin in Arrow Meta. Here is the compiler plugin debulog-arrow-meta explained in the article.]]></description>
-            <content:encoded><![CDATA[<p>Learn how to write and test the <a href="https://github.com/kevinmost/debuglog" target="_blank" rel="noopener noreferrer">debuglog</a> compiler plugin in Arrow Meta. Here is the compiler plugin <a href="https://github.com/msya/debuglog-arrow-meta" target="_blank" rel="noopener noreferrer">debulog-arrow-meta</a> explained in the article.</p>]]></content:encoded>
-            <category>meta</category>
-            <category>articles</category>
-        </item>
-        <item>
-            <title><![CDATA[Template-Oriented-Programming to Ship Faster, Part-1]]></title>
-            <link>https://arrow-kt.io/community/blog/2020/04/06/template-oriented-programming-talk</link>
-            <guid>https://arrow-kt.io/community/blog/2020/04/06/template-oriented-programming-talk</guid>
-            <pubDate>Mon, 06 Apr 2020 00:00:00 GMT</pubDate>
-            <description><![CDATA[Learn about the magic of Ad-hoc polymorphism using Arrow typeclasses with simple examples.]]></description>
-            <content:encoded><![CDATA[<p>Learn about the magic of Ad-hoc polymorphism using Arrow typeclasses with simple examples.</p>]]></content:encoded>
-            <category>core</category>
-            <category>videos</category>
-        </item>
-        <item>
-            <title><![CDATA[Template-Oriented-Programming to Ship Faster]]></title>
-            <link>https://arrow-kt.io/community/blog/2020/04/06/template-oriented-programming</link>
-            <guid>https://arrow-kt.io/community/blog/2020/04/06/template-oriented-programming</guid>
-            <pubDate>Mon, 06 Apr 2020 00:00:00 GMT</pubDate>
-            <description><![CDATA[With a POC using Spring-fu + Kotlin + Arrow, let's Convert Monomorphic code (for common use-cases such as Auth, Validation) to Polymorphic reusable templates, to be reused among heterogeneous services built on different tech-stacks (blocking/non-blocking). This helps accelerate feature development.]]></description>
-            <content:encoded><![CDATA[<p>With a POC using Spring-fu + Kotlin + Arrow, let's Convert Monomorphic code (for common use-cases such as Auth, Validation) to Polymorphic reusable templates, to be reused among heterogeneous services built on different tech-stacks (blocking/non-blocking). This helps accelerate feature development.</p>]]></content:encoded>
-            <category>core</category>
-            <category>articles</category>
-        </item>
-        <item>
-            <title><![CDATA[Explaining the Arrow Android sample]]></title>
-            <link>https://arrow-kt.io/community/blog/2020/04/01/explaining-arrow-android-sample</link>
-            <guid>https://arrow-kt.io/community/blog/2020/04/01/explaining-arrow-android-sample</guid>
-            <pubDate>Wed, 01 Apr 2020 00:00:00 GMT</pubDate>
-            <description><![CDATA[Arrow is an exciting development for Kotlin developers interested in functional programming and, more broadly, pushing the limits of the Kotlin compiler.]]></description>
-            <content:encoded><![CDATA[<p>Arrow is an exciting development for Kotlin developers interested in functional programming and, more broadly, pushing the limits of the Kotlin compiler.</p>]]></content:encoded>
-            <category>core</category>
-            <category>articles</category>
-        </item>
-        <item>
-            <title><![CDATA[IO integration with kotlinx.coroutines]]></title>
-            <link>https://arrow-kt.io/community/blog/2020/03/02/io-integration-kotlinx-coroutines</link>
-            <guid>https://arrow-kt.io/community/blog/2020/03/02/io-integration-kotlinx-coroutines</guid>
-            <pubDate>Mon, 02 Mar 2020 00:00:00 GMT</pubDate>
-            <description><![CDATA[This article showcases the brand new Arrow integration module for KotlinX Coroutines included in the Arrow 0.10.5 release.]]></description>
-            <content:encoded><![CDATA[<p>This article showcases the brand new Arrow integration module for KotlinX Coroutines included in the Arrow 0.10.5 release.</p>]]></content:encoded>
-            <category>fx</category>
-            <category>articles</category>
-        </item>
-        <item>
-            <title><![CDATA[FP with Kotlin/Arrow: Monad Comprehensions & Parallel Processing]]></title>
-            <link>https://arrow-kt.io/community/blog/2020/02/26/fp-with-kotlin-arrow</link>
-            <guid>https://arrow-kt.io/community/blog/2020/02/26/fp-with-kotlin-arrow</guid>
-            <pubDate>Wed, 26 Feb 2020 00:00:00 GMT</pubDate>
-            <description><![CDATA[Arrow has multiple libraries available for functional programming. In this talk we'll focus on Arrow FX and learn how to handle IO in a functional way with an introduction to monadic composition. Then we'll examine how to compose monads in a cleaner fashion with Arrow FX's monad comprehensions. Finally, we'll take a look at how to parallelize IO monads with parallel map strategies.]]></description>
-            <content:encoded><![CDATA[<p>Arrow has multiple libraries available for functional programming. In this talk we'll focus on Arrow FX and learn how to handle IO in a functional way with an introduction to monadic composition. Then we'll examine how to compose monads in a cleaner fashion with Arrow FX's monad comprehensions. Finally, we'll take a look at how to parallelize IO monads with parallel map strategies.</p>]]></content:encoded>
-            <category>fx</category>
-            <category>videos</category>
-        </item>
-        <item>
-            <title><![CDATA[What could possibly go wrong? - A safer programming with Arrow]]></title>
-            <link>https://arrow-kt.io/community/blog/2020/02/26/safer-programming-with-arrow</link>
-            <guid>https://arrow-kt.io/community/blog/2020/02/26/safer-programming-with-arrow</guid>
-            <pubDate>Wed, 26 Feb 2020 00:00:00 GMT</pubDate>
-            <description><![CDATA[Your Kotlin app grabs data from an API, transforms it and saves the processed data in a database. However, there are so many things that could go wrong at runtime treat your impure functions as computations with context, pass them around just like other values, and make the necessary unsafe invocation from a single point of your app, your main function.]]></description>
-            <content:encoded><![CDATA[<p>Your Kotlin app grabs data from an API, transforms it and saves the processed data in a database. However, there are so many things that could go wrong at runtime: the API might be inaccessible, the data is not what you expected or the data can't be persisted in the database. You can start adding try catch blocks to your function in your objects, but there is a better way to do it: treat your impure functions as computations with context, pass them around just like other values, and make the necessary unsafe invocation from a single point of your app, your main function.</p><p>This talk will walk you through the core functional concepts of Arrow, you will learn how Some, Either and even IO are functor, applicative and monad. You can use the code example from this talk as a starting point for your Arrow-learning, to write safer, simpler and more elegant functional code in Kotlin.</p>]]></content:encoded>
-            <category>core</category>
-            <category>videos</category>
-        </item>
-        <item>
-            <title><![CDATA[Kotlin Functional Programming: Cleaner Composition with Monad Comprehensions in Arrow Fx]]></title>
-            <link>https://arrow-kt.io/community/blog/2020/01/29/cleaner-composition-with-monad-comprehensions-arrow-fx</link>
-            <guid>https://arrow-kt.io/community/blog/2020/01/29/cleaner-composition-with-monad-comprehensions-arrow-fx</guid>
-            <pubDate>Wed, 29 Jan 2020 00:00:00 GMT</pubDate>
-            <description><![CDATA[Learn how to write cleaner monadic composition in Kotlin with Arrow’s monad comprehensions, available in Arrow FX.]]></description>
-            <content:encoded><![CDATA[<p>Learn how to write cleaner monadic composition in Kotlin with Arrow’s monad comprehensions, available in Arrow FX.</p>]]></content:encoded>
-            <category>fx</category>
-            <category>articles</category>
-        </item>
-        <item>
-            <title><![CDATA[Kotlin Functional Programming: Monads & Composition with Arrow Fx]]></title>
-            <link>https://arrow-kt.io/community/blog/2020/01/29/monads-and-composition-with-arrow-fx</link>
-            <guid>https://arrow-kt.io/community/blog/2020/01/29/monads-and-composition-with-arrow-fx</guid>
-            <pubDate>Wed, 29 Jan 2020 00:00:00 GMT</pubDate>
-            <description><![CDATA[Arrow is a library created by folks over at a company called  47 degrees . In a nutshell, Arrow brings a slew of functional programming features to Kotlin. It is heavily inspired by Scala and Haskell, and emphasizes a lot of the concepts that those languages started]]></description>
-            <content:encoded><![CDATA[<p>Arrow is a library created by folks over at a company called  47 degrees . In a nutshell, Arrow brings a slew of functional programming features to Kotlin. It is heavily inspired by Scala and Haskell, and emphasizes a lot of the concepts that those languages started</p>]]></content:encoded>
-            <category>fx</category>
-            <category>articles</category>
-        </item>
-        <item>
-            <title><![CDATA[Kotlin Functional Programming: Parallel Processing The Functional Way with Arrow Fx]]></title>
-            <link>https://arrow-kt.io/community/blog/2020/01/29/parallel-processing-the-functional-way-with-arrow-fx</link>
-            <guid>https://arrow-kt.io/community/blog/2020/01/29/parallel-processing-the-functional-way-with-arrow-fx</guid>
-            <pubDate>Wed, 29 Jan 2020 00:00:00 GMT</pubDate>
-            <description><![CDATA[Learn how to handle parallel processing in Kotlin with Arrow IO monads.]]></description>
-            <content:encoded><![CDATA[<p>Learn how to handle parallel processing in Kotlin with Arrow IO monads.</p>]]></content:encoded>
-            <category>fx</category>
-            <category>articles</category>
-        </item>
-        <item>
-            <title><![CDATA[Arrow Comonad Approach for GameOfLife with Android Compose]]></title>
-            <link>https://arrow-kt.io/community/blog/2020/01/14/Arrow-Comonad-Android-Compose-gameOfLife</link>
-            <guid>https://arrow-kt.io/community/blog/2020/01/14/Arrow-Comonad-Android-Compose-gameOfLife</guid>
-            <pubDate>Tue, 14 Jan 2020 00:00:00 GMT</pubDate>
-            <description><![CDATA[The purpose of this article is complement the bow + SwifUi solution for the game of live we can find here https://www.47deg.com/blog/conway-swift/ with the arrow + compose version.]]></description>
-            <content:encoded><![CDATA[<p>The purpose of this article is complement the bow + SwifUi solution for the game of live we can find here <a href="https://www.47deg.com/blog/conway-swift/" target="_blank" rel="noopener noreferrer">https://www.47deg.com/blog/conway-swift/</a> with the arrow + compose version.</p>]]></content:encoded>
-            <category>fx</category>
-            <category>articles</category>
-        </item>
-        <item>
-            <title><![CDATA[Kotlin coroutines with arrow-fx]]></title>
-            <link>https://arrow-kt.io/community/blog/2019/12/15/Kotlin-coroutines-with-arrow-fx</link>
-            <guid>https://arrow-kt.io/community/blog/2019/12/15/Kotlin-coroutines-with-arrow-fx</guid>
-            <pubDate>Sun, 15 Dec 2019 00:00:00 GMT</pubDate>
-            <description><![CDATA[The purpose of this article is to summarize the approaches from questions at Slack about the usage of Either, Option and other datatypes and to give a tour of arrow-fx usage and APIs.]]></description>
-            <content:encoded><![CDATA[<p>The purpose of this article is to summarize the approaches from questions at Slack about the usage of Either, Option and other datatypes and to give a tour of arrow-fx usage and APIs.</p>]]></content:encoded>
-            <category>fx</category>
-            <category>articles</category>
-        </item>
-        <item>
-            <title><![CDATA[Conway's Game of Life using Kotlin and Arrow]]></title>
-            <link>https://arrow-kt.io/community/blog/2019/12/12/GOL-using-Kotlin-and-Arrow</link>
-            <guid>https://arrow-kt.io/community/blog/2019/12/12/GOL-using-Kotlin-and-Arrow</guid>
-            <pubDate>Thu, 12 Dec 2019 00:00:00 GMT</pubDate>
-            <description><![CDATA[An article of a series on Functional Programming solutions for the Global Day of Coderetreat challenge. In this case, it shows an approach for it using Kotlin and Functional Programming provided by the Arrow library.]]></description>
-            <content:encoded><![CDATA[<p>An article of a series on Functional Programming solutions for the Global Day of Coderetreat challenge. In this case, it shows an approach for it using Kotlin and Functional Programming provided by the Arrow library.</p>]]></content:encoded>
-            <category>core</category>
-            <category>fx</category>
-            <category>articles</category>
-        </item>
-        <item>
-            <title><![CDATA[Keep insisting - Arrow Meta]]></title>
-            <link>https://arrow-kt.io/community/blog/2019/12/06/kotlinconf-arrow-meta</link>
-            <guid>https://arrow-kt.io/community/blog/2019/12/06/kotlinconf-arrow-meta</guid>
-            <pubDate>Fri, 06 Dec 2019 00:00:00 GMT</pubDate>
-            <description><![CDATA[Arrow Meta is a library that empowers library and application authors with the ability to write plugins for the Kotlin compiler. Compiler plugins have access to all compiler phases and can intercept and modify the AST, descriptors, and IR intermediate lang for bytecode generation.]]></description>
-            <content:encoded><![CDATA[<p>Arrow Meta is a library that empowers library and application authors with the ability to write plugins for the Kotlin compiler. Compiler plugins have access to all compiler phases and can intercept and modify the AST, descriptors, and IR intermediate lang for bytecode generation.</p>]]></content:encoded>
-            <category>meta</category>
-            <category>videos</category>
-        </item>
-        <item>
-            <title><![CDATA[Arrow Fx & Arrow Meta - Functional Programming for the masses]]></title>
-            <link>https://arrow-kt.io/community/blog/2019/11/27/functional-jvm-arrow-fx-meta</link>
-            <guid>https://arrow-kt.io/community/blog/2019/11/27/functional-jvm-arrow-fx-meta</guid>
-            <pubDate>Wed, 27 Nov 2019 00:00:00 GMT</pubDate>
-            <description><![CDATA[In this meetup we discuss the new features of Arrow Fx to write “effectful” programs with an emphasis on simple and declarative programming for everyone.]]></description>
-            <content:encoded><![CDATA[<p>In this meetup we discuss the new features of Arrow Fx to write “effectful” programs with an emphasis on simple and declarative programming for everyone.
-Additionally, we see how Arrow Meta works and how we can use it to improve the ergonomics of Functional Programming in Kotlin.</p>]]></content:encoded>
-            <category>meta</category>
-            <category>fx</category>
-            <category>videos</category>
-        </item>
-        <item>
-            <title><![CDATA[Arrow Meta - Enabling Functional Programming in the Kotlin Compiler]]></title>
-            <link>https://arrow-kt.io/community/blog/2019/10/18/lambda-world-arrow-meta</link>
-            <guid>https://arrow-kt.io/community/blog/2019/10/18/lambda-world-arrow-meta</guid>
-            <pubDate>Fri, 18 Oct 2019 00:00:00 GMT</pubDate>
-            <description><![CDATA[Arrow Meta is a library that empowers library and application authors with the ability to write plugins for the Kotlin compiler. Compiler plugins have access to all compiler phases and can intercept and modify the AST, descriptors, and IR intermediate lang for bytecode generation.]]></description>
-            <content:encoded><![CDATA[<p>Arrow Meta is a library that empowers library and application authors with the ability to write plugins for the Kotlin compiler. Compiler plugins have access to all compiler phases and can intercept and modify the AST, descriptors, and IR intermediate lang for bytecode generation.</p>]]></content:encoded>
-            <category>meta</category>
-            <category>videos</category>
-        </item>
-        <item>
-            <title><![CDATA[Kotlin and Arrow: the functional way]]></title>
-            <link>https://arrow-kt.io/community/blog/2019/08/08/kotlin-and-arrow-the-functional-way</link>
-            <guid>https://arrow-kt.io/community/blog/2019/08/08/kotlin-and-arrow-the-functional-way</guid>
-            <pubDate>Thu, 08 Aug 2019 00:00:00 GMT</pubDate>
-            <description><![CDATA[Kotlin is a great language for developing server-side applications; it's an object-oriented language and also a functional one, supporting features such as function types, lambdas or higher order functions. But...is this enough to switch completely from an imperative paradigm to a functional paradigm?]]></description>
-            <content:encoded><![CDATA[<p>Kotlin is a great language for developing server-side applications; it's an object-oriented language and also a functional one, supporting features such as function types, lambdas or higher order functions. But...is this enough to switch completely from an imperative paradigm to a functional paradigm?</p><p>In this talk by Noe Luaces, we'll see how features from Arrow library completes Kotlin in order to follow a pure functional way.</p>]]></content:encoded>
-            <category>core</category>
-            <category>videos</category>
-        </item>
-        <item>
-            <title><![CDATA[Effect polymorphism with Arrow FX]]></title>
-            <link>https://arrow-kt.io/community/blog/2019/07/22/polymorphic-fx</link>
-            <guid>https://arrow-kt.io/community/blog/2019/07/22/polymorphic-fx</guid>
-            <pubDate>Mon, 22 Jul 2019 00:00:00 GMT</pubDate>
-            <description><![CDATA[Wonder how to handle side effects in a very clean way while abstracting the real effect implementation? #Arrow #FX provides an easy way to do this, without the burden of Higher-Kinded Types.]]></description>
-            <content:encoded><![CDATA[<p>Wonder how to handle side effects in a very clean way while abstracting the real effect implementation? #Arrow #FX provides an easy way to do this, without the burden of Higher-Kinded Types.</p>]]></content:encoded>
-            <category>fx</category>
-            <category>articles</category>
-        </item>
-        <item>
-            <title><![CDATA[Self-contained example of testing with modules and Arrow FX]]></title>
-            <link>https://arrow-kt.io/community/blog/2019/07/05/testing-with-modules</link>
-            <guid>https://arrow-kt.io/community/blog/2019/07/05/testing-with-modules</guid>
-            <pubDate>Fri, 05 Jul 2019 00:00:00 GMT</pubDate>
-            <description><![CDATA[This post shows a porting with Kotlin and Arrow FX of a self-contained testing example with Scala ZIO]]></description>
-            <content:encoded><![CDATA[<p>This post shows a porting with Kotlin and Arrow FX of a self-contained testing example with Scala ZIO</p>]]></content:encoded>
-            <category>core</category>
-            <category>fx</category>
-            <category>articles</category>
-        </item>
-        <item>
-            <title><![CDATA[Modular functional programming with Kotlin]]></title>
-            <link>https://arrow-kt.io/community/blog/2019/07/02/modular-app-kotlin</link>
-            <guid>https://arrow-kt.io/community/blog/2019/07/02/modular-app-kotlin</guid>
-            <pubDate>Tue, 02 Jul 2019 00:00:00 GMT</pubDate>
-            <description><![CDATA[This post proposes a possible solution in order to structure and compose a pure functional Kotlin application, in order to better manage and decouple modules, get simpler tests and manage the Dependency Injection at compile time.]]></description>
-            <content:encoded><![CDATA[<p>This post proposes a possible solution in order to structure and compose a pure functional Kotlin application, in order to better manage and decouple modules, get simpler tests and manage the Dependency Injection at compile time.</p>]]></content:encoded>
-        </item>
-        <item>
-            <title><![CDATA[ArrowFx: Functional Programming for the masses]]></title>
-            <link>https://arrow-kt.io/community/blog/2019/06/07/kotliners-arrow-fx</link>
-            <guid>https://arrow-kt.io/community/blog/2019/06/07/kotliners-arrow-fx</guid>
-            <pubDate>Fri, 07 Jun 2019 00:00:00 GMT</pubDate>
-            <description><![CDATA[In this talk we recap about the imminent future of Functional Programming in Kotlin. With ArrowFx you are able to encode “effectful” programs in a controlled way following the FP principles through a direct syntax. You’ll think you’re writing imperative code!]]></description>
-            <content:encoded><![CDATA[<p>In this talk we recap about the imminent future of Functional Programming in Kotlin. With ArrowFx you are able to encode “effectful” programs in a controlled way following the FP principles through a direct syntax. You’ll think you’re writing imperative code!</p>]]></content:encoded>
-        </item>
-        <item>
-            <title><![CDATA[How KEEP-87 & Typeclasses will change the way we write Kotlin]]></title>
-            <link>https://arrow-kt.io/community/blog/2019/06/04/keep-87-and-typeclasses</link>
-            <guid>https://arrow-kt.io/community/blog/2019/06/04/keep-87-and-typeclasses</guid>
-            <pubDate>Tue, 04 Jun 2019 00:00:00 GMT</pubDate>
-            <description><![CDATA[Short introduction into the proposal KEEP-87 and how it would be able to improve the language.]]></description>
-            <content:encoded><![CDATA[<p>Short introduction into the proposal <a href="https://github.com/Kotlin/KEEP/pull/87" target="_blank" rel="noopener noreferrer">KEEP-87</a> and how it would be able to improve the language.</p>]]></content:encoded>
-            <category>core</category>
-            <category>articles</category>
-        </item>
-        <item>
-            <title><![CDATA[Introducing Arrow Playground]]></title>
-            <link>https://arrow-kt.io/community/blog/2019/04/11/introducing-arrow-playground</link>
-            <guid>https://arrow-kt.io/community/blog/2019/04/11/introducing-arrow-playground</guid>
-            <pubDate>Thu, 11 Apr 2019 00:00:00 GMT</pubDate>
-            <description><![CDATA[Arrow Playground is a JavaScript library that creates Kotlin-aware, including Arrow, editors capable of running code from HTML block elements. This is a fork of the original Kotlin Playground work done by the JetBrains team.]]></description>
-            <content:encoded><![CDATA[<p>Arrow Playground is a JavaScript library that creates Kotlin-aware, including Arrow, editors capable of running code from HTML block elements. This is a fork of the original Kotlin Playground work done by the JetBrains team.</p>]]></content:encoded>
-            <category>core</category>
-            <category>articles</category>
-        </item>
-        <item>
-            <title><![CDATA[Immutable Conversations - Past and Future of Arrow]]></title>
-            <link>https://arrow-kt.io/community/blog/2019/03/12/immutable-conv-1</link>
-            <guid>https://arrow-kt.io/community/blog/2019/03/12/immutable-conv-1</guid>
-            <pubDate>Tue, 12 Mar 2019 00:00:00 GMT</pubDate>
-            <description><![CDATA[In this episode, we capture a conversation between Arrow maintainers Raúl Raja and Paco Estevez as they discuss the past and future of the library which is designed to bring Functional Programming to Kotlin.]]></description>
-            <content:encoded><![CDATA[<p>In this episode, we capture a conversation between Arrow maintainers Raúl Raja and Paco Estevez as they discuss the past and future of the library which is designed to bring Functional Programming to Kotlin.</p>]]></content:encoded>
-            <category>core</category>
-            <category>fx</category>
-            <category>videos</category>
-        </item>
-        <item>
-            <title><![CDATA[From Imperative to Functional Programming using Arrow]]></title>
-            <link>https://arrow-kt.io/community/blog/2019/02/10/imperative-functional-programming-arrow</link>
-            <guid>https://arrow-kt.io/community/blog/2019/02/10/imperative-functional-programming-arrow</guid>
-            <pubDate>Sun, 10 Feb 2019 00:00:00 GMT</pubDate>
-            <description><![CDATA[As its name implies, From Imperative to Functional Programming using Arrow is a tale about migrating a simple Kotlin application written in imperative style to a fully function application with the help of the Arrow library.]]></description>
-            <content:encoded><![CDATA[<p>As its name implies, <a href="https://blog.frankel.ch/imperative-functional-programming/1/" target="_blank" rel="noopener noreferrer">From Imperative to Functional Programming using Arrow</a> is a tale about migrating a simple Kotlin application written in imperative style to a fully function application with the help of the Arrow library.</p>]]></content:encoded>
-            <category>core</category>
-            <category>fx</category>
-            <category>tutorials</category>
-        </item>
-        <item>
-            <title><![CDATA[Webflux with Kotlin and Arrow]]></title>
-            <link>https://arrow-kt.io/community/blog/2019/02/03/arrow-webflux</link>
-            <guid>https://arrow-kt.io/community/blog/2019/02/03/arrow-webflux</guid>
-            <pubDate>Sun, 03 Feb 2019 00:00:00 GMT</pubDate>
-            <description><![CDATA[Webflux with Kotlin and Arrow shows how you can use Arrow together with Spring Webflux to create a reactive REST application. This article explains how to use the MonoK and the FluxK Arrow extensions together with the binding function to make working with the Mono and Flux reactor constructs much easier and better understandable.]]></description>
-            <content:encoded><![CDATA[<p><a href="http://www.smartjava.org/content/webflux-arrow/" target="_blank" rel="noopener noreferrer">Webflux with Kotlin and Arrow</a> shows how you can use Arrow together with Spring Webflux to create a reactive REST application. This article explains how to use the <code>MonoK</code> and the <code>FluxK</code> Arrow extensions together with the <code>binding</code> function to make working with the <code>Mono</code> and <code>Flux</code> reactor constructs much easier and better understandable.</p>]]></content:encoded>
-            <category>core</category>
-            <category>fx</category>
-            <category>articles</category>
-        </item>
-        <item>
-            <title><![CDATA[Getting started with FP in Kotlin and Arrow: Typeclasses]]></title>
-            <link>https://arrow-kt.io/community/blog/2019/01/03/getting-started</link>
-            <guid>https://arrow-kt.io/community/blog/2019/01/03/getting-started</guid>
-            <pubDate>Thu, 03 Jan 2019 00:00:00 GMT</pubDate>
-            <description><![CDATA[Getting started with FP in Kotlin and Arrow: Typeclasses explores part of the Arrow library by explaining how you can use Arrow to create your own typeclasses and use the ones provided by Arrow to make your code more concise and better readable.]]></description>
-            <content:encoded><![CDATA[<p><a href="http://www.smartjava.org/content/kotlin-arrow-typeclasses/" target="_blank" rel="noopener noreferrer">Getting started with FP in Kotlin and Arrow: Typeclasses</a> explores part of the Arrow library by explaining how you can use Arrow to create your own typeclasses and use the ones provided by Arrow to make your code more concise and better readable.</p>]]></content:encoded>
-            <category>core</category>
-            <category>fx</category>
-            <category>articles</category>
-        </item>
-        <item>
-            <title><![CDATA[Functional Hangman Game written with Arrow]]></title>
-            <link>https://arrow-kt.io/community/blog/2018/11/30/hangman</link>
-            <guid>https://arrow-kt.io/community/blog/2018/11/30/hangman</guid>
-            <pubDate>Fri, 30 Nov 2018 00:00:00 GMT</pubDate>
-            <description><![CDATA[Functional Hangman game - console application written with Arrow. Uses the IO monad to push side effects to the edge of the system.]]></description>
-            <content:encoded><![CDATA[<p><a href="https://lordraydenmk.github.io/2018/functional-hangman-in-kotlin-with-arrow/" target="_blank" rel="noopener noreferrer">Functional Hangman</a> game - console application written with Arrow. Uses the <code>IO&lt;A&gt;</code> monad to push side effects to the edge of the system.</p>]]></content:encoded>
-            <category>core</category>
-            <category>fx</category>
-            <category>articles</category>
-        </item>
-        <item>
-            <title><![CDATA[Manual documentation is dead. Long live automated documentation! Automated documentation with ANK]]></title>
-            <link>https://arrow-kt.io/community/blog/2018/11/24/ank</link>
-            <guid>https://arrow-kt.io/community/blog/2018/11/24/ank</guid>
-            <pubDate>Sat, 24 Nov 2018 00:00:00 GMT</pubDate>
-            <description><![CDATA[It includes how the ANK plugin works: from having a tool that evaluates and verifies your doc snippets at compile time, to generating code documentation that is always correct and up to date.]]></description>
-            <content:encoded><![CDATA[<p>It includes how the ANK plugin works: from having a tool that evaluates and verifies your doc snippets at compile time, to generating code documentation that is always correct and up to date.</p>]]></content:encoded>
-            <category>core</category>
-            <category>incubator</category>
-            <category>videos</category>
-        </item>
-        <item>
-            <title><![CDATA[Simple Dependency Management in Kotlin]]></title>
-            <link>https://arrow-kt.io/community/blog/2018/11/07/simple-management-dependency</link>
-            <guid>https://arrow-kt.io/community/blog/2018/11/07/simple-management-dependency</guid>
-            <pubDate>Wed, 07 Nov 2018 00:00:00 GMT</pubDate>
-            <description><![CDATA[In this talk we introduce the concepts of Dependency Management as a language feature, typeclasses, and a live demo of KEEP-87. You can follow along the example in this folder.]]></description>
-            <content:encoded><![CDATA[<p>In this talk we introduce the concepts of Dependency Management as a language feature, typeclasses, and a live demo of <a href="https://github.com/Kotlin/KEEP/pull/87" target="_blank" rel="noopener noreferrer">KEEP-87</a>. You can follow along the example in <a href="https://github.com/arrow-kt/arrow/tree/master/modules/docs/arrow-examples/src/test/kotlin/arrow/typeclasses" target="_blank" rel="noopener noreferrer">this folder</a>.</p>]]></content:encoded>
-            <category>core</category>
-            <category>videos</category>
-        </item>
-        <item>
-            <title><![CDATA[Polyjokes  -  A polymorphic approach using Arrow]]></title>
-            <link>https://arrow-kt.io/community/blog/2018/10/21/polyjokes</link>
-            <guid>https://arrow-kt.io/community/blog/2018/10/21/polyjokes</guid>
-            <pubDate>Sun, 21 Oct 2018 00:00:00 GMT</pubDate>
-            <description><![CDATA[@dcampogiani is using a polymorphic approach to retrieve a random user and then a joke about him.]]></description>
-            <content:encoded><![CDATA[<p><a href="https://github.com/dcampogiani" target="_blank" rel="noopener noreferrer">@dcampogiani</a> is using a polymorphic approach to retrieve a random user and then a joke about him.</p><p><a href="https://github.com/dcampogiani/polyjokes" target="_blank" rel="noopener noreferrer">Polyjokes — A polymorphic approach using Arrow</a></p>]]></content:encoded>
-            <category>core</category>
-            <category>articles</category>
-        </item>
-        <item>
-            <title><![CDATA[Architecting Typed FP Applications & Libraries in Kotlin with Arrow]]></title>
-            <link>https://arrow-kt.io/community/blog/2018/10/05/kotlin-conf-fp-in-kotlin-with-arrow</link>
-            <guid>https://arrow-kt.io/community/blog/2018/10/05/kotlin-conf-fp-in-kotlin-with-arrow</guid>
-            <pubDate>Fri, 05 Oct 2018 00:00:00 GMT</pubDate>
-            <description><![CDATA[This talk includes a comprehensive walkthrough of the most important patterns covered by the data types and type classes we find in Arrow. Each pattern will be accompanied by code examples that illustrate how Arrow brings Typed Functional Programming to Kotlin.]]></description>
-            <content:encoded><![CDATA[<p>This talk includes a comprehensive walkthrough of the most important patterns covered by the data types and type classes we find in Arrow. Each pattern will be accompanied by code examples that illustrate how Arrow brings Typed Functional Programming to Kotlin.</p><p><a href="https://github.com/47deg/arrow-architecture" target="_blank" rel="noopener noreferrer">Sources and slides</a></p>]]></content:encoded>
-            <category>core</category>
-            <category>fx</category>
-            <category>videos</category>
-        </item>
-        <item>
-            <title><![CDATA[Arrow and Functional Programming for Kotlin Developers]]></title>
-            <link>https://arrow-kt.io/community/blog/2018/07/24/arrow-fp-kotlin</link>
-            <guid>https://arrow-kt.io/community/blog/2018/07/24/arrow-fp-kotlin</guid>
-            <pubDate>Tue, 24 Jul 2018 00:00:00 GMT</pubDate>
-            <description><![CDATA[A beginner level introduction to Functional Programming for Kotlin and/or Android Developers or developers with OOP background.]]></description>
-            <content:encoded><![CDATA[<p>A beginner level introduction to Functional Programming for Kotlin and/or Android Developers or developers with OOP background.</p>]]></content:encoded>
-            <category>core</category>
-            <category>videos</category>
-        </item>
-        <item>
-            <title><![CDATA[Functional Programming in Kotlin with Arrow by Emmanuel Nhan]]></title>
-            <link>https://arrow-kt.io/community/blog/2018/06/27/fp-kotlin-arrow</link>
-            <guid>https://arrow-kt.io/community/blog/2018/06/27/fp-kotlin-arrow</guid>
-            <pubDate>Wed, 27 Jun 2018 00:00:00 GMT</pubDate>
-            <description><![CDATA[@nhanmanu introduces Kotlin and how it is a good fit for functional programming. The talk goes through some interesting features of Kotlin, then show how to use them to enter the world of Higher Kinds and Typeclasses. In the last part, we explore some Arrow capabilities & built-in syntax, using validation as an example.]]></description>
-            <content:encoded><![CDATA[<p><a href="https://twitter.com/nhanmanu" target="_blank" rel="noopener noreferrer">@nhanmanu</a> introduces Kotlin and how it is a good fit for functional programming. The talk goes through some interesting features of Kotlin, then show how to use them to enter the world of Higher Kinds and Typeclasses. In the last part, we explore some Arrow capabilities &amp; built-in syntax, using validation as an example.</p>]]></content:encoded>
-            <category>core</category>
-            <category>slidedecks</category>
-        </item>
-        <item>
-            <title><![CDATA[Arrow 101  -  Building an Android app using Functional Programming]]></title>
-            <link>https://arrow-kt.io/community/blog/2018/06/24/arrow-101</link>
-            <guid>https://arrow-kt.io/community/blog/2018/06/24/arrow-101</guid>
-            <pubDate>Sun, 24 Jun 2018 00:00:00 GMT</pubDate>
-            <description><![CDATA[Leandro Ferreira presents how to build a simple app using Arrow and how to implement solutions with Semigroups.]]></description>
-            <content:encoded><![CDATA[<p><a href="https://twitter.com/mLeandroBF" target="_blank" rel="noopener noreferrer">Leandro Ferreira</a> presents how to build a simple app using Arrow and how to implement solutions with Semigroups.</p><p><a href="https://medium.com/@lehen01/arrow-101-building-an-android-app-using-functional-programming-fe959675d96d" target="_blank" rel="noopener noreferrer">Arrow 101 — Building an Android app using Functional Programming</a></p><p><a href="https://medium.com/@lehen01/arrow-101-modelling-a-real-world-problem-with-semigroups-d8f22cdf54c" target="_blank" rel="noopener noreferrer">Arrow 101 — Modelling a real world problem with Semigroups</a></p>]]></content:encoded>
-            <category>core</category>
-            <category>articles</category>
-        </item>
-        <item>
-            <title><![CDATA[State of the functional ecosystem in Kotlin: Mid 2018 checkup]]></title>
-            <link>https://arrow-kt.io/community/blog/2018/06/24/state-ecosystem</link>
-            <guid>https://arrow-kt.io/community/blog/2018/06/24/state-ecosystem</guid>
-            <pubDate>Sun, 24 Jun 2018 00:00:00 GMT</pubDate>
-            <description><![CDATA[This talk focuses on the day-to-day problems Arrow solves, from small ideas to big concepts.]]></description>
-            <content:encoded><![CDATA[<p>This talk focuses on the day-to-day problems Arrow solves, from small ideas to big concepts.</p><p>It includes an overview of all the modules available, and some of the 3rd party libraries made by the community.</p>]]></content:encoded>
-            <category>core</category>
-            <category>optics</category>
-            <category>fx</category>
-            <category>incubator</category>
-            <category>videos</category>
-        </item>
-        <item>
-            <title><![CDATA[Higher Kinded Types in a Lower Kinded Language by Jacob Bass]]></title>
-            <link>https://arrow-kt.io/community/blog/2018/06/22/hk-types</link>
-            <guid>https://arrow-kt.io/community/blog/2018/06/22/hk-types</guid>
-            <pubDate>Fri, 22 Jun 2018 00:00:00 GMT</pubDate>
-            <description><![CDATA[It's hard coming back down to the earth of a JVM based language after spending time with Haskell and OCaml. This talk will discuss functional programming in Kotlin with the Arrow library, how the abstractions it provides can improve your code, and how this magic that provides higher-kinded types works under the hood.]]></description>
-            <content:encoded><![CDATA[<p>It's hard coming back down to the earth of a JVM based language after spending time with Haskell and OCaml. This talk will discuss functional programming in Kotlin with the Arrow library, how the abstractions it provides can improve your code, and how this magic that provides higher-kinded types works under the hood.</p>]]></content:encoded>
-            <category>core</category>
-            <category>videos</category>
-        </item>
-        <item>
-            <title><![CDATA[1/n - How do I… in FP: Validation]]></title>
-            <link>https://arrow-kt.io/community/blog/2018/04/23/how-do-i</link>
-            <guid>https://arrow-kt.io/community/blog/2018/04/23/how-do-i</guid>
-            <pubDate>Mon, 23 Apr 2018 00:00:00 GMT</pubDate>
-            <description><![CDATA[Emmanuel Nhan showcases different approaches to validation including examples for ValidatedNel from Arrow in this great and in depth post using Kafka Streams Config parameters as example.]]></description>
-            <content:encoded><![CDATA[<p><a href="https://www.enhan.eu/author/enhan/" target="_blank" rel="noopener noreferrer">Emmanuel Nhan</a> showcases different approaches to validation including examples for <code>ValidatedNel</code> from Arrow in this great and in depth post using Kafka Streams Config parameters as example.</p><p><a href="https://www.enhan.eu/how-to-in-fp/" target="_blank" rel="noopener noreferrer">1/n - How do I… in FP: Validation</a></p>]]></content:encoded>
-            <category>core</category>
-            <category>tutorials</category>
-        </item>
-        <item>
-            <title><![CDATA[Android Functional Validation]]></title>
-            <link>https://arrow-kt.io/community/blog/2018/04/14/android-functional-validation</link>
-            <guid>https://arrow-kt.io/community/blog/2018/04/14/android-functional-validation</guid>
-            <pubDate>Sat, 14 Apr 2018 00:00:00 GMT</pubDate>
-            <description><![CDATA[@dcampogiani explores some data types in Arrow and uses them to validate a form on Android.]]></description>
-            <content:encoded><![CDATA[<p><a href="https://github.com/dcampogiani" target="_blank" rel="noopener noreferrer">@dcampogiani</a> explores some data types in Arrow and uses them to validate a form on Android.</p><p><a href="https://player.vimeo.com/video/279931528" target="_blank" rel="noopener noreferrer">Video (in italian)</a></p><ul><li><a href="http://danielecampogiani.com/blog/2018/02/android-functional-validation-1-intro/" target="_blank" rel="noopener noreferrer">Introduction</a></li><li><a href="http://danielecampogiani.com/blog/2018/02/android-functional-validation-2-option/" target="_blank" rel="noopener noreferrer">Option</a></li><li><a href="http://danielecampogiani.com/blog/2018/02/android-functional-validation-3-either/" target="_blank" rel="noopener noreferrer">Either</a></li><li><a href="http://danielecampogiani.com/blog/2018/02/android-functional-validation-4-validated/" target="_blank" rel="noopener noreferrer">Validated</a></li></ul>]]></content:encoded>
-            <category>core</category>
-            <category>tutorials</category>
-        </item>
-        <item>
-            <title><![CDATA[Introduction to Kotlin Arrow by Jacob Bass]]></title>
-            <link>https://arrow-kt.io/community/blog/2018/03/26/kotlin-arrow</link>
-            <guid>https://arrow-kt.io/community/blog/2018/03/26/kotlin-arrow</guid>
-            <pubDate>Mon, 26 Mar 2018 00:00:00 GMT</pubDate>
-            <description><![CDATA[@bassjacob goes through how Funktionale and Kategory merged into Arrow, consolidating two of the most popular FP libraries in the Kotlin space into one powerhouse. The talk is an introduction to some FP concepts, how the libraries work, what features they bring to the table and where you might use them in your code.]]></description>
-            <content:encoded><![CDATA[<p><a href="https://github.com/bassjacob" target="_blank" rel="noopener noreferrer">@bassjacob</a> goes through how Funktionale and Kategory merged into Arrow, consolidating two of the most popular FP libraries in the Kotlin space into one powerhouse. The talk is an introduction to some FP concepts, how the libraries work, what features they bring to the table and where you might use them in your code.</p>]]></content:encoded>
-            <category>core</category>
-            <category>videos</category>
-        </item>
-        <item>
-            <title><![CDATA[It's all about morphisms]]></title>
-            <link>https://arrow-kt.io/community/blog/2018/03/21/morphisms</link>
-            <guid>https://arrow-kt.io/community/blog/2018/03/21/morphisms</guid>
-            <pubDate>Wed, 21 Mar 2018 00:00:00 GMT</pubDate>
-            <description><![CDATA[@uberto gives a gentle introduction to Category Theory for programmers used to OOP but interested in Functional Programming. No Haskell knowledge required. We will explain main concepts behind functional programming with many diagrams and simple metaphors and examples. Some code will clarify how to translate these ideas in programs.]]></description>
-            <content:encoded><![CDATA[<p><a href="https://github.com/uberto" target="_blank" rel="noopener noreferrer">@uberto</a> gives a gentle introduction to Category Theory for programmers used to OOP but interested in Functional Programming. No Haskell knowledge required. We will explain main concepts behind functional programming with many diagrams and simple metaphors and examples. Some code will clarify how to translate these ideas in programs.</p>]]></content:encoded>
-            <category>core</category>
-            <category>videos</category>
-        </item>
-        <item>
-            <title><![CDATA[Optics and Type Classes in Arrow]]></title>
-            <link>https://arrow-kt.io/community/blog/2018/01/17/optics-type-classes-arrow</link>
-            <guid>https://arrow-kt.io/community/blog/2018/01/17/optics-type-classes-arrow</guid>
-            <pubDate>Wed, 17 Jan 2018 00:00:00 GMT</pubDate>
-            <description><![CDATA[@msya explains how to use various optics and type classes in Arrow. He discusses optics such as]]></description>
-            <content:encoded><![CDATA[<p><a href="https://github.com/msya" target="_blank" rel="noopener noreferrer">@msya</a> explains how to use various optics and type classes in Arrow. He discusses optics such as
-<!-- -->[<code>Lens</code>]<!-- -->({{ '/docs/optics/lens' | relative_url }}) and <!-- -->[<code>Iso</code>]<!-- -->({{ '/docs/optics/iso' | relative_url }}). He also goes over the purpose for type classes and how <a href="https://github.com/Kotlin/KEEP/pull/87" target="_blank" rel="noopener noreferrer">KEEP-87</a> will make it easier to implement them.</p><p><a href="https://speakerdeck.com/heyitsmohit/functional-programming-with-arrow" target="_blank" rel="noopener noreferrer">Functional Programming with Arrow</a></p>]]></content:encoded>
-            <category>core</category>
-            <category>optics</category>
-            <category>slidedecks</category>
-        </item>
-        <item>
-            <title><![CDATA[Functional Programming in Kotlin with Arrow]]></title>
-            <link>https://arrow-kt.io/community/blog/2017/11/29/fp-kotlin-arrow</link>
-            <guid>https://arrow-kt.io/community/blog/2017/11/29/fp-kotlin-arrow</guid>
-            <pubDate>Wed, 29 Nov 2017 00:00:00 GMT</pubDate>
-            <description><![CDATA[A rundown of all the features included in the library, focusing on implementation details.]]></description>
-            <content:encoded><![CDATA[<p>A rundown of all the features included in the library, focusing on implementation details.</p>]]></content:encoded>
-            <category>core</category>
-            <category>videos</category>
-        </item>
-        <item>
-            <title><![CDATA[Building a DSL… in Kotlin]]></title>
-            <link>https://arrow-kt.io/community/blog/2017/11/24/building-dsl-kotlin</link>
-            <guid>https://arrow-kt.io/community/blog/2017/11/24/building-dsl-kotlin</guid>
-            <pubDate>Fri, 24 Nov 2017 00:00:00 GMT</pubDate>
-            <description><![CDATA[Make DSLs stack safe, composable and reusable under different runtime requirements thanks to Arrow.]]></description>
-            <content:encoded><![CDATA[<p>Make DSLs stack safe, composable and reusable under different runtime requirements thanks to Arrow.</p>]]></content:encoded>
-            <category>core</category>
-            <category>videos</category>
-        </item>
-        <item>
-            <title><![CDATA[Happy path: Kotlin + Actors + Arrow]]></title>
-            <link>https://arrow-kt.io/community/blog/2017/11/22/happy-path</link>
-            <guid>https://arrow-kt.io/community/blog/2017/11/22/happy-path</guid>
-            <pubDate>Wed, 22 Nov 2017 00:00:00 GMT</pubDate>
-            <description><![CDATA[@javipacheco creates a Proof of Concept architecture for Android using the Actor pattern and modelling the domain with Either.]]></description>
-            <content:encoded><![CDATA[<p><a href="https://github.com/javipacheco" target="_blank" rel="noopener noreferrer">@javipacheco</a> creates a Proof of Concept architecture for Android using the Actor pattern and modelling the domain with <!-- -->[<code>Either</code>]<!-- -->({{ '<a href="https://arrow-kt.io/docs/apidocs/arrow-core-data/arrow.core/-either/'" target="_blank" rel="noopener noreferrer">https://arrow-kt.io/docs/apidocs/arrow-core-data/arrow.core/-either/'</a> | relative_url }}).</p><p><a href="https://medium.com/@javipacheco/happy-path-kotlin-actors-arrow-proof-of-concept-322e9099d2ea" target="_blank" rel="noopener noreferrer">Happy Path: Kotlin + Actors + Arrow</a></p>]]></content:encoded>
-        </item>
-        <item>
-            <title><![CDATA[Architectures Using Functional Programming Concepts]]></title>
-            <link>https://arrow-kt.io/community/blog/2017/11/17/architectures</link>
-            <guid>https://arrow-kt.io/community/blog/2017/11/17/architectures</guid>
-            <pubDate>Fri, 17 Nov 2017 00:00:00 GMT</pubDate>
-            <description><![CDATA[Introductory talk to Functional architectures to be built on top of Arrow.]]></description>
-            <content:encoded><![CDATA[<p>Introductory talk to Functional architectures to be built on top of Arrow.</p>]]></content:encoded>
-            <category>core</category>
-            <category>videos</category>
-        </item>
-        <item>
-            <title><![CDATA[Kotlin for the Pragmatic Functionalist]]></title>
-            <link>https://arrow-kt.io/community/blog/2017/11/09/pragmatic-functionalist</link>
-            <guid>https://arrow-kt.io/community/blog/2017/11/09/pragmatic-functionalist</guid>
-            <pubDate>Thu, 09 Nov 2017 00:00:00 GMT</pubDate>
-            <description><![CDATA[An introduction to Arrow and the enhancements it brings to Kotlin's standard library.]]></description>
-            <content:encoded><![CDATA[<p>An introduction to Arrow and the enhancements it brings to Kotlin's standard library.</p>]]></content:encoded>
-            <category>core</category>
-            <category>videos</category>
-        </item>
-        <item>
-            <title><![CDATA[Functional Programming in Kotlin]]></title>
-            <link>https://arrow-kt.io/community/blog/2017/11/02/fp-kotlin</link>
-            <guid>https://arrow-kt.io/community/blog/2017/11/02/fp-kotlin</guid>
-            <pubDate>Thu, 02 Nov 2017 00:00:00 GMT</pubDate>
-            <description><![CDATA[An ongoing blog series introducing Functional Programming architectures from scratch]]></description>
-            <content:encoded><![CDATA[<p>An ongoing blog series introducing Functional Programming architectures from scratch</p><p><a href="https://medium.com/@JorgeCastilloPr/kotlin-functional-programming-does-it-make-sense-36ad07e6bacf" target="_blank" rel="noopener noreferrer">Kotlin Functional Programming: Does it make sense?</a></p><p><a href="https://medium.com/@JorgeCastilloPr/kotlin-functional-programming-i-monad-stack-518d1bd8fbee" target="_blank" rel="noopener noreferrer">Kotlin Functional Programming I: Monad Stack</a></p><p><a href="https://medium.com/@JorgeCastilloPr/kotlin-functional-programming-ii-monad-transformers-b1f020f14dd8" target="_blank" rel="noopener noreferrer">Kotlin Functional Programming II: Monad Transformers</a></p>]]></content:encoded>
-            <category>core</category>
-            <category>fx</category>
-            <category>mtl</category>
-            <category>tutorials</category>
-        </item>
-        <item>
-            <title><![CDATA[Functional approach to Android architecture using Kotlin]]></title>
-            <link>https://arrow-kt.io/community/blog/2017/10/20/functional-approach</link>
-            <guid>https://arrow-kt.io/community/blog/2017/10/20/functional-approach</guid>
-            <pubDate>Fri, 20 Oct 2017 00:00:00 GMT</pubDate>
-            <description><![CDATA[Move side effects to the edges of the system, implement a functional oriented architecture for Android apps based on purity.]]></description>
-            <content:encoded><![CDATA[<p>Move side effects to the edges of the system, implement a functional oriented architecture for Android apps based on purity.</p>]]></content:encoded>
-            <category>core</category>
-            <category>videos</category>
-        </item>
-        <item>
-            <title><![CDATA[Handling exceptions in Arrow]]></title>
-            <link>https://arrow-kt.io/community/blog/2017/09/17/handling-exceptions-arrow</link>
-            <guid>https://arrow-kt.io/community/blog/2017/09/17/handling-exceptions-arrow</guid>
-            <pubDate>Sun, 17 Sep 2017 00:00:00 GMT</pubDate>
-            <description><![CDATA[@uris77 explains how to use Try in real world examples.]]></description>
-            <content:encoded><![CDATA[<p><a href="https://github.com/uris77" target="_blank" rel="noopener noreferrer">@uris77</a> explains how to use <a href="https://arrow-kt.io/docs/apidocs/arrow-core-data/arrow.core/-try/" target="_blank" rel="noopener noreferrer">Try</a> in real world examples.</p><p><a href="https://www.spantree.net/blog/2017/09/15/kotlin-exception-handling-with-kategory.html" target="_blank" rel="noopener noreferrer">Handling Kotlin Exceptions with Arrow – A Functional Approach</a></p>]]></content:encoded>
-            <category>core</category>
-            <category>articles</category>
         </item>
     </channel>
 </rss>
