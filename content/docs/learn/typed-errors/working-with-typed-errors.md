@@ -426,7 +426,7 @@ fun problematic(n: Int): Either<Problem, Int?> =
 
 :::
 
-::: info Tracing the origin of a raise
+:::info Tracing the origin of a raise
 
 As projects grow in size, raised errors propagate through the call stack. To make debugging easier, Arrow provides a way to trace calls to `raise` and `bind`: [see Raise.traced](https://apidocs.arrow-kt.io/arrow-core/arrow.core.raise/traced.html).
 
