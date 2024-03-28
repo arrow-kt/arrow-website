@@ -153,13 +153,13 @@ Arrow 2.x simplifies the hierarchy to the five optics described in this section.
 
 ```mermaid
 graph TD;
-  subgraph <h4>only access</h4>
+  subgraph "<h4>only access</h4>"
     fold{{"<b>Fold</b> (0 .. ∞)<br /><tt>getAll</tt>"}};
     optionalFold{{"<b>OptionalFold</b> (0 .. 1)<br /><tt>getOrNull</tt>"}};
     getter{{"<b>Getter</b> (exactly 1)<br /><tt>get</tt>"}};
   end
   setter{{"<b>Setter</b><br /><tt>modify</tt> and <tt>set</tt>"}};
-  subgraph <h4>Arrow 2.x</h4>
+  subgraph "<h4>Arrow 2.x</h4>"
     traversal{{"<b>Traversal</b>"}};
     optional{{"<b>Optional</b>"}};
     lens{{"<b>Lens</b>"}};
