@@ -18,6 +18,9 @@ According to our plan, this is the last non-bugfix release of the 1.x series.
 From now on, our <code>main</code> branch targets Arrow 2.0, which should be the next major release.</p>
 <p>We are incredibly thankful to the many people that have contributed to this release,
 bringing new ideas and quite some code.</p>
+<div class="theme-admonition theme-admonition-info admonition_xJq3 alert alert--info"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M12 23c6.075 0 11-4.925 11-11S18.075 1 12 1 1 5.925 1 12s4.925 11 11 11ZM9 11.5h2v4H9v2h6v-2h-2v-6H9v2ZM13 8V6h-2v2h2Z" fill="currentColor"></path></svg></span>Please use 1.2.4</div><div class="admonitionContent_BuS1"><p>Version 1.2.3 of <code>arrow-core</code> changed the behavior of <code>Raise</code> computations returning
+functions or sequences. This change <a href="https://github.com/arrow-kt/arrow/issues/3391" target="_blank" rel="noopener noreferrer">restricted some useful usages</a>,
+so the team has decided to roll it back and keep the 1.2.1 behavior.</p></div></div>
 <h2 class="anchor anchorWithStickyNavbar_LWe7" id="new-features">New features<a href="https://arrow-kt.io/community/blog/2024/02/28/arrow-1-2-3#new-features" class="hash-link" aria-label="Direct link to New features" title="Direct link to New features">​</a></h2>
 <p>A version number like 1.2.3 sounds like a small bugfix release, but this is far from truth in
 this case: this release is full of new modules to help you be productive when writing Kotlin.</p>
