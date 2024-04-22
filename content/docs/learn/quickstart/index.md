@@ -71,8 +71,8 @@ Simply include the desired library in your `dependencies` block or as a
 
 ```kotlin
 dependencies {
-  implementation("io.arrow-kt:arrow-core:1.2.1")
-  implementation("io.arrow-kt:arrow-fx-coroutines:1.2.1")
+  implementation("io.arrow-kt:arrow-core:1.2.4")
+  implementation("io.arrow-kt:arrow-fx-coroutines:1.2.4")
 }
 ```
 
@@ -81,8 +81,8 @@ dependencies {
 
 ```groovy
 dependencies {
-  implementation 'io.arrow-kt:arrow-core:1.2.1'
-  implementation 'io.arrow-kt:arrow-fx-coroutines:1.2.1'
+  implementation 'io.arrow-kt:arrow-core:1.2.4'
+  implementation 'io.arrow-kt:arrow-fx-coroutines:1.2.4'
 }
 ```
 
@@ -94,12 +94,12 @@ dependencies {
 <dependency>
   <groupId>io.arrow-kt</groupId>
   <artifactId>arrow-core</artifactId>
-  <version>1.2.1</version>
+  <version>1.2.4</version>
 </dependency>
 <dependency>
   <groupId>io.arrow-kt</groupId>
   <artifactId>arrow-fx-coroutines</artifactId>
-  <version>1.2.1</version>
+  <version>1.2.4</version>
 </dependency>
 ```
 
@@ -118,7 +118,7 @@ your Gradle build has several subprojects.
 
 ```yaml
 [versions]
-arrow = "1.2.1"
+arrow = "1.2.4"
 # other versions
 
 [libraries]
@@ -172,7 +172,7 @@ to include `arrow-stack`, which declares versions for the rest of the components
 
 ```kotlin
 dependencies {
-  implementation(platform("io.arrow-kt:arrow-stack:1.2.1"))
+  implementation(platform("io.arrow-kt:arrow-stack:1.2.4"))
   // no versions on libraries
   implementation("io.arrow-kt:arrow-core")
   implementation("io.arrow-kt:arrow-fx-coroutines")
@@ -184,7 +184,7 @@ dependencies {
 
 ```groovy
 dependencies {
-  implementation platform('io.arrow-kt:arrow-stack:1.2.1')
+  implementation platform('io.arrow-kt:arrow-stack:1.2.4')
   // no versions on libraries
   implementation 'io.arrow-kt:arrow-core'
   implementation 'io.arrow-kt:arrow-fx-coroutines'
@@ -199,7 +199,7 @@ dependencies {
 <dependency>
     <groupId>io.arrow-kt</groupId>
     <artifactId>arrow-stack</artifactId>
-    <version>1.2.1</version>
+    <version>1.2.4</version>
     <type>pom</type>
     <scope>import</scope>
 </dependency>
@@ -217,6 +217,12 @@ dependencies {
 </TabItem>
 </Tabs>
 
+:::caution Eager dependency update policy
+
+The Arrow team follows an eager dependency update policy. That means that Arrow libraries always depend on the most up-to-date version of the dependencies at the moment of release. In most cases, it is fine to use older versions of the dependencies; but in rare cases, the conflict leads to [`NoClassDefFoundError`](https://docs.oracle.com/javase/8/docs/api/java/lang/NoClassDefFoundError.html)s. If that happens, please try to update your dependencies to a more recent version, or [open an issue](https://github.com/arrow-kt/arrow/issues).
+
+:::
+
 ### Additional setup for plug-ins
 
 If you're using the Optics component of Arrow, we provide a Kotlin compiler 
@@ -230,12 +236,12 @@ which requires an additional configuration step.
 
 ```kotlin
 plugins {
-  id("com.google.devtools.ksp") version "1.8.21-1.0.11"
+  id("com.google.devtools.ksp") version "1.9.23-1.0.20"
 }
 
 dependencies {
-  implementation("io.arrow-kt:arrow-optics:1.2.1")
-  ksp("io.arrow-kt:arrow-optics-ksp-plugin:1.2.1")
+  implementation("io.arrow-kt:arrow-optics:1.2.4")
+  ksp("io.arrow-kt:arrow-optics-ksp-plugin:1.2.4")
 }
 ```
 
@@ -244,12 +250,12 @@ dependencies {
 
 ```groovy
 plugins {
-  id 'com.google.devtools.ksp' version '1.8.10-1.0.9'
+  id 'com.google.devtools.ksp' version '1.9.23-1.0.20'
 }
 
 dependencies {
-  implementation 'io.arrow-kt:arrow-optics:1.2.1'
-  ksp 'io.arrow-kt:arrow-optics-ksp-plugin:1.2.1'
+  implementation 'io.arrow-kt:arrow-optics:1.2.4'
+  ksp 'io.arrow-kt:arrow-optics-ksp-plugin:1.2.4'
 }
 ```
 
