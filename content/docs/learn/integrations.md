@@ -78,6 +78,16 @@ The main point of contact between Ktor and Arrow is in
 If you're using kotlinx.serialization, you need no further changes other than
 importing the serializers with `@UseSerializers`.
 
+If you want to use Arrow Core types directly as your request or response models, you will need to include the `ArrowModule` in your serializers module:
+
+```kotlin
+install(ContentNegotiation) {
+  json(Json {
+    serializersModule = ArrowModule
+  })
+}
+```
+
 If you're using Jackson, you can use the
 [custom mapper](https://github.com/arrow-kt/arrow-integrations#ktor),
 and pass it to the `ContentNegotiation` configuration.

@@ -20,7 +20,7 @@ If you're using kotlinx.serialization, you need to depend on the
 Declare your serializable types as usual. However, when one of the fields
 mentions a type from Arrow Core,
 
-```
+```kotlin
 @Serializable
 data class Book(val title: String, val authors: NonEmptyList<String>)
 ```
@@ -28,11 +28,10 @@ data class Book(val title: String, val authors: NonEmptyList<String>)
 you need to "import" the serializer into the file. The easiest way is to
 include a `UseSerializers` annotation at the very top.
 
-```
+```kotlin
 @file:UseSerializers(
   EitherSerializer::class,
   IorSerializer::class,
-  ValidatedSerializer::class,
   OptionSerializer::class,
   NonEmptyListSerializer::class,
   NonEmptySetSerializer::class
@@ -42,6 +41,30 @@ include a `UseSerializers` annotation at the very top.
 The list above mentions all the serializers, but you only need to add those
 which are used in your fields. Don't worry too much: if you miss one, the
 kotlinx.serialization plug-in gives you an error.
+
+Additionally, you can use `arrow.core.serialization.ArrowModule` to register run-time [contextual serialization](https://github.com/Kotlin/kotlinx.serialization/blob/master/docs/serializers.md#contextual-serialization) support of the Arrow Core types. 
+
+```kotlin
+val format = Json { serializersModule = ArrowModule }
+```
+
+or by merging with another serializers module
+
+```kotlin
+val format = Json { serializersModule = myModule + ArrowModule }
+```
+
+This will allow for use of the Arrow Core types as the value to be serialized without specifying the serializer explicitly:
+
+```kotlin
+val payload = format.encodeToString(nonEmptyListOf("hello", "world"))
+```
+
+:::note
+
+Using `@UseSerializers` to provide static _compile-time_ serialization of fields containing Arrow Core types is usually preferable to annotating fields with `@Contextual` and relying on _run-time_ resolution, wherever possible.
+
+:::
 
 :::info Additional reading
 
