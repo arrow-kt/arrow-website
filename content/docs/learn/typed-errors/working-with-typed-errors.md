@@ -534,7 +534,7 @@ fun example() {
 <!--- KNIT example-typed-errors-12.kt -->
 <!--- TEST assert -->
 
-The type system now tracks that a new error of `OtherError` might have occurred, but we recovered from any possible errors of `UserNotFound `. This is useful across application layers or in the service layer, where we might want to `recover` from a `DatabaseError` with a `NetworkError` when we want to load data from the network when a database operation failed.
+The type system now tracks that a new error of `OtherError` might have occurred, but we recovered from any possible errors of `UserNotFound`. This is useful across application layers or in the service layer, where we might want to `recover` from a `DatabaseError` with a `NetworkError` when we want to load data from the network when a database operation failed.
 To achieve the same with the `Raise` DSL, we need to be inside the context of `Raise<OtherError>` to `raise` it.
 
 <!--- INCLUDE
@@ -653,7 +653,7 @@ If we want to accumulate all the errors, we can use `mapOrAccumulate` on `Iterab
 
 Since you have potentially more than one failure, the error type in `Either` must be some sort of list.
 However, we know that if we are not in the happy path, then _at least one_ error must have occurred.
-Arrow makes this fact explicit by making the return type of `mapOrAccumulate ` a `NonEmptyList`, or `Nel` for short.
+Arrow makes this fact explicit by making the return type of `mapOrAccumulate` a `NonEmptyList`, or `Nel` for short.
 
 :::
 

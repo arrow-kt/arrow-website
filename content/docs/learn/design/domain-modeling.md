@@ -56,7 +56,7 @@ data class Event(
 )
 ```
 
-If we go back to our previous example, the compiler now fails to compile since we pass `Organizer ` where `Title` is expected, `Description` where `Organizer` is expected, and so on.
+If we go back to our previous example, the compiler now fails to compile since we pass `Organizer` where `Title` is expected, `Description` where `Organizer` is expected, and so on.
 
 ```kotlin
 Event(
@@ -87,7 +87,7 @@ Using an `enum class` is much more powerful than `String` for reasons beyond the
 So it's much easier to reason about `AgeRestriction` than to reason and work with `String`.
 
 In functional programming, this type of data composition is also known as a **sum type**, which models an _or_ relationship.
-So we can say that an `AgeRestriction `is either `General` _or_ `PG` _or_ `PG13` _or_ `Restricted` _or_ `NC17`.
+So we can say that an `AgeRestriction` is either `General` _or_ `PG` _or_ `PG13` _or_ `Restricted` _or_ `NC17`.
 This tells us much more than if it was just a `String`. A `String` would have infinite values, while `AgeRestriction` modeled as an `enum class` only has five different values.
 So using sum types can drastically reduce the complexity of our types.
 
