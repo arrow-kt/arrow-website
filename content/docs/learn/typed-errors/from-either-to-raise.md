@@ -7,11 +7,18 @@ description: Learning about Raise from other FP ecosystems.
 # From `Either` to `Raise`
 
 Typed errors in other functional ecosystems usually revolve around
-special types like `Either`, which provide the ability to describe
+dedicated types like `Either`, which provide the ability to describe
 computations that are successful or end in error. This style is
 fully supported by Arrow, but the DSL based around `Raise` usually
 results in nicer code. This small guide describes common patterns
 in the `Either` style and how they translate into `Raise`.
+
+:::note Working with typed errors
+
+For a more general introduction to typed errors, without assuming
+any prior knowledge on the topic, check [this tutorial](working-with-typed-errors.md).
+
+:::
 
 In the following discussion, we assume the following functions:
 
@@ -33,7 +40,7 @@ a pure computation to the result, if available.
 Take this possible combination of the aforementioned functions:
 
 ```kotlin
-fun tururu(n: Int): Either<Error, String> =
+fun foo(n: Int): Either<Error, String> =
   f(n).flatMap { s ->
     g(s).map { t ->
       t.summarize()
@@ -45,7 +52,7 @@ The translation into the `Raise` DSL describes the same sequence
 of steps, but using a more sequential style:
 
 ```kotlin
-fun tururu(n: Int): Either<Error, String> = either {
+fun foo(n: Int): Either<Error, String> = either {
   val s = f(n).bind()
   val t = g(s).bind()
   t.summarize()
@@ -66,7 +73,7 @@ you use regular Kotlin idioms with some `bind`s sprinkled. In fact
 you could have written the previous code in one single line:
 
 ```kotlin
-fun tururu(n: Int): Either<Error, String> = either {
+fun foo(n: Int): Either<Error, String> = either {
   g(f(n).bind()).bind().summarize()
 }
 ```
@@ -79,6 +86,31 @@ Arrow provides different builders for different return types
 (`either`, `option`, `result`), but regardless of the one you choose
 you always use `bind` for the injection phase.
 
+:::info Why "Raise DSL"?
+
+At this point, you may be surprised that we haven't used the word `Raise`
+at all in the code, only `either` and `bind`. To understand why we use
+"`Raise` DSL" to refer to this coding style, we need to dig a big in
+the type of `either`.
+
+```kotlin
+fun <E, A> either(block: Raise<E>.() -> A): Either<E, A>
+```
+
+The fact that `Raise<E>` appears at the front of the function type
+of `block` (formally, as an [extension receiver](https://kotlinlang.org/docs/lambdas.html#function-literals-with-receiver))
+means that all the functions from the `Raise<E>` interface are available
+implicitly in the scope of `block`. The function `bind` (alongside
+`raise`, `ensure`, `mapOrAccumulate`, and others) lives in that interface.
+
+The pattern of having a parameter with a functional type with receiver
+is not alien to Kotlin, either. Quite the contrary, it is
+[described in the documentation](https://kotlinlang.org/docs/type-safe-builders.html).
+Other well-known libraries in the ecosystem, like `kotlinx.coroutines`
+also follow this pattern (in `coroutineScope` or `flow`, for example).
+
+:::
+
 ## Returning with logical error
 
 Using wrapper types you often have a specific constructor that represents
@@ -87,7 +119,7 @@ Using the `Raise` DSL you no longer need to remember each of them,
 failure is always signaled using `raise`.
 
 ```kotlin
-fun tururuThatRaise(n: Int): Either<Error, String> = either {
+fun fooThatRaise(n: Int): Either<Error, String> = either {
   if (n < 0) raise(Error.NegativeInput)
   val s = f(n).bind()
   val t = g(s).bind()
@@ -102,11 +134,29 @@ means resulting in `Either.Left(Error.NegativeInput)`.
 :::info Somebody said "exceptions"?
 
 The propagation and early return of the `Raise` scope look similar to exceptions.
-However, typed errors should be used for _logical_ errors — problems that have
+That is deliberate, for familiarity.  However, they serve a different purpose from exceptions.
+Typed errors should be used for _logical_ errors — problems that have
 a place in your domain model — as opposed to _exceptional_ cases — which represent
 circumstances that are difficult to recover from.
 
+For a more concrete example, `Raise` is a good tool to signal problems like
+"user not found in a database". On the other hand, "database connection suddenly dropped"
+should rather use exceptions (maybe combined with [resilience](../resilience/intro.md)).
+
 :::
+
+By the way, the Raise DSL provides several utility functions for common patterns.
+Checking an assertion and raising if false is one of those; so the most idiomatic
+way to write the code above is:
+
+```kotlin
+fun fooThatRaise(n: Int): Either<Error, String> = either {
+  ensure(n >= 0) { Error.NegativeInput }
+  val s = f(n).bind()
+  val t = g(s).bind()
+  t.summarize()
+}
+```
 
 ## Transforming the error values
 
@@ -117,7 +167,7 @@ If this is not the case, you have to _bridge_ the different error types, which
 is done using functions like `mapLeft`.
 
 ```kotlin
-fun tarara(n: Int): Either<Error, String> =
+fun bar(n: Int): Either<Error, String> =
   f(n).flatMap { s ->
     h(s).mapLeft { 
       it.toString()
@@ -134,9 +184,9 @@ scope in which the error type is different. The first argument to
 scope into the error type of the outer scope.
 
 ```kotlin
-fun tarara(n: Int): Either<Error, String> = either {
+fun bar(n: Int): Either<Error, String> = either {
   val s = f(n).bind()
-  val t = withError({ it.toString() }) { h(s).bind() }
+  val t = withError({ boo -> boo.toError() }) { h(s).bind() }
   t.summarize()
 }
 ```
@@ -148,7 +198,7 @@ want to run a potentially-failing computation. Almost every library
 provides an "effectful map" (usually called `traverse`) to cover those cases.
 
 ```kotlin
-fun tururus(xs: List<Int>) = xs.traverse { tururu(it) }
+fun foos(xs: List<Int>) = xs.traverse { foo(it) }
 ```
 
 Another advantage of the `Raise` DSL is that you don't need all of those
@@ -156,10 +206,10 @@ new combinators. The regular `map` on lists is enough — although you
 need to remember to `bind` the values to "inject" the errors.
 
 ```kotlin
-fun tururus(xs: List<Int>) = either {
-  xs.map { tururu(it).bind() }
+fun foos(xs: List<Int>) = either {
+  xs.map { foo(it).bind() }
   // alternatively
-  xs.map { tururu(it) }.bindAll()
+  xs.map { foo(it) }.bindAll()
 }
 ```
 
@@ -178,4 +228,33 @@ More information can be found in the
 
 :::
 
-## `Either` no more
+## `Either` and `bind` no more
+
+Until this point we are using the `Raise` DSL to combine different `Either`
+computations, with the goal of producing yet another `Either`. The frontier
+between both styles requires the use of `bind`; but if you go full-on with
+`Raise`, we can even remove those. In that case, the error type appears
+as the extension receiver, instead of wrapping the return type.
+
+```kotlin
+fun Raise<Error>.f(n: Int): String
+fun Raise<Error>.g(s: String): Thing
+fun Raise<Boo>.h(s: String): Thing
+fun Thing.summarize(): String
+```
+
+As a consequence of return types being "bare", we can use them directly,
+without the mediation of `bind`. The last of our examples reads now:
+
+```kotlin
+fun Raise<Error>.bar(n: Int): String {
+  val s = f(n)
+  val t = withError({ boo -> boo.toError() }) { h(s) }
+  return t.summarize()
+}
+```
+
+We encourage using this style, especially for non-public parts of your
+code, instead of continuously using `either` and `bind`. Apart from the
+stylistic improvement, it also avoids wrapping and unwrapping
+`Right` and `Left` values.
