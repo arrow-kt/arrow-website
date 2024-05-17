@@ -90,8 +90,8 @@ you always use `bind` for the injection phase.
 
 At this point, you may be surprised that we haven't used the word `Raise`
 at all in the code, only `either` and `bind`. To understand why we use
-"`Raise` DSL" to refer to this coding style, we need to dig a big in
-the type of `either`.
+"`Raise` DSL" to refer to this coding style, we need to dig a bit into
+the type of the `either` declaration itself.
 
 ```kotlin
 fun <E, A> either(block: Raise<E>.() -> A): Either<E, A>
@@ -230,7 +230,7 @@ More information can be found in the
 
 ## `Either` and `bind` no more
 
-Until this point we are using the `Raise` DSL to combine different `Either`
+Until this point, we are using the `Raise` DSL to combine different `Either`
 computations, with the goal of producing yet another `Either`. The frontier
 between both styles requires the use of `bind`; but if you go full-on with
 `Raise`, we can even remove those. In that case, the error type appears
@@ -258,3 +258,23 @@ We encourage using this style, especially for non-public parts of your
 code, instead of continuously using `either` and `bind`. Apart from the
 stylistic improvement, it also avoids wrapping and unwrapping
 `Right` and `Left` values.
+
+:::warning More than one receiver
+
+Unfortunately, the current Kotlin language does not allow more than
+one receiver. That means that you cannot easily turn a function like:
+
+```kotlin
+fun Thing.problematic(): Either<Error, String>
+```
+
+into a similar version with `Raise<Error>` as receiver. There is
+an ongoing proposal, [context parameters](https://github.com/Kotlin/KEEP/blob/context-parameters/proposals/context-parameters.md),
+which shall drop this restriction. Until then, your best choice
+is to move the original receiver into an argument.
+
+```kotlin
+fun Raise<Error>.problematic(thing: Thing): String
+```
+
+:::
