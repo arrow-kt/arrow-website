@@ -20,7 +20,7 @@ If you're using kotlinx.serialization, you need to depend on the
 Declare your serializable types as usual. However, when one of the fields
 mentions a type from Arrow Core,
 
-```kotlin
+```
 @Serializable
 data class Book(val title: String, val authors: NonEmptyList<String>)
 ```
@@ -28,7 +28,7 @@ data class Book(val title: String, val authors: NonEmptyList<String>)
 you need to "import" the serializer into the file. The easiest way is to
 include a `UseSerializers` annotation at the very top.
 
-```kotlin
+```
 @file:UseSerializers(
   EitherSerializer::class,
   IorSerializer::class,
@@ -44,19 +44,19 @@ kotlinx.serialization plug-in gives you an error.
 
 Additionally, you can use `arrow.core.serialization.ArrowModule` to register run-time [contextual serialization](https://github.com/Kotlin/kotlinx.serialization/blob/master/docs/serializers.md#contextual-serialization) support of the Arrow Core types. 
 
-```kotlin
+```
 val format = Json { serializersModule = ArrowModule }
 ```
 
 or by merging with another serializers module
 
-```kotlin
+```
 val format = Json { serializersModule = myModule + ArrowModule }
 ```
 
 This will allow for use of the Arrow Core types as the value to be serialized without specifying the serializer explicitly:
 
-```kotlin
+```
 val payload = format.encodeToString(nonEmptyListOf("hello", "world"))
 ```
 
@@ -80,7 +80,7 @@ If you're using Jackson for serialization, [this module](https://github.com/arro
 adds support for Arrow types. You just need to call an additional method when
 creating the mapper.
 
-```kotlin
+```
 val mapper = ObjectMapper()
     .registerKotlinModule()
     .registerArrowModule()   // <- this is the one
