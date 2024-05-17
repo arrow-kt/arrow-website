@@ -119,7 +119,7 @@ Using the `Raise` DSL you no longer need to remember each of them,
 failure is always signaled using `raise`.
 
 ```kotlin
-fun fooThatRaise(n: Int): Either<Error, String> = either {
+fun fooThatRaises(n: Int): Either<Error, String> = either {
   if (n < 0) raise(Error.NegativeInput)
   val s = f(n).bind()
   val t = g(s).bind()
@@ -128,7 +128,7 @@ fun fooThatRaise(n: Int): Either<Error, String> = either {
 ```
 
 Calling `raise` immediately ends the execution of the current block. In the example
-above, calling `h(-1)` ends up in `raise`, which in the case of an `either` block
+above, calling `fooThatRaises(-1)` ends up in `raise`, which in the case of an `either` block
 means resulting in `Either.Left(Error.NegativeInput)`.
 
 :::info Somebody said "exceptions"?
@@ -150,7 +150,7 @@ Checking an assertion and raising if false is one of those; so the most idiomati
 way to write the code above is:
 
 ```kotlin
-fun fooThatRaise(n: Int): Either<Error, String> = either {
+fun fooThatRaises(n: Int): Either<Error, String> = either {
   ensure(n >= 0) { Error.NegativeInput }
   val s = f(n).bind()
   val t = g(s).bind()
