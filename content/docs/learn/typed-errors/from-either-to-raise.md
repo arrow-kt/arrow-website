@@ -66,10 +66,10 @@ creates a new scope in which you can use the `Raise` DSL.
 
 The second step is that every time that you have an `Either` value
 resulting from another computation (like `f` and `g` above), you need
-to call `bind`. This "injects" any potential error value in the context,
-and continues normal execution otherwise.
+to call `bind`. This short-circuits the current calculation in case
+of error and continues with normal execution otherwise.
 In this style you don't need to use any function to compose computations,
-you use regular Kotlin idioms with some `bind`s sprinkled. In fact
+you use regular Kotlin idioms with some `bind`s sprinkled. In fact,
 you could have written the previous code in one single line:
 
 ```kotlin
@@ -84,7 +84,7 @@ on the logical decomposition you want in your code.
 
 Arrow provides different builders for different return types
 (`either`, `option`, `result`), but regardless of the one you choose
-you always use `bind` for the injection phase.
+you always use `bind` at every step with potential failure.
 
 :::info Why "Raise DSL"?
 
@@ -203,7 +203,7 @@ fun foos(xs: List<Int>) = xs.traverse { foo(it) }
 
 Another advantage of the `Raise` DSL is that you don't need all of those
 new combinators. The regular `map` on lists is enough — although you
-need to remember to `bind` the values to "inject" the errors.
+need to remember to `bind` each of the values.
 
 ```kotlin
 fun foos(xs: List<Int>) = either {
