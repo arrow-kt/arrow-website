@@ -88,6 +88,23 @@ One additional guarantee of STM is that the _whole_ transaction is executed
 atomically. That means we can modify several `TVar`s in one transaction,
 and we'll never observe an intermediate state.
 
+:::tip Delegated transactional properties
+
+From version 2.0, you can use [property delegation](https://kotlinlang.org/docs/delegated-properties.html)
+to access a `TVar`. That way you don't need explicit `read` or `write`,
+they become implicit in the syntax.
+
+```
+fun STM.deposit(accVar: TVar<Int>, amount: Int): Unit {
+  val acc by accVar       // property delegation
+  val current = acc       // implicit 'read'
+  acc = current + amount  // implicit 'write'
+  // or simply, acc = acc + amount
+}
+```
+
+:::
+
 ### Other STM data structures
 
 The following types are built upon `TVar`s and provided out of the box with Arrow:
