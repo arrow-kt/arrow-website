@@ -94,7 +94,13 @@ From version 2.0, you can use [property delegation](https://kotlinlang.org/docs/
 to access a `TVar`. That way you don't need explicit `read` or `write`,
 they become implicit in the syntax.
 
-```
+<!--- INCLUDE
+import arrow.fx.stm.atomically
+import arrow.fx.stm.TVar
+import arrow.fx.stm.STM
+--->
+
+```kotlin
 fun STM.deposit(accVar: TVar<Int>, amount: Int): Unit {
   val acc by accVar       // property delegation
   val current = acc       // implicit 'read'
@@ -102,6 +108,12 @@ fun STM.deposit(accVar: TVar<Int>, amount: Int): Unit {
   // or simply, acc = acc + amount
 }
 ```
+
+<!--- INCLUDE
+suspend fun example() { }
+--->
+<!--- KNIT example-stm-02.kt -->
+<!--- TEST assert -->
 
 :::
 
