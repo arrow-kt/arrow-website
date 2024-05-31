@@ -12,7 +12,8 @@ as discoverable as possible. Nevertheless, the surface of some
 components, like [typed errors](../docs/learn/typed-errors/index.md),
 is quite large.
 For that reason, we have been busy in the last weeks preparing
-the first release of the Arrow plug-in for IntelliJ-based IDEs.
+the first release of the
+[Arrow plug-in for IntelliJ-based IDEs](https://plugins.jetbrains.com/plugin/24550-arrow).
 
 This first version already focuses on three different aspects of
 Arrow usage where we found that an additional companion can make
@@ -38,5 +39,5 @@ the difficulties raised by the community.
 
 The plug-in lives in a [separate repository](https://github.com/arrow-kt/arrow-intellij).
 Please let us know your experience, and don't be shy to open issues
-with suggestions for more features. They would help not only you,
+with suggestions for more features. They would help not only you
 but potentially every user of the Arrow library.
