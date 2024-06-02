@@ -236,7 +236,7 @@ which requires an additional configuration step.
 
 ```kotlin
 plugins {
-  id("com.google.devtools.ksp") version "1.9.23-1.0.20"
+  id("com.google.devtools.ksp") version "1.9.24-1.0.20"
 }
 
 dependencies {
@@ -250,7 +250,7 @@ dependencies {
 
 ```groovy
 plugins {
-  id 'com.google.devtools.ksp' version '1.9.23-1.0.20'
+  id 'com.google.devtools.ksp' version '1.9.24-1.0.20'
 }
 
 dependencies {
@@ -275,10 +275,19 @@ provides unofficial support for that scenario.
 
 </Tabs>
 
+### Plug-in for IntelliJ-based IDEs
+
+If you are using an [IntelliJ IDEA](https://www.jetbrains.com/idea/) or any
+other IDE from JetBrains, we strongly recommend installing the
+[Arrow plug-in](https://plugins.jetbrains.com/plugin/24550-arrow).
+The plug-in helps fix common problems, especially in the realm of
+[typed errors](../typed-errors/index.md) and suggests more idiomatic
+alternatives when available.
+
 ### Alphas (development builds)
 
 For those wanting to live on the edge, we provide alphas of our [development
 branch](https://github.com/arrow-kt/arrow). Those are tagged with the upcoming
 version, followed by `-alpha.` and the sequence number of the compilation. 
-Check [Maven Central](https://central.sonatype.com/artifact/io.arrow-kt/arrow-core/1.1.5/versions)
+Check [Maven Central](https://central.sonatype.com/artifact/io.arrow-kt/arrow-core/versions)
 for the most recent list of available versions.
