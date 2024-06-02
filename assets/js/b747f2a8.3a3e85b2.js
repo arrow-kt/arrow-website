@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkarrow_website=self.webpackChunkarrow_website||[]).push([[178],{37898:e=>{e.exports=JSON.parse('{"permalink":"/community/blog/tags/mtl","page":1,"postsPerPage":8,"totalPages":1,"totalCount":1,"blogDescription":"Blog","blogTitle":"Blog"}')}}]);

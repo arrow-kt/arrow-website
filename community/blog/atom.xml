@@ -1,16 +1,56 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-    <id>https://arrow-kt.io/community/blog</id>
+    <id>https://arrow-kt.io/community/blog/</id>
     <title>Arrow Blog</title>
-    <updated>2024-02-28T00:00:00.000Z</updated>
+    <updated>2024-06-01T00:00:00.000Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
-    <link rel="alternate" href="https://arrow-kt.io/community/blog"/>
+    <link rel="alternate" href="https://arrow-kt.io/community/blog/"/>
     <subtitle>Arrow Blog</subtitle>
     <icon>https://arrow-kt.io/img/arrow-brand-icon.svg</icon>
     <entry>
+        <title type="html"><![CDATA[Arrow plug-in for IntelliJ 0.1 is here!]]></title>
+        <id>https://arrow-kt.io/community/blog/2024/06/01/intellij-plugin/</id>
+        <link href="https://arrow-kt.io/community/blog/2024/06/01/intellij-plugin/"/>
+        <updated>2024-06-01T00:00:00.000Z</updated>
+        <summary type="html"><![CDATA[One of the main goals of the Arrow project is to produce libraries]]></summary>
+        <content type="html"><![CDATA[<p>One of the main goals of the Arrow project is to produce libraries
+that follow well-known Kotlin idioms, and we strive to make them
+as discoverable as possible. Nevertheless, the surface of some
+components, like <a href="https://arrow-kt.io/learn/typed-errors/">typed errors</a>,
+is quite large.
+For that reason, we have been busy in the last weeks preparing
+the first release of the
+<a href="https://plugins.jetbrains.com/plugin/24550-arrow" target="_blank" rel="noopener noreferrer">Arrow plug-in for IntelliJ-based IDEs</a>.</p>
+<p>This first version already focuses on three different aspects of
+Arrow usage where we found that an additional companion can make
+a big difference. The first aspect is the usage of typed errors:
+the IDE will now suggest missing <code>.bind()</code> or <code>.bindAll()</code>,
+mapping of error using <code>withError</code>, and promoting idioms like
+<code>ensure</code> whenever possible.</p>
+<p>The second aspect is warning about wrong usages of Arrow APIs
+which cannot be prevented by Kotlin's type system alone. This includes
+escaping of <code>Raise</code> contexts -- for example, using <code>sequence</code> or
+<code>flow</code> inside <code>either</code> --, using <code>Atomic</code> with primitive types
+-- where <code>AtomicInt</code> or <code>AtomicBoolean</code> should be used instead --,
+or matching on <code>Eval</code> instances directly instead of using the
+provided API -- which can easily lead to broken invariants.</p>
+<p>The third aspect is applying some known recipes which may be hard
+to know upfront. The first release includes a suggestion to add
+the corresponding <a href="https://arrow-kt.io/learn/quickstart/serialization/">serializer</a>
+when a type marked as <code>@Serializable</code> includes an Arrow Core type.
+This is an area which we would like to explore more, helping with
+the difficulties raised by the community.</p>
+<p>The plug-in lives in a <a href="https://github.com/arrow-kt/arrow-intellij" target="_blank" rel="noopener noreferrer">separate repository</a>.
+Please let us know your experience, and don't be shy to open issues
+with suggestions for more features. They would help not only you
+but potentially every user of the Arrow library.</p>]]></content>
+        <category label="intellij" term="intellij"/>
+        <category label="articles" term="articles"/>
+    </entry>
+    <entry>
         <title type="html"><![CDATA[Arrow 1.2.3 release]]></title>
-        <id>https://arrow-kt.io/community/blog/2024/02/28/arrow-1-2-3</id>
-        <link href="https://arrow-kt.io/community/blog/2024/02/28/arrow-1-2-3"/>
+        <id>https://arrow-kt.io/community/blog/2024/02/28/arrow-1-2-3/</id>
+        <link href="https://arrow-kt.io/community/blog/2024/02/28/arrow-1-2-3/"/>
         <updated>2024-02-28T00:00:00.000Z</updated>
         <summary type="html"><![CDATA[We are happy to announce the availability of version 1.2.3 of the Arrow collection of libraries.]]></summary>
         <content type="html"><![CDATA[<p>We are happy to announce the availability of version 1.2.3 of the Arrow collection of libraries.
@@ -18,13 +58,13 @@ According to our plan, this is the last non-bugfix release of the 1.x series.
 From now on, our <code>main</code> branch targets Arrow 2.0, which should be the next major release.</p>
 <p>We are incredibly thankful to the many people that have contributed to this release,
 bringing new ideas and quite some code.</p>
-<div class="theme-admonition theme-admonition-info admonition_xJq3 alert alert--info"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M12 23c6.075 0 11-4.925 11-11S18.075 1 12 1 1 5.925 1 12s4.925 11 11 11ZM9 11.5h2v4H9v2h6v-2h-2v-6H9v2ZM13 8V6h-2v2h2Z" fill="currentColor"></path></svg></span>Please use 1.2.4</div><div class="admonitionContent_BuS1"><p>Version 1.2.3 of <code>arrow-core</code> changed the behavior of <code>Raise</code> computations returning
+<div class="theme-admonition theme-admonition-info admonition_xJq3 alert alert--info"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><path fill="currentColor" fill-rule="evenodd" d="M12 23c6.075 0 11-4.925 11-11S18.075 1 12 1 1 5.925 1 12s4.925 11 11 11M9 11.5h2v4H9v2h6v-2h-2v-6H9zM13 8V6h-2v2z" clip-rule="evenodd"></path></svg></span>Please use 1.2.4</div><div class="admonitionContent_BuS1"><p>Version 1.2.3 of <code>arrow-core</code> changed the behavior of <code>Raise</code> computations returning
 functions or sequences. This change <a href="https://github.com/arrow-kt/arrow/issues/3391" target="_blank" rel="noopener noreferrer">restricted some useful usages</a>,
 so the team has decided to roll it back and keep the 1.2.1 behavior.</p></div></div>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="new-features">New features<a href="https://arrow-kt.io/community/blog/2024/02/28/arrow-1-2-3#new-features" class="hash-link" aria-label="Direct link to New features" title="Direct link to New features">​</a></h2>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="new-features">New features<a href="https://arrow-kt.io/community/blog/2024/02/28/arrow-1-2-3/#new-features" class="hash-link" aria-label="Direct link to New features" title="Direct link to New features">​</a></h2>
 <p>A version number like 1.2.3 sounds like a small bugfix release, but this is far from truth in
 this case: this release is full of new modules to help you be productive when writing Kotlin.</p>
-<h3 class="anchor anchorWithStickyNavbar_LWe7" id="improved-focus-on-compose">Improved focus on Compose<a href="https://arrow-kt.io/community/blog/2024/02/28/arrow-1-2-3#improved-focus-on-compose" class="hash-link" aria-label="Direct link to Improved focus on Compose" title="Direct link to Improved focus on Compose">​</a></h3>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="improved-focus-on-compose">Improved focus on Compose<a href="https://arrow-kt.io/community/blog/2024/02/28/arrow-1-2-3/#improved-focus-on-compose" class="hash-link" aria-label="Direct link to Improved focus on Compose" title="Direct link to Improved focus on Compose">​</a></h3>
 <p>Arrow provides building blocks relevant to many projects using Kotlin.
 A large part of our community is doing frontend work, and during the latest months,
 the team has been trying to understand their needs, in order to make Arrow
@@ -37,7 +77,7 @@ or <code>MutableStateFlow</code>.</p>
 <p>We are eager to hear more use cases or needs where Arrow may help the lives
 of Kotlin developers. Feel free to drop by the <code>#arrow</code> channel in the Kotlin Slack,
 or open an issue or discussion in our <a href="https://github.com/arrow-kt/arrow" target="_blank" rel="noopener noreferrer">repository</a>.</p>
-<h3 class="anchor anchorWithStickyNavbar_LWe7" id="non-suspend-resource-management">Non-<code>suspend</code> resource management<a href="https://arrow-kt.io/community/blog/2024/02/28/arrow-1-2-3#non-suspend-resource-management" class="hash-link" aria-label="Direct link to non-suspend-resource-management" title="Direct link to non-suspend-resource-management">​</a></h3>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="non-suspend-resource-management">Non-<code>suspend</code> resource management<a href="https://arrow-kt.io/community/blog/2024/02/28/arrow-1-2-3/#non-suspend-resource-management" class="hash-link" aria-label="Direct link to non-suspend-resource-management" title="Direct link to non-suspend-resource-management">​</a></h3>
 <p><a href="https://arrow-kt.io/learn/coroutines/resource-safety/">Resource safety</a> in Arrow
 has been traditionally tied to the use of coroutines and <code>suspend</code> functions.
 This is the right choice for Kotlin-first libraries, like Ktor or Koin, but many
@@ -49,7 +89,7 @@ and ensures the desired behavior alongside coroutines (including cancellation).<
 <li><code>AutoClose</code>, from the new <code>arrow-autoclose</code> module, provides almost the
 same API as <code>Resource</code>, but without the <code>suspend</code> requirement.</li>
 </ul>
-<h3 class="anchor anchorWithStickyNavbar_LWe7" id="forward-compatible-eval">Forward compatible <code>Eval</code><a href="https://arrow-kt.io/community/blog/2024/02/28/arrow-1-2-3#forward-compatible-eval" class="hash-link" aria-label="Direct link to forward-compatible-eval" title="Direct link to forward-compatible-eval">​</a></h3>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="forward-compatible-eval">Forward compatible <code>Eval</code><a href="https://arrow-kt.io/community/blog/2024/02/28/arrow-1-2-3/#forward-compatible-eval" class="hash-link" aria-label="Direct link to forward-compatible-eval" title="Direct link to forward-compatible-eval">​</a></h3>
 <p>One of our goals is to make the transition to 2.0 as smooth as possible.
 You can <a href="https://arrow-kt.io/learn/quickstart/migration/">already migrate</a>
 to the new APIs by using Arrow 1.2.3, and then ensuring that you get no deprecation warnings.</p>
@@ -58,16 +98,16 @@ there was no clear story for the migration of <code>Eval</code>. On the other ha
 The decision was to create a new <a href="https://arrow-kt.io/learn/collections-functions/eval/"><code>arrow-eval</code> module</a>,
 present since this release, and mark the one from <code>arrow-core</code> point the new module,
 instead of entirely removing this functionality from Arrow.</p>
-<h3 class="anchor anchorWithStickyNavbar_LWe7" id="collectors">Collectors<a href="https://arrow-kt.io/community/blog/2024/02/28/arrow-1-2-3#collectors" class="hash-link" aria-label="Direct link to Collectors" title="Direct link to Collectors">​</a></h3>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="collectors">Collectors<a href="https://arrow-kt.io/community/blog/2024/02/28/arrow-1-2-3/#collectors" class="hash-link" aria-label="Direct link to Collectors" title="Direct link to Collectors">​</a></h3>
 <p>The new <a href="https://arrow-kt.io/learn/collections-functions/collectors/"><code>arrow-collectors</code> module</a>
 allows composing operations over sequences of values
 (lists, flows, sequences) while ensuring that the sequence is traversed only once.
 This property is especially relevant when building the sequence is expensive, or simply
 cannot be reproduced, like a stream of data from a database or a flow of actions.</p>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="improved-features">Improved features<a href="https://arrow-kt.io/community/blog/2024/02/28/arrow-1-2-3#improved-features" class="hash-link" aria-label="Direct link to Improved features" title="Direct link to Improved features">​</a></h2>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="improved-features">Improved features<a href="https://arrow-kt.io/community/blog/2024/02/28/arrow-1-2-3/#improved-features" class="hash-link" aria-label="Direct link to Improved features" title="Direct link to Improved features">​</a></h2>
 <p>Several features in the library have been improved, to ensure that Arrow covers a variety
 of use cases.</p>
-<h3 class="anchor anchorWithStickyNavbar_LWe7" id="lenses-for-sealed-classes">Lenses for sealed classes<a href="https://arrow-kt.io/community/blog/2024/02/28/arrow-1-2-3#lenses-for-sealed-classes" class="hash-link" aria-label="Direct link to Lenses for sealed classes" title="Direct link to Lenses for sealed classes">​</a></h3>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="lenses-for-sealed-classes">Lenses for sealed classes<a href="https://arrow-kt.io/community/blog/2024/02/28/arrow-1-2-3/#lenses-for-sealed-classes" class="hash-link" aria-label="Direct link to Lenses for sealed classes" title="Direct link to Lenses for sealed classes">​</a></h3>
 <p>This was once of the <a href="https://github.com/arrow-kt/arrow/issues/2829" target="_blank" rel="noopener noreferrer">older feature requests</a>
 still in our issue tracker, which is now closed thanks to a wonderful
 <a href="https://github.com/arrow-kt/arrow/pull/3359" target="_blank" rel="noopener noreferrer">contribution</a>!</p>
@@ -76,12 +116,12 @@ still in our issue tracker, which is now closed thanks to a wonderful
 given that the field lives in the common parent. For example, the following code</p>
 <div class="language-kotlin codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#D4D4D4;--prism-background-color:#222E51"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-kotlin codeBlock_bY9V thin-scrollbar" style="color:#D4D4D4;background-color:#222E51"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#D4D4D4"><span class="token label symbol" style="color:#c57a17">@optics</span><span class="token plain"> </span><span class="token keyword" style="color:#82a2f3">sealed</span><span class="token plain"> </span><span class="token keyword" style="color:#82a2f3">interface</span><span class="token plain"> User </span><span class="token punctuation" style="color:rgb(212, 212, 212)">{</span><span class="token plain"></span><br></span><span class="token-line" style="color:#D4D4D4"><span class="token plain">  </span><span class="token keyword" style="color:#82a2f3">val</span><span class="token plain"> name</span><span class="token operator" style="color:rgb(212, 212, 212)">:</span><span class="token plain"> String</span><br></span><span class="token-line" style="color:#D4D4D4"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#D4D4D4"><span class="token plain">  </span><span class="token keyword" style="color:#82a2f3">data</span><span class="token plain"> </span><span class="token keyword" style="color:#82a2f3">class</span><span class="token plain"> </span><span class="token function" style="color:#EDB368">Person</span><span class="token punctuation" style="color:rgb(212, 212, 212)">(</span><span class="token keyword" style="color:#82a2f3">override</span><span class="token plain"> </span><span class="token keyword" style="color:#82a2f3">val</span><span class="token plain"> name</span><span class="token operator" style="color:rgb(212, 212, 212)">:</span><span class="token plain"> String</span><span class="token punctuation" style="color:rgb(212, 212, 212)">,</span><span class="token plain"> </span><span class="token keyword" style="color:#82a2f3">val</span><span class="token plain"> age</span><span class="token operator" style="color:rgb(212, 212, 212)">:</span><span class="token plain"> Int</span><span class="token punctuation" style="color:rgb(212, 212, 212)">)</span><span class="token operator" style="color:rgb(212, 212, 212)">:</span><span class="token plain"> User</span><br></span><span class="token-line" style="color:#D4D4D4"><span class="token plain">  </span><span class="token keyword" style="color:#82a2f3">data</span><span class="token plain"> </span><span class="token keyword" style="color:#82a2f3">class</span><span class="token plain"> </span><span class="token function" style="color:#EDB368">Company</span><span class="token punctuation" style="color:rgb(212, 212, 212)">(</span><span class="token keyword" style="color:#82a2f3">override</span><span class="token plain"> </span><span class="token keyword" style="color:#82a2f3">val</span><span class="token plain"> name</span><span class="token operator" style="color:rgb(212, 212, 212)">:</span><span class="token plain"> String</span><span class="token punctuation" style="color:rgb(212, 212, 212)">,</span><span class="token plain"> </span><span class="token keyword" style="color:#82a2f3">val</span><span class="token plain"> vat</span><span class="token operator" style="color:rgb(212, 212, 212)">:</span><span class="token plain"> VATNumber</span><span class="token punctuation" style="color:rgb(212, 212, 212)">)</span><span class="token operator" style="color:rgb(212, 212, 212)">:</span><span class="token plain"> User</span><br></span><span class="token-line" style="color:#D4D4D4"><span class="token plain"></span><span class="token punctuation" style="color:rgb(212, 212, 212)">}</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
 <p>generates from this version on both prisms for each choice, and a lens for <code>name</code>.</p>
-<h3 class="anchor anchorWithStickyNavbar_LWe7" id="higher-arity-functions">Higher-arity functions<a href="https://arrow-kt.io/community/blog/2024/02/28/arrow-1-2-3#higher-arity-functions" class="hash-link" aria-label="Direct link to Higher-arity functions" title="Direct link to Higher-arity functions">​</a></h3>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="higher-arity-functions">Higher-arity functions<a href="https://arrow-kt.io/community/blog/2024/02/28/arrow-1-2-3/#higher-arity-functions" class="hash-link" aria-label="Direct link to Higher-arity functions" title="Direct link to Higher-arity functions">​</a></h3>
 <p>We have traditionally been reluctant to add variations of <code>zip</code> with more than
 10 parameters, because we felt that the narrow use cases did not balance out
 the increase in binary size. Since this release Arrow provides those functions
 in a new <code>arrow-core-high-arity</code> module.</p>
-<h3 class="anchor anchorWithStickyNavbar_LWe7" id="more-accumulating-functions-for-raise">More accumulating functions for <code>Raise</code><a href="https://arrow-kt.io/community/blog/2024/02/28/arrow-1-2-3#more-accumulating-functions-for-raise" class="hash-link" aria-label="Direct link to more-accumulating-functions-for-raise" title="Direct link to more-accumulating-functions-for-raise">​</a></h3>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="more-accumulating-functions-for-raise">More accumulating functions for <code>Raise</code><a href="https://arrow-kt.io/community/blog/2024/02/28/arrow-1-2-3/#more-accumulating-functions-for-raise" class="hash-link" aria-label="Direct link to more-accumulating-functions-for-raise" title="Direct link to more-accumulating-functions-for-raise">​</a></h3>
 <p><a href="https://arrow-kt.io/learn/typed-errors/working-with-typed-errors/">Typed errors</a>
 provide two essential ways to <a href="https://arrow-kt.io/learn/typed-errors/working-with-typed-errors/#accumulating-errors">accumulate errors</a>: <code>zipOrAccumulate</code> and <code>mapOrAccumulate</code>. Those correspond
 to accumulating over a fixed number of computations of different types, or
@@ -93,7 +133,7 @@ library. From there Arrow takes the name of the new function: <code>forEachAccum
 <p>One potential use case is performing validation over elements of a list,
 but keeping the values intact.</p>
 <div class="language-kotlin codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#D4D4D4;--prism-background-color:#222E51"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-kotlin codeBlock_bY9V thin-scrollbar" style="color:#D4D4D4;background-color:#222E51"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#D4D4D4"><span class="token plain">people</span><span class="token punctuation" style="color:rgb(212, 212, 212)">.</span><span class="token function" style="color:#EDB368">forEachAccumulating</span><span class="token plain"> </span><span class="token punctuation" style="color:rgb(212, 212, 212)">{</span><span class="token plain"> person </span><span class="token operator" style="color:rgb(212, 212, 212)">-&gt;</span><span class="token plain"></span><br></span><span class="token-line" style="color:#D4D4D4"><span class="token plain">  </span><span class="token function" style="color:#EDB368">ensure</span><span class="token punctuation" style="color:rgb(212, 212, 212)">(</span><span class="token plain">person</span><span class="token punctuation" style="color:rgb(212, 212, 212)">.</span><span class="token plain">age </span><span class="token operator" style="color:rgb(212, 212, 212)">&gt;=</span><span class="token plain"> </span><span class="token number" style="color:#cfcd9a">0</span><span class="token punctuation" style="color:rgb(212, 212, 212)">)</span><span class="token plain"> </span><span class="token punctuation" style="color:rgb(212, 212, 212)">{</span><span class="token plain"> </span><span class="token function" style="color:#EDB368">InvalidAge</span><span class="token punctuation" style="color:rgb(212, 212, 212)">(</span><span class="token plain">person</span><span class="token punctuation" style="color:rgb(212, 212, 212)">.</span><span class="token plain">name</span><span class="token punctuation" style="color:rgb(212, 212, 212)">)</span><span class="token plain"> </span><span class="token punctuation" style="color:rgb(212, 212, 212)">}</span><span class="token plain"></span><br></span><span class="token-line" style="color:#D4D4D4"><span class="token plain"></span><span class="token punctuation" style="color:rgb(212, 212, 212)">}</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
-<h3 class="anchor anchorWithStickyNavbar_LWe7" id="better-memoization">Better memoization<a href="https://arrow-kt.io/community/blog/2024/02/28/arrow-1-2-3#better-memoization" class="hash-link" aria-label="Direct link to Better memoization" title="Direct link to Better memoization">​</a></h3>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="better-memoization">Better memoization<a href="https://arrow-kt.io/community/blog/2024/02/28/arrow-1-2-3/#better-memoization" class="hash-link" aria-label="Direct link to Better memoization" title="Direct link to Better memoization">​</a></h3>
 <p><a href="https://arrow-kt.io/learn/collections-functions/recursive/#memoized-recursive-functions"><code>MemoizedDeepRecursiveFunction</code></a>
 is a powerful tool to express recursive algorithms without worries over stack overflow or recomputation.
 However, there was a lack of control over how memoized values were stored or evicted, which made the
@@ -102,7 +142,7 @@ type less useful than intended.</p>
 Furthermore, the new <a href="https://arrow-kt.io/learn/collections-functions/recursive/#memoization-takes-memory"><code>arrow-cache4k</code> module</a>
 provides integration with the excellent
 <a href="https://github.com/ReactiveCircus/cache4k" target="_blank" rel="noopener noreferrer">cache4k</a> library.</p>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="more-integrations">More integrations<a href="https://arrow-kt.io/community/blog/2024/02/28/arrow-1-2-3#more-integrations" class="hash-link" aria-label="Direct link to More integrations" title="Direct link to More integrations">​</a></h2>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="more-integrations">More integrations<a href="https://arrow-kt.io/community/blog/2024/02/28/arrow-1-2-3/#more-integrations" class="hash-link" aria-label="Direct link to More integrations" title="Direct link to More integrations">​</a></h2>
 <p>Although not part of this release, we would like to highlight that
 <a href="https://akkurate.dev/" target="_blank" rel="noopener noreferrer">Akkurate</a>, which provides a wonderful DSL for validation over data,
 has released an <a href="https://akkurate.dev/docs/arrow-integration.html" target="_blank" rel="noopener noreferrer">integration module for Arrow</a>.
@@ -113,8 +153,8 @@ and shows the collaborative spirit of the Kotlin community.</p>]]></content>
     </entry>
     <entry>
         <title type="html"><![CDATA[Arrow releases stable 1.2.0 version]]></title>
-        <id>https://arrow-kt.io/community/blog/2023/07/12/arrow-1-2-0</id>
-        <link href="https://arrow-kt.io/community/blog/2023/07/12/arrow-1-2-0"/>
+        <id>https://arrow-kt.io/community/blog/2023/07/12/arrow-1-2-0/</id>
+        <link href="https://arrow-kt.io/community/blog/2023/07/12/arrow-1-2-0/"/>
         <updated>2023-07-12T00:00:00.000Z</updated>
         <summary type="html"><![CDATA[We're excited to announce the stable Arrow 1.2.0 version. To briefly summarize, this release:]]></summary>
         <content type="html"><![CDATA[<p>We're excited to announce the stable Arrow 1.2.0 version. To briefly summarize, this release:</p>
@@ -135,8 +175,8 @@ to be used alongside KotlinX Serialization.</li>
     </entry>
     <entry>
         <title type="html"><![CDATA[Arrow 2.0's Trajectory - Video]]></title>
-        <id>https://arrow-kt.io/community/blog/2023/05/04/arrow-trajectory-kotlinconf</id>
-        <link href="https://arrow-kt.io/community/blog/2023/05/04/arrow-trajectory-kotlinconf"/>
+        <id>https://arrow-kt.io/community/blog/2023/05/04/arrow-trajectory-kotlinconf/</id>
+        <link href="https://arrow-kt.io/community/blog/2023/05/04/arrow-trajectory-kotlinconf/"/>
         <updated>2023-05-04T00:00:00.000Z</updated>
         <summary type="html"><![CDATA[Watch Simon Vergauwen's presentation from KotlinConf 2023 about the history of Arrow, and the trajectory for Arrow 2.0.]]></summary>
         <content type="html"><![CDATA[<p>Watch <a href="https://twitter.com/vergauwen_simon" target="_blank" rel="noopener noreferrer">Simon Vergauwen</a>'s presentation from KotlinConf 2023 about the history of Arrow, and the trajectory for Arrow 2.0.</p>]]></content>
@@ -145,8 +185,8 @@ to be used alongside KotlinX Serialization.</li>
     </entry>
     <entry>
         <title type="html"><![CDATA[Nicer data transformation with KopyKat and Optics]]></title>
-        <id>https://arrow-kt.io/community/blog/2023/05/04/data-transformation-kotlinconf</id>
-        <link href="https://arrow-kt.io/community/blog/2023/05/04/data-transformation-kotlinconf"/>
+        <id>https://arrow-kt.io/community/blog/2023/05/04/data-transformation-kotlinconf/</id>
+        <link href="https://arrow-kt.io/community/blog/2023/05/04/data-transformation-kotlinconf/"/>
         <updated>2023-05-04T00:00:00.000Z</updated>
         <summary type="html"><![CDATA[Watch Alejandro Serrano's presentation from KotlinConf 2023 about data transformation.]]></summary>
         <content type="html"><![CDATA[<p>Watch <a href="https://twitter.com/trupill" target="_blank" rel="noopener noreferrer">Alejandro Serrano</a>'s presentation from KotlinConf 2023 about data transformation.</p>
@@ -156,8 +196,8 @@ to be used alongside KotlinX Serialization.</li>
     </entry>
     <entry>
         <title type="html"><![CDATA[Typed Error Handling in Kotlin]]></title>
-        <id>https://arrow-kt.io/community/blog/2023/04/17/typed-error-handling-in-kotlin</id>
-        <link href="https://arrow-kt.io/community/blog/2023/04/17/typed-error-handling-in-kotlin"/>
+        <id>https://arrow-kt.io/community/blog/2023/04/17/typed-error-handling-in-kotlin/</id>
+        <link href="https://arrow-kt.io/community/blog/2023/04/17/typed-error-handling-in-kotlin/"/>
         <updated>2023-04-17T00:00:00.000Z</updated>
         <summary type="html"><![CDATA[A comparative study about several typed-error handling practices in Kotlin.]]></summary>
         <content type="html"><![CDATA[<p>A comparative study about several typed-error handling practices in Kotlin.</p>
@@ -175,8 +215,8 @@ as well as the most succinct with the least lines of codes.</p>
     </entry>
     <entry>
         <title type="html"><![CDATA[Arrow 2.0's Trajectory]]></title>
-        <id>https://arrow-kt.io/community/blog/2023/04/16/arrow-2-0-trajectory</id>
-        <link href="https://arrow-kt.io/community/blog/2023/04/16/arrow-2-0-trajectory"/>
+        <id>https://arrow-kt.io/community/blog/2023/04/16/arrow-2-0-trajectory/</id>
+        <link href="https://arrow-kt.io/community/blog/2023/04/16/arrow-2-0-trajectory/"/>
         <updated>2023-04-16T00:00:00.000Z</updated>
         <summary type="html"><![CDATA[A full transcript and the slides from Simon Vergauwen's presentation from KotlinConf 2023 about the history of Arrow and where it's going.]]></summary>
         <content type="html"><![CDATA[<p>A full transcript and the slides from <a href="https://twitter.com/vergauwen_simon" target="_blank" rel="noopener noreferrer">Simon Vergauwen's</a> presentation from KotlinConf 2023 about the history of Arrow and where it's going.</p>]]></content>
@@ -185,8 +225,8 @@ as well as the most succinct with the least lines of codes.</p>
     </entry>
     <entry>
         <title type="html"><![CDATA[Arrow 1.2.0-RC Release Summary]]></title>
-        <id>https://arrow-kt.io/community/blog/2023/04/04/arrow-1-2-0-rc-summary</id>
-        <link href="https://arrow-kt.io/community/blog/2023/04/04/arrow-1-2-0-rc-summary"/>
+        <id>https://arrow-kt.io/community/blog/2023/04/04/arrow-1-2-0-rc-summary/</id>
+        <link href="https://arrow-kt.io/community/blog/2023/04/04/arrow-1-2-0-rc-summary/"/>
         <updated>2023-04-04T00:00:00.000Z</updated>
         <summary type="html"><![CDATA[We're excited to announce Arrow 1.2.0-RC alongside a new Arrow website. To briefly summarize, this release:]]></summary>
         <content type="html"><![CDATA[<p>We're excited to announce Arrow 1.2.0-RC alongside a new Arrow website. To briefly summarize, this release:</p>
@@ -201,8 +241,8 @@ as well as the most succinct with the least lines of codes.</p>
     </entry>
     <entry>
         <title type="html"><![CDATA[Functional Fun in Kotlin]]></title>
-        <id>https://arrow-kt.io/community/blog/2023/02/04/functional-fun-kotlin</id>
-        <link href="https://arrow-kt.io/community/blog/2023/02/04/functional-fun-kotlin"/>
+        <id>https://arrow-kt.io/community/blog/2023/02/04/functional-fun-kotlin/</id>
+        <link href="https://arrow-kt.io/community/blog/2023/02/04/functional-fun-kotlin/"/>
         <updated>2023-02-04T00:00:00.000Z</updated>
         <summary type="html"><![CDATA[Simon Vergauwen shares why he thinks Kotlin is great language to do modern functional programming, and why he believes it's perhaps the best language to do modern mainstream (hardcore) functional programming.]]></summary>
         <content type="html"><![CDATA[<p><a href="https://twitter.com/vergauwen_simon" target="_blank" rel="noopener noreferrer">Simon Vergauwen</a> shares why he thinks Kotlin is great language to do modern functional programming, and why he believes it's perhaps the best language to do modern mainstream (hardcore) functional programming.</p>]]></content>
@@ -211,8 +251,8 @@ as well as the most succinct with the least lines of codes.</p>
     </entry>
     <entry>
         <title type="html"><![CDATA[CodelyTV Interview with Raul Raja]]></title>
-        <id>https://arrow-kt.io/community/blog/2023/01/03/codelytv-interview</id>
-        <link href="https://arrow-kt.io/community/blog/2023/01/03/codelytv-interview"/>
+        <id>https://arrow-kt.io/community/blog/2023/01/03/codelytv-interview/</id>
+        <link href="https://arrow-kt.io/community/blog/2023/01/03/codelytv-interview/"/>
         <updated>2023-01-03T00:00:00.000Z</updated>
         <summary type="html"><![CDATA[An interview with Arrow maintainer Raúl Raja by Rafa Gómez on CodelyTV.]]></summary>
         <content type="html"><![CDATA[<p>An interview with Arrow maintainer Raúl Raja by Rafa Gómez on CodelyTV.</p>]]></content>
@@ -221,8 +261,8 @@ as well as the most succinct with the least lines of codes.</p>
     </entry>
     <entry>
         <title type="html"><![CDATA[Actions as Data]]></title>
-        <id>https://arrow-kt.io/community/blog/2022/12/01/actions-as-data</id>
-        <link href="https://arrow-kt.io/community/blog/2022/12/01/actions-as-data"/>
+        <id>https://arrow-kt.io/community/blog/2022/12/01/actions-as-data/</id>
+        <link href="https://arrow-kt.io/community/blog/2022/12/01/actions-as-data/"/>
         <updated>2022-12-01T00:00:00.000Z</updated>
         <summary type="html"><![CDATA[A presentation by Alejandro Serrano at Advanced Kotlin Dev Day 2022.]]></summary>
         <content type="html"><![CDATA[<p>A presentation by Alejandro Serrano at Advanced Kotlin Dev Day 2022.</p>]]></content>
@@ -231,8 +271,8 @@ as well as the most succinct with the least lines of codes.</p>
     </entry>
     <entry>
         <title type="html"><![CDATA[Context Receivers: Kotlin's new secret sauce]]></title>
-        <id>https://arrow-kt.io/community/blog/2022/12/01/context-receivers</id>
-        <link href="https://arrow-kt.io/community/blog/2022/12/01/context-receivers"/>
+        <id>https://arrow-kt.io/community/blog/2022/12/01/context-receivers/</id>
+        <link href="https://arrow-kt.io/community/blog/2022/12/01/context-receivers/"/>
         <updated>2022-12-01T00:00:00.000Z</updated>
         <summary type="html"><![CDATA[Alejandro Serrano's presentation from Advanced Kotlin Dev Day 2022 about context receivers.]]></summary>
         <content type="html"><![CDATA[<p>Alejandro Serrano's presentation from Advanced Kotlin Dev Day 2022 about context receivers.</p>]]></content>
@@ -241,8 +281,8 @@ as well as the most succinct with the least lines of codes.</p>
     </entry>
     <entry>
         <title type="html"><![CDATA[Functional Error Handling - A Practical Approach]]></title>
-        <id>https://arrow-kt.io/community/blog/2022/12/01/functional-error-handling</id>
-        <link href="https://arrow-kt.io/community/blog/2022/12/01/functional-error-handling"/>
+        <id>https://arrow-kt.io/community/blog/2022/12/01/functional-error-handling/</id>
+        <link href="https://arrow-kt.io/community/blog/2022/12/01/functional-error-handling/"/>
         <updated>2022-12-01T00:00:00.000Z</updated>
         <summary type="html"><![CDATA[A presentation by Bas de Groot at Advanced Kotlin Dev Day 2022.]]></summary>
         <content type="html"><![CDATA[<p>A presentation by Bas de Groot at Advanced Kotlin Dev Day 2022.</p>]]></content>
@@ -251,8 +291,8 @@ as well as the most succinct with the least lines of codes.</p>
     </entry>
     <entry>
         <title type="html"><![CDATA[Functional Flowing]]></title>
-        <id>https://arrow-kt.io/community/blog/2022/12/01/functional-flowing</id>
-        <link href="https://arrow-kt.io/community/blog/2022/12/01/functional-flowing"/>
+        <id>https://arrow-kt.io/community/blog/2022/12/01/functional-flowing/</id>
+        <link href="https://arrow-kt.io/community/blog/2022/12/01/functional-flowing/"/>
         <updated>2022-12-01T00:00:00.000Z</updated>
         <summary type="html"><![CDATA[Simon Vergauwen shows how to leverage KotlinX Flow to describe powerful programs and build pipelines to transform and manipulate data in an efficient streaming way.]]></summary>
         <content type="html"><![CDATA[<p>Simon Vergauwen shows how to leverage KotlinX Flow to describe powerful programs and build pipelines to transform and manipulate data in an efficient streaming way.</p>]]></content>
@@ -261,8 +301,8 @@ as well as the most succinct with the least lines of codes.</p>
     </entry>
     <entry>
         <title type="html"><![CDATA[Graceful Shutdown with Structured Concurrency]]></title>
-        <id>https://arrow-kt.io/community/blog/2022/12/01/graceful-shutdown-structured-concurrency</id>
-        <link href="https://arrow-kt.io/community/blog/2022/12/01/graceful-shutdown-structured-concurrency"/>
+        <id>https://arrow-kt.io/community/blog/2022/12/01/graceful-shutdown-structured-concurrency/</id>
+        <link href="https://arrow-kt.io/community/blog/2022/12/01/graceful-shutdown-structured-concurrency/"/>
         <updated>2022-12-01T00:00:00.000Z</updated>
         <summary type="html"><![CDATA[A presentation by Simon Vergauwen at Advanced Kotlin Dev Day 2022.]]></summary>
         <content type="html"><![CDATA[<p>A presentation by Simon Vergauwen at Advanced Kotlin Dev Day 2022.</p>]]></content>
@@ -271,8 +311,8 @@ as well as the most succinct with the least lines of codes.</p>
     </entry>
     <entry>
         <title type="html"><![CDATA[Functional Programming in Kotlin: Exploring Arrow]]></title>
-        <id>https://arrow-kt.io/community/blog/2022/07/01/exploring-arrow</id>
-        <link href="https://arrow-kt.io/community/blog/2022/07/01/exploring-arrow"/>
+        <id>https://arrow-kt.io/community/blog/2022/07/01/exploring-arrow/</id>
+        <link href="https://arrow-kt.io/community/blog/2022/07/01/exploring-arrow/"/>
         <updated>2022-07-01T00:00:00.000Z</updated>
         <summary type="html"><![CDATA[A presentation by Ties van de Veen at Voxxed Days Luxembourg 2022.]]></summary>
         <content type="html"><![CDATA[<p>A presentation by Ties van de Veen at Voxxed Days Luxembourg 2022.</p>]]></content>
@@ -281,8 +321,8 @@ as well as the most succinct with the least lines of codes.</p>
     </entry>
     <entry>
         <title type="html"><![CDATA[Turbocharging Kotlin: Arrow Analysis, Optics, and Meta]]></title>
-        <id>https://arrow-kt.io/community/blog/2022/06/28/turbocharging-kotlin-talking-kotlin</id>
-        <link href="https://arrow-kt.io/community/blog/2022/06/28/turbocharging-kotlin-talking-kotlin"/>
+        <id>https://arrow-kt.io/community/blog/2022/06/28/turbocharging-kotlin-talking-kotlin/</id>
+        <link href="https://arrow-kt.io/community/blog/2022/06/28/turbocharging-kotlin-talking-kotlin/"/>
         <updated>2022-06-28T00:00:00.000Z</updated>
         <summary type="html"><![CDATA[Raul Raja, Simon Vergauwen, and Alejandro Serrano appeared on Talking Kotlin to chat about Arrow.]]></summary>
         <content type="html"><![CDATA[<p>Raul Raja, Simon Vergauwen, and Alejandro Serrano appeared on Talking Kotlin to chat about Arrow.</p>]]></content>
@@ -294,8 +334,8 @@ as well as the most succinct with the least lines of codes.</p>
     </entry>
     <entry>
         <title type="html"><![CDATA[Arrow put on a big show at Kotlin Dev Day]]></title>
-        <id>https://arrow-kt.io/community/blog/2022/06/14/arrow-kotlin-dev-day</id>
-        <link href="https://arrow-kt.io/community/blog/2022/06/14/arrow-kotlin-dev-day"/>
+        <id>https://arrow-kt.io/community/blog/2022/06/14/arrow-kotlin-dev-day/</id>
+        <link href="https://arrow-kt.io/community/blog/2022/06/14/arrow-kotlin-dev-day/"/>
         <updated>2022-06-14T00:00:00.000Z</updated>
         <summary type="html"><![CDATA[A recap of the attention Arrow received at Kotlin Dev Day.]]></summary>
         <content type="html"><![CDATA[<p>A recap of the attention Arrow received at Kotlin Dev Day.</p>]]></content>
@@ -305,8 +345,8 @@ as well as the most succinct with the least lines of codes.</p>
     </entry>
     <entry>
         <title type="html"><![CDATA[Building applications with Kotlin and Arrow.kt in style]]></title>
-        <id>https://arrow-kt.io/community/blog/2022/05/31/building-applications-with-kotlin-and-arrow-kt-in-style</id>
-        <link href="https://arrow-kt.io/community/blog/2022/05/31/building-applications-with-kotlin-and-arrow-kt-in-style"/>
+        <id>https://arrow-kt.io/community/blog/2022/05/31/building-applications-with-kotlin-and-arrow-kt-in-style/</id>
+        <link href="https://arrow-kt.io/community/blog/2022/05/31/building-applications-with-kotlin-and-arrow-kt-in-style/"/>
         <updated>2022-05-31T00:00:00.000Z</updated>
         <summary type="html"><![CDATA[A presentation by Simon Vergauwen presented on the official Kotlin YouTube channel.]]></summary>
         <content type="html"><![CDATA[<p>A presentation by Simon Vergauwen presented on the official Kotlin YouTube channel.</p>]]></content>
@@ -316,22 +356,12 @@ as well as the most succinct with the least lines of codes.</p>
     </entry>
     <entry>
         <title type="html"><![CDATA[Extending kotlinx.serialization functionality with Arrow Meta with Karin-Aleksandra Monoid]]></title>
-        <id>https://arrow-kt.io/community/blog/2022/05/30/extending-kotlinx-serialization-functionality-arrow-meta</id>
-        <link href="https://arrow-kt.io/community/blog/2022/05/30/extending-kotlinx-serialization-functionality-arrow-meta"/>
+        <id>https://arrow-kt.io/community/blog/2022/05/30/extending-kotlinx-serialization-functionality-arrow-meta/</id>
+        <link href="https://arrow-kt.io/community/blog/2022/05/30/extending-kotlinx-serialization-functionality-arrow-meta/"/>
         <updated>2022-05-30T00:00:00.000Z</updated>
         <summary type="html"><![CDATA[Karin-Aleksandra Monoid provides an overview of Arrow Meta features.]]></summary>
         <content type="html"><![CDATA[<p>Karin-Aleksandra Monoid provides an overview of Arrow Meta features.</p>]]></content>
         <category label="meta" term="meta"/>
-        <category label="videos" term="videos"/>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[Super-charge your build with Arrow Analysis by Alejandro Serrano Mena]]></title>
-        <id>https://arrow-kt.io/community/blog/2022/05/30/super-charge-build-arrow-analysis</id>
-        <link href="https://arrow-kt.io/community/blog/2022/05/30/super-charge-build-arrow-analysis"/>
-        <updated>2022-05-30T00:00:00.000Z</updated>
-        <summary type="html"><![CDATA[Alejandro Serrano presents Arrow Analysis, a Kotlin compiler plug-in that does pre-and post-condition and type invariant checking at compile time.]]></summary>
-        <content type="html"><![CDATA[<p>Alejandro Serrano presents Arrow Analysis, a Kotlin compiler plug-in that does pre-and post-condition and type invariant checking at compile time.</p>]]></content>
-        <category label="analysis" term="analysis"/>
         <category label="videos" term="videos"/>
     </entry>
 </feed>
