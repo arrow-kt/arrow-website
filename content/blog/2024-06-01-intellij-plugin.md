@@ -1,5 +1,5 @@
 ---
-title: Arrow plug-in for IntelliJ is here!
+title: Arrow plug-in for IntelliJ 0.1 is here!
 category: articles
 tags: [intellij, articles]
 ---
@@ -9,7 +9,7 @@ tags: [intellij, articles]
 One of the main goals of the Arrow project is to produce libraries
 that follow well-known Kotlin idioms, and we strive to make them
 as discoverable as possible. Nevertheless, the surface of some
-components, like [typed errors](../docs/learn/typed-errors/index.md),
+components, like [typed errors](/learn/typed-errors/),
 is quite large.
 For that reason, we have been busy in the last weeks preparing
 the first release of the
@@ -32,7 +32,7 @@ provided API -- which can easily lead to broken invariants.
 
 The third aspect is applying some known recipes which may be hard
 to know upfront. The first release includes a suggestion to add
-the corresponding [serializer](../docs/learn/quickstart/serialization.md)
+the corresponding [serializer](/learn/quickstart/serialization/)
 when a type marked as `@Serializable` includes an Arrow Core type.
 This is an area which we would like to explore more, helping with
 the difficulties raised by the community.
