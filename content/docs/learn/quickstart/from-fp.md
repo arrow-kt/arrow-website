@@ -31,6 +31,14 @@ found in [their `base` library](https://hackage.haskell.org/package/base).
 
 ## Computation blocks
 
+:::note From Either to Raise
+
+You may be interested in our [tutorial](../typed-errors/from-either-to-raise.md)
+focusing specifically on transitioning from wrapper types
+for errors, like `Either`, to the `Raise` DSL.
+
+:::
+
 Both Scala and Haskell have special support for types which define a 
 `flatMap` or bind operation, namely
 [`for` comprehensions](https://docs.scala-lang.org/tour/for-comprehensions.html)

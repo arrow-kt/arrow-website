@@ -1,6 +1,6 @@
 ---
 description: Writing your own DSLs with Raise.
-sidebar_position: 5
+sidebar_position: 6
 ---
 
 # Creating your own error wrappers
