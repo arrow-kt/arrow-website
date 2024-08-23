@@ -22,7 +22,7 @@ All the libraries under the Arrow umbrella are
 This means you can use them in your Android applications using
 [Jetpack Compose](https://developer.android.com/jetpack/compose),
 and in Desktop, iOS, or Web alongside
-[Compose Multiplaftorm](https://www.jetbrains.com/lp/compose-multiplatform/).
+[Compose Multiplatform](https://www.jetbrains.com/lp/compose-multiplatform/).
 
 :::
 
