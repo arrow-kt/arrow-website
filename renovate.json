@@ -3,14 +3,7 @@
   "extends": [
     "config:base"
   ],
-  "packageRules": [
-    {
-      "description": "Group dependencies from package.json files",
-      "matchPaths": ["**/package.json"],
-      "groupName": "All package.json changes",
-      "schedule": [
-        "every 3 months on the first day of the month"
-      ]
-    }
+  "ignorePaths": [
+    "package.json"
   ]
 }
