@@ -28,8 +28,9 @@ data class Book private constructor(
         { ensure(title.isNotEmpty()) { EmptyTitle } },
         { ensureNotNull(authors.toNonEmptyListOrNull()) { NoAuthors } }
       ) { _, _ ->
-        Book(title, TODO())
+          Unit
       }
+      Book(title, TODO())
     }
   }
 }
