@@ -2,6 +2,7 @@
 title: Arrow Open Space @ Lambda World
 category: articles
 tags: [articles, community]
+image: https://pub-c7459893ae854bbdb5ad00855f44c0c8.r2.dev/LandingPage_Lambda/Lambda_Logo_Blue.svg
 ---
 
 # Arrow Open Space @ [Lambda World](https://lambda.world)
