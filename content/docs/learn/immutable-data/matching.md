@@ -47,7 +47,7 @@ val User.name: String get() = this.matchOrThrow {
   User.company(Company.name, Company.director(Name.lastName)) then { (nm, d) -> "$nm, att. $d" }
   // Person(Name(firstName = fn), age if it < 18)
   User.person(Person.name(Name.firstName), Person.age.suchThat { it < 18 }) then { (fn, _) -> fn }
-  // Person(Name(firstName = fn, lastName = ln)) -> "Sir/Madam $fn $ln"
+  // Person(Name(firstName = fn, lastName = ln))
   User.person(Person.name(Name.firstName, Name.lastName)) then { (fn, ln) -> "Sir/Madam $fn $ln" }
 }
 ```
@@ -84,7 +84,7 @@ which are represented in the diagram as nodes with no children. Those terminal v
 ones available as arguments to the body of the case; above we show the corresponding variable
 names in the body.
 
-The pattern matching mechanism in `arrow-match` allows you to add checks about values
+The pattern matching mechanism in `arrow-optics` also allow you to add checks about values
 at any point in the pattern. In our example above, the `age` is checked to decide whether to
 apply the first match, using `.suchThat { it < 18 }`.
 
@@ -98,4 +98,84 @@ match on a `Person` and obtain its first name.
 
 ## Default cases
 
+The example at the beginning of this section is _exhaustive_, that is, matches every possible
+value of type `User`. This may not always be the case; using `matchOrThrow` over a value which
+is not handled by any pattern results in a `MatchNotFound` exception.
 
+If you want to define how to handle any remaining case, you use use the special `default` pattern.
+For example, here we gather information about the director if available, and return `null` otherwise.
+
+```kotlin
+fun User.directorOrNull(): Name? = this.matchOrThrow {
+  User.company(Company.director) then { it }
+  default { null }
+}
+```
+
+:::warning Exhaustiveness checking
+
+It is responsibility of the developer to ensure that the patterns cover every possible case,
+adding `default` whenever required.
+
+The Kotlin compiler ensures that every `when` with a subject is ehxaustive using a specialized
+analysis. Unfortunately, such an analysis is not performed over the patterns described in
+this section.
+
+:::
+
+## Matching without optics
+
+You can also use pattern matching without bringing the full optics machinery in, by using
+the reflection facilities provided by the Kotlin language alongisde the `arrow-match` package.
+
+:::tip Type-safe reflection
+
+Even though the term _reflection_ usually evokes unsafety, the API provided by `arrow-match` 
+guarantees that patterns that compile are well-behaved.
+
+:::
+
+Since we do not have optics, we need another way to represent types and property:
+
+- Instead of prisms, the type is chosen using `T::class`;
+- Instead of lenses, properties are described using `T::property`.
+- Further matching on a value is done using `.of`.
+
+You can see those changes in action in the "translation" of the first example in this section
+to `arrow-match`.
+
+```kotlin
+val User.name: String get() = this.matchOrThrow {
+  // Company(name = nm, director = Name(lastName = d))
+  Company::class.of(Company::name, Company::director.of(Name::lastName)) then { (nm, d) -> "$nm, att. $d" }
+  // Person(Name(firstName = fn), age if it < 18)
+  Person::class.of(Person::name.of(Name::firstName), Person::age.suchThat { it < 18 }) then { (fn, _) -> fn }
+  // Person(Name(firstName = fn, lastName = ln))
+  Person::class.of(Person::name.of(Name::firstName, Name::lastName)) then { (fn, ln) -> "Sir/Madam $fn $ln" }
+}
+```
+
+## Matching with guards
+
+We strongly discourage using Arrow's pattern matching facilities for simple cases.
+In most cases patterns can be recreated using `when` expressions with guards and
+property access, leading to more idiomatic code. This approach has the additional
+benefit of the exhaustiveness checking performed by the compiler.
+
+```kotlin
+val User.name: String get() = when (this) {
+  is Company -> "$name, att ${director.lastName}"
+  is Person if age < 18 -> name.firstName
+  is Person -> "Sir/Madam ${name.firstName} ${name.lastName}"
+}
+```
+
+Here are some rules of thumb to decide when pattern matching is a good solution:
+
+- The decision over which branch to takes depends on nested information.
+  This is the case, for example, when working with abstract syntax trees (ASTs).
+- One needs to obtain several sub-values. For example, `User.name` defined without
+  pattern matching forces us to write `name.firstName` and `name.lastName`, whereas
+  this duplication is gone when using a pattern.
+
+As you can see, the more nested your data it, the more pattern matching helps.
