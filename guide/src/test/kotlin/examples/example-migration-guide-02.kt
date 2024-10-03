@@ -7,7 +7,7 @@ import arrow.core.raise.either
 
 fun one(): Either<String, Int> = Either.Right(1)
 
-val old: Either<String, Int> = one().zip(one()) { x, y -> x + y }
+// val old: Either<String, Int> = one().zip(one()) { x, y -> x + y }
 
 val new: Either<String, Int> =
   either { one().bind() + one().bind() }

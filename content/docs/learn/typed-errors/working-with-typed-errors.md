@@ -194,8 +194,8 @@ fun example() {
 <!--- KNIT example-typed-errors-03.kt -->
 <!--- TEST assert -->
 
-Without context receivers, these functions look pretty different depending on if we use `Raise` or `Either`. This is because we sacrifice our _extension receiver_ for `Raise`.
-And thus, the `Raise` based computation cannot be an extension function on `User`. With context receivers, we could've defined it as:
+Alas, these functions look pretty different depending on if we use `Raise` or `Either`. This is because we sacrifice our _extension receiver_ for `Raise`.
+And thus, the `Raise` based computation cannot be an extension function on `User`. In the future, it will be possible to define a better version using context parameters.
 
 <!--- INCLUDE
 import arrow.core.raise.Raise
@@ -204,8 +204,8 @@ import arrow.core.raise.ensure
 data class User(val id: Long)
 data class UserNotFound(val message: String)
 -->
-```kotlin
-context(Raise<UserNotFound>)
+```
+context(_: Raise<UserNotFound>)
 fun User.isValid(): Unit =
   ensure(id > 0) { UserNotFound("User without a valid id: $id") }
 ```
@@ -821,11 +821,14 @@ data class User private constructor(val name: String, val age: Int) {
 
 With this change, the problems are correctly accumulated. Now we can present the user all the problems in the form at once.
 
-```kotlin
-fun example() {
+```
+fun sample() {
   User("", -1) shouldBe Left(nonEmptyListOf(UserProblem.EmptyName, UserProblem.NegativeAge(-1)))
 }
 ```
+<!--- INCLUDE
+fun example() { }
+-->
 <!--- KNIT example-typed-errors-20.kt -->
 <!--- TEST assert -->
 

@@ -133,14 +133,14 @@ If you're refactoring code using `Validated` check the [Validated & Either](#val
 
 <!--- INCLUDE
 import arrow.core.Either
-import arrow.core.traverse
+// import arrow.core.traverse
 import arrow.core.raise.either
 -->
 ```kotlin
 fun one(): Either<String, Int> = Either.Right(1)
 
-val old: Either<String, List<Int>> = 
-  listOf(1, 2, 3).traverse { one() }
+// val old: Either<String, List<Int>> =
+//   listOf(1, 2, 3).traverse { one() }
 
 val new: Either<String, List<Int>> = either {
   listOf(1, 2, 3).map { one().bind() }
@@ -170,7 +170,7 @@ import arrow.core.raise.either
 ```kotlin
 fun one(): Either<String, Int> = Either.Right(1)
 
-val old: Either<String, Int> = one().zip(one()) { x, y -> x + y }
+// val old: Either<String, Int> = one().zip(one()) { x, y -> x + y }
 
 val new: Either<String, Int> =
   either { one().bind() + one().bind() }
@@ -280,29 +280,33 @@ some deprecated methods may need to add an extra manual step, besides the automa
 The replacement of deprecated `foldMap` for `Iterable`, `Option` and `Either` requires to replace the `Monoid` parameter
 with an `empty` value of the type contained in the removed `Monoid`.
 Let's see this in action:
+
 <!--- INCLUDE
 import arrow.core.Either
-import arrow.core.replicate
-import arrow.core.Valid
-import arrow.core.Validated
-import arrow.core.combineAll
+// import arrow.core.replicate
+// import arrow.core.Valid
+// import arrow.core.Validated
+// import arrow.core.combineAll
 import arrow.core.Ior
 import arrow.core.raise.nullable
 import arrow.core.right
-import arrow.core.valid
+// import arrow.core.valid
 import arrow.core.zip
-import arrow.typeclasses.Monoid
+// import arrow.typeclasses.Monoid
 import io.kotest.matchers.shouldBe
 -->
 
 ```kotlin
 fun booleanToString(b: Boolean): String = if (b) "IS TRUE! :)" else "IS FALSE.... :(" 
+```
 
+```
 fun deprecatedFoldMap() {
    val e1: Either<String, Boolean> = false.right()
    e1.foldMap(Monoid.string(), ::booleanToString) shouldBe "IS FALSE.... :("
 }
 ```
+
 ```
 // Executing automatic replacement
 fun migrateFoldMap() {
@@ -311,6 +315,7 @@ fun migrateFoldMap() {
 }
  
 ```
+
 ```kotlin
 // Adding the empty value to complete the replacement of the deprecated method
 fun migrateFoldMap() {
@@ -320,10 +325,11 @@ fun migrateFoldMap() {
 ```
 
 ### combine
+
 All deprecated `combine` methods are suggested to be replaced by the lambda `{a, b -> a + b}`, which will cover almost all
 possible replacements successfully. One of the cases that will need some manual fix is the following:
 
-```kotlin
+```
 fun deprecatedZip() {
    val nullableLongMonoid = object : Monoid<Long?> {
       override fun empty(): Long? = 0
@@ -336,7 +342,9 @@ fun deprecatedZip() {
    res shouldBe Validated.Valid(3)
 }
 ```
+
 When we replace the deprecated `zip` method:
+
 ```
 // Executing automatic replacement
 fun migrateZip(){ 
@@ -348,8 +356,10 @@ fun migrateZip(){
    ) { a, _ -> a }.toValidated()
 }
 ```
+
 In this case, we do not have the `+` operation for `Long?`, so we need to add it manually:
-```kotlin
+
+```
 fun migrateZip() {
    val validated: Validated<Long?, Int?> = 3.valid()
    val res = Either.zipOrAccumulate(
@@ -362,10 +372,12 @@ fun migrateZip() {
 ```
 
 ### combineAll
+
 In a similar situation like [foldMap](#foldmap), the replacement of deprecated `combineAll` for `Iterable`, `Option` and 
 `Validate` needs to add manually the `initial` parameter, in the replacement with `fold` method. Let's do a replacement
 to see how to achieve this:
-```kotlin
+
+```
 fun deprecatedCombineAll() {
    val l: List<Int> = listOf(1, 2, 3, 4, 5)
    l.combineAll(Monoid.int()) shouldBe 10
@@ -389,10 +401,12 @@ fun migrateCombineAll() {
 ```
 
 ### replicate
+
 `replicate` also needs a bit of *help* when removing the deprecated `Monoid` for `Option` and `Either`. Again,
 `fold` is the recommended replacement method, so we'll need to provide the `initial` parameter in the `fold`. Let's see this
 with an `Either`:
-```kotlin
+
+```
 fun deprecatedReplicate() {
    val rEither: Either<String, Int> = 125.right()
    val n = 3
@@ -424,23 +438,27 @@ fun migrateReplicate() {
 ```
 
 ## Ior
+
 Most of the `Ior` data type deprecated method migrations related to `traverse` and `crosswalk`, 
 must be replaced manually. The main reason is that `Intellij` does not know how to infer some types when we're using 
 generics. Although this situation can be a bit annoying, this is a good excuse for the user to navigate and get more expertise
 on the `Arrow` source code. Let's see a few examples to be more familiar with these special cases:
 
 ### crosswalk
+
 Given the `Ior` implementation of `crosswalk`:
-```
-public inline fun <C> crosswalk(fa: (B) -> Iterable<C>): List<Ior<A, C>> =
+
+```kotlin
+public inline fun <A, B, C> Ior<A, B>.crosswalk(fa: (B) -> Iterable<C>): List<Ior<A, C>> =
     fold(
       { emptyList() },
-      { b -> fa(b).map { Right(it) } },
-      { a, b -> fa(b).map { Both(a, it) } }
+      { b -> fa(b).map { Ior.Right(it) } },
+      { a, b -> fa(b).map { Ior.Both(a, it) } }
     )
 ```
 
 And an example that use `crosswalk`:
+
 ```kotlin
 fun deprecatedCrosswalk() {
    val rightIor: Ior<String, Int> = Ior.Right(124)
@@ -451,6 +469,7 @@ fun deprecatedCrosswalk() {
 <!--- KNIT example-migration-guide-05.kt -->
 
 The result of replacing manually the `crosswalk` call using the `fold` implementation would be:
+
 <!--- INCLUDE
 import arrow.core.Ior
 import io.kotest.matchers.shouldBe
@@ -469,19 +488,10 @@ fun migrateCrosswalk() {
 <!--- KNIT example-migration-guide-06.kt -->
 
 ### traverse
+
 In a similar situation we have the `Ior` `traverse` method for a function that returns an `Option`.
 Given the implementation of `traverse`:
-```
-public inline fun <C> traverse(fa: (B) -> Option<C>): Option<Ior<A, C>> {
-    return fold(
-      { a -> Some(Left(a)) },
-      { b -> fa(b).map { Right(it) } },
-      { a, b -> fa(b).map { Both(a, it) } }
-    )
-  }
-```
 
-And an example that use `traverse`:
 <!--- INCLUDE
 import arrow.core.Ior
 import arrow.core.None
@@ -490,6 +500,19 @@ import arrow.core.Some
 import arrow.core.some
 import io.kotest.matchers.shouldBe
 -->
+
+```kotlin
+public inline fun <A, B, C> Ior<A, B>.traverse(fa: (B) -> Option<C>): Option<Ior<A, C>> {
+    return fold(
+      { a -> Some(Ior.Left(a)) },
+      { b -> fa(b).map { Ior.Right(it) } },
+      { a, b -> fa(b).map { Ior.Both(a, it) } }
+    )
+  }
+```
+
+And an example that use `traverse`:
+
 ```kotlin
 fun evenOpt(i: Int): Option<Int> = if(i % 2 == 0) i.some() else None
 
