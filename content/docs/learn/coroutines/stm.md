@@ -98,7 +98,7 @@ they become implicit in the syntax.
 import arrow.fx.stm.atomically
 import arrow.fx.stm.TVar
 import arrow.fx.stm.STM
---->
+-->
 
 ```kotlin
 fun STM.deposit(accVar: TVar<Int>, amount: Int): Unit {
@@ -111,7 +111,7 @@ fun STM.deposit(accVar: TVar<Int>, amount: Int): Unit {
 
 <!--- INCLUDE
 suspend fun example() { }
---->
+-->
 <!--- KNIT example-stm-02.kt -->
 <!--- TEST assert -->
 
@@ -196,7 +196,7 @@ suspend fun example() = coroutineScope {
   acc2.unsafeRead() shouldBe 350
 }
 ```
-<!--- KNIT example-stm-02.kt -->
+<!--- KNIT example-stm-03.kt -->
 <!--- TEST assert -->
 
 `retry` can be used to implement a lot of complex transactions,
@@ -249,7 +249,7 @@ suspend fun example() {
   atomically { transaction(v) } shouldBe 5
 }
 ```
-<!--- KNIT example-stm-03.kt -->
+<!--- KNIT example-stm-04.kt -->
 <!--- TEST assert -->
 
 ## Exceptions

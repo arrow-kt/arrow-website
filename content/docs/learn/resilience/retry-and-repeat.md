@@ -43,7 +43,7 @@ Since version 2.0, you can use specify a subclass of `Throwable` as first type a
 to `retry` to focus only on those exceptions. It is customary to leave the second type
 argument unspecified.
 
-```kotlin
+```
 policy.retry<IllegalArgumentException, _> { ... }
 ```
 
