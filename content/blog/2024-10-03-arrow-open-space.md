@@ -28,18 +28,13 @@ The first [Arrow & Fuctional Kotlin Open Space](https://www.lambda.world/worksho
 
 We have a nice room, some sweets, and a nice projector. The perfect setup to share some knowledge about Arrow and Functional Kotlin! Our goal with the Unconference is to bring together people who can talk about something and people who want to learn about something.
 
-_How does it work?_ Please talk to one of the people in charge so they can change the spreadsheet.
+_How does it work?_ Use the whiteboard!
 
-- If you want to learn about a topic...
-  - If the topic is not yet in the spreadsheet, add it in the first column with the _Requested_ status.
-  - If the topic is in the spreadsheet, contact the potential speaker.
-- If you want to talk about a topic...
-  - If it is already in the spreadsheet, shout it out loud and let the talk begin!
-  - If not, add your topic and name with the _Waiting_ status, and wait for somebody to request it.
-- Once the talk begins, change it status to _In progress_, and once it is finished, move it to _Done_.
+- If you want to learn about a topic put a note in the _Hear_ column if none is already in _Talk_.
+- If you want to talk about a topic put a note in the _Talk_ column if none is already in _Hear_.
+- If there's a match, shout it out loud and let the talk begin!
+  - Move the note to the _In progress_ column, and once it's done, to the _Done_ column.
   - It would be great if any material or code would be shared with the organizers, so we can later add it to this page.
-
-<iframe width="100%" height="300px" src="https://docs.google.com/spreadsheets/d/15H8lXScJkX4aao02VqLcDqXwASlo-XrCvmlPl9qgN_Y/pubhtml?range=A1:C20&amp;gid=0&amp;single=true&amp;widget=false&amp;headers=false"></iframe>
 
 
 ## Build together
