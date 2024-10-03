@@ -22,4 +22,4 @@ fun Person.happyBirthdayFriends(): Person =
   )
 
 fun Person.happyBirthdayFriendsOptics(): Person =
-  Person.friends.every(Every.list()).age.modify(this) { it + 1 }
+  Person.friends.every.age.modify(this) { it + 1 }

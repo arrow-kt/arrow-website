@@ -7,8 +7,8 @@ import arrow.website.captureOutput
 import kotlinx.knit.test.verifyOutputLines
 
 class ParallelTest {
-  @Test fun ExampleParallel04() = runTest {
-    captureOutput("ExampleParallel04") { arrow.website.examples.exampleParallel04.example() }
+  @Test fun ExampleParallel05() = runTest {
+    captureOutput("ExampleParallel05") { arrow.website.examples.exampleParallel05.example() }
       .verifyOutputLines(
         "Sleeping for 500 milliseconds ...",
         "Sleeping for 500 milliseconds ...",
@@ -16,8 +16,8 @@ class ParallelTest {
       )
   }
 
-  @Test fun ExampleParallel05() = runTest {
-    captureOutput("ExampleParallel05") { arrow.website.examples.exampleParallel05.example() }
+  @Test fun ExampleParallel06() = runTest {
+    captureOutput("ExampleParallel06") { arrow.website.examples.exampleParallel06.example() }
       .verifyOutputLines(
         "Sleeping for 500 milliseconds ...",
         "Sleeping for 500 milliseconds ...",
@@ -27,8 +27,8 @@ class ParallelTest {
       )
   }
 
-  @Test fun ExampleParallel06() = runTest {
-    captureOutput("ExampleParallel06") { arrow.website.examples.exampleParallel06.example() }
+  @Test fun ExampleParallel07() = runTest {
+    captureOutput("ExampleParallel07") { arrow.website.examples.exampleParallel07.example() }
       .verifyOutputLines(
         "Sleeping for 500 milliseconds ...",
         "Sleeping for 500 milliseconds ...",
