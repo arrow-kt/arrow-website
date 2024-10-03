@@ -17,7 +17,7 @@ dependencies {
   testImplementation(libs.coroutines.test)
   testImplementation(libs.kotlinx.knit.test)
   testImplementation(libs.arrow.core.lib)
-  // testImplementation(libs.arrow.core.highArity)
+  testImplementation(libs.arrow.core.highArity)
   testImplementation(libs.arrow.core.serialization)
   testImplementation(libs.arrow.fx.coroutines)
   testImplementation(libs.arrow.autoclose)
@@ -29,6 +29,7 @@ dependencies {
   // testImplementation(libs.arrow.optics.compose)
   testImplementation(libs.arrow.collectors)
   testImplementation(libs.arrow.eval)
+  testImplementation(libs.arrow.functions)
   testImplementation(libs.arrow.cache4k)
   testImplementation(libs.kotest.assertions.core)
   testImplementation(libs.kotest.property)
@@ -49,5 +50,6 @@ tasks {
 
   withType<KotlinCompile>().configureEach {
     compilerOptions.freeCompilerArgs.add("-Xcontext-receivers")
+    compilerOptions.freeCompilerArgs.add("-Xconsistent-data-class-copy-visibility")
   }
 }
