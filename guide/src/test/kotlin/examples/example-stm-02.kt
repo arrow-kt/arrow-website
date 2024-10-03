@@ -10,7 +10,7 @@ import arrow.fx.stm.TVar
 import arrow.fx.stm.STM
 
 fun STM.deposit(accVar: TVar<Int>, amount: Int): Unit {
-  val acc by accVar       // property delegation
+  var acc by accVar       // property delegation
   val current = acc       // implicit 'read'
   acc = current + amount  // implicit 'write'
   // or simply, acc = acc + amount
