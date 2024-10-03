@@ -36,7 +36,7 @@ function ReadingTime({ readingTime }: { readingTime: number }) {
   return <>{readingTimePlural(readingTime)}</>;
 }
 
-function Date({
+function DateInfo({
   date,
   formattedDate,
 }: {
@@ -45,7 +45,7 @@ function Date({
 }) {
   return (
     <time dateTime={date} itemProp="datePublished">
-      {formattedDate}
+      {new Date(date).toDateString()}
     </time>
   );
 }
@@ -73,7 +73,7 @@ export default function BlogPostItemHeaderInfo({
           <Spacer />
         </>
       )}
-      <Date date={date} formattedDate={formattedDate} />
+      <DateInfo date={date} formattedDate={formattedDate} />
       {typeof readingTime !== 'undefined' && (
         <>
           <Spacer />

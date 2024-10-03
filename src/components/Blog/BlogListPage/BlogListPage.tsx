@@ -20,7 +20,7 @@ import data from './blog-list-page.yml';
 import styles from './blog-list-page.module.css';
 
 const formatSubtitle = (name: string | undefined, date: string): string =>
-  name ? `${name}, ${date}` : `${date}`;
+  name ? `${name}, ${new Date(date).toDateString()}` : `${new Date(date).toDateString()}`;
 
 function BlogListPageMetadata(props: Props): JSX.Element {
   const { metadata } = props;
@@ -45,7 +45,7 @@ function BlogListPageContent(props: Props): JSX.Element {
     title: item.content.metadata.title,
     subtitle: formatSubtitle(
       item.content.metadata.authors[0]?.name,
-      item.content.metadata.formattedDate,
+      item.content.metadata.date,
     ),
     image: item.content.frontMatter.image,
     body: item.content.metadata.description,
