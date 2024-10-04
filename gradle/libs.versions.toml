@@ -32,6 +32,7 @@ arrow-collectors = { module = "io.arrow-kt:arrow-collectors", version.ref = "arr
 arrow-eval = { module = "io.arrow-kt:arrow-eval", version.ref = "arrow" }
 arrow-functions = { module = "io.arrow-kt:arrow-functions", version.ref = "arrow" }
 arrow-cache4k = { module = "io.arrow-kt:arrow-cache4k", version.ref = "arrow" }
+arrow-match = { module = "io.arrow-kt:arrow-match", version.ref = "arrow" }
 kotlinx-knit = { module = "org.jetbrains.kotlinx:kotlinx-knit", version.ref = "knit" }
 kotlinx-knit-test = { module = "org.jetbrains.kotlinx:kotlinx-knit-test", version.ref = "knit" }
 suspendapp = { module = "io.arrow-kt:suspendapp", version.ref = "suspendapp" }

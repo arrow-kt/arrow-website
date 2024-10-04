@@ -12,8 +12,7 @@ and with Arrow Optics those same ideas translate to Kotlin.
 
 <!--- TEST_NAME Matching -->
 
-<!--- INCLUDE .*
-import io.kotest.matchers.shouldBe
+<!--- INCLUDE
 import arrow.optics.*
 import arrow.optics.match.*
 -->
@@ -33,7 +32,7 @@ and data classes for which we get lenses.
 ): User { companion object }
 @optics data class Company(
   val name: String, val director: Name, val address: String
-): User 
+): User { companion object }
 ```
 
 Here is the implementation of a small function that returns how to show 
@@ -46,7 +45,7 @@ val User.name: String get() = this.matchOrThrow {
   // Company(name = nm, director = Name(lastName = d))
   User.company(Company.name, Company.director(Name.lastName)) then { (nm, d) -> "$nm, att. $d" }
   // Person(Name(firstName = fn), age if it < 18)
-  User.person(Person.name(Name.firstName), Person.age.suchThat { it < 18 }) then { (fn, _) -> fn }
+  User.person(Person.name(Name.firstName), Person.age.takeIf { it < 18 }) then { (fn, _) -> fn }
   // Person(Name(firstName = fn, lastName = ln))
   User.person(Person.name(Name.firstName, Name.lastName)) then { (fn, ln) -> "Sir/Madam $fn $ln" }
 }
@@ -86,7 +85,7 @@ names in the body.
 
 The pattern matching mechanism in `arrow-optics` also allow you to add checks about values
 at any point in the pattern. In our example above, the `age` is checked to decide whether to
-apply the first match, using `.suchThat { it < 18 }`.
+apply the first match, using `.takeIf { it < 18 }`.
 
 :::tip It
 
@@ -111,6 +110,7 @@ fun User.directorOrNull(): Name? = this.matchOrThrow {
   default { null }
 }
 ```
+<!--- KNIT example-matching-01.kt -->
 
 :::warning Exhaustiveness checking
 
@@ -144,16 +144,33 @@ Since we do not have optics, we need another way to represent types and property
 You can see those changes in action in the "translation" of the first example in this section
 to `arrow-match`.
 
+<!--- INCLUDE
+import arrow.match.*
+
+data class Name(
+  val firstName: String, val lastName: String
+)
+
+sealed interface User
+data class Person(
+  val name: Name, val age: Int
+): User
+data class Company(
+  val name: String, val director: Name, val address: String
+): User
+-->
+
 ```kotlin
 val User.name: String get() = this.matchOrThrow {
   // Company(name = nm, director = Name(lastName = d))
   Company::class.of(Company::name, Company::director.of(Name::lastName)) then { (nm, d) -> "$nm, att. $d" }
   // Person(Name(firstName = fn), age if it < 18)
-  Person::class.of(Person::name.of(Name::firstName), Person::age.suchThat { it < 18 }) then { (fn, _) -> fn }
+  Person::class.of(Person::name.of(Name::firstName), Person::age.takeIf { it < 18 }) then { (fn, _) -> fn }
   // Person(Name(firstName = fn, lastName = ln))
   Person::class.of(Person::name.of(Name::firstName, Name::lastName)) then { (fn, ln) -> "Sir/Madam $fn $ln" }
 }
 ```
+<!--- KNIT example-matching-02.kt -->
 
 ## Matching with guards
 
@@ -162,7 +179,7 @@ In most cases patterns can be recreated using `when` expressions with guards and
 property access, leading to more idiomatic code. This approach has the additional
 benefit of the exhaustiveness checking performed by the compiler.
 
-```kotlin
+```
 val User.name: String get() = when (this) {
   is Company -> "$name, att ${director.lastName}"
   is Person if age < 18 -> name.firstName
