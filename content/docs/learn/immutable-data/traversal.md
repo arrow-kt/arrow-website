@@ -75,20 +75,16 @@ and copying, and simply focuses on the path to access the values.
 
 ```kotlin
 fun Person.happyBirthdayFriendsOptics(): Person =
-  Person.friends.every(Every.list()).age.modify(this) { it + 1 }
+  Person.friends.every.age.modify(this) { it + 1 }
 ```
 <!--- KNIT example-traversal-01.kt -->
 
 :::note Every(List)
 
-You might be wondering why we need to write `Every.list()` as argument to `every`,
-given that we know that `Person.friends` focuses on a `List<Person>`.
-The reason is [type erasure](https://kotlinlang.org/docs/generics.html#type-erasure):
-the compiler cannot differentiate between `Lens<Person, List<Person>>`
-and `Lens<Person, Map<String, Person>>`, so there's no way to tell which
-is the right traversal to apply in each case. However, if we provide the
-hint ourselves by giving `Every.list()` as argument, the compiler is able
-to _check_ that our usage is correct.
+In versions prior to 2.0, `.every` required an additional argument specifying
+the type of traversal. So one would write `Person.friends.every(Every.list())`.
+This problem was related to [type erasure](https://kotlinlang.org/docs/generics.html#type-erasure),
+but fortunately, a new encoding was found without this caveat.
 
 :::
 

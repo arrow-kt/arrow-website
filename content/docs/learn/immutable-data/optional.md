@@ -57,8 +57,8 @@ val db = Db(mapOf(
 ))
 
 fun example() {
-  Db.cities.index(Index.map(), "Alejandro").country.getOrNull(db) shouldBe "Netherlands"
-  Db.cities.index(Index.map(), "Jack").country.getOrNull(db) shouldBe null
+  Db.cities.index("Alejandro").country.getOrNull(db) shouldBe "Netherlands"
+  Db.cities.index("Jack").country.getOrNull(db) shouldBe null
 }
 ```
 <!--- KNIT example-optional-01.kt -->
@@ -91,7 +91,7 @@ val db = Db(mapOf(
 
 ```kotlin
 fun example() {
-  val dbWithJack = Db.cities.index(Index.map(), "Jack").set(db, City("London", "UK"))
+  val dbWithJack = Db.cities.index("Jack").set(db, City("London", "UK"))
   // Jack was not really added to the database
   ("Jack" in dbWithJack.cities) shouldBe false
 }

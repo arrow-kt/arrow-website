@@ -55,4 +55,8 @@ class TypedErrorsTest {
     arrow.website.examples.exampleTypedErrors21.example()
   }
 
+  @Test fun ExampleTypedErrors22() = runTest {
+    arrow.website.examples.exampleTypedErrors22.example()
+  }
+
 }
