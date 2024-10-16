@@ -32,7 +32,6 @@ include a `UseSerializers` annotation at the very top.
 @file:UseSerializers(
   EitherSerializer::class,
   IorSerializer::class,
-  ValidatedSerializer::class,
   OptionSerializer::class,
   NonEmptyListSerializer::class,
   NonEmptySetSerializer::class
@@ -42,6 +41,30 @@ include a `UseSerializers` annotation at the very top.
 The list above mentions all the serializers, but you only need to add those
 which are used in your fields. Don't worry too much: if you miss one, the
 kotlinx.serialization plug-in gives you an error.
+
+Additionally, you can use `arrow.core.serialization.ArrowModule` to register run-time [contextual serialization](https://github.com/Kotlin/kotlinx.serialization/blob/master/docs/serializers.md#contextual-serialization) support of the Arrow Core types. 
+
+```
+val format = Json { serializersModule = ArrowModule }
+```
+
+or by merging with another serializers module
+
+```
+val format = Json { serializersModule = myModule + ArrowModule }
+```
+
+This will allow for use of the Arrow Core types as the value to be serialized without specifying the serializer explicitly:
+
+```
+val payload = format.encodeToString(nonEmptyListOf("hello", "world"))
+```
+
+:::note
+
+Using `@UseSerializers` to provide static _compile-time_ serialization of fields containing Arrow Core types is usually preferable to annotating fields with `@Contextual` and relying on _run-time_ resolution, wherever possible.
+
+:::
 
 :::info Additional reading
 
@@ -57,7 +80,7 @@ If you're using Jackson for serialization, [this module](https://github.com/arro
 adds support for Arrow types. You just need to call an additional method when
 creating the mapper.
 
-```kotlin
+```
 val mapper = ObjectMapper()
     .registerKotlinModule()
     .registerArrowModule()   // <- this is the one
