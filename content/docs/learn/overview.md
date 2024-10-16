@@ -36,8 +36,7 @@ Each section in the documentation roughly corresponds to one of the libraries th
 | `arrow-fx-coroutines` <br /> _Companion to [KotlinX Coroutines](https://kotlinlang.org/api/kotlinx.coroutines/kotlinx-coroutines-core/)_ | [High-level concurrency](../coroutines/parallel), including `parMap` and `parZip` <br /> [Resource management](../coroutines/resource-safety/) (with `suspend`) |
 | `arrow-autoclose` | [Resource management](../coroutines/resource-safety/) (no `suspend`) |
 | `arrow-resilience` | [Resilience patterns](../resilience/) |
-| `arrow-optics` + `arrow-optics-ksp-plugin` <br /> _Companion to [data](https://kotlinlang.org/docs/data-classes.html) and [sealed](https://kotlinlang.org/docs/sealed-classes.html) classes_ | Utilities for [immutable data](../immutable-data/intro/), including [pattern matching](../immutable-data/matching/) |
-| `arrow-match` | [Pattern matching](../immutable-data/matching/) without optics | 
+| `arrow-optics` + `arrow-optics-ksp-plugin` <br /> _Companion to [data](https://kotlinlang.org/docs/data-classes.html) and [sealed](https://kotlinlang.org/docs/sealed-classes.html) classes_ | Utilities for [immutable data](../immutable-data/intro/) |
 | `arrow-fx-stm` | [Software Transactional Memory](../coroutines/stm/) (STM) |
 | `arrow-atomic` <br /> _Multiplatform-ready [references](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.native.concurrent/-atomic-reference/)_ | [Atomic references](../coroutines/concurrency-primitives/#atomic) |
 | `arrow-collectors` <br /> _Companion to [`fold`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/fold.html) and [`reduce`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/reduce.html)_ | [Aggregation with single traversal](../collections-functions/collectors/) |
