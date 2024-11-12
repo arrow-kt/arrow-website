@@ -31,7 +31,6 @@ dependencies {
   testImplementation(libs.arrow.eval)
   testImplementation(libs.arrow.functions)
   testImplementation(libs.arrow.cache4k)
-  testImplementation(libs.arrow.match)
   testImplementation(libs.kotest.assertions.core)
   testImplementation(libs.kotest.property)
   testImplementation(libs.suspendapp)

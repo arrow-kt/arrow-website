@@ -1,10 +1,10 @@
 [versions]
 coroutines = "1.9.0"
-kotest = "5.9.1"
-kotlin = "2.0.21"
+kotest = "6.0.0.M1"
+kotlin = "2.1.0-RC"
 knit = "0.5.0"
-arrow = "2.0.0-alpha.4"
-ksp = "2.0.21-1.0.25"
+arrow = "2.0.0-beta.1"
+ksp = "2.1.0-RC-1.0.27"
 suspendapp = "0.4.0"
 kotlinKafka = "0.4.0"
 cache4k = "0.13.0"
@@ -32,7 +32,6 @@ arrow-collectors = { module = "io.arrow-kt:arrow-collectors", version.ref = "arr
 arrow-eval = { module = "io.arrow-kt:arrow-eval", version.ref = "arrow" }
 arrow-functions = { module = "io.arrow-kt:arrow-functions", version.ref = "arrow" }
 arrow-cache4k = { module = "io.arrow-kt:arrow-cache4k", version.ref = "arrow" }
-arrow-match = { module = "io.arrow-kt:arrow-match", version.ref = "arrow" }
 kotlinx-knit = { module = "org.jetbrains.kotlinx:kotlinx-knit", version.ref = "knit" }
 kotlinx-knit-test = { module = "org.jetbrains.kotlinx:kotlinx-knit-test", version.ref = "knit" }
 suspendapp = { module = "io.arrow-kt:suspendapp", version.ref = "suspendapp" }
