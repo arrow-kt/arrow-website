@@ -22,8 +22,8 @@ with Structured Concurrency and KotlinX Coroutines.
 :::note Graceful Shutdowns
 
 Correct release of resources when the application is terminating is important
-in several scenarios. The Arrow community has you covered:
-[SuspendApp](../../../ecosystem/suspendapp/) improves on
+in several scenarios.
+[SuspendApp](../suspendapp/) improves on
 `Resource` to gracefully deal with shutdown and termination.
 
 :::

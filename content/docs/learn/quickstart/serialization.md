@@ -2,7 +2,7 @@
 id: serialization
 title: Serialization
 description: How to (de)serialize Arrow Core types.
-sidebar_position: 2
+sidebar_position: 3
 ---
 
 # Serialization

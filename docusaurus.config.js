@@ -106,10 +106,6 @@ const createConfig = async () => {
               to: '/learn/overview',
               items: [
                 {
-                  label: 'Overview',
-                  to: '/learn/overview',
-                },
-                {
                   label: 'Quickstart',
                   to: '/learn/quickstart',
                   activeBaseRegex: '^(/learn/quickstart)',
@@ -158,53 +154,32 @@ const createConfig = async () => {
             {
               type: 'dropdown',
               position: 'right',
-              label: 'Ecosystem',
+              label: 'Community',
               items: [
-                {
-                  label: 'SuspendApp',
-                  to: '/ecosystem/suspendapp',
-                  activeBaseRegex: '^(/ecosystem/suspendapp)',
-                },
-                {
-                  label: 'Analysis',
-                  to: '/ecosystem/analysis',
-                  activeBaseRegex: '^(/ecosystem/analysis)',
-                },
+                { to: '/community/blog', label: 'Blog' },
                 {
                   label: 'More libraries',
                   to: '/libraries',
                 },
               ],
             },
-            {
-              type: 'dropdown',
-              position: 'right',
-              label: 'Community',
-              items: [{ to: '/community/blog', label: 'Blog' }],
-            },
           ],
         },
         footer: {
           links: [
             {
-              title: 'Menu',
               items: [
-                {
-                  label: 'Learn',
-                  to: '/learn/overview',
-                },
                 {
                   label: 'API Docs',
                   href: 'https://apidocs.arrow-kt.io',
                 },
                 {
-                  label: 'Community',
-                  to: '/community/support',
+                  label: 'Blog',
+                  to: '/community/blog',
                 },
               ],
             },
             {
-              title: 'Learn',
               items: [
                 {
                   label: 'Quickstart',
@@ -225,7 +200,6 @@ const createConfig = async () => {
               ],
             },
             {
-              title: 'More',
               items: [
                 {
                   label: 'Immutable data',
@@ -239,31 +213,9 @@ const createConfig = async () => {
                   label: 'Design',
                   to: '/learn/design',
                 },
-              ],
-            },
-            {
-              title: 'Ecosystem',
-              items: [
                 {
-                  label: 'SuspendApp',
-                  href: '/ecosystem/suspendapp/',
-                },
-                {
-                  label: 'Analysis',
-                  to: '/ecosystem/analysis',
-                },
-                {
-                  label: 'More libraries',
-                  to: '/libraries',
-                },
-              ],
-            },
-            {
-              title: 'Community',
-              items: [
-                {
-                  label: 'Blog',
-                  to: '/community/blog',
+                  label: 'Integrations',
+                  to: '/learn/integrations',
                 },
               ],
             },

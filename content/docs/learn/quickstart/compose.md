@@ -1,7 +1,7 @@
 ---
 id: compose
 title: Compose and UIs
-sidebar_position: 3
+sidebar_position: 4
 ---
 
 Arrow provides several features which are very interesting when developing 

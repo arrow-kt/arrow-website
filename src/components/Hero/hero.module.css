@@ -7,9 +7,9 @@
   background-image: url('@site/static/img/arrow-brand-icon.svg');
   background-repeat: no-repeat;
   background-size: auto 150%;
-  background-position: max(-400px, calc(100vw - 3000px)) bottom;
+  background-position: max(-200px, calc(100vw - 3000px)) bottom;
   width: 100%;
-  height: 100%;
+  height: 90%;
   content: '';
   position: absolute;
   left: 0;

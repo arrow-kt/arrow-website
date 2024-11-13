@@ -3,6 +3,7 @@ title: Quickstart
 sidebar_custom_props:
   icon: icon-quickstart.svg
   overview: true
+position: 1
 ---
 
 import Tabs from '@theme/Tabs';
@@ -10,16 +11,19 @@ import TabItem from '@theme/TabItem';
 
 # <decorated-text icon={frontMatter.sidebar_custom_props.icon}>Quickstart</decorated-text>
 
-Arrow is composed of different libraries; simply select the ones
-you need in your project.
+Arrow aims to be the _perfect companion_ to your Kotlin journey. That means it focuses on tasks most developers dealt with, like modifying data or managing resources. Given these aims, Arrow strives to provide _idiomatic_ solutions and integrate with core Kotlin concepts such as coroutines.
 
-:::info Multiplatform-ready
+Arrow is inspired by the great work made in other programming language communities, especially from _functional_, _data-oriented_ and _concurrent_ programming. This doesn't mean you need to know any of those ideas to use the libraries; Arrow exposes these concepts in ways that do not feel alien to Kotlin programmers.
 
-All Arrow libraries are Multiplatform-ready, so you can use them in all of your
-[KMP](https://kotlinlang.org/docs/multiplatform.html) projects. Be aware that
-some instructions here may need to be slightly changed in that situation.
+:::info Where to start?
+
+- Look at the [list of libraries](../quickstart/libs) and see how Arrow can help in your project
+- Our [summary](../summary) is designed to help you find your way in the Arrow ecosystem.
+- Look at some [example projects](../design/projects/) using Arrow in both frontend and backend.
+- Learn about [design and architecture](../design) using functional and data-oriented programming concepts.
 
 :::
+
 
 ### Enable the Maven Central repository
 
@@ -60,6 +64,10 @@ Maven includes the Maven Central repository by default.
 
 You're now ready to include Arrow in your project. You have three possibilities
 that correspond to three different ways of handling versioning in your build.
+
+All Arrow libraries are Multiplatform-ready, so you can use them in all of your
+[KMP](https://kotlinlang.org/docs/multiplatform.html) projects. Be aware that
+some instructions here may need to be slightly changed in that situation.
 
 #### One by one
 
