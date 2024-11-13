@@ -116,7 +116,7 @@ const createConfig = async () => {
                   activeBaseRegex: '^(/learn/typed-errors)',
                 },
                 {
-                  label: 'Coroutines',
+                  label: 'Concurrency and resources',
                   to: '/learn/coroutines',
                   activeBaseRegex: '^(/learn/coroutines)',
                 },
@@ -139,6 +139,11 @@ const createConfig = async () => {
                   label: 'Design',
                   to: '/learn/design',
                   activeBaseRegex: '^(/learn/design)',
+                },
+                {
+                  label: 'Example projects',
+                  to: '/learn/projects',
+                  activeBaseRegex: '^(/learn/projects)',
                 },
                 {
                   label: 'Integrations',
@@ -177,9 +182,14 @@ const createConfig = async () => {
                   label: 'Blog',
                   to: '/community/blog',
                 },
+                {
+                  label: 'Example projects',
+                  to: '/learn/projects',
+                },
               ],
             },
             {
+              title: 'Learn',
               items: [
                 {
                   label: 'Quickstart',
@@ -200,6 +210,7 @@ const createConfig = async () => {
               ],
             },
             {
+              title: '...',
               items: [
                 {
                   label: 'Immutable data',

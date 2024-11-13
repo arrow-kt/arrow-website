@@ -11,7 +11,7 @@ similar functional flavor, such as Compose.
 :::info Example projects
 
 Projects using Compose and Arrow can be found in the
-[corresponding section](../../design/projects/).
+[corresponding section](../../projects/).
 
 :::
 

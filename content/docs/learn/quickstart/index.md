@@ -19,7 +19,7 @@ Arrow is inspired by the great work made in other programming language communiti
 
 - Look at the [list of libraries](../quickstart/libs) and see how Arrow can help in your project
 - Our [summary](../summary) is designed to help you find your way in the Arrow ecosystem.
-- Look at some [example projects](../design/projects/) using Arrow in both frontend and backend.
+- Look at some [example projects](../projects) using Arrow in both frontend and backend.
 - Learn about [design and architecture](../design) using functional and data-oriented programming concepts.
 
 :::

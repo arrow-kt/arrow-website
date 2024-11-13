@@ -16,11 +16,9 @@ detected error is fatal? Instead of predefined answers, Arrow aims to provide
 a set of **tools** that you can compose to specify your solution in a concise
 and composable way.
 
-:::caution Arrow pre-1.2.0
+:::note Where to find it
 
-In Arrow series 1.0.x and 1.1.x, these types were provided as part of the
-`arrow-fx-coroutines` library. From 1.2.0 on they live in `arrow-resilience`,
-even though a migration window is in place until Arrow 2.0.
+All the resilience mechanisms described in this section are part of the `arrow-resilience` library. Prior to version 1.2.0, they were available as part of `arrow-fx-coroutines`.
 
 :::
 

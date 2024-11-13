@@ -17,6 +17,12 @@ For further information, you can read [_Composable memory transactions_](https:/
 
 :::
 
+:::note Where to find it
+
+Software Transaction Memory is available in the `arrow-fx-stm` library.
+
+:::
+
 ## Reading and writing concurrent state
 
 Those values that live under the umbrella of STM must be defined as `TVar`s

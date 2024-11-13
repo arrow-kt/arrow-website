@@ -1,3 +1,7 @@
+---
+sidebar_class_name: sidebar-hidden
+---
+
 import React from 'react';
 import {Redirect} from '@docusaurus/router';
 

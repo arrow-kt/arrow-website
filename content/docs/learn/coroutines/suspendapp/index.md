@@ -16,9 +16,9 @@ code. This library aims to solve that problem by leveraging Kotlin MPP using Kot
 
 :::
 
-:::note SuspendApp
+:::note Where to find it
 
-For historical reasons, the `suspendapp` library follows its own versioning scheme. Please check [Maven Central](https://central.sonatype.com/artifact/io.arrow-kt/suspendapp) for the latest release information.
+Graceful shutdowns are implemented in the `suspendapp` library, with further integration with other frameworks available in their own libraries. For historical reasons, the `suspendapp` library follows its own versioning scheme. Please check [Maven Central](https://central.sonatype.com/artifact/io.arrow-kt/suspendapp) for the latest release information.
 
 :::
 

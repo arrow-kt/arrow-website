@@ -32,6 +32,16 @@ export default function Home(): JSX.Element {
         </section>
         <section
           className={`container text--center margin-bottom--lg ${styles.textContainer}`}>
+          <h1>Dive into the concepts behind Arrow</h1>
+        </section>
+        <section
+          className={`${styles.featuresContainer} ${styles.verticalRhythm}`}>
+          {data.divein.map((feature: LinkCardProps) => (
+            <LinkCard key={feature.title} {...feature} />
+          ))}
+        </section>
+        <section
+          className={`container text--center margin-bottom--lg ${styles.textContainer}`}>
           <h1>What the community says</h1>
         </section>
         <section
