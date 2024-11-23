@@ -19,12 +19,9 @@ with Structured Concurrency and KotlinX Coroutines.
 
 :::
 
-:::note Graceful Shutdowns
+:::note Where to find it
 
-Correct release of resources when the application is terminating is important
-in several scenarios. The Arrow community has you covered:
-[SuspendApp](../../../ecosystem/suspendapp/) improves on
-`Resource` to gracefully deal with shutdown and termination.
+Resource management is part of the `arrow-fx-coroutines` library. The separate `arrow-autoclose` library provides a similar API but without integration with Kotlin's coroutine mechanism.
 
 :::
 
@@ -111,6 +108,15 @@ stages: 1️⃣ acquiring the resource, 2️⃣ using the resource, and 3️⃣ 
 resource. With `Resource`, we bundle steps (1) and (3), and the implementation
 ensures that everything works correctly, even in the event of exceptions or
 cancellations.
+
+:::note Graceful Shutdowns
+
+Correct release of resources when the application is terminating is important
+in several scenarios.
+[SuspendApp](../suspendapp/) improves on
+`Resource` to gracefully deal with shutdown and termination.
+
+:::
 
 ## Dealing with resources properly
 

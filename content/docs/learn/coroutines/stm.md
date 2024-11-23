@@ -1,5 +1,5 @@
 ---
-sidebar_position: 3
+sidebar_position: 4
 ---
 
 # Transactional memory (STM)
@@ -14,6 +14,12 @@ The base building blocks of STM are `TVar`s and the primitives `retry`, `orElse`
 
 The API of `arrow-fx-stm` is based on Haskell's [`stm`](https://hackage.haskell.org/package/stm) package, and the implementation is based on the GHC implementation for fine-grained locks.
 For further information, you can read [_Composable memory transactions_](https://www.microsoft.com/en-us/research/publication/composable-memory-transactions/) by Tim Harris, Simon Marlow, Simon Peyton Jones, and Maurice Herlihy.
+
+:::
+
+:::note Where to find it
+
+Software Transaction Memory is available in the `arrow-fx-stm` library.
 
 :::
 

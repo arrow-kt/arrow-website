@@ -8,6 +8,12 @@ description: Better aggregation over sequences
 Collectors help build complex computations over sequences of values,
 guaranteeing that those values are consumed only once.
 
+:::note Where to find it
+
+Collectors live in the `arrow-collectors` library. This library is still in experimental state, but no big changes are expected.
+
+:::
+
 Take for example the computation of the average of a list. You can 
 certainly write a simple version using the built-in functions,
 

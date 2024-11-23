@@ -1,5 +1,5 @@
 ---
-title: With Kafka
+title: ... with Kafka
 sidebar_position: 3
 ---
 

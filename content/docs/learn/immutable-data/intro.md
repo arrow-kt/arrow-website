@@ -35,7 +35,7 @@ fun Person.capitalizeCountry(): Person =
 ```
 <!--- KNIT example-immutable-intro-01.kt -->
 
-:::note
+:::tip
 
 We often use the word _transform_ even though we are talking about immutable
 data. In most cases, we refer to creating a _copy_ of the value where some of
@@ -52,6 +52,12 @@ on the `address` field of a `Person`. By combining different optics, we can
 concentrate on nested elements, like the `city` field within the `address` field
 within a `Person`. But code speaks louder than words, so let's see how the
 example above improves using optics.
+
+:::note Where to find it
+
+Immutable data manipulation with optics is available through the `arrow-optics` library, and the corresponding `arrow-optics-ksp-plugin` compiler plug-in.
+
+:::
 
 The easiest way to start with Arrow Optics is through its compiler
 plug-in. After [adding it to your build](../../quickstart/#additional-setup-for-plug-ins)

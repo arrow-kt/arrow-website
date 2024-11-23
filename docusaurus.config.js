@@ -106,10 +106,6 @@ const createConfig = async () => {
               to: '/learn/overview',
               items: [
                 {
-                  label: 'Overview',
-                  to: '/learn/overview',
-                },
-                {
                   label: 'Quickstart',
                   to: '/learn/quickstart',
                   activeBaseRegex: '^(/learn/quickstart)',
@@ -120,7 +116,7 @@ const createConfig = async () => {
                   activeBaseRegex: '^(/learn/typed-errors)',
                 },
                 {
-                  label: 'Coroutines',
+                  label: 'Concurrency and resources',
                   to: '/learn/coroutines',
                   activeBaseRegex: '^(/learn/coroutines)',
                 },
@@ -145,6 +141,11 @@ const createConfig = async () => {
                   activeBaseRegex: '^(/learn/design)',
                 },
                 {
+                  label: 'Example projects',
+                  to: '/learn/projects',
+                  activeBaseRegex: '^(/learn/projects)',
+                },
+                {
                   label: 'Integrations',
                   to: '/learn/integrations',
                 },
@@ -158,48 +159,32 @@ const createConfig = async () => {
             {
               type: 'dropdown',
               position: 'right',
-              label: 'Ecosystem',
+              label: 'Community',
               items: [
-                {
-                  label: 'SuspendApp',
-                  to: '/ecosystem/suspendapp',
-                  activeBaseRegex: '^(/ecosystem/suspendapp)',
-                },
-                {
-                  label: 'Analysis',
-                  to: '/ecosystem/analysis',
-                  activeBaseRegex: '^(/ecosystem/analysis)',
-                },
+                { to: '/community/blog', label: 'Blog' },
                 {
                   label: 'More libraries',
                   to: '/libraries',
                 },
               ],
             },
-            {
-              type: 'dropdown',
-              position: 'right',
-              label: 'Community',
-              items: [{ to: '/community/blog', label: 'Blog' }],
-            },
           ],
         },
         footer: {
           links: [
             {
-              title: 'Menu',
               items: [
-                {
-                  label: 'Learn',
-                  to: '/learn/overview',
-                },
                 {
                   label: 'API Docs',
                   href: 'https://apidocs.arrow-kt.io',
                 },
                 {
-                  label: 'Community',
-                  to: '/community/support',
+                  label: 'Blog',
+                  to: '/community/blog',
+                },
+                {
+                  label: 'Example projects',
+                  to: '/learn/projects',
                 },
               ],
             },
@@ -225,7 +210,7 @@ const createConfig = async () => {
               ],
             },
             {
-              title: 'More',
+              title: '...',
               items: [
                 {
                   label: 'Immutable data',
@@ -239,31 +224,9 @@ const createConfig = async () => {
                   label: 'Design',
                   to: '/learn/design',
                 },
-              ],
-            },
-            {
-              title: 'Ecosystem',
-              items: [
                 {
-                  label: 'SuspendApp',
-                  href: '/ecosystem/suspendapp/',
-                },
-                {
-                  label: 'Analysis',
-                  to: '/ecosystem/analysis',
-                },
-                {
-                  label: 'More libraries',
-                  to: '/libraries',
-                },
-              ],
-            },
-            {
-              title: 'Community',
-              items: [
-                {
-                  label: 'Blog',
-                  to: '/community/blog',
+                  label: 'Integrations',
+                  to: '/learn/integrations',
                 },
               ],
             },

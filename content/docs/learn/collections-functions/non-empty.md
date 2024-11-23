@@ -5,6 +5,12 @@ description: Working with collections with at least one element
 
 # Non-empty collections
 
+:::note Where to find it
+
+Non-empty collections are part of the `arrow-core` library.
+
+:::
+
 Nullable types give us the ability to have zero or one appearance of a value,
 collections allow us to have any number of them. However, in some scenarios, we need to work with collections that should contain **at least one** element. Arrow provides both [`NonEmptyList`](https://apidocs.arrow-kt.io/arrow-core/arrow.core/-non-empty-list/index.html)
 and [`NonEmptySet`](https://apidocs.arrow-kt.io/arrow-core/arrow.core/-non-empty-set/index.html).

@@ -23,6 +23,13 @@ leading to a defensive mode of error handling.
 
 :::
 
+:::note Where to find it
+
+Typed errors live in the `arrow-core` library, with high-arity versions of the
+`zipOrAccumulate` function available in `arrow-core-high-arity`.
+
+:::
+
 ## Concepts and types
 
 In the rest of the documentation we often refer to a few concepts related to error handling.
