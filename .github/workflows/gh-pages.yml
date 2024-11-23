@@ -46,11 +46,3 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./build
-
-      - name: Install EnhanceDocs CLI
-        uses: enhancedocs/setup-enhancedocs@v0.2.0
-        with:
-          api-key: ${{ secrets.ENHANCEDOCS_API_KEY }}
-
-      - name: Update Docs
-        run: enhancedocs alpha sources web --project ${{ secrets.ENHANCEDOCS_PROJECT_ID }} https://arrow-kt.io
