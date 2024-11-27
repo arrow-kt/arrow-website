@@ -74,10 +74,10 @@ fun example() {
 <!--- KNIT example-own-errors-01.kt -->
 <!--- TEST assert -->
 
-If we'd used _context receivers_, defining this DSL would be even more straightforward, and we could use the `Raise` type class directly.
+If we'd used _context parameters, defining this DSL would be even more straightforward, and we could use the `Raise` type class directly.
 
-```kotlin
-context(Raise<Lce<E, Nothing>>)
+```
+context(_: Raise<Lce<E, Nothing>>)
 fun <E, A> Lce<E, A>.bind(): A =  when (this) {
   is Lce.Content -> value
   is Lce.Failure -> raise(this)

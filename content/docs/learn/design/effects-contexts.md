@@ -7,7 +7,7 @@ sidebar_position: 2
   <link rel="canonical" href="https://www.47deg.com/blog/effects-contexts/" />
 </head>
 
-:::note This article was originally published in the [47 Degrees blog](https://www.47deg.com/blog/effects-contexts/).
+:::note This article was originally published in the [47 Degrees blog](https://www.47deg.com/blog/effects-contexts/), and subsequently updated to replace context receivers with context parameters.
 
 :::
 
@@ -188,14 +188,14 @@ Then we cannot define a context requiring `Environment<ConnectionParams>` and `E
 
 ### Looking at the future
 
-The future looks quite bright for Kotliners in this respect. For a few versions now, the language includes [_context receivers_](https://github.com/Kotlin/KEEP/issues/259), which would allow a cleaner design for what we are describing using subtyping. Using context receiver, we're able to state:
+The future looks quite bright for Kotliners in this respect. For a few versions now, the language includes [_context parameters](https://github.com/Kotlin/KEEP/issues/367), which would allow a cleaner design for what we are describing using subtyping. Using context receiver, we're able to state:
 
 ```kotlin
-context(Database, Logger)
+context(db: Database, logger: Logger)
 fun User.saveInDb() { ... }
 ```
 
-and inject the values by simply nesting the calls to `db` and `stdoutLogger`. Note that sometimes you need a more robust `with` function than the one provided by the standard library, like [this one](https://gist.github.com/carbaj03/4ebd0f8da17c351d4235e1bedd9a36b5), which admits subtyping within contexts.
+and inject the values by simply nesting the calls to `db` and `stdoutLogger`, or simply using the `context` function.
 
 ## Contexts, effects, algebras
 
