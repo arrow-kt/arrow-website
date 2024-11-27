@@ -1,7 +1,5 @@
 import React, { memo } from 'react';
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-ignore
-import EnhancedChat from 'enhancedocs-chat';
+
 
 import { useThemeConfig, FooterLinkItem } from '@docusaurus/theme-common';
 import FooterLinks from '@theme/Footer/Links';
@@ -10,8 +8,6 @@ import FooterCopyright from '@theme/Footer/Copyright';
 
 import FooterLayout from '@site/src/theme/Footer/Layout';
 import IconLinks from '@site/src/theme/Footer/Links/IconLinks';
-
-import 'enhancedocs-chat/dist/style.css';
 
 // The name of the links section that will be used differently
 const externalLinksTitle = 'Links';
