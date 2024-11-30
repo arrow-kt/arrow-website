@@ -2,20 +2,18 @@
 package arrow.website.examples.exampleTypedErrors09
 
 import arrow.core.Either
-import arrow.core.Either.Left
-import arrow.core.Either.Right
-import arrow.core.right
-import arrow.core.raise.Raise
 import arrow.core.raise.either
-import arrow.core.raise.fold
-import io.kotest.assertions.fail
-import io.kotest.matchers.shouldBe
+import arrow.core.raise.nullable
 
 object Problem
 
-val maybeTwo: Either<Problem, Int> = either { 2 }
-val maybeFive: Either<Problem, Int> = either { raise(Problem) }
-
-val maybeSeven: Either<Problem, Int> = either {
-  maybeTwo.bind() + maybeFive.bind()
-}
+fun problematic(n: Int): Either<Problem, Int?> =
+  either { 
+    nullable { 
+      when {
+        n < 0  -> raise(Problem)
+        n == 0 -> raise(null)
+        else   -> n
+      }
+    }
+  }

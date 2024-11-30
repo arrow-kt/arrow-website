@@ -46,8 +46,4 @@ tasks {
       setEvents(listOf("passed", "skipped", "failed", "standardOut", "standardError"))
     }
   }
-
-  withType<KotlinCompile>().configureEach {
-    compilerOptions.freeCompilerArgs.add("-Xcontext-receivers")
-  }
 }

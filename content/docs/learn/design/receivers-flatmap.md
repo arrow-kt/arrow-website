@@ -7,7 +7,7 @@ sidebar_position: 3
   <link rel="canonical" href="https://xebia.com/blog/the-suspend-receivers-style-in-kotlin/" />
 </head>
 
-:::note This article was originally published at [Xebia's blog](https://xebia.com/blog/the-suspend-receivers-style-in-kotlin/). 
+:::note This article was originally published at [Xebia's blog](https://xebia.com/blog/the-suspend-receivers-style-in-kotlin/). This article mentions context receivers, which are deprecated, and shall be updated once context parameters are released.
 
 :::
 

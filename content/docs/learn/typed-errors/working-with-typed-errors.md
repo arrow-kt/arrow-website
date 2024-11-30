@@ -83,13 +83,13 @@ as their first type parameter.
 The second approach is describing errors as part of the _computation context_ of the function.
 In that case the ability to finish with logical failures is represented by having `Raise<E>`
 be part of the context or scope of the function. Kotlin offers two choices here: we can use
-an extension receiver or using the more modern context receivers.
+an extension receiver, and in the future we may use context parameters.
 
 ```
 // Raise<UserNotFound> is extension receiver
 fun Raise<UserNotFound>.findUser(id: UserId): User
-// Raise<UserNotFound> is context receiver
-context(Raise<UserNotFound>) fun findUser(id: UserId): User
+// Raise<UserNotFound> is context parameter
+context(_: Raise<UserNotFound>) fun findUser(id: UserId): User
 ```
 
 Let's define a simple program that _raises_ a _logical failure_ of `UserNotFound` or returns a `User`. We can represent this both as a value `Either<UserNotFound, User>`, and as a _computation_ (using `Raise<UserNotFound>`).
@@ -202,21 +202,14 @@ fun example() {
 <!--- TEST assert -->
 
 Without context receivers, these functions look pretty different depending on if we use `Raise` or `Either`. This is because we sacrifice our _extension receiver_ for `Raise`.
-And thus, the `Raise` based computation cannot be an extension function on `User`. With context receivers, we could've defined it as:
+And thus, the `Raise` based computation cannot be an extension function on `User`.
+In the future, context parameters should allow us to define the function as follows:
 
-<!--- INCLUDE
-import arrow.core.raise.Raise
-import arrow.core.raise.ensure
-
-data class User(val id: Long)
-data class UserNotFound(val message: String)
--->
-```kotlin
-context(Raise<UserNotFound>)
+```
+context(_: Raise<UserNotFound>)
 fun User.isValid(): Unit =
   ensure(id > 0) { UserNotFound("User without a valid id: $id") }
 ```
-<!--- KNIT example-typed-errors-04.kt -->
 
 `ensureNotNull` takes a _nullable value_ and a _lazy_ `UserNotFound` value. When the value is null, the _computation_ will result in a _logical failure_ of `UserNotFound`.
 Otherwise, the value will be _smart-casted_ to non-null, and you can operate on it without checking nullability.
@@ -256,7 +249,7 @@ fun example() {
   )
 }
 ```
-<!--- KNIT example-typed-errors-05.kt -->
+<!--- KNIT example-typed-errors-04.kt -->
 <!--- TEST assert -->
 
 ## Running and inspecting results
@@ -294,7 +287,7 @@ fun example() {
   )
 }
 ```
-<!--- KNIT example-typed-errors-06.kt -->
+<!--- KNIT example-typed-errors-05.kt -->
 <!--- TEST assert -->
 
 :::info Fold over all possible cases
@@ -328,7 +321,7 @@ fun example() {
   either { error() } shouldBe UserNotFound.left()
 }
 ```
-<!--- KNIT example-typed-errors-07.kt -->
+<!--- KNIT example-typed-errors-06.kt -->
 <!--- TEST assert -->
 
 <!--- INCLUDE
@@ -356,7 +349,7 @@ computation with `Raise`, is achieved via the `.bind()` extension function.
 ```kotlin
 fun Raise<UserNotFound>.res(): User = user.bind()
 ```
-<!--- KNIT example-typed-errors-08.kt -->
+<!--- KNIT example-typed-errors-07.kt -->
 
 In fact, to define a result with a wrapper type, we recommend to use one
 of the runners (`either`, `ior`, et cetera), and use `.bind()` to "inject"
@@ -385,7 +378,7 @@ val maybeSeven: Either<Problem, Int> = either {
   maybeTwo.bind() + maybeFive.bind()
 }
 ```
-<!--- KNIT example-typed-errors-09.kt -->
+<!--- KNIT example-typed-errors-08.kt -->
 
 ```mermaid
 graph LR;
@@ -429,7 +422,7 @@ fun problematic(n: Int): Either<Problem, Int?> =
     }
   }
 ```
-<!--- KNIT example-typed-errors-10.kt -->
+<!--- KNIT example-typed-errors-09.kt -->
 
 :::
 
@@ -494,7 +487,7 @@ suspend fun example() {
   }) { e: UserNotFound -> null } shouldBe User(1)
 }
 ```
-<!--- KNIT example-typed-errors-11.kt -->
+<!--- KNIT example-typed-errors-10.kt -->
 <!--- TEST assert -->
 
 Default to `null` is typically not desired since we've effectively swallowed our _logical failure_ and ignored our error. If that was desirable, we could've used nullable types initially.
@@ -538,7 +531,7 @@ fun example() {
     .recover { _: UserNotFound -> raise(OtherError) } shouldBe OtherError.left()
 }
 ```
-<!--- KNIT example-typed-errors-12.kt -->
+<!--- KNIT example-typed-errors-11.kt -->
 <!--- TEST assert -->
 
 The type system now tracks that a new error of `OtherError` might have occurred, but we recovered from any possible errors of `UserNotFound`. This is useful across application layers or in the service layer, where we might want to `recover` from a `DatabaseError` with a `NetworkError` when we want to load data from the network when a database operation failed.
@@ -565,7 +558,7 @@ suspend fun Raise<OtherError>.recovery(): User =
     fetchUser(-1)
   }) { _: UserNotFound -> raise(OtherError) }
 ```
-<!--- KNIT example-typed-errors-13.kt -->
+<!--- KNIT example-typed-errors-12.kt -->
 
 :::tip DSLs everywhere
 Since recovery for both `Either` and `Raise` is DSL based, you can also call `bind` or `raise` from both.
@@ -624,7 +617,7 @@ suspend fun insertUser(username: String, email: String): Either<UserAlreadyExist
     else throw e
   }
 ```
-<!--- KNIT example-typed-errors-14.kt -->
+<!--- KNIT example-typed-errors-13.kt -->
 
 This pattern allows us to turn exceptions we want to track into _typed errors_, and things that are **truly** exceptional remain exceptional.
 
@@ -672,7 +665,7 @@ fun example() {
   (1..10).mapOrAccumulate { isEven2(it).bind() } shouldBe errors
 }
 ```
-<!--- KNIT example-typed-errors-15.kt -->
+<!--- KNIT example-typed-errors-14.kt -->
 <!--- TEST assert -->
 
 We can also provide custom logic to accumulate the errors, typically when we have custom types.
@@ -715,7 +708,7 @@ fun example() {
   (1..10).mapOrAccumulate(MyError::plus) { isEven2(it).bind() } shouldBe error
 }
 ```
-<!--- KNIT example-typed-errors-16.kt -->
+<!--- KNIT example-typed-errors-15.kt -->
 <!--- TEST assert -->
 
 :::tip Accumulating errors but not values
@@ -734,7 +727,7 @@ fun example() = either {
   }
 }
 ```
-<!--- KNIT example-typed-errors-17.kt -->
+<!--- KNIT example-typed-errors-16.kt -->
 <!--- TEST assert -->
 
 :::
@@ -750,7 +743,7 @@ As a guiding example, let's consider information about a user, where the name sh
 ```kotlin
 data class User(val name: String, val age: Int)
 ```
-<!--- KNIT example-typed-errors-18.kt -->
+<!--- KNIT example-typed-errors-17.kt -->
 
 It's customary to define the different problems that may arise from validation as a sealed interface:
 
@@ -790,7 +783,7 @@ fun example() {
   User("", -1) shouldBe Left(UserProblem.EmptyName)
 }
 ```
-<!--- KNIT example-typed-errors-19.kt -->
+<!--- KNIT example-typed-errors-18.kt -->
 <!--- TEST assert -->
 
 <!--- INCLUDE
@@ -833,7 +826,7 @@ fun example() {
   User("", -1) shouldBe Left(nonEmptyListOf(UserProblem.EmptyName, UserProblem.NegativeAge(-1)))
 }
 ```
-<!--- KNIT example-typed-errors-20.kt -->
+<!--- KNIT example-typed-errors-19.kt -->
 <!--- TEST assert -->
 
 :::tip Error accumulation and concurrency
@@ -870,7 +863,7 @@ fun example() {
   intError shouldBe Either.Left("problem".length)
 }
 -->
-<!--- KNIT example-typed-errors-21.kt -->
+<!--- KNIT example-typed-errors-20.kt -->
 <!--- TEST assert -->
 
 A very common pattern is using `withError` to "bridge" validation errors of sub-components into validation errors of the larger value.

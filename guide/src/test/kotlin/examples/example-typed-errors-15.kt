@@ -3,24 +3,26 @@ package arrow.website.examples.exampleTypedErrors15
 
 import arrow.core.Either
 import arrow.core.left
-import arrow.core.nonEmptyListOf
 import arrow.core.mapOrAccumulate
 import arrow.core.raise.either
-import arrow.core.raise.ensure
+import arrow.core.raise.ensureNotNull
 import arrow.core.raise.Raise
 import io.kotest.matchers.shouldBe
 
-data class NotEven(val i: Int)
+data class MyError(val message: String)
 
-fun Raise<NotEven>.isEven(i: Int): Int =
-  i.also { ensure(i % 2 == 0) { NotEven(i) } }
+fun Raise<MyError>.isEven(i: Int): Int =
+  ensureNotNull(i.takeIf { i % 2 == 0 }) { MyError("$i is not even") }
 
-fun isEven2(i: Int): Either<NotEven, Int> =
+fun isEven2(i: Int): Either<MyError, Int> =
   either { isEven(i) }
 
-val errors = nonEmptyListOf(NotEven(1), NotEven(3), NotEven(5), NotEven(7), NotEven(9)).left()
+operator fun MyError.plus(second: MyError): MyError =
+  MyError(message + ", ${second.message}")
+
+val error = MyError("1 is not even, 3 is not even, 5 is not even, 7 is not even, 9 is not even").left()
 
 fun example() {
-  (1..10).mapOrAccumulate { isEven(it) } shouldBe errors
-  (1..10).mapOrAccumulate { isEven2(it).bind() } shouldBe errors
+  (1..10).mapOrAccumulate(MyError::plus) { isEven(it) } shouldBe error
+  (1..10).mapOrAccumulate(MyError::plus) { isEven2(it).bind() } shouldBe error
 }
