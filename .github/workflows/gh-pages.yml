@@ -30,7 +30,7 @@ jobs:
         run: npm ci --prefer-offline --no-audit
 
       - name: Set up Gradle
-        uses: gradle/actions/setup-gradle@v3
+        uses: gradle/actions/setup-gradle@v4
 
       - name: Gradle build
         run: ./gradlew build
