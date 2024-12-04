@@ -1,7 +1,7 @@
 ---
 id: from-fp
 title: From other FP languages
-sidebar_position: 1
+sidebar_position: 2
 ---
 
 # From other FP languages

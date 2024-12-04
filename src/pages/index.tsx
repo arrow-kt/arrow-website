@@ -20,18 +20,10 @@ export default function Home(): JSX.Element {
     <Layout description={siteConfig.tagline}>
       <Hero
         title={parse(data.hero.title)}
+        subtitle={parse(data.hero.subtitle)}
         ctaList={data.hero.ctaList}
-        className={styles.verticalRhythm}
       />
       <main>
-        <section
-          className={`container text--center ${styles.textContainer} ${styles.verticalRhythm}`}>
-          <h1>Start learning now</h1>
-          <p>
-            Arrow is composed of different libraries that greatly improve your
-            developer experience using Kotlin
-          </p>
-        </section>
         <section
           className={`${styles.featuresContainer} ${styles.verticalRhythm}`}>
           {data.features.map((feature: LinkCardProps) => (
@@ -40,10 +32,17 @@ export default function Home(): JSX.Element {
         </section>
         <section
           className={`container text--center margin-bottom--lg ${styles.textContainer}`}>
+          <h1>Dive into the concepts behind Arrow</h1>
+        </section>
+        <section
+          className={`${styles.featuresContainer} ${styles.verticalRhythm}`}>
+          {data.divein.map((feature: LinkCardProps) => (
+            <LinkCard key={feature.title} {...feature} />
+          ))}
+        </section>
+        <section
+          className={`container text--center margin-bottom--lg ${styles.textContainer}`}>
           <h1>What the community says</h1>
-          <p>
-            Some opinions about Arrow from the community and its practitioners
-          </p>
         </section>
         <section
           className={`${styles.quotesContainer} ${styles.verticalRhythm}`}>

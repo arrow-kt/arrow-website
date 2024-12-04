@@ -1,6 +1,6 @@
 ---
 title: Example projects
-sidebar_position: 5
+sidebar_position: 9
 description: Bigger projects where the design guidelines are put into practice
 ---
 

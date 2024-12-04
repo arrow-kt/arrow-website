@@ -1,7 +1,5 @@
 import React, { memo } from 'react';
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-ignore
-import EnhancedChat from 'enhancedocs-chat';
+
 
 import { useThemeConfig, FooterLinkItem } from '@docusaurus/theme-common';
 import FooterLinks from '@theme/Footer/Links';
@@ -10,8 +8,6 @@ import FooterCopyright from '@theme/Footer/Copyright';
 
 import FooterLayout from '@site/src/theme/Footer/Layout';
 import IconLinks from '@site/src/theme/Footer/Links/IconLinks';
-
-import 'enhancedocs-chat/dist/style.css';
 
 // The name of the links section that will be used differently
 const externalLinksTitle = 'Links';
@@ -53,24 +49,6 @@ function Footer(): JSX.Element | null {
         }
         logo={logo && <FooterLogo logo={logo} />}
         copyright={copyright && <FooterCopyright copyright={copyright} />}
-      />
-
-      <EnhancedChat
-        config={{
-          projectId: '6442ad83351c12aba70adc49',
-          accessToken: 'pk_6c67a49f78a72d32727881bc42733cbb9da115b85cc1b3d2',
-        }}
-        theme={{
-          primaryColor: 'var(--ifm-color-primary)',
-          botName: 'Arrow AI Assistant',
-          logo: {
-            src: '/img/arrow-brand-icon.svg',
-            alt: 'Arrow logo',
-          },
-        }}
-        size="small"
-        shape="square"
-        icon="chat"
       />
     </>
   );

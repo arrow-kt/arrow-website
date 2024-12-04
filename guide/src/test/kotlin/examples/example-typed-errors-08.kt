@@ -11,11 +11,11 @@ import arrow.core.raise.fold
 import io.kotest.assertions.fail
 import io.kotest.matchers.shouldBe
 
-object UserNotFound
-data class User(val id: Long)
+object Problem
 
-val user: Either<UserNotFound, User> = User(1).right()
+val maybeTwo: Either<Problem, Int> = either { 2 }
+val maybeFive: Either<Problem, Int> = either { raise(Problem) }
 
-fun Raise<UserNotFound>.user(): User = User(1)
-
-fun Raise<UserNotFound>.res(): User = user.bind()
+val maybeSeven: Either<Problem, Int> = either {
+  maybeTwo.bind() + maybeFive.bind()
+}

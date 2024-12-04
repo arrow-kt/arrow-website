@@ -1,11 +1,11 @@
 ---
-title: SuspendApp
+title: Graceful shutdown
 ---
 
 import { useCurrentSidebarCategory } from '@docusaurus/theme-common';
 import DocCardList from '@theme/DocCardList';
 
-# <decorated-text icon={useCurrentSidebarCategory().customProps.icon} title={frontMatter.title} />
+# Graceful shutdown
 
 When building applications that require graceful shutdown it typically requires us to write a lot of platform-specific
 code. This library aims to solve that problem by leveraging Kotlin MPP using KotlinX Coroutines, and Structured Concurrency.
@@ -16,16 +16,9 @@ code. This library aims to solve that problem by leveraging Kotlin MPP using Kot
 
 :::
 
-:::note Currently supported targets 
+:::note Where to find it
 
-- JVM
-- MacOsX64 & MacosArm64
-- NodeJS
-- Windows (MingwX64)
-- Linux
-
-SuspendApp currently does not support any mobile or browser targets because it does not make sense to have such
-application behavior on such platforms. If you have a use-case for this please [open a ticket](https://github.com/arrow-kt/suspendapp/issues)!
+Graceful shutdowns are implemented in the `suspendapp` library, with further integration with other frameworks available in their own libraries. For historical reasons, the `suspendapp` library follows its own versioning scheme. Please check [Maven Central](https://central.sonatype.com/artifact/io.arrow-kt/suspendapp) for the latest release information.
 
 :::
 
@@ -128,6 +121,19 @@ You can find this example in the [repository](https://github.com/arrow-kt/suspen
 
 For more details on Kotlin Multiplatform configuration consult the [official documentation](https://kotlinlang.org/docs/multiplatform.html).
 Just `./gradlew build` the project, and launch the created binaries as shown in the sections belows.
+
+:::note Currently supported targets
+
+- JVM
+- MacOsX64 & MacosArm64
+- NodeJS
+- Windows (MingwX64)
+- Linux
+
+SuspendApp currently does not support any mobile or browser targets because it does not make sense to have such
+application behavior on such platforms. If you have a use-case for this please [open a ticket](https://github.com/arrow-kt/suspendapp/issues)!
+
+:::
 
 ### Node.js
 

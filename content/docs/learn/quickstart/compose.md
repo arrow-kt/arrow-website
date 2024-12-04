@@ -1,7 +1,7 @@
 ---
 id: compose
 title: Compose and UIs
-sidebar_position: 3
+sidebar_position: 4
 ---
 
 Arrow provides several features which are very interesting when developing 
@@ -11,7 +11,7 @@ similar functional flavor, such as Compose.
 :::info Example projects
 
 Projects using Compose and Arrow can be found in the
-[corresponding section](../../design/projects/).
+[corresponding section](../../projects/).
 
 :::
 

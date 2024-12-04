@@ -49,7 +49,6 @@ tasks {
   }
 
   withType<KotlinCompile>().configureEach {
-    compilerOptions.freeCompilerArgs.add("-Xcontext-receivers")
-    compilerOptions.freeCompilerArgs.add("-Xconsistent-data-class-copy-visibility")
+    compilerOptions.freeCompilerArgs.add("-Xconsistent-data-class-copy-visibility"  )
   }
 }

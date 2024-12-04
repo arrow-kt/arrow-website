@@ -8,6 +8,12 @@ description: Better aggregation over sequences
 Collectors help build complex computations over sequences of values,
 guaranteeing that those values are consumed only once.
 
+:::note Where to find it
+
+Collectors live in the `arrow-collectors` library. This library is still in experimental state, but no big changes are expected.
+
+:::
+
 Take for example the computation of the average of a list. You can 
 certainly write a simple version using the built-in functions,
 
@@ -59,3 +65,23 @@ Java's [`Collector`](https://docs.oracle.com/javase/8/docs/api/java/util/stream/
 and Haskell's [`foldl` library](https://hackage.haskell.org/package/foldl/docs/Control-Foldl.html).
 
 :::
+
+## Collectors, sequences and flows
+
+Given a sequence of values (in the most abstract sense of the term)
+you can broadly operate over them in two different ways: by _transforming_
+the sequence into a new one, or by _consuming_ the values into a single
+result. Sometimes we refer to the former group as _intermediate_ operations
+and the latter as _terminal_.
+
+- Operations like `map`, `filter` and `distinct` belong to the group
+  of transformations.
+- Operations like `sum` and `size` belong to the group of consumers.
+
+Collectors, as introducing in this section, focus on the second group.
+For transformation of sequences, Kotlin already provides two good tools:
+
+- [Sequences](https://kotlinlang.org/docs/sequences.html) describe
+  transformations which are performed in a lazy fashion.
+- [Flows](https://kotlinlang.org/docs/flow.html) are the counterpart when
+  the generation or transformation of values require `suspend` operations.

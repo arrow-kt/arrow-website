@@ -19,6 +19,12 @@ rules, even when the logic grows more complex.
 
 :::
 
+:::note Where to find it
+
+High-level concurrency is part of the `arrow-fx-coroutines` library.
+
+:::
+
 ## Independently, in parallel
 
 We often have independent computations that we want to perform in parallel.

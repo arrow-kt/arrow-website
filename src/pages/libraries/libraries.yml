@@ -3,15 +3,15 @@ hero:
   subtitle: Libraries that complement the Arrow ecosystem
 
 libraries:
-  - title: SuspendApp
-    href: https://arrow-kt.github.io/suspendapp/
-    icon: icon-coroutines.svg
-    body: Reason about resource-safety in the same way you reason about Structured Concurrency
-
   - title: Quiver
     href: https://cashapp.github.io/quiver/
     icon: icon-support.svg
     body: Additional functional programming idioms over and above what is available from Arrow.
+
+  - title: Akkurate
+    href: https://akkurate.dev/
+    icon: icon-events.svg
+    body: Expressive validation library for Kotlin
 
   - title: kotlinx-serialization-jsonpath 
     href: https://nomisrev.github.io/kotlinx-serialization-jsonpath/
@@ -27,21 +27,12 @@ libraries:
     href: https://github.com/sksamuel/tribune
     icon: icon-typed-errors.svg
     body: Toolset for creating simple parsers from raw input types, to properly validated parsed types
-  
-  - title: Akkurate
-    href: https://akkurate.dev/
-    icon: icon-events.svg
-    body: Expressive validation library for Kotlin
+
 
   - title: Parsus
     href: https://github.com/alllex/parsus
     icon: icon-quote.png
     body: Parser-combinators with Kotlin Coroutines
-
-  - title: KopyKat
-    href: https://kopyk.at/
-    icon: icon-immutable-data.svg
-    body: Little utilities for more pleasant immutable data in Kotlin
 
   - title: Inikio
     href: http://serranofp.com/inikio/

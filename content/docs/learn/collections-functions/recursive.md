@@ -18,6 +18,12 @@ even for not-so-big values.
 import io.kotest.matchers.shouldBe
 -->
 
+:::note Where to find it
+
+Support for memoized deep recursive functions is available in the `arrow-core` library. Integration with cache4k is provided in its own `arrow-cache4k` library.
+
+:::
+
 ## Stack-safe deep recursive functions
 
 Kotlin comes with a built-in [`DeepRecursiveFunction`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-deep-recursive-function/)

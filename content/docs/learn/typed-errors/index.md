@@ -32,4 +32,11 @@ you can find information about their Arrow counterparts
 We stongly recommend to read [From `Either` to `Raise`](from-either-to-raise.md) to understand
 how you can benefit from the typed errors DSL.
 
+:::note Where to find it
+
+Typed errors live in the `arrow-core` library, with high-arity versions of the
+`zipOrAccumulate` function available in `arrow-core-high-arity`.
+
+:::
+
 <DocCardList />

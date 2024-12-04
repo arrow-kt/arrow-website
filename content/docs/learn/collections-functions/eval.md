@@ -9,6 +9,12 @@ Using `Eval` you can control evaluation of a value or a computation that produce
 This is useful to delay potentially costly computations, and to prevent start
 overflows by carefully choosing when computations should take place.
 
+:::note Where to find it
+
+Control over evaluation lives in the `arrow-eval` library.
+
+:::
+
 You construct `Eval` instance by providing a function that computes a value, together with an _evaluation strategy_.
 There are three basic strategies:
 - `Eval.now` evaluates the function immediately.

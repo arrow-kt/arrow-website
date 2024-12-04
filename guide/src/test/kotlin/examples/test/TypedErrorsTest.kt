@@ -11,6 +11,10 @@ class TypedErrorsTest {
     arrow.website.examples.exampleTypedErrors03.example()
   }
 
+  @Test fun ExampleTypedErrors04() = runTest {
+    arrow.website.examples.exampleTypedErrors04.example()
+  }
+
   @Test fun ExampleTypedErrors05() = runTest {
     arrow.website.examples.exampleTypedErrors05.example()
   }
@@ -19,16 +23,16 @@ class TypedErrorsTest {
     arrow.website.examples.exampleTypedErrors06.example()
   }
 
-  @Test fun ExampleTypedErrors07() = runTest {
-    arrow.website.examples.exampleTypedErrors07.example()
+  @Test fun ExampleTypedErrors10() = runTest {
+    arrow.website.examples.exampleTypedErrors10.example()
   }
 
   @Test fun ExampleTypedErrors11() = runTest {
     arrow.website.examples.exampleTypedErrors11.example()
   }
 
-  @Test fun ExampleTypedErrors12() = runTest {
-    arrow.website.examples.exampleTypedErrors12.example()
+  @Test fun ExampleTypedErrors14() = runTest {
+    arrow.website.examples.exampleTypedErrors14.example()
   }
 
   @Test fun ExampleTypedErrors15() = runTest {
@@ -39,8 +43,8 @@ class TypedErrorsTest {
     arrow.website.examples.exampleTypedErrors16.example()
   }
 
-  @Test fun ExampleTypedErrors17() = runTest {
-    arrow.website.examples.exampleTypedErrors17.example()
+  @Test fun ExampleTypedErrors18() = runTest {
+    arrow.website.examples.exampleTypedErrors18.example()
   }
 
   @Test fun ExampleTypedErrors19() = runTest {
@@ -53,10 +57,6 @@ class TypedErrorsTest {
 
   @Test fun ExampleTypedErrors21() = runTest {
     arrow.website.examples.exampleTypedErrors21.example()
-  }
-
-  @Test fun ExampleTypedErrors22() = runTest {
-    arrow.website.examples.exampleTypedErrors22.example()
   }
 
 }
