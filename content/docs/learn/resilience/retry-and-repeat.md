@@ -37,6 +37,18 @@ steps involved in using `Schedule`.
      It returns the last internal state of the scheduling policy 
      or the error that happened running the action.
 
+:::tip Retrying only on certain exceptions
+
+Since version 2.0, you can use specify a subclass of `Throwable` as first type argument
+to `retry` to focus only on those exceptions. It is customary to leave the second type
+argument unspecified.
+
+```
+policy.retry<IllegalArgumentException, _> { ... }
+```
+
+:::
+
 ## Constructing a policy
 
 <!--- TEST_NAME RetryRepeat -->

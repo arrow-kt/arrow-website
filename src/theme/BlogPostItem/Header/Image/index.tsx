@@ -49,7 +49,7 @@ export default function BlogPostItemHeaderImage(): JSX.Element | null {
   const image = assets.image ?? frontMatter.image;
   const { link } = frontMatter as BlogPostFrontMatterExpanded;
 
-  if (!image) {
+  if (!image || frontMatter.no_image_on_post) {
     return null;
   }
 

@@ -94,6 +94,35 @@ One additional guarantee of STM is that the _whole_ transaction is executed
 atomically. That means we can modify several `TVar`s in one transaction,
 and we'll never observe an intermediate state.
 
+:::tip Delegated transactional properties
+
+From version 2.0, you can use [property delegation](https://kotlinlang.org/docs/delegated-properties.html)
+to access a `TVar`. That way you don't need explicit `read` or `write`,
+they become implicit in the syntax.
+
+<!--- INCLUDE
+import arrow.fx.stm.atomically
+import arrow.fx.stm.TVar
+import arrow.fx.stm.STM
+-->
+
+```kotlin
+fun STM.deposit(accVar: TVar<Int>, amount: Int): Unit {
+  var acc by accVar       // property delegation
+  val current = acc       // implicit 'read'
+  acc = current + amount  // implicit 'write'
+  // or simply, acc = acc + amount
+}
+```
+
+<!--- INCLUDE
+suspend fun example() { }
+-->
+<!--- KNIT example-stm-02.kt -->
+<!--- TEST assert -->
+
+:::
+
 ### Other STM data structures
 
 The following types are built upon `TVar`s and provided out of the box with Arrow:
@@ -173,7 +202,7 @@ suspend fun example() = coroutineScope {
   acc2.unsafeRead() shouldBe 350
 }
 ```
-<!--- KNIT example-stm-02.kt -->
+<!--- KNIT example-stm-03.kt -->
 <!--- TEST assert -->
 
 `retry` can be used to implement a lot of complex transactions,
@@ -226,7 +255,7 @@ suspend fun example() {
   atomically { transaction(v) } shouldBe 5
 }
 ```
-<!--- KNIT example-stm-03.kt -->
+<!--- KNIT example-stm-04.kt -->
 <!--- TEST assert -->
 
 ## Exceptions

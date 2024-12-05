@@ -1,9 +1,9 @@
 [versions]
 coroutines = "1.9.0"
-kotest = "5.9.1"
+kotest = "6.0.0.M1"
 kotlin = "2.1.0"
 knit = "0.5.0"
-arrow = "1.2.4"
+arrow = "2.0.0"
 ksp = "2.1.0-1.0.29"
 suspendapp = "0.4.0"
 kotlinKafka = "0.4.0"
@@ -30,6 +30,7 @@ arrow-optics-reflect = { module = "io.arrow-kt:arrow-optics-reflect", version.re
 arrow-optics-compose = { module = "io.arrow-kt:arrow-optics-compose", version.ref = "arrow" }
 arrow-collectors = { module = "io.arrow-kt:arrow-collectors", version.ref = "arrow" }
 arrow-eval = { module = "io.arrow-kt:arrow-eval", version.ref = "arrow" }
+arrow-functions = { module = "io.arrow-kt:arrow-functions", version.ref = "arrow" }
 arrow-cache4k = { module = "io.arrow-kt:arrow-cache4k", version.ref = "arrow" }
 kotlinx-knit = { module = "org.jetbrains.kotlinx:kotlinx-knit", version.ref = "knit" }
 kotlinx-knit-test = { module = "org.jetbrains.kotlinx:kotlinx-knit-test", version.ref = "knit" }

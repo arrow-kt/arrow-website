@@ -737,6 +737,7 @@ fun example() = either {
 In the example above we are providing one single function to operate on a sequence of elements.
 Another important and related scenario is accumulating different errors, but each of them coming from different computations.
 For example, you need to perform validation over the different fields of a form, and accumulate the errors, but each field has different constraints.
+Arrow supports two different styles for this task: using `zipOrAccumulate`, and using the `accumulate` scope.
 
 As a guiding example, let's consider information about a user, where the name shouldn't be empty and the age should be non-negative.
 
@@ -803,8 +804,12 @@ sealed interface UserProblem {
 -->
 
 If you want to gather as many validation problems as possible, you need to switch to _accumulation_, as done above with `mapOrAccumulate`.
-When each of the validations is different, you should reach to `zipOrAccumulate`: each of the arguments defines one independent validation,
-and the final block defines what to do when all the validations were successful, that is, when no problem was `raise`d during execution.
+Bu in this case we want to run independent validations of a different type, each for each field comprising the value.
+
+The first approach is to use `zipOrAccumulate`.
+In that case the first arguments define the different independent validations, often as a block of code.
+If all those validations succeed, that is, when no problem was `raise`d during execution of any of them,
+then the final block is executed. The result of the independent validations are made available, in case they are required.
 
 ```kotlin
 data class User private constructor(val name: String, val age: Int) {
@@ -822,11 +827,63 @@ data class User private constructor(val name: String, val age: Int) {
 With this change, the problems are correctly accumulated. Now we can present the user all the problems in the form at once.
 
 ```kotlin
+fun sample() {
+  User("", -1) shouldBe Left(nonEmptyListOf(UserProblem.EmptyName, UserProblem.NegativeAge(-1)))
+}
+```
+<!--- INCLUDE
+fun example() { }
+-->
+<!--- KNIT example-typed-errors-19.kt -->
+<!--- TEST assert -->
+
+The second approach involves delimiting a scope where accumulation should take place using `accumulate`. That way we bring into scope variations of most functions described above, like `ensureOrAccumulate` and `bindOrAccumulate`. One important difference, though, is that when the computation returns a value, you must use `by` (property delegation) instead of `=` to obtain the value.
+
+```
+accumulate {
+  val thing by checkThing().bindOrAccumulate()
+}
+```
+
+Translating the example above to this new style leads to the following code. We introduce no delegation because `ensureOrAccumulate` returns no interesting value.
+
+<!--- INCLUDE
+import arrow.core.Either
+import arrow.core.Either.Left
+import arrow.core.NonEmptyList
+import arrow.core.nonEmptyListOf
+import arrow.core.raise.either
+import arrow.core.raise.accumulate
+import io.kotest.matchers.shouldBe
+
+sealed interface UserProblem {
+  object EmptyName: UserProblem
+  data class NegativeAge(val age: Int): UserProblem
+}
+-->
+
+```kotlin
+data class User private constructor(val name: String, val age: Int) {
+  companion object {
+    operator fun invoke(name: String, age: Int): Either<NonEmptyList<UserProblem>, User> = either {
+      accumulate {
+        ensureOrAccumulate(name.isNotEmpty()) { UserProblem.EmptyName }
+        ensureOrAccumulate(age >= 0) { UserProblem.NegativeAge(age) }
+        User(name, age)
+      }
+    }
+  }
+}
+```
+
+The behavior is exactly the same as with `zipOrAccumulate`, that is, all potential errors are accumulated.
+
+```kotlin
 fun example() {
   User("", -1) shouldBe Left(nonEmptyListOf(UserProblem.EmptyName, UserProblem.NegativeAge(-1)))
 }
 ```
-<!--- KNIT example-typed-errors-19.kt -->
+<!--- KNIT example-typed-errors-20.kt -->
 <!--- TEST assert -->
 
 :::tip Error accumulation and concurrency
@@ -863,7 +920,7 @@ fun example() {
   intError shouldBe Either.Left("problem".length)
 }
 -->
-<!--- KNIT example-typed-errors-20.kt -->
+<!--- KNIT example-typed-errors-21.kt -->
 <!--- TEST assert -->
 
 A very common pattern is using `withError` to "bridge" validation errors of sub-components into validation errors of the larger value.

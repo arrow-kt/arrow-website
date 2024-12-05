@@ -19,4 +19,8 @@ class STMTest {
     arrow.website.examples.exampleStm03.example()
   }
 
+  @Test fun ExampleStm04() = runTest {
+    arrow.website.examples.exampleStm04.example()
+  }
+
 }
