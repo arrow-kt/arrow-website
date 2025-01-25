@@ -10,8 +10,9 @@ import kotlinx.coroutines.delay
 
 @ExperimentalTime
 suspend fun main(): Unit {
+  val maxFailuresUntilOpen = 2
   val circuitBreaker = CircuitBreaker(
-    openingStrategy = OpeningStrategy.Count(2),
+    openingStrategy = OpeningStrategy.Count(maxFailuresUntilOpen),
     resetTimeout = 2.seconds,
     exponentialBackoffFactor = 1.2,
     maxResetTimeout = 60.seconds,
@@ -21,12 +22,11 @@ suspend fun main(): Unit {
   circuitBreaker.protectOrThrow { "I am in Closed: ${circuitBreaker.state()}" }.also(::println)
 
   // simulate service getting overloaded
-  Either.catch { 
-    circuitBreaker.protectOrThrow { throw RuntimeException("Service overloaded") }
-  }.also(::println)
-  Either.catch {
-    circuitBreaker.protectOrThrow { throw RuntimeException("Service overloaded") }
-  }.also(::println)
+  for (i in 1 .. maxFailuresUntilOpen + 1) {
+    Either.catch {
+      circuitBreaker.protectOrThrow { throw RuntimeException("Service overloaded") }
+    }.also(::println)
+  }
   circuitBreaker.protectEither { }
    .also { println("I am Open and short-circuit with ${it}. ${circuitBreaker.state()}") }
 
