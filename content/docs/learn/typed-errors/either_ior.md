@@ -1,11 +1,11 @@
 ---
 id: either-and-ior
-title: Either & Ior
+title: Either & Ior (& Result)
 description: Use cases for Either and Ior.
 sidebar_position: 3
 ---
 
-# Either & Ior
+# Either & Ior (& Result)
 
 <!--- TEST_NAME EitherIorKnitTest -->
 
@@ -22,9 +22,7 @@ hold values that may be of type `E` or `A`.
 By convention, the type `E` represents _errors_ and the type `A` represents
 _success_. For example, `Either<DbError, User>` could be a good result type for
 a function that accesses a database and returns a `User` but may also fail
-with a `DbError`. Another point of view is that both types _extend_ the capabilities
-of the built-in [`Result`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-result/) 
-type, but no longer constraining the potential errors to be `Throwable`.
+with a `DbError`.
 
 `Either<E, A>` only admits these two possibilities: a `Left` holding a value of
 type `E` or a `Right` holding a value of type `A`. On the other hand, `Ior<E, A>`
@@ -33,12 +31,21 @@ that are considered successful but with some potential errors during execution;
 like a compiler that finishes successfully but has some warnings. Nevertheless,
 `Ior` is not used very often.
 
+These two types look very similar to the
+[`Result`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-result/)
+that comes with the standard library. However, `Result` is tighly coupled to the
+coroutine and exception machinery in the language. In fact, the "failure" case
+only admits `Throwable` errors. Even though the use case is more niche, the same
+API is also available for `Result` values.
+
 ## Using builders
 
 The preferred way to work with `Either` and `Ior` is to use [builders](../../typed-errors/working-with-typed-errors/#running-and-inspecting-results).
 Those start with a call to `either` or `ior` followed by a lambda; inside that
 block, we can access the uniform typed errors API with functions like `raise`,
-`ensure`, and `recover`.
+`ensure`, and `recover`. For the `Result` type the builder is called `result`,
+although in that case most errors come from
+[`runCatching`](https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/run-catching.html).
 
 ```kotlin
 import arrow.core.raise.either
@@ -64,17 +71,17 @@ represented by a receiver of type `Raise<E>`. Functions with that receiver can
 be transformed into a variety of types; not only `Either` and `Ior`, but also
 `Result`, `Option`, or a nullable type.
 
-A common scenario is to have an `Either` or `Ior` value that we want to execute
-as part of the block. That is, we want potential errors in those values to bubble
+A common scenario is to have a potentially erroneous value (not only limited
+to that of the block) that we want to _unwrap_.
+That is, we want potential errors in those values to bubble
 as errors of the entire block or keep the execution if the value represents
-success. In those cases, we need to call `.bind()` over the value of type `Either`
-or `Ior`.
+success. In those cases, we need to call `.bind()` over that value.
 
 ```mermaid
 graph LR;
   raise{{"Raise&lt;E&gt;.() -> A"}};
   other{{"Either&lt;E, A&gt; / Ior&lt;E, A&gt;"}};
-  raise-->|either / ior|other;
+  raise-->|either / ior / result|other;
   other-->|".bind()"|raise;
 ```
 
