@@ -2,7 +2,7 @@
 id: validation
 title: Validation
 description: Worked out example of validation.
-sidebar_position: 4
+sidebar_position: 2
 ---
 
 # Validation

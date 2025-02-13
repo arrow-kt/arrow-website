@@ -1,6 +1,6 @@
 ---
 title: From Either to Raise
-sidebar_position: 5
+sidebar_position: 3
 description: Learning about Raise from other FP ecosystems.
 ---
 
