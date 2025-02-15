@@ -2,11 +2,53 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://arrow-kt.io/community/blog/</id>
     <title>Arrow Blog</title>
-    <updated>2024-12-05T00:00:00.000Z</updated>
+    <updated>2025-02-15T00:00:00.000Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://arrow-kt.io/community/blog/"/>
     <subtitle>Arrow Blog</subtitle>
     <icon>https://arrow-kt.io/img/arrow-brand-icon.svg</icon>
+    <entry>
+        <title type="html"><![CDATA[Work on more integration]]></title>
+        <id>https://arrow-kt.io/community/blog/2025/02/15/integration/</id>
+        <link href="https://arrow-kt.io/community/blog/2025/02/15/integration/"/>
+        <updated>2025-02-15T00:00:00.000Z</updated>
+        <summary type="html"><![CDATA[Once Arrow 2.0 is finally released,]]></summary>
+        <content type="html"><![CDATA[<p>Once Arrow 2.0 is finally <a href="https://arrow-kt.io/community/blog/2024/12/05/arrow-2-0/" target="_blank" rel="noopener noreferrer">released</a>,
+a fair question is what are the new goals of the Arrow project.
+This post outlines some of the future plans of the maintainer team.
+Having said so, Arrow welcomes any contribution — code or ideas —
+that fits its goal of being a <em>companion in the Kotlin journey</em>.</p>
+<p>Apart from the any needed bugfixes, we aim to improve our integration
+with the broader Kotlin ecosystem, a line of work we started with
+the <a href="https://arrow-kt.io/learn/quickstart/compose/#updating-the-model" target="_blank" rel="noopener noreferrer">optics module for Compose</a>.
+One line of work already in progress is better integration with Ktor.
+We would really appreciate any input on what integrations you miss
+as Arrow user.</p>
+<p>At this point, the <a href="https://github.com/arrow-kt/" target="_blank" rel="noopener noreferrer"><code>arrow-kt</code> organization</a>
+has more than 50 projects. Of those, only a handful have graduated
+from a proof-of-concept into part of Arrow. To make this status
+more clear, the <code>arrow-integrations</code> and SuspendApp projects are
+now hosted in the main <code>arrow</code> repository. This means that those
+projects become part of the regular Arrow release schedule, instead
+of the current model in which some libraries may be outdated for a
+few weeks. Furthermore, it removes some burden from maintainers, which
+now only need to care about one single repository.</p>
+<p>Speaking of maintainance, in the past weeks we have been paying some
+of the debt in our build files, that had grown too wild.
+Technically, we have moved from separate <a href="https://github.com/arrow-kt/arrow-gradle-config" target="_blank" rel="noopener noreferrer"><code>arrow-gradle-config</code></a>
+into a convention plug-in withing the same repository.
+This process has revealed some lack of uniformity between the
+different projects, especially with respect to supported platforms.
+From now on, all Arrow libraries support Native targets in
+<a href="https://kotlinlang.org/docs/native-target-support.html" target="_blank" rel="noopener noreferrer">tiers 1 and 2</a>,
+plus Windows + MinGW.</p>
+<p>From the point of view of Arrow users, the only visible part of
+this transition is that the next version of Arrow integration modules
+and SuspendApp should be 2.1.0, instead of 0.x. Note that no breaking
+changes are expected, regardless of the major version bump.</p>]]></content>
+        <category label="core" term="core"/>
+        <category label="articles" term="articles"/>
+    </entry>
     <entry>
         <title type="html"><![CDATA[Arrow 2.0 release]]></title>
         <id>https://arrow-kt.io/community/blog/2024/12/05/arrow-2-0/</id>
@@ -460,16 +502,5 @@ as well as the most succinct with the least lines of codes.</p>
         <category label="optics" term="optics"/>
         <category label="analysis" term="analysis"/>
         <category label="videos" term="videos"/>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[Arrow put on a big show at Kotlin Dev Day]]></title>
-        <id>https://arrow-kt.io/community/blog/2022/06/14/arrow-kotlin-dev-day/</id>
-        <link href="https://arrow-kt.io/community/blog/2022/06/14/arrow-kotlin-dev-day/"/>
-        <updated>2022-06-14T00:00:00.000Z</updated>
-        <summary type="html"><![CDATA[A recap of the attention Arrow received at Kotlin Dev Day.]]></summary>
-        <content type="html"><![CDATA[<p>A recap of the attention Arrow received at Kotlin Dev Day.</p>]]></content>
-        <category label="core" term="core"/>
-        <category label="fx" term="fx"/>
-        <category label="articles" term="articles"/>
     </entry>
 </feed>
