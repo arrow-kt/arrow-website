@@ -1,6 +1,7 @@
 ---
+title: Your own error wrappers
 description: Writing your own DSLs with Raise.
-sidebar_position: 6
+sidebar_position: 7
 ---
 
 # Creating your own error wrappers

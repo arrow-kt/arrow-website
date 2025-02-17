@@ -4,14 +4,24 @@ hero:
 
 libraries:
   - title: Quiver
-    href: https://cashapp.github.io/quiver/
+    href: https://block.github.io/quiver/
     icon: icon-support.svg
-    body: Additional functional programming idioms over and above what is available from Arrow.
+    body: Additional functional programming idioms over and above what is available from Arrow
+
+  - title: OpenSavvy
+    href: https://opensavvy.dev/libraries/index.html
+    icon: icon-generic-4.svg
+    body: Open source utilities for unified software architecture
 
   - title: Akkurate
     href: https://akkurate.dev/
     icon: icon-events.svg
     body: Expressive validation library for Kotlin
+
+  - title: Tribune
+    href: https://github.com/sksamuel/tribune
+    icon: icon-typed-errors.svg
+    body: Toolset for creating simple parsers from raw input types, to properly validated parsed types
 
   - title: kotlinx-serialization-jsonpath 
     href: https://nomisrev.github.io/kotlinx-serialization-jsonpath/
@@ -22,12 +32,6 @@ libraries:
     href: https://github.com/sksamuel/hoplite
     icon: icon-quickstart.svg
     body: Boilerplate-free Kotlin config library for loading configuration files as data classes
-
-  - title: Tribune
-    href: https://github.com/sksamuel/tribune
-    icon: icon-typed-errors.svg
-    body: Toolset for creating simple parsers from raw input types, to properly validated parsed types
-
 
   - title: Parsus
     href: https://github.com/alllex/parsus
