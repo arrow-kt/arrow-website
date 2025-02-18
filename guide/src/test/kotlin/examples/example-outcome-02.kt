@@ -8,8 +8,8 @@ import opensavvy.state.progressive.*
 fun <E, A> printProgress(po: ProgressiveOutcome<E, A>) {
     val (current, progress) = po
     when {
+        current is Outcome.Success -> println("current value is ${current.value}!")
         progress is Progress.Loading -> println("loading...")
-        current is Outcome.Success -> println("done!")
-        current is Outcome.Failure -> println("problem ${current.failure}")
+        progress is Progress.Done -> println("no value found :(")
     }
 }
