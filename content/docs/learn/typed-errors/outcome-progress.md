@@ -44,7 +44,7 @@ about how the corresponding task is evolving.
 
 :::tip Success does not mean stopped
 
-The value `Success(5, Progress.loading(0.4))` is perfectly valid,
+The value `Success(5, loading(0.4))` is perfectly valid,
 and describes a point in which:
 
 - The last successful value of a task is `5`,
