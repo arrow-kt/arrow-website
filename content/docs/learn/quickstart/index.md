@@ -11,16 +11,16 @@ import TabItem from '@theme/TabItem';
 
 # <decorated-text icon={frontMatter.sidebar_custom_props.icon}>Quickstart</decorated-text>
 
-Arrow aims to be the _perfect companion_ to your Kotlin journey. That means it focuses on tasks most developers dealt with, like modifying data or managing resources. Given these aims, Arrow strives to provide _idiomatic_ solutions and integrate with core Kotlin concepts such as coroutines.
+Arrow aims to be the _perfect companion_ to your Kotlin journey. That means it focuses on tasks most developers deal with, like modifying data or managing resources. Given these aims, Arrow strives to provide _idiomatic_ solutions and integrate with core Kotlin concepts such as coroutines.
 
 Arrow is inspired by the great work made in other programming language communities, especially from _functional_, _data-oriented_ and _concurrent_ programming. This doesn't mean you need to know any of those ideas to use the libraries; Arrow exposes these concepts in ways that do not feel alien to Kotlin programmers.
 
 :::info Where to start?
 
 - Look at the [list of libraries](../quickstart/libs) and see how Arrow can help in your project
-- Our [summary](../summary) is designed to help you find your way in the Arrow ecosystem.
-- Look at some [example projects](../projects) using Arrow in both frontend and backend.
-- Learn about [design and architecture](../design) using functional and data-oriented programming concepts.
+- Our [summary](../summary) is designed to help you find your way in the Arrow ecosystem
+- Look at some [example projects](../projects) using Arrow in both frontend and backend
+- Learn about [design and architecture](../design) using functional and data-oriented programming concepts
 
 :::
 
@@ -117,7 +117,7 @@ dependencies {
 #### Using version catalogs
 
 [Version catalogs](https://docs.gradle.org/current/userguide/platforms.html)
-provide centralized management of versions. This is especially interesting when
+provide centralized management of versions. This is especially helpful when
 your Gradle build has several subprojects.
 
 <Tabs groupId="build">

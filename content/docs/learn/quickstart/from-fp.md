@@ -156,7 +156,7 @@ comparing the different approaches for effect handling.
 
 Both Scala and Haskell allow abstractions that operate at the level of
 type constructors. For example, a function like `flatMap` which always has
-the form `F<A>.flatMap(next: (A) -> F<B>): F<B>` is part of an interface /
+the form of `F<A>.flatMap(next: (A) -> F<B>): F<B>` is a part of an interface /
 type class called `Monad`. Kotlin doesn't provide this feature, but Arrow
 still follows the naming convention for consistency. The following list
 relates the names to abstractions in [Cats](https://typelevel.org/cats/)
