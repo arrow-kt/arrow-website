@@ -36,6 +36,8 @@ dependencies {
   testImplementation(libs.suspendapp)
   testImplementation(libs.kafka.kotlin)
   testImplementation(libs.cache4k)
+  testImplementation(libs.quiver)
+  testImplementation(libs.pedestal.state)
   ksp(libs.arrow.optics.plugin)
 }
 
