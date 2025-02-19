@@ -36,7 +36,7 @@ taking as arguments the _values_ from the current state. Updating the state
 is also explicitly marked, and often separated in a `ViewModel`.
 
 As a consequence, Arrow and Compose make great dancing partners. Below we
-discuss a few feature which we think are an immediately gain for Android
+discuss a few features which we think are an immediate gain for Android
 (and with Compose Multiplatform, other UI) developers. In the same vein, our
 [design](../../design/) section readily applies to projects using Compose. 
 
@@ -87,7 +87,7 @@ different states.
 Although every application is unique, a common scenario in interactive
 applications involve having a "success state" and an "error state".
 For example, correctly loading the user data, or encountering a problem
-with connection or authentication. Instead of rolling your own types,
+with connection or authentication. Instead of rolling out your own types,
 Arrow (and our sibling library [Quiver](https://cashapp.github.io/quiver/))
 provide out-of-the-box solutions:
 

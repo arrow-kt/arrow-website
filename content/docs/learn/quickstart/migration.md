@@ -7,7 +7,7 @@ sidebar_position: 5
 
 # Migration to Arrow 1.2.0
 
-Arrow 1.2.0-RC is a big step in Arrow and marks the last minor version in the 1.x series, and serves as a long term version to over a graceful transition to Arrow 2.0.
+Arrow 1.2.0-RC is a big step in Arrow and marks the last minor version in the 1.x series, and serves as a long term version until a graceful transition to Arrow 2.0.
 All non-deprecated code in 1.2.0-RC is source compatible with 2.0.0, so you can slowly and gracefully migrate your codebase to Arrow 2.0.0 as soon as you want.
 
 Arrow includes a lot of improvements and changes in Arrow 1.2.0-RC, all based on the feedback we've received from the community, and experience from teaching Functional Programming, building applications and knowledge from the other languages and communities.
@@ -18,7 +18,7 @@ If you have any issues or questions, feel free to contact the Arrow maintainers 
 
 ## Either DSL, Effect & EffectScope
 
-Arrow 1.0.0 introduced DSLs to work over functional data types such as `Either`, and enabled several DSLs to work with _typed errors_ in convenient ways.
+Arrow 1.0.0 introduced DSLs to operate on functional data types such as `Either`, and enabled several DSLs to work with _typed errors_ in convenient ways.
 These DSLs were built on top of `Effect` and `EffectScope`, from the `arrow.core.continuations` package and had several issues, and were deprecated in Arrow 1.2.0-RC.
 The biggest issue was that they were not compatible with Kotlin's `suspend` functions, and you needed to explicitly differentiate between `suspend` and `non-suspend` functions.
 
@@ -74,13 +74,13 @@ You can track the progress in [rewrite-arrow](https://github.com/arrow-kt/rewrit
 [This migration script](https://gist.github.com/nomisRev/e01ddc354c84b8b626c23d024706b916#file-migrate-main-kts) attempts to automatically migrate `arrow.core.computations.*` and `arrow.core.continuations.*` on a best effort to `arrow.core.raise.*`.
 It has been tested on several real-life projects with 100% success, being able to automatically migrate the entire codebase.
 
-The run this `kts` script you need `kotlinc` install on your machine.
+To run this `kts` script you need `kotlinc` installed on your machine.
 The official documentation on how to install [`kotlinc`](https://kotlinlang.org/docs/command-line.html).
 
 Some methods like `ensure` in the DSL became top-level, and `fold` if you're using `Effect` or `EagerEffect`.
 These new _top-level imports_ cannot be automatically migrated, and there are two ways of dealing with the necessary imports.
 
-There is two ways to use this script for migration:
+There are two ways to use this script for migration:
  - Recommended: automatic _imports_ handling, adds too many imports and uses IntelliJ's _optimise imports_
  - Manual imports, doesn't add import for `fold`, and `ensure` and requires manually importing them on a usage basis.
 
@@ -104,7 +104,7 @@ This should remove all _unused imports_ this might also affect other unrelated i
 If you don't want to rely on IntelliJ's _optimise imports_ you can still use the migration script to do 99,99% of the work,
 except import `ensure` (and `fold` for `Effect`/`EagerEffect`).
 
-Easiest way to fix the imports is run `./gradlew build` and add missing imports in files that fail to compile.
+Easiest way to fix the imports is to run `./gradlew build` and add missing imports in files that fail to compile.
 
 Thank you for using Arrow, and your support. I hope this script was able to simplify your migration process to 2.0.0
 
@@ -121,7 +121,7 @@ We will also provide [OpenRewrite](https://docs.openrewrite.org) recipes through
 
 All `traverse` functionality has been deprecated in favor of Kotlin's `map` function, and it _should_ be possible to migrate automatically using Kotlin & IntelliJ's `ReplaceWith`.
 Let's look at a simple example to illustrate the difference between `traverse`, and the _new_ resulting code. We'll be using `Either` in this example, but it should be the same for any other collection type that has a `traverse` method.
-The rationale behind this change is while `traverse` is a very well known method within the FP community, it's not as well known outside of it.
+The rationale behind this change is that while `traverse` is a very well known method within the FP community, it's not as well known outside of it.
 Using `map` is more familiar to most developers, and using `bind` gives a more consistent experience with the rest of the DSL. Additionally, when working over `Raise<E>` the `bind` method would disappear and `map === traverse`.
 
 :::warning accumulating errors
@@ -150,7 +150,7 @@ val new: Either<String, List<Int>> = either {
 
 ### Zip
 
-In similar fashion to `traverse`, all `zip` methods have been deprecated in favor of the DSL, and it _should_ be possible to migrate automatically using Kotlin & IntelliJ's `ReplaceWith`.
+In a similar fashion to `traverse`, all `zip` methods have been deprecated in favor of the DSL, and it _should_ be possible to migrate automatically using Kotlin & IntelliJ's `ReplaceWith`.
 The rationale behind deprecating `zip` was that it's behavior is now duplicated by the `bind` method, and since the DSLs are now fully `inline` it makes `zip` redundant.
 Working with `zip` requires dealing with the _arity-n_ problem, which means that the `zip` method is only defined for `9 arguments` in Arrow but can be defined for any `n` number of arguments.
 The DSL, and `bind`, don't suffer from this problem, and it's possible to use `bind` with any number of arguments thus getting rid of this problem. See [this question on StackOverflow](https://stackoverflow.com/questions/72782045/arrow-validation-more-then-10-fields/72782420#72782420). 
@@ -186,7 +186,7 @@ val new2 : Either<String, Int> = either {
 ## Validated & Either
 
 In Arrow 1.2.0-RC we've deprecated `Validated` in favor of `Either`, and `ValidatedNel` in favor of `EitherNel`.
-Rationale was that `Either` and `Validated` offer the same abstraction of _either_ an error of type `E` or a value of type `A`.
+Rationale was that `Either` and `Validated` offer the same abstraction of _either_ as an error of type `E` or a value of type `A`.
 The main reason is that `zip` and `traverse` behave differently in these data types. Where `Validated` allows _accumulating errors_ using `zip` and `traverse`, `Either` short-circuits on the first error.
 
 This behavior can be bridged by concrete APIs in the new `Raise` DSL whilst supporting **both** working over `E` and `NonEmptyList<E>` in singular APIs.
@@ -457,7 +457,7 @@ public inline fun <A, B, C> Ior<A, B>.crosswalk(fa: (B) -> Iterable<C>): List<Io
     )
 ```
 
-And an example that use `crosswalk`:
+And an example that uses `crosswalk`:
 
 ```kotlin
 fun deprecatedCrosswalk() {
@@ -511,7 +511,7 @@ public inline fun <A, B, C> Ior<A, B>.traverse(fa: (B) -> Option<C>): Option<Ior
   }
 ```
 
-And an example that use `traverse`:
+And an example that uses `traverse`:
 
 ```kotlin
 fun evenOpt(i: Int): Option<Int> = if(i % 2 == 0) i.some() else None
