@@ -10,7 +10,7 @@ sidebar_position: 1
 _Typed errors_ refer to a technique from functional programming in which we
 make _explicit_ in the signature (or _type_) the potential errors that may
 arise during the execution of a piece of code. This is not the case when using
-exceptions, which any documentation is not taken into account by the compiler,
+exceptions, where any documentation that we might provide is not taken into account by the compiler,
 leading to a defensive mode of error handling.
 
 :::info Media resources
@@ -36,7 +36,7 @@ In the rest of the documentation we often refer to a few concepts related to err
 
 :::note Logical Failure vs. Real exceptions
 
-We use the term _logical failure_ to describe a situation not deemed as successful in your domain, but that it's still within the realms of that domain.
+We use the term _logical failure_ to describe a situation not deemed as successful in your domain, but that is still within the realms of that domain.
 For example, if you are implementing a repository for users, not finding a user for a certain query is a logical failure.
 
 In contrast to logical failures we have _real exceptions_, which are problems, usually technical, which are _truly exceptional_ and are thus not part of our domain.
@@ -55,7 +55,7 @@ or additionally describes the range of problems that may arise.
 :::
 
 There are two main approaches to representing types in the signature of a function.
-Fortunately, Arrow provides a _uniform_ API to working with all of them, which is described in the rest of this section.
+Fortunately, Arrow provides a _uniform_ API for working with all of them, which is described in the rest of this section.
 
 The first approach is using a _wrapper type_, in which the return type of your function
 is nested within a larger type that provides the choice of error. 
@@ -105,7 +105,7 @@ rest of choices outlined above.
 
 ## Defining the success / happy path
 
-The code below shows how we define a function which _successfully_ returns a `User`.
+The code below shows how we can define a function which _successfully_ returns a `User`.
 
 <!--- INCLUDE
 import arrow.core.Either
@@ -157,10 +157,10 @@ fun Raise<UserNotFound>.error(): User = raise(UserNotFound)
 <!--- KNIT example-typed-errors-02.kt -->
 
 Besides `raise` or `left`, several DSLs are also available to check invariants.
-`either { }` and `Raise` offer `ensure` and `ensureNotNull`, in spirit with `require` and `requireNotNull` from the Kotlin Std.
+`either { }` and `Raise` offer `ensure` and `ensureNotNull`, mirroring the style of `require` and `requireNotNull` from the Kotlin Std Lib.
 Instead of throwing an exception, they result in a _logical failure_ with the given error if the predicate is not satisfied.
 
-`ensure` takes a _predicate_ and a _lazy_ `UserNotFound` value. When the _predicate_ is not matched, the _computation_ will result in a _logical failure_ of `UserNotFound`.
+`ensure` takes a _predicate_ and a _lazy_ evaluated `UserNotFound` value. When the _predicate_ is not matched, the _computation_ will result in a _logical failure_ of `UserNotFound`.
 In the function below, we show how we can use `ensure` to check if a given `User` has a valid id, and if not, we return a _logical failure_ of `UserNotFound`.
 
 <!--- INCLUDE
@@ -201,7 +201,7 @@ fun example() {
 <!--- KNIT example-typed-errors-03.kt -->
 <!--- TEST assert -->
 
-Without context receivers, these functions look pretty different depending on if we use `Raise` or `Either`. This is because we sacrifice our _extension receiver_ for `Raise`.
+Without context receivers, these functions look pretty different depending on whether we use `Raise` or `Either`. This is because we sacrifice our _extension receiver_ for `Raise`.
 And thus, the `Raise` based computation cannot be an extension function on `User`.
 In the future, context parameters should allow us to define the function as follows:
 
@@ -211,7 +211,7 @@ fun User.isValid(): Unit =
   ensure(id > 0) { UserNotFound("User without a valid id: $id") }
 ```
 
-`ensureNotNull` takes a _nullable value_ and a _lazy_ `UserNotFound` value. When the value is null, the _computation_ will result in a _logical failure_ of `UserNotFound`.
+`ensureNotNull` takes a _nullable value_ and a _lazy_ evaluated `UserNotFound` value. When the value is null, the _computation_ will result in a _logical failure_ of `UserNotFound`.
 Otherwise, the value will be _smart-casted_ to non-null, and you can operate on it without checking nullability.
 In the function below, we show how we can use `ensureNotNull` to check if a given `User` is non-null, and if not, we return a _logical failure_ of `UserNotFound`.
 
@@ -343,7 +343,7 @@ val user: Either<UserNotFound, User> = User(1).right()
 fun Raise<UserNotFound>.user(): User = User(1)
 -->
 
-The converse direction, turning a value of a type like `Either` into a
+The opposite conversion, turning a value of a type like `Either` into a
 computation with `Raise`, is achieved via the `.bind()` extension function.
 
 ```kotlin
@@ -353,7 +353,7 @@ fun Raise<UserNotFound>.res(): User = user.bind()
 
 In fact, to define a result with a wrapper type, we recommend to use one
 of the runners (`either`, `ior`, et cetera), and use `.bind()` to "inject"
-any sub-computation that may be required, or `raise` to describe a logical
+any sub-computation that might be required, or `raise` to describe a logical
 failure. We often refer to this approach as _using the `Raise` DSL_.
 
 <!--- INCLUDE
@@ -390,17 +390,17 @@ graph LR;
 
 :::info Don't forget your binds!
 
-The [Arrow Detekt Rules](https://github.com/woltapp/arrow-detekt-rules) project has a set of rules to _detekt_ you call `bind` on every `Either` value.
+The [Arrow Detekt Rules](https://github.com/woltapp/arrow-detekt-rules) project has a set of rules to _detekt_ that you call `bind` on every `Either` value.
 
 :::
 
 :::info Nested error types
 
-Sometimes you may need to have one error type inside another one, 
+Sometimes you might need to have one error type nested inside another one, 
 like `Either<Problem, Int?>`. The rule of thumb in that case is to nest the
 runner functions (`either`, `option`, `nullable`) in the same order as they
-appear in the type. When you call `raise`, the type of the error given as
-argument is used to "select" the appropriate type to fall back to.
+appear in the type. When you call `raise`, the type of the error given as 
+an argument is used to "select" the appropriate type to fall back to.
 
 <!--- INCLUDE
 import arrow.core.Either
@@ -434,14 +434,14 @@ As projects grow in size, raised errors propagate through the call stack. To mak
 
 ## Recovering from typed errors
 
-We've already hinted this distinction above, but with working with type errors it's important to distinguish between two kinds of _problems_ that may arise:
+We've already hinted at this distinction above, but when working with type errors it's important to distinguish between two kinds of _problems_ that may arise:
 
-- _Logical failures_ indicate problems within the domain, and which should be handled as part of the usual domain logic. For example, trying to find a user which doesn't exist, or validating input data.
+- _Logical failures_ indicate problems within the domain, and those should be handled as part of the usual domain logic. For example, trying to find a user which doesn't exist, or validating input data.
 - _Exceptions_ indicate problems which affect the system's ability to continue working. For example, if the database connection breaks this is something outside your domain logic.
 
 Historically exceptions have been used for both cases. For example, throwing a `UserNotValidException` when the input data was wrong.
 We advocate for making this distinction clear in the types, and leave exceptions only for exceptional cases.
-However, we're also aware of the historical baggage, so we provide tools to transforms those exceptions which shouldn't have been exceptions into typed errors.
+However, we're also aware of the historical baggage, so we provide tools to transforms those exceptions which shouldn't have been exceptions in the first place into typed errors.
 
 ### From logical failures
 
@@ -490,7 +490,7 @@ suspend fun example() {
 <!--- KNIT example-typed-errors-10.kt -->
 <!--- TEST assert -->
 
-Default to `null` is typically not desired since we've effectively swallowed our _logical failure_ and ignored our error. If that was desirable, we could've used nullable types initially.
+Defaulting to `null` is typically not desired since we've effectively swallowed our _logical failure_ and ignored our error. If that was desirable, we could've used nullable types in the first place.
 When encountering a _logical failure_ and not being able to provide a proper fallback value, we typically want to execute another operation that might fail with `OtherError`.
 As a result, our `Either` value doesn't get _unwrapped_ as it did with `getOrElse`, since a different _logical failure_ might've occurred.
 
@@ -534,7 +534,7 @@ fun example() {
 <!--- KNIT example-typed-errors-11.kt -->
 <!--- TEST assert -->
 
-The type system now tracks that a new error of `OtherError` might have occurred, but we recovered from any possible errors of `UserNotFound`. This is useful across application layers or in the service layer, where we might want to `recover` from a `DatabaseError` with a `NetworkError` when we want to load data from the network when a database operation failed.
+The type system now tracks that a new error of `OtherError` might have occurred, but we've recovered from any possible errors of `UserNotFound`. This is useful across application layers or in the service layer, where we might want to `recover` from a `DatabaseError` with a `NetworkError` when we want to load data from the network when a database operation failed.
 To achieve the same with the `Raise` DSL, we need to be inside the context of `Raise<OtherError>` to `raise` it.
 
 <!--- INCLUDE

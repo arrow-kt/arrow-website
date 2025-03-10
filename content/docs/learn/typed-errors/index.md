@@ -14,9 +14,9 @@ arise during the execution of a piece of code. Arrow provides two different
 
 1. The `Raise` DSL uses an extension receiver which represents a _context_
    in which errors of a certain type may be raised. This approach often results
-   in more idiomatic code.
-2. Using _wrapper types_, like `Either`, `Option`, or `Result`, we indicate
-   that a computation may end with a logical error by decorating the return
+   in a more idiomatic code.
+By using _wrapper types_, like `Either`, `Option`, or `Result`, we indicate
+   that a computation might end with a logical error which we specify in the return
    type.
 
 Regardless of your choice, Arrow provides a uniform API, and simple ways to
