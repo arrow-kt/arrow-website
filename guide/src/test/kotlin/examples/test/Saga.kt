@@ -11,4 +11,8 @@ class Saga {
     arrow.website.examples.exampleSaga01.example()
   }
 
+  @Test fun ExampleSaga02() = runTest {
+    arrow.website.examples.exampleSaga02.example()
+  }
+
 }
