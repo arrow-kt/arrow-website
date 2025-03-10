@@ -105,6 +105,51 @@ suspend fun example() {
 <!--- KNIT example-saga-01.kt -->
 <!--- TEST assert -->
 
+In the example above the failure of a step is signalled by throwing an
+exception. `Saga` also integrates with Arrow's
+[`Raise`](https://arrow-kt.io/learn/typed-errors/working-with-typed-errors/).
+
+<!--- INCLUDE
+import arrow.core.Either
+import arrow.core.left
+import arrow.core.raise.*
+import arrow.atomic.AtomicInt
+import arrow.resilience.*
+
+val INITIAL_VALUE = 1
+
+object Counter {
+  val value = AtomicInt(INITIAL_VALUE)
+
+  fun increment() {
+    value.incrementAndGet()
+  }
+
+  fun decrement() {
+    value.decrementAndGet()
+  }
+}
+
+val PROBLEM = "problem detected!"
+-->
+
+```kotlin
+fun Raise<String>.transaction(): Saga<Int> = saga {
+  saga({ Counter.increment() }) { Counter.decrement() }
+  saga({ raise(PROBLEM) }) {}
+  Counter.value.get()
+}
+
+suspend fun example() {
+  // perform the transaction
+  val result = either { transaction().transact() }
+  result shouldBe PROBLEM.left()
+  Counter.value.get() shouldBe INITIAL_VALUE
+}
+```
+<!--- KNIT example-saga-02.kt -->
+<!--- TEST assert -->
+
 :::info Saga and [Resource](../../coroutines/resource-safety/)
 
 `SagaScope` has many parallels with `ResourceScope`: both ensure that some
