@@ -562,7 +562,7 @@ suspend fun Raise<OtherError>.recovery(): User =
 
 :::tip DSLs everywhere
 Since recovery for both `Either` and `Raise` is DSL based, you can also call `bind` or `raise` from both.
-This allows seamless interop between both types when creating programs that can fail and recovering from them.
+This allows for a seamless interop between both types when creating programs that can fail and recovering from them.
 :::
 
 ### From exceptions
@@ -579,7 +579,7 @@ The `catch` DSL allows us to wrap foreign functions and capture any `Throwable` 
 It requires two functions, or lambdas, as arguments: One for wrapping our _foreign code_ and another for resolving the captured `Throwable` or `T : Throwable`. In this case, instead of providing a fallback value, we `raise` a _logical failure_.
 
 We expect `SQLException` since we only _expect_ it to be thrown and rethrow any other `Throwable`.
-We can then operate on the captured `SQLException` to check if our insertion failed with a unique violation, and, in that case, we turn it into a `UserAlreadyExists` _logical failure_.
+We can then operate on a captured `SQLException` to check if our insertion failed with a unique violation, and, in that case, to turn it into a `UserAlreadyExists` _logical failure_.
 
 <!--- INCLUDE
 import arrow.core.Either
@@ -651,7 +651,7 @@ If we want to accumulate all the errors, we can use `mapOrAccumulate` on `Iterab
 
 :::info Non-empty lists
 
-Since you have potentially more than one failure, the error type in `Either` must be some sort of list.
+Since you might potentially have more than one failure, the error type in `Either` must be some sort of list.
 However, we know that if we are not in the happy path, then _at least one_ error must have occurred.
 Arrow makes this fact explicit by making the return type of `mapOrAccumulate` a `NonEmptyList`, or `Nel` for short.
 
@@ -777,7 +777,7 @@ data class User private constructor(val name: String, val age: Int) {
 }
 ```
 
-Alas, that implementation stops after the first error. We can see this if we try to validate a `User` with both an empty name and a wrong age.
+Alas, that implementation short-circuits after encountering the first error. We can see this if we try to validate a `User` with both an empty name and a wrong age.
 
 ```kotlin
 fun example() {
@@ -809,7 +809,7 @@ Bu in this case we want to run independent validations of a different type, each
 The first approach is to use `zipOrAccumulate`.
 In that case the first arguments define the different independent validations, often as a block of code.
 If all those validations succeed, that is, when no problem was `raise`d during execution of any of them,
-then the final block is executed. The result of the independent validations are made available, in case they are required.
+then the final block is executed. The result of independent validations is made available, in case they are required.
 
 ```kotlin
 data class User private constructor(val name: String, val age: Int) {
@@ -824,7 +824,7 @@ data class User private constructor(val name: String, val age: Int) {
 }
 ```
 
-With this change, the problems are correctly accumulated. Now we can present the user all the problems in the form at once.
+With this change, the problems are correctly accumulated. Now we can notify the user about all the problems found in the form at once.
 
 ```kotlin
 fun sample() {
@@ -888,7 +888,7 @@ fun example() {
 
 :::tip Error accumulation and concurrency
 
-In addition to accumulating errors, you may want to perform each of the tasks within `zipOrAccumulate` or `mapOrAccumulate` in parallel.
+In addition to accumulating errors, you might want to perform each of the tasks within `zipOrAccumulate` or `mapOrAccumulate` in parallel.
 Arrow Fx features [`parZipOrAccumulate` and `parMapOrAccumulate`](../../coroutines/parallel/#accumulating-typed-errors-in-parallel) to cover
 those cases, in addition to [`parZip` and `parMap`](../../coroutines/parallel/#integration-with-typed-errors)
 which follow a short-circuiting approach.
@@ -897,7 +897,7 @@ which follow a short-circuiting approach.
 
 ## Transforming errors
 
-We call this approach _typed_ errors because at every point the signatures state which is the type of errors that may be raised from some computation. This type is checked when `.bind`ing, which means that you cannot directly consume computation with a given error type within a block with a different one. The solution is to _transform_ the error, which is achieved using [`withError`](https://apidocs.arrow-kt.io/arrow-core/arrow.core.raise/with-error.html).
+We call this approach _typed_ errors because at every point the signatures state which is the type of errors that might be raised from some computation. This type is checked when `.bind`ed, which means that you cannot directly consume computation with a given error type within a block with a different one. The solution is to _transform_ the error, which is achieved using [`withError`](https://apidocs.arrow-kt.io/arrow-core/arrow.core.raise/with-error.html).
 
 <!--- INCLUDE
 import arrow.core.*
@@ -939,7 +939,7 @@ At this point we can summarize the advantages that typed errors offer over using
 
 - **Predictability:** When using typed errors, the possible error conditions are explicitly listed in the type signature of a function. This makes it easier to understand the possible error conditions and write tests covering all error scenarios.
 
-- **Composability:** Typed errors can be easily combined and propagated through a series of function calls, making writing modular, composable code easier. With exceptions, ensuring errors are correctly propagated through a complex codebase can be difficult. Patterns like accumulation, which are at your fingertips using typed errors, become quite convoluted using exceptions.
+- **Composability:** Typed errors can be easily combined and propagated through a series of function calls, making writing modular, composable code easier. Whereas with exceptions, ensuring that errors are correctly propagated through a complex codebase can be difficult. Patterns like accumulation, which are at your fingertips when using typed errors, become quite convoluted using exceptions.
 
 - **Performance:** Exception handling can significantly impact performance, especially in languages that don't have a dedicated stack for exceptions. Typed errors can be handled more efficiently as the compiler has more information about the possible error conditions.
 

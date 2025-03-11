@@ -24,7 +24,7 @@ suspend fun example() {
   v.unsafeRead() shouldBe 100
   // value is outside the range, should fail
   atomically { transaction(v) } shouldBe null
-  // value is outside the range, should succeed
   atomically { v.write(5) }
+  // value now is inside the range, should succeed
   atomically { transaction(v) } shouldBe 5
 }
