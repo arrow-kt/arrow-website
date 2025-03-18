@@ -39,11 +39,11 @@ We want to accumulate as many error as possible.
 
 ## Smart constructors
 
-The `Author` class exposes its constructor, so we cannot prevent from creating
-wrong values. One could introduce a `require` in the constructor, but we prefer
+The `Author` class exposes its constructor, so we cannot prevent the user from creating
+it with wrong values. One could introduce a `require` in the constructor, but we prefer
 to use the typed error mechanism instead. A common pattern in this case is to
 _hide_ the constructor, and provide a _smart constructor_ by adding an `invoke`
-operator in the companion.
+operator inside the companion object.
 
 ```kotlin
 object EmptyAuthorName
@@ -82,8 +82,8 @@ data class Author private constructor(val name: String) {
 
 We are going to use a similar approach for `Book`, introducing a smart
 constructor. We have several different errors, though, which we define as
-a hierarchy. Note that `EmptyAuthor` is a different type than before,
-since we want to accommodate the index of the author.
+a sealed hierarchy. Note that `EmptyAuthor` is a different type than before,
+since we want to store the index of the author.
 
 <!--- INCLUDE
 data class Author(val name: String)
@@ -138,7 +138,7 @@ data class Book private constructor(
 ```
 <!--- KNIT example-validation-05.kt -->
 
-This code has a problem, though: it only returns _one_ error, even if there are
+This code has a problem, though: it only returns _one_ error, even if there were
 two problems with the data of the `Book`. We would rather use an _accumulation_
 approach, so we can give back as much information as possible to the user.
 This requires two changes to the code:
@@ -247,7 +247,7 @@ This additional check is quite complex, so let's unravel it step by step:
   the right `EmptyAuthor` error value.
 - With `mapOrAccumulate` we state that we want to perform some validation over
   a collection of elements, accumulating each possible error.
-- The call to `Author(it.value)` return an `Either` with the wrong error type
+- The call to `Author(it.value)` returns an `Either` with the wrong error type
   (`EmptyAuthorName` instead of `EmptyAuthor`). To transform this value we
   use the `recover` extension function.
 
@@ -286,7 +286,7 @@ This first version uses the variant of `mapOrAccumulate` which lives in
 provides `Raise` inside the block (hence the need to call `.bind()`), and
 `raise`s automatically if any error is found.
 
-Another way to write the code above is creating a list of `Either` using
+Another way to write the code above is by creating a list of `Either` using
 `map`, and then using `.bindAll()` at the very end. This often turns into
 simpler code when your validations use wrapper types, as we do here, since
 you don't need to call the intermediate `.bind()`.
