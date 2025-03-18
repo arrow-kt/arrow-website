@@ -27,7 +27,7 @@ fun STM.withdraw(acc: TVar<Int>, amount: Int): Unit {
   val current = acc.read()
   if (current - amount >= 0) acc.write(current - amount)
   else retry()
-  // the two lines above could also be written
+  // the two lines above could also be written as
   // check(current - amount >= 0)
   // acc.write(it - amount)`
 }
@@ -38,7 +38,7 @@ suspend fun example() = coroutineScope {
   // check initial balances
   acc1.unsafeRead() shouldBe 0
   acc2.unsafeRead() shouldBe 300
-  // simulate some time until the money is found
+  // simulate some wait time until the money is available
   async {
     delay(500)
     atomically { acc1.write(100_000_000) }

@@ -96,7 +96,7 @@ and we'll never observe an intermediate state.
 
 :::tip Delegated transactional properties
 
-From version 2.0, you can use [property delegation](https://kotlinlang.org/docs/delegated-properties.html)
+Starting from version 2.0, you can use [property delegation](https://kotlinlang.org/docs/delegated-properties.html)
 to access a `TVar`. That way you don't need explicit `read` or `write`,
 they become implicit in the syntax.
 
@@ -127,11 +127,11 @@ suspend fun example() { }
 
 The following types are built upon `TVar`s and provided out of the box with Arrow:
 
-- [`TQueue`](https://apidocs.arrow-kt.io/arrow-fx-stm/arrow.fx.stm/-t-queue/index.html): transactional mutable queue,
-- [`TMVar`](https://apidocs.arrow-kt.io/arrow-fx-stm/arrow.fx.stm/-t-m-var/index.html): mutable transactional variable that may be empty,
-- [`TSet`](https://apidocs.arrow-kt.io/arrow-fx-stm/arrow.fx.stm/-t-set/index.html), [`TMap`](https://apidocs.arrow-kt.io/arrow-fx-stm/arrow.fx.stm/-t-map/index.html): transactional `Set` and `Map`,
-- [`TArray`](https://apidocs.arrow-kt.io/arrow-fx-stm/arrow.fx.stm/-t-array/index.html): array of `TVar`s,
-- [`TSemaphore`](https://apidocs.arrow-kt.io/arrow-fx-stm/arrow.fx.stm/-t-semaphore/index.html): transactional semaphore.
+- [`TQueue`](https://apidocs.arrow-kt.io/arrow-fx-stm/arrow.fx.stm/-t-queue/index.html): transactional mutable queue
+- [`TMVar`](https://apidocs.arrow-kt.io/arrow-fx-stm/arrow.fx.stm/-t-m-var/index.html): mutable transactional variable that may be empty
+- [`TSet`](https://apidocs.arrow-kt.io/arrow-fx-stm/arrow.fx.stm/-t-set/index.html), [`TMap`](https://apidocs.arrow-kt.io/arrow-fx-stm/arrow.fx.stm/-t-map/index.html): transactional `Set` and `Map`
+- [`TArray`](https://apidocs.arrow-kt.io/arrow-fx-stm/arrow.fx.stm/-t-array/index.html): array of `TVar`s
+- [`TSemaphore`](https://apidocs.arrow-kt.io/arrow-fx-stm/arrow.fx.stm/-t-semaphore/index.html): transactional semaphore
 
 :::tip
 
@@ -177,7 +177,7 @@ fun STM.withdraw(acc: TVar<Int>, amount: Int): Unit {
   val current = acc.read()
   if (current - amount >= 0) acc.write(current - amount)
   else retry()
-  // the two lines above could also be written
+  // the two lines above could also be written as
   // check(current - amount >= 0)
   // acc.write(it - amount)`
 }
@@ -188,7 +188,7 @@ suspend fun example() = coroutineScope {
   // check initial balances
   acc1.unsafeRead() shouldBe 0
   acc2.unsafeRead() shouldBe 300
-  // simulate some time until the money is found
+  // simulate some wait time until the money is available
   async {
     delay(500)
     atomically { acc1.write(100_000_000) }
@@ -215,14 +215,14 @@ A transaction that sees an invalid state (which includes reading a `TVar` that h
 This usually means we rerun the function entirely. Therefore it is recommended to keep transactions small and never to use code that
 has side effects inside. 
 
-- Transactions may be aborted at any time, so accessing resources may never trigger finalizers,
-- Transactions may rerun an arbitrary amount of times before finishing, and thus all effects will rerun.
+- Transactions may be aborted at any time, so accessing resources may never trigger finalizers
+- Transactions may rerun an arbitrary number of times before finishing, and thus all effects will rerun
 
 :::
 
 ###  Branching
 
-The counterpart to `retry` is `orElse`, which allows detecting if a branch 
+The counterpart to `retry` is `orElse`, which allows detecting whether a branch 
 has called [retry](https://apidocs.arrow-kt.io/arrow-fx-stm/arrow.fx.stm/-s-t-m/retry.html) and then use a fallback instead. If the fallback retries as 
 well, then the whole transaction retries.
 
@@ -250,8 +250,8 @@ suspend fun example() {
   v.unsafeRead() shouldBe 100
   // value is outside the range, should fail
   atomically { transaction(v) } shouldBe null
-  // value is outside the range, should succeed
   atomically { v.write(5) }
+  // value now is inside the range, should succeed
   atomically { transaction(v) } shouldBe 5
 }
 ```
