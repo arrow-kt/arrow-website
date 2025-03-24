@@ -10,7 +10,7 @@ Typed errors in other functional ecosystems usually revolve around
 dedicated types like `Either`, which provide the ability to describe
 computations that are successful or end in error. This style is
 fully supported by Arrow, but the DSL based around `Raise` usually
-results in nicer code. This small guide describes common patterns
+results in a nicer code. This small guide describes common patterns
 in the `Either` style and how they translate into `Raise`.
 
 :::note Working with typed errors
@@ -37,7 +37,7 @@ an error appears. This is done using `flatMap` — if the next
 computation may also fail — or `map` — if you need to apply
 a pure computation to the result, if available.
 
-Take this possible combination of the aforementioned functions:
+Consider this possible combination of the aforementioned functions:
 
 ```kotlin
 fun foo(n: Int): Either<Error, String> =
@@ -80,11 +80,11 @@ fun foo(n: Int): Either<Error, String> = either {
 
 How you split your code into local values no longer depends on the
 structure of your functions, as is the case with `flatMap`, but rather
-on the logical decomposition you want in your code.
+on the logical decomposition you want to achieve in your code.
 
 Arrow provides different builders for different return types
-(`either`, `option`, `result`), but regardless of the one you choose
-you always use `bind` at every step with potential failure.
+(`either`, `option`, `result`), but regardless of which one you choose
+you always use `bind` at every step where potential failure is possible.
 
 :::info Why "Raise DSL"?
 
@@ -141,7 +141,7 @@ circumstances that are difficult to recover from.
 
 For a more concrete example, `Raise` is a good tool to signal problems like
 "user not found in a database". On the other hand, "database connection suddenly dropped"
-should rather use exceptions (maybe combined with [resilience](../resilience/intro.md)).
+should rather be modeled via exceptions (perhaps combined with [resilience](../resilience/intro.md)).
 
 :::
 
@@ -163,7 +163,7 @@ fun fooThatRaises(n: Int): Either<Error, String> = either {
 The fact that both `f` and `g` share the same `Error` type is key for
 the previous code blocks to compile. In every `Raise` scope, we have one _single_
 error type which you can `raise` or `bind` in the whole block of code.
-If this is not the case, you have to _bridge_ the different error types, which
+If this is not the case, you have to _bridge_ the different error types to each other, which
 is done using functions like `mapLeft`.
 
 ```kotlin
@@ -181,7 +181,7 @@ Within the `Raise` DSL, the corresponding function is called `withError`.
 Following the discussion above, the `withError` function creates a new
 scope in which the error type is different. The first argument to
 `withError` describes how to transform failure values from the inner
-scope into the error type of the outer scope.
+scope error type into the error type of the outer scope.
 
 ```kotlin
 fun bar(n: Int): Either<Error, String> = either {
@@ -230,7 +230,7 @@ More information can be found in the
 
 ## `Either` and `bind` no more
 
-Until this point, we are using the `Raise` DSL to combine different `Either`
+Until this point, we were using the `Raise` DSL to combine different `Either`
 computations, with the goal of producing yet another `Either`. The frontier
 between both styles requires the use of `bind`; but if you go full-on with
 `Raise`, we can even remove those. In that case, the error type appears
@@ -244,7 +244,7 @@ fun Thing.summarize(): String
 ```
 
 As a consequence of return types being "bare", we can use them directly,
-without the mediation of `bind`. The last of our examples reads now:
+without the mediation of `bind`. The last of our examples reads now as:
 
 ```kotlin
 fun Raise<Error>.bar(n: Int): String {
@@ -254,23 +254,23 @@ fun Raise<Error>.bar(n: Int): String {
 }
 ```
 
-We encourage using this style, especially for non-public parts of your
+We encourage you to use this style, especially for non-public parts of your
 code, instead of continuously using `either` and `bind`. Apart from the
 stylistic improvement, it also avoids wrapping and unwrapping
 `Right` and `Left` values.
 
 :::warning More than one receiver
 
-Unfortunately, the current Kotlin language does not allow more than
-one receiver. That means that you cannot easily turn a function like:
+Unfortunately, the current Kotlin language does not allow for more than
+one receiver. That means that you cannot easily turn a function like this:
 
 ```kotlin
 fun Thing.problematic(): Either<Error, String>
 ```
 
-into a similar version with `Raise<Error>` as receiver. There is
+into a similar version but with `Raise<Error>` as a receiver. There is
 an ongoing proposal, [context parameters](https://github.com/Kotlin/KEEP/blob/context-parameters/proposals/context-parameters.md),
-which shall drop this restriction. Until then, your best choice
+which shall hopefully drop this restriction. Until then though, your best resort
 is to move the original receiver into an argument.
 
 ```kotlin
