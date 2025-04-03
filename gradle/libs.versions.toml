@@ -1,6 +1,6 @@
 [versions]
 coroutines = "1.10.1"
-kotest = "6.0.0.M2"
+kotest = "6.0.0.M3"
 kotlin = "2.1.20"
 knit = "0.5.0"
 arrow = "2.0.1"
@@ -8,7 +8,7 @@ ksp = "2.1.20-1.0.32"
 suspendapp = "0.5.0"
 kotlinKafka = "0.4.1"
 cache4k = "0.14.0"
-quiver = "0.5.13"
+quiver = "1.0.0"
 pedestal = "2.3.0"
 
 [libraries]
