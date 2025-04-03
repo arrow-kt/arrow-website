@@ -52,7 +52,7 @@ The code above showcases how `parZip` is used: we have a sequence of arguments
 representing each of the computations to perform, and, at the end, one final
 block (usually written in trailing form) that specifies what to do with the
 results of those computations. In this case, the two arguments obtain the name
-and avatar, and the block puts them together in the `User` type.
+and avatar, and the trailing block places them together into the `User` type.
 
 :::tip
 
@@ -64,7 +64,7 @@ and canceling running computations whenever one of the tasks fails.
 
 In the code above, we had a fixed sequence of computations to perform in parallel.
 In other cases, those computations depend on some form of _collection_; for example,
-we want to obtain the name of all a user's friends. Arrow provides `parMap` (PARallel MAP)
+we want to obtain the names of all user's friends. Arrow provides `parMap` (PARallel MAP)
 for that use case.
 
 <!--- INCLUDE
@@ -81,7 +81,7 @@ suspend fun getFriendNames(id: UserId): List<User> =
 <!--- KNIT example-parallel-02.kt -->
 
 One potential problem with `parMap` is that we may have _too much_ concurrency
-if the amount of elements in the collection is too significant. To fight against this
+if the amount of elements in the collection is too significant. To fight this
 problem, Arrow provides a version of `parMap` with an additional parameter that
 tells how many computations should be dispatched in parallel.
 
@@ -111,7 +111,7 @@ suspend fun getUser(id: UserId): User = awaitAll {
 
 As the name suggests, within this `awaitAll` block, every time you call `.await()`
 _all_ of the `async` computations that were registered until that point are
-awaited. If any of those throws an exception, the whole block is canceled, as
+awaited. If any of those throw an exception, the whole block is canceled, as
 per the rules of structured concurrency. In general, writing a sequence of independent
 `async` computations within `awaitAll` is equivalent to giving those computations
 as arguments to `parZip`.
@@ -131,7 +131,7 @@ computations should be executed concurrently at most.
 ## Racing
 
 The `parX` operators describe the cases in which we are interested in the result
-of _every_ computation we perform. But imagine the scenario in which we want to
+of _every_ computation we perform. But imagine the scenario where we want to
 download a file, but we try two servers simultaneously for resilience purposes. Once we get the file from one server, we're not really interested in the 
 rest. This is an example of **racing** two computations.
 
@@ -161,7 +161,7 @@ a single value.
 ## Integration with typed errors
 
 Arrow's typed errors can seamlessly integrate with the Arrow Fx Coroutines operators while supporting the patterns of structured concurrency.
-The subtleties lie in the ordering of the DSLs and how they affect the _cancellation_ of scopes of structured concurrency -and error handling.
+The subtleties lie in the ordering of the DSLs and in how they affect the _cancellation_ of scopes of structured concurrency -and error handling.
 So you must understand how cancellation works in [Structured Concurrency](https://kotlinlang.org/docs/cancellation-and-timeouts.html).
 
 <!--- INCLUDE
@@ -217,7 +217,7 @@ _typed errors_ follow the same rules as [Structured Concurrency](https://kotlinl
 As shown above, `parZip` allows running _independent_ tasks in parallel. If any of the tasks fail, the other tasks will get canceled.
 The same semantics are also guaranteed when composing `parZip` with typed errors.
 
-The example below shows 3 `task` running in parallel, and according to the `task` implementation, the `TaskId` 2 will fail.
+The example below shows 3 `task`s running in parallel, and according to the `task` implementation, the `TaskId` 2 will fail.
 
 <!--- INCLUDE
 import kotlinx.coroutines.delay
@@ -249,7 +249,7 @@ suspend fun example() {
 ```
 <!--- KNIT example-parallel-06.kt -->
 
-In the output, we can see that tasks `1` and `3` started, but `2` _raised_ an error that triggered the cancellation of the other two tasks.
+In the output, we can see that tasks `1` and `3` have started, but `2` _raised_ an error that triggered the cancellation of the other two tasks.
 After tasks `1` and `3` are canceled, we see that the result of `raise` is returned and prints the error message.
 
 ```text
@@ -310,7 +310,7 @@ Either.Left(Error)
 
 Arrow Fx Coroutines also provides a way to accumulate errors in parallel.
 If we want to run tasks in parallel but accumulate all errors instead of short-circuiting, we can use `parMapOrAccumulate`.
-It works the same as `parMap` from our previous example, but instead of canceling the other coroutines when one fails, it accumulates the errors.
+It works the same as `parMap` from our previous example, but instead of canceling the other coroutines when one of them fails, it accumulates the errors.
 So no matter how many coroutines fail, all of them will run to completion.
 
 ```kotlin

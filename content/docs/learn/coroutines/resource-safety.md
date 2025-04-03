@@ -9,7 +9,7 @@ sidebar_position: 2
 Allocation and release of resources is not easy, especially when
 we have multiple resources that depend on each other. The Resource DSL
 adds the ability to _install_ resources and ensure proper finalization even
-in the face of exceptions and cancellations. Arrow's Resource co-operated
+in the face of exceptions and cancellations. Arrow's Resource co-operate
 with Structured Concurrency and KotlinX Coroutines.
 
 :::info Media resources
@@ -63,7 +63,7 @@ suspend fun example() {
 ```
 <!--- KNIT example-resource-01.kt -->
 
-If we were using Kotlin JVM, we might rely on `Closeable` or `AutoCloseable` and rewrite our code.
+If we were using Kotlin JVM, we might rely on `Closeable` or `AutoCloseable` and rewrite our code like this.
 
 <!--- INCLUDE
 class UserProcessor : AutoCloseable {
@@ -98,12 +98,12 @@ However, while we fixed the closing of `UserProcessor` and `DataSource`, there a
 
   1. It requires implementing `Closeable` or `AutoCloseable`, which is only possible for Kotlin JVM but not available for Multiplatform.
   2. Requires implementing an interface or wrapping external types with something like `class CloseableOf<A>(val type: A): Closeable`.
-  3. Requires nesting of different resources in callback tree, not composable.
+  3. Requires nesting of different resources in a callback tree, which is not composable.
   4. Enforces `close` method name, renamed `UserProcessor#shutdown` to `close`
   5. Cannot run `suspend` functions within `fun close(): Unit`.
-  6. No exit signal; we don't know if we exited successfully, with an error or cancellation.
+  6. No exit signal; we don't know whether we exited successfully, with an error or cancellation.
 
-Resource solves these issues. The main idea is that each resource has three
+`Resource` solves these issues. The main idea is that each resource has three
 stages: 1️⃣ acquiring the resource, 2️⃣ using the resource, and 3️⃣ releasing the
 resource. With `Resource`, we bundle steps (1) and (3), and the implementation
 ensures that everything works correctly, even in the event of exceptions or
@@ -194,12 +194,12 @@ running the constructor, followed by calling some start method using Kotlin's
 
 :::note
 
-To achieve its behavior, `install` invokes the `acquire` and `release` step
+To achieve its behavior, `install` invokes the `acquire` and `release` steps
 as [NonCancellable](https://kotlinlang.org/api/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-non-cancellable/).
 If a cancellation signal or an exception is received during `acquire`, the 
 resource is assumed to **not** have been acquired and thus will not trigger the
 release function; any composed resources that are already acquired are guaranteed 
-to release as expected.
+to be released as expected.
 
 :::
 
@@ -211,7 +211,7 @@ in the form of the [`closeable`](https://apidocs.arrow-kt.io/arrow-fx-coroutines
 
 ### Using `Resource`
 
-The usage of `resource` is very similar to `install`. The main difference
+The usage of `resource` is very similar to that of `install`. The main difference
 is that the result is a value of type `Resource<T>`, where `T` is the type of
 the resource to acquire. But such a value doesn't run the acquisition step,
 it's simply a _recipe_ describing how that's done; to actually acquire the
@@ -348,9 +348,9 @@ nestings of `resourceScope` and `either`.
     } // Closing A: ExitCase.Completed
     ```
 
-We remark that, in both cases, resources are correctly released. If you're
+We remark that, in both cases, resources are correctly released. If your
 finalizer works in the same way for every possible `ExitCase`, then there's no
-visible difference between both. 
+visible difference between them. 
 
 :::info
 

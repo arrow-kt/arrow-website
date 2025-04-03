@@ -13,7 +13,7 @@ Instead, we commit the offset every 5 seconds (or every x records, 5s is default
 
 Imagine the application getting stopped after 4,5 seconds, either by _Ctrl+C_ or K8S or another type of
 containerization.
-We could've processed thousands, or tens of thousands of events.
+We could've processed thousands, or tens of thousands of events by that time.
 If we don't commit these offsets before shutting down we'd have to re-process all the events.
 
 We can easily prevent this with SuspendApp, and [kotlin-kafka](https://github.com/nomisRev/kotlin-kafka)

@@ -145,7 +145,7 @@ fun example() {
 <!--- KNIT example-option-06.kt -->
 <!--- TEST assert -->
 
-Creating a `Option<A>` from a nullable type `A?` can be helpful when we need to lift nullable values into Option. This can be done with the `Option.fromNullable` function or the `A?.toOption()` extension function.
+Creating an `Option<A>` from a nullable type `A?` can be helpful when we need to lift nullable values into Option. This can be done with the `Option.fromNullable` function or the `A?.toOption()` extension function.
 
 <!--- INCLUDE
 import arrow.core.Option
@@ -363,7 +363,7 @@ fun sendEmail(params: QueryParameters): Option<SendResult> = option {
 
 ## Inspecting `Option` values
 
-Besides extracting the value from an `Option` or sequencing nullable or `Option` based logic, we often just need to _inspect_ the values inside it.
+Apart from extracting the value from an `Option` or sequencing nullable or `Option` based logic, we often just need to _inspect_ the values inside it.
 With _nullable types_, we can simply use `!= null` to inspect the value, but with `Option`, we can check whether option has value or not using `isSome` and `isNone`.
 
 <!--- INCLUDE

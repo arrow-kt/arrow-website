@@ -120,7 +120,7 @@ You can find this example in the [repository](https://github.com/arrow-kt/suspen
 ## Running on different platforms
 
 For more details on Kotlin Multiplatform configuration consult the [official documentation](https://kotlinlang.org/docs/multiplatform.html).
-Just `./gradlew build` the project, and launch the created binaries as shown in the sections belows.
+Just `./gradlew build` the project, and launch the created binaries as shown in the sections below.
 
 :::note Currently supported targets
 

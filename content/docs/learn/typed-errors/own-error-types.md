@@ -45,7 +45,7 @@ value class LceRaise<E>(val raise: Raise<Lce<E, Nothing>>) : Raise<Lce<E, Nothin
 }
 ```
 
-All that is required now is a DSL function. We can use the `recover` or `fold` function to summon an instance of `RaiseLce<E, Nothing>` from the `Raise` type class.
+All that is required now is a DSL function. We can use the `recover` or `fold` function to obtain an instance of `RaiseLce<E, Nothing>` from the `Raise` type class.
 We wrap the `block` in an `Lce.Content` value and return any encountered `Lce<E, Nothing>` value. We can call `block` by wrapping `Raise<Lce<E, Nothing>>` in `LceRaise`.
 
 ```kotlin
@@ -75,7 +75,7 @@ fun example() {
 <!--- KNIT example-own-errors-01.kt -->
 <!--- TEST assert -->
 
-If we'd used _context parameters, defining this DSL would be even more straightforward, and we could use the `Raise` type class directly.
+If we'd used _context parameters_, defining this DSL would be even more straightforward, and we could use the `Raise` type class directly.
 
 ```
 context(_: Raise<Lce<E, Nothing>>)
@@ -102,7 +102,7 @@ DialogResult<out T>
  └ Cancelled: DialogResult<Nothing>
 ```
 
-We can now not really conveniently provide `Raise` over the _flat_ type `DialogResult`, and are kind-of forced to use `DialogResult<Nothing>`. However, if we stratify our type differently,
+We can not conveniently provide `Raise` over this _flat_ type `DialogResult`, and are kind-of forced to use `DialogResult<Nothing>`. However, if we stratify our type differently,
 
 ```kotlin
 DialogResult<out T>
@@ -113,7 +113,7 @@ DialogResult<out T>
     └ Cancelled: Error
 ```
 
-We can again benefit from `Raise<DialogResult.Error>`, and the reason that this is **much** more desirable, it that you can now also interop with `Either`!
+We can again benefit from `Raise<DialogResult.Error>`, and the reason why that is **much** more desirable, is that you can now also interop with `Either`!
 
 ```kotlin
 dialogResult {
@@ -123,7 +123,7 @@ dialogResult {
 }
 ```
 
-That can be useful if you need to for example want to _accumulate errors_, you can now benefit from the default behavior in Kotlin.
+That can be useful if you want to for example _accumulate errors_, now you can benefit from the default behavior in Kotlin.
 
 ```kotlin
 fun dialog(int: Int): DialogResult<Int> =

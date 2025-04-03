@@ -10,11 +10,11 @@ Arrow Core includes three different types to model success and failure:
 `Option` when no information is available on failure,
 `Either` when the success and failure cases are disjoint,
 and `Ior` when success and failure may happen at the same time.
-But sometimes life is a bit more complicated, and these type fall short.
+But sometimes life is a bit more complicated, and these solutions fall short.
 Fortunately, the wonderful Kotlin community has developed libraries
 to cover other scenarios, with full integration with Arrow's `Raise` approach.
 
-## Outcomes: absence is not failure
+## Outcomes: absence is not a failure
 
 [Quiver](https://block.github.io/quiver/) introduces the
 [`Outcome`](https://block.github.io/quiver/-quiver%20-library/app.cash.quiver/index.html)
@@ -42,7 +42,7 @@ introduces [`ProgressiveOutcome`](https://opensavvy.gitlab.io/groundwork/pedesta
 a type that combines the current state of a computation, and information
 about how the corresponding task is evolving.
 
-:::tip Success does not mean stopped
+:::tip Success does not mean being stopped
 
 The value `Success(5, loading(0.4))` is perfectly valid,
 and describes a point in which:

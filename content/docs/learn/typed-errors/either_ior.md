@@ -73,8 +73,8 @@ be transformed into a variety of types; not only `Either` and `Ior`, but also
 
 A common scenario is to have a potentially erroneous value (not only limited
 to that of the block) that we want to _unwrap_.
-That is, we want potential errors in those values to bubble
-as errors of the entire block or keep the execution if the value represents
+That is, we want potential errors in those values to bubble up
+as errors of the entire block or continue the execution if the value represents
 success. In those cases, we need to call `.bind()` over that value.
 
 ```mermaid
@@ -95,7 +95,7 @@ an `either` or `ior` block.
 
 ### Combining Ior errors
 
-The flow in an `Either` block is simple: we execute each step; if at some point
+The flow in an `Either` block is simple: we execute each line of code; if at some point
 we `bind()` a `Left` or find a `raise`, we stop and return that value; if we get
 to the end, we wrap the result in `Right`. `ior` blocks are a bit more complicated,
 since we may end up in a situation in which we have errors to be reported, yet
@@ -106,7 +106,7 @@ an additional parameter that specifies how to combine several errors.
 
 ## Without builders
 
-In some scenarios, builders may be overkill for the task at hand. For those cases,
+In some scenarios, builders may be an overkill for the task at hand. For those cases,
 we provide functions that create or operate directly on `Either` and `Ior`.
 
 On the generation front, extension functions like `.left()` and `.right()`
@@ -132,9 +132,9 @@ fun validAdult(age: Int): Either<AgeProblem, Age> = when {
 ```
 <!--- KNIT example-either-ior-02.kt -->
 
-Another way to obtain an `Either` is using `Either.catch`, which wraps a
+Another way to obtain an `Either` is by using `Either.catch`, which wraps a
 computation that may throw exceptions and returns a `Left` if that's the case.
-Essentially, [`runCatching` from the standard library](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/run-catching.html),
+Essentially, it's [`runCatching` from the standard library](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/run-catching.html),
 but replacing `Result` with `Either`.
 
 The rest of the API closely follows the one from [typed errors](../../typed-errors/).
@@ -179,6 +179,6 @@ public typealias EitherNel<E, A> = Either<NonEmptyList<E>, A>
 
 In Arrow 1.x series, a different type called `Validation` embodied
 the accumulation strategy for errors. However, the API was almost identical, and
-sometimes code became flooded with conversion back and forth between `Either` and `Validation`.
+sometimes code ended up flooded with conversion back and forth between `Either` and `Validation`.
 Arrow 2.x provides a single `Either` type instead, but we encourage you to use
 the `EitherNel` type alias if you are describing a validation.
