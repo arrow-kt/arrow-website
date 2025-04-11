@@ -33,7 +33,7 @@ now only need to care about one single repository.
 Speaking of maintainance, in the past weeks we have been paying some
 of the debt in our build files, that had grown too wild.
 Technically, we have moved from separate [`arrow-gradle-config`](https://github.com/arrow-kt/arrow-gradle-config)
-into a convention plug-in withing the same repository.
+into a convention plug-in within the same repository.
 This process has revealed some lack of uniformity between the
 different projects, especially with respect to supported platforms.
 From now on, all Arrow libraries support Native targets in 
