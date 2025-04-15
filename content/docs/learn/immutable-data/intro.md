@@ -8,7 +8,7 @@ sidebar_position: 1
 
 Data classes, sealed hierarchies, and above all, **immutable data** is
 an excellent recipe for [domain modeling](../../design/domain-modeling/). If we want
-to model a domain sharply, we often end up with a large amount of (nested)
+to model a domain meticulously, we often end up with a large number of (nested)
 classes, each of them representing a particular kind of object.
 
 ```kotlin
@@ -51,7 +51,7 @@ value. For example, we may have an optic focusing (that's the term we use)
 on the `address` field of a `Person`. By combining different optics, we can
 concentrate on nested elements, like the `city` field within the `address` field
 within a `Person`. But code speaks louder than words, so let's see how the
-example above improves using optics.
+example above might be improved using optics.
 
 :::note Where to find it
 
@@ -120,7 +120,7 @@ in two ways:
 
 ## Many optics to rule them all
 
-You may have noticed that we speak about optic*s*. In fact, there are a few
+You might have noticed that we speak about optic*s*. In fact, there are a few
 important kinds that differ in the *amount* of elements they
 can potentially focus on. All the optics in the example above are **lenses**,
 which have precisely one focus. At the other end of the spectrum, we have
