@@ -10,8 +10,8 @@ must succeed or fail as a unit; otherwise, we may end up in an inconsistent stat
 A **saga** implements this concept by providing for each action a corresponding
 _compensating_ action, which is executed if any of the following steps fail.
 The role of the compensating action is to undo any changes performed by the
-action, hence taking the system to the state before the entire operation
-beginning its execution.
+action, hence taking the system back to the state before the entire operation
+began its execution.
 
 :::info Additional context for this pattern
 
@@ -63,7 +63,7 @@ object Counter {
 ```
 
 Now we create a saga with a couple of operations. The first one increments the
-counter, so the compensating action must be decrementing it. The second action
+counter, so the compensating action must be to decrement it. The second action
 simply fails; we include no compensation because we know that part is never
 reached.
 

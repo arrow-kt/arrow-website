@@ -12,7 +12,7 @@ to simulate synchronization between different systems.
 
 The Arrow Fx library is Multiplatform-ready, so you can use it in all of your
 [KMP](https://kotlinlang.org/docs/multiplatform.html) projects. In most cases,
-the API provided by Arrow Fx follows the one for similar concepts in the JVM.
+the API provided by Arrow Fx follows the one covering the similar concepts in the JVM.
 
 :::
 
@@ -32,7 +32,7 @@ The separate [`arrow-atomic` library](https://apidocs.arrow-kt.io/arrow-atomic/a
 provides Multiplatform-ready atomic references.
 In particular, their `getAndSet`, `getAndUpdate`, and `compareAndSet` operations
 are guaranteed to happen atomically; there's no possibility of two computations
-performing these operations and getting an inconsistent state at the end.
+performing these operations and resulting in an inconsistent state in the end.
 
 :::warning Atomic primitive types
 

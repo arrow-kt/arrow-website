@@ -5,7 +5,7 @@ sidebar_position: 1
 # Introduction
 
 Most, if not all, of the systems we develop nowadays require the cooperation of
-other services, which may live in the same process, in the same machine, or may
+other services, which may live in the same process, on the same machine, or may
 require some network communication. This creates a lot of different potential
 scenarios where things may fail. **Resilience** is the ability of your system 
 to act in an organized way when those events occur.
@@ -13,7 +13,7 @@ to act in an organized way when those events occur.
 Your particular approach to resilience depends on multiple factors. Is it
 possible to try that request again? Should the administrator be alerted if the
 detected error is fatal? Instead of predefined answers, Arrow aims to provide
-a set of **tools** that you can compose to specify your solution in a concise
+a set of **tools** that you can use to architect your solution in a concise
 and composable way.
 
 :::note Where to find it

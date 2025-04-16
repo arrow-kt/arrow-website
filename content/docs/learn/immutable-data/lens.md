@@ -92,7 +92,7 @@ val address: Lens<Person, Address>
 
 Lenses provide three primary operations:
 
-- `get` obtains the elements focused on a lens.
+- `get` obtains the elements focused on with a lens.
 - `set` changes the value of the focus to a new one.
 - `modify` transforms the value of the focus by applying a given function.
 
@@ -183,8 +183,8 @@ fun example() {
 <!--- KNIT example-lens-domain-01.kt -->
 <!--- TEST assert -->
 
-The `compose` infix function is an integral part of the library, but you almost
-never see it mentioned explicitly. As part of its job, the Arrow Optics compiler
+The `compose` infix function is an integral part of the library, but you hardly
+will ever see it mentioned explicitly. As part of its job, the Arrow Optics compiler
 plug-in introduces additional extension functions that allow you to use the
 regular dot operation to access composed lenses. The code above can be rewritten
 in that form:
@@ -226,6 +226,15 @@ can use the name of a lens to perform an operation.
 fun Person.moveToAmsterdamCopy(): Person = copy {
   Person.address.city.name set "Amsterdam"
   Person.address.city.country set "Netherlands"
+}
+```
+
+You can also use `transform` if you need access to an original field value.
+
+```kotlin
+fun Person.capitalizeNameAndCountry(): Person = copy {
+  Person.address.city.name transform { it.capitalize() }
+  Person.address.city.country transform { it.capitalize() }
 }
 ```
 

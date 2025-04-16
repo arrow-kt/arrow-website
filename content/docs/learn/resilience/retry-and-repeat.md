@@ -39,7 +39,7 @@ steps involved in using `Schedule`.
 
 :::tip Retrying only on certain exceptions
 
-Since version 2.0, you can use specify a subclass of `Throwable` as first type argument
+Since version 2.0, you can specify a subclass of `Throwable` as the first type argument
 to `retry` to focus only on those exceptions. It is customary to leave the second type
 argument unspecified.
 
@@ -64,7 +64,7 @@ import io.kotest.matchers.shouldBe
 Scheduling policies are constructed using the methods in [`Schedule`'s
 companion object](https://apidocs.arrow-kt.io/arrow-resilience/arrow.resilience/-schedule/-companion/index.html).
 Schedule policies also return values on each step, which can be used to
-take decisions based on previous values.
+make decisions based on previous values.
 
 One of the simplest policies is recurring ten times. This means that if we
 call `repeat`, the same action is performed ten times, and if we call `retry`,
