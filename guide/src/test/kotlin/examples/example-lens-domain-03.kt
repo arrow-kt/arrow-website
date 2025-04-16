@@ -29,6 +29,11 @@ fun Person.moveToAmsterdamCopy(): Person = copy {
   Person.address.city.country set "Netherlands"
 }
 
+fun Person.capitalizeNameAndCountry(): Person = copy {
+    Person.address.city.name transform { it.capitalize() }
+    Person.address.city.country transform { it.capitalize() }
+}
+
 fun Person.moveToAmsterdamInside(): Person = copy {
   inside(Person.address.city) {
     City.name set "Amsterdam"
