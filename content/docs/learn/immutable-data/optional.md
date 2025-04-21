@@ -163,7 +163,7 @@ nullability in each potential modification.
 It's also possible to turn a lens over a nullable type into an optional of the
 unwrapped type using `notNull`. In the example above, `nickname.notNull`
 has the type `Optional<Person, String>` (notice the lack of `?` at the end
-of the second type parameter). However, you should be aware that, in the same way
+of the second type parameter). However, you should be aware that, following the same logic
 as with indexed collections where you could not add or remove elements, with
 `notNull`, you cannot change whether the value is `null` or not; only modify
 it if it's already not null.
