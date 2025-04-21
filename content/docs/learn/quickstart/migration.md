@@ -1,16 +1,22 @@
 ---
 id: migration
-title: Migration to Arrow 1.2.0
-description: Migration guide to upgrade to Arrow 1.2.0.
+title: Migration to Arrow 2.0 / 1.2
+description: Migration guide to upgrade to Arrow 2.0 and 1.2.
 sidebar_position: 5
 ---
 
-# Migration to Arrow 1.2.0
+# Migration to Arrow 2.0 / 1.2
 
-Arrow 1.2.0-RC is a big step in Arrow and marks the last minor version in the 1.x series, and serves as a long term version until a graceful transition to Arrow 2.0.
-All non-deprecated code in 1.2.0-RC is source compatible with 2.0.0, so you can slowly and gracefully migrate your codebase to Arrow 2.0.0 as soon as you want.
+:::tip First 1.2.0, then 2.x
 
-Arrow includes a lot of improvements and changes in Arrow 1.2.0-RC, all based on the feedback we've received from the community, and experience from teaching Functional Programming, building applications and knowledge from the other languages and communities.
+If you want to migrate to Arrow in the 1.x series to 2.x series, we strongly recommend you first migrate to version 1.2.4 following this guide. Afterwards you should be ready to migrate to the 2.x series.
+
+:::
+
+Arrow 1.2.0 marks the last minor version in the 1.x series, and serves as a long term version until a graceful transition to Arrow 2.0.
+All non-deprecated code in 1.2.0 is source compatible with 2.0.0, so you can slowly and gracefully migrate your codebase to Arrow 2.0.0 as soon as you want.
+
+Arrow includes a lot of improvements and changes in Arrow 1.2.0, all based on the feedback we've received from the community, and experience from teaching Functional Programming, building applications and knowledge from the other languages and communities.
 Any criticism is welcome, and we'll try to improve the migration guide and the library to make it as easy as possible to migrate to Arrow 2.0.0.
 
 In case a deprecated method is crucial for you, please file an issue in the [Arrow repository](https://github.com/arrow-kt/arrow/issues), and so Arrow can consider keeping it in the library or finding an alternative solution.
@@ -19,10 +25,10 @@ If you have any issues or questions, feel free to contact the Arrow maintainers 
 ## Either DSL, Effect & EffectScope
 
 Arrow 1.0.0 introduced DSLs to operate on functional data types such as `Either`, and enabled several DSLs to work with _typed errors_ in convenient ways.
-These DSLs were built on top of `Effect` and `EffectScope`, from the `arrow.core.continuations` package and had several issues, and were deprecated in Arrow 1.2.0-RC.
+These DSLs were built on top of `Effect` and `EffectScope`, from the `arrow.core.continuations` package and had several issues, and were deprecated in Arrow 1.2.0.
 The biggest issue was that they were not compatible with Kotlin's `suspend` functions, and you needed to explicitly differentiate between `suspend` and `non-suspend` functions.
 
-Arrow 1.2.0-RC introduces a new [`Raise` DSL](https://github.com/arrow-kt/arrow/pull/2912), which resolves this problem and allows Arrow to provide uniform APIs for typed errors across the board.
+Arrow 1.2.0 introduces a new [`Raise` DSL](https://github.com/arrow-kt/arrow/pull/2912), which resolves this problem and allows Arrow to provide uniform APIs for typed errors across the board.
 This heavily reduces the API surface, and makes it easier to learn and use Arrow, and additionally it allows us to build more powerful and flexible APIs.
 If you want to learn more about the new `Raise` DSL, check out the [Typed Errors](../../typed-errors) guide.
 
@@ -89,7 +95,7 @@ There are two ways to use this script for migration:
 
 Once installed you can run the script with default params: `kotlinc -script migrate.main.kts .`.
 
-You need to have Arrow version `1.2.0-RC` (or newer) in order to compile your project after the script finishes running.
+You need to have Arrow version `1.2.0` or newer (we recommend `1.2.4`) in order to compile your project after the script finishes running.
 
 The script _might_ leave you with some unused imports, to fix this you can run _optimise imports_ on your _project root_ or _src_ folder.
 - Select _src_ or _project root` + `⌃ ⌥ O` or `Ctrl+Alt+O`.
@@ -185,7 +191,7 @@ val new2 : Either<String, Int> = either {
 
 ## Validated & Either
 
-In Arrow 1.2.0-RC we've deprecated `Validated` in favor of `Either`, and `ValidatedNel` in favor of `EitherNel`.
+In Arrow 1.2.0 we've deprecated `Validated` in favor of `Either`, and `ValidatedNel` in favor of `EitherNel`.
 Rationale was that `Either` and `Validated` offer the same abstraction of _either_ as an error of type `E` or a value of type `A`.
 The main reason is that `zip` and `traverse` behave differently in these data types. Where `Validated` allows _accumulating errors_ using `zip` and `traverse`, `Either` short-circuits on the first error.
 

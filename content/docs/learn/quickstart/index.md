@@ -79,8 +79,8 @@ Simply include the desired library in your `dependencies` block or as a
 
 ```kotlin
 dependencies {
-  implementation("io.arrow-kt:arrow-core:2.0.1")
-  implementation("io.arrow-kt:arrow-fx-coroutines:2.0.1")
+  implementation("io.arrow-kt:arrow-core:2.1.0")
+  implementation("io.arrow-kt:arrow-fx-coroutines:2.1.0")
 }
 ```
 
@@ -89,8 +89,8 @@ dependencies {
 
 ```groovy
 dependencies {
-  implementation 'io.arrow-kt:arrow-core:2.0.1'
-  implementation 'io.arrow-kt:arrow-fx-coroutines:2.0.1'
+  implementation 'io.arrow-kt:arrow-core:2.1.0'
+  implementation 'io.arrow-kt:arrow-fx-coroutines:2.1.0'
 }
 ```
 
@@ -102,12 +102,12 @@ dependencies {
 <dependency>
   <groupId>io.arrow-kt</groupId>
   <artifactId>arrow-core</artifactId>
-  <version>2.0.1</version>
+  <version>2.1.0</version>
 </dependency>
 <dependency>
   <groupId>io.arrow-kt</groupId>
   <artifactId>arrow-fx-coroutines</artifactId>
-  <version>2.0.1</version>
+  <version>2.1.0</version>
 </dependency>
 ```
 
@@ -126,7 +126,7 @@ your Gradle build has several subprojects.
 
 ```yaml
 [versions]
-arrow = "2.0.1"
+arrow = "2.1.0"
 # other versions
 
 [libraries]
@@ -180,7 +180,7 @@ to include `arrow-stack`, which declares versions for the rest of the components
 
 ```kotlin
 dependencies {
-  implementation(platform("io.arrow-kt:arrow-stack:2.0.1"))
+  implementation(platform("io.arrow-kt:arrow-stack:2.1.0"))
   // no versions on libraries
   implementation("io.arrow-kt:arrow-core")
   implementation("io.arrow-kt:arrow-fx-coroutines")
@@ -192,7 +192,7 @@ dependencies {
 
 ```groovy
 dependencies {
-  implementation platform('io.arrow-kt:arrow-stack:2.0.1')
+  implementation platform('io.arrow-kt:arrow-stack:2.1.0')
   // no versions on libraries
   implementation 'io.arrow-kt:arrow-core'
   implementation 'io.arrow-kt:arrow-fx-coroutines'
@@ -207,7 +207,7 @@ dependencies {
 <dependency>
     <groupId>io.arrow-kt</groupId>
     <artifactId>arrow-stack</artifactId>
-    <version>2.0.1</version>
+    <version>2.1.0</version>
     <type>pom</type>
     <scope>import</scope>
 </dependency>
@@ -244,12 +244,12 @@ which requires an additional configuration step.
 
 ```kotlin
 plugins {
-  id("com.google.devtools.ksp") version "2.1.0-1.0.29"
+  id("com.google.devtools.ksp") version "2.1.20-2.0.0"
 }
 
 dependencies {
-  implementation("io.arrow-kt:arrow-optics:2.0.1")
-  ksp("io.arrow-kt:arrow-optics-ksp-plugin:2.0.1")
+  implementation("io.arrow-kt:arrow-optics:2.1.0")
+  ksp("io.arrow-kt:arrow-optics-ksp-plugin:2.1.0")
 }
 ```
 
@@ -258,12 +258,12 @@ dependencies {
 
 ```groovy
 plugins {
-  id 'com.google.devtools.ksp' version '2.1.0-1.0.29'
+  id 'com.google.devtools.ksp' version '2.1.20-2.0.0'
 }
 
 dependencies {
-  implementation 'io.arrow-kt:arrow-optics:2.0.1'
-  ksp 'io.arrow-kt:arrow-optics-ksp-plugin:2.0.1'
+  implementation 'io.arrow-kt:arrow-optics:2.1.0'
+  ksp 'io.arrow-kt:arrow-optics-ksp-plugin:2.1.0'
 }
 ```
 

@@ -72,12 +72,10 @@ may come in quite handy.
 
 ### [Ktor](https://ktor.io/)
 
-The main point of contact between Ktor and Arrow is in
-[serialization](../quickstart/serialization).
+#### [Serialization](../quickstart/serialization)
 
 If you're using kotlinx.serialization, you need no further changes other than
 importing the serializers with `@UseSerializers`.
-
 If you want to use Arrow Core types directly as your request or response models, you will need to include the `ArrowModule` in your serializers module:
 
 ```
@@ -97,6 +95,10 @@ install(ContentNegotiation) {
   register(ContentType.Application.Json, JacksonConverter(JsonMapper.mapper))
 }
 ```
+
+#### [Resilience](../resilience/)
+
+The [`arrow-resilience-ktor-client`](https://apidocs.arrow-kt.io/arrow-resilience-ktor-client/index.html) module provides Ktor client plug-ins for retry/repeat and circuit breakers based on Arrow's.
 
 ### [kJWT](https://github.com/nefilim/kJWT)
 

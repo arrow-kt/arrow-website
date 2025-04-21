@@ -16,12 +16,6 @@ code. This library aims to solve that problem by leveraging Kotlin MPP using Kot
 
 :::
 
-:::note Where to find it
-
-Graceful shutdowns are implemented in the `suspendapp` library, with further integration with other frameworks available in their own libraries. For historical reasons, the `suspendapp` library follows its own versioning scheme. Please check [Maven Central](https://central.sonatype.com/artifact/io.arrow-kt/suspendapp) for the latest release information.
-
-:::
-
 ## Simple example
 
 When you see `App Started! Waiting until asked to shutdown.` try pressing

@@ -3,9 +3,8 @@ coroutines = "1.10.2"
 kotest = "6.0.0.M3"
 kotlin = "2.1.20"
 knit = "0.5.0"
-arrow = "2.0.1"
+arrow = "2.1.0"
 ksp = "2.1.20-2.0.0"
-suspendapp = "0.5.0"
 kotlinKafka = "0.4.1"
 cache4k = "0.14.0"
 quiver = "1.0.0"
@@ -36,7 +35,7 @@ arrow-functions = { module = "io.arrow-kt:arrow-functions", version.ref = "arrow
 arrow-cache4k = { module = "io.arrow-kt:arrow-cache4k", version.ref = "arrow" }
 kotlinx-knit = { module = "org.jetbrains.kotlinx:kotlinx-knit", version.ref = "knit" }
 kotlinx-knit-test = { module = "org.jetbrains.kotlinx:kotlinx-knit-test", version.ref = "knit" }
-suspendapp = { module = "io.arrow-kt:suspendapp", version.ref = "suspendapp" }
+suspendapp = { module = "io.arrow-kt:suspendapp", version.ref = "arrow" }
 kafka-kotlin = { module = "io.github.nomisrev:kotlin-kafka", version.ref = "kotlinKafka" }
 cache4k = { module = "io.github.reactivecircus.cache4k:cache4k", version.ref = "cache4k" }
 quiver = { module = "app.cash.quiver:lib", version.ref = "quiver" }
