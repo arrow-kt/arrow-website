@@ -4,10 +4,32 @@
         <title>Arrow Blog</title>
         <link>https://arrow-kt.io/community/blog/</link>
         <description>Arrow Blog</description>
-        <lastBuildDate>Sat, 15 Feb 2025 00:00:00 GMT</lastBuildDate>
+        <lastBuildDate>Mon, 21 Apr 2025 00:00:00 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
         <generator>https://github.com/jpmonette/feed</generator>
         <language>en</language>
+        <item>
+            <title><![CDATA[Arrow 2.1.0]]></title>
+            <link>https://arrow-kt.io/community/blog/2025/04/21/arrow-2-1/</link>
+            <guid>https://arrow-kt.io/community/blog/2025/04/21/arrow-2-1/</guid>
+            <pubDate>Mon, 21 Apr 2025 00:00:00 GMT</pubDate>
+            <description><![CDATA[On top of hiding chocolate eggs, the Easter Bunny has helped us release a new version of Arrow, namely 2.1.0. Apart from fixing several issues, this release is the first one with a more integrated repository.]]></description>
+            <content:encoded><![CDATA[<p>On top of hiding chocolate eggs, the Easter Bunny has helped us release a new version of Arrow, namely 2.1.0. Apart from <a href="https://github.com/arrow-kt/arrow/releases/tag/2.1.0" target="_blank" rel="noopener noreferrer">fixing several issues</a>, this release is the first one with a <a href="https://arrow-kt.io/community/blog/2025/02/15/integration/" target="_blank" rel="noopener noreferrer">more integrated repository</a>.</p>
+<p><strong>Integrated libraries.</strong> As a result, the following libraries have bumped their versions from 0.x directly to 2.1.0.</p>
+<ul>
+<li><a href="https://central.sonatype.com/artifact/io.arrow-kt/suspendapp" target="_blank" rel="noopener noreferrer"><code>suspendapp</code></a> and <a href="https://central.sonatype.com/artifact/io.arrow-kt/suspendapp-ktor" target="_blank" rel="noopener noreferrer"><code>suspendapp-ktor</code></a></li>
+<li><a href="https://central.sonatype.com/artifact/io.arrow-kt/arrow-core-jackson" target="_blank" rel="noopener noreferrer"><code>arrow-core-jackson</code></a></li>
+</ul>
+<p>These libraries are from now on part of the Arrow release train. These libraries are tested as part of every PR to our repository, ensuring the same level of quality as the rest of the Arrow libraries. The <a href="https://apidocs.arrow-kt.io/index.html" target="_blank" rel="noopener noreferrer">API docs</a> also include them.</p>
+<p><strong>New Ktor client module.</strong> The new <a href="https://apidocs.arrow-kt.io/arrow-resilience-ktor-client/index.html" target="_blank" rel="noopener noreferrer"><code>arrow-resilience-ktor-client</code></a> exposes Arrow's <a href="https://arrow-kt.io/learn/resilience/" target="_blank" rel="noopener noreferrer">resilience</a> mechanisms as <a href="https://ktor.io/docs/client-create-new-application.html" target="_blank" rel="noopener noreferrer">Ktor client</a> plug-ins. Just <code>install</code> <a href="https://apidocs.arrow-kt.io/arrow-resilience-ktor-client/arrow.resilience.ktor.client/-http-request-schedule.html" target="_blank" rel="noopener noreferrer">HttpRequestSchedule</a> or <a href="https://apidocs.arrow-kt.io/arrow-resilience-ktor-client/arrow.resilience.ktor.client/-http-circuit-breaker/index.html" target="_blank" rel="noopener noreferrer">HttpCircuitBreaker</a> to improve the behavior of your applications under unexpected circumstances.</p>
+<p><strong>Soft deprecation of <code>arrow-atomic</code>.</strong> The Kotlin Team has introduced new <a href="https://kotlinlang.org/docs/whatsnew2120.html#common-atomic-types" target="_blank" rel="noopener noreferrer">common atomic types</a> as experimental in their 2.1.20 release. This new package covers the raison d'être of <code>arrow-atomic</code>, so once the functionality in the standard library becomes stable, we intend to deprecate Arrow's (and hopefully, we'd have convinced the Kotlin Team to <a href="https://youtrack.jetbrains.com/issue/KT-76389/Provide-update-functions-for-common-atomics" target="_blank" rel="noopener noreferrer">include the <code>update</code> function</a> by then).</p>
+<p><strong><code>suspend</code>ed lazy evaluation.</strong> Arrow contains a small module for <a href="https://arrow-kt.io/learn/collections-functions/eval/" target="_blank" rel="noopener noreferrer">better control over evaluation</a>. However, it used to lack support for <code>suspend</code>ed functions. <a href="https://arrow-kt.io/learn/collections-functions/eval/" target="_blank" rel="noopener noreferrer">Until now</a>.</p>
+<p><strong>Broader Arrow ecosystem in documentation.</strong> the Arrow organization develops a few libraries, and on top of that the community has created awesome patterns and functionality. We want to showcase those libraries even more in our documentation, since expanding that knowledge benefits every Arrow user. As a first step in that direction, our <a href="https://arrow-kt.io/learn/typed-errors/outcome-progress/" target="_blank" rel="noopener noreferrer">typed errors documentation</a> now mentions <a href="https://block.github.io/quiver/" target="_blank" rel="noopener noreferrer">Quiver</a> and <a href="https://opensavvy.gitlab.io/groundwork/pedestal/api-docs/index.html" target="_blank" rel="noopener noreferrer">Pedestal</a>.</p>
+<p>On the topic of documentation, we would like to send special thanks to <a href="https://github.com/theycome" target="_blank" rel="noopener noreferrer">Ivan Yakushev</a>, which has submitted an incredible amount of grammar and spelling corrections to the Arrow website.</p>
+<div class="theme-admonition theme-admonition-tip admonition_xJq3 alert alert--success"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><path fill="currentColor" fill-rule="evenodd" d="M4.25 9a7.75 7.75 0 1 1 15.5 0v4.823l2.464 4.927H1.787l2.463-4.927zM10 23h4v-2h-4z" clip-rule="evenodd"></path></svg></span>Improving together</div><div class="admonitionContent_BuS1"><p>We are happy to hear about missing topics in the documentation, either interesting libraries or simply parts of Arrow which need more coverage. Feel free to open an issue in <a href="https://github.com/arrow-kt/arrow-website" target="_blank" rel="noopener noreferrer"><code>arrow-website</code></a> (we also accept PRs!).</p></div></div>]]></content:encoded>
+            <category>core</category>
+            <category>articles</category>
+        </item>
         <item>
             <title><![CDATA[Work on more integration]]></title>
             <link>https://arrow-kt.io/community/blog/2025/02/15/integration/</link>
@@ -37,7 +59,7 @@ now only need to care about one single repository.</p>
 <p>Speaking of maintainance, in the past weeks we have been paying some
 of the debt in our build files, that had grown too wild.
 Technically, we have moved from separate <a href="https://github.com/arrow-kt/arrow-gradle-config" target="_blank" rel="noopener noreferrer"><code>arrow-gradle-config</code></a>
-into a convention plug-in withing the same repository.
+into a convention plug-in within the same repository.
 This process has revealed some lack of uniformity between the
 different projects, especially with respect to supported platforms.
 From now on, all Arrow libraries support Native targets in
@@ -489,19 +511,6 @@ as well as the most succinct with the least lines of codes.</p>
             <description><![CDATA[A presentation by Ties van de Veen at Voxxed Days Luxembourg 2022.]]></description>
             <content:encoded><![CDATA[<p>A presentation by Ties van de Veen at Voxxed Days Luxembourg 2022.</p>]]></content:encoded>
             <category>core</category>
-            <category>videos</category>
-        </item>
-        <item>
-            <title><![CDATA[Turbocharging Kotlin: Arrow Analysis, Optics, and Meta]]></title>
-            <link>https://arrow-kt.io/community/blog/2022/06/28/turbocharging-kotlin-talking-kotlin/</link>
-            <guid>https://arrow-kt.io/community/blog/2022/06/28/turbocharging-kotlin-talking-kotlin/</guid>
-            <pubDate>Tue, 28 Jun 2022 00:00:00 GMT</pubDate>
-            <description><![CDATA[Raul Raja, Simon Vergauwen, and Alejandro Serrano appeared on Talking Kotlin to chat about Arrow.]]></description>
-            <content:encoded><![CDATA[<p>Raul Raja, Simon Vergauwen, and Alejandro Serrano appeared on Talking Kotlin to chat about Arrow.</p>]]></content:encoded>
-            <category>core</category>
-            <category>meta</category>
-            <category>optics</category>
-            <category>analysis</category>
             <category>videos</category>
         </item>
     </channel>
