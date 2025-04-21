@@ -11,8 +11,8 @@ import Admonition from '@theme/Admonition';
 When a service is overloaded, additional interaction may only worsen its
 overloaded state. This is especially true when combined with retry mechanisms such as [`Schedule`](../retry-and-repeat/).
 Sometimes, simply using a back-off retry policy might not be sufficient 
-during peak traffic. To prevent such overloaded resources from overloading, 
-a **circuit breaker** protects the service by failing fast. This helps us 
+during peak traffic. To prevent such high in demand resources from overloading, 
+a **circuit breaker** can be used to protect the service by failing fast. This helps us 
 achieve stability and prevents cascading failures in distributed systems.
 
 ## Circuit breaker protocol
@@ -55,7 +55,7 @@ graph LR;
 <Admonition type="note" icon="⤴️" title="Half Open">
 
 - The circuit breaker is in this state while allowing a request to go through as a _test request_.
-  - All other requests made while test request` is still running short-circuit/fail-fast.
+  - All other requests made while test request` is still running will short-circuit/fail-fast.
 - If the test request succeeds, the circuit breaker is tripped back into _Closed_,
   with the `resetTimeout` and the `failures` count also reset to initial values.
 - If the test request fails, the circuit breaker moves back to _Open_, 
@@ -73,7 +73,7 @@ in _Cloud Design Patterns_.
 
 ## Opening strategies
 
-Arrow offers different strategies to determine when the circuit breaker should open and short-circuit all incoming requests. The currently available ones are:
+Arrow offers several strategies to determine when the circuit breaker should open and short-circuit all incoming requests. The currently available are:
 
 - [_Count_](https://apidocs.arrow-kt.io/arrow-resilience/arrow.resilience/-circuit-breaker/-opening-strategy/-count/index.html).
   This strategy sets a maximum number of failures. Once this threshold is exceeded, the circuit breaker moves to _Open_.
@@ -82,7 +82,7 @@ Arrow offers different strategies to determine when the circuit breaker should o
 - [_Sliding Window_](https://apidocs.arrow-kt.io/arrow-resilience/arrow.resilience/-circuit-breaker/-opening-strategy/-sliding-window/index.html).
   This strategy counts the number of failures within a given time window. Unlike the `Count` approach, the circuit breaker
   will only move to `Open` if the number of failing requests tracked within the given period exceeds the threshold. As the
-  time window slides, the failures out of the window limits are ignored.
+  time window slides, the failures outside the window length are ignored.
 
 ## Arrow's [`CircuitBreaker`](https://apidocs.arrow-kt.io/arrow-resilience/arrow.resilience/-circuit-breaker/index.html)
 
@@ -214,7 +214,7 @@ suspend fun main(): Unit {
 :::tip One circuit breaker to rule them all
 
 If several (concurrent) threads access the same service, they should be
-protected by the _same_ circuit breaker. That is, not circuit breakers created
+protected by the _same_ circuit breaker. That is, not just circuit breakers created
 with the same parameters, literally the _same instance_.
 
 :::
