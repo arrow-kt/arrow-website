@@ -20,7 +20,7 @@ const createConfig = async () => {
   /** @type {import('@docusaurus/types').Config} */
   const config = {
     title: 'Arrow',
-    tagline: 'Idiomatic functional programming for Kotlin',
+    tagline: 'The perfect companion for your Kotlin journey',
     favicon: '/img/arrow-brand-icon.svg',
     url: 'https://arrow-kt.io',
     baseUrl: '/',
@@ -167,6 +167,11 @@ const createConfig = async () => {
                   to: '/libraries',
                 },
               ],
+            },
+            {
+              type: 'html',
+              position: 'right',
+              value: '<img src="https://img.shields.io/maven-central/v/io.arrow-kt/arrow-core?color=5b88f8&label=latest">',
             },
           ],
         },

@@ -28,6 +28,16 @@ away when you use Arrow Fx [high-level operations](../parallel).
 
 ## Atomic
 
+:::warning Common Atomics
+
+Since version 2.1.0,
+[common atomic types](https://kotlinlang.org/docs/whatsnew2120.html#common-atomic-types)
+are directly available in the Kotlin standard library,
+eliminating the main use case for `arrow-atomic`.
+We strongly recommend to use Kotlin's common atomic types whenever possible.
+
+:::
+
 The separate [`arrow-atomic` library](https://apidocs.arrow-kt.io/arrow-atomic/arrow.atomic/index.html) 
 provides Multiplatform-ready atomic references.
 In particular, their `getAndSet`, `getAndUpdate`, and `compareAndSet` operations
