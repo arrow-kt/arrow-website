@@ -4,10 +4,22 @@
         <title>Arrow Blog</title>
         <link>https://arrow-kt.io/community/blog/</link>
         <description>Arrow Blog</description>
-        <lastBuildDate>Mon, 21 Apr 2025 00:00:00 GMT</lastBuildDate>
+        <lastBuildDate>Tue, 22 Apr 2025 00:00:00 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
         <generator>https://github.com/jpmonette/feed</generator>
         <language>en</language>
+        <item>
+            <title><![CDATA[Arrow plug-in for IntelliJ 0.3]]></title>
+            <link>https://arrow-kt.io/community/blog/2025/04/22/arrow-intellij-0-3/</link>
+            <guid>https://arrow-kt.io/community/blog/2025/04/22/arrow-intellij-0-3/</guid>
+            <pubDate>Tue, 22 Apr 2025 00:00:00 GMT</pubDate>
+            <description><![CDATA[The new version of the Arrow plug-in for IntelliJ (and compatible IDEs) is out! This release fixes some problems in inspections related to Raise, and brings compatibility with 2025.1. The plug-in is compatible with both K1 and K2 mode of the Kotlin plug-in.]]></description>
+            <content:encoded><![CDATA[<p>The new version of the <a href="https://plugins.jetbrains.com/plugin/24550-arrow" target="_blank" rel="noopener noreferrer">Arrow plug-in for IntelliJ</a> (and compatible IDEs) is out! This release fixes some problems in inspections related to <code>Raise</code>, and brings <strong>compatibility with 2025.1</strong>. The plug-in is compatible with <strong>both K1 and K2 mode</strong> of the Kotlin plug-in.</p>
+<p>This release also brings new <strong>gutter icons</strong> inspired by the "suspended function" and "recursive function" icons in the Kotlin plug-in. These gutter icons highlight uses of <code>Raise</code> functions, and delayed computations with <code>Eval</code>. Our goal is to make a bit more explicit what the surface syntax of Kotlin keeps implicit.</p>
+<center><p><img decoding="async" loading="lazy" alt="Gutter icon for Raise" src="https://arrow-kt.io/assets/images/gutter-raise-c4e2e9c3f2c7fd82e9e1bebdbbe87ca5.png" width="534" height="184" class="img_ev3q"> <br> <em>Gutter icon for <code>Raise</code></em></p><p><img decoding="async" loading="lazy" alt="Gutter icons for Eval" src="https://arrow-kt.io/assets/images/gutter-eval-ab4e8b50ef7995dfe1617b870877a800.png" width="554" height="108" class="img_ev3q"> <br> <em>Gutter icons for <code>Eval.later</code> and <code>Eval.always</code></em></p></center>]]></content:encoded>
+            <category>intellij</category>
+            <category>articles</category>
+        </item>
         <item>
             <title><![CDATA[Arrow 2.1.0]]></title>
             <link>https://arrow-kt.io/community/blog/2025/04/21/arrow-2-1/</link>
@@ -500,16 +512,6 @@ as well as the most succinct with the least lines of codes.</p>
             <pubDate>Thu, 01 Dec 2022 00:00:00 GMT</pubDate>
             <description><![CDATA[A presentation by Simon Vergauwen at Advanced Kotlin Dev Day 2022.]]></description>
             <content:encoded><![CDATA[<p>A presentation by Simon Vergauwen at Advanced Kotlin Dev Day 2022.</p>]]></content:encoded>
-            <category>core</category>
-            <category>videos</category>
-        </item>
-        <item>
-            <title><![CDATA[Functional Programming in Kotlin: Exploring Arrow]]></title>
-            <link>https://arrow-kt.io/community/blog/2022/07/01/exploring-arrow/</link>
-            <guid>https://arrow-kt.io/community/blog/2022/07/01/exploring-arrow/</guid>
-            <pubDate>Fri, 01 Jul 2022 00:00:00 GMT</pubDate>
-            <description><![CDATA[A presentation by Ties van de Veen at Voxxed Days Luxembourg 2022.]]></description>
-            <content:encoded><![CDATA[<p>A presentation by Ties van de Veen at Voxxed Days Luxembourg 2022.</p>]]></content:encoded>
             <category>core</category>
             <category>videos</category>
         </item>
