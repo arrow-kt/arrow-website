@@ -5,7 +5,7 @@ sidebar_position: 4
 # Traversals
 
 The framework laid out by optics extends very nicely to values like lists, which
-contain any potential number of elements. Traversals is the name of that kind of
+may contain any potential number of elements. Traversals is the name of that kind of
 optic.
 
 :::info In a rush?
