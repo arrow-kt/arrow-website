@@ -283,6 +283,15 @@ provides unofficial support for that scenario.
 
 </Tabs>
 
+:::tip Multiplatform setup
+
+If you are using the optics plug-in in a Multiplatform project,
+we recommend checking the [official guide in Kotlin docs](https://kotlinlang.org/docs/ksp-multiplatform.html)
+and the [related documentation in Koin](https://insert-koin.io/docs/setup/annotations/#kotlin-kts)
+for guidance.
+
+:::
+
 ### Plug-in for IntelliJ-based IDEs
 
 If you are using an [IntelliJ IDEA](https://www.jetbrains.com/idea/) or any
