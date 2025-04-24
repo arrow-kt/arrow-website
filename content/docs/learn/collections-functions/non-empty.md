@@ -17,7 +17,7 @@ and [`NonEmptySet`](https://apidocs.arrow-kt.io/arrow-core/arrow.core/-non-empty
 
 One concrete example is given by [error accumulation](../../typed-errors/working-with-typed-errors/#accumulating-errors).
 A type like `Either<List<Problem>, Result>` may take us to the weird case in
-which we end with `Left`, but we have no `Problem`s in the `List`. To avoid
+which we end up with `Left`, but we have no `Problem`s in the `List`. To avoid
 this issue, Arrow makes `mapOrAccumulate` and `zipOrAccumulate` return
 `Either<NonEmptyList<Problem>, Result>` instead.
 
