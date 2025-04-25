@@ -7,7 +7,7 @@ description: Making functions stack-safe and efficient
 
 Algorithms with a functional flavor tend to favor recursion over looping.
 This is often hidden in higher-level functions like `map` and `filter`,
-so you don't often see it on your code. However, when the time comes, some
+so you don't often see it in your code. However, when the time comes, some
 platforms (including the JVM) can make your life quite difficult: deep
 recursion means a deep stack, so you can easily get a `StackOverflowError`,
 even for not-so-big values.
@@ -55,11 +55,11 @@ fun example() {
 <!--- KNIT example-recursive-01.kt -->
 <!--- TEST assert -->
 
-To make this function stack-safe we move the worker from being a regular
+To make this function stack-safe we change the worker from being a regular
 function into being a `DeepRecursiveFunction`. The latter takes a block which
 defines the function, very similar to a regular one. The key change is that
 instead of calling `fibonacciWorker`, we use `callRecursive` every time we
-need recursion.
+need a recursive call.
 
 <!--- INCLUDE
 fun fibonacci(n: Int): Int {
