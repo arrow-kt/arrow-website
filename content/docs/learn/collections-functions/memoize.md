@@ -6,9 +6,9 @@ description: Avoiding duplicate work for pure functions
 # Memoization
 
 Say that your function is pure, that is, given the same inputs it always
-produces the same outputs and it doesn't produce any other effects like printing
+produces the same outputs, and it doesn't produce any other effects like printing
 to the screen. Then, once you execute the function for a given input, you could
-save (or cache) the result, so the next time you need you don't compute it
+save (or cache) the result, so the next time you need it you don't have to compute it
 again. The general technique of saving outputs to avoid double computation of
 pure functions is known as _memoization_.
 
@@ -32,7 +32,7 @@ import io.kotest.matchers.shouldBe
 
 Arrow Core contains a small utility called
 [`memoize`](https://apidocs.arrow-kt.io/arrow-core/arrow.core/memoize.html)
-which transforms any function into one that keep a cache of computed results.
+which transforms any function into one that keeps a cache of computed results.
 
 ```kotlin
 import arrow.core.memoize
@@ -75,7 +75,7 @@ caching library which you can use to manually tweak your memoization.
 
 ## Recursion
 
-The technique outline above can be applied to any function, regardless of its
+The technique outlined above can be applied to any function, regardless of its
 provenance. However, one needs to be aware of the limitations of `memoize` with
 respect to recursive functions.
 
