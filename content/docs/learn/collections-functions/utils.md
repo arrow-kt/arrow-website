@@ -25,7 +25,7 @@ often.
 :::danger Not idiomatic
 
 Although the following functions are very commonly used in other functional
-languages, they are not considered idiomatic Kotlin. Most Kotlin developers
+languages, they are not considered idiomatically Kotlin. Most Kotlin developers
 prefer a block with an explicit call, `{ dance(2, it) }`, instead of 
 manipulating the function value as described in this section, `::dance.partially1(2)`.
 
@@ -97,6 +97,12 @@ depending on the amount of values you inject.
 The functions provided by Arrow always start fixing arguments from the left,
 that is, from the "first" parameter in the signature. At the moment of writing
 there are no versions of partial application for functions with a receiver.
+
+:::
+
+:::note Where to find it
+
+`partiallyN` functions are a part of the `arrow-functions` library.
 
 :::
 
