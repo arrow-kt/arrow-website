@@ -23,7 +23,7 @@ and on [learnk8s.io](https://learnk8s.io/graceful-shutdown).
 :::
 
 The module `suspendapp-ktor` provides a `server` constructor that lifts the Ktor `ApplicationEngine` in to a Resource,
-representing the _Engine_ running an `Application`(i.e `Netty`) while supporting [auto-reload](https://ktor.io/docs/auto-reload.html).
+representing the _Engine_ running an `Application` (i.e `Netty`) while supporting [auto-reload](https://ktor.io/docs/auto-reload.html).
 The example below introduces graceful shutdown for Kubernetes;
 we additionally use `awaitCancellation` to _await_ `SIGTERM`, `SIGINT` or other shutdown hooks.
 
@@ -42,15 +42,27 @@ fun main() = SuspendApp {
 }
 ```
 
-When the `release` function of our `ApplicationEngine` is called, there is a `wait` period before the beginning of the stop
+When the `release` function of our `ApplicationEngine` is called, there is a `preWait` period before the beginning of the stop
 process (defaulted to `30.seconds`), this gives Kubernetes enough time to do all its network management before we shut down.
 Two more parameters are available:
-- `grace` which sets the number of seconds during which already inflight requests are allowed to continue before the shutdown process begins,
-- `timeout` which sets the number of seconds after which the server will be forceably shutdown.
+- `grace` which sets the number of seconds during which already in-flight requests are allowed to continue before the shutdown process begins,
+- `timeout` which sets the number of seconds after which the server will be forcibly shutdown.
+
+
+:::warning Ktor Shutdown Hook
+
+Ktor includes its own Shutdown Hook handling by default, which will handle the `SIGTERM` and `stop` the Ktor Server without
+waiting for the configured `preWait` period.
+
+This can be disabled on the JVM by setting the `io.ktor.server.engine.ShutdownHook` system property to `false`.
+
+It is not currently possible to disable it on other platforms.
+
+:::
 
 :::note Development mode
 
 In the case that Ktor server is set in
-[development mode](https://ktor.io/docs/development-mode.html), the `wait` period is ignored.
+[development mode](https://ktor.io/docs/development-mode.html), the `preWait` period is ignored.
 
 :::
