@@ -231,6 +231,12 @@ The Arrow team follows an eager dependency update policy. That means that Arrow 
 
 :::
 
+### Additional setup for Android
+
+If you are using Arrow in Android, you should enable
+[library desugaring](https://developer.android.com/studio/write/java8-support#library-desugaring) in your final application.
+This is especially important if you use `arrow-collectors`, since that library uses APIs available only from Java 11 on.
+
 ### Additional setup for plug-ins
 
 If you're using the Optics component of Arrow, we provide a Kotlin compiler 
