@@ -67,7 +67,7 @@ Akkurate provides a language to describe complex validation code. It provides [i
 ### [Retrofit](https://square.github.io/retrofit/)
 
 If Retrofit is your library of choice for querying HTTP services, this
-[small integration module](https://github.com/arrow-kt/arrow/tree/main/arrow-libs/core/arrow-core-retrofit)
+[small integration module](https://apidocs.arrow-kt.io/arrow-core-retrofit/index.html)
 may come in quite handy.
 
 ### [Ktor](https://ktor.io/)
@@ -86,11 +86,19 @@ install(ContentNegotiation) {
 }
 ```
 
-If you're using Jackson, you can use the
-[custom mapper](https://github.com/arrow-kt/arrow-integrations#ktor),
+If you're using Jackson, you can use a custom mapper,
 and pass it to the `ContentNegotiation` configuration.
 
 ```
+object JsonMapper {
+  val mapper: ObjectMapper = ObjectMapper()
+    .registerModule(KotlinModule(singletonSupport = SingletonSupport.CANONICALIZE))
+    .registerArrowModule()
+    .disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES)
+    .disable(JsonParser.Feature.INCLUDE_SOURCE_IN_LOCATION)
+    .setSerializationInclusion(JsonInclude.Include.NON_ABSENT)
+}
+
 install(ContentNegotiation) {
   register(ContentType.Application.Json, JacksonConverter(JsonMapper.mapper))
 }

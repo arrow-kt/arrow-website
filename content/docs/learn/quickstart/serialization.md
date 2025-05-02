@@ -76,8 +76,9 @@ in a Ktor project.
 
 ## [Jackson](https://github.com/FasterXML/jackson)
 
-If you're using Jackson for serialization, [this module](https://github.com/arrow-kt/arrow-integrations#jackson-module)
-adds support for Arrow types. You just need to call an additional method when
+If you're using Jackson for serialization, you need to depend on the
+`arrow-core-jackson` with the same version of your `arrow-core`.
+You just need to call an additional method when
 creating the mapper.
 
 ```
