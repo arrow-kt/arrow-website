@@ -9,13 +9,15 @@ import DocCardList from '@theme/DocCardList';
 
 _Typed errors_ refer to a technique from functional programming in which we
 make _explicit_ in the signature (or _type_) the potential errors that may
-arise during the execution of a piece of code. Arrow provides two different
+arise during the execution of a piece of code. 
+
+Arrow provides two different
 **approaches** to typed errors:
 
 1. The `Raise` DSL uses an extension receiver which represents a _context_
    in which errors of a certain type may be raised. This approach often results
    in a more idiomatic code.
-By using _wrapper types_, like `Either`, `Option`, or `Result`, we indicate
+2. By using _wrapper types_, like `Either`, `Option`, or `Result`, we indicate
    that a computation might end with a logical error which we specify in the return
    type.
 
