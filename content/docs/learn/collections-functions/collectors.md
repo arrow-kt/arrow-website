@@ -78,7 +78,7 @@ and the latter as _terminal_.
   of transformations.
 - Operations like `sum` and `size` belong to the group of consumers.
 
-Collectors, as introducing in this section, focus on the second group.
+Collectors, as introduced in this section, focus on the second group.
 For transformation of sequences, Kotlin already provides two good tools:
 
 - [Sequences](https://kotlinlang.org/docs/sequences.html) describe
