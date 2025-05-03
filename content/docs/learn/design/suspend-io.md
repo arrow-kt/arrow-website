@@ -11,13 +11,13 @@ based on `suspend` and top-level extension functions over
 `suspend () -> A`. This section explains the rationale behind this choice.
 
 The reason for using `IO` is because you care about writing side-effecting code in a safe and referential transparent manner.
-Additionally, `IO` offers powerful concurrent operators and cancellation in addition of offering a referential transparent runtime.
+Additionally, `IO` offers powerful concurrent operators and cancellation in addition to offering a referential transparent runtime.
 These properties are what makes using `IO` powerful, and `suspend` offers the exact same properties but natively in the language with support from the compiler. 
 
 :::info Arrow and Kotlin
 
 One of the main goals of Arrow is to provide APIs which feel idiomatic to
-Kotlin developers. This section should be read on that light; what is a good
+Kotlin developers. This section should be read in that light; what is a good
 choice in Kotlin may not have the right trade-offs in other ecosystems.
 
 :::
@@ -25,7 +25,7 @@ choice in Kotlin may not have the right trade-offs in other ecosystems.
 ## Ergonomics
 
 `IO` requires a wrapper in the return type: `fun number(): IO<Int>`, and thus we always have to work with the `IO` type to access the value we care about within.
-A typical pattern for this using `flatMap`, so let's say we want to calculate 3 numbers and return them as a `Triple`.
+A typical pattern for this is to use `flatMap`, so let's say we want to calculate 3 numbers and return them as a `Triple`.
 To make the example concrete we use names inspired by [Cats Effect](https://typelevel.org/cats-effect/docs/getting-started).
 
 ```kotlin
@@ -43,8 +43,8 @@ fun triple(): IO<Triple<Int, Int, Int>> =
 
 So simply to call a function 3 times, and combine the result into a `Triple` we had to use `flatMap` twice and `map`.
 What that means under the hood we'll discuss in the performance section but in terms of ergonomics this is not ideal.
-Especially not if we can compare it to the following `suspend` code.
-We can see that we can forget about `flatMap` and `map`, and construct the `Triple` and call `number()` three times directly in the constructor.
+Especially not if we will compare it to the following `suspend` code.
+We notice that we can forget about `flatMap` and `map`, and construct the `Triple` and call `number()` three times directly in the constructor.
 
 ```kotlin
 suspend fun number(): Int = 1
@@ -74,12 +74,12 @@ Important here is that a `Throwable` that occurs in an async thread is safely ca
 which is equivalent to `Either<Throwable, A>`, and it can be used to offer the same safety guarantees as `IO`.
 So the `suspend` API can also always return any exception safely to the user, and it can be recovered from at any point in the code.
 In contrast to `IO`, we can only find [`startCoroutine`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.coroutines/start-coroutine.html)
-in the standard library, and has the same behavior as `unsafeRunAsync`.
+in the standard library, which has the same behavior as `unsafeRunAsync`.
 Instead of `f: (Either<Throwable, A>) -> Unit` you provide `f: (Result<A>) -> Unit` to run the `suspend () -> A` program.
 
 :::tip Conclusion
 
-`suspend () -> A` offers us the exact same guarantees as `IO<A>`.
+`suspend () -> A` offers us the same exact guarantees as `IO<A>`.
 
 :::
 
@@ -91,8 +91,8 @@ _monad transformers_ to `suspend`.
 
 ### Domain errors
 
-When writing functional code style we often want to express our domain errors as clearly as possible, a popular pattern is to return `Either<DomainError, SuccessValue>`.
-Let's assume following domain, and compare two snippets: one using `IO<Either<E, A>>`, and another `suspend () -> Either<E, A>`.
+When writing code in functional style we often want to express our domain errors as clearly as possible, a popular pattern is to return `Either<DomainError, SuccessValue>`.
+Let's assume the following domain, and compare two snippets: one using `IO<Either<E, A>>`, and another `suspend () -> Either<E, A>`.
 
 ```kotlin
 import arrow.core.Either
@@ -142,14 +142,14 @@ suspend fun suspendProgram(): Either<PersistenceError, ProcessedUser> =
     processed
   }
 ```
-The above two examples demonstrate how much simpler `suspend` is over its `IO` counterpart and how the `either` computation block allows us to bind values of `Either` to extract their right side all while inside `suspend`. Arrow allows intermixing effects in suspension. What otherwise would have required the `EitherT` transformer over `IO` now it can just be expressed by wrapping in `either` instead
+The two above examples demonstrate how much simpler `suspend` is over its `IO` counterpart and how the `either` computation block allows us to bind values of `Either` to extract their right side all the while being inside `suspend`. Arrow allows intermixing effects in suspension. What otherwise would have required the `EitherT` transformer over `IO` now can just be expressed by wrapping in `either` instead.
 
 ### Dependency injection
 
 We can use extension functions to do functional dependency injection with similar semantics as `Reader` or `Kleisli`.
 They allow us to elegantly define syntax for a certain type.
 
-Let's reuse our previous domain of`User`, `ProcessedUser`, but let's introduce `Repo` and `Persistence` layers to mimic what could be a small app with a couple layers.
+Let's reuse our previous domain of`User`, `ProcessedUser`, but let's introduce `Repo` and `Persistence` layers to mimic something what could have been a small app with a couple of layers.
 
 ```kotlin
 interface Repo {
@@ -202,7 +202,7 @@ suspend fun <R> R.getProcessedUsers(): Either<PersistenceError, List<ProcessedUs
 Working with an actual data type such as `IO<A>` implies that each composition of our program has some allocation cost.
 This happens because `IO` requires different data classes to move computation from the stack to the heap in order to compose them and preserve properties such as lazy evaluation semantics. In contrast, when using `suspend`, the Kotlin compiler is aware of function composition on each suspension point and can desugar and specializes the program into more efficient target code. The code generated by the Kotlin compiler is better in terms of allocations and throughput when compared to other implementations of `IO` in the JVM.
 
-Let's take our previous example from ergonomics:
+Let's consider our previous example for ergonomics:
  
 ```kotlin
 import arrow.fx.IO
@@ -233,7 +233,7 @@ fun triple(): IO<Triple<Int, Int, Int>> =
   }
 ```
 
-This is necessary so when `unsafeRun` is invoked the `IO` program can find the branch representing the kind of operation of `IO` that needs to be interpreted. In the example above `IO.FlatMap`, `IO.Map` or `IO.Pure`
+This is necessary so that when `unsafeRun` is invoked the `IO` program can find the branch representing the kind of operation of `IO` that needs to be interpreted. In the example above it's `IO.FlatMap`, `IO.Map` or `IO.Pure`
 
 In contrast, `suspend` can simply be wired by the Kotlin compiler eliminating the need for additional `sealed class` declarations and allocations keeping computations in the stack instead of maintaining value level in memory representations of our program. 
 The Kotlin compiler rewrites the suspend program to a super fast runtime which uses a switch table and mutable state machine to run the `suspend` program.
