@@ -10,7 +10,7 @@ guaranteeing that those values are consumed only once.
 
 :::note Where to find it
 
-Collectors live in the `arrow-collectors` library. This library is still in experimental state, but no big changes are expected.
+Collectors live in the `arrow-collectors` library. This library is still in experimental state, but no big changes are expected. Using this library from Android requires [library desugaring](https://developer.android.com/studio/write/java8-support#library-desugaring).
 
 :::
 
