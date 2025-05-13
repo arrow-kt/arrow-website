@@ -31,7 +31,7 @@ import io.kotest.matchers.shouldBe
 -->
 
 Arrow Core contains a small utility called
-[`memoize`](https://apidocs.arrow-kt.io/arrow-core/arrow.core/memoize.html)
+[`memoize`](https://apidocs.arrow-kt.io/arrow-functions/arrow.core/memoize.html)
 which transforms any function into one that keeps a cache of computed results.
 
 ```kotlin
