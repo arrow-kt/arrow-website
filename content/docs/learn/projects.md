@@ -25,7 +25,7 @@ Service to create an answer quizzes, written in a functional style. Apart from A
 
 ## [MasterMind](https://gist.github.com/jakzal/3f0ee968fe8073ee81e328ecbd59fe8b)
 
-Implementation of the game using functional event sourcing. The [accompanying blog post](https://dev.to/jakub_zalas/functional-event-sourcing-example-in-kotlin-3245) is part of a series that covers both domain modelling and event sourcing.
+Implementation of the game using functional event sourcing. The [accompanying blog post](https://zalas.pl/functional-event-sourcing-example-in-kotlin/) is part of a [series](https://zalas.pl/series/event-sourcing/) that covers both domain modelling and event sourcing.
 
 ## [Weather App](https://github.com/serras/WeatherApp)
 
