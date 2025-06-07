@@ -8,7 +8,7 @@ ksp = "2.1.21-2.0.1"
 kotlinKafka = "0.4.1"
 cache4k = "0.14.0"
 quiver = "1.0.0"
-pedestal = "2.3.0"
+pedestal = "3.0.0"
 
 [libraries]
 coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "coroutines" }
