@@ -88,7 +88,7 @@ Although every application is unique, a common scenario in interactive
 applications involve having a "success state" and an "error state".
 For example, correctly loading the user data, or encountering a problem
 with connection or authentication. Instead of rolling out your own types,
-Arrow (and our sibling library [Quiver](https://cashapp.github.io/quiver/))
+Arrow (and our sibling library [Quiver](https://block.github.io/quiver/))
 provide out-of-the-box solutions:
 
 - [`Either`](../../typed-errors/either-and-ior/) describes a model
@@ -100,7 +100,7 @@ provide out-of-the-box solutions:
   option, namely succeeding but still with some problems along the way.
   This type is useful to model domains where we can work with some
   erroneous or missing information.
-- [`Outcome`](https://cashapp.github.io/quiver/-quiver%20-library/app.cash.quiver/-outcome/index.html)
+- [`Outcome`](https://block.github.io/quiver/-quiver%20-library/app.cash.quiver/-outcome/index.html)
   models success, failure, and absence. The latter case is useful
   when the application may be in _loading_ state: still no problems,
   but no data ready either.
