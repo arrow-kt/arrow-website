@@ -17,7 +17,7 @@ import arrow.core.Either
 -->
 
 Both [`Either<E, A>`](https://apidocs.arrow-kt.io/arrow-core/arrow.core/-either/index.html)
-and [`Ior<E, A>`](https://apidocs.arrow-kt.io/arrow-core/arrow.core/-ior/index.html)
+and [`Ior<E, A>`](https://apidocs.arrow-kt.io/arrow-core/arrow.core/-ior/index.html) (*I*nclusive *Or*)
 hold values that may be of type `E` or `A`.
 By convention, the type `E` represents _errors_ and the type `A` represents
 _success_. For example, `Either<DbError, User>` could be a good result type for
