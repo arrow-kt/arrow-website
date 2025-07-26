@@ -50,7 +50,7 @@ graph LR;
 
 When writing a composition pipeline `f compose g compose h`, remember that
 computations are applied in **right-to-left** order; in this case we begin
-with `h` and finish with `f`. This mirrors the way you would write them
+with `h` and finish with `f`. This parallels the way you would write them
 using explicit invocations, `{ f(g(h(it))) }`.
 
 :::
