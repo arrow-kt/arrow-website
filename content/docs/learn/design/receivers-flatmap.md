@@ -83,7 +83,7 @@ suspend fun getUserName(id: UserId): String? =
 Although coroutines are often explained together with the concurrency mechanisms from [`kotlinx.coroutines`](https://github.com/Kotlin/kotlinx.coroutines), those are separate ideas. Coroutines allow _fine-grained control_ over the computations within a `suspend` block. Concurrency is one form of exercising this control, deciding when and in which threads computations will happen. But this is not the only one,
 
 - [Inikio](http://serranofp.com/inikio/) is a library that leverages `suspend` to create "imperative" syntax for domain-specific languages;
-- Arrow provides [computation builders](https://github.com/arrow-kt/arrow/tree/main/arrow-libs/core/arrow-core/src/commonMain/kotlin/arrow/core/computations) where you can write functions over `Either`, `Result`, or nullable types without having to check for the error path at each step.
+- Arrow provides [computation builders](https://github.com/arrow-kt/arrow/blob/arrow-2/arrow-libs/core/arrow-core/src/commonMain/kotlin/arrow/core/raise/Builders.kt) where you can write functions over `Either`, `Result`, or nullable types without having to check for the error path at each step.
 
 The ability to control computation in that way comes from the transformation performed by the compiler into [_continuation-passing style_](https://en.wikibooks.org/wiki/Haskell/Continuation_passing_style). Long story short, our functions above really take an additional argument -- the continuation -- which is "fed" the resulting value of the function.
 
@@ -175,7 +175,7 @@ fun <A, B> A?.flatMap(next: (A) -> B?): B? =
   }
 ```
 
-One important monad for both Haskell and Scala is the `IO` monad, which marks the code as "impure", that is, as having potential side effects like writing or reading from a device. Note that in the case of Scala, there's not a unified `IO` monad; we have [Cats Effect](https://typelevel.org/cats-effect/api/3.x/cats/effect/IO.html) and [ZIO](https://zio.dev/overview/getting-started) as main examples. In Kotlin [the same can be achieved with `suspend`](https://arrow-kt.io/docs/effects/io/); to start running a suspended computation, we need to call it from `main` or from `runBlocking`, which amounts to the same guarantees as found in Haskell and Scala.
+One important monad for both Haskell and Scala is the `IO` monad, which marks the code as "impure", that is, as having potential side effects like writing or reading from a device. Note that in the case of Scala, there's not a unified `IO` monad; we have [Cats Effect](https://typelevel.org/cats-effect/api/3.x/cats/effect/IO.html) and [ZIO](https://zio.dev/overview/getting-started) as main examples. In Kotlin [the same can be achieved with `suspend`](https://arrow-kt.io/learn/design/suspend-io/); to start running a suspended computation, we need to call it from `main` or from `runBlocking`, which amounts to the same guarantees as found in Haskell and Scala.
 
 Alas, code written with monads tends to break under the weight of all the `flatMap`s in the way and the nesting associated with them.
 
@@ -237,7 +237,7 @@ One interesting application of this style is an ergonomic interface for errors. 
 context(Raise<E>) () -> A
 ```
 
-can be [executed](https://github.com/arrow-kt/arrow/blob/arrow-2/arrow-libs/core/arrow-core/src/commonMain/kotlin/arrow/core/continuations/Builders.kt) into an `Either`, a `Result` (is `E` is `Throwable`), and many other similar types. However, nothing stops you from having more than one `Raise` in your context if you want to be completely explicit about errors.
+can be [executed](https://github.com/arrow-kt/arrow/blob/arrow-2/arrow-libs/core/arrow-core/src/commonMain/kotlin/arrow/core/raise/Builders.kt) into an `Either`, a `Result` (is `E` is `Throwable`), and many other similar types. However, nothing stops you from having more than one `Raise` in your context if you want to be completely explicit about errors.
 
 ```kotlin
 context(Raise<DbConnectionError>, Raise<MalformedQuery>)
