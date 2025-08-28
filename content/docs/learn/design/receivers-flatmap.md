@@ -143,8 +143,8 @@ fun <T> async(block: context(CoroutineScope) suspend () -> T): Deferred<T>
 
 we can see that those scopes are nothing else than _effects_! This notion is visible in several places in the Arrow library,
 
-- A [`ResourceScope`](https://github.com/arrow-kt/arrow/blob/arrow-2/arrow-libs/fx/arrow-fx-coroutines/src/commonMain/kotlin/arrow/fx/coroutines/Resource.kt) brings the ability to acquire and release resources correctly,
-- [`STM`](https://github.com/arrow-kt/arrow/blob/arrow-2/arrow-libs/fx/arrow-fx-stm/src/commonMain/kotlin/arrow/fx/stm/STM.kt) introduces the concept of transactional variables, whose concurrent access is protected.
+- A [`ResourceScope`](https://github.com/arrow-kt/arrow/blob/main/arrow-libs/fx/arrow-fx-coroutines/src/commonMain/kotlin/arrow/fx/coroutines/Resource.kt) brings the ability to acquire and release resources correctly,
+- [`STM`](https://github.com/arrow-kt/arrow/blob/main/arrow-libs/fx/arrow-fx-stm/src/commonMain/kotlin/arrow/fx/stm/STM.kt) introduces the concept of transactional variables, whose concurrent access is protected.
 
 To perform their duty, `resourceScope` (the "runner" for `ResourceScope`) and `atomically` (the "runner" for `STM`) need control over the computation. That's precisely where the coroutine system becomes necessary.
 
@@ -237,7 +237,7 @@ One interesting application of this style is an ergonomic interface for errors. 
 context(Raise<E>) () -> A
 ```
 
-can be [executed](https://github.com/arrow-kt/arrow/blob/arrow-2/arrow-libs/core/arrow-core/src/commonMain/kotlin/arrow/core/raise/Builders.kt) into an `Either`, a `Result` (is `E` is `Throwable`), and many other similar types. However, nothing stops you from having more than one `Raise` in your context if you want to be completely explicit about errors.
+can be [executed](https://github.com/arrow-kt/arrow/blob/main/arrow-libs/core/arrow-core/src/commonMain/kotlin/arrow/core/raise/Builders.kt) into an `Either`, a `Result` (is `E` is `Throwable`), and many other similar types. However, nothing stops you from having more than one `Raise` in your context if you want to be completely explicit about errors.
 
 ```kotlin
 context(Raise<DbConnectionError>, Raise<MalformedQuery>)
