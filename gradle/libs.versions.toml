@@ -7,7 +7,7 @@ arrow = "2.1.2"
 ksp = "2.2.0-2.0.2"
 kotlinKafka = "0.4.1"
 cache4k = "0.14.0"
-quiver = "1.0.0"
+quiver = "1.0.2"
 pedestal = "3.1.1"
 
 [libraries]
