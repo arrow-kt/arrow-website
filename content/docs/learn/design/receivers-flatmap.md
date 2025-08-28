@@ -83,7 +83,7 @@ suspend fun getUserName(id: UserId): String? =
 Although coroutines are often explained together with the concurrency mechanisms from [`kotlinx.coroutines`](https://github.com/Kotlin/kotlinx.coroutines), those are separate ideas. Coroutines allow _fine-grained control_ over the computations within a `suspend` block. Concurrency is one form of exercising this control, deciding when and in which threads computations will happen. But this is not the only one,
 
 - [Inikio](http://serranofp.com/inikio/) is a library that leverages `suspend` to create "imperative" syntax for domain-specific languages;
-- Arrow provides [computation builders](https://github.com/arrow-kt/arrow/blob/arrow-2/arrow-libs/core/arrow-core/src/commonMain/kotlin/arrow/core/raise/Builders.kt) where you can write functions over `Either`, `Result`, or nullable types without having to check for the error path at each step.
+- Arrow provides [computation builders](https://github.com/arrow-kt/arrow/blob/main/arrow-libs/core/arrow-core/src/commonMain/kotlin/arrow/core/raise/Builders.kt) where you can write functions over `Either`, `Result`, or nullable types without having to check for the error path at each step.
 
 The ability to control computation in that way comes from the transformation performed by the compiler into [_continuation-passing style_](https://en.wikibooks.org/wiki/Haskell/Continuation_passing_style). Long story short, our functions above really take an additional argument -- the continuation -- which is "fed" the resulting value of the function.
 
