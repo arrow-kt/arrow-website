@@ -48,7 +48,7 @@ fun example() {
 }
 ```
 <!--- KNIT example-option-02.kt -->
-<!--- TEST lines.first().startsWith("Exception in thread \"main\" java.lang.AssertionError: Expected null but actual was -1") -->
+<!--- TEST lines.first().contains("Expected null but actual was -1") -->
 
 Now we're executing the function on a list that `isNotEmpty`, so we expect it to return the first element of value `null`.
 Instead, it returns `-1`, the default value we specified in case the list `isEmpty`!
@@ -233,7 +233,7 @@ import arrow.core.None
 import arrow.core.Some
 import arrow.core.none
 import arrow.core.some
-import io.kotest.assertions.fail
+import io.kotest.assertions.AssertionErrorBuilder.Companion.fail
 import io.kotest.matchers.shouldBe
 -->
 ```kotlin

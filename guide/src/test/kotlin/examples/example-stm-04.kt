@@ -2,7 +2,6 @@
 package arrow.website.examples.exampleStm04
 
 
-import io.kotest.assertions.fail
 import io.kotest.matchers.shouldBe
 
 import arrow.fx.stm.atomically

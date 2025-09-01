@@ -8,7 +8,7 @@ import arrow.core.raise.ensure
 import arrow.core.raise.either
 import arrow.core.raise.Raise
 import arrow.core.raise.recover
-import io.kotest.assertions.fail
+import io.kotest.assertions.AssertionErrorBuilder.Companion.fail
 import io.kotest.matchers.shouldBe
 
 data class User(val id: Long)

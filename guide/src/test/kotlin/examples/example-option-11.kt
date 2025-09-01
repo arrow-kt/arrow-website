@@ -5,7 +5,7 @@ import arrow.core.None
 import arrow.core.Some
 import arrow.core.none
 import arrow.core.some
-import io.kotest.assertions.fail
+import io.kotest.assertions.AssertionErrorBuilder.Companion.fail
 import io.kotest.matchers.shouldBe
 
 fun example() {

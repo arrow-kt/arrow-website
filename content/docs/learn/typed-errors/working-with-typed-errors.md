@@ -115,7 +115,7 @@ import arrow.core.right
 import arrow.core.raise.Raise
 import arrow.core.raise.either
 import arrow.core.raise.fold
-import io.kotest.assertions.fail
+import io.kotest.assertions.AssertionErrorBuilder.Companion.fail
 import io.kotest.matchers.shouldBe
 -->
 ```kotlin
@@ -143,7 +143,7 @@ import arrow.core.Either.Right
 import arrow.core.left
 import arrow.core.raise.Raise
 import arrow.core.raise.fold
-import io.kotest.assertions.fail
+import io.kotest.assertions.AssertionErrorBuilder.Companion.fail
 import io.kotest.matchers.shouldBe
 
 object UserNotFound
@@ -170,7 +170,7 @@ import arrow.core.raise.ensure
 import arrow.core.raise.either
 import arrow.core.raise.Raise
 import arrow.core.raise.fold
-import io.kotest.assertions.fail
+import io.kotest.assertions.AssertionErrorBuilder.Companion.fail
 import io.kotest.matchers.shouldBe
 
 data class User(val id: Long)
@@ -222,7 +222,7 @@ import arrow.core.raise.ensureNotNull
 import arrow.core.raise.either
 import arrow.core.raise.Raise
 import arrow.core.raise.fold
-import io.kotest.assertions.fail
+import io.kotest.assertions.AssertionErrorBuilder.Companion.fail
 import io.kotest.matchers.shouldBe
 
 data class User(val id: Long)
@@ -263,7 +263,7 @@ import arrow.core.Either.Right
 import arrow.core.left
 import arrow.core.raise.Raise
 import arrow.core.raise.fold
-import io.kotest.assertions.fail
+import io.kotest.assertions.AssertionErrorBuilder.Companion.fail
 import io.kotest.matchers.shouldBe
 
 object UserNotFound
@@ -305,7 +305,7 @@ import arrow.core.left
 import arrow.core.raise.Raise
 import arrow.core.raise.fold
 import arrow.core.raise.either
-import io.kotest.assertions.fail
+import io.kotest.assertions.AssertionErrorBuilder.Companion.fail
 import io.kotest.matchers.shouldBe
 
 object UserNotFound
@@ -332,7 +332,7 @@ import arrow.core.right
 import arrow.core.raise.Raise
 import arrow.core.raise.either
 import arrow.core.raise.fold
-import io.kotest.assertions.fail
+import io.kotest.assertions.AssertionErrorBuilder.Companion.fail
 import io.kotest.matchers.shouldBe
 
 object UserNotFound
@@ -364,7 +364,7 @@ import arrow.core.right
 import arrow.core.raise.Raise
 import arrow.core.raise.either
 import arrow.core.raise.fold
-import io.kotest.assertions.fail
+import io.kotest.assertions.AssertionErrorBuilder.Companion.fail
 import io.kotest.matchers.shouldBe
 
 object Problem
@@ -456,7 +456,7 @@ import arrow.core.raise.ensure
 import arrow.core.raise.either
 import arrow.core.raise.Raise
 import arrow.core.raise.recover
-import io.kotest.assertions.fail
+import io.kotest.assertions.AssertionErrorBuilder.Companion.fail
 import io.kotest.matchers.shouldBe
 
 data class User(val id: Long)

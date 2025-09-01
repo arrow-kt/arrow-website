@@ -7,7 +7,7 @@ import arrow.core.Either.Right
 import arrow.core.left
 import arrow.core.raise.Raise
 import arrow.core.raise.fold
-import io.kotest.assertions.fail
+import io.kotest.assertions.AssertionErrorBuilder.Companion.fail
 import io.kotest.matchers.shouldBe
 
 object UserNotFound
