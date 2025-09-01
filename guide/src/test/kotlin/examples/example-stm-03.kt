@@ -2,7 +2,6 @@
 package arrow.website.examples.exampleStm03
 
 
-import io.kotest.assertions.fail
 import io.kotest.matchers.shouldBe
 
 import arrow.fx.stm.atomically
@@ -12,18 +11,18 @@ import kotlinx.coroutines.async
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.coroutineScope
 
-fun STM.transfer(from: TVar<Int>, to: TVar<Int>, amount: Int): Unit {
+fun STM.transfer(from: TVar<Int>, to: TVar<Int>, amount: Int) {
   withdraw(from, amount)
   deposit(to, amount)
 }
 
-fun STM.deposit(acc: TVar<Int>, amount: Int): Unit {
+fun STM.deposit(acc: TVar<Int>, amount: Int) {
   val current = acc.read()
   acc.write(current + amount)
   // or the shorthand acc.modify { it + amount }
 }
 
-fun STM.withdraw(acc: TVar<Int>, amount: Int): Unit {
+fun STM.withdraw(acc: TVar<Int>, amount: Int) {
   val current = acc.read()
   if (current - amount >= 0) acc.write(current - amount)
   else retry()

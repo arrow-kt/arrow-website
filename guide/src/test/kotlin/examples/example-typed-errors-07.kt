@@ -8,7 +8,7 @@ import arrow.core.right
 import arrow.core.raise.Raise
 import arrow.core.raise.either
 import arrow.core.raise.fold
-import io.kotest.assertions.fail
+import io.kotest.assertions.AssertionErrorBuilder.Companion.fail
 import io.kotest.matchers.shouldBe
 
 object UserNotFound

@@ -47,7 +47,6 @@ produce an invalid state by committing after the read state has changed concurre
 
 <!--- INCLUDE .*
 
-import io.kotest.assertions.fail
 import io.kotest.matchers.shouldBe
 
 -->
@@ -57,18 +56,18 @@ import arrow.fx.stm.atomically
 import arrow.fx.stm.TVar
 import arrow.fx.stm.STM
 
-fun STM.transfer(from: TVar<Int>, to: TVar<Int>, amount: Int): Unit {
+fun STM.transfer(from: TVar<Int>, to: TVar<Int>, amount: Int) {
   withdraw(from, amount)
   deposit(to, amount)
 }
 
-fun STM.deposit(acc: TVar<Int>, amount: Int): Unit {
+fun STM.deposit(acc: TVar<Int>, amount: Int) {
   val current = acc.read()
   acc.write(current + amount)
   // or the shorthand acc.modify { it + amount }
 }
 
-fun STM.withdraw(acc: TVar<Int>, amount: Int): Unit {
+fun STM.withdraw(acc: TVar<Int>, amount: Int) {
   val current = acc.read()
   require(current - amount >= 0) { "Not enough money in the account!" }
   acc.write(current - amount)
@@ -107,7 +106,7 @@ import arrow.fx.stm.STM
 -->
 
 ```kotlin
-fun STM.deposit(accVar: TVar<Int>, amount: Int): Unit {
+fun STM.deposit(accVar: TVar<Int>, amount: Int) {
   var acc by accVar       // property delegation
   val current = acc       // implicit 'read'
   acc = current + amount  // implicit 'write'
@@ -162,18 +161,18 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.coroutineScope
 -->
 ```kotlin
-fun STM.transfer(from: TVar<Int>, to: TVar<Int>, amount: Int): Unit {
+fun STM.transfer(from: TVar<Int>, to: TVar<Int>, amount: Int) {
   withdraw(from, amount)
   deposit(to, amount)
 }
 
-fun STM.deposit(acc: TVar<Int>, amount: Int): Unit {
+fun STM.deposit(acc: TVar<Int>, amount: Int) {
   val current = acc.read()
   acc.write(current + amount)
   // or the shorthand acc.modify { it + amount }
 }
 
-fun STM.withdraw(acc: TVar<Int>, amount: Int): Unit {
+fun STM.withdraw(acc: TVar<Int>, amount: Int) {
   val current = acc.read()
   if (current - amount >= 0) acc.write(current - amount)
   else retry()

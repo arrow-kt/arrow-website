@@ -13,7 +13,7 @@ class OptionAndNullableKnitTest {
 
   @Test fun ExampleOption02() = runTest {
     captureOutput("ExampleOption02") { arrow.website.examples.exampleOption02.example() }
-      .also { lines -> check(lines.first().startsWith("Exception in thread \"main\" java.lang.AssertionError: Expected null but actual was -1")) }
+      .also { lines -> check(lines.first().contains("Expected null but actual was -1")) }
   }
 
   @Test fun ExampleOption06() = runTest {
