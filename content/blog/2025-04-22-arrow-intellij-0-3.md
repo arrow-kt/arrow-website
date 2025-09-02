@@ -1,7 +1,7 @@
 ---
 title: Arrow plug-in for IntelliJ 0.3
 category: articles
-image: https://xebia.com/wp-content/uploads/2023/04/arrow-release-ftr.jpg
+image: /img/arrow-release-ftr.jpg
 no_image_on_post: true
 tags: [intellij, articles]
 ---
