@@ -81,7 +81,7 @@
 
   --ifm-footer-background-color: var(--ifm-color-white);
   --ifm-footer-link-color: var(--arrow-grey-primary);
-  --ifm-footer-padding-vertical: calc(3 * var(--ifm-spacing-vertical));
+  --ifm-footer-padding-vertical: calc(1.5 * var(--ifm-spacing-vertical));
 
   --ifm-navbar-search-input-background-color: var(--ifm-color-primary-lightest);
 
@@ -94,6 +94,8 @@
 [data-theme="dark"]:root {
   --arrow-grey-primary: rgb(218, 221, 225);
   --arrow-grey-secondary: rgb(218, 221, 225);
+  --ifm-color-primary-lighter: rgb(25, 60, 71);
+  --ifm-color-primary-lightest: rgb(25, 60, 71);
   --ifm-footer-background-color: var(--ifm-color-black);
 }
 

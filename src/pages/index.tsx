@@ -58,18 +58,6 @@ export default function Home(): JSX.Element {
             ))}
           </section>
         )}
-        <section className={`${styles.usageWrapperContainer}`}>
-          <div className={`container ${styles.usageContainer}`}>
-            {data.companies?.map((company: { name: string; logo: string }) => (
-              <img
-                key={company.name}
-                src={useBaseUrl(`/img/${company.logo}`)}
-                alt={company.name}
-                title={company.name}
-              />
-            ))}
-          </div>
-        </section>
       </main>
     </Layout>
   );

@@ -91,6 +91,7 @@ const createConfig = async () => {
           logo: {
             alt: 'Arrow Logo',
             src: '/img/arrow-brand.svg',
+            srcDark: '/img/arrow-brand-dark.svg',
           },
           items: [
             {
@@ -269,6 +270,7 @@ const createConfig = async () => {
           logo: {
             alt: 'Arrow Logo',
             src: '/img/arrow-brand.svg',
+            srcDark: '/img/arrow-brand-dark.svg',
             href: 'https://arrow-kt.io',
             width: 128,
             height: 42,

@@ -4,9 +4,3 @@ hero:
   ctaList:
     - title: Learn more about Arrow
       href: /learn/overview
-
-banner:
-  title: Do you want to publish a new post?
-  ctaList:
-    - title: Contact us
-      href: https://github.com/arrow-kt/arrow

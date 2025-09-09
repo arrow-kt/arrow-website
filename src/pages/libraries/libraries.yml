@@ -42,9 +42,3 @@ libraries:
     href: http://serranofp.com/inikio/
     icon: icon-resilience.svg
     body: Better initial-style DSLs in Kotlin
-
-banner:
-  title: Want to know more about Arrow?
-  ctaList:
-    - title: Read the docs
-      href: /learn/overview
