@@ -53,9 +53,6 @@ export default function Libraries(): JSX.Element {
             ))}
           </section>
         )}
-        <section>
-          <Banner title={data.banner.title} ctaList={data.banner.ctaList} />
-        </section>
       </main>
     </Layout>
   );

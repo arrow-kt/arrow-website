@@ -70,9 +70,6 @@ function BlogListPageContent(props: Props): JSX.Element {
         <section className={`container ${styles.verticalRhythm}`}>
           <BlogListPaginator metadata={metadata} />
         </section>
-        <section>
-          <Banner title={data.banner.title} ctaList={data.banner.ctaList} />
-        </section>
       </main>
     </Layout>
   );
