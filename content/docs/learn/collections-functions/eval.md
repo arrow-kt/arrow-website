@@ -16,12 +16,15 @@ Control over evaluation lives in the `arrow-eval` library.
 :::
 
 You construct `Eval` instance by providing a function that computes a value, together with an _evaluation strategy_.
-There are three basic strategies:
+There are four strategies:
 - `Eval.now` evaluates the function immediately.
 - `Eval.later` waits until the first time the value is requested. Once computed, the result is saved, so subsequent calls return immediately.
+  Note that evaluation may be performed several times if two or more threads ask for the value concurrently, and the result is not yet saved.
+- `Eval.atMostOnce` works as `lazy`, but ensures that evaluation is performed at most once.
+  As a result, getting a value from such an `Eval` instance may block (or suspend) if another thread is already evaluating it.
 - `Eval.always` evaluates the function every time we need its value. If you ask for the value more than once, the function is executed again.
 
-We say that `Now` is an _eager_ evaluation strategy, and `Later` and `Always` are _lazy_ evaluation strategies.
+We say that `now` is an _eager_ evaluation strategy, and `later`, `atMostOnce`, and `always` are _lazy_ evaluation strategies.
 
 One of the main use cases for `Eval` is **stack safety**, that is, preventing stack overflows for operations with deep recursion.
 For example, here is a (overly complicated) way to compute whether a number is even or odd, by jumping between `even` and `odd` until we reach `0`.
@@ -41,7 +44,7 @@ stateDiagram
   even_choice --> true: n == 0
 ```
 
-This approach would lead to stack overflow for big numbers, but we can prevent this using `Eval`. Using `Eval.always { n == 0}` we indicate that we want the evaluation to be performed when we need the answer; using `later` or `always` does not make a big difference here, since we only evaluate once per `n` in any case. We indicate the next operation by using `flatMap`.
+This approach would lead to stack overflow for big numbers, but we can prevent this using `Eval`. Using `Eval.always { n == 0 }` we indicate that we want the evaluation to be performed when we need the answer; using `later` or `always` does not make a big difference here, since we only evaluate once per `n` in any case. We indicate the next operation by using `flatMap`.
 ```kotlin
 import arrow.core.Eval
 
