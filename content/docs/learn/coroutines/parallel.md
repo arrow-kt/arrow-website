@@ -85,37 +85,6 @@ if the amount of elements in the collection is too significant. To fight this
 problem, Arrow provides a version of `parMap` with an additional parameter that
 tells how many computations should be dispatched in parallel.
 
-### Await-all scopes
-
-Although `parZip` gives the most high-level view of the code, clearly specifying
-which tasks are independent of each other, it has the drawback of requiring a particular
-style of writing your computations. Arrow provides another tool based on `async`,
-where the code is written using the usual `async`/`.await()` idioms.
-
-<!--- INCLUDE
-import arrow.fx.coroutines.parZip
-import arrow.fx.coroutines.await.awaitAll
-typealias UserId = Int
-data class User(val name: String, val avatar: String)
-suspend fun getUserName(id: UserId): String = "$id-name"
-suspend fun getAvatar(id: UserId): String = "$id-avatar"
--->
-```kotlin
-suspend fun getUser(id: UserId): User = awaitAll {
-  val name = async { getUserName(id) }
-  val avatar = async { getAvatar(id) }
-  User(name.await(), avatar.await())
-}
-```
-<!--- KNIT example-parallel-03.kt -->
-
-As the name suggests, within this `awaitAll` block, every time you call `.await()`
-_all_ of the `async` computations that were registered until that point are
-awaited. If any of those throw an exception, the whole block is canceled, as
-per the rules of structured concurrency. In general, writing a sequence of independent
-`async` computations within `awaitAll` is equivalent to giving those computations
-as arguments to `parZip`.
-
 ### Flows
 
 The [`parMap`](https://apidocs.arrow-kt.io/arrow-fx-coroutines/arrow.fx.coroutines/par-map.html)
@@ -150,7 +119,7 @@ suspend fun file(server1: String, server2: String) =
     { downloadFrom(server2) }
   ).merge()
 ```
-<!--- KNIT example-parallel-04.kt -->
+<!--- KNIT example-parallel-03.kt -->
 
 The example above shows a typical pattern combined with `raceN`.
 The result of the function above is `Either<A, B>`, with each type
@@ -193,7 +162,7 @@ suspend fun example() {
   println(triple)
 }
 ```
-<!--- KNIT example-parallel-05.kt -->
+<!--- KNIT example-parallel-04.kt -->
 
 ```text
 Sleeping for 500 milliseconds ...
@@ -247,7 +216,7 @@ suspend fun example() {
   println(res)
 }
 ```
-<!--- KNIT example-parallel-06.kt -->
+<!--- KNIT example-parallel-05.kt -->
 
 In the output, we can see that tasks `1` and `3` have started, but `2` _raised_ an error that triggered the cancellation of the other two tasks.
 After tasks `1` and `3` are canceled, we see that the result of `raise` is returned and prints the error message.
@@ -292,7 +261,7 @@ suspend fun example() {
   println(res)
 }
 ```
-<!--- KNIT example-parallel-07.kt -->
+<!--- KNIT example-parallel-06.kt -->
 
 The example transforms, or maps, every element of an `Iterable` `[1, 2, 3, 4]` in _parallel_ using `parMap` and `failOnEven`.
 Since `failOnEven` raises an error when the `Int` is even, it fails for inputs 2 and 4, and the other two coroutines are canceled.
