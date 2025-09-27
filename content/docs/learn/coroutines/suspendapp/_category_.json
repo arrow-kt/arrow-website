@@ -1,6 +1,6 @@
 {
   "label": "Graceful shutdown",
-  "position": 3,
+  "position": 4,
   "customProps": {
     "icon": "icon-coroutines.svg",
     "description": "Graceful shutdowns"
