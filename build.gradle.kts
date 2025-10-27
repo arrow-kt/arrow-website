@@ -1,16 +1,12 @@
 import kotlinx.knit.KnitPluginExtension
 
 buildscript {
-  repositories {
-    mavenCentral()
-  }
-
-  dependencies {
-    classpath(libs.kotlinx.knit)
-  }
+  repositories { mavenCentral() }
+  dependencies { classpath(libs.kotlinx.knit) }
 }
 
-@Suppress("DSL_SCOPE_VIOLATION")
+repositories { mavenCentral() }
+
 plugins {
   alias(libs.plugins.kotlin.jvm)
 }
