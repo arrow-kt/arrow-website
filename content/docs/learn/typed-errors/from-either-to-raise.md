@@ -141,7 +141,7 @@ circumstances that are difficult to recover from.
 
 For a more concrete example, `Raise` is a good tool to signal problems like
 "user not found in a database". On the other hand, "database connection suddenly dropped"
-should rather be modeled via exceptions (perhaps combined with [resilience](/learn/resilience/intro)).
+should rather be modeled via exceptions (perhaps combined with [resilience](/learn/resilience)).
 
 :::
 
