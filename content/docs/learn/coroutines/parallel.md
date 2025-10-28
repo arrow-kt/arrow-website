@@ -2,30 +2,9 @@
 sidebar_position: 1
 ---
 
-# High-level concurrency
+# Parallelism
 
 <!--- TEST_NAME ParallelTest -->
-
-[Coroutines](https://kotlinlang.org/docs/coroutines-guide.html) are one of the
-most interesting features of Kotlin. However, the ["coroutines standard library"](https://kotlinlang.org/api/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/)
-sometimes falls short, especially when dealing with many
-suspended computations. Arrow provides those few additional functions that have
-proven useful in Kotlin code and other programming communities.
-
-:::info
-
-Arrow Fx makes it easier to follow the [Structured Concurrency](https://kotlinlang.org/docs/composing-suspending-functions.html#structured-concurrency-with-async)
-rules, even when the logic grows more complex.
-
-:::
-
-:::note Where to find it
-
-High-level concurrency is part of the `arrow-fx-coroutines` library.
-
-:::
-
-## Independently, in parallel
 
 We often have independent computations that we want to perform in parallel.
 For example, if we need to fetch a value from the database and download a file
@@ -85,7 +64,7 @@ if the amount of elements in the collection is too significant. To fight this
 problem, Arrow provides a version of `parMap` with an additional parameter that
 tells how many computations should be dispatched in parallel.
 
-### Flows
+## Flows
 
 The [`parMap`](https://apidocs.arrow-kt.io/arrow-fx-coroutines/arrow.fx.coroutines/par-map.html)
 function is also provided for [`Flow`](https://kotlinlang.org/api/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.flow/).
@@ -97,35 +76,43 @@ the mapping output as the one in the source flow. Just call [`parMapUnordered`](
 in that case. As with `parMap`, the concurrency factor defines how many
 computations should be executed concurrently at most.
 
-## Racing
+## Await all / parallelism (experimental)
 
-The `parX` operators describe the cases in which we are interested in the result
-of _every_ computation we perform. But imagine the scenario where we want to
-download a file, but we try two servers simultaneously for resilience purposes. Once we get the file from one server, we're not really interested in the 
-rest. This is an example of **racing** two computations.
+:::warning
 
-Arrow provides functions that perform racing over 2 or 3 computations, with the
-option of customizing the coroutine context.
+The functionality described in this section is experimental.
+Although the basic concepts shall remain, we may tweak the API in the future.
+
+:::
+
+Although `parZip` gives a high-level view of the code, clearly specifying
+which tasks are independent of each other, it has the drawback of requiring a particular
+style of writing your computations. Arrow provides another tool based on `async`,
+where the code is written using the usual `async`/`.await()` idioms.
 
 <!--- INCLUDE
-import arrow.core.merge
-import arrow.fx.coroutines.raceN
-suspend fun downloadFrom(url: String): Unit = Unit
+import arrow.fx.coroutines.parZip
+import arrow.fx.coroutines.await.awaitAll
+typealias UserId = Int
+data class User(val name: String, val avatar: String)
+suspend fun getUserName(id: UserId): String = "$id-name"
+suspend fun getAvatar(id: UserId): String = "$id-avatar"
 -->
 ```kotlin
-suspend fun file(server1: String, server2: String) =
-  raceN(
-    { downloadFrom(server1) },
-    { downloadFrom(server2) }
-  ).merge()
+suspend fun getUser(id: UserId): User = awaitAll {
+  val name = async { getUserName(id) }
+  val avatar = async { getAvatar(id) }
+  User(name.await(), avatar.await())
+}
 ```
 <!--- KNIT example-parallel-03.kt -->
 
-The example above shows a typical pattern combined with `raceN`.
-The result of the function above is `Either<A, B>`, with each type
-corresponding to one branch in `raceN`. Since we have two computations that
-return the same type here and don't care which one "wins," we conflate both into
-a single value.
+As the name suggests, within this `awaitAll` block, every time you call `.await()`
+_all_ of the `async` computations that were registered until that point are
+awaited. If any of those throw an exception, the whole block is canceled, as
+per the rules of structured concurrency. In general, writing a sequence of independent
+`async` computations within `awaitAll` is equivalent to giving those computations
+as arguments to `parZip`.
 
 ## Integration with typed errors
 

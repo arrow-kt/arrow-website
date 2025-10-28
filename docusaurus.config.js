@@ -137,7 +137,7 @@ const createConfig = async () => {
                   activeBaseRegex: '^(/learn/collections-functions)',
                 },
                 {
-                  label: 'Design',
+                  label: 'Design recipes',
                   to: '/learn/design',
                   activeBaseRegex: '^(/learn/design)',
                 },
@@ -250,11 +250,6 @@ const createConfig = async () => {
                   icon: '/img/icon-social-slack.svg',
                 },
                 {
-                  label: 'YouTube',
-                  href: 'https://www.youtube.com/@xebiafunctional',
-                  icon: '/img/icon-social-youtube.svg',
-                },
-                {
                   label: 'GitHub',
                   href: 'https://github.com/arrow-kt',
                   icon: '/img/icon-social-github.svg',
@@ -275,7 +270,7 @@ const createConfig = async () => {
             width: 128,
             height: 42,
           },
-          copyright: `Arrow is designed and developed by ARROW with support from <a href="https://47deg.com" target="_blank" rel="noopener noreferrer">Xebia Functional</a>`,
+          copyright: `Arrow is developed and maintained by the community`,
         },
         prism: {
           theme: darkCodeTheme,

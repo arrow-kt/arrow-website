@@ -1,12 +1,14 @@
 // This file was automatically generated from racing.md by Knit tool. Do not edit.
-package arrow.website.examples.exampleRacing03
+package arrow.website.examples.exampleRacing06
 
 import arrow.fx.coroutines.racing
 import arrow.fx.coroutines.race
-import kotlinx.coroutines.delay
-import java.util.concurrent.TimeoutException
+import arrow.core.NonFatal
 import kotlin.random.Random
-import kotlin.time.Duration.Companion.milliseconds
+import kotlinx.coroutines.*
+import kotlinx.coroutines.selects.select
+import kotlin.coroutines.cancellation.CancellationException
+import kotlin.time.Duration.Companion.seconds
 
 typealias UserId = Int
 
@@ -24,11 +26,16 @@ object LocalCache {
         if (Random.nextBoolean()) User("$id-local-user") else throw NullPointerException()
 }
 
-suspend fun getUserRacing(id: UserId): User = racing {
-    race { RemoteCache.getUser(id) }
-    race { LocalCache.getUser(id) }
-    race {
-        delay(10.milliseconds)
-        throw TimeoutException()
+suspend fun customErrorHandling(): String =
+    withContext(CoroutineExceptionHandler { ctx, t -> t.printStackTrace() }) {
+        racing {
+            race {
+                delay(2.seconds)
+                throw RuntimeException("boom!")
+            }
+            race {
+                delay(10.seconds)
+                "Winner!"
+            }
+        }
     }
-}

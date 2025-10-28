@@ -8,7 +8,7 @@ sidebar_custom_props:
   overview: true
 ---
 
-# <decorated-text icon={frontMatter.sidebar_custom_props.icon} title={frontMatter.title} />
+# Integrations
 
 A library is more robust if it plays well with the rest of the ecosystem 
 surrounding it. Arrow integrates with many useful libraries in the Kotlin

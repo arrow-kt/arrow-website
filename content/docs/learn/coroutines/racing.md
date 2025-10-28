@@ -1,42 +1,60 @@
 ---
-sidebar_position: 4
+sidebar_position: 2
 ---
 
 # Racing
 
 <!--- TEST_NAME RacingTest -->
 
-The ["coroutines standard library"](https://kotlinlang.org/api/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/)
-offers [Select](), but often a higher level DSL is desired.
-For example, when _racing_ for the _first success value_ and cancelling the others. Or, when you want to easily combine
-it with typed errors.
+The `parX` operators describe the cases in which we are interested in the result
+of _every_ computation we perform. But imagine the scenario where we want to
+download a file, but we try two servers simultaneously for resilience purposes. 
+Once we get the file from one server, we're not really interested in the 
+rest. This is an example of **racing** two computations.
 
-:::info
-
-Arrow Fx makes it easier to follow
-the [Structured Concurrency](https://kotlinlang.org/docs/composing-suspending-functions.html#structured-concurrency-with-async)
-rules, even when the logic grows more complex.
-
-:::
-
-:::note Where to find it
-
-High-level concurrency is part of the `arrow-fx-coroutines` library.
-
-:::
-
-## Race for the first success value
-
-We often have independent computations that we want to _race_ against each other in parallel,
-but we only care about the first one to succeed. For example, getting a value from different locations,
-or getting the first result from a list of services. This is the desired behavior:
+This is an key point in racing: we only care about the **first value** to **succeed**.
+But that is too abstract, the desired behavior should match the following:
 
 - The first value produced by a racer _wins_ the race.
 - All exceptions need to be logged but not _win_ the race, they need to _await_ the race.
 - When the race is finished, all racers need to be canceled before returning the winning value. This guarantees all
   acquired resources are closed whilst trying to return the success value as soon as possible.
 
+## Simple racing
+
+For the simpler cases,
+Arrow provides functions that perform racing over 2 or 3 computations, with the
+option of customizing the coroutine context.
+
+<!--- INCLUDE
+import arrow.core.merge
+import arrow.fx.coroutines.raceN
+suspend fun downloadFrom(url: String): Unit = Unit
+-->
+```kotlin
+suspend fun file(server1: String, server2: String) =
+  raceN(
+    { downloadFrom(server1) },
+    { downloadFrom(server2) }
+  ).merge()
+```
+<!--- KNIT example-racing-01.kt -->
+
+The example above shows a typical pattern combined with `raceN`.
+The result of the function above is `Either<A, B>`, with each type
+corresponding to one branch in `raceN`. Since we have two computations that
+return the same type here and don't care which one "wins," we conflate both into
+a single value.
+
+## Using `select`
+
+The ["coroutines standard library"](https://kotlinlang.org/api/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/)
+offers [select expressions](https://kotlinlang.org/docs/select-expression.html), but often a higher level DSL is desired.
+For example, when _racing_ for the _first success value_ and cancelling the others. Or, when you want to easily combine
+it with typed errors.
+
 Let's first see how we'd write this example with `select`, and how we can rewrite it with Arrow Fx Coroutines.
+You don't need to understand the whole code to keep reading, but it provides a good explanation of the difficulties of racing.
 
 <!--- INCLUDE
 import arrow.fx.coroutines.racing
@@ -95,13 +113,21 @@ The snippet above handles four important edge cases:
 - `try/finally`: When `select` returns we need to always cancel all still active running coroutines instead of waiting
   for them to be finished. This is crucial otherwise we would still await _all_ values, and that would defeat the
   purpose of racing.
-
 - `awaitAfterError`: When an error occurs in a participant during racing, they are often considered _losers_, and must
   await the race to be finished. Since the _winner_ cancels the race, this can be achieved by `awaitCancellation`.
     - `e.prinStacktrace()`: When an error occurs in a participant during racing, they are often considered _losers_,
       however, its typically not desired this information disappears so some form of error handling strategy is needed.
     - `e is CancellationException || e.isFatal()`: We should never recover from `CancellationException`, nor should we
       recover from fatal exceptions like `OutOfMemoryException`.
+
+## Racing DSL (experimental)
+
+:::warning
+
+The functionality described in this section is experimental.
+Although the basic concepts shall remain, we may tweak the API in the future.
+
+:::
 
 The process of setting up this racing logic is a bit low-level, and complex. So unless for specific needs, we often
 prefer a higher level DSL. Arrow offers a simpler `racing` DSL on top of `select` that guarantees these semantics.
@@ -113,18 +139,18 @@ suspend fun getUserRacing(id: UserId): User = racing {
 }
 ```
 
-<!--- KNIT example-racing-01.kt -->
+<!--- KNIT example-racing-02.kt -->
 
 This snippet is significantly simpler, and less error-prone. Initially, it seems we've lost a lot of flexibility, but
 let's see what else the Arrow DSL has to offer.
 
-:::warning
+:::info
 
-If all racers thrown an exception then the `racing` block will hang forever waiting for a success value.
+If all racers thrown an exception then the `racing` block will hang **forever** waiting for a success value.
 
 :::
 
-#### Timeout
+### Timeout
 
 Hanging is common with racing if everything fails. Therefore, it's common to include a timeout.
 
@@ -164,12 +190,12 @@ suspend fun getUserRacing(id: UserId): User = racing {
 }
 ```
 
-<!--- KNIT example-racing-02.kt -->
+<!--- KNIT example-racing-03.kt -->
 
 Here we simply use a `delay` inside of the `race { }` block, and return a default value after the `delay` (timeout)
 finishes. In this case we throw `UserRaceException` but we could've also returned `null`, `Either.Right`, or `raise`.
 
-#### Allowing exceptions to win the race
+### Allow exceptions to win
 
 Sometimes ignoring all exceptions is not desired, and certain participants are allowed to have their exception to win
 the race. For example, in case when `LocalCache` returns fast in the success cache hit occurs, but slow with a cache
@@ -206,14 +232,14 @@ object LocalCache {
 
 ```kotlin
 suspend fun getUserRacing(id: UserId): User = racing {
-    raceOrThrow { RemoteCache.getUser(id) }
+    raceOrFail { RemoteCache.getUser(id) }
     race { LocalCache.getUser(id) }
 }
 ```
 
-<!--- KNIT example-racing-03.kt -->
+<!--- KNIT example-racing-04.kt -->
 
-#### Race until a certain condition is met
+### Race until a certain condition
 
 Sometimes we need to race not only until a value is produced, but also that it needs to meet certain conditions.
 For example, when we need to retrieve a `NonEmptyList<UserId>`.
@@ -249,23 +275,23 @@ suspend fun LocalCache.getCachedUsers(ids: NonEmptyList<UserId>): List<User> =
 
 suspend fun getUserRacing(ids: NonEmptyList<UserId>): List<User> = racing {
     race { RemoteCache.getUsers(ids) }
-    race(condition = { it.size == ids.size }) { LocalCache.getCachedUsers(id) }
+    race(condition = { it.size == ids.size }) { LocalCache.getCachedUsers(ids) }
 }
 ```
 
-<!--- KNIT example-racing-04.kt -->
+<!--- KNIT example-racing-05.kt -->
 
 Since `getCachedUsers` ignores missing cached values we need to make sure the result from our cache matches the amount
 requested ids. We can easily do so by adding a `condition` check in our `race` to verify `it.size == ids.size`.
 
-:::warning
+:::info
 
-If all racers fail, or do not meet the `condition` then the `racing` block will hang forever waiting for a success
+If all racers fail, or do not meet the `condition` then the `racing` block will hang **forever** waiting for a success
 value.
 
 :::
 
-#### Custom Exception Handling
+### Custom exception handling
 
 By default, the strategy for unhandled exceptions is `Throwable::printStackTrace`, but it attempts to use any installed
 `CoroutineExceptionHandler`. So in the case of Ktor it will be using the Ktor's default`CoroutineExceptionHandler`.
@@ -275,11 +301,11 @@ It can easily be overridden by explicitly using `withContext` to install a `Coro
 import arrow.fx.coroutines.racing
 import arrow.fx.coroutines.race
 import arrow.core.NonFatal
-import kotlinx.coroutines.async
-import kotlinx.coroutines.awaitCancellation
-import kotlinx.coroutines.coroutineScope
+import kotlin.random.Random
+import kotlinx.coroutines.*
 import kotlinx.coroutines.selects.select
 import kotlin.coroutines.cancellation.CancellationException
+import kotlin.time.Duration.Companion.seconds
 
 typealias UserId = Int
 
@@ -304,7 +330,7 @@ suspend fun customErrorHandling(): String =
         racing {
             race {
                 delay(2.seconds)
-                throw RuntimeException("$it - boom")
+                throw RuntimeException("boom!")
             }
             race {
                 delay(10.seconds)
@@ -314,8 +340,10 @@ suspend fun customErrorHandling(): String =
     }
 ```
 
-<!--- KNIT example-racing-05.kt -->
+<!--- KNIT example-racing-06.kt -->
 
-### Working with Raise
+### Integration with typed errors
 
-Since `Raise` does not have any straight-forward fallback way of handling errors by default it will 
+For the purposes of racing, using `raise` has the same effects as throwing
+an exception. That means that if you want the error to propagate you need
+to use `raceOrFail`; otherwise that computation does not count as successful.

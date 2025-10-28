@@ -18,6 +18,12 @@ slorber:
 
 vergauwen_simon:
   name: Simon Vergauwen
-  title: Arrow maintainer & Principal Engineer @ Xebia Functional
+  title: Arrow maintainer & Developer Advocate @ JetBrains
   url: https://github.com/nomisRev
   image_url: https://github.com/nomisRev.png
+
+trupill:
+  name: Alejandro Serrano
+  title: Arrow maintainer & Language Researcher @ JetBrains
+  url: https://serranofp.com
+  image_url: https://github.com/serras.png

@@ -2,11 +2,17 @@
 title: Immutable Data
 ---
 
-import { useCurrentSidebarCategory } from '@docusaurus/theme-common';
 import DocCardList from '@theme/DocCardList';
 
-# <decorated-text icon={useCurrentSidebarCategory().customProps.icon} title={frontMatter.title} />
+# Immutable data
 
-<p>{useCurrentSidebarCategory().customProps.description}</p>
+Arrow Optics provide concise ways to handle immutable data.
+
+:::note Where to find it
+
+Immutable data manipulation with optics is available through the `arrow-optics` library,
+and the corresponding plug-ins.
+
+:::
 
 <DocCardList />

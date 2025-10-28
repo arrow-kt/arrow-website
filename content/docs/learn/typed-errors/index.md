@@ -5,7 +5,7 @@ title: Typed Errors
 import { useCurrentSidebarCategory } from '@docusaurus/theme-common';
 import DocCardList from '@theme/DocCardList';
 
-# <decorated-text icon={useCurrentSidebarCategory().customProps.icon} title={frontMatter.title} />
+# Typed errors
 
 _Typed errors_ refer to a technique from functional programming in which we
 make _explicit_ in the signature (or _type_) the potential errors that may

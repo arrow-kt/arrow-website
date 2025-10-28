@@ -2,12 +2,47 @@
 title: Resilience
 ---
 
-import { useCurrentSidebarCategory } from '@docusaurus/theme-common';
 import DocCardList from '@theme/DocCardList';
 
-# <decorated-text icon={useCurrentSidebarCategory().customProps.icon} title={frontMatter.title} />
+# Resilience
 
-<p>{useCurrentSidebarCategory().customProps.description}</p>
+Most, if not all, of the systems we develop nowadays require the cooperation of
+other services, which may live in the same process, on the same machine, or may
+require some network communication. This creates a lot of different potential
+scenarios where things may fail. **Resilience** is the ability of your system 
+to act in an organized way when those events occur.
+
+Your particular approach to resilience depends on multiple factors. Is it
+possible to try that request again? Should the administrator be alerted if the
+detected error is fatal? Instead of predefined answers, Arrow aims to provide
+a set of **tools** that you can use to architect your solution in a concise
+and composable way.
+
+:::note Where to find it
+
+All the resilience mechanisms described in this section are part of the `arrow-resilience` library.
+
+:::
 
 <DocCardList />
 
+<br />
+
+:::info Media Resources
+
+The following videos showcase how to introduce resilience in your applications.
+
+- [_Functional Programming in Kotlin with Arrow_](https://www.youtube.com/watch?v=IDMmmrRhUvQ) by Simon Vergauwen and Alejandro Serrano
+- [_Building applications with Kotlin and Arrow.kt in style_](https://www.youtube.com/watch?v=g79A6HmbW5M) by Simon Vergauwen
+
+:::
+
+:::tip Further Reading
+
+If you want to know more about these patterns, you can check some of these guides:
+
+- [_A pattern language for microservices_](https://microservices.io/patterns/)
+- [_Cloud design patterns_](https://learn.microsoft.com/en-us/azure/architecture/patterns/)
+  (the documentation talks about Azure, but its insights are widely applicable.)
+
+:::

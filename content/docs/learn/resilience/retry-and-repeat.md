@@ -1,5 +1,6 @@
 ---
 sidebar_position: 2
+description: Retry and repeat computations using Schedule
 ---
 
 # Retry and repeat
