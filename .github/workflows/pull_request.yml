@@ -22,16 +22,16 @@ jobs:
           java-version: 17
 
       - name: Set up Node
-        uses: actions/setup-node@v5
+        uses: actions/setup-node@v6
         with:
-          node-version: 22
+          node-version: 24
           cache: 'npm'
 
       - name: Install Node dependencies
         run: npm ci --prefer-offline --no-audit
 
       - name: Set up Gradle
-        uses: gradle/actions/setup-gradle@v4
+        uses: gradle/actions/setup-gradle@v5
 
       - name: Gradle build
         run: ./gradlew build
