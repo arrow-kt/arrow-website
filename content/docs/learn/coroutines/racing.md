@@ -6,7 +6,7 @@ sidebar_position: 2
 
 <!--- TEST_NAME RacingTest -->
 
-The `parX` operators describe the cases in which we are interested in the result
+The [parallelism operators](/learn/coroutines/parallel) describe the cases in which we are interested in the result
 of _every_ computation we perform. But imagine the scenario where we want to
 download a file, but we try two servers simultaneously for resilience purposes. 
 Once we get the file from one server, we're not really interested in the 
