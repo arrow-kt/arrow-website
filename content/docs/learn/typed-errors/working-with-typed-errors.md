@@ -71,13 +71,14 @@ The Kotlin standard library includes a few wrapper types, but they are all restr
 Arrow introduces `Either` and `Ior`, both giving the developer the choice of type of logical failures, and reflecting that choice
 as their first type parameter.
 
-| Type | Failure | Simultaneous <br /> success and failure? | Kotlin stdlib. or Arrow? |
-|---|---------|------|---|
-| `A?` | `null` | No | <img src="https://upload.wikimedia.org/wikipedia/commons/3/37/Kotlin_Icon_2021.svg" style={{height: '20px'}} /> |
-| `Option<A>` | `None` | No | <img src="/img/arrow-brand-icon.svg" style={{height: '20px'}} /> |
-| `Result<A>` | `Failure` contains a `Throwable`, <br /> inspection possible at runtime | No | <img src="https://upload.wikimedia.org/wikipedia/commons/3/37/Kotlin_Icon_2021.svg" style={{height: '20px'}} /> |
-| `Either<E, A>` | `Left` contains value of type `E` | No | <img src="/img/arrow-brand-icon.svg" style={{height: '20px'}} /> |
-| `Ior<E, A>` | `Left` contains value of type `E` | Yes, using `Both` | <img src="/img/arrow-brand-icon.svg" style={{height: '20px'}} /> |
+| Type | Failure                                                                 | Simultaneous <br /> success and failure? | Lives in                                                                                                                  |
+|---|-------------------------------------------------------------------------|------|---------------------------------------------------------------------------------------------------------------------------|
+| `A?` | `null`                                                                  | No | <img src="https://upload.wikimedia.org/wikipedia/commons/4/44/Kodee-mascot-petite.svg" style={{height: '20px'}} /> (stdlib) |
+| `Option<A>` | `None`                                                                  | No | <img src="/img/arrow-brand-icon.svg" style={{height: '20px'}} /> (core)                                                   |
+| `Result<A>` | `Failure` contains a `Throwable`, <br /> inspection possible at runtime | No | <img src="https://upload.wikimedia.org/wikipedia/commons/4/44/Kodee-mascot-petite.svg" style={{height: '20px'}} /> (stdlib) |
+| `Either<E, A>` | `Left` contains value of type `E`                                       | No | <img src="/img/arrow-brand-icon.svg" style={{height: '20px'}} /> (core)                                                        |
+| `Ior<E, A>` | `Left` contains value of type `E`                                       | Yes, using `Both` | <img src="/img/arrow-brand-icon.svg" style={{height: '20px'}} /> (core)                                                        |
+| `Result<A, E>` | `Failure` contains value of type `E`                                     | No | [Result4k](https://github.com/fork-handles/forkhandles/tree/trunk/result4k)                                               |
 
 
 The second approach is describing errors as part of the _computation context_ of the function.
