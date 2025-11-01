@@ -10,7 +10,7 @@ tags: [core, articles]
 
 In order to unlock the full power of Arrow Optics, lenses and prisms for your
 own types must be defined. This is a tedious task, that can be automate with
-the help of the `@optics` annotation. Alas, [setting up](/learn/quickstart/#additional-setup-for-plug-ins)
+the help of the `@optics` annotation. Alas, [setting up](/learn/quickstart/#additional-setup-for-optics)
 the plug-in is not easy (especially in Multiplatform projects), and the
 architecture of the plugin means that you need to write a `companion object`
 explicitly on every one of your types.

@@ -60,7 +60,7 @@ Immutable data manipulation with optics is available through the `arrow-optics` 
 :::
 
 The easiest way to start with Arrow Optics is through its compiler
-plug-in. After [adding it to your build](../../quickstart/#additional-setup-for-plug-ins)
+plug-in. After [adding it to your build](../../quickstart/#additional-setup-for-optics)
 you just need to mark each class for which you want optics generated
 with the `@optics` annotation.
 

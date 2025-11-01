@@ -79,8 +79,8 @@ Simply include the desired library in your `dependencies` block or as a
 
 ```kotlin
 dependencies {
-  implementation("io.arrow-kt:arrow-core:2.1.0")
-  implementation("io.arrow-kt:arrow-fx-coroutines:2.1.0")
+  implementation("io.arrow-kt:arrow-core:2.2.0")
+  implementation("io.arrow-kt:arrow-fx-coroutines:2.2.0")
 }
 ```
 
@@ -89,8 +89,8 @@ dependencies {
 
 ```groovy
 dependencies {
-  implementation 'io.arrow-kt:arrow-core:2.1.0'
-  implementation 'io.arrow-kt:arrow-fx-coroutines:2.1.0'
+  implementation 'io.arrow-kt:arrow-core:2.2.0'
+  implementation 'io.arrow-kt:arrow-fx-coroutines:2.2.0'
 }
 ```
 
@@ -102,12 +102,12 @@ dependencies {
 <dependency>
   <groupId>io.arrow-kt</groupId>
   <artifactId>arrow-core</artifactId>
-  <version>2.1.0</version>
+  <version>2.2.0</version>
 </dependency>
 <dependency>
   <groupId>io.arrow-kt</groupId>
   <artifactId>arrow-fx-coroutines</artifactId>
-  <version>2.1.0</version>
+  <version>2.2.0</version>
 </dependency>
 ```
 
@@ -126,7 +126,7 @@ your Gradle build has several subprojects.
 
 ```yaml
 [versions]
-arrow = "2.1.0"
+arrow = "2.2.0"
 # other versions
 
 [libraries]
@@ -180,7 +180,7 @@ to include `arrow-stack`, which declares versions for the rest of the components
 
 ```kotlin
 dependencies {
-  implementation(platform("io.arrow-kt:arrow-stack:2.1.0"))
+  implementation(platform("io.arrow-kt:arrow-stack:2.2.0"))
   // no versions on libraries
   implementation("io.arrow-kt:arrow-core")
   implementation("io.arrow-kt:arrow-fx-coroutines")
@@ -192,7 +192,7 @@ dependencies {
 
 ```groovy
 dependencies {
-  implementation platform('io.arrow-kt:arrow-stack:2.1.0')
+  implementation platform('io.arrow-kt:arrow-stack:2.2.0')
   // no versions on libraries
   implementation 'io.arrow-kt:arrow-core'
   implementation 'io.arrow-kt:arrow-fx-coroutines'
@@ -207,7 +207,7 @@ dependencies {
 <dependency>
     <groupId>io.arrow-kt</groupId>
     <artifactId>arrow-stack</artifactId>
-    <version>2.1.0</version>
+    <version>2.2.0</version>
     <type>pom</type>
     <scope>import</scope>
 </dependency>
@@ -237,7 +237,7 @@ If you are using Arrow in Android, you should enable
 [library desugaring](https://developer.android.com/studio/write/java8-support#library-desugaring) in your final application.
 This is especially important if you use `arrow-collectors`, since that library uses APIs available only from Java 11 on.
 
-### Additional setup for plug-ins
+### Additional setup for Optics
 
 If you're using the Optics component of Arrow, we provide a Kotlin compiler 
 plug-in that can derive most of the boilerplate required to use it. This
@@ -250,12 +250,12 @@ which requires an additional configuration step.
 
 ```kotlin
 plugins {
-  id("com.google.devtools.ksp") version "2.1.20-2.0.0"
+  id("com.google.devtools.ksp") version "2.3.0"
 }
 
 dependencies {
-  implementation("io.arrow-kt:arrow-optics:2.1.0")
-  ksp("io.arrow-kt:arrow-optics-ksp-plugin:2.1.0")
+  implementation("io.arrow-kt:arrow-optics:2.2.0")
+  ksp("io.arrow-kt:arrow-optics-ksp-plugin:2.2.0")
 }
 ```
 
@@ -264,12 +264,12 @@ dependencies {
 
 ```groovy
 plugins {
-  id 'com.google.devtools.ksp' version '2.1.20-2.0.0'
+  id 'com.google.devtools.ksp' version '2.3.0'
 }
 
 dependencies {
-  implementation 'io.arrow-kt:arrow-optics:2.1.0'
-  ksp 'io.arrow-kt:arrow-optics-ksp-plugin:2.1.0'
+  implementation 'io.arrow-kt:arrow-optics:2.2.0'
+  ksp 'io.arrow-kt:arrow-optics-ksp-plugin:2.2.0'
 }
 ```
 
@@ -289,12 +289,17 @@ provides unofficial support for that scenario.
 
 </Tabs>
 
-:::tip Multiplatform setup
-
 If you are using the optics plug-in in a Multiplatform project,
 we recommend checking the [official guide in Kotlin docs](https://kotlinlang.org/docs/ksp-multiplatform.html)
 and the [related documentation in Koin](https://insert-koin.io/docs/setup/annotations/#kotlin-kts)
 for guidance.
+
+:::tip Arrow Optics for Gradle (beta)
+
+Instead of manually configuring the KSP plug-in, you may try the
+new beta [Arrow Optics Gradle plug-in](/community/blog/2025/11/01/arrow-optics-gradle/).
+It configures the whole project automatically (regardless of it being JVM or Multiplatform)
+and no longer requires a `companion object` on every class with `@optics`.
 
 :::
 
