@@ -4,6 +4,10 @@ buildscript {
   dependencies { classpath(libs.kotlinx.knit) }
 }
 
+repositories {
+  mavenCentral()
+}
+
 plugins {
   alias(libs.plugins.kotlin.jvm)
 }
