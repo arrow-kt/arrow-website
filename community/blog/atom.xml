@@ -2,11 +2,130 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://arrow-kt.io/community/blog/</id>
     <title>Arrow Blog</title>
-    <updated>2025-04-22T00:00:00.000Z</updated>
+    <updated>2025-11-01T00:00:00.000Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://arrow-kt.io/community/blog/"/>
     <subtitle>Arrow Blog</subtitle>
     <icon>https://arrow-kt.io/img/arrow-brand-icon.svg</icon>
+    <entry>
+        <title type="html"><![CDATA[Arrow 2.2.0]]></title>
+        <id>https://arrow-kt.io/community/blog/2025/11/01/arrow-2-2/</id>
+        <link href="https://arrow-kt.io/community/blog/2025/11/01/arrow-2-2/"/>
+        <updated>2025-11-01T00:00:00.000Z</updated>
+        <summary type="html"><![CDATA[Arrow 2.2.0 is out, with improved and new functionality.]]></summary>
+        <content type="html"><![CDATA[<p>Arrow 2.2.0 is out, with improved and new functionality.
+This release builds on top of several <a href="https://kotlinlang.org/docs/whatsnew22.html" target="_blank" rel="noopener noreferrer">new features in Kotlin 2.2</a>,
+in its self-imposed role of <em>perfect companion for your Kotlin journey</em>.</p>
+<p><strong><code>Raise</code> with context parameters.</strong>
+The new package <code>arrow.core.raise.context</code> provides the same API as <code>arrow.core.raise</code>,
+but using context parameters instead of extension functions.
+This package is intended to be a full 1-1 replacement the extension-based API.</p>
+<p>Unfortunately, currently mixing <code>Raise</code> functions using extension-style and
+context-style doesn't lead to the better experience. Our advice is to fully migrate
+to the context-style API if possible, or stay completely within the extension style.</p>
+<div class="language-kotlin codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#D4D4D4;--prism-background-color:#222E51"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-kotlin codeBlock_bY9V thin-scrollbar" style="color:#D4D4D4;background-color:#222E51"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#D4D4D4"><span class="token comment" style="color:#6b738a">// extension-style</span><span class="token plain"></span><br></span><span class="token-line" style="color:#D4D4D4"><span class="token plain"></span><span class="token keyword" style="color:#82a2f3">fun</span><span class="token plain"> Raise</span><span class="token operator" style="color:rgb(212, 212, 212)">&lt;</span><span class="token plain">PersonValidationError</span><span class="token operator" style="color:rgb(212, 212, 212)">&gt;</span><span class="token punctuation" style="color:rgb(212, 212, 212)">.</span><span class="token function" style="color:#EDB368">buildPerson</span><span class="token punctuation" style="color:rgb(212, 212, 212)">(</span><span class="token plain">name</span><span class="token operator" style="color:rgb(212, 212, 212)">:</span><span class="token plain"> String</span><span class="token punctuation" style="color:rgb(212, 212, 212)">,</span><span class="token plain"> age</span><span class="token operator" style="color:rgb(212, 212, 212)">:</span><span class="token plain"> Int</span><span class="token punctuation" style="color:rgb(212, 212, 212)">)</span><span class="token operator" style="color:rgb(212, 212, 212)">:</span><span class="token plain"> Person </span><span class="token punctuation" style="color:rgb(212, 212, 212)">{</span><span class="token plain"> </span><span class="token operator" style="color:rgb(212, 212, 212)">..</span><span class="token punctuation" style="color:rgb(212, 212, 212)">.</span><span class="token plain"> </span><span class="token punctuation" style="color:rgb(212, 212, 212)">}</span><span class="token plain"></span><br></span><span class="token-line" style="color:#D4D4D4"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#D4D4D4"><span class="token plain"></span><span class="token comment" style="color:#6b738a">// context-style, "fake" constructor</span><span class="token plain"></span><br></span><span class="token-line" style="color:#D4D4D4"><span class="token plain"></span><span class="token function" style="color:#EDB368">context</span><span class="token punctuation" style="color:rgb(212, 212, 212)">(</span><span class="token plain">Raise</span><span class="token operator" style="color:rgb(212, 212, 212)">&lt;</span><span class="token plain">PersonValidationError</span><span class="token operator" style="color:rgb(212, 212, 212)">&gt;</span><span class="token punctuation" style="color:rgb(212, 212, 212)">)</span><span class="token plain"></span><br></span><span class="token-line" style="color:#D4D4D4"><span class="token plain"></span><span class="token keyword" style="color:#82a2f3">fun</span><span class="token plain"> </span><span class="token function" style="color:#EDB368">Person</span><span class="token punctuation" style="color:rgb(212, 212, 212)">(</span><span class="token plain">name</span><span class="token operator" style="color:rgb(212, 212, 212)">:</span><span class="token plain"> String</span><span class="token punctuation" style="color:rgb(212, 212, 212)">,</span><span class="token plain"> age</span><span class="token operator" style="color:rgb(212, 212, 212)">:</span><span class="token plain"> Int</span><span class="token punctuation" style="color:rgb(212, 212, 212)">)</span><span class="token operator" style="color:rgb(212, 212, 212)">:</span><span class="token plain"> Person </span><span class="token punctuation" style="color:rgb(212, 212, 212)">{</span><span class="token plain"> </span><span class="token operator" style="color:rgb(212, 212, 212)">..</span><span class="token punctuation" style="color:rgb(212, 212, 212)">.</span><span class="token plain"> </span><span class="token punctuation" style="color:rgb(212, 212, 212)">}</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+<div class="theme-admonition theme-admonition-info admonition_xJq3 alert alert--info"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><path fill="currentColor" fill-rule="evenodd" d="M12 23c6.075 0 11-4.925 11-11S18.075 1 12 1 1 5.925 1 12s4.925 11 11 11M9 11.5h2v4H9v2h6v-2h-2v-6H9zM13 8V6h-2v2z" clip-rule="evenodd"></path></svg></span>Enabling context parameters</div><div class="admonitionContent_BuS1"><p>In order to define functions with context parameters, you need to enable the
+corresponding language feature, as described in the
+<a href="https://kotlinlang.org/docs/whatsnew22.html#preview-of-context-parameters" target="_blank" rel="noopener noreferrer">Kotlin documentation</a>.</p></div></div>
+<p><strong>New <code>Racing</code> DSL for concurrency.</strong>
+Arrow Fx provides high-level concurrency combinators
+to succinctly describe how tasks should be interleaved in a computation.
+Albeit useful, those combinators require nesting and writing your code in a
+particular way. In Arrow 2.2.0 we introduce a new
+<a href="https://arrow-kt.io/learn/coroutines/racing/#racing-dsl-experimental"><code>Racing</code> DSL</a>.
+Combined with the already existing
+<a href="https://arrow-kt.io/learn/coroutines/parallel/#await-all--parallelism-experimental"><code>AwaitAll</code> DSL</a>,
+you can write your coroutines code with little to no changes, while using as
+much concurrency as possible during execution.</p>
+<p><strong><code>validate</code> for error values.</strong>
+We have introduced a small utility function to bridge the world of validation functions
+working on <code>Raise</code>, and chained style using <code>Either</code> or <code>Option</code>. This function is
+called <code>validate</code>, and it should be commonly used in conjunction with <code>ensure</code> and similar functions.</p>
+<div class="language-kotlin codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#D4D4D4;--prism-background-color:#222E51"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-kotlin codeBlock_bY9V thin-scrollbar" style="color:#D4D4D4;background-color:#222E51"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#D4D4D4"><span class="token keyword" style="color:#82a2f3">fun</span><span class="token plain"> </span><span class="token function" style="color:#EDB368">failOnMoreConditionsWithBindMap</span><span class="token punctuation" style="color:rgb(212, 212, 212)">(</span><span class="token punctuation" style="color:rgb(212, 212, 212)">)</span><span class="token operator" style="color:rgb(212, 212, 212)">:</span><span class="token plain"> Either</span><span class="token operator" style="color:rgb(212, 212, 212)">&lt;</span><span class="token plain">String</span><span class="token punctuation" style="color:rgb(212, 212, 212)">,</span><span class="token plain"> Int</span><span class="token operator" style="color:rgb(212, 212, 212)">&gt;</span><span class="token plain"> </span><span class="token operator" style="color:rgb(212, 212, 212)">=</span><span class="token plain"></span><br></span><span class="token-line" style="color:#D4D4D4"><span class="token plain">    </span><span class="token function" style="color:#EDB368">randomNumber</span><span class="token punctuation" style="color:rgb(212, 212, 212)">(</span><span class="token punctuation" style="color:rgb(212, 212, 212)">)</span><span class="token plain"></span><br></span><span class="token-line" style="color:#D4D4D4"><span class="token plain">        </span><span class="token punctuation" style="color:rgb(212, 212, 212)">.</span><span class="token function" style="color:#EDB368">validate</span><span class="token plain"> </span><span class="token punctuation" style="color:rgb(212, 212, 212)">{</span><span class="token plain"> </span><span class="token function" style="color:#EDB368">ensure</span><span class="token punctuation" style="color:rgb(212, 212, 212)">(</span><span class="token plain">it </span><span class="token operator" style="color:rgb(212, 212, 212)">!=</span><span class="token plain"> </span><span class="token number" style="color:#cfcd9a">10</span><span class="token punctuation" style="color:rgb(212, 212, 212)">)</span><span class="token plain"> </span><span class="token punctuation" style="color:rgb(212, 212, 212)">{</span><span class="token plain"> </span><span class="token string-literal singleline string" style="color:#5B88F8">"Number 10 also not allowed"</span><span class="token plain"> </span><span class="token punctuation" style="color:rgb(212, 212, 212)">}</span><span class="token plain"> </span><span class="token punctuation" style="color:rgb(212, 212, 212)">}</span><span class="token plain"></span><br></span><span class="token-line" style="color:#D4D4D4"><span class="token plain">        </span><span class="token punctuation" style="color:rgb(212, 212, 212)">.</span><span class="token function" style="color:#EDB368">map</span><span class="token plain"> </span><span class="token punctuation" style="color:rgb(212, 212, 212)">{</span><span class="token plain"> it </span><span class="token operator" style="color:rgb(212, 212, 212)">+</span><span class="token plain"> </span><span class="token number" style="color:#cfcd9a">100</span><span class="token plain"> </span><span class="token punctuation" style="color:rgb(212, 212, 212)">}</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+<p>This new function provides no functionality you could not get before.
+For example, here is the code equivalent to the one above, but using the <code>Either</code> DSL.</p>
+<div class="language-kotlin codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#D4D4D4;--prism-background-color:#222E51"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-kotlin codeBlock_bY9V thin-scrollbar" style="color:#D4D4D4;background-color:#222E51"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#D4D4D4"><span class="token keyword" style="color:#82a2f3">fun</span><span class="token plain"> </span><span class="token function" style="color:#EDB368">failOnMoreConditionsWithBindMap</span><span class="token punctuation" style="color:rgb(212, 212, 212)">(</span><span class="token punctuation" style="color:rgb(212, 212, 212)">)</span><span class="token operator" style="color:rgb(212, 212, 212)">:</span><span class="token plain"> Either</span><span class="token operator" style="color:rgb(212, 212, 212)">&lt;</span><span class="token plain">String</span><span class="token punctuation" style="color:rgb(212, 212, 212)">,</span><span class="token plain"> Int</span><span class="token operator" style="color:rgb(212, 212, 212)">&gt;</span><span class="token plain"> </span><span class="token operator" style="color:rgb(212, 212, 212)">=</span><span class="token plain"> either </span><span class="token punctuation" style="color:rgb(212, 212, 212)">{</span><span class="token plain"></span><br></span><span class="token-line" style="color:#D4D4D4"><span class="token plain">    </span><span class="token keyword" style="color:#82a2f3">val</span><span class="token plain"> random </span><span class="token operator" style="color:rgb(212, 212, 212)">=</span><span class="token plain"> </span><span class="token function" style="color:#EDB368">randomNumber</span><span class="token punctuation" style="color:rgb(212, 212, 212)">(</span><span class="token punctuation" style="color:rgb(212, 212, 212)">)</span><span class="token punctuation" style="color:rgb(212, 212, 212)">.</span><span class="token function" style="color:#EDB368">bind</span><span class="token punctuation" style="color:rgb(212, 212, 212)">(</span><span class="token punctuation" style="color:rgb(212, 212, 212)">)</span><span class="token plain"></span><br></span><span class="token-line" style="color:#D4D4D4"><span class="token plain">    </span><span class="token function" style="color:#EDB368">ensure</span><span class="token punctuation" style="color:rgb(212, 212, 212)">(</span><span class="token plain">random </span><span class="token operator" style="color:rgb(212, 212, 212)">!=</span><span class="token plain"> </span><span class="token number" style="color:#cfcd9a">10</span><span class="token punctuation" style="color:rgb(212, 212, 212)">)</span><span class="token plain"> </span><span class="token punctuation" style="color:rgb(212, 212, 212)">{</span><span class="token plain"> </span><span class="token string-literal singleline string" style="color:#5B88F8">"Number 10 also not allowed"</span><span class="token plain"> </span><span class="token punctuation" style="color:rgb(212, 212, 212)">}</span><span class="token plain"></span><br></span><span class="token-line" style="color:#D4D4D4"><span class="token plain">    random </span><span class="token operator" style="color:rgb(212, 212, 212)">+</span><span class="token plain"> </span><span class="token number" style="color:#cfcd9a">100</span><span class="token plain"></span><br></span><span class="token-line" style="color:#D4D4D4"><span class="token plain"></span><span class="token punctuation" style="color:rgb(212, 212, 212)">}</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+<p>We acknowledge that the chain-of-calls style is a common one, and we want the Arrow API
+to appeal to users using their preferred style.</p>
+<p><strong>"At most once" for <code>Eval</code>.</strong>
+Arrow provides the <code>Eval</code> type for <a href="https://arrow-kt.io/learn/collections-functions/eval/">fine-grained control over evaluation</a>.
+This is similar to <code>lazy</code> in the standard library, but you can choose
+between eager, lazy, and repeated (computed every time) evaluation strategies.
+However, there was no (easy) way to ensure that a computation was evaluated
+at most once.</p>
+<p>The new <code>Eval.atMostOnce</code> function (alongside <code>SuspendEval.atMostOnce</code>)
+provides this new behavior. You should be aware, though, that this means
+that getting the value of an <code>Eval</code> built this way may block (or suspend)
+if more than one thread does so concurrently.</p>
+<p><strong>Changes to <code>toString</code> for non-empty collections.</strong>
+After a <a href="https://kotlinlang.slack.com/archives/C5UPMM0A0/p1757410910270849" target="_blank" rel="noopener noreferrer">long discussion in Slack</a>
+it became clear that the behavior of <code>toString</code> for non-empty collections
+should just reflect that of the wrapped collection. Until now, using
+<code>NonEmptyList</code> or <code>NonEmptySet</code> added a prefix — from now on, we treat
+non-emptiness as simply a property of the collection, no different than other
+such as their size, that are not reflected when turning into a string.</p>
+<p><strong>New <code>arrow-core-result4k</code> module.</strong>
+<a href="https://github.com/fork-handles/forkhandles/tree/trunk/result4k" target="_blank" rel="noopener noreferrer">Result4k</a>
+is a popular library for computation that may succeed or fail.
+We now provide support for it as part of <a href="https://arrow-kt.io/learn/typed-errors/working-with-typed-errors/">typed errors</a>.
+You can either consume them — that is, <code>.bind()</code> a <code>Result</code> value —
+or produce them — use the <code>result4k</code> builder in a similar way to <code>either</code>.</p>
+<p><strong>Arrow Optics for Gradle, beta.</strong>
+We have been working on a new approach to handle <code>@optics</code> annotations
+with much less configuration, and that removes the need for manually
+writing <code>companion object</code>s. This new approach is in beta,
+<a href="https://arrow-kt.io/community/blog/2025/11/01/arrow-optics-gradle/">read here</a> all the details.</p>
+<p><strong>Migration to new plug-ins.</strong>
+Following our <em>eager dependency update policy</em>, we have moved to the new recommended
+plug-ins in the ecosystem.</p>
+<ul>
+<li>We now use <a href="https://github.com/google/ksp/blob/main/docs/ksp2.md" target="_blank" rel="noopener noreferrer">KSP2</a>,</li>
+<li>Android now uses the <a href="https://developer.android.com/kotlin/multiplatform/plugin" target="_blank" rel="noopener noreferrer">Android Gradle Library Plugin for KMP</a>,</li>
+<li>Binary validation is done using the <a href="https://kotlinlang.org/docs/gradle-binary-compatibility-validation.html" target="_blank" rel="noopener noreferrer">experimental built-in support</a>,</li>
+<li>We now publish a <a href="https://docs.gradle.org/current/userguide/version_catalogs.html#sec:importing-published-catalog" target="_blank" rel="noopener noreferrer">version catalog</a>
+for consistent versioning of Arrow dependencies.</li>
+<li>The <a href="https://plugins.jetbrains.com/plugin/24550-arrow" target="_blank" rel="noopener noreferrer">Arrow plug-in for IntelliJ IDEs</a>
+now supports up to 2025.3, and understands code using context parameters
+and the new <code>Racing</code> DSL.</li>
+</ul>]]></content>
+        <category label="core" term="core"/>
+        <category label="articles" term="articles"/>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Arrow Optics for Gradle in beta]]></title>
+        <id>https://arrow-kt.io/community/blog/2025/11/01/arrow-optics-gradle/</id>
+        <link href="https://arrow-kt.io/community/blog/2025/11/01/arrow-optics-gradle/"/>
+        <updated>2025-11-01T00:00:00.000Z</updated>
+        <summary type="html"><![CDATA[In order to unlock the full power of Arrow Optics, lenses and prisms for your]]></summary>
+        <content type="html"><![CDATA[<p>In order to unlock the full power of Arrow Optics, lenses and prisms for your
+own types must be defined. This is a tedious task, that can be automate with
+the help of the <code>@optics</code> annotation. Alas, <a href="https://arrow-kt.io/learn/quickstart/#additional-setup-for-optics">setting up</a>
+the plug-in is not easy (especially in Multiplatform projects), and the
+architecture of the plugin means that you need to write a <code>companion object</code>
+explicitly on every one of your types.</p>
+<p>We've been working on making this process easier, and the result is the
+new <a href="https://plugins.gradle.org/plugin/io.arrow-kt.optics" target="_blank" rel="noopener noreferrer">Arrow Optics plugin for Gradle</a>.
+This plugin configures your project to process <code>@optics</code> annotations,
+taking care of all the peculiarities of Kotlin JVM and Multiplatform plugins.
+Furthermore, it sets up the Kotlin compiler to generate <code>companion object</code>
+automatically (if they are not already present), saving time and boilerplate.</p>
+<p>This new plugin is in <strong>beta</strong>, the KSP plugin still remains the officially
+supported way to generate optics. But we would also love feedback on the
+new approach, with the goal of making this simpler option the default.
+If you want to try the new plugin, you need to:</p>
+<ul>
+<li>Remove any previous configuration of the Arrow Optics KSP plugin,</li>
+<li>Add <code>id("io.arrow-kt.optics") version "2.2.0"</code> to your <code>plugins</code> block,</li>
+<li>Call <code>arrowOptics()</code> at the <strong>end</strong> of your <code>kotlin</code> block.</li>
+</ul>
+<div class="language-kotlin codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#D4D4D4;--prism-background-color:#222E51"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-kotlin codeBlock_bY9V thin-scrollbar" style="color:#D4D4D4;background-color:#222E51"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#D4D4D4"><span class="token plain">plugins </span><span class="token punctuation" style="color:rgb(212, 212, 212)">{</span><span class="token plain"></span><br></span><span class="token-line" style="color:#D4D4D4"><span class="token plain">    </span><span class="token function" style="color:#EDB368">id</span><span class="token punctuation" style="color:rgb(212, 212, 212)">(</span><span class="token string-literal singleline string" style="color:#5B88F8">"io.arrow-kt.optics"</span><span class="token punctuation" style="color:rgb(212, 212, 212)">)</span><span class="token plain"> version </span><span class="token string-literal singleline string" style="color:#5B88F8">"2.2.0"</span><span class="token plain"></span><br></span><span class="token-line" style="color:#D4D4D4"><span class="token plain"></span><span class="token punctuation" style="color:rgb(212, 212, 212)">}</span><span class="token plain"></span><br></span><span class="token-line" style="color:#D4D4D4"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#D4D4D4"><span class="token plain">kotlin </span><span class="token punctuation" style="color:rgb(212, 212, 212)">{</span><span class="token plain"></span><br></span><span class="token-line" style="color:#D4D4D4"><span class="token plain">    </span><span class="token comment" style="color:#6b738a">// compiler, target, and source set configuration</span><span class="token plain"></span><br></span><span class="token-line" style="color:#D4D4D4"><span class="token plain">    </span><span class="token comment" style="color:#6b738a">// ...</span><span class="token plain"></span><br></span><span class="token-line" style="color:#D4D4D4"><span class="token plain">    </span><span class="token function" style="color:#EDB368">arrowOptics</span><span class="token punctuation" style="color:rgb(212, 212, 212)">(</span><span class="token punctuation" style="color:rgb(212, 212, 212)">)</span><span class="token plain"></span><br></span><span class="token-line" style="color:#D4D4D4"><span class="token plain"></span><span class="token punctuation" style="color:rgb(212, 212, 212)">}</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+<p>Please let us know of any issues you encounter or any feedback on how to
+make the process even more approachable, in either our
+<a href="https://github.com/arrow-kt/arrow/issues" target="_blank" rel="noopener noreferrer">issues page</a>
+or the <code>#arrow</code> channel on <a href="https://slack-chats.kotlinlang.org/c/arrow" target="_blank" rel="noopener noreferrer">Kotlin Slack</a>.</p>]]></content>
+        <category label="core" term="core"/>
+        <category label="articles" term="articles"/>
+    </entry>
     <entry>
         <title type="html"><![CDATA[Arrow plug-in for IntelliJ 0.3]]></title>
         <id>https://arrow-kt.io/community/blog/2025/04/22/arrow-intellij-0-3/</id>
@@ -128,7 +247,7 @@ of some data.</p>
 one intends to use as much concurrency as possible. Arrow Fx includes a <code>parZip</code>
 function, but not everybody enjoys having so many brackets.</p>
 <div class="language-kotlin codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#D4D4D4;--prism-background-color:#222E51"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-kotlin codeBlock_bY9V thin-scrollbar" style="color:#D4D4D4;background-color:#222E51"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#D4D4D4"><span class="token function" style="color:#EDB368">parZip</span><span class="token punctuation" style="color:rgb(212, 212, 212)">(</span><span class="token plain"></span><br></span><span class="token-line" style="color:#D4D4D4"><span class="token plain">    </span><span class="token punctuation" style="color:rgb(212, 212, 212)">{</span><span class="token plain"> </span><span class="token function" style="color:#EDB368">downloadFile</span><span class="token punctuation" style="color:rgb(212, 212, 212)">(</span><span class="token punctuation" style="color:rgb(212, 212, 212)">)</span><span class="token plain"> </span><span class="token punctuation" style="color:rgb(212, 212, 212)">}</span><span class="token punctuation" style="color:rgb(212, 212, 212)">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#D4D4D4"><span class="token plain">    </span><span class="token punctuation" style="color:rgb(212, 212, 212)">{</span><span class="token plain"> </span><span class="token function" style="color:#EDB368">loadDataFromDatabase</span><span class="token punctuation" style="color:rgb(212, 212, 212)">(</span><span class="token punctuation" style="color:rgb(212, 212, 212)">)</span><span class="token plain"> </span><span class="token punctuation" style="color:rgb(212, 212, 212)">}</span><span class="token plain"></span><br></span><span class="token-line" style="color:#D4D4D4"><span class="token plain"></span><span class="token punctuation" style="color:rgb(212, 212, 212)">)</span><span class="token plain"> </span><span class="token punctuation" style="color:rgb(212, 212, 212)">{</span><span class="token plain"> file</span><span class="token punctuation" style="color:rgb(212, 212, 212)">,</span><span class="token plain"> </span><span class="token keyword" style="color:#82a2f3">data</span><span class="token plain"> </span><span class="token operator" style="color:rgb(212, 212, 212)">-&gt;</span><span class="token plain"> </span><span class="token function" style="color:#EDB368">Result</span><span class="token punctuation" style="color:rgb(212, 212, 212)">(</span><span class="token plain">file</span><span class="token punctuation" style="color:rgb(212, 212, 212)">,</span><span class="token plain"> </span><span class="token keyword" style="color:#82a2f3">data</span><span class="token punctuation" style="color:rgb(212, 212, 212)">)</span><span class="token plain"> </span><span class="token punctuation" style="color:rgb(212, 212, 212)">}</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
-<p>The new <a href="https://arrow-kt.io/learn/coroutines/parallel/#await-all-scopes"><code>awaitAll</code> scope</a> tries to improve the situation by tweaking the
+<p>The new <a href="https://arrow-kt.io/learn/coroutines/parallel/#await-all--parallelism-experimental"><code>awaitAll</code> scope</a> tries to improve the situation by tweaking the
 usual <code>async</code> mechanism, ensuring that all <code>Deferred</code> values are <code>await</code>ed
 once the first one is requested. That means that the previous code behaves
 identically to the following, that is, the call <code>file.await()</code> implicitly
@@ -491,26 +610,6 @@ as well as the most succinct with the least lines of codes.</p>
         <updated>2022-12-01T00:00:00.000Z</updated>
         <summary type="html"><![CDATA[A presentation by Bas de Groot at Advanced Kotlin Dev Day 2022.]]></summary>
         <content type="html"><![CDATA[<p>A presentation by Bas de Groot at Advanced Kotlin Dev Day 2022.</p>]]></content>
-        <category label="core" term="core"/>
-        <category label="videos" term="videos"/>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[Functional Flowing]]></title>
-        <id>https://arrow-kt.io/community/blog/2022/12/01/functional-flowing/</id>
-        <link href="https://arrow-kt.io/community/blog/2022/12/01/functional-flowing/"/>
-        <updated>2022-12-01T00:00:00.000Z</updated>
-        <summary type="html"><![CDATA[Simon Vergauwen shows how to leverage KotlinX Flow to describe powerful programs and build pipelines to transform and manipulate data in an efficient streaming way.]]></summary>
-        <content type="html"><![CDATA[<p>Simon Vergauwen shows how to leverage KotlinX Flow to describe powerful programs and build pipelines to transform and manipulate data in an efficient streaming way.</p>]]></content>
-        <category label="core" term="core"/>
-        <category label="videos" term="videos"/>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[Graceful Shutdown with Structured Concurrency]]></title>
-        <id>https://arrow-kt.io/community/blog/2022/12/01/graceful-shutdown-structured-concurrency/</id>
-        <link href="https://arrow-kt.io/community/blog/2022/12/01/graceful-shutdown-structured-concurrency/"/>
-        <updated>2022-12-01T00:00:00.000Z</updated>
-        <summary type="html"><![CDATA[A presentation by Simon Vergauwen at Advanced Kotlin Dev Day 2022.]]></summary>
-        <content type="html"><![CDATA[<p>A presentation by Simon Vergauwen at Advanced Kotlin Dev Day 2022.</p>]]></content>
         <category label="core" term="core"/>
         <category label="videos" term="videos"/>
     </entry>
