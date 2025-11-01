@@ -8,7 +8,7 @@ sidebar_custom_props:
   overview: true
 ---
 
-# <decorated-text icon={frontMatter.sidebar_custom_props.icon} title={frontMatter.title} />
+# Integrations
 
 A library is more robust if it plays well with the rest of the ecosystem 
 surrounding it. Arrow integrates with many useful libraries in the Kotlin
@@ -22,58 +22,67 @@ Do you maintain or know of a library with support for Arrow? Feel free to
 
 :::
 
-:::tip
+### Linting
 
+**[Detekt](https://detekt.dev/).**
 There's a [custom set of rules](https://github.com/woltapp/arrow-detekt-rules)
-for [Detekt](https://detekt.dev/) that can help you refine your style when
-using Arrow.
+that can help you refine your style when using Arrow.
 
-:::
+### Testing
 
-## Testing
-
-### [Kotest](https://kotest.io/)
-
+**[Kotest](https://kotest.io/).**
 If you want to test the result of a function that uses a type defined in Arrow,
 like `Either`, you can use the [matchers](https://kotest.io/docs/assertions/arrow.html)
 extension library. If you're using property-based testing (you should!), you can
 use [generators](https://kotest.io/docs/proptest/property-test-generators-arrow.html)
 for Arrow types.
 
-### [AssertJ](https://assertj.github.io/doc/)
-
+**[AssertJ](https://assertj.github.io/doc/).**
 Assertions covering `Either` and `Option` are provided by
 [this library](https://github.com/rcardin/assertj-arrow-core).
 
-## Serialization
+### Serialization
 
-See the [corresponding section](../quickstart/serialization).
+See the [corresponding section](../quickstart/serialization) in the documentation.
 
-## Configuration
+### Configuration
 
-### [Hoplite](https://github.com/sksamuel/hoplite)
-
+**[Hoplite](https://github.com/sksamuel/hoplite).**
 Hoplite is a great library for handling configurations and supporting various sources, formats, and cascading setups. The library supports most
 Arrow types for [decoding](https://github.com/sksamuel/hoplite#decoders).
 
-## Validation
+### Validation and Errors
 
-### [Akkurate](https://akkurate.dev/)
-
+**[Akkurate](https://akkurate.dev/).**
 Akkurate provides a language to describe complex validation code. It provides [integration](https://akkurate.dev/docs/arrow-integration.html) with Arrow's typed error mechanism.
 
-## HTTP
+**[Result4k](https://github.com/fork-handles/forkhandles/tree/trunk/result4k).**
+The Arrow project provides support for Result4k in its `Raise` framework for typed errors.
 
-### [Retrofit](https://square.github.io/retrofit/)
+### Caching
 
+**[cache4k](https://reactivecircus.github.io/cache4k/).**
+You can easily integrate [cache4k](https://reactivecircus.github.io/cache4k/)
+as caching mechanism for [memoization](../collections-functions/recursive/#memoization-takes-memory).
+
+### HTTP
+
+**[Retrofit](https://square.github.io/retrofit/).**
 If Retrofit is your library of choice for querying HTTP services, this
 [small integration module](https://apidocs.arrow-kt.io/arrow-core-retrofit/index.html)
 may come in quite handy.
 
+**[kJWT](https://github.com/nefilim/kJWT).**
+This library adds support for JSON Web Signatures and JSON Web Tokens
+to the Kotlin and Arrow ecosystems.
+
 ### [Ktor](https://ktor.io/)
 
-#### [Serialization](../quickstart/serialization)
+**Graceful shutdown.**
+SuspendApp may be [directly integrated](/learn/coroutines/suspendapp/ktor/)
+in Ktor servers to provide graceful shutdown.
 
+**[Serialization](../quickstart/serialization).**
 If you're using kotlinx.serialization, you need no further changes other than
 importing the serializers with `@UseSerializers`.
 If you want to use Arrow Core types directly as your request or response models, you will need to include the `ArrowModule` in your serializers module:
@@ -104,18 +113,5 @@ install(ContentNegotiation) {
 }
 ```
 
-#### [Resilience](../resilience/)
-
+**[Resilience](../resilience/).**
 The [`arrow-resilience-ktor-client`](https://apidocs.arrow-kt.io/arrow-resilience-ktor-client/index.html) module provides Ktor client plug-ins for retry/repeat and circuit breakers based on Arrow's.
-
-### [kJWT](https://github.com/nefilim/kJWT)
-
-This library adds support for JSON Web Signatures and JSON Web Tokens
-to the Kotlin and Arrow ecosystems.
-
-## Caching
-
-### [cache4k](https://reactivecircus.github.io/cache4k/)
-
-You can easily integrate [cache4k](https://reactivecircus.github.io/cache4k/)
-as caching mechanism for [memoization](../collections-functions/recursive/#memoization-takes-memory).

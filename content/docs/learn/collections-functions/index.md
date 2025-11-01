@@ -2,11 +2,12 @@
 title: Collections and functions
 ---
 
-import { useCurrentSidebarCategory } from '@docusaurus/theme-common';
 import DocCardList from '@theme/DocCardList';
 
-# <decorated-text icon={useCurrentSidebarCategory().customProps.icon} title={frontMatter.title} />
+# Collections and functions
 
-<p>{useCurrentSidebarCategory().customProps.description}</p>
+In the quest to be the _perfect companion to your Kotlin journey_,
+Arrow provides a bunch of smaller utilities that makes working with the
+language much more productive.
 
 <DocCardList />

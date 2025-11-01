@@ -3,15 +3,14 @@ coroutines = "1.10.2"
 kotest = "6.0.4"
 kotlin = "2.2.21"
 knit = "0.5.0"
-arrow = "2.2.0-beta.3"
-ksp = "2.3.0"
+arrow = "2.2.0"
 kotlinKafka = "0.4.1"
 cache4k = "0.14.0"
 quiver = "1.0.2"
 pedestal = "3.1.1"
 
 [libraries]
-coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "coroutines" }
+# coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "coroutines" }
 coroutines-test = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-test", version.ref = "coroutines" }
 kotest-assertions-core = { module = "io.kotest:kotest-assertions-core", version.ref = "kotest" }
 kotest-property = { module = "io.kotest:kotest-property", version.ref = "kotest" }
@@ -26,9 +25,7 @@ arrow-resilience = { module = "io.arrow-kt:arrow-resilience", version.ref = "arr
 arrow-atomic = { module = "io.arrow-kt:arrow-atomic", version.ref = "arrow" }
 arrow-fx-stm = { module = "io.arrow-kt:arrow-fx-stm", version.ref = "arrow" }
 arrow-optics-lib = { module = "io.arrow-kt:arrow-optics", version.ref = "arrow" }
-arrow-optics-plugin = { module = "io.arrow-kt:arrow-optics-ksp-plugin", version.ref = "arrow" }
 arrow-optics-reflect = { module = "io.arrow-kt:arrow-optics-reflect", version.ref = "arrow" }
-arrow-optics-compose = { module = "io.arrow-kt:arrow-optics-compose", version.ref = "arrow" }
 arrow-collectors = { module = "io.arrow-kt:arrow-collectors", version.ref = "arrow" }
 arrow-eval = { module = "io.arrow-kt:arrow-eval", version.ref = "arrow" }
 arrow-functions = { module = "io.arrow-kt:arrow-functions", version.ref = "arrow" }
@@ -45,4 +42,4 @@ pedestal-state = { module = "dev.opensavvy.pedestal:state", version.ref = "pedes
 kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
 kotlinx-knit = { id = "org.jetbrains.kotlinx.knit", version.ref = "knit" }
 kotlinx-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
-ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
+arrow-optics = { id = "io.arrow-kt.optics", version.ref = "arrow" }

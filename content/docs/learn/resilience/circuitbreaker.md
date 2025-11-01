@@ -1,5 +1,6 @@
 ---
 sidebar_position: 3
+description: Protect other services from being overloaded
 ---
 
 # Circuit breaker

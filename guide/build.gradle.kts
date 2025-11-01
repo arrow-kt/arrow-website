@@ -1,9 +1,8 @@
-import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+import arrow.optics.plugin.arrowOptics
 
-@Suppress("DSL_SCOPE_VIOLATION")
 plugins {
   alias(libs.plugins.kotlin.jvm)
-  alias(libs.plugins.ksp)
+  alias(libs.plugins.arrow.optics)
   alias(libs.plugins.kotlinx.serialization)
 }
 
@@ -38,19 +37,17 @@ dependencies {
   testImplementation(libs.cache4k)
   testImplementation(libs.quiver)
   testImplementation(libs.pedestal.state)
-  ksp(libs.arrow.optics.plugin)
 }
 
-tasks {
-  withType<Test>().configureEach {
-    useJUnitPlatform()
-    testLogging {
-      setExceptionFormat("full")
-      setEvents(listOf("passed", "skipped", "failed", "standardOut", "standardError"))
-    }
-  }
+kotlin {
+  compilerOptions.freeCompilerArgs.add("-Xconsistent-data-class-copy-visibility")
+  arrowOptics()
+}
 
-  withType<KotlinCompile>().configureEach {
-    compilerOptions.freeCompilerArgs.add("-Xconsistent-data-class-copy-visibility"  )
+tasks.withType<Test>().configureEach {
+  useJUnitPlatform()
+  testLogging {
+    setExceptionFormat("full")
+    setEvents(listOf("passed", "skipped", "failed", "standardOut", "standardError"))
   }
 }

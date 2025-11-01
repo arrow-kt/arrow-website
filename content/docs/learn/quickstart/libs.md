@@ -27,12 +27,16 @@ Note that during the transition to Arrow 2.x some libraries were further split. 
 | `arrow-core-high-arity` | `arrow-core` for more than 10 parameters |
 | `arrow-atomic` <br /> _Multiplatform-ready [references](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.native.concurrent/-atomic-reference/)_ | [Atomic references](../../coroutines/concurrency-primitives/#atomic) <br /> <small>Replaced by [standard-library atomics](https://kotlinlang.org/docs/whatsnew2120.html#common-atomic-types)</small> |
 
-| Use case | Library | Integrates with |
-| -- | --- | --- |
-| _Serialization_ | `arrow-core-serialization` | [KotlinX Serialization](https://kotlinlang.org/docs/serialization.html) for core types |
-| | `arrow-core-jackson` | [Jackson](https://github.com/FasterXML/jackson-module-kotlin) for core types |
-| | `arrow-core-retrofit` | [Retrofit](https://square.github.io/retrofit/) with core types |
-| [_Ktor_](https://ktor.io/) | `suspendapp-ktor` | [Graceful shutdown with Ktor](https://arrow-kt.io/learn/coroutines/suspendapp/ktor/) |
-| | `arrow-resilience-ktor-client` | [Resilience](https://arrow-kt.io/learn/resilience/) client plug-ins |
-| _Memoization_ | `arrow-cache4k` | [cache4k](https://reactivecircus.github.io/cache4k/) for [memoization](../../collections-functions/recursive/) |
+The Arrow project also maintains some integrations with popular libraries in the ecosystem.
+For a broader overview of integrations, see the [corresponding page](/learn/integrations/).
+
+| Use case | Library | Integrates with                                                                                                            |
+| -- | --- |----------------------------------------------------------------------------------------------------------------------------|
+| _Typed errors_ | `arrow-core-result4k` | Use `Raise` with [Result4k](https://github.com/fork-handles/forkhandles/tree/trunk/result4k)                               |
+| _Serialization_ | `arrow-core-serialization` | [KotlinX Serialization](https://kotlinlang.org/docs/serialization.html) for core types                                     |
+| | `arrow-core-jackson` | [Jackson](https://github.com/FasterXML/jackson-module-kotlin) for core types                                               |
+| | `arrow-core-retrofit` | [Retrofit](https://square.github.io/retrofit/) with core types                                                             |
+| [_Ktor_](https://ktor.io/) | `suspendapp-ktor` | [Graceful shutdown with Ktor](https://arrow-kt.io/learn/coroutines/suspendapp/ktor/)                                       |
+| | `arrow-resilience-ktor-client` | [Resilience](https://arrow-kt.io/learn/resilience/) client plug-ins                                                        |
+| _Memoization_ | `arrow-cache4k` | [cache4k](https://reactivecircus.github.io/cache4k/) for [memoization](../../collections-functions/recursive/)             |
 | _Compose_ | `arrow-optics-compose` | [Compose state management](https://developer.android.com/jetpack/compose/state) with [optics](../../immutable-data/intro/) |

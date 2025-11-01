@@ -1,6 +1,6 @@
 ---
 title: Arrow 1.2.0-RC Release Summary 
-image: https://xebia.com/wp-content/uploads/2023/04/arrow-1-2-0-rc-twitter.jpg
+image: /img/arrow-release-ftr.jpg
 category: articles
 tags: [core, articles]
 link: https://xebia.com/blog/arrow-1-2-0-rc-is-now-available/
