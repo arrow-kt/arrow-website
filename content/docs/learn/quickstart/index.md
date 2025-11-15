@@ -58,6 +58,15 @@ Maven includes the Maven Central repository by default.
 :::
 
   </TabItem>
+  <TabItem value="amper" label="Amper">
+
+:::info
+
+Amper includes the Maven Central repository by default.
+
+:::
+
+  </TabItem>
 </Tabs>
 
 ### Include the dependencies
@@ -112,6 +121,15 @@ dependencies {
 ```
 
 </TabItem>
+<TabItem value="amper" label="Amper">
+
+```yaml
+dependencies:
+  - io.arrow-kt:arrow-core:2.2.0
+  - io.arrow-kt:arrow-fx-coroutines:2.2.0
+```
+
+</TabItem>
 </Tabs>
 
 #### Using version catalogs
@@ -163,9 +181,18 @@ dependencies {
 
 :::info
 
-Version catalogs are only available in Gradle.
+Version catalogs are not supported in Maven.
 
 :::
+
+</TabItem>
+<TabItem value="amper" label="Amper">
+
+```yaml
+dependencies:
+  - $libs.arrow.core
+  - $libs.arrow.fx.coroutines
+```
 
 </TabItem>
 </Tabs>
@@ -221,6 +248,15 @@ dependencies {
   <artifactId>arrow-fx-coroutines</artifactId>
 </dependency>
 ```
+
+</TabItem>
+<TabItem value="amper" label="Amper">
+
+:::info
+
+Bill-of-Materials are not supported in Amper.
+
+:::
 
 </TabItem>
 </Tabs>
@@ -286,7 +322,18 @@ provides unofficial support for that scenario.
 :::
 
 </TabItem>
+<TabItem value="amper" label="Amper">
 
+```yaml
+settings:
+  kotlin:
+    # other settings
+    ksp:
+      processors:
+        - io.arrow-kt:arrow-optics-ksp-plugin:2.2.0
+```
+
+</TabItem>
 </Tabs>
 
 If you are using the optics plug-in in a Multiplatform project,
