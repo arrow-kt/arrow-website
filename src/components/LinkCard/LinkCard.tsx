@@ -21,7 +21,7 @@ function LinkWrapper({
 }: {
   href: string;
   children: ReactNode;
-}): JSX.Element {
+}): React.JSX.Element {
   return (
     <Link href={href} className={styles.linkCard}>
       {children}

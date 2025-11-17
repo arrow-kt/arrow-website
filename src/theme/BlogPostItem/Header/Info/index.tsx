@@ -2,7 +2,8 @@ import React from 'react';
 
 import { translate } from '@docusaurus/Translate';
 import { usePluralForm } from '@docusaurus/theme-common';
-import { useBlogPost } from '@docusaurus/theme-common/internal';
+import { useBlogPost } from '@docusaurus/plugin-content-blog/client';
+import { BlogPostFrontMatter } from '@docusaurus/plugin-content-blog';
 import type { Props } from '@theme/BlogPostItem/Header/Info';
 
 import styles from './styles.module.css';
@@ -60,7 +61,7 @@ function Spacer() {
  */
 export default function BlogPostItemHeaderInfo({
   className,
-}: Props): JSX.Element {
+}: Props): React.JSX.Element {
   const { frontMatter, metadata } = useBlogPost();
   const { date, formattedDate, readingTime } = metadata;
   const { event } = frontMatter as BlogPostFrontMatterExpanded;

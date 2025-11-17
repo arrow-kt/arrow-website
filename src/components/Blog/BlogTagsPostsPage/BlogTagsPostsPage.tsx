@@ -50,7 +50,7 @@ function useBlogTagsPostsPageTitle(tag: Props['tag']): string {
   );
 }
 
-function BlogTagsPostsPageMetadata({ tag }: Props): JSX.Element {
+function BlogTagsPostsPageMetadata({ tag }: Props): React.JSX.Element {
   const title = useBlogTagsPostsPageTitle(tag);
   return (
     <>
@@ -60,7 +60,7 @@ function BlogTagsPostsPageMetadata({ tag }: Props): JSX.Element {
   );
 }
 
-function BlogTagsPostsPageContent(props: Props): JSX.Element {
+function BlogTagsPostsPageContent(props: Props): React.JSX.Element {
   const { tag, listMetadata, items } = props;
 
   const title = useBlogTagsPostsPageTitle(tag);
@@ -103,7 +103,7 @@ function BlogTagsPostsPageContent(props: Props): JSX.Element {
   );
 }
 
-export default function BlogTagsPostsPage(props: Props): JSX.Element {
+export default function BlogTagsPostsPage(props: Props): React.JSX.Element {
   return (
     <HtmlClassNameProvider
       className={`${ThemeClassNames.wrapper.blogPages} ${ThemeClassNames.page.blogTagPostListPage}`}>

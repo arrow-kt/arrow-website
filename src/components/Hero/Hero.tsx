@@ -1,7 +1,5 @@
 import React, { ReactNode } from 'react';
 
-import Link from '@docusaurus/Link';
-
 import styles from './hero.module.css';
 
 export interface HeroProps extends Partial<Styled> {
@@ -15,7 +13,7 @@ export function Hero({
   subtitle,
   ctaList,
   className: classNameProp,
-}: HeroProps): JSX.Element {
+}: HeroProps): React.JSX.Element {
   return (
     <div className={`hero ${styles.hero} ${classNameProp}`}>
       <div className={`container ${styles.container}`}>

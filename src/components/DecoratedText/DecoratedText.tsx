@@ -14,7 +14,7 @@ export const DecoratedText = ({
   children,
   icon,
   title,
-}: DecoratedTextProps): JSX.Element => (
+}: DecoratedTextProps): React.JSX.Element => (
   <>
     <img
       className={styles.icon}

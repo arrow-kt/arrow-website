@@ -29,7 +29,6 @@ const createConfig = async () => {
     projectName: 'arrow-website', // Usually your repo name.
 
     onBrokenLinks: 'throw',
-    onBrokenMarkdownLinks: 'warn',
 
     i18n: {
       defaultLocale: 'en',
@@ -61,6 +60,7 @@ const createConfig = async () => {
               '@site/src/components/Blog/BlogTagsPostsPage',
             postsPerPage: 8,
             editUrl: 'https://github.com/arrow-kt/arrow-website/edit/main/',
+            onUntruncatedBlogPosts: 'ignore',
           },
           theme: {
             customCss: [
@@ -172,7 +172,8 @@ const createConfig = async () => {
             {
               type: 'html',
               position: 'right',
-              value: '<img src="https://img.shields.io/maven-central/v/io.arrow-kt/arrow-core?color=5b88f8&label=latest">',
+              value:
+                '<img src="https://img.shields.io/maven-central/v/io.arrow-kt/arrow-core?color=5b88f8&label=latest">',
             },
           ],
         },
@@ -330,6 +331,9 @@ const createConfig = async () => {
     ],
     markdown: {
       mermaid: true,
+      hooks: {
+        onBrokenMarkdownLinks: 'throw',
+      },
     },
     themes: [
       '@docusaurus/theme-mermaid',

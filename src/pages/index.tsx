@@ -2,18 +2,17 @@ import React from 'react';
 import parse from 'html-react-parser';
 
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
-import useBaseUrl from '@docusaurus/useBaseUrl';
 import Layout from '@theme/Layout';
 
 import { Hero } from '@site/src/components/Hero';
-import { LinkCard, LinkCardProps } from '@site/src/components/LinkCard/index';
+import { LinkCard, LinkCardProps } from '@site/src/components/LinkCard';
 import { QuoteCard, QuoteCardProps } from '@site/src/components/QuoteCard';
 import { BorderlessCard } from '@site/src/components/BorderlessCard';
 
 import data from './index.yml';
 import styles from './index.module.css';
 
-export default function Home(): JSX.Element {
+export default function Home(): React.JSX.Element {
   const { siteConfig } = useDocusaurusContext();
 
   return (

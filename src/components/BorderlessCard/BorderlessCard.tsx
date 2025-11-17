@@ -3,7 +3,7 @@ import React from 'react';
 import Link from '@docusaurus/Link';
 import useBaseUrl from '@docusaurus/useBaseUrl';
 
-import { LinkCardProps } from '@site/src/components/LinkCard/index';
+import { LinkCardProps } from '@site/src/components/LinkCard';
 
 import styles from './borderless-card.module.css';
 

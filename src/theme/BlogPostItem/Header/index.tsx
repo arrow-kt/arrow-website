@@ -9,7 +9,7 @@ import BlogPostItemHeaderTags from '@site/src/theme/BlogPostItem/Header/Tags';
 import BlogPostItemHeaderImage from '@site/src/theme/BlogPostItem/Header/Image';
 import BlogPostItemHeaderLink from '@site/src/theme/BlogPostItem/Header/Link';
 
-export default function BlogPostItemHeader(): JSX.Element {
+export default function BlogPostItemHeader(): React.JSX.Element {
   return (
     <header className="text--center margin-bottom--md">
       <BlogPostItemHeaderTitle />

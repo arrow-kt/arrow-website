@@ -1,13 +1,10 @@
 import React from 'react';
 
 import { useCurrentSidebarCategory } from '@docusaurus/theme-common';
-import { useDocById } from '@docusaurus/theme-common/internal';
-import type {
-  PropSidebarItemCategory,
-  PropSidebarItemLink,
-} from '@docusaurus/plugin-content-docs';
+import { useDocById } from '@docusaurus/plugin-content-docs/client';
+import type { PropSidebarItemCategory, PropSidebarItemLink, } from '@docusaurus/plugin-content-docs';
 
-import { LinkCard, LinkCardProps } from '@site/src/components/LinkCard/index';
+import { LinkCard, LinkCardProps } from '@site/src/components/LinkCard';
 
 const defaultIcon = 'icon-tutorial.svg';
 
@@ -17,8 +14,7 @@ const defaultIcon = 'icon-tutorial.svg';
  */
 function useCurrentSidebarCategoryWrapper(): PropSidebarItemCategory {
   try {
-    const currentSidebarCategory = useCurrentSidebarCategory();
-    return currentSidebarCategory;
+    return useCurrentSidebarCategory();
   } catch {
     return undefined;
   }
@@ -28,7 +24,7 @@ export default function DocCard({
   item,
 }: {
   item: PropSidebarItemCategory | PropSidebarItemLink;
-}): JSX.Element {
+}): React.JSX.Element {
   const sidebarCategoryIcon = useCurrentSidebarCategoryWrapper()?.customProps
     ?.icon as string;
 
