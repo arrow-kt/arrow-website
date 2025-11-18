@@ -1,5 +1,4 @@
 // @ts-check
-/* eslint-disable @typescript-eslint/no-var-requires */
 /* eslint-disable no-undef */
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 
@@ -56,7 +55,7 @@ const createConfig = async () => {
             path: 'content/docs',
             routeBasePath: '/',
             sidebarPath: require.resolve('./sidebars.js'),
-            editUrl: 'https://github.com/arrow-kt/arrow-website/edit/main/',
+            // editUrl: 'https://github.com/arrow-kt/arrow-website/edit/main/',
             breadcrumbs: false,
           },
           pages: {
@@ -71,7 +70,7 @@ const createConfig = async () => {
             blogTagsPostsComponent:
               '@site/src/components/Blog/BlogTagsPostsPage',
             postsPerPage: 8,
-            editUrl: 'https://github.com/arrow-kt/arrow-website/edit/main/',
+            // editUrl: 'https://github.com/arrow-kt/arrow-website/edit/main/',
             onUntruncatedBlogPosts: 'ignore',
           },
           theme: {

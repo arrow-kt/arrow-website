@@ -1,4 +1,5 @@
 import React from 'react';
+import { formatDistance } from 'date-fns';
 
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import {
@@ -19,8 +20,8 @@ import styles from './blog-list-page.module.css';
 
 const formatSubtitle = (name: string | undefined, date: string): string =>
   name
-    ? `${name}, ${new Date(date).toDateString()}`
-    : `${new Date(date).toDateString()}`;
+    ? `${name}, ${formatDistance(new Date(date), new Date(), { addSuffix: true })}`
+    : `${formatDistance(new Date(date), new Date(), { addSuffix: true })}`;
 
 function BlogListPageMetadata(props: Props): React.JSX.Element {
   const { metadata } = props;
