@@ -37,7 +37,10 @@ const createConfig = async () => {
 
     future: {
       experimental_faster: true,
-      v4: true,
+      v4: {
+        removeLegacyPostBuildHeadAttribute: true,
+      },
+      // v4: true,
     },
 
     presets: [
