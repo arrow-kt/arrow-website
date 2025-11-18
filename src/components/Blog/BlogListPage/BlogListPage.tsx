@@ -18,7 +18,9 @@ import data from './blog-list-page.yml';
 import styles from './blog-list-page.module.css';
 
 const formatSubtitle = (name: string | undefined, date: string): string =>
-  name ? `${name}, ${new Date(date).toDateString()}` : `${new Date(date).toDateString()}`;
+  name
+    ? `${name}, ${new Date(date).toDateString()}`
+    : `${new Date(date).toDateString()}`;
 
 function BlogListPageMetadata(props: Props): React.JSX.Element {
   const { metadata } = props;

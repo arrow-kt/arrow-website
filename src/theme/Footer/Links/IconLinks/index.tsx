@@ -13,7 +13,9 @@ interface IconLinksProps {
   links: FooterLinkItem[];
 }
 
-export default function IconLinks({ links }: IconLinksProps): React.JSX.Element {
+export default function IconLinks({
+  links,
+}: IconLinksProps): React.JSX.Element {
   return (
     <ul className={`clean-list ${styles.container}`}>
       {links.map(({ label, href, icon }: FooterLinkItem) => (

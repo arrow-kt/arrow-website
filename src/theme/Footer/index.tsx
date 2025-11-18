@@ -1,6 +1,5 @@
 import React, { memo } from 'react';
 
-
 import { useThemeConfig, FooterLinkItem } from '@docusaurus/theme-common';
 import FooterLinks from '@theme/Footer/Links';
 import FooterLogo from '@theme/Footer/Logo';

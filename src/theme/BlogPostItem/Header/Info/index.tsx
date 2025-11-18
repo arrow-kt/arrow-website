@@ -37,13 +37,7 @@ function ReadingTime({ readingTime }: { readingTime: number }) {
   return <>{readingTimePlural(readingTime)}</>;
 }
 
-function DateInfo({
-  date,
-  formattedDate,
-}: {
-  date: string;
-  formattedDate: string;
-}) {
+function DateInfo({ date }: { date: string }) {
   return (
     <time dateTime={date} itemProp="datePublished">
       {new Date(date).toDateString()}
@@ -63,7 +57,7 @@ export default function BlogPostItemHeaderInfo({
   className,
 }: Props): React.JSX.Element {
   const { frontMatter, metadata } = useBlogPost();
-  const { date, formattedDate, readingTime } = metadata;
+  const { date, readingTime } = metadata;
   const { event } = frontMatter as BlogPostFrontMatterExpanded;
 
   return (
@@ -74,7 +68,7 @@ export default function BlogPostItemHeaderInfo({
           <Spacer />
         </>
       )}
-      <DateInfo date={date} formattedDate={formattedDate} />
+      <DateInfo date={date} />
       {typeof readingTime !== 'undefined' && (
         <>
           <Spacer />

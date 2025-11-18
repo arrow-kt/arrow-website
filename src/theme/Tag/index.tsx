@@ -5,7 +5,11 @@ import type { Props } from '@theme/Tag';
 
 import styles from './styles.module.css';
 
-export default function Tag({ permalink, label, count }: Props): React.JSX.Element {
+export default function Tag({
+  permalink,
+  label,
+  count,
+}: Props): React.JSX.Element {
   return (
     <Link
       href={permalink}

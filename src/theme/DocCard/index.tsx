@@ -2,7 +2,10 @@ import React from 'react';
 
 import { useCurrentSidebarCategory } from '@docusaurus/theme-common';
 import { useDocById } from '@docusaurus/plugin-content-docs/client';
-import type { PropSidebarItemCategory, PropSidebarItemLink, } from '@docusaurus/plugin-content-docs';
+import type {
+  PropSidebarItemCategory,
+  PropSidebarItemLink,
+} from '@docusaurus/plugin-content-docs';
 
 import { LinkCard, LinkCardProps } from '@site/src/components/LinkCard';
 

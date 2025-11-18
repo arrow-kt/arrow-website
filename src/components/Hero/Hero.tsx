@@ -11,6 +11,7 @@ export interface HeroProps extends Partial<Styled> {
 export function Hero({
   title,
   subtitle,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   ctaList,
   className: classNameProp,
 }: HeroProps): React.JSX.Element {

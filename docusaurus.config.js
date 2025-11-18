@@ -12,6 +12,10 @@
  * https://gist.github.com/sindresorhus/a39789f98801d908bbc7ff3ecc99d99c
  *
  */
+import generated from '@csstools/postcss-global-data';
+import postcss_custom_media from 'postcss-custom-media';
+import autoprefixer from 'autoprefixer';
+
 const createConfig = async () => {
   const { arrowDark: darkCodeTheme } = await import(
     './src/utils/arrowDark.mjs'
@@ -327,12 +331,12 @@ const createConfig = async () => {
           // Appends Global Data, Custom Media and AutoPrefixer.
           postcssOptions.plugins.push(
             // @ts-ignore
-            require('@csstools/postcss-global-data')({
+            generated({
               files: ['./src/css/vars.css'],
             }),
           );
-          postcssOptions.plugins.push(require('postcss-custom-media'));
-          postcssOptions.plugins.push(require('autoprefixer'));
+          postcssOptions.plugins.push(postcss_custom_media);
+          postcssOptions.plugins.push(autoprefixer);
           return postcssOptions;
         },
       }),
