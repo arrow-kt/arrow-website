@@ -805,7 +805,7 @@ sealed interface UserProblem {
 -->
 
 If you want to gather as many validation problems as possible, you need to switch to _accumulation_, as done above with `mapOrAccumulate`.
-Bu in this case we want to run independent validations of a different type, each for each field comprising the value.
+But in this case we want to run independent validations of a different type, each for each field comprising the value.
 
 The first approach is to use `zipOrAccumulate`.
 In that case the first arguments define the different independent validations, often as a block of code.
