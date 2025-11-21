@@ -1,6 +1,6 @@
 import React from 'react';
+import { formatDistance } from 'date-fns';
 
-import Link from '@docusaurus/Link';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import {
   PageMetadata,
@@ -14,15 +14,16 @@ import type { Props } from '@theme/BlogListPage';
 
 import { Hero } from '@site/src/components/Hero';
 import { ImageCard, ImageCardProps } from '@site/src/components/ImageCard';
-import { Banner } from '@site/src/components/Banner';
 
 import data from './blog-list-page.yml';
 import styles from './blog-list-page.module.css';
 
 const formatSubtitle = (name: string | undefined, date: string): string =>
-  name ? `${name}, ${new Date(date).toDateString()}` : `${new Date(date).toDateString()}`;
+  name
+    ? `${name}, ${formatDistance(new Date(date), new Date(), { addSuffix: true })}`
+    : `${formatDistance(new Date(date), new Date(), { addSuffix: true })}`;
 
-function BlogListPageMetadata(props: Props): JSX.Element {
+function BlogListPageMetadata(props: Props): React.JSX.Element {
   const { metadata } = props;
   const {
     siteConfig: { title: siteTitle },
@@ -38,7 +39,7 @@ function BlogListPageMetadata(props: Props): JSX.Element {
   );
 }
 
-function BlogListPageContent(props: Props): JSX.Element {
+function BlogListPageContent(props: Props): React.JSX.Element {
   const { metadata, items } = props;
 
   const posts = items.map((item) => ({
@@ -75,7 +76,7 @@ function BlogListPageContent(props: Props): JSX.Element {
   );
 }
 
-export default function BlogListPage(props: Props): JSX.Element {
+export default function BlogListPage(props: Props): React.JSX.Element {
   return (
     <HtmlClassNameProvider
       className={`${ThemeClassNames.wrapper.blogPages} ${ThemeClassNames.page.blogListPage}`}>

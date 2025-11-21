@@ -1,6 +1,5 @@
 import React, { memo } from 'react';
 
-
 import { useThemeConfig, FooterLinkItem } from '@docusaurus/theme-common';
 import FooterLinks from '@theme/Footer/Links';
 import FooterLogo from '@theme/Footer/Logo';
@@ -12,7 +11,7 @@ import IconLinks from '@site/src/theme/Footer/Links/IconLinks';
 // The name of the links section that will be used differently
 const externalLinksTitle = 'Links';
 
-function Footer(): JSX.Element | null {
+function Footer(): React.JSX.Element | null {
   const { footer } = useThemeConfig();
   if (!footer) {
     return null;

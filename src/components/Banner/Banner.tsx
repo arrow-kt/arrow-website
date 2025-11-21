@@ -13,7 +13,7 @@ export function Banner({
   title,
   ctaList,
   className: classNameProp,
-}: BannerProps): JSX.Element {
+}: BannerProps): React.JSX.Element {
   return (
     <div className={`${styles.wrapperContainer} ${classNameProp}`}>
       <div className={`container ${styles.container}`}>

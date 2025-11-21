@@ -1,5 +1,4 @@
 // @ts-check
-/* eslint-disable @typescript-eslint/no-var-requires */
 /* eslint-disable no-undef */
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 
@@ -12,6 +11,10 @@
  * https://gist.github.com/sindresorhus/a39789f98801d908bbc7ff3ecc99d99c
  *
  */
+import generated from '@csstools/postcss-global-data';
+import postcss_custom_media from 'postcss-custom-media';
+import autoprefixer from 'autoprefixer';
+
 const createConfig = async () => {
   const { arrowDark: darkCodeTheme } = await import(
     './src/utils/arrowDark.mjs'
@@ -29,11 +32,18 @@ const createConfig = async () => {
     projectName: 'arrow-website', // Usually your repo name.
 
     onBrokenLinks: 'throw',
-    onBrokenMarkdownLinks: 'warn',
 
     i18n: {
       defaultLocale: 'en',
       locales: ['en'],
+    },
+
+    future: {
+      experimental_faster: true,
+      v4: {
+        removeLegacyPostBuildHeadAttribute: true,
+      },
+      // v4: true,
     },
 
     presets: [
@@ -45,7 +55,7 @@ const createConfig = async () => {
             path: 'content/docs',
             routeBasePath: '/',
             sidebarPath: require.resolve('./sidebars.js'),
-            editUrl: 'https://github.com/arrow-kt/arrow-website/edit/main/',
+            // editUrl: 'https://github.com/arrow-kt/arrow-website/edit/main/',
             breadcrumbs: false,
           },
           pages: {
@@ -60,7 +70,8 @@ const createConfig = async () => {
             blogTagsPostsComponent:
               '@site/src/components/Blog/BlogTagsPostsPage',
             postsPerPage: 8,
-            editUrl: 'https://github.com/arrow-kt/arrow-website/edit/main/',
+            // editUrl: 'https://github.com/arrow-kt/arrow-website/edit/main/',
+            onUntruncatedBlogPosts: 'ignore',
           },
           theme: {
             customCss: [
@@ -172,7 +183,8 @@ const createConfig = async () => {
             {
               type: 'html',
               position: 'right',
-              value: '<img src="https://img.shields.io/maven-central/v/io.arrow-kt/arrow-core?color=5b88f8&label=latest">',
+              value:
+                '<img src="https://img.shields.io/maven-central/v/io.arrow-kt/arrow-core?color=5b88f8&label=latest">',
             },
           ],
         },
@@ -318,18 +330,21 @@ const createConfig = async () => {
           // Appends Global Data, Custom Media and AutoPrefixer.
           postcssOptions.plugins.push(
             // @ts-ignore
-            require('@csstools/postcss-global-data')({
+            generated({
               files: ['./src/css/vars.css'],
             }),
           );
-          postcssOptions.plugins.push(require('postcss-custom-media'));
-          postcssOptions.plugins.push(require('autoprefixer'));
+          postcssOptions.plugins.push(postcss_custom_media);
+          postcssOptions.plugins.push(autoprefixer);
           return postcssOptions;
         },
       }),
     ],
     markdown: {
       mermaid: true,
+      hooks: {
+        onBrokenMarkdownLinks: 'throw',
+      },
     },
     themes: [
       '@docusaurus/theme-mermaid',

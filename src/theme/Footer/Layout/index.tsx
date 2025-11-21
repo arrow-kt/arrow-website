@@ -17,7 +17,7 @@ export default function FooterLayout({
   iconLinks,
   logo,
   copyright,
-}: ExtendededProps): JSX.Element {
+}: ExtendededProps): React.JSX.Element {
   return (
     <footer className="footer">
       <div className={`container container-fluid ${styles.container}`}>

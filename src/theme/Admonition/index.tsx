@@ -23,7 +23,7 @@ const iconsMapping = {
 export default function AdmonitionWrapper({
   type,
   ...props
-}: Props): JSX.Element {
+}: Props): React.JSX.Element {
   return (
     <>
       <Admonition icon={iconsMapping[type]} {...{ type, ...props }} />

@@ -1,8 +1,8 @@
 import React from 'react';
+import { formatDistance } from 'date-fns';
 
-import { translate } from '@docusaurus/Translate';
-import { usePluralForm } from '@docusaurus/theme-common';
-import { useBlogPost } from '@docusaurus/theme-common/internal';
+import { useBlogPost } from '@docusaurus/plugin-content-blog/client';
+import { BlogPostFrontMatter } from '@docusaurus/plugin-content-blog';
 import type { Props } from '@theme/BlogPostItem/Header/Info';
 
 import styles from './styles.module.css';
@@ -11,42 +11,17 @@ interface BlogPostFrontMatterExpanded extends BlogPostFrontMatter {
   event: string;
 }
 
-// Very simple pluralization: probably good enough for now
-function useReadingTimePlural() {
-  const { selectMessage } = usePluralForm();
-  return (readingTimeFloat: number) => {
-    const readingTime = Math.ceil(readingTimeFloat);
-    return selectMessage(
-      readingTime,
-      translate(
-        {
-          id: 'theme.blog.post.readingTime.plurals',
-          description:
-            'Pluralized label for "{readingTime} min read". Use as much plural forms (separated by "|") as your language support (see https://www.unicode.org/cldr/cldr-aux/charts/34/supplemental/language_plural_rules.html)',
-          message: 'One min read|{readingTime} min read',
-        },
-        { readingTime },
-      ),
-    );
-  };
-}
-
-function ReadingTime({ readingTime }: { readingTime: number }) {
-  const readingTimePlural = useReadingTimePlural();
-  return <>{readingTimePlural(readingTime)}</>;
-}
-
-function DateInfo({
-  date,
-  formattedDate,
-}: {
-  date: string;
-  formattedDate: string;
-}) {
+function DateInfo({ date }: { date: string }) {
   return (
-    <time dateTime={date} itemProp="datePublished">
-      {new Date(date).toDateString()}
-    </time>
+    <>
+      <time dateTime={date} itemProp="datePublished">
+        {formatDistance(new Date(date), new Date(), { addSuffix: true })}
+      </time>
+      <Spacer />
+      <time dateTime={date} itemProp="datePublished">
+        {new Date(date).toDateString()}
+      </time>
+    </>
   );
 }
 
@@ -60,9 +35,9 @@ function Spacer() {
  */
 export default function BlogPostItemHeaderInfo({
   className,
-}: Props): JSX.Element {
+}: Props): React.JSX.Element {
   const { frontMatter, metadata } = useBlogPost();
-  const { date, formattedDate, readingTime } = metadata;
+  const { date } = metadata;
   const { event } = frontMatter as BlogPostFrontMatterExpanded;
 
   return (
@@ -73,13 +48,7 @@ export default function BlogPostItemHeaderInfo({
           <Spacer />
         </>
       )}
-      <DateInfo date={date} formattedDate={formattedDate} />
-      {typeof readingTime !== 'undefined' && (
-        <>
-          <Spacer />
-          <ReadingTime readingTime={readingTime} />
-        </>
-      )}
+      <DateInfo date={date} />
     </div>
   );
 }

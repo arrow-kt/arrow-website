@@ -5,7 +5,7 @@ import type { Props } from '@theme/BlogPostItem/Header/Author';
 
 import styles from './styles.module.css';
 
-function MaybeLink(props: LinkProps): JSX.Element {
+function MaybeLink(props: LinkProps): React.JSX.Element {
   if (props.href) {
     return <Link {...props} />;
   }
@@ -19,7 +19,7 @@ function MaybeLink(props: LinkProps): JSX.Element {
 export default function BlogPostItemHeaderAuthor({
   author,
   className,
-}: Props): JSX.Element {
+}: Props): React.JSX.Element {
   const { name, title, url, imageURL, email } = author;
   const link = url || (email && `mailto:${email}`) || undefined;
   return (
