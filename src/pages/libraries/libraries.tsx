@@ -10,12 +10,11 @@ import {
   BorderlessCard,
   BorderlessCardProps,
 } from '@site/src/components/BorderlessCard';
-import { Banner } from '@site/src/components/Banner';
 
 import data from './libraries.yml';
 import styles from './libraries.module.css';
 
-export default function Libraries(): JSX.Element {
+export default function Libraries(): React.JSX.Element {
   const { siteConfig } = useDocusaurusContext();
 
   return (

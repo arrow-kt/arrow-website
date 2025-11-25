@@ -9,7 +9,7 @@ import Link from '@docusaurus/Link';
 
 const oldSiteHost = 'old.arrow-kt.io';
 
-export default function NotFound(): JSX.Element {
+export default function NotFound(): React.JSX.Element {
   const location = useLocation();
 
   return (

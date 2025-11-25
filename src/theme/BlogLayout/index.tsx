@@ -10,7 +10,7 @@ import styles from './blog-layout.module.css';
  * Also including an additional container to have a
  * background similar as the rest of pages in the site
  */
-export default function BlogLayout(props: Props): JSX.Element {
+export default function BlogLayout(props: Props): React.JSX.Element {
   const { children, ...layoutProps } = props;
 
   return (

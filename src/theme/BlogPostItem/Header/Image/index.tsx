@@ -2,7 +2,8 @@ import React, { ReactNode } from 'react';
 
 import Link from '@docusaurus/Link';
 import { useBaseUrlUtils } from '@docusaurus/useBaseUrl';
-import { useBlogPost } from '@docusaurus/theme-common/internal';
+import { useBlogPost } from '@docusaurus/plugin-content-blog/client';
+import { BlogPostFrontMatter } from '@docusaurus/plugin-content-blog';
 
 import styles from './styles.module.css';
 
@@ -21,14 +22,14 @@ function LinkWrapper({
 }: {
   href: string;
   children: ReactNode;
-}): JSX.Element {
+}): React.JSX.Element {
   return <Link href={href}>{children}</Link>;
 }
 
 const BlogPostItemHeaderImageBase = ({
   title,
   image,
-}: BlogPostItemHeaderImageBaseProps): JSX.Element => (
+}: BlogPostItemHeaderImageBaseProps): React.JSX.Element => (
   <div className={`${styles.imageContainer} margin-bottom--lg`}>
     <img
       className={styles.image}
@@ -42,7 +43,7 @@ const BlogPostItemHeaderImageBase = ({
 /*
  * An additional component to show the image of a post
  */
-export default function BlogPostItemHeaderImage(): JSX.Element | null {
+export default function BlogPostItemHeaderImage(): React.JSX.Element | null {
   const { metadata, frontMatter, assets } = useBlogPost();
   const { title } = metadata;
   const { withBaseUrl } = useBaseUrlUtils();

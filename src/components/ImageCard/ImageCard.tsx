@@ -44,7 +44,7 @@ export function ImageCardBase({
         <p className={styles.text}>{body}</p>
         <strong className={styles.linkContainer}>
           <Link href={href} className={styles.link}>
-            Learn more
+            Read
           </Link>
         </strong>
       </div>
