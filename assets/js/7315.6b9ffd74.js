@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkarrow_website=self.webpackChunkarrow_website||[]).push([["7315"],{86366:function(e,r,c){c.d(r,{createArchitectureServices:()=>s.S});var s=c(38980);c(47342)}}]);
