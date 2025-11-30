@@ -32,7 +32,7 @@ provided API -- which can easily lead to broken invariants.
 
 The third aspect is applying some known recipes which may be hard
 to know upfront. The first release includes a suggestion to add
-the corresponding [serializer](/learn/quickstart/serialization/)
+the corresponding [serializer](/learn/quickstart/setup/serialization/)
 when a type marked as `@Serializable` includes an Arrow Core type.
 This is an area which we would like to explore more, helping with
 the difficulties raised by the community.

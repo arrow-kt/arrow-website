@@ -43,7 +43,7 @@ Assertions covering `Either` and `Option` are provided by
 
 ### Serialization
 
-See the [corresponding section](../quickstart/serialization) in the documentation.
+See the [corresponding section](../quickstart/setup/serialization) in the documentation.
 
 ### Configuration
 
@@ -82,7 +82,7 @@ to the Kotlin and Arrow ecosystems.
 SuspendApp may be [directly integrated](/learn/coroutines/suspendapp/ktor/)
 in Ktor servers to provide graceful shutdown.
 
-**[Serialization](../quickstart/serialization).**
+**[Serialization](../quickstart/setup/serialization).**
 If you're using kotlinx.serialization, you need no further changes other than
 importing the serializers with `@UseSerializers`.
 If you want to use Arrow Core types directly as your request or response models, you will need to include the `ArrowModule` in your serializers module:
