@@ -1,12 +1,12 @@
 ---
-title: Overview of libraries
+title: Library reference
 description: Arrow comprises different libraries, each improving or extending one commonly-used library in the Kotlin ecosystem or a particular Kotlin language feature.
-sidebar_position: 1
+sidebar_position: 6
 sidebar_custom_props:
   icon: icon-docs.svg
 ---
 
-# Overview of libraries
+# Library reference
 
 Arrow is not a single library, but a collection of them. The guiding principle is that each Arrow library should be _self-contained_: each library improves or extends a single commonly-used library in the Kotlin ecosystem (like `arrow-core` and `arrow-fx-coroutines`) or a particular Kotlin language feature (like `arrow-optics`), or focuses on a particular set of tasks (like `arrow-resilience`).
 

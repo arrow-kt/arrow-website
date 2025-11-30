@@ -15,354 +15,261 @@ Arrow aims to be the _perfect companion_ to your Kotlin journey. That means it f
 
 Arrow is inspired by the great work made in other programming language communities, especially from _functional_, _data-oriented_ and _concurrent_ programming. This doesn't mean you need to know any of those ideas to use the libraries; Arrow exposes these concepts in ways that do not feel alien to Kotlin programmers.
 
-:::info Where to start?
+:::info DSLs
 
-- Look at the [list of libraries](../quickstart/libs) and see how Arrow can help in your project
-- Our [summary](../summary) is designed to help you find your way in the Arrow ecosystem
-- Look at some [example projects](../projects) using Arrow in both frontend and backend
-- Learn about [design and architecture](../design) using functional and data-oriented programming concepts
+Arrow uses Domain Specific Languages (DSLs) to provide a more concise syntax for many tasks.
+This is just a fancy way of saying that Arrow libraries often have a core function that ought to be called with a lambda,
+and inside that new scope you get access to additional behaviors.
 
 :::
 
+### Typed errors
 
-### Enable the Maven Central repository
+<Tabs groupId="typedErrors1">
+  <TabItem value="typedErrors1Explanation" label="Domain errors">
 
-Arrow is published in [Maven Central](https://search.maven.org/), so you need to
-enable it as a source of dependencies in your build.
+With Arrow you can succinctly describe what kind of **domain errors** may arise in your functions.
+This brings extra clarity to your code, as you can more easily track what failure may happen,
+and also extra safety, as the compiler will ensure that you don't forget to handle a possible error.
 
-<Tabs groupId="build">
-  <TabItem value="gradleKotlin" label="Gradle (Kotlin)">
+  </TabItem>
+  <TabItem value="typedErrors1Example" label="Show me the code">
 
   ```kotlin
-  repositories {
-    mavenCentral()
-  }
-  ```
-
-  </TabItem>
-  <TabItem value="gradleGroovy" label="Gradle (Groovy)">
-
-  ```groovy
-  repositories {
-    mavenCentral()
-  }
-  ```
-
-  </TabItem>
-  <TabItem value="maven" label="Maven">
-
-:::info
+  // these signatures mark the possible errors
+  suspend fun findUser(id: UserId): Either<UserNotFound, User> { TODO() }
   
-Maven includes the Maven Central repository by default.
-
-:::
-
-  </TabItem>
-  <TabItem value="amper" label="Amper">
-
-:::info
-
-Amper includes the Maven Central repository by default.
-
-:::
+  // you build larger computations using the 'Raise' DSL
+  suspend fun fromTheSameCity(id1: UserId, id2: UserId): Either<UserNotFound, Boolean> =
+    either {  // this begins a 'Raise' block
+      val user1 = findUser(id1).bind()  // 'bind' aborts computation on failure
+      val user2 = findUser(id2).bind()
+      return user1.city == user2.city
+    }
+  ```
 
   </TabItem>
 </Tabs>
 
-### Include the dependencies
+<Tabs groupId="typedErrors2">
+  <TabItem value="typedErrors2Explanation" label="Validation and accumulation">
 
-You're now ready to include Arrow in your project. You have three possibilities
-that correspond to three different ways of handling versioning in your build.
+Arrow does not only provide fail-first behavior for errors, but also error **accumulation**.
+This is especially useful when validating user input, as you often want to report as many problems at once.
 
-All Arrow libraries are Multiplatform-ready, so you can use them in all of your
-[KMP](https://kotlinlang.org/docs/multiplatform.html) projects. Be aware that
-some instructions here may need to be slightly changed in that situation.
+  </TabItem>
+  <TabItem value="typedErrors2Example" label="Show me the code">
 
-#### One by one
+  ```kotlin
+  // To be updated when 'accumulating' is documented
+  ```
 
-Simply include the desired library in your `dependencies` block or as a
-`<dependency>` if you're using Maven.
-
-<Tabs groupId="build">
-<TabItem value="gradleKotlin" label="Gradle (Kotlin)">
-
-```kotlin
-dependencies {
-  implementation("io.arrow-kt:arrow-core:2.2.0")
-  implementation("io.arrow-kt:arrow-fx-coroutines:2.2.0")
-}
-```
-
-</TabItem>
-<TabItem value="gradleGroovy" label="Gradle (Groovy)">
-
-```groovy
-dependencies {
-  implementation 'io.arrow-kt:arrow-core:2.2.0'
-  implementation 'io.arrow-kt:arrow-fx-coroutines:2.2.0'
-}
-```
-
-</TabItem>
-<TabItem value="maven" label="Maven">
-
-
-```xml
-<dependency>
-  <groupId>io.arrow-kt</groupId>
-  <artifactId>arrow-core</artifactId>
-  <version>2.2.0</version>
-</dependency>
-<dependency>
-  <groupId>io.arrow-kt</groupId>
-  <artifactId>arrow-fx-coroutines</artifactId>
-  <version>2.2.0</version>
-</dependency>
-```
-
-</TabItem>
-<TabItem value="amper" label="Amper">
-
-```yaml
-dependencies:
-  - io.arrow-kt:arrow-core:2.2.0
-  - io.arrow-kt:arrow-fx-coroutines:2.2.0
-```
-
-</TabItem>
+  </TabItem>
 </Tabs>
 
-#### Using version catalogs
+### Concurrency and resources
 
-[Version catalogs](https://docs.gradle.org/current/userguide/platforms.html)
-provide centralized management of versions. This is especially helpful when
-your Gradle build has several subprojects.
+<Tabs groupId="concurrency1">
+  <TabItem value="concurrency1Text" label="Simpler parallelism and racing">
 
-<Tabs groupId="build">
+Kotlin coroutines are a powerful mechanism for concurrency. However, sometimes you need to describe what you want
+to happen in more detail than you may want. Arrow provides higher-level constructs that focus on the intent:
+**parallelism and racing** (executing several computations concurrently but waiting only for the first one).
+Cancellations and exceptions are handled following the Structured Concurrency principles.
 
-<TabItem value="gradleToml" label="libs.version.toml (Common)">
+  </TabItem>
+  <TabItem value="concurrency1Example" label="Show me the code">
 
-```yaml
-[versions]
-arrow = "2.2.0"
-# other versions
+  ```kotlin
+  // obtain information in parallel, taking a maximum of 5 tasks concurrently
+  suspend fun getFriendNames(id: UserId): List<User> =
+    getFriendIds(id).parMap(concurrency = 5) { findUser(it) }
 
-[libraries]
-arrow-core = { module = "io.arrow-kt:arrow-core", version.ref = "arrow" }
-arrow-fx-coroutines = { module = "io.arrow-kt:arrow-fx-coroutines", version.ref = "arrow" }
-# other dependencies
-```
+  // implement a caching strategy for users,
+  // get the first result that succeeds
+  suspend fun findUserRacing(id: UserId): User = racing {
+    race { UserRepository.findUser(id) }
+    race { LocalCache.getUser(id) }
+  }
+  ```
 
-</TabItem>
-
-<TabItem value="gradleKotlin" label="Gradle (Kotlin)">
-
-```kotlin
-dependencies {
-  implementation(libs.arrow.core)
-  implementation(libs.arrow.fx.coroutines)
-}
-```
-
-</TabItem>
-
-<TabItem value="gradleGroovy" label="Gradle (Groovy)">
-
-```groovy
-dependencies {
-  implementation(libs.arrow.core)
-  implementation(libs.arrow.fx.coroutines)
-}
-```
-
-</TabItem>
-
-<TabItem value="maven" label="Maven">
-
-:::info
-
-Version catalogs are not supported in Maven.
-
-:::
-
-</TabItem>
-<TabItem value="amper" label="Amper">
-
-```yaml
-dependencies:
-  - $libs.arrow.core
-  - $libs.arrow.fx.coroutines
-```
-
-</TabItem>
+  </TabItem>
 </Tabs>
 
-#### Using a Bill-of-Materials (BOM)
+<Tabs groupId="concurrency2">
+  <TabItem value="concurrency2Explanation" label="Resource management">
 
-Another way to keep a single version for all Arrow dependencies in your build is
-to include `arrow-stack`, which declares versions for the rest of the components.
+Allocation and release of resources is not easy, especially when we have multiple resources that depend on each other.
+The Resource DSL adds the ability to install **resources** and ensure proper finalization even in the face of exceptions and cancellations.
+Furthermore, your code moves from a mess of nested `try`s or `use`s to a **linear** sequence of operations.
 
-<Tabs groupId="build">
-<TabItem value="gradleKotlin" label="Gradle (Kotlin)">
+  </TabItem>
+  <TabItem value="concurrency2Example" label="Show me the code">
 
-```kotlin
-dependencies {
-  implementation(platform("io.arrow-kt:arrow-stack:2.2.0"))
-  // no versions on libraries
-  implementation("io.arrow-kt:arrow-core")
-  implementation("io.arrow-kt:arrow-fx-coroutines")
-}
-```
+  ```kotlin
+  suspend fun main(): Unit = resourceScope {
+    // register several resources
+    val client = autoCloseable { HttpClient() }  // compatible with 'AutoCloseable'
+    val dataSource = install({ DataSource(client) }) { s, _ -> s.disconnect() }
+    // use dataSource here
+  }
+  ```
 
-</TabItem>
-<TabItem value="gradleGroovy" label="Gradle (Groovy)">
-
-```groovy
-dependencies {
-  implementation platform('io.arrow-kt:arrow-stack:2.2.0')
-  // no versions on libraries
-  implementation 'io.arrow-kt:arrow-core'
-  implementation 'io.arrow-kt:arrow-fx-coroutines'
-}
-```
-
-</TabItem>
-<TabItem value="maven" label="Maven">
-
-
-```xml
-<dependency>
-    <groupId>io.arrow-kt</groupId>
-    <artifactId>arrow-stack</artifactId>
-    <version>2.2.0</version>
-    <type>pom</type>
-    <scope>import</scope>
-</dependency>
-<!-- no versions on libraries -->
-<dependency>
-  <groupId>io.arrow-kt</groupId>
-  <artifactId>arrow-core</artifactId>
-</dependency>
-<dependency>
-  <groupId>io.arrow-kt</groupId>
-  <artifactId>arrow-fx-coroutines</artifactId>
-</dependency>
-```
-
-</TabItem>
-<TabItem value="amper" label="Amper">
-
-:::info
-
-Bill-of-Materials are not supported in Amper.
-
-:::
-
-</TabItem>
+  </TabItem>
 </Tabs>
 
-:::caution Eager dependency update policy
+<Tabs groupId="concurrency3">
+  <TabItem value="concurrency3Explanation" label="Transactions">
 
-The Arrow team follows an eager dependency update policy. That means that Arrow libraries always depend on the most up-to-date version of the dependencies at the moment of release. In most cases, it is fine to use older versions of the dependencies; but in rare cases, the conflict leads to [`NoClassDefFoundError`](https://docs.oracle.com/javase/8/docs/api/java/lang/NoClassDefFoundError.html)s. If that happens, please try to update your dependencies to a more recent version, or [open an issue](https://github.com/arrow-kt/arrow/issues).
+Sharing data across multiple concurrent computations is always tricky, 
+especially when this data is not just a single atomic value.
+Arrow provides a higher level notion of **transactions** for your state,
+providing protection for whole execution blocks, and introducing the notion
+of rollback for failed computations.
 
-:::
+  </TabItem>
+  <TabItem value="concurrency3Example" label="Show me the code">
 
-### Additional setup for Android
+  ```kotlin
+  // STM is 'Software Transactional Memory'
+  // TVar is an atomic transactional variable
+  fun STM.withdraw(acc: TVar<Int>, amount: Int) {
+    val current = acc.read()
+    // failing this check will rollback the transaction
+    require(current - amount >= 0) { "Not enough money in the account!" }
+    acc.write(current - amount)
+  }
+  ```
 
-If you are using Arrow in Android, you should enable
-[library desugaring](https://developer.android.com/studio/write/java8-support#library-desugaring) in your final application.
-This is especially important if you use `arrow-collectors`, since that library uses APIs available only from Java 11 on.
-
-### Additional setup for Optics
-
-If you're using the Optics component of Arrow, we provide a Kotlin compiler 
-plug-in that can derive most of the boilerplate required to use it. This
-plug-in is built with [KSP](https://kotlinlang.org/docs/ksp-overview.html),
-which requires an additional configuration step.
-
-
-<Tabs groupId="build">
-<TabItem value="gradleKotlin" label="Gradle (Kotlin)">
-
-```kotlin
-plugins {
-  id("com.google.devtools.ksp") version "2.3.0"
-}
-
-dependencies {
-  implementation("io.arrow-kt:arrow-optics:2.2.0")
-  ksp("io.arrow-kt:arrow-optics-ksp-plugin:2.2.0")
-}
-```
-
-</TabItem>
-<TabItem value="gradleGroovy" label="Gradle (Groovy)">
-
-```groovy
-plugins {
-  id 'com.google.devtools.ksp' version '2.3.0'
-}
-
-dependencies {
-  implementation 'io.arrow-kt:arrow-optics:2.2.0'
-  ksp 'io.arrow-kt:arrow-optics-ksp-plugin:2.2.0'
-}
-```
-
-</TabItem>
-
-<TabItem value="maven" label="Maven">
-
-:::caution
-
-There's no official support for KSP in Maven. 
-[This project](https://github.com/Dyescape/kotlin-maven-symbol-processing)
-provides unofficial support for that scenario.
-
-:::
-
-</TabItem>
-<TabItem value="amper" label="Amper">
-
-```yaml
-settings:
-  kotlin:
-    # other settings
-    ksp:
-      processors:
-        - io.arrow-kt:arrow-optics-ksp-plugin:2.2.0
-```
-
-</TabItem>
+  </TabItem>
 </Tabs>
 
-If you are using the optics plug-in in a Multiplatform project,
-we recommend checking the [official guide in Kotlin docs](https://kotlinlang.org/docs/ksp-multiplatform.html)
-and the [related documentation in Koin](https://insert-koin.io/docs/setup/annotations/#kotlin-kts)
-for guidance.
+### Resilience
 
-:::tip Arrow Optics for Gradle (beta)
+<Tabs groupId="resilience1">
+  <TabItem value="resilience1Explanation" label="Retries">
 
-Instead of manually configuring the KSP plug-in, you may try the
-new beta [Arrow Optics Gradle plug-in](/community/blog/2025/11/01/arrow-optics-gradle/).
-It configures the whole project automatically (regardless of it being JVM or Multiplatform)
-and no longer requires a `companion object` on every class with `@optics`.
+Most, if not all, of the systems we develop nowadays require the cooperation of other services, 
+which may live in the same process, on the same machine, or may require some network communication. 
+This creates a lot of different potential scenarios where things may fail.
+Arrow provides a simple yet powerful way to define **policies** for **retrying** failed computations.
+
+  </TabItem>
+  <TabItem value="resilience1Example" label="Show me the code">
+
+  ```kotlin
+  // - exponential backoff of 10ms for the first minute,
+  // - then try 10s for 50 times,
+  // - add some jitter to the entire process
+  fun <A> complexPolicy(): Schedule<A, List<A>> = Schedule
+      .exponential<A>(10.milliseconds).doWhile { _, duration -> duration < 60.seconds }
+      .andThen(Schedule.spaced<A>(10.seconds) and Schedule.recurs(50))
+      .jittered()
+
+  // use this policy to download the avatar
+  suspend fun downloadAvatar(user: User) =
+    complexPolicy().retry { HttpClient().get(user.avatarUrl) }
+  ```
+
+  </TabItem>
+</Tabs>
+
+<Tabs groupId="resilience2">
+  <TabItem value="resilience2Explanation" label="Circuit breaker">
+
+In even more complex scenarios simple retry may not be the solution.
+This is especially true when a service is overloaded, since additional interaction may only worsen its overloaded state.
+Arrow provides a **circuit breaker** mechanism that can be shared between concurrent computations,
+with a much better protocol to resume execution until several failed attempts.
+
+  </TabItem>
+  <TabItem value="resilience2Example" label="Show me the code">
+
+  ```kotlin
+  val circuitBreaker = CircuitBreaker(
+    openingStrategy = OpeningStrategy.Count(10),
+    resetTimeout = 2.seconds,
+    exponentialBackoffFactor = 1.2,
+    maxResetTimeout = 60.seconds,
+  )
+
+  // use this policy to download the avatar
+  suspend fun downloadAvatar(user: User) =
+    circuitBreaker.protectOrThrow { HttpClient().get(user.avatarUrl) }
+  ```
+
+  </TabItem>
+</Tabs>
+
+### Immutable data
+
+<Tabs groupId="optics1">
+  <TabItem value="optics1Explanation" label="Update nested data">
+
+Immutable data has many advantages in terms of safety — and Kotlin makes it easy
+to use them with data classes and sealed hierarchies. However, updating those structures
+using only the provided `copy` may become quite tedious if the data is nested.
+Arrow **optics** give you the tools to write the concise code you always wanted.
+
+  </TabItem>
+  <TabItem value="options1Example" label="Show me the code">
+
+  ```kotlin
+  // instead of this
+  fun Person.capitalizeCountry(): Person = this.copy(
+    address = address.copy(
+      city = address.city.copy(
+        country = address.city.country.capitalize()
+      )
+    )
+  )
+
+  // you can write any of the following two
+  fun Person.capitalizeCountryCopy(): Person = this.copy {
+    Person.address.city.country transform { it.capitalize() }
+  }
+  fun Person.capitalizeCountryModify(): Person =
+    Person.address.city.country.modify(this) { it.capitalize() }
+  ```
+
+  </TabItem>
+</Tabs>
+
+<Tabs groupId="optics2">
+  <TabItem value="optics2Explanation" label="Traverse collections">
+
+The other difficult part of immutable data is traversing collections,
+either to aggregate data or to modify some part of them.
+Fortunately, the optics mechanism also applies to collections,
+so all of your immutable data manipulation can use the same vocabulary.
+
+  </TabItem>
+  <TabItem value="options2Example" label="Show me the code">
+
+  ```kotlin
+  // traverse every Person in the list and update its age
+  // the result is a new list with the modified elements
+  fun List<Person>.happyBirthdayOptics(): List<Person> =
+    Every.list<Person>().age.modify(this) { age -> age + 1 }
+  ```
+
+  </TabItem>
+</Tabs>
+
+### And more!
+
+This was just a quick overview of the main features provided by Arrow.
+Smaller utilities for collections, functions, coroutines, and errors,
+are also part of the ecosystem. The docs describe (almost) all of them,
+so just take a look around and find what you may need.
+
+
+:::info Give it a try?
+
+- [Set up](/learn/quickstart/setup) Arrow in your project and start exploring!
+- Look at some [example projects](/learn/projects) using Arrow in both frontend and backend 
+- Explore the main topics in more depth: [typed errors](/learn/typed-errors/), [concurrency and resources](/learn/coroutines/), [resilience](/learn/resilience/), and [immutable data](/learn/immutable-data/)
+- Learn about [design and architecture](/learn/design) using functional and data-oriented programming concepts
+- Look at the [list of libraries](/learn/quickstart/libs/) and [integrations](/learn/integrations/) to see how Arrow fits in your existing project
 
 :::
-
-### Plug-in for IntelliJ-based IDEs
-
-If you are using an [IntelliJ IDEA](https://www.jetbrains.com/idea/) or any
-other IDE from JetBrains, we strongly recommend installing the
-[Arrow plug-in](https://plugins.jetbrains.com/plugin/24550-arrow).
-The plug-in helps fix common problems, especially in the realm of
-[typed errors](../typed-errors/index.md) and suggests more idiomatic
-alternatives when available.
-
-### Alphas (development builds)
-
-For those wanting to live on the edge, we provide alphas of our [development
-branch](https://github.com/arrow-kt/arrow). Those are tagged with the upcoming
-version, followed by `-alpha.` and the sequence number of the compilation. 
-Check [Maven Central](https://central.sonatype.com/artifact/io.arrow-kt/arrow-core/versions)
-for the most recent list of available versions.

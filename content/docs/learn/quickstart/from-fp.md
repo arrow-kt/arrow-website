@@ -10,18 +10,14 @@ Arrow is heavily influenced by functional programming. If you're used to working
 with those concepts, the journey to Arrow should be a pleasant one. In this
 section, we review the most important differences with other ecosystems.
 
-:::note scala
+:::note Inspired by others
 
-The [Scala Standard Library](https://www.scala-lang.org/api/current/scala/index.html) contains
+**Scala.** The [Scala Standard Library](https://www.scala-lang.org/api/current/scala/index.html) contains
 many of the types provided by Arrow like [`Either`](https://www.scala-lang.org/api/current/scala/util/Either.html).
 There's also a vibrant community which brings even more functional features,
-like the [Typelevel ecosystem](https://typelevel.org/). 
+like the [Typelevel ecosystem](https://typelevel.org/).
 
-:::
-
-:::note haskell
-
-[Haskell](https://www.haskell.org/) is often considered the prime example of a 
+**Haskell.** [Haskell](https://www.haskell.org/) is often considered the prime example of a 
 pure functional programming language. Most of the utilities in Arrow are
 found in [their `base` library](https://hackage.haskell.org/package/base).
 
