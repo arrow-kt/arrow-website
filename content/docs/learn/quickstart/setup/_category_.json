@@ -1,0 +1,8 @@
+{
+  "label": "Setup",
+  "position": 1,
+  "customProps": {
+    "icon": "icon-quickstart.svg",
+    "description": "Setting up Arrow in your project"
+  }
+}
