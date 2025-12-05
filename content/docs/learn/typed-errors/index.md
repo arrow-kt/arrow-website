@@ -21,15 +21,15 @@ arise during the execution of a piece of code. Arrow provides two different
 
 Regardless of your choice, Arrow provides a uniform API, and simple ways to
 move from one style to the other.
+You can find information about the different wrapper types in 
+the [corresponding section](wrappers).
 
 If you want a **general introduction** we recommend the tutorial about
 [working with typed errors](working-with-typed-errors.md), followed by
 how to model [validation](validation.md) in this style.
 
 If you are already **familiar with `Either`** and similar wrapper types,
-you can find information about their Arrow counterparts
-([Nullable and `Option`](nullable-and-option.md), [`Either` and `Ior`](either_ior.md)).
-We stongly recommend to read [From `Either` to `Raise`](from-either-to-raise.md) to understand
+we stongly recommend to read [From `Either` to `Raise`](from-either-to-raise.md) to understand
 how you can benefit from the typed errors DSL.
 
 :::note Where to find it

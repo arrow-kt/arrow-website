@@ -339,3 +339,7 @@ code {
 .sidebar-hidden {
   display: none !important;
 }
+
+.theme-doc-sidebar-item-link-level-3 {
+  padding-left: 10px;
+}

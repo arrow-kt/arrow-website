@@ -14,10 +14,12 @@ data class User(val id: Long)
 
 data class UserNotFound(val message: String)
 
+// wrapper type approach
 fun User.isValid(): Either<UserNotFound, Unit> = either {
   ensure(id > 0) { UserNotFound("User without a valid id: $id") }
 }
 
+// computation context approach
 fun Raise<UserNotFound>.isValid(user: User): User {
   ensure(user.id > 0) { UserNotFound("User without a valid id: ${user.id}") }
   return user

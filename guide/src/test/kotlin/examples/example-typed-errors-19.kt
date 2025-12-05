@@ -25,7 +25,6 @@ data class User private constructor(val name: String, val age: Int) {
     }
   }
 }
-
 fun sample() {
   User("", -1) shouldBe Left(nonEmptyListOf(UserProblem.EmptyName, UserProblem.NegativeAge(-1)))
 }

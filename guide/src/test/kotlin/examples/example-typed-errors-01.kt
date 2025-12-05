@@ -14,6 +14,8 @@ import io.kotest.matchers.shouldBe
 object UserNotFound
 data class User(val id: Long)
 
+// wrapper type approach
 val user: Either<UserNotFound, User> = User(1).right()
 
+// computation context approach
 fun Raise<UserNotFound>.user(): User = User(1)

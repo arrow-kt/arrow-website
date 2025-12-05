@@ -15,6 +15,7 @@ suspend fun Raise<UserNotFound>.fetchUser(id: Long): User {
 
 object OtherError
 
+// computation context approach
 suspend fun Raise<OtherError>.recovery(): User =
   recover({
     fetchUser(-1)

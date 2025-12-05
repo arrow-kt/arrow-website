@@ -2,7 +2,7 @@
 id: either-and-ior
 title: Either & Ior (& Result)
 description: Use cases for Either and Ior.
-sidebar_position: 5
+sidebar_position: 2
 ---
 
 # Either & Ior (& Result)
@@ -40,7 +40,7 @@ API is also available for `Result` values.
 
 ## Using builders
 
-The preferred way to work with `Either` and `Ior` is to use [builders](../../typed-errors/working-with-typed-errors/#running-and-inspecting-results).
+The preferred way to work with `Either` and `Ior` is to use [builders](../../working-with-typed-errors/#running-and-inspecting-results).
 Those start with a call to `either` or `ior` followed by a lambda; inside that
 block, we can access the uniform typed errors API with functions like `raise`,
 `ensure`, and `recover`. For the `Result` type the builder is called `result`,
@@ -137,7 +137,7 @@ computation that may throw exceptions and returns a `Left` if that's the case.
 Essentially, it's [`runCatching` from the standard library](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/run-catching.html),
 but replacing `Result` with `Either`.
 
-The rest of the API closely follows the one from [typed errors](../../typed-errors/).
+The rest of the API closely follows the one from [typed errors](../../../typed-errors).
 For example, you can call `recover` or `zipOrAccumulate` directly on `Either`
 without the need for an additional `either { }` block. One potentially useful
 function not part of builders is [`mapLeft`](https://apidocs.arrow-kt.io/arrow-core/arrow.core/-either/map-left.html), 

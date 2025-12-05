@@ -1,0 +1,9 @@
+{
+  "label": "Wrapper types",
+  "position": 3,
+  "customProps": {
+    "icon": "icon-typed-errors.svg",
+    "description": "Additional information about wrapper types: Either, Ior, Option, Result, nullable",
+    "overview": true
+  }
+}

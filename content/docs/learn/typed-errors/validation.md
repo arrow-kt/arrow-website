@@ -29,13 +29,17 @@ data class Book(val title: String, val authors: NonEmptyList<Author>)
 ```
 <!--- KNIT example-validation-01.kt -->
 
-over which we want to implement the following rules:
+over which we want to implement the following rules,
+and accumulate as many errors as possible.
 
 1. The given title should not be empty,
 2. The list of authors should [not be empty](../../collections-functions/non-empty/),
 3. None of the author names should be empty.
 
-We want to accumulate as many error as possible.
+We are going to follow the [_parse, don't validate_](https://lexi-lambda.github.io/blog/2019/11/05/parse-don-t-validate/)
+approach to validation. In short, instead of first creating potentially
+erronenous instances of our classes, we shall only _build_ such an instance
+whenever the components satisfy all the constraints.
 
 ## Smart constructors
 

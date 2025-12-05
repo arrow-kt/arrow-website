@@ -14,6 +14,7 @@ fun SQLException.isUniqueViolation(): Boolean = true
 
 data class UserAlreadyExists(val username: String, val email: String)
 
+// computation context approach
 suspend fun Raise<UserAlreadyExists>.insertUser(username: String, email: String): Long =
   catch({
     UsersQueries.insert(username, email)
@@ -22,6 +23,7 @@ suspend fun Raise<UserAlreadyExists>.insertUser(username: String, email: String)
     else throw e
   }
 
+// wrapper type approach
 suspend fun insertUser(username: String, email: String): Either<UserAlreadyExists, Long> =
   Either.catchOrThrow<SQLException, Long> {
     UsersQueries.insert(username, email)

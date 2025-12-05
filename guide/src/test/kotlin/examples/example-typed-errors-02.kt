@@ -13,6 +13,8 @@ import io.kotest.matchers.shouldBe
 object UserNotFound
 data class User(val id: Long)
 
+// wrapper type approach
 val error: Either<UserNotFound, User> = UserNotFound.left()
 
+// computation context approach
 fun Raise<UserNotFound>.error(): User = raise(UserNotFound)
