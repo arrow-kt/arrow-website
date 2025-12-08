@@ -1,6 +1,6 @@
 ---
 title: Outcomes and in-progress
-sidebar_position: 6
+sidebar_position: 3
 description: Describing more than success and failure.
 ---
 

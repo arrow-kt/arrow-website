@@ -60,9 +60,16 @@ This is especially useful when validating user input, as you often want to repor
   </TabItem>
   <TabItem value="typedErrors2Example" label="Show me the code">
 
-  ```kotlin
-  // To be updated when 'accumulating' is documented
-  ```
+```kotlin
+fun buildUser(name: String, age: Int): Either<NonEmptyList<UserProblem>, User> = 
+  either {
+    accumulate {
+      ensureOrAccumulate(name.isNotEmpty()) { UserProblem.EmptyName }
+      ensureOrAccumulate(age >= 0) { UserProblem.NegativeAge(age) }
+      User(name, age)
+    }
+  }
+```
 
   </TabItem>
 </Tabs>

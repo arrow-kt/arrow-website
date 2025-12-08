@@ -14,20 +14,24 @@ import io.kotest.matchers.shouldBe
 data class User(val id: Long)
 data class UserNotFound(val message: String)
 
+// wrapper type approach
 suspend fun fetchUser(id: Long): Either<UserNotFound, User> = either {
   ensure(id > 0) { UserNotFound("Invalid id: $id") }
   User(id)
 }
 
+// computation context approach
 suspend fun Raise<UserNotFound>.fetchUser(id: Long): User {
   ensure(id > 0) { UserNotFound("Invalid id: $id") }
   return User(id)
 }
 
 suspend fun example() {
+  // wrapper type approach
   fetchUser(-1)
     .getOrElse { e: UserNotFound -> null } shouldBe null
-
+  
+  // computation context approach
   recover({
     fetchUser(1)
   }) { e: UserNotFound -> null } shouldBe User(1)

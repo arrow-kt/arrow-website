@@ -3,6 +3,9 @@ description: Working, recovering, and accumulating errors in a typed and concise
 sidebar_position: 1
 ---
 
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
 # Working with typed errors
 
 <!--- TEST_NAME TypedErrorsTest -->
@@ -20,13 +23,6 @@ leading to a defensive mode of error handling.
 - [_Por qué no uso excepciones en mi código_](https://www.youtube.com/watch?v=8WdprhzmQe4) by Raúl Raja and [Codely](https://codely.com/)
 - [_Typed error handling in Kotlin_](https://medium.com/@mitchellyuwono/typed-error-handling-in-kotlin-11ff25882880) by Mitchell Yuwono
 - _Functional Error Handling in Kotlin_ by Riccardo Cardin (video and text): [part 1](https://blog.rockthejvm.com/functional-error-handling-in-kotlin/), [part 2](https://blog.rockthejvm.com/functional-error-handling-in-kotlin-part-2/), and [part 3](https://blog.rockthejvm.com/functional-error-handling-in-kotlin-part-3/)
-
-:::
-
-:::note Where to find it
-
-Typed errors live in the `arrow-core` library, with high-arity versions of the
-`zipOrAccumulate` function available in `arrow-core-high-arity`.
 
 :::
 
@@ -68,18 +64,8 @@ fun findUser(id: UserId): Either<UserNotFound, User>
 ```
 
 The Kotlin standard library includes a few wrapper types, but they are all restricted in the information they may include.
-Arrow introduces `Either` and `Ior`, both giving the developer the choice of type of logical failures, and reflecting that choice
-as their first type parameter.
-
-| Type | Failure                                                                 | Simultaneous <br /> success and failure? | Lives in                                                                                                                  |
-|---|-------------------------------------------------------------------------|------|---------------------------------------------------------------------------------------------------------------------------|
-| `A?` | `null`                                                                  | No | <img src="https://upload.wikimedia.org/wikipedia/commons/4/44/Kodee-mascot-petite.svg" style={{height: '20px'}} /> (stdlib) |
-| `Option<A>` | `None`                                                                  | No | <img src="/img/arrow-brand-icon.svg" style={{height: '20px'}} /> (core)                                                   |
-| `Result<A>` | `Failure` contains a `Throwable`, <br /> inspection possible at runtime | No | <img src="https://upload.wikimedia.org/wikipedia/commons/4/44/Kodee-mascot-petite.svg" style={{height: '20px'}} /> (stdlib) |
-| `Either<E, A>` | `Left` contains value of type `E`                                       | No | <img src="/img/arrow-brand-icon.svg" style={{height: '20px'}} /> (core)                                                        |
-| `Ior<E, A>` | `Left` contains value of type `E`                                       | Yes, using `Both` | <img src="/img/arrow-brand-icon.svg" style={{height: '20px'}} /> (core)                                                        |
-| `Result<A, E>` | `Failure` contains value of type `E`                                     | No | [Result4k](https://github.com/fork-handles/forkhandles/tree/trunk/result4k)                                               |
-
+Arrow introduces `Either` and `Ior`, both giving the developer the choice of type of logical failures, and reflecting that choice as their first type parameter.
+After reading this introduction, you can read about the different [wrapper types](../wrappers).
 
 The second approach is describing errors as part of the _computation context_ of the function.
 In that case the ability to finish with logical failures is represented by having `Raise<E>`
@@ -123,8 +109,10 @@ import io.kotest.matchers.shouldBe
 object UserNotFound
 data class User(val id: Long)
 
+// wrapper type approach
 val user: Either<UserNotFound, User> = User(1).right()
 
+// computation context approach
 fun Raise<UserNotFound>.user(): User = User(1)
 ```
 <!--- KNIT example-typed-errors-01.kt -->
@@ -151,8 +139,10 @@ object UserNotFound
 data class User(val id: Long)
 -->
 ```kotlin
+// wrapper type approach
 val error: Either<UserNotFound, User> = UserNotFound.left()
 
+// computation context approach
 fun Raise<UserNotFound>.error(): User = raise(UserNotFound)
 ```
 <!--- KNIT example-typed-errors-02.kt -->
@@ -180,10 +170,12 @@ data class User(val id: Long)
 ```kotlin
 data class UserNotFound(val message: String)
 
+// wrapper type approach
 fun User.isValid(): Either<UserNotFound, Unit> = either {
   ensure(id > 0) { UserNotFound("User without a valid id: $id") }
 }
 
+// computation context approach
 fun Raise<UserNotFound>.isValid(user: User): User {
   ensure(user.id > 0) { UserNotFound("User without a valid id: ${user.id}") }
   return user
@@ -230,11 +222,13 @@ data class User(val id: Long)
 data class UserNotFound(val message: String)
 -->
 ```kotlin
+// wrapper type approach
 fun process(user: User?): Either<UserNotFound, Long> = either {
   ensureNotNull(user) { UserNotFound("Cannot process null user") }
   user.id // smart-casted to non-null
 }
 
+// computation context approach
 fun Raise<UserNotFound>.process(user: User?): Long {
   ensureNotNull(user) { UserNotFound("Cannot process null user") }
   return user.id // smart-casted to non-null
@@ -464,11 +458,13 @@ data class User(val id: Long)
 data class UserNotFound(val message: String)
 -->
 ```kotlin
+// wrapper type approach
 suspend fun fetchUser(id: Long): Either<UserNotFound, User> = either {
   ensure(id > 0) { UserNotFound("Invalid id: $id") }
   User(id)
 }
 
+// computation context approach
 suspend fun Raise<UserNotFound>.fetchUser(id: Long): User {
   ensure(id > 0) { UserNotFound("Invalid id: $id") }
   return User(id)
@@ -480,9 +476,11 @@ The same can be done for the `Raise` based computation using the `recover` DSL i
 
 ```kotlin
 suspend fun example() {
+  // wrapper type approach
   fetchUser(-1)
     .getOrElse { e: UserNotFound -> null } shouldBe null
-
+  
+  // computation context approach
   recover({
     fetchUser(1)
   }) { e: UserNotFound -> null } shouldBe User(1)
@@ -554,6 +552,7 @@ suspend fun Raise<UserNotFound>.fetchUser(id: Long): User {
 object OtherError
 -->
 ```kotlin
+// computation context approach
 suspend fun Raise<OtherError>.recovery(): User =
   recover({
     fetchUser(-1)
@@ -597,6 +596,7 @@ fun SQLException.isUniqueViolation(): Boolean = true
 ```kotlin
 data class UserAlreadyExists(val username: String, val email: String)
 
+// computation context approach
 suspend fun Raise<UserAlreadyExists>.insertUser(username: String, email: String): Long =
   catch({
     UsersQueries.insert(username, email)
@@ -610,6 +610,7 @@ Since we also have `raise` available inside `either`, we can also write the same
 This behavior is also available as top-level functionality on `Either` itself if you prefer to use that. It can be achieved using `catchOrThrow` instead of `catch` and `mapLeft` to transform `SQLException` into `UserAlreadyExists`.
 
 ```kotlin
+// wrapper type approach
 suspend fun insertUser(username: String, email: String): Either<UserAlreadyExists, Long> =
   Either.catchOrThrow<SQLException, Long> {
     UsersQueries.insert(username, email)
@@ -640,9 +641,11 @@ import io.kotest.matchers.shouldBe
 ```kotlin
 data class NotEven(val i: Int)
 
+// computation context approach
 fun Raise<NotEven>.isEven(i: Int): Int =
   i.also { ensure(i % 2 == 0) { NotEven(i) } }
 
+// wrapper type approach
 fun isEven2(i: Int): Either<NotEven, Int> =
   either { isEven(i) }
 ```
@@ -662,7 +665,9 @@ Arrow makes this fact explicit by making the return type of `mapOrAccumulate` a 
 val errors = nonEmptyListOf(NotEven(1), NotEven(3), NotEven(5), NotEven(7), NotEven(9)).left()
 
 fun example() {
+  // computation context approach
   (1..10).mapOrAccumulate { isEven(it) } shouldBe errors
+  // wrapper type approach
   (1..10).mapOrAccumulate { isEven2(it).bind() } shouldBe errors
 }
 ```
@@ -685,9 +690,11 @@ import io.kotest.matchers.shouldBe
 ```kotlin
 data class MyError(val message: String)
 
+// computation context approach
 fun Raise<MyError>.isEven(i: Int): Int =
   ensureNotNull(i.takeIf { i % 2 == 0 }) { MyError("$i is not even") }
 
+// wrapper type approach
 fun isEven2(i: Int): Either<MyError, Int> =
   either { isEven(i) }
 ```
@@ -705,7 +712,9 @@ We can then simply pass this function to the `mapOrAccumulate` function, and it 
 val error = MyError("1 is not even, 3 is not even, 5 is not even, 7 is not even, 9 is not even").left()
 
 fun example() {
+  // computation context approach
   (1..10).mapOrAccumulate(MyError::plus) { isEven(it) } shouldBe error
+  // wrapper type approach
   (1..10).mapOrAccumulate(MyError::plus) { isEven2(it).bind() } shouldBe error
 }
 ```
@@ -812,6 +821,11 @@ In that case the first arguments define the different independent validations, o
 If all those validations succeed, that is, when no problem was `raise`d during execution of any of them,
 then the final block is executed. The result of independent validations is made available, in case they are required.
 
+The second approach involves delimiting a scope where accumulation should take place using `accumulate`. That way we bring into scope variations of most functions described above, like `ensureOrAccumulate` and `bindOrAccumulate`. One important difference, though, is that when the computation returns a value, you must use `by` (property delegation) instead of `=` to obtain the value.
+
+<Tabs groupId="errorAccumulation">
+  <TabItem value="errorAccumulationZip" label="Using zipOrAccumulate">
+
 ```kotlin
 data class User private constructor(val name: String, val age: Int) {
   companion object {
@@ -825,28 +839,18 @@ data class User private constructor(val name: String, val age: Int) {
 }
 ```
 
-With this change, the problems are correctly accumulated. Now we can notify the user about all the problems found in the form at once.
-
-```kotlin
+<!--- INCLUDE
 fun sample() {
   User("", -1) shouldBe Left(nonEmptyListOf(UserProblem.EmptyName, UserProblem.NegativeAge(-1)))
 }
-```
-<!--- INCLUDE
 fun example() { }
 -->
 <!--- KNIT example-typed-errors-19.kt -->
 <!--- TEST assert -->
+  
+  </TabItem>
 
-The second approach involves delimiting a scope where accumulation should take place using `accumulate`. That way we bring into scope variations of most functions described above, like `ensureOrAccumulate` and `bindOrAccumulate`. One important difference, though, is that when the computation returns a value, you must use `by` (property delegation) instead of `=` to obtain the value.
-
-```
-accumulate {
-  val thing by checkThing().bindOrAccumulate()
-}
-```
-
-Translating the example above to this new style leads to the following code. We introduce no delegation because `ensureOrAccumulate` returns no interesting value.
+  <TabItem value="errorAccumulationBlock" label="Using accumulate block">
 
 <!--- INCLUDE
 import arrow.core.Either
@@ -877,7 +881,10 @@ data class User private constructor(val name: String, val age: Int) {
 }
 ```
 
-The behavior is exactly the same as with `zipOrAccumulate`, that is, all potential errors are accumulated.
+  </TabItem>
+</Tabs>
+
+With this change, the problems are correctly accumulated. Now we can notify the user about all the problems found in the form at once.
 
 ```kotlin
 fun example() {
@@ -928,7 +935,7 @@ A very common pattern is using `withError` to "bridge" validation errors of sub-
 
 :::tip Ignoring errors
 
-In the context of [nullable and `Option`](../nullable-and-option) you often need to "forget" the error type if consuming more informative types like `Either`. Although you can achieve this behavior using `withError`, we provide a more declarative version called `ignoreErrors`.
+In the context of [nullable and `Option`](../wrappers/nullable-and-option) you often need to "forget" the error type if consuming more informative types like `Either`. Although you can achieve this behavior using `withError`, we provide a more declarative version called `ignoreErrors`.
 
 :::
 

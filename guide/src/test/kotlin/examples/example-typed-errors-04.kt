@@ -13,11 +13,13 @@ import io.kotest.matchers.shouldBe
 data class User(val id: Long)
 data class UserNotFound(val message: String)
 
+// wrapper type approach
 fun process(user: User?): Either<UserNotFound, Long> = either {
   ensureNotNull(user) { UserNotFound("Cannot process null user") }
   user.id // smart-casted to non-null
 }
 
+// computation context approach
 fun Raise<UserNotFound>.process(user: User?): Long {
   ensureNotNull(user) { UserNotFound("Cannot process null user") }
   return user.id // smart-casted to non-null

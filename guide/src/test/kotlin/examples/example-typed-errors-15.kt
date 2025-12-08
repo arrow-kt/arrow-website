@@ -11,9 +11,11 @@ import io.kotest.matchers.shouldBe
 
 data class MyError(val message: String)
 
+// computation context approach
 fun Raise<MyError>.isEven(i: Int): Int =
   ensureNotNull(i.takeIf { i % 2 == 0 }) { MyError("$i is not even") }
 
+// wrapper type approach
 fun isEven2(i: Int): Either<MyError, Int> =
   either { isEven(i) }
 
@@ -23,6 +25,8 @@ operator fun MyError.plus(second: MyError): MyError =
 val error = MyError("1 is not even, 3 is not even, 5 is not even, 7 is not even, 9 is not even").left()
 
 fun example() {
+  // computation context approach
   (1..10).mapOrAccumulate(MyError::plus) { isEven(it) } shouldBe error
+  // wrapper type approach
   (1..10).mapOrAccumulate(MyError::plus) { isEven2(it).bind() } shouldBe error
 }

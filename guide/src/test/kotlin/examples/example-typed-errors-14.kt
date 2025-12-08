@@ -12,15 +12,19 @@ import io.kotest.matchers.shouldBe
 
 data class NotEven(val i: Int)
 
+// computation context approach
 fun Raise<NotEven>.isEven(i: Int): Int =
   i.also { ensure(i % 2 == 0) { NotEven(i) } }
 
+// wrapper type approach
 fun isEven2(i: Int): Either<NotEven, Int> =
   either { isEven(i) }
 
 val errors = nonEmptyListOf(NotEven(1), NotEven(3), NotEven(5), NotEven(7), NotEven(9)).left()
 
 fun example() {
+  // computation context approach
   (1..10).mapOrAccumulate { isEven(it) } shouldBe errors
+  // wrapper type approach
   (1..10).mapOrAccumulate { isEven2(it).bind() } shouldBe errors
 }
