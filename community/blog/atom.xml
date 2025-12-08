@@ -99,7 +99,7 @@ and the new <code>Racing</code> DSL.</li>
         <summary type="html"><![CDATA[In order to unlock the full power of Arrow Optics, lenses and prisms for your]]></summary>
         <content type="html"><![CDATA[<p>In order to unlock the full power of Arrow Optics, lenses and prisms for your
 own types must be defined. This is a tedious task, that can be automate with
-the help of the <code>@optics</code> annotation. Alas, <a class="" href="https://arrow-kt.io/learn/quickstart/#additional-setup-for-optics">setting up</a>
+the help of the <code>@optics</code> annotation. Alas, <a class="" href="https://arrow-kt.io/learn/quickstart/setup/#additional-setup-for-optics">setting up</a>
 the plug-in is not easy (especially in Multiplatform projects), and the
 architecture of the plugin means that you need to write a <code>companion object</code>
 explicitly on every one of your types.</p>
@@ -293,7 +293,7 @@ of the <code>Iterable</code> is known. Similar improvements have been applied
 to <code>.at</code> and <code>.index</code>.</p>
 <h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="better-support-for-kotlinxserialization">Better support for kotlinx.serialization<a href="https://arrow-kt.io/community/blog/2024/12/05/arrow-2-0/#better-support-for-kotlinxserialization" class="hash-link" aria-label="Direct link to Better support for kotlinx.serialization" title="Direct link to Better support for kotlinx.serialization" translate="no">​</a></h2>
 <p>Using Arrow Core data types as part of serialized data requires additional integration.
-In 1.2.x we started providing compile-time <a class="" href="https://arrow-kt.io/learn/quickstart/serialization/#kotlinxserialization">support for <code>kotlinx.serialization</code></a>.
+In 1.2.x we started providing compile-time <a class="" href="https://arrow-kt.io/learn/quickstart/setup/serialization/#kotlinxserialization">support for <code>kotlinx.serialization</code></a>.
 From 2.0 on we also provide <code>ArrowModule</code> for
 <a href="https://github.com/Kotlin/kotlinx.serialization/blob/master/docs/serializers.md#contextual-serialization" target="_blank" rel="noopener noreferrer" class="">contextual serialization</a>. This is needed, among others, when the data is processed
 by Ktor.</p>]]></content>
@@ -360,7 +360,7 @@ or matching on <code>Eval</code> instances directly instead of using the
 provided API -- which can easily lead to broken invariants.</p>
 <p>The third aspect is applying some known recipes which may be hard
 to know upfront. The first release includes a suggestion to add
-the corresponding <a class="" href="https://arrow-kt.io/learn/quickstart/serialization/">serializer</a>
+the corresponding <a class="" href="https://arrow-kt.io/learn/quickstart/setup/serialization/">serializer</a>
 when a type marked as <code>@Serializable</code> includes an Arrow Core type.
 This is an area which we would like to explore more, helping with
 the difficulties raised by the community.</p>
