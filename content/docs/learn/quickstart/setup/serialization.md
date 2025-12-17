@@ -76,10 +76,21 @@ in a Ktor project.
 
 ## [Jackson](https://github.com/FasterXML/jackson)
 
-If you're using Jackson for serialization, you need to depend on the
-`arrow-core-jackson` with the same version of your `arrow-core`.
-You just need to call an additional method when
-creating the mapper.
+If you're using Jackson for serialization, you need to depend on different
+artifacts depending on your Jackson version.
+
+For Jackson 3.x, use `arrow-core-jackson` with the same version of your `arrow-core`.
+Then use `addArrowModule` in your builder.
+
+```
+val mapper = JsonMapper.builder()
+    .addModule(kotlinModule())
+    .addArrowModule()    // <- this is the one
+    .build()
+```
+
+For Jackson 2.x, use `arrow-core-jackson2` with the same version of your `arrow-core`.
+Then use `registerArrowModule` directly on your `ObjectMapper`.
 
 ```
 val mapper = ObjectMapper()

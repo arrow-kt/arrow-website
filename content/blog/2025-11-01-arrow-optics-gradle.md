@@ -28,12 +28,12 @@ new approach, with the goal of making this simpler option the default.
 If you want to try the new plugin, you need to:
 
 - Remove any previous configuration of the Arrow Optics KSP plugin,
-- Add `id("io.arrow-kt.optics") version "2.2.0"` to your `plugins` block,
+- Add `id("io.arrow-kt.optics") version "2.2.1.1"` to your `plugins` block,
 - Call `arrowOptics()` at the **end** of your `kotlin` block.
 
 ```kotlin
 plugins {
-    id("io.arrow-kt.optics") version "2.2.0"
+    id("io.arrow-kt.optics") version "2.2.1.1"
 }
 
 kotlin {
