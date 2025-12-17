@@ -2,11 +2,51 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://arrow-kt.io/community/blog/</id>
     <title>Arrow Blog</title>
-    <updated>2025-11-01T00:00:00.000Z</updated>
+    <updated>2025-12-17T00:00:00.000Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://arrow-kt.io/community/blog/"/>
     <subtitle>Arrow Blog</subtitle>
     <icon>https://arrow-kt.io/img/arrow-brand-icon.svg</icon>
+    <entry>
+        <title type="html"><![CDATA[Arrow 2.2.1.1]]></title>
+        <id>https://arrow-kt.io/community/blog/2025/12/17/arrow-2-2-1/</id>
+        <link href="https://arrow-kt.io/community/blog/2025/12/17/arrow-2-2-1/"/>
+        <updated>2025-12-17T00:00:00.000Z</updated>
+        <summary type="html"><![CDATA[Arrow 2.2.1.1 is out!]]></summary>
+        <content type="html"><![CDATA[<p>Arrow 2.2.1.1 is out!
+The main focus of this release is better compatibility with
+major releases in the Kotlin ecosystem, including
+<a href="https://kotlinlang.org/docs/whatsnew23.html" target="_blank" rel="noopener noreferrer" class="">Kotlin 2.3</a>
+and <a href="https://github.com/FasterXML/jackson/wiki/Jackson-Release-3.0" target="_blank" rel="noopener noreferrer" class="">Jackson 3.0</a>.</p>
+<p><strong>Unused return value checker certified.</strong>
+The new <a href="https://kotlinlang.org/docs/whatsnew23.html#unused-return-value-checker" target="_blank" rel="noopener noreferrer" class="">unused value checker</a>
+in Kotlin 2.3 fits like a glove with the design principles behind Arrow.
+For this release we have enabled the "full mode", meaning not only that
+the Arrow codebase itself has been checked, but also that code using Arrow
+gets additional support from the compiler.</p>
+<p><strong>Alignment of exception handling.</strong>
+Handling exceptions in the right way is paramount to integrating with
+structured concurrency from Kotlin coroutines. Alas, until this release
+each Arrow module was doing their own thing, and it was unclear whether
+this behavior was consistent.</p>
+<p>Thanks to the efforts of <a href="https://github.com/kyay10" target="_blank" rel="noopener noreferrer" class="">Youssef Shoaib</a>,
+this is no longer the case. The shared bits have been moved to a separate
+<code>arrow-exception-utils</code> library, but they re-exposed by both <code>arrow-core</code>
+and <code>arrow-autoclose</code> in their previous form, so no migration is required.</p>
+<p><strong>Support for Jackson 3.0.</strong>
+The <a href="https://github.com/FasterXML/jackson" target="_blank" rel="noopener noreferrer" class="">Jackson</a> project is used all across
+the JVM ecosystem to handle JSON. They have recently released a
+<a href="https://github.com/FasterXML/jackson/wiki/Jackson-Release-3.0" target="_blank" rel="noopener noreferrer" class="">new major version</a>,
+with major players like <a href="https://spring.io/blog/2025/10/07/introducing-jackson-3-support-in-spring" target="_blank" rel="noopener noreferrer" class="">Spring</a>
+updating their dependencies.
+This release of Arrow moves the main <code>arrow-core-jackson</code> to Jackson 3.0 APIs.
+The 2.x version will still be maintained, under the <code>arrow-core-jackson2</code> artifact.</p>
+<div class="theme-admonition theme-admonition-info admonition_xJq3 alert alert--info"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><path fill="currentColor" fill-rule="evenodd" d="M12 23c6.075 0 11-4.925 11-11S18.075 1 12 1 1 5.925 1 12s4.925 11 11 11M9 11.5h2v4H9v2h6v-2h-2v-6H9zM13 8V6h-2v2z" clip-rule="evenodd"></path></svg></span>Why no 2.2.1?</div><div class="admonitionContent_BuS1"><p>Unfortunately, due to problems with publication, not all components of version 2.2.1
+are available in Maven Central and Gradle Plugin Portal. We strongly recommend
+to use 2.2.1.1 instead.</p></div></div>]]></content>
+        <category label="core" term="core"/>
+        <category label="articles" term="articles"/>
+    </entry>
     <entry>
         <title type="html"><![CDATA[Arrow 2.2.0]]></title>
         <id>https://arrow-kt.io/community/blog/2025/11/01/arrow-2-2/</id>
@@ -115,10 +155,10 @@ new approach, with the goal of making this simpler option the default.
 If you want to try the new plugin, you need to:</p>
 <ul>
 <li class="">Remove any previous configuration of the Arrow Optics KSP plugin,</li>
-<li class="">Add <code>id("io.arrow-kt.optics") version "2.2.0"</code> to your <code>plugins</code> block,</li>
+<li class="">Add <code>id("io.arrow-kt.optics") version "2.2.1.1"</code> to your <code>plugins</code> block,</li>
 <li class="">Call <code>arrowOptics()</code> at the <strong>end</strong> of your <code>kotlin</code> block.</li>
 </ul>
-<div class="language-kotlin codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#D4D4D4;--prism-background-color:#222E51"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-kotlin codeBlock_bY9V thin-scrollbar" style="color:#D4D4D4;background-color:#222E51"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#D4D4D4"><span class="token plain">plugins </span><span class="token punctuation" style="color:rgb(212, 212, 212)">{</span><span class="token plain"></span><br></span><span class="token-line" style="color:#D4D4D4"><span class="token plain">    </span><span class="token function" style="color:#EDB368">id</span><span class="token punctuation" style="color:rgb(212, 212, 212)">(</span><span class="token string-literal singleline string" style="color:#5B88F8">"io.arrow-kt.optics"</span><span class="token punctuation" style="color:rgb(212, 212, 212)">)</span><span class="token plain"> version </span><span class="token string-literal singleline string" style="color:#5B88F8">"2.2.0"</span><span class="token plain"></span><br></span><span class="token-line" style="color:#D4D4D4"><span class="token plain"></span><span class="token punctuation" style="color:rgb(212, 212, 212)">}</span><span class="token plain"></span><br></span><span class="token-line" style="color:#D4D4D4"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#D4D4D4"><span class="token plain">kotlin </span><span class="token punctuation" style="color:rgb(212, 212, 212)">{</span><span class="token plain"></span><br></span><span class="token-line" style="color:#D4D4D4"><span class="token plain">    </span><span class="token comment" style="color:#6b738a">// compiler, target, and source set configuration</span><span class="token plain"></span><br></span><span class="token-line" style="color:#D4D4D4"><span class="token plain">    </span><span class="token comment" style="color:#6b738a">// ...</span><span class="token plain"></span><br></span><span class="token-line" style="color:#D4D4D4"><span class="token plain">    </span><span class="token function" style="color:#EDB368">arrowOptics</span><span class="token punctuation" style="color:rgb(212, 212, 212)">(</span><span class="token punctuation" style="color:rgb(212, 212, 212)">)</span><span class="token plain"></span><br></span><span class="token-line" style="color:#D4D4D4"><span class="token plain"></span><span class="token punctuation" style="color:rgb(212, 212, 212)">}</span><br></span></code></pre></div></div>
+<div class="language-kotlin codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#D4D4D4;--prism-background-color:#222E51"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-kotlin codeBlock_bY9V thin-scrollbar" style="color:#D4D4D4;background-color:#222E51"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#D4D4D4"><span class="token plain">plugins </span><span class="token punctuation" style="color:rgb(212, 212, 212)">{</span><span class="token plain"></span><br></span><span class="token-line" style="color:#D4D4D4"><span class="token plain">    </span><span class="token function" style="color:#EDB368">id</span><span class="token punctuation" style="color:rgb(212, 212, 212)">(</span><span class="token string-literal singleline string" style="color:#5B88F8">"io.arrow-kt.optics"</span><span class="token punctuation" style="color:rgb(212, 212, 212)">)</span><span class="token plain"> version </span><span class="token string-literal singleline string" style="color:#5B88F8">"2.2.1.1"</span><span class="token plain"></span><br></span><span class="token-line" style="color:#D4D4D4"><span class="token plain"></span><span class="token punctuation" style="color:rgb(212, 212, 212)">}</span><span class="token plain"></span><br></span><span class="token-line" style="color:#D4D4D4"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#D4D4D4"><span class="token plain">kotlin </span><span class="token punctuation" style="color:rgb(212, 212, 212)">{</span><span class="token plain"></span><br></span><span class="token-line" style="color:#D4D4D4"><span class="token plain">    </span><span class="token comment" style="color:#6b738a">// compiler, target, and source set configuration</span><span class="token plain"></span><br></span><span class="token-line" style="color:#D4D4D4"><span class="token plain">    </span><span class="token comment" style="color:#6b738a">// ...</span><span class="token plain"></span><br></span><span class="token-line" style="color:#D4D4D4"><span class="token plain">    </span><span class="token function" style="color:#EDB368">arrowOptics</span><span class="token punctuation" style="color:rgb(212, 212, 212)">(</span><span class="token punctuation" style="color:rgb(212, 212, 212)">)</span><span class="token plain"></span><br></span><span class="token-line" style="color:#D4D4D4"><span class="token plain"></span><span class="token punctuation" style="color:rgb(212, 212, 212)">}</span><br></span></code></pre></div></div>
 <p>Please let us know of any issues you encounter or any feedback on how to
 make the process even more approachable, in either our
 <a href="https://github.com/arrow-kt/arrow/issues" target="_blank" rel="noopener noreferrer" class="">issues page</a>
@@ -600,16 +640,6 @@ as well as the most succinct with the least lines of codes.</p>
         <updated>2022-12-01T00:00:00.000Z</updated>
         <summary type="html"><![CDATA[Alejandro Serrano's presentation from Advanced Kotlin Dev Day 2022 about context receivers.]]></summary>
         <content type="html"><![CDATA[<p>Alejandro Serrano's presentation from Advanced Kotlin Dev Day 2022 about context receivers.</p>]]></content>
-        <category label="core" term="core"/>
-        <category label="videos" term="videos"/>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[Functional Error Handling - A Practical Approach]]></title>
-        <id>https://arrow-kt.io/community/blog/2022/12/01/functional-error-handling/</id>
-        <link href="https://arrow-kt.io/community/blog/2022/12/01/functional-error-handling/"/>
-        <updated>2022-12-01T00:00:00.000Z</updated>
-        <summary type="html"><![CDATA[A presentation by Bas de Groot at Advanced Kotlin Dev Day 2022.]]></summary>
-        <content type="html"><![CDATA[<p>A presentation by Bas de Groot at Advanced Kotlin Dev Day 2022.</p>]]></content>
         <category label="core" term="core"/>
         <category label="videos" term="videos"/>
     </entry>
