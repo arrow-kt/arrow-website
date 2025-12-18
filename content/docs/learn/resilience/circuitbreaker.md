@@ -91,7 +91,7 @@ Let's create a circuit breaker that only allows us to call a remote service twic
 After that, whenever more than two requests fail with an exception, 
 the circuit breaker starts short-circuiting/failing-fast.
 
-A new instance of `CircuitBreaker` is created using [`of`](https://apidocs.arrow-kt.io/arrow-resilience/arrow.resilience/-circuit-breaker/-companion/of.html); there, we specify
+A new instance of `CircuitBreaker` is created using the `CircuitBreaker` [`constructor`(https://apidocs.arrow-kt.io/arrow-resilience/arrow.resilience/-circuit-breaker/index.html); there, we specify
 the different options. 
 
 :::caution Deprecation in Arrow 1.2
