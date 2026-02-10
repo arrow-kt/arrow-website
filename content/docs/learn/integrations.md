@@ -115,3 +115,6 @@ install(ContentNegotiation) {
 
 **[Resilience](../resilience/).**
 The [`arrow-resilience-ktor-client`](https://apidocs.arrow-kt.io/arrow-resilience-ktor-client/index.html) module provides Ktor client plug-ins for retry/repeat and circuit breakers based on Arrow's.
+
+**[Spine](https://spine.opensavvy.dev)**
+The Spine library allows declaring Ktor endpoints in code shared between clients and the server, including type-safe failures. Clients and servers can use Arrow's `Raise` DSL to declare and handle HTTP status codes.
