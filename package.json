@@ -38,6 +38,7 @@
     "@tsconfig/docusaurus": "2.0.7",
     "@typescript-eslint/eslint-plugin": "8.47.0",
     "@typescript-eslint/parser": "8.47.0",
+    "baseline-browser-mapping": "^2.10.0",
     "eslint": "9.39.1",
     "eslint-config-prettier": "10.1.8",
     "eslint-import-resolver-typescript": "4.4.4",
