@@ -2,11 +2,50 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://arrow-kt.io/community/blog/</id>
     <title>Arrow Blog</title>
-    <updated>2025-12-17T00:00:00.000Z</updated>
+    <updated>2026-04-03T00:00:00.000Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://arrow-kt.io/community/blog/"/>
     <subtitle>Arrow Blog</subtitle>
     <icon>https://arrow-kt.io/img/arrow-brand-icon.svg</icon>
+    <entry>
+        <title type="html"><![CDATA[Arrow 2.2.2]]></title>
+        <id>https://arrow-kt.io/community/blog/2026/04/03/arrow-2-2-2/</id>
+        <link href="https://arrow-kt.io/community/blog/2026/04/03/arrow-2-2-2/"/>
+        <updated>2026-04-03T00:00:00.000Z</updated>
+        <summary type="html"><![CDATA[Arrow 2.2.2 is out!]]></summary>
+        <content type="html"><![CDATA[<p>Arrow 2.2.2 is out!
+The main focus of this release is bugfixing — especially around the Arrow Optics plugin —
+but also comes with a few goodies.</p>
+<p><strong>Integration with <a href="https://ktor.io/docs/server-resources.html" target="_blank" rel="noopener noreferrer" class="">Ktor type-safe routing</a>.</strong>
+The new <a href="https://apidocs.arrow-kt.io/arrow-raise-ktor-server-resources/index.html" target="_blank" rel="noopener noreferrer" class=""><code>arrow-raise-ktor-server-resources</code> module</a>
+provides integration between Arrow's Raise mechanism and Ktor's definition of paths as resources.</p>
+<p><strong>More platforms.</strong> Arrow is now published for all platforms
+<a href="https://kotlinlang.org/docs/native-target-support.html#target-tiers" target="_blank" rel="noopener noreferrer" class="">supported by Kotlin/Native</a>.</p>
+<p><strong>More context parameters.</strong></p>
+<ul>
+<li class="">The <a href="https://apidocs.arrow-kt.io/arrow-core/arrow.core.raise.context/index.html" target="_blank" rel="noopener noreferrer" class=""><code>arrow.core.raise.context</code></a> package
+now exposes the same API as the <a href="https://apidocs.arrow-kt.io/arrow-core/arrow.core.raise/index.html" target="_blank" rel="noopener noreferrer" class=""><code>arrow.core.raise</code> package</a>,
+but using context parameters. Up to this version some functions were missing.</li>
+<li class="">The new <a href="https://apidocs.arrow-kt.io/arrow-fx-coroutines/arrow.fx.coroutines.resource.context/index.html" target="_blank" rel="noopener noreferrer" class=""><code>arrow.fx.coroutines.resource.context</code></a>
+package exposes the <a href="https://arrow-kt.io/learn/coroutines/resource-safety/" target="_blank" rel="noopener noreferrer" class="">resource management</a> capabilities of
+Arrow using context parameters.</li>
+</ul>
+<p><strong>Deprecations around lists.</strong></p>
+<ul>
+<li class="">There has been some ongoing problems with <a href="https://apidocs.arrow-kt.io/arrow-core/arrow.core/unweave.html" target="_blank" rel="noopener noreferrer" class=""><code>unweave</code></a>,
+because of its unclear semantics. Since these semantics haven't been clarified for a long time,
+we have decided to deprecate it.</li>
+<li class="">The <a href="https://apidocs.arrow-kt.io/arrow-core/arrow.core/-non-empty-list/fold-left.html" target="_blank" rel="noopener noreferrer" class=""><code>foldLeft</code></a> function
+for <code>NonEmptyList</code> has been deprecated in favor of
+<a href="https://apidocs.arrow-kt.io/arrow-core/arrow.core/-non-empty-list/fold-left2.html" target="_blank" rel="noopener noreferrer" class=""><code>foldLeft2</code></a>.
+This new function has a more general type, since it knows that the reducer will be called at least once.
+In principle, every use site of <code>foldLeft</code> could be directly replaced with <code>foldLeft2</code>, except those cases in
+which explicit type arguments are used.</li>
+</ul>
+<p>Thanks to everybody who has contributed to this release!</p>]]></content>
+        <category label="core" term="core"/>
+        <category label="articles" term="articles"/>
+    </entry>
     <entry>
         <title type="html"><![CDATA[Arrow 2.2.1.1]]></title>
         <id>https://arrow-kt.io/community/blog/2025/12/17/arrow-2-2-1/</id>
@@ -630,16 +669,6 @@ as well as the most succinct with the least lines of codes.</p>
         <updated>2022-12-01T00:00:00.000Z</updated>
         <summary type="html"><![CDATA[A presentation by Alejandro Serrano at Advanced Kotlin Dev Day 2022.]]></summary>
         <content type="html"><![CDATA[<p>A presentation by Alejandro Serrano at Advanced Kotlin Dev Day 2022.</p>]]></content>
-        <category label="core" term="core"/>
-        <category label="videos" term="videos"/>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[Context Receivers: Kotlin's new secret sauce]]></title>
-        <id>https://arrow-kt.io/community/blog/2022/12/01/context-receivers/</id>
-        <link href="https://arrow-kt.io/community/blog/2022/12/01/context-receivers/"/>
-        <updated>2022-12-01T00:00:00.000Z</updated>
-        <summary type="html"><![CDATA[Alejandro Serrano's presentation from Advanced Kotlin Dev Day 2022 about context receivers.]]></summary>
-        <content type="html"><![CDATA[<p>Alejandro Serrano's presentation from Advanced Kotlin Dev Day 2022 about context receivers.</p>]]></content>
         <category label="core" term="core"/>
         <category label="videos" term="videos"/>
     </entry>
