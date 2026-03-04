@@ -4,15 +4,15 @@
         <title>Arrow Blog</title>
         <link>https://arrow-kt.io/community/blog/</link>
         <description>Arrow Blog</description>
-        <lastBuildDate>Fri, 03 Apr 2026 00:00:00 GMT</lastBuildDate>
+        <lastBuildDate>Wed, 04 Mar 2026 00:00:00 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
         <generator>https://github.com/jpmonette/feed</generator>
         <language>en</language>
         <item>
             <title><![CDATA[Arrow 2.2.2]]></title>
-            <link>https://arrow-kt.io/community/blog/2026/04/03/arrow-2-2-2/</link>
-            <guid>https://arrow-kt.io/community/blog/2026/04/03/arrow-2-2-2/</guid>
-            <pubDate>Fri, 03 Apr 2026 00:00:00 GMT</pubDate>
+            <link>https://arrow-kt.io/community/blog/2026/03/04/arrow-2-2-2/</link>
+            <guid>https://arrow-kt.io/community/blog/2026/03/04/arrow-2-2-2/</guid>
+            <pubDate>Wed, 04 Mar 2026 00:00:00 GMT</pubDate>
             <description><![CDATA[Arrow 2.2.2 is out!]]></description>
             <content:encoded><![CDATA[<p>Arrow 2.2.2 is out!
 The main focus of this release is bugfixing — especially around the Arrow Optics plugin —

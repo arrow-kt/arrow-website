@@ -2,16 +2,16 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://arrow-kt.io/community/blog/</id>
     <title>Arrow Blog</title>
-    <updated>2026-04-03T00:00:00.000Z</updated>
+    <updated>2026-03-04T00:00:00.000Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://arrow-kt.io/community/blog/"/>
     <subtitle>Arrow Blog</subtitle>
     <icon>https://arrow-kt.io/img/arrow-brand-icon.svg</icon>
     <entry>
         <title type="html"><![CDATA[Arrow 2.2.2]]></title>
-        <id>https://arrow-kt.io/community/blog/2026/04/03/arrow-2-2-2/</id>
-        <link href="https://arrow-kt.io/community/blog/2026/04/03/arrow-2-2-2/"/>
-        <updated>2026-04-03T00:00:00.000Z</updated>
+        <id>https://arrow-kt.io/community/blog/2026/03/04/arrow-2-2-2/</id>
+        <link href="https://arrow-kt.io/community/blog/2026/03/04/arrow-2-2-2/"/>
+        <updated>2026-03-04T00:00:00.000Z</updated>
         <summary type="html"><![CDATA[Arrow 2.2.2 is out!]]></summary>
         <content type="html"><![CDATA[<p>Arrow 2.2.2 is out!
 The main focus of this release is bugfixing — especially around the Arrow Optics plugin —
