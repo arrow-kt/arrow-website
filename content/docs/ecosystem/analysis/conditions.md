@@ -63,7 +63,7 @@ If you are completely sure that a pre-condition is satisfied, even though Arrow 
 
     ```kotlin
     import arrow.analysis.unsafeCall
-  
+    
     val wrong1 = unsafeCall(increment(-2)) // no errors reported
     val wrong2 = unsafeCall(increment(increment(-2)))
                        //   ^         ^
@@ -75,7 +75,7 @@ If you are completely sure that a pre-condition is satisfied, even though Arrow 
 
     ```kotlin
     import arrow.analysis.unsafeBlock
-  
+    
     val wrong3 = unsafeBlock { increment(increment(-2)) } // no errors reported
     ```
 - `@Suppress` can be attached to a declaration to silence an entire type of errors or warnings in their body. For example, `"UnsatCallPre"` are those errors coming from **unsat**isfied **pre**conditions on **call**s.

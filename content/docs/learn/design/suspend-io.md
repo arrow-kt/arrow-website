@@ -113,7 +113,7 @@ suspend fun User.process(): Either<PersistenceError, ProcessedUser> =
   else Left(PersistenceError)
 ```
 
- ```kotlin title="Using IO<Either<E, A>>"
+```kotlin title="Using IO<Either<E, A>>"
 import arrow.fx.*
 
 fun ioProgram(): IO<Either<PersistenceError, ProcessedUser>> =
@@ -130,7 +130,7 @@ fun ioProgram(): IO<Either<PersistenceError, ProcessedUser>> =
 // Or unwrapped in `suspend`
 suspend suspendedIOProgram(): Either<PersistenceError, ProcessedUser> =
   ioProgram().suspended()
- ```
+```
 
 ```kotlin title="Using suspend () -> Either<E, A>"
 import arrow.core.raise.either
