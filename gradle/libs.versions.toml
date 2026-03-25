@@ -1,7 +1,7 @@
 [versions]
 coroutines = "1.10.2"
 kotest = "6.1.9"
-kotlin = "2.3.10"
+kotlin = "2.3.20"
 knit = "0.5.1"
 arrow = "2.2.2.1"
 kotlinKafka = "0.4.1"
