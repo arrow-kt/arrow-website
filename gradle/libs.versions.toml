@@ -1,6 +1,6 @@
 [versions]
 coroutines = "1.10.2"
-kotest = "6.1.9"
+kotest = "6.1.11"
 kotlin = "2.3.20"
 knit = "0.5.1"
 arrow = "2.2.2.1"
