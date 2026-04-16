@@ -13,7 +13,7 @@ features:
     href: /learn/quickstart
     icon: icon-quickstart.svg
     # body: Backend or frontend, JVM, Android or Multiplatform, Gradle or Maven, Arrow fits in all your projects
-    body: "Learn how Arrow can help you write better Kotlin code faster — backend of frontend, JVM, Android or Multiplatform"
+    body: "Learn how Arrow can help you write better Kotlin code faster — backend or frontend, JVM, Android or Multiplatform"
 
   - title: Typed errors
     href: /learn/typed-errors
