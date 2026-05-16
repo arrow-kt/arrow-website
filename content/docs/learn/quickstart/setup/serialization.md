@@ -97,3 +97,18 @@ val mapper = ObjectMapper()
     .registerKotlinModule()
     .registerArrowModule()   // <- this is the one
 ```
+
+:::warning[Jackson and non-empty collections]
+
+Due to the way Jackson handles value classes with generic types,
+sometimes the content type of non-empty collections is lost in the deserialization process.
+The easiest way to fix this problem is to specify it (again) using a `@JsonDeserialize` annotation.
+
+```
+data class Thing(
+  @field:JsonDeserialize(contentAs = Inner::class)
+  val inners: NonEmptyList<Inner>
+)
+```
+
+:::
