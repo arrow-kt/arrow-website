@@ -78,8 +78,8 @@ Simply include the desired library in your `dependencies` block or as a
 
 ```kotlin
 dependencies {
-  implementation("io.arrow-kt:arrow-core:2.2.1.1")
-  implementation("io.arrow-kt:arrow-fx-coroutines:2.2.1.1")
+  implementation("io.arrow-kt:arrow-core:2.2.3")
+  implementation("io.arrow-kt:arrow-fx-coroutines:2.2.3")
 }
 ```
 
@@ -88,8 +88,8 @@ dependencies {
 
 ```groovy
 dependencies {
-  implementation 'io.arrow-kt:arrow-core:2.2.1.1'
-  implementation 'io.arrow-kt:arrow-fx-coroutines:2.2.1.1'
+  implementation 'io.arrow-kt:arrow-core:2.2.3'
+  implementation 'io.arrow-kt:arrow-fx-coroutines:2.2.3'
 }
 ```
 
@@ -101,12 +101,12 @@ dependencies {
 <dependency>
   <groupId>io.arrow-kt</groupId>
   <artifactId>arrow-core</artifactId>
-  <version>2.2.1.1</version>
+  <version>2.2.3</version>
 </dependency>
 <dependency>
   <groupId>io.arrow-kt</groupId>
   <artifactId>arrow-fx-coroutines</artifactId>
-  <version>2.2.1.1</version>
+  <version>2.2.3</version>
 </dependency>
 ```
 
@@ -115,8 +115,8 @@ dependencies {
 
 ```yaml
 dependencies:
-  - io.arrow-kt:arrow-core:2.2.1.1
-  - io.arrow-kt:arrow-fx-coroutines:2.2.1.1
+  - io.arrow-kt:arrow-core:2.2.3
+  - io.arrow-kt:arrow-fx-coroutines:2.2.3
 ```
 
 </TabItem>
@@ -134,7 +134,7 @@ your Gradle build has several subprojects.
 
 ```yaml
 [versions]
-arrow = "2.2.1.1"
+arrow = "2.2.3"
 # other versions
 
 [libraries]
@@ -197,7 +197,7 @@ to include `arrow-stack`, which declares versions for the rest of the components
 
 ```kotlin
 dependencies {
-  implementation(platform("io.arrow-kt:arrow-stack:2.2.1.1"))
+  implementation(platform("io.arrow-kt:arrow-stack:2.2.3"))
   // no versions on libraries
   implementation("io.arrow-kt:arrow-core")
   implementation("io.arrow-kt:arrow-fx-coroutines")
@@ -209,7 +209,7 @@ dependencies {
 
 ```groovy
 dependencies {
-  implementation platform('io.arrow-kt:arrow-stack:2.2.1.1')
+  implementation platform('io.arrow-kt:arrow-stack:2.2.3')
   // no versions on libraries
   implementation 'io.arrow-kt:arrow-core'
   implementation 'io.arrow-kt:arrow-fx-coroutines'
@@ -224,7 +224,7 @@ dependencies {
 <dependency>
     <groupId>io.arrow-kt</groupId>
     <artifactId>arrow-stack</artifactId>
-    <version>2.2.1.1</version>
+    <version>2.2.3</version>
     <type>pom</type>
     <scope>import</scope>
 </dependency>
@@ -280,8 +280,8 @@ plugins {
 }
 
 dependencies {
-  implementation("io.arrow-kt:arrow-optics:2.2.1.1")
-  ksp("io.arrow-kt:arrow-optics-ksp-plugin:2.2.1.1")
+  implementation("io.arrow-kt:arrow-optics:2.2.3")
+  ksp("io.arrow-kt:arrow-optics-ksp-plugin:2.2.3")
 }
 ```
 
@@ -294,8 +294,8 @@ plugins {
 }
 
 dependencies {
-  implementation 'io.arrow-kt:arrow-optics:2.2.1.1'
-  ksp 'io.arrow-kt:arrow-optics-ksp-plugin:2.2.1.1'
+  implementation 'io.arrow-kt:arrow-optics:2.2.3'
+  ksp 'io.arrow-kt:arrow-optics-ksp-plugin:2.2.3'
 }
 ```
 
@@ -320,7 +320,7 @@ settings:
     # other settings
     ksp:
       processors:
-        - io.arrow-kt:arrow-optics-ksp-plugin:2.2.1.1
+        - io.arrow-kt:arrow-optics-ksp-plugin:2.2.3
 ```
 
 </TabItem>

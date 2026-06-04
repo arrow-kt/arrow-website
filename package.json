@@ -17,10 +17,10 @@
     "typecheck": "tsc"
   },
   "dependencies": {
-    "@docusaurus/core": "^3.9.2",
-    "@docusaurus/faster": "^3.9.2",
-    "@docusaurus/preset-classic": "^3.9.2",
-    "@docusaurus/theme-mermaid": "^3.9.2",
+    "@docusaurus/core": "^3.10.1",
+    "@docusaurus/faster": "^3.10.1",
+    "@docusaurus/preset-classic": "^3.10.1",
+    "@docusaurus/theme-mermaid": "^3.10.1",
     "@easyops-cn/docusaurus-search-local": "^0.52.1",
     "@mdx-js/react": "^3.1.1",
     "autoprefixer": "^10.4.22",
@@ -31,7 +31,7 @@
   },
   "devDependencies": {
     "@csstools/postcss-global-data": "3.1.0",
-    "@docusaurus/module-type-aliases": "^3.9.2",
+    "@docusaurus/module-type-aliases": "^3.10.1",
     "@eslint/compat": "^2.0.0",
     "@eslint/eslintrc": "^3.3.1",
     "@eslint/js": "^9.39.1",
