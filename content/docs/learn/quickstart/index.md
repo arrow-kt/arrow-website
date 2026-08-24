@@ -36,16 +36,17 @@ and also extra safety, as the compiler will ensure that you don't forget to hand
   <TabItem value="typedErrors1Example" label="Show me the code">
 
   ```kotlin
-  // these signatures mark the possible errors
-  suspend fun findUser(id: UserId): Either<UserNotFound, User> { TODO() }
+  // this function declares it may fail with UserNotFound
+  context(raise: Raise<UserNotFound>)
+  suspend fun findUser(id: UserId): User { TODO() }
   
-  // you build larger computations using the 'Raise' DSL
-  suspend fun fromTheSameCity(id1: UserId, id2: UserId): Either<UserNotFound, Boolean> =
-    either {  // this begins a 'Raise' block
-      val user1 = findUser(id1).bind()  // 'bind' aborts computation on failure
-      val user2 = findUser(id2).bind()
+  // you build larger computations as usual, no added syntax!
+  context(raise: Raise<UserNotFound>)
+  suspend fun fromTheSameCity(id1: UserId, id2: UserId): Boolean {
+      val user1 = findUser(id1)  // no need for any operator, no 'bind', no nested flatMap…
+      val user2 = findUser(id2)  // …just regular function calls!
       return user1.city == user2.city
-    }
+  }
   ```
 
   </TabItem>
@@ -61,13 +62,12 @@ This is especially useful when validating user input, as you often want to repor
   <TabItem value="typedErrors2Example" label="Show me the code">
 
 ```kotlin
-fun buildUser(name: String, age: Int): Either<NonEmptyList<UserProblem>, User> = 
-  either {
-    accumulate {
-      ensureOrAccumulate(name.isNotEmpty()) { UserProblem.EmptyName }
-      ensureOrAccumulate(age >= 0) { UserProblem.NegativeAge(age) }
-      User(name, age)
-    }
+context(raise: Raise<NonEmptyList<UserProblem>>)
+fun buildUser(name: String, age: Int): User = 
+  accumulate {
+    ensureOrAccumulate(name.isNotEmpty()) { UserProblem.EmptyName }
+    ensureOrAccumulate(age >= 0) { UserProblem.NegativeAge(age) }
+    User(name, age)
   }
 ```
 

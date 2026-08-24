@@ -113,6 +113,36 @@ fun mkPerson(name: String, age: Int): Either<Problem, Person> = either {
 ```
 <!--- KNIT example-scala-migration-02.kt -->
 
+The `either` block allows its content to raise errors and short-circuits when that happens.
+Using this style, every function creates its own `Either` wrapper for its result, which is immediately unwrapped by the caller
+so it can create its own wrapper with its own result. Instead, if all functions _declare that they may fail_, the failure 
+can short-circuit without needing wrappers until the place where it is handled (for example, by wrapping it into an `Either`).
+
+To declare errors without wrapping, we use the `Raise` effect:
+<!--- INCLUDE
+import arrow.core.*
+import arrow.core.raise.either
+
+data class Person(val name: String, val age: Int)
+interface Problem
+-->
+
+```kotlin
+context(raise: Raise<Problem>)
+fun validName(name: String): String = TODO()
+
+context(raise: Raise<Problem>)
+fun validAge(age: Int): Int = TODO()
+
+context(raise: Raise<Problem>)
+fun mkPerson(name: String, age: Int): Person = 
+  Person(validName(name), validAge(age))
+```
+<!--- KNIT example-scala-migration-02b.kt -->
+
+When all functions are declared to raise, they can simply be called within each other with no additional syntax.
+To get an `Either` from any such function, we call it within the `either` block.
+
 :::tip No zip
 
 It's common to use functions like `zip` to combine values inside a 
@@ -127,7 +157,7 @@ except when [dealing with concurrency](../../coroutines/parallel/).
 If you want to apply an effectful operation to every element of a collection,
 you need to use a function different from `map`, usually called `traverse`.
 This split does not exist in Arrow: you can use the same functions you know
-and love from the collections API inside one of these blocks.
+and love from the collections API inside `either` or `Raise`.
 
 :::
 
