@@ -31,15 +31,9 @@ we have two options: a person or a company.
 ```kotlin
 import arrow.optics.*
 
-@optics sealed interface User {
-  companion object
-}
-@optics data class Person(val name: String, val age: Int): User {
-  companion object
-}
-@optics data class Company(val name: String, val country: String): User {
-  companion object
-}
+@optics sealed interface User
+@optics data class Person(val name: String, val age: Int): User
+@optics data class Company(val name: String, val country: String): User
 ```
 
 The Arrow Optics plug-in generates two optics within `User`, namely
@@ -119,13 +113,9 @@ import arrow.optics.*
 -->
 
 ```kotlin
-@optics data class Person(val name: String, val age: Age) {
-  companion object
-}
+@optics data class Person(val name: String, val age: Age)
 
-@JvmInline @optics value class Age(val age: Int) {
-  companion object
-}
+@JvmInline @optics value class Age(val age: Int)
 ```
 
 Since isos are also lenses, you can still use the syntax from [the latter](../lens/)

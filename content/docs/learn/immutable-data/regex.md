@@ -26,23 +26,17 @@ We shall use different forms of trees in the examples below.
 The first variation only has data in the leaves.
 
 ```kotlin
-@optics sealed interface BinaryTree1<out A> {
-    companion object
-}
+@optics sealed interface BinaryTree1<out A>
 
 @optics data class Node1<out A>(
     val children: List<BinaryTree1<A>>
 ) : BinaryTree1<A> {
     constructor(vararg children: BinaryTree1<A>) : this(children.toList())
-
-    companion object
 }
 
 @optics data class Leaf1<out A>(
     val value: A
-) : BinaryTree1<A> {
-    companion object
-}
+) : BinaryTree1<A>
 ```
 
 Suppose we want to increment all the numbers in a binary tree of integers.
@@ -65,23 +59,17 @@ fun example() {
 <!--- TEST assert -->
 
 <!--- INCLUDE .*
-@optics sealed interface BinaryTree1<out A> {
-    companion object
-}
+@optics sealed interface BinaryTree1<out A>
 
 @optics data class Node1<out A>(
     val children: List<BinaryTree1<A>>
 ) : BinaryTree1<A> {
     constructor(vararg children: BinaryTree1<A>) : this(children.toList())
-
-    companion object
 }
 
 @optics data class Leaf1<out A>(
     val value: A
-) : BinaryTree1<A> {
-    companion object
-}
+) : BinaryTree1<A>
 
 val exampleTree1 = Node1(Node1(Leaf1(1), Leaf1(2)), Leaf1(3))
 -->
@@ -118,24 +106,18 @@ Let's now consider another variation of binary trees, in which now
 at every step (leaf or node) we find a value.
 
 ```kotlin
-@optics sealed interface BinaryTree2<out A> {
-    companion object
-}
+@optics sealed interface BinaryTree2<out A>
 
 @optics data class Node2<out A>(
     val innerValue: A,
     val children: List<BinaryTree2<A>>
 ) : BinaryTree2<A> {
     constructor(value: A, vararg children: BinaryTree2<A>) : this(value, children.toList())
-
-    companion object
 }
 
 @optics data class Leaf2<out A>(
     val value: A
-) : BinaryTree2<A> {
-    companion object
-}
+) : BinaryTree2<A>
 ```
 
 If we construct a path similar to the previous one, we shall only
@@ -156,24 +138,18 @@ fun example() {
 <!--- TEST assert -->
 
 <!--- INCLUDE .*
-@optics sealed interface BinaryTree2<out A> {
-    companion object
-}
+@optics sealed interface BinaryTree2<out A>
 
 @optics data class Node2<out A>(
     val innerValue: A,
     val children: List<BinaryTree2<A>>
 ) : BinaryTree2<A> {
     constructor(value: A, vararg children: BinaryTree2<A>) : this(value, children.toList())
-
-    companion object
 }
 
 @optics data class Leaf2<out A>(
     val value: A
-) : BinaryTree2<A> {
-    companion object
-}
+) : BinaryTree2<A>
 
 val exampleTree2 = Node2(1, Node2(2, Leaf2(3), Leaf2(4)), Leaf2(5))
 -->

@@ -1,5 +1,3 @@
-import arrow.optics.plugin.arrowOptics
-
 plugins {
   alias(libs.plugins.kotlin.jvm)
   alias(libs.plugins.arrow.optics)
@@ -41,7 +39,6 @@ dependencies {
 
 kotlin {
   compilerOptions.freeCompilerArgs.add("-Xconsistent-data-class-copy-visibility")
-  arrowOptics()
 }
 
 tasks.withType<Test>().configureEach {

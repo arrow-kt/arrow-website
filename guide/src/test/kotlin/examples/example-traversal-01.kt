@@ -6,9 +6,7 @@ import io.kotest.matchers.shouldBe
 import arrow.optics.*
 import arrow.optics.dsl.*
 
-@optics data class Person(val name: String, val age: Int, val friends: List<Person>) {
-  companion object
-}
+@optics data class Person(val name: String, val age: Int, val friends: List<Person>)
 
 fun List<Person>.happyBirthdayMap(): List<Person> =
   map { Person.age.modify(it) { age -> age + 1 } }
