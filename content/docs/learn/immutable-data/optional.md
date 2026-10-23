@@ -33,12 +33,8 @@ import arrow.optics.*
 import arrow.optics.dsl.*
 import arrow.optics.typeclasses.*
 
-@optics data class Db(val cities: Map<String, City>) {
-  companion object
-}
-@optics data class City(val name: String, val country: String) {
-  companion object
-}
+@optics data class Db(val cities: Map<String, City>)
+@optics data class City(val name: String, val country: String)
 ```
 
 There's a notion of elements within a map, which we refer to by their key.
@@ -75,12 +71,8 @@ import arrow.optics.*
 import arrow.optics.dsl.*
 import arrow.optics.typeclasses.*
 
-@optics data class Db(val cities: Map<String, City>) {
-  companion object
-}
-@optics data class City(val name: String, val country: String) {
-  companion object
-}
+@optics data class Db(val cities: Map<String, City>)
+@optics data class City(val name: String, val country: String)
 
 val db = Db(mapOf(
   "Alejandro" to City("Hilversum", "Netherlands"),
@@ -109,12 +101,8 @@ import arrow.optics.*
 import arrow.optics.dsl.*
 import arrow.optics.typeclasses.*
 
-@optics data class Db(val cities: Map<String, City>) {
-  companion object
-}
-@optics data class City(val name: String, val country: String) {
-  companion object
-}
+@optics data class Db(val cities: Map<String, City>)
+@optics data class City(val name: String, val country: String)
 
 val db = Db(mapOf(
   "Alejandro" to City("Hilversum", "Netherlands"),

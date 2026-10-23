@@ -34,18 +34,10 @@ generate lenses for every field by having an `@optics` annotation:
 ```kotlin
 import arrow.optics.*
 
-@optics data class Person(val name: String, val age: Int, val address: Address) {
-  companion object
-}
-@optics data class Address(val street: Street, val city: City) {
-  companion object
-}
-@optics data class Street(val name: String, val number: Int?) {
-  companion object
-}
-@optics data class City(val name: String, val country: String) {
-  companion object
-}
+@optics data class Person(val name: String, val age: Int, val address: Address)
+@optics data class Address(val street: Street, val city: City)
+@optics data class Street(val name: String, val number: Int?)
+@optics data class City(val name: String, val country: String)
 ```
 <!--- KNIT example-lens-01.kt -->
 
@@ -56,15 +48,9 @@ The lenses are generated in the companion object, so you can think of your
 
 import arrow.optics.*
 
-data class Address(val street: Street, val city: City) {
-  companion object
-}
-data class Street(val name: String, val number: Int?) {
-  companion object
-}
-data class City(val name: String, val country: String) {
-  companion object
-}
+data class Address(val street: Street, val city: City)
+data class Street(val name: String, val number: Int?)
+data class City(val name: String, val country: String)
 
 -->
 
@@ -100,18 +86,10 @@ Lenses provide three primary operations:
 
 import arrow.optics.*
 
-@optics data class Person(val name: String, val age: Int, val address: Address) {
-  companion object
-}
-@optics data class Address(val street: Street, val city: City) {
-  companion object
-}
-@optics data class Street(val name: String, val number: Int?) {
-  companion object
-}
-@optics data class City(val name: String, val country: String) {
-  companion object
-}
+@optics data class Person(val name: String, val age: Int, val address: Address)
+@optics data class Address(val street: Street, val city: City)
+@optics data class Street(val name: String, val number: Int?)
+@optics data class City(val name: String, val country: String)
 
 -->
 
@@ -151,18 +129,10 @@ that focuses on the city where a `Person` lives:
 
 import arrow.optics.*
 
-@optics data class Person(val name: String, val age: Int, val address: Address) {
-  companion object
-}
-@optics data class Address(val street: Street, val city: City) {
-  companion object
-}
-@optics data class Street(val name: String, val number: Int?) {
-  companion object
-}
-@optics data class City(val name: String, val country: String) {
-  companion object
-}
+@optics data class Person(val name: String, val age: Int, val address: Address)
+@optics data class Address(val street: Street, val city: City)
+@optics data class Street(val name: String, val number: Int?)
+@optics data class City(val name: String, val country: String)
 
 -->
 
@@ -269,23 +239,17 @@ typealias VATNumber = Int
 ```kotlin
 @optics sealed interface SUser {
   val name: String
-
-  companion object
 }
 
 @optics data class SPerson(
   override val name: String,
   val age: Int
-): SUser {
-  companion object
-}
+): SUser 
 
 @optics data class SCompany(
   override val name: String,
   val vat: VATNumber
-): SUser {
-  companion object
-}
+): SUser
 ```
 <!--- KNIT example-sealed-domain-01.kt -->
 

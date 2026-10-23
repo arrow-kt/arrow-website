@@ -5,13 +5,9 @@ import io.kotest.matchers.shouldBe
 
 import arrow.optics.*
 
-@optics data class Person(val name: String, val age: Age) {
-  companion object
-}
+@optics data class Person(val name: String, val age: Age)
 
-@JvmInline @optics value class Age(val age: Int) {
-  companion object
-}
+@JvmInline @optics value class Age(val age: Int)
 
 fun Person.happyBirthday(): Person =
   Person.age.age.modify(this) { it + 1 }
