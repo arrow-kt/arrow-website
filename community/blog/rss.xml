@@ -4,10 +4,59 @@
         <title>Arrow Blog</title>
         <link>https://arrow-kt.io/community/blog/</link>
         <description>Arrow Blog</description>
-        <lastBuildDate>Thu, 04 Jun 2026 00:00:00 GMT</lastBuildDate>
+        <lastBuildDate>Sun, 25 Oct 2026 00:00:00 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
         <generator>https://github.com/jpmonette/feed</generator>
         <language>en</language>
+        <item>
+            <title><![CDATA[Arrow 2.2.3]]></title>
+            <link>https://arrow-kt.io/community/blog/2026/10/25/arrow-2-3-0/</link>
+            <guid>https://arrow-kt.io/community/blog/2026/10/25/arrow-2-3-0/</guid>
+            <pubDate>Sun, 25 Oct 2026 00:00:00 GMT</pubDate>
+            <description><![CDATA[Arrow 2.3.0 is out!]]></description>
+            <content:encoded><![CDATA[<p>Arrow 2.3.0 is out!
+The main change of this release is the new Optics compiler plug-in,
+which greatly improves the experience of creating optics in Multiplatform
+projects and in the IDE. On top of that, this release brings compatibility
+with new (experimental) features from 2.4.0 and beyond.</p>
+<p><strong>Compiler plugin for optics.</strong>
+We have performed an AI-assisted migration of the Arrow Optics KSP plugin
+to the Kotlin compiler plugin API. This means that generation of optics
+happens directly during compilation, which allows us to remove the limitation
+of requiring a manually-written companion object — generating optics is now
+really simple.</p>
+<div class="language-kotlin codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#D4D4D4;--prism-background-color:#222E51"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-kotlin codeBlock_bY9V thin-scrollbar" style="color:#D4D4D4;background-color:#222E51"><code class="codeBlockLines_e6Vv"><div class="token-line" style="color:#D4D4D4"><span class="token label symbol" style="color:#c57a17">@optics</span><span class="token plain"> </span><span class="token keyword" style="color:#82a2f3">data</span><span class="token plain"> </span><span class="token keyword" style="color:#82a2f3">class</span><span class="token plain"> </span><span class="token function" style="color:#EDB368">User</span><span class="token punctuation" style="color:rgb(212, 212, 212)">(</span><span class="token keyword" style="color:#82a2f3">val</span><span class="token plain"> id</span><span class="token operator" style="color:rgb(212, 212, 212)">:</span><span class="token plain"> UserId</span><span class="token punctuation" style="color:rgb(212, 212, 212)">,</span><span class="token plain"> </span><span class="token keyword" style="color:#82a2f3">val</span><span class="token plain"> shownName</span><span class="token operator" style="color:rgb(212, 212, 212)">:</span><span class="token plain"> String</span><span class="token punctuation" style="color:rgb(212, 212, 212)">)</span><br></div></code></pre></div></div>
+<p>To use the new compiler plugin-based implementation,</p>
+<ul>
+<li class="">Remove any previous configuration of the Arrow Optics KSP plugin,</li>
+<li class="">Add <code>id("io.arrow-kt.optics") version "2.3.0"</code> to your <code>plugins</code> block.</li>
+</ul>
+<p>If you also want to see the generated optics in IntelliJ,
+go to <em>Help</em> &gt; <em>Edit</em> custom properties, and add the following line and restat.</p>
+<div class="language-kotlin codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#D4D4D4;--prism-background-color:#222E51"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-kotlin codeBlock_bY9V thin-scrollbar" style="color:#D4D4D4;background-color:#222E51"><code class="codeBlockLines_e6Vv"><div class="token-line" style="color:#D4D4D4"><span class="token plain">kotlin</span><span class="token punctuation" style="color:rgb(212, 212, 212)">.</span><span class="token plain">k2</span><span class="token punctuation" style="color:rgb(212, 212, 212)">.</span><span class="token plain">only</span><span class="token punctuation" style="color:rgb(212, 212, 212)">.</span><span class="token plain">bundled</span><span class="token punctuation" style="color:rgb(212, 212, 212)">.</span><span class="token plain">compiler</span><span class="token punctuation" style="color:rgb(212, 212, 212)">.</span><span class="token plain">plugins</span><span class="token punctuation" style="color:rgb(212, 212, 212)">.</span><span class="token plain">enabled</span><span class="token operator" style="color:rgb(212, 212, 212)">=</span><span class="token boolean" style="color:#569CD6">false</span><span class="token punctuation" style="color:rgb(212, 212, 212)">.</span><br></div></code></pre></div></div>
+<div class="theme-admonition theme-admonition-warning admonition_xJq3 alert alert--warning"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"></span>Running plugins in the IDE</div><div class="admonitionContent_BuS1"><p>Note that adding the line above means that Arrow Optics and other compiler
+plugins are run during IDE operations. This may have an impact on the stability
+of the IDE experience. Of course, if you get problems by using Arrow Optics,
+feel free to <a href="https://github.com/arrow-kt/arrow/issues" target="_blank" rel="noopener noreferrer" class="">open an issue</a>.</p></div></div>
+<p><strong>Improvements to SuspendApp.</strong>
+This library has gotten a lot of love in this release, mostly as bugfixes for
+corner cases. In addition, you can now explicitly
+<a href="https://github.com/arrow-kt/arrow/pull/3917" target="_blank" rel="noopener noreferrer" class=""><code>exit</code></a>.</p>
+<p><strong>Non-empty collection literals.</strong>
+Kotlin 2.4.0 features <a href="https://kotlinlang.org/docs/whatsnew24.html#support-for-collection-literals" target="_blank" rel="noopener noreferrer" class="">collection literals</a>.
+In this release we bring compatibility of <code>NonEmptyList</code> and <code>NonEmptySet</code>
+with it, that means you can now write,</p>
+<div class="language-kotlin codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#D4D4D4;--prism-background-color:#222E51"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-kotlin codeBlock_bY9V thin-scrollbar" style="color:#D4D4D4;background-color:#222E51"><code class="codeBlockLines_e6Vv"><div class="token-line" style="color:#D4D4D4"><span class="token keyword" style="color:#82a2f3">val</span><span class="token plain"> list</span><span class="token operator" style="color:rgb(212, 212, 212)">:</span><span class="token plain"> NonEmptyList</span><span class="token operator" style="color:rgb(212, 212, 212)">&lt;</span><span class="token plain">Int</span><span class="token operator" style="color:rgb(212, 212, 212)">&gt;</span><span class="token plain"> </span><span class="token operator" style="color:rgb(212, 212, 212)">=</span><span class="token plain"> </span><span class="token punctuation" style="color:rgb(212, 212, 212)">[</span><span class="token number" style="color:#cfcd9a">1</span><span class="token punctuation" style="color:rgb(212, 212, 212)">,</span><span class="token plain"> </span><span class="token number" style="color:#cfcd9a">2</span><span class="token punctuation" style="color:rgb(212, 212, 212)">,</span><span class="token plain"> </span><span class="token number" style="color:#cfcd9a">3</span><span class="token punctuation" style="color:rgb(212, 212, 212)">]</span><br></div></code></pre></div></div>
+<p>Given the way the compiler works, empty collection literals <code>[]</code> are correctly
+marked as an error if a non-empty one is required.</p>
+<p><strong>Missing contextual and ignorable functions.</strong>
+The whole <code>Raise</code> API is now exposed through context parameter versions.
+We have also annotated the API as ignorable when required; that means the
+<a href="https://kotlinlang.org/docs/unused-return-value-checker.html" target="_blank" rel="noopener noreferrer" class="">unused return value checker</a>
+has all the required information.</p>]]></content:encoded>
+            <category>core</category>
+            <category>articles</category>
+        </item>
         <item>
             <title><![CDATA[Arrow 2.2.3]]></title>
             <link>https://arrow-kt.io/community/blog/2026/06/04/arrow-2-2-3/</link>
@@ -673,16 +722,6 @@ as well as the most succinct with the least lines of codes.</p>
             <content:encoded><![CDATA[<p><a href="https://twitter.com/vergauwen_simon" target="_blank" rel="noopener noreferrer" class="">Simon Vergauwen</a> shares why he thinks Kotlin is great language to do modern functional programming, and why he believes it's perhaps the best language to do modern mainstream (hardcore) functional programming.</p>]]></content:encoded>
             <category>core</category>
             <category>slidedecks</category>
-        </item>
-        <item>
-            <title><![CDATA[CodelyTV Interview with Raul Raja]]></title>
-            <link>https://arrow-kt.io/community/blog/2023/01/03/codelytv-interview/</link>
-            <guid>https://arrow-kt.io/community/blog/2023/01/03/codelytv-interview/</guid>
-            <pubDate>Tue, 03 Jan 2023 00:00:00 GMT</pubDate>
-            <description><![CDATA[An interview with Arrow maintainer Raúl Raja by Rafa Gómez on CodelyTV.]]></description>
-            <content:encoded><![CDATA[<p>An interview with Arrow maintainer Raúl Raja by Rafa Gómez on CodelyTV.</p>]]></content:encoded>
-            <category>core</category>
-            <category>videos</category>
         </item>
     </channel>
 </rss>
