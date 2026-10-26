@@ -48,11 +48,11 @@ Maven includes the Maven Central repository by default.
 :::
 
   </TabItem>
-  <TabItem value="amper" label="Amper">
+  <TabItem value="amper" label="Kotlin Toolchain">
 
 :::info
 
-Amper includes the Maven Central repository by default.
+The Kotlin Toolchain includes the Maven Central repository by default.
 
 :::
 
@@ -78,8 +78,8 @@ Simply include the desired library in your `dependencies` block or as a
 
 ```kotlin
 dependencies {
-  implementation("io.arrow-kt:arrow-core:2.2.3")
-  implementation("io.arrow-kt:arrow-fx-coroutines:2.2.3")
+  implementation("io.arrow-kt:arrow-core:2.3.0")
+  implementation("io.arrow-kt:arrow-fx-coroutines:2.3.0")
 }
 ```
 
@@ -88,8 +88,8 @@ dependencies {
 
 ```groovy
 dependencies {
-  implementation 'io.arrow-kt:arrow-core:2.2.3'
-  implementation 'io.arrow-kt:arrow-fx-coroutines:2.2.3'
+  implementation 'io.arrow-kt:arrow-core:2.3.0'
+  implementation 'io.arrow-kt:arrow-fx-coroutines:2.3.0'
 }
 ```
 
@@ -101,22 +101,22 @@ dependencies {
 <dependency>
   <groupId>io.arrow-kt</groupId>
   <artifactId>arrow-core</artifactId>
-  <version>2.2.3</version>
+  <version>2.3.0</version>
 </dependency>
 <dependency>
   <groupId>io.arrow-kt</groupId>
   <artifactId>arrow-fx-coroutines</artifactId>
-  <version>2.2.3</version>
+  <version>2.3.0</version>
 </dependency>
 ```
 
 </TabItem>
-<TabItem value="amper" label="Amper">
+<TabItem value="amper" label="Kotlin Toolchain">
 
 ```yaml
 dependencies:
-  - io.arrow-kt:arrow-core:2.2.3
-  - io.arrow-kt:arrow-fx-coroutines:2.2.3
+  - io.arrow-kt:arrow-core:2.3.0
+  - io.arrow-kt:arrow-fx-coroutines:2.3.0
 ```
 
 </TabItem>
@@ -134,7 +134,7 @@ your Gradle build has several subprojects.
 
 ```yaml
 [versions]
-arrow = "2.2.3"
+arrow = "2.3.0"
 # other versions
 
 [libraries]
@@ -176,7 +176,7 @@ Version catalogs are not supported in Maven.
 :::
 
 </TabItem>
-<TabItem value="amper" label="Amper">
+<TabItem value="amper" label="Kotlin Toolchain">
 
 ```yaml
 dependencies:
@@ -197,7 +197,7 @@ to include `arrow-stack`, which declares versions for the rest of the components
 
 ```kotlin
 dependencies {
-  implementation(platform("io.arrow-kt:arrow-stack:2.2.3"))
+  implementation(platform("io.arrow-kt:arrow-stack:2.3.0"))
   // no versions on libraries
   implementation("io.arrow-kt:arrow-core")
   implementation("io.arrow-kt:arrow-fx-coroutines")
@@ -209,7 +209,7 @@ dependencies {
 
 ```groovy
 dependencies {
-  implementation platform('io.arrow-kt:arrow-stack:2.2.3')
+  implementation platform('io.arrow-kt:arrow-stack:2.3.0')
   // no versions on libraries
   implementation 'io.arrow-kt:arrow-core'
   implementation 'io.arrow-kt:arrow-fx-coroutines'
@@ -224,7 +224,7 @@ dependencies {
 <dependency>
     <groupId>io.arrow-kt</groupId>
     <artifactId>arrow-stack</artifactId>
-    <version>2.2.3</version>
+    <version>2.3.0</version>
     <type>pom</type>
     <scope>import</scope>
 </dependency>
@@ -240,13 +240,14 @@ dependencies {
 ```
 
 </TabItem>
-<TabItem value="amper" label="Amper">
+<TabItem value="amper" label="Kotlin Toolchain">
 
-:::info
-
-Bill-of-Materials are not supported in Amper.
-
-:::
+```yaml
+dependencies:
+  - bom: io.arrow-kt:arrow-stack:2.3.0
+  - io.arrow-kt:arrow-core
+  - io.arrow-kt:arrow-fx-coroutines
+```
 
 </TabItem>
 </Tabs>
@@ -266,22 +267,17 @@ This is especially important if you use `arrow-collectors`, since that library u
 ### Additional setup for Optics
 
 If you're using the Optics component of Arrow, we provide a Kotlin compiler 
-plug-in that can derive most of the boilerplate required to use it. This
-plug-in is built with [KSP](https://kotlinlang.org/docs/ksp-overview.html),
-which requires an additional configuration step.
+plug-in that can derive most of the boilerplate required to use it.
 
+There are two possibilities to configure this plug-in. Since version 2.3.0,
+we recommend using the _compiler_ plug-in.
 
 <Tabs groupId="build">
 <TabItem value="gradleKotlin" label="Gradle (Kotlin)">
 
 ```kotlin
 plugins {
-  id("com.google.devtools.ksp") version "2.3.4"
-}
-
-dependencies {
-  implementation("io.arrow-kt:arrow-optics:2.2.3")
-  ksp("io.arrow-kt:arrow-optics-ksp-plugin:2.2.3")
+  id("io.arrow-kt.optics") version "2.3.0"
 }
 ```
 
@@ -290,12 +286,58 @@ dependencies {
 
 ```groovy
 plugins {
-  id 'com.google.devtools.ksp' version '2.3.4'
+  id 'io.arrow-kt.optics' version '2.3.0'
+}
+```
+
+</TabItem>
+<TabItem value="amper" label="Kotlin Toolchain">
+
+```yaml
+settings:
+  kotlin:
+    # other settings
+    compilerPlugins:
+      - id: arrow.optics.plugin
+        dependency: io.arrow-kt:arrow-optics-compiler-plugin:2.3.0
+```
+
+</TabItem>
+</Tabs>
+
+If you cannot use the compiler plug-in for any reason (unsupported build tool,
+unsupported Kotlin version), you should use the 
+[KSP](https://kotlinlang.org/docs/ksp-overview.html) implementation instead.
+If you are using it in a Multiplatform project or plan to,
+we recommend checking the [official guide in Kotlin docs](https://kotlinlang.org/docs/ksp-multiplatform.html)
+and the [related documentation in Koin](https://insert-koin.io/docs/setup/annotations/#kotlin-kts)
+for guidance.
+
+<Tabs groupId="build">
+<TabItem value="gradleKotlin" label="Gradle (Kotlin)">
+
+```kotlin
+plugins {
+  id("com.google.devtools.ksp") version "2.3.12"
 }
 
 dependencies {
-  implementation 'io.arrow-kt:arrow-optics:2.2.3'
-  ksp 'io.arrow-kt:arrow-optics-ksp-plugin:2.2.3'
+  implementation("io.arrow-kt:arrow-optics:2.3.0")
+  ksp("io.arrow-kt:arrow-optics-ksp-plugin:2.3.0")
+}
+```
+
+</TabItem>
+<TabItem value="gradleGroovy" label="Gradle (Groovy)">
+
+```groovy
+plugins {
+  id 'com.google.devtools.ksp' version '2.3.12'
+}
+
+dependencies {
+  implementation 'io.arrow-kt:arrow-optics:2.3.0'
+  ksp 'io.arrow-kt:arrow-optics-ksp-plugin:2.3.0'
 }
 ```
 
@@ -312,7 +354,7 @@ provides unofficial support for that scenario.
 :::
 
 </TabItem>
-<TabItem value="amper" label="Amper">
+<TabItem value="amper" label="Kotlin Toolchain">
 
 ```yaml
 settings:
@@ -320,25 +362,11 @@ settings:
     # other settings
     ksp:
       processors:
-        - io.arrow-kt:arrow-optics-ksp-plugin:2.2.3
+        - io.arrow-kt:arrow-optics-ksp-plugin:2.3.0
 ```
 
 </TabItem>
 </Tabs>
-
-If you are using the optics plug-in in a Multiplatform project,
-we recommend checking the [official guide in Kotlin docs](https://kotlinlang.org/docs/ksp-multiplatform.html)
-and the [related documentation in Koin](https://insert-koin.io/docs/setup/annotations/#kotlin-kts)
-for guidance.
-
-:::tip Arrow Optics for Gradle (beta)
-
-Instead of manually configuring the KSP plug-in, you may try the
-new beta [Arrow Optics Gradle plug-in](/community/blog/2025/11/01/arrow-optics-gradle/).
-It configures the whole project automatically (regardless of it being JVM or Multiplatform)
-and no longer requires a `companion object` on every class with `@optics`.
-
-:::
 
 ### Plug-in for IntelliJ-based IDEs
 

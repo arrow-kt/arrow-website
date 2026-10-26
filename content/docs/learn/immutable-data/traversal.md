@@ -38,9 +38,7 @@ import arrow.optics.dsl.*
 -->
 
 ```kotlin
-@optics data class Person(val name: String, val age: Int, val friends: List<Person>) {
-  companion object
-}
+@optics data class Person(val name: String, val age: Int, val friends: List<Person>)
 ```
 
 If we want to update the age of every `Person` in a list, the usual way is to

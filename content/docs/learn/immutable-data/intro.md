@@ -55,7 +55,8 @@ example above might be improved using optics.
 
 :::note Where to find it
 
-Immutable data manipulation with optics is available through the `arrow-optics` library, and the corresponding `arrow-optics-ksp-plugin` compiler plug-in.
+Immutable data manipulation with optics is available through the `arrow-optics` library,
+and the corresponding compiler plug-in.
 
 :::
 
@@ -67,25 +68,17 @@ with the `@optics` annotation.
 ```kotlin
 import arrow.optics.*
 
-@optics data class Person(val name: String, val age: Int, val address: Address) {
-  companion object
-}
-@optics data class Address(val street: Street, val city: City) {
-  companion object
-}
-@optics data class Street(val name: String, val number: Int?) {
-  companion object
-}
-@optics data class City(val name: String, val country: String) {
-  companion object
-}
+@optics data class Person(val name: String, val age: Int, val address: Address)
+@optics data class Address(val street: Street, val city: City)
+@optics data class Street(val name: String, val number: Int?)
+@optics data class City(val name: String, val country: String)
 ```
 
 :::caution Annoying companion object
 
-You need to have a `companion object` declaration in each class, even if it's empty.
-This is due to limitations in [KSP](https://kotlinlang.org/docs/ksp-quickstart.html),
-the compiler plug-in framework used to implement the Arrow Optics plug-in.
+If you are using [KSP](https://kotlinlang.org/docs/ksp-quickstart.html)
+to generate optics, you need to have a `companion object` declaration in each class, even if it's empty.
+This is due to limitations in KSP itself.
 
 :::
 
@@ -105,7 +98,7 @@ in two ways:
       Person.address.city.country.modify(this) { it.capitalize() }
     ```
 
-2. **Copy builder**: Arrow Optics provides an overload of `copy` that, instead
+1. **Copy builder**: Arrow Optics provides an overload of `copy` that, instead
    of named arguments, takes a block. Inside that block, you can use the syntax
    `optic transform operation` to modify a focused element.
 
