@@ -28,11 +28,14 @@ really simple.</p>
 <p>To use the new compiler plugin-based implementation,</p>
 <ul>
 <li class="">Remove any previous configuration of the Arrow Optics KSP plugin,</li>
-<li class="">Add <code>id("io.arrow-kt.optics") version "2.3.0"</code> to your <code>plugins</code> block.</li>
+<li class="">Add <code>id("io.arrow-kt.optics") version "2.3.0.1"</code> to your <code>plugins</code> block.</li>
 </ul>
 <p>If you also want to see the generated optics in IntelliJ,
-go to <em>Help</em> &gt; <em>Edit</em> custom properties, and add the following line and restat.</p>
+go to <em>Help</em> &gt; <em>Edit</em> custom properties, and add the following line and restart.</p>
 <div class="language-kotlin codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#D4D4D4;--prism-background-color:#222E51"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-kotlin codeBlock_bY9V thin-scrollbar" style="color:#D4D4D4;background-color:#222E51"><code class="codeBlockLines_e6Vv"><div class="token-line" style="color:#D4D4D4"><span class="token plain">kotlin</span><span class="token punctuation" style="color:rgb(212, 212, 212)">.</span><span class="token plain">k2</span><span class="token punctuation" style="color:rgb(212, 212, 212)">.</span><span class="token plain">only</span><span class="token punctuation" style="color:rgb(212, 212, 212)">.</span><span class="token plain">bundled</span><span class="token punctuation" style="color:rgb(212, 212, 212)">.</span><span class="token plain">compiler</span><span class="token punctuation" style="color:rgb(212, 212, 212)">.</span><span class="token plain">plugins</span><span class="token punctuation" style="color:rgb(212, 212, 212)">.</span><span class="token plain">enabled</span><span class="token operator" style="color:rgb(212, 212, 212)">=</span><span class="token boolean" style="color:#569CD6">false</span><span class="token punctuation" style="color:rgb(212, 212, 212)">.</span><br></div></code></pre></div></div>
+<p>If everything goes well, you'll see the result of the plugin right away
+in your editor.</p>
+<center><p><img decoding="async" loading="lazy" alt="Optics plug-in in IDE" src="https://arrow-kt.io/assets/images/optics-plugin-4d10930ceaf08e6b0704a10ba78a4c3d.png" width="1272" height="516" class="img_ev3q"></p></center>
 <div class="theme-admonition theme-admonition-warning admonition_xJq3 alert alert--warning"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"></span>Running plugins in the IDE</div><div class="admonitionContent_BuS1"><p>Note that adding the line above means that Arrow Optics and other compiler
 plugins are run during IDE operations. This may have an impact on the stability
 of the IDE experience. Of course, if you get problems by using Arrow Optics,
